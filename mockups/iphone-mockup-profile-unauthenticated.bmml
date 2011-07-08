@@ -1,0 +1,55 @@
+<mockup version="1.0" skin="sketch" measuredW="904" measuredH="934" mockupW="862" mockupH="904">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="412" y="44" w="492" h="890" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bgPattern>topBlackBottom</bgPattern>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::StickyNote" x="42" y="30" w="292" h="244" measuredW="109" measuredH="123" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Profile%20Page%20-%20Unauthenticated%0A%20%0APurpose%20of%20the%20view%3A%0A*%20Allow%20new%20users%20to%20register%20with%20Lokalite.com%0A*%20Allow%20existing%20users%20to%20sign%20in%20and%20access%20personalized%20content%0A*%20Learn%20more%20about%20the%20service%0A*%20Provide%20help%20about%20the%20app</text>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Image" x="534" y="324" w="248" h="56" measuredW="250" measuredH="47" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./images/lokalite-logo.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="480" y="533" w="356" h="-1" measuredW="215" measuredH="126" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Sign%20In%2C%20%3E%0ASign%20Up%2C%20%3E%0ALearn%20More%2C%20%3E%0AHelp%2C%20%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::Label" x="555" y="414" w="-1" h="-1" measuredW="220" measuredH="29" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Living%20life%20outside%20the%20box</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Button" x="468" y="732" w="-1" h="-1" measuredW="78" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Featured</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Button" x="553" y="732" w="-1" h="-1" measuredW="63" measuredH="28" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Events</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Button" x="713" y="732" w="-1" h="-1" measuredW="65" measuredH="28" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Button" x="625" y="732" w="-1" h="-1" measuredW="80" measuredH="28" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Directory</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Button" x="785" y="732" w="-1" h="-1" measuredW="64" measuredH="28" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Profile</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

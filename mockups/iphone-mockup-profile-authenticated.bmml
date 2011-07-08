@@ -1,0 +1,70 @@
+<mockup version="1.0" skin="sketch" measuredW="904" measuredH="934" mockupW="862" mockupH="904">
+  <controls>
+    <control controlID="10" controlTypeID="__group__" x="42" y="30" w="862" h="904" measuredW="862" measuredH="904" zOrder="0" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="370" y="14" w="492" h="890" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="10">
+          <controlProperties>
+            <bgPattern>topBlackBottom</bgPattern>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::StickyNote" x="0" y="0" w="292" h="244" measuredW="109" measuredH="123" zOrder="1" locked="false" isInGroup="10">
+          <controlProperties>
+            <text>Profile%20Page%20-%20Authenticated%0A%20%0APurpose%20of%20the%20view%20is%20to%20allow%20users%20to%20view%20their%20personalized%20content.%0A*%20List%20of%20activities%0A*%20List%20of%20places%20you%27re%20following%0A*%20List%20of%20loyalty%20programs%0A%20%0AWhat%20else%20should%20go%20here%3F</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Image" x="525" y="200" w="196" h="44" measuredW="250" measuredH="47" zOrder="2" locked="false" isInGroup="10">
+          <controlProperties>
+            <src>./images/lokalite-logo.png</src>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="533" y="275" w="-1" h="-1" measuredW="131" measuredH="37" zOrder="3" locked="false" isInGroup="10">
+          <controlProperties>
+            <size>24</size>
+            <text>John%20Debay</text>
+          </controlProperties>
+        </control>
+        <control controlID="11" controlTypeID="com.balsamiq.mockups::Image" x="442" y="268" w="-1" h="-1" measuredW="77" measuredH="79" zOrder="4" locked="false" isInGroup="10">
+          <controlProperties>
+            <text>Avatar</text>
+          </controlProperties>
+        </control>
+        <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="533" y="318" w="-1" h="-1" measuredW="102" measuredH="29" zOrder="5" locked="false" isInGroup="10">
+          <controlProperties>
+            <size>18</size>
+            <text>Boulder%2C%20CO</text>
+          </controlProperties>
+        </control>
+        <control controlID="13" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="437" y="380" w="357" h="-1" measuredW="215" measuredH="97" zOrder="6" locked="false" isInGroup="10">
+          <controlProperties>
+            <text>Activities%2C%20%3E%0AFavorite%20Places%2C%20%3E%0ABookmarks%2C%20%3E</text>
+          </controlProperties>
+        </control>
+        <control controlID="14" controlTypeID="com.balsamiq.mockups::Button" x="425" y="704" w="-1" h="-1" measuredW="78" measuredH="28" zOrder="7" locked="false" isInGroup="10">
+          <controlProperties>
+            <text>Featured</text>
+          </controlProperties>
+        </control>
+        <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="510" y="704" w="-1" h="-1" measuredW="63" measuredH="28" zOrder="8" locked="false" isInGroup="10">
+          <controlProperties>
+            <text>Events</text>
+          </controlProperties>
+        </control>
+        <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="670" y="704" w="-1" h="-1" measuredW="65" measuredH="28" zOrder="9" locked="false" isInGroup="10">
+          <controlProperties>
+            <text>Search</text>
+          </controlProperties>
+        </control>
+        <control controlID="17" controlTypeID="com.balsamiq.mockups::Button" x="582" y="704" w="-1" h="-1" measuredW="80" measuredH="28" zOrder="10" locked="false" isInGroup="10">
+          <controlProperties>
+            <text>Directory</text>
+          </controlProperties>
+        </control>
+        <control controlID="18" controlTypeID="com.balsamiq.mockups::Button" x="742" y="704" w="-1" h="-1" measuredW="64" measuredH="28" zOrder="11" locked="false" isInGroup="10">
+          <controlProperties>
+            <text>Profile</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>

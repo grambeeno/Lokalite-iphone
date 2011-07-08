@@ -1,0 +1,84 @@
+<mockup version="1.0" skin="sketch" measuredW="1282" measuredH="933" mockupW="1217" mockupH="904">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="435" y="43" w="492" h="890" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bgPattern>topBlackBottom</bgPattern>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="491" y="348" w="372" h="-1" measuredW="215" measuredH="360" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <text>__%20Company%20%231%2C%20300%20yards%3E%0A__%20Company%20%232%2C%200.5%20mi%2C%20%3E%0A__%20Company%20%233%2C%200.5%20mi%2C%20%3E%0A__%20Company%20%234%2C%200.7%20mi%2C%20%3E%0A__%20Company%20%235%2C%201%20mi%2C%20%3E%0A__%20Company%20%236%2C%201.2%20mi%2C%20%3E%0A__%20Company%20%237%2C%201.4%20mi%2C%20%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::StickyNote" x="65" y="29" w="292" h="227" measuredW="109" measuredH="123" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Business%20List%0A%20%0AThe%20purpose%20of%20this%20view%20is%3A%0A*%20Get%20a%20list%20of%20all%20businesses%2C%20sorted%20in%20various%20relevant%20ways%20and%20limited%20by%20appropriate%20filters%0A*%20Search%20the%20list%20of%20businesses%0A*%20Provide%20links%20to%20get%20the%20full%20information%20on%20a%20business</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Arrow" x="297" y="256" w="295" h="111" measuredW="150" measuredH="100" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <curvature>1</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::SearchBox" x="482" y="285" w="390" h="-1" measuredW="64" measuredH="25" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::ButtonBar" x="607" y="241" w="-1" h="-1" measuredW="134" measuredH="29" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Closest%2C%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::StickyNote" x="65" y="331" w="219" h="151" measuredW="109" measuredH="123" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Sorting%20options%0A%20%0A*%20Closest%20based%20on%20the%20device%27s%20location%0A*%20Alphabetical%20by%20name</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::ButtonBar" x="491" y="310" w="366" h="29" measuredW="326" measuredH="29" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>All%2C%20Happy%20Hour%2C%20Music%2C%20Retail%2C%20Food</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::StickyNote" x="1028" y="127" w="254" h="170" measuredW="109" measuredH="123" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Full%20list%20of%20categories%0A%20%0A*%20Represented%20by%20icons%2C%20not%20text%0A*%20Scrolls%20horizontally%20to%20show%20whole%20list%20%28similar%20to%20the%20Foursquare%20app%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Arrow" x="867" y="205" w="155" h="117" measuredW="150" measuredH="100" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <curvature>-1</curvature>
+        <direction>bottom</direction>
+        <leftArrow>true</leftArrow>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="491" y="731" w="-1" h="-1" measuredW="78" measuredH="28" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Featured</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="576" y="731" w="-1" h="-1" measuredW="63" measuredH="28" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Events</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Button" x="736" y="731" w="-1" h="-1" measuredW="65" measuredH="28" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Button" x="648" y="731" w="-1" h="-1" measuredW="80" measuredH="28" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Directory</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Button" x="808" y="731" w="-1" h="-1" measuredW="64" measuredH="28" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Profile</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
