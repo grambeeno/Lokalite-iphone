@@ -6,9 +6,9 @@
 //  Copyright 2011 High Order Bit. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "FeaturedViewController.h"
 
-@implementation FirstViewController
+@implementation FeaturedViewController
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

@@ -16,8 +16,8 @@
 		05209F1313C770FF00CA6A2D /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1113C770FF00CA6A2D /* SecondViewController.m */; };
 		05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */; };
 		05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1613C7710F00CA6A2D /* MainWindow.xib */; };
-		05209F1C13C7711700CA6A2D /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1913C7711700CA6A2D /* FirstView.xib */; };
-		05209F1D13C7711700CA6A2D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1B13C7711700CA6A2D /* FirstViewController.m */; };
+		05209F1C13C7711700CA6A2D /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1913C7711700CA6A2D /* FeaturedView.xib */; };
+		05209F1D13C7711700CA6A2D /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1B13C7711700CA6A2D /* FeaturedViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +35,9 @@
 		05209F1413C7710F00CA6A2D /* LokaliteAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteAppDelegate.h; path = src/application/LokaliteAppDelegate.h; sourceTree = "<group>"; };
 		05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteAppDelegate.m; path = src/application/LokaliteAppDelegate.m; sourceTree = "<group>"; };
 		05209F1613C7710F00CA6A2D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = src/application/MainWindow.xib; sourceTree = "<group>"; };
-		05209F1913C7711700CA6A2D /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FirstView.xib; path = src/featured/FirstView.xib; sourceTree = "<group>"; };
-		05209F1A13C7711700CA6A2D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstViewController.h; path = src/featured/FirstViewController.h; sourceTree = "<group>"; };
-		05209F1B13C7711700CA6A2D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstViewController.m; path = src/featured/FirstViewController.m; sourceTree = "<group>"; };
+		05209F1913C7711700CA6A2D /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
+		05209F1A13C7711700CA6A2D /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
+		05209F1B13C7711700CA6A2D /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,9 +124,9 @@
 		05209F0D13C7705D00CA6A2D /* featured */ = {
 			isa = PBXGroup;
 			children = (
-				05209F1913C7711700CA6A2D /* FirstView.xib */,
-				05209F1A13C7711700CA6A2D /* FirstViewController.h */,
-				05209F1B13C7711700CA6A2D /* FirstViewController.m */,
+				05209F1913C7711700CA6A2D /* FeaturedView.xib */,
+				05209F1A13C7711700CA6A2D /* FeaturedViewController.h */,
+				05209F1B13C7711700CA6A2D /* FeaturedViewController.m */,
 			);
 			name = featured;
 			sourceTree = "<group>";
@@ -194,7 +194,7 @@
 				05209EE713C76F9200CA6A2D /* InfoPlist.strings in Resources */,
 				05209F1213C770FF00CA6A2D /* SecondView.xib in Resources */,
 				05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */,
-				05209F1C13C7711700CA6A2D /* FirstView.xib in Resources */,
+				05209F1C13C7711700CA6A2D /* FeaturedView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +208,7 @@
 				05209EE913C76F9200CA6A2D /* main.m in Sources */,
 				05209F1313C770FF00CA6A2D /* SecondViewController.m in Sources */,
 				05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */,
-				05209F1D13C7711700CA6A2D /* FirstViewController.m in Sources */,
+				05209F1D13C7711700CA6A2D /* FeaturedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
