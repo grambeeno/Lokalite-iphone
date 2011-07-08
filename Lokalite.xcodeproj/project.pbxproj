@@ -1,0 +1,318 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05209EDD13C76F9200CA6A2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDC13C76F9200CA6A2D /* UIKit.framework */; };
+		05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDE13C76F9200CA6A2D /* Foundation.framework */; };
+		05209EE113C76F9200CA6A2D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EE013C76F9200CA6A2D /* CoreGraphics.framework */; };
+		05209EE713C76F9200CA6A2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05209EE513C76F9200CA6A2D /* InfoPlist.strings */; };
+		05209EE913C76F9200CA6A2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209EE813C76F9200CA6A2D /* main.m */; };
+		05209F1213C770FF00CA6A2D /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F0F13C770FF00CA6A2D /* SecondView.xib */; };
+		05209F1313C770FF00CA6A2D /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1113C770FF00CA6A2D /* SecondViewController.m */; };
+		05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */; };
+		05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1613C7710F00CA6A2D /* MainWindow.xib */; };
+		05209F1C13C7711700CA6A2D /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1913C7711700CA6A2D /* FirstView.xib */; };
+		05209F1D13C7711700CA6A2D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1B13C7711700CA6A2D /* FirstViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05209ED813C76F9200CA6A2D /* Lokalite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokalite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05209EDC13C76F9200CA6A2D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		05209EDE13C76F9200CA6A2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		05209EE013C76F9200CA6A2D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		05209EE413C76F9200CA6A2D /* Lokalite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Lokalite-Info.plist"; sourceTree = "<group>"; };
+		05209EE613C76F9200CA6A2D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		05209EE813C76F9200CA6A2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		05209EEA13C76F9200CA6A2D /* Lokalite-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lokalite-Prefix.pch"; sourceTree = "<group>"; };
+		05209F0F13C770FF00CA6A2D /* SecondView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SecondView.xib; path = src/loyalty/SecondView.xib; sourceTree = "<group>"; };
+		05209F1013C770FF00CA6A2D /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = src/loyalty/SecondViewController.h; sourceTree = "<group>"; };
+		05209F1113C770FF00CA6A2D /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = src/loyalty/SecondViewController.m; sourceTree = "<group>"; };
+		05209F1413C7710F00CA6A2D /* LokaliteAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteAppDelegate.h; path = src/application/LokaliteAppDelegate.h; sourceTree = "<group>"; };
+		05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteAppDelegate.m; path = src/application/LokaliteAppDelegate.m; sourceTree = "<group>"; };
+		05209F1613C7710F00CA6A2D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = src/application/MainWindow.xib; sourceTree = "<group>"; };
+		05209F1913C7711700CA6A2D /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FirstView.xib; path = src/featured/FirstView.xib; sourceTree = "<group>"; };
+		05209F1A13C7711700CA6A2D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstViewController.h; path = src/featured/FirstViewController.h; sourceTree = "<group>"; };
+		05209F1B13C7711700CA6A2D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstViewController.m; path = src/featured/FirstViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05209ED513C76F9200CA6A2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05209EDD13C76F9200CA6A2D /* UIKit.framework in Frameworks */,
+				05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */,
+				05209EE113C76F9200CA6A2D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05209ECD13C76F9200CA6A2D = {
+			isa = PBXGroup;
+			children = (
+				05209EE213C76F9200CA6A2D /* Lokalite */,
+				05209EDB13C76F9200CA6A2D /* Frameworks */,
+				05209ED913C76F9200CA6A2D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		05209ED913C76F9200CA6A2D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05209ED813C76F9200CA6A2D /* Lokalite.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05209EDB13C76F9200CA6A2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05209EDC13C76F9200CA6A2D /* UIKit.framework */,
+				05209EDE13C76F9200CA6A2D /* Foundation.framework */,
+				05209EE013C76F9200CA6A2D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		05209EE213C76F9200CA6A2D /* Lokalite */ = {
+			isa = PBXGroup;
+			children = (
+				05209F0B13C7705300CA6A2D /* src */,
+				05209EE313C76F9200CA6A2D /* Supporting Files */,
+			);
+			path = Lokalite;
+			sourceTree = "<group>";
+		};
+		05209EE313C76F9200CA6A2D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05209EE413C76F9200CA6A2D /* Lokalite-Info.plist */,
+				05209EE513C76F9200CA6A2D /* InfoPlist.strings */,
+				05209EE813C76F9200CA6A2D /* main.m */,
+				05209EEA13C76F9200CA6A2D /* Lokalite-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		05209F0B13C7705300CA6A2D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				05209F0C13C7705800CA6A2D /* application */,
+				05209F0D13C7705D00CA6A2D /* featured */,
+				05209F0E13C7706700CA6A2D /* loyalty */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		05209F0C13C7705800CA6A2D /* application */ = {
+			isa = PBXGroup;
+			children = (
+				05209F1413C7710F00CA6A2D /* LokaliteAppDelegate.h */,
+				05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */,
+				05209F1613C7710F00CA6A2D /* MainWindow.xib */,
+			);
+			name = application;
+			sourceTree = "<group>";
+		};
+		05209F0D13C7705D00CA6A2D /* featured */ = {
+			isa = PBXGroup;
+			children = (
+				05209F1913C7711700CA6A2D /* FirstView.xib */,
+				05209F1A13C7711700CA6A2D /* FirstViewController.h */,
+				05209F1B13C7711700CA6A2D /* FirstViewController.m */,
+			);
+			name = featured;
+			sourceTree = "<group>";
+		};
+		05209F0E13C7706700CA6A2D /* loyalty */ = {
+			isa = PBXGroup;
+			children = (
+				05209F0F13C770FF00CA6A2D /* SecondView.xib */,
+				05209F1013C770FF00CA6A2D /* SecondViewController.h */,
+				05209F1113C770FF00CA6A2D /* SecondViewController.m */,
+			);
+			name = loyalty;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05209ED713C76F9200CA6A2D /* Lokalite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05209EFF13C76F9200CA6A2D /* Build configuration list for PBXNativeTarget "Lokalite" */;
+			buildPhases = (
+				05209ED413C76F9200CA6A2D /* Sources */,
+				05209ED513C76F9200CA6A2D /* Frameworks */,
+				05209ED613C76F9200CA6A2D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Lokalite;
+			productName = Lokalite;
+			productReference = 05209ED813C76F9200CA6A2D /* Lokalite.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05209ECF13C76F9200CA6A2D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "High Order Bit";
+			};
+			buildConfigurationList = 05209ED213C76F9200CA6A2D /* Build configuration list for PBXProject "Lokalite" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 05209ECD13C76F9200CA6A2D;
+			productRefGroup = 05209ED913C76F9200CA6A2D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05209ED713C76F9200CA6A2D /* Lokalite */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05209ED613C76F9200CA6A2D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05209EE713C76F9200CA6A2D /* InfoPlist.strings in Resources */,
+				05209F1213C770FF00CA6A2D /* SecondView.xib in Resources */,
+				05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */,
+				05209F1C13C7711700CA6A2D /* FirstView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05209ED413C76F9200CA6A2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05209EE913C76F9200CA6A2D /* main.m in Sources */,
+				05209F1313C770FF00CA6A2D /* SecondViewController.m in Sources */,
+				05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */,
+				05209F1D13C7711700CA6A2D /* FirstViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		05209EE513C76F9200CA6A2D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05209EE613C76F9200CA6A2D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05209EFD13C76F9200CA6A2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		05209EFE13C76F9200CA6A2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		05209F0013C76F9200CA6A2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Lokalite/Lokalite-Prefix.pch";
+				INFOPLIST_FILE = "Lokalite/Lokalite-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		05209F0113C76F9200CA6A2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Lokalite/Lokalite-Prefix.pch";
+				INFOPLIST_FILE = "Lokalite/Lokalite-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05209ED213C76F9200CA6A2D /* Build configuration list for PBXProject "Lokalite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05209EFD13C76F9200CA6A2D /* Debug */,
+				05209EFE13C76F9200CA6A2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05209EFF13C76F9200CA6A2D /* Build configuration list for PBXNativeTarget "Lokalite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05209F0013C76F9200CA6A2D /* Debug */,
+				05209F0113C76F9200CA6A2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05209ECF13C76F9200CA6A2D /* Project object */;
+}
