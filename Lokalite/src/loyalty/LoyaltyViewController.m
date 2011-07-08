@@ -3,7 +3,7 @@
 //  Lokalite
 //
 //  Created by John Debay on 7/8/11.
-//  Copyright 2011 High Order Bit. All rights reserved.
+//  Copyright 2011 Lokalite. All rights reserved.
 //
 
 #import "LoyaltyViewController.h"
