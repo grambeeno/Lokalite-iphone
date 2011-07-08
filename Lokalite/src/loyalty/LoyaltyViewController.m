@@ -6,9 +6,9 @@
 //  Copyright 2011 High Order Bit. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "LoyaltyViewController.h"
 
-@implementation SecondViewController
+@implementation LoyaltyViewController
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

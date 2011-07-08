@@ -12,8 +12,8 @@
 		05209EE113C76F9200CA6A2D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EE013C76F9200CA6A2D /* CoreGraphics.framework */; };
 		05209EE713C76F9200CA6A2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05209EE513C76F9200CA6A2D /* InfoPlist.strings */; };
 		05209EE913C76F9200CA6A2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209EE813C76F9200CA6A2D /* main.m */; };
-		05209F1213C770FF00CA6A2D /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F0F13C770FF00CA6A2D /* SecondView.xib */; };
-		05209F1313C770FF00CA6A2D /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1113C770FF00CA6A2D /* SecondViewController.m */; };
+		05209F1213C770FF00CA6A2D /* LoyaltyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F0F13C770FF00CA6A2D /* LoyaltyView.xib */; };
+		05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1113C770FF00CA6A2D /* LoyaltyViewController.m */; };
 		05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */; };
 		05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1613C7710F00CA6A2D /* MainWindow.xib */; };
 		05209F1C13C7711700CA6A2D /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1913C7711700CA6A2D /* FeaturedView.xib */; };
@@ -29,9 +29,9 @@
 		05209EE613C76F9200CA6A2D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		05209EE813C76F9200CA6A2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		05209EEA13C76F9200CA6A2D /* Lokalite-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lokalite-Prefix.pch"; sourceTree = "<group>"; };
-		05209F0F13C770FF00CA6A2D /* SecondView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SecondView.xib; path = src/loyalty/SecondView.xib; sourceTree = "<group>"; };
-		05209F1013C770FF00CA6A2D /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = src/loyalty/SecondViewController.h; sourceTree = "<group>"; };
-		05209F1113C770FF00CA6A2D /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = src/loyalty/SecondViewController.m; sourceTree = "<group>"; };
+		05209F0F13C770FF00CA6A2D /* LoyaltyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoyaltyView.xib; path = src/loyalty/LoyaltyView.xib; sourceTree = "<group>"; };
+		05209F1013C770FF00CA6A2D /* LoyaltyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoyaltyViewController.h; path = src/loyalty/LoyaltyViewController.h; sourceTree = "<group>"; };
+		05209F1113C770FF00CA6A2D /* LoyaltyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoyaltyViewController.m; path = src/loyalty/LoyaltyViewController.m; sourceTree = "<group>"; };
 		05209F1413C7710F00CA6A2D /* LokaliteAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteAppDelegate.h; path = src/application/LokaliteAppDelegate.h; sourceTree = "<group>"; };
 		05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteAppDelegate.m; path = src/application/LokaliteAppDelegate.m; sourceTree = "<group>"; };
 		05209F1613C7710F00CA6A2D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = src/application/MainWindow.xib; sourceTree = "<group>"; };
@@ -134,9 +134,9 @@
 		05209F0E13C7706700CA6A2D /* loyalty */ = {
 			isa = PBXGroup;
 			children = (
-				05209F0F13C770FF00CA6A2D /* SecondView.xib */,
-				05209F1013C770FF00CA6A2D /* SecondViewController.h */,
-				05209F1113C770FF00CA6A2D /* SecondViewController.m */,
+				05209F0F13C770FF00CA6A2D /* LoyaltyView.xib */,
+				05209F1013C770FF00CA6A2D /* LoyaltyViewController.h */,
+				05209F1113C770FF00CA6A2D /* LoyaltyViewController.m */,
 			);
 			name = loyalty;
 			sourceTree = "<group>";
@@ -192,7 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05209EE713C76F9200CA6A2D /* InfoPlist.strings in Resources */,
-				05209F1213C770FF00CA6A2D /* SecondView.xib in Resources */,
+				05209F1213C770FF00CA6A2D /* LoyaltyView.xib in Resources */,
 				05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */,
 				05209F1C13C7711700CA6A2D /* FeaturedView.xib in Resources */,
 			);
@@ -206,7 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05209EE913C76F9200CA6A2D /* main.m in Sources */,
-				05209F1313C770FF00CA6A2D /* SecondViewController.m in Sources */,
+				05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */,
 				05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */,
 				05209F1D13C7711700CA6A2D /* FeaturedViewController.m in Sources */,
 			);
