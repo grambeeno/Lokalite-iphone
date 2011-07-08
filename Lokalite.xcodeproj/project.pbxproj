@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050436A013C77F220077F03D /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0504369E13C77F220077F03D /* radar.png */; };
+		050436A113C77F220077F03D /* radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0504369F13C77F220077F03D /* radar@2x.png */; };
 		05209EDD13C76F9200CA6A2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDC13C76F9200CA6A2D /* UIKit.framework */; };
 		05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDE13C76F9200CA6A2D /* Foundation.framework */; };
 		05209EE113C76F9200CA6A2D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EE013C76F9200CA6A2D /* CoreGraphics.framework */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0504369E13C77F220077F03D /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = radar.png; path = images/radar.png; sourceTree = "<group>"; };
+		0504369F13C77F220077F03D /* radar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "radar@2x.png"; path = "images/radar@2x.png"; sourceTree = "<group>"; };
 		05209ED813C76F9200CA6A2D /* Lokalite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokalite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05209EDC13C76F9200CA6A2D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		05209EDE13C76F9200CA6A2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -54,6 +58,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0504369C13C77F0C0077F03D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				0504369E13C77F220077F03D /* radar.png */,
+				0504369F13C77F220077F03D /* radar@2x.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		05209ECD13C76F9200CA6A2D = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				05209F0B13C7705300CA6A2D /* src */,
+				0504369C13C77F0C0077F03D /* images */,
 				05209EE313C76F9200CA6A2D /* Supporting Files */,
 			);
 			path = Lokalite;
@@ -167,7 +181,7 @@
 		05209ECF13C76F9200CA6A2D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = "High Order Bit";
+				ORGANIZATIONNAME = Lokalite;
 			};
 			buildConfigurationList = 05209ED213C76F9200CA6A2D /* Build configuration list for PBXProject "Lokalite" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -195,6 +209,8 @@
 				05209F1213C770FF00CA6A2D /* LoyaltyView.xib in Resources */,
 				05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */,
 				05209F1C13C7711700CA6A2D /* FeaturedView.xib in Resources */,
+				050436A013C77F220077F03D /* radar.png in Resources */,
+				050436A113C77F220077F03D /* radar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
