@@ -19,8 +19,6 @@
 		05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1113C770FF00CA6A2D /* LoyaltyViewController.m */; };
 		05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */; };
 		05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1613C7710F00CA6A2D /* MainWindow.xib */; };
-		05209F1C13C7711700CA6A2D /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1913C7711700CA6A2D /* FeaturedView.xib */; };
-		05209F1D13C7711700CA6A2D /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1B13C7711700CA6A2D /* FeaturedViewController.m */; };
 		054E06B613CB82B6009B7373 /* tab-bar-icon-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */; };
 		054E06B713CB82B6009B7373 /* tab-bar-icon-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B513CB82B6009B7373 /* tab-bar-icon-profile@2x.png */; };
 		054E06BA13CB8309009B7373 /* tab-bar-icon-loyalty.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B813CB8309009B7373 /* tab-bar-icon-loyalty.png */; };
@@ -53,9 +51,6 @@
 		05209F1413C7710F00CA6A2D /* LokaliteAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteAppDelegate.h; path = src/application/LokaliteAppDelegate.h; sourceTree = "<group>"; };
 		05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteAppDelegate.m; path = src/application/LokaliteAppDelegate.m; sourceTree = "<group>"; };
 		05209F1613C7710F00CA6A2D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = src/application/MainWindow.xib; sourceTree = "<group>"; };
-		05209F1913C7711700CA6A2D /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
-		05209F1A13C7711700CA6A2D /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
-		05209F1B13C7711700CA6A2D /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 		054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-profile.png"; path = "images/tab-bar-icons/tab-bar-icon-profile.png"; sourceTree = "<group>"; };
 		054E06B513CB82B6009B7373 /* tab-bar-icon-profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-profile@2x.png"; path = "images/tab-bar-icons/tab-bar-icon-profile@2x.png"; sourceTree = "<group>"; };
 		054E06B813CB8309009B7373 /* tab-bar-icon-loyalty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-loyalty.png"; path = "images/tab-bar-icons/tab-bar-icon-loyalty.png"; sourceTree = "<group>"; };
@@ -168,9 +163,6 @@
 		05209F0D13C7705D00CA6A2D /* featured */ = {
 			isa = PBXGroup;
 			children = (
-				05209F1A13C7711700CA6A2D /* FeaturedViewController.h */,
-				05209F1B13C7711700CA6A2D /* FeaturedViewController.m */,
-				05209F1913C7711700CA6A2D /* FeaturedView.xib */,
 				05EC9A2F13CB8FBD00B7AD61 /* NewFeaturedViewController.h */,
 				05EC9A3013CB8FBD00B7AD61 /* NewFeaturedViewController.m */,
 				05EC9A3113CB8FBD00B7AD61 /* NewFeaturedView.xib */,
@@ -265,7 +257,6 @@
 				05209EE713C76F9200CA6A2D /* InfoPlist.strings in Resources */,
 				05209F1213C770FF00CA6A2D /* LoyaltyView.xib in Resources */,
 				05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */,
-				05209F1C13C7711700CA6A2D /* FeaturedView.xib in Resources */,
 				050436A013C77F220077F03D /* radar.png in Resources */,
 				050436A113C77F220077F03D /* radar@2x.png in Resources */,
 				050436A313C786BA0077F03D /* Icon@2x.png in Resources */,
@@ -293,7 +284,6 @@
 				05209EE913C76F9200CA6A2D /* main.m in Sources */,
 				05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */,
 				05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */,
-				05209F1D13C7711700CA6A2D /* FeaturedViewController.m in Sources */,
 				05EC9A3213CB8FBD00B7AD61 /* NewFeaturedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
