@@ -8,10 +8,31 @@
 
 #import "LokaliteAppDelegate.h"
 
+#import <CoreData/CoreData.h>
+
+#import "SDKAdditions.h"
+
+@interface LokaliteAppDelegate ()
+
+@property (nonatomic, retain) NSManagedObjectModel *model;
+@property (nonatomic, retain) NSPersistentStoreCoordinator *coordinator;
+@property (nonatomic, retain) NSManagedObjectContext *context;
+
+#pragma mark - Static accessors
+
++ (NSString *)modelPath;
++ (NSString *)persistentStorePath;
+
+@end
+
 @implementation LokaliteAppDelegate
 
 @synthesize window = window_;
 @synthesize tabBarController = tabBarController_;
+
+@synthesize model = model_;
+@synthesize coordinator = coordinator_;
+@synthesize context = context_;
 
 #pragma mark - Memory management
 
@@ -19,6 +40,11 @@
 {
     [window_ release];
     [tabBarController_ release];
+
+    [model_ release];
+    [coordinator_ release];
+    [context_ release];
+
     [super dealloc];
 }
 
@@ -27,10 +53,9 @@
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    // Add the tab bar controller's current view as a subview of the window
-    self.window.rootViewController = self.tabBarController;
-    [self.window makeKeyAndVisible];
+    [[self window] setRootViewController:[self tabBarController]];
+    [[self window] makeKeyAndVisible];
+
     return YES;
 }
 
@@ -82,6 +107,109 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+#pragma mark - Accessors
+
+- (NSManagedObjectContext *)context
+{
+    if (context_ != nil)
+        return context_;
+
+    NSPersistentStoreCoordinator * coordinator = [self coordinator];
+    if (coordinator != nil) {
+        context_ = [[NSManagedObjectContext alloc] init];
+        [context_ setPersistentStoreCoordinator:coordinator];
+    }
+
+    return context_;
+}
+
+- (NSManagedObjectModel *)model
+{
+    if (model_ != nil)
+        return model_;
+
+    NSString * modelPath = [[self class] modelPath];
+    NSURL * modelUrl = [NSURL fileURLWithPath:modelPath];
+    model_ = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
+
+    return model_;
+}
+
+- (NSPersistentStoreCoordinator *)coordinator
+{
+    if (coordinator_ != nil)
+        return coordinator_;
+
+    NSString * path = [[self class] persistentStorePath];
+    NSURL * storeURL = [NSURL fileURLWithPath:path];
+
+    NSManagedObjectModel * model = [self model];
+
+    NSError * error = nil;
+    coordinator_ =
+        [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+
+    NSString * storeType = NSSQLiteStoreType;
+    NSDictionary * options =
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         [NSNumber numberWithBool:YES],
+         NSMigratePersistentStoresAutomaticallyOption,
+         [NSNumber numberWithBool:YES],
+         NSInferMappingModelAutomaticallyOption, nil];
+
+    NSPersistentStore * store =
+        [coordinator_ addPersistentStoreWithType:storeType
+                                   configuration:nil
+                                             URL:storeURL
+                                         options:options
+                                           error:&error];
+    if (!store) {
+        // We failed to open the store, so delete the current one and re-create
+        // it. If that fails, then we're done.
+        NSLog(@"WARNING: Failed to create persistent store. Error:\n%@",
+              [error detailedDescription]);
+        NSLog(@"Attempting to delete current store (if it exists) and create a "
+               "new one. Current store path: '%@'", path);
+        NSFileManager *mgr = [NSFileManager defaultManager];
+        if ([mgr fileExistsAtPath:path]) {
+            if ([mgr removeItemAtPath:path error:&error]) {
+                // try to create the store again
+                NSLog(@"Successfully removed store. Attempting to create a new "
+                      "one.");
+                store =
+                    [coordinator_
+                     addPersistentStoreWithType:storeType
+                                  configuration:nil
+                                            URL:storeURL
+                                        options:options
+                                          error:&error];
+            } else
+                NSLog(@"Failed to delete file at path, even though it "
+                       "exists. Error: %@", [error detailedDescription]);
+        }
+
+        if (!store) {
+            NSLog(@"Unresolved error: %@", [error detailedDescription]);
+            abort();
+        }
+    }
+
+    return coordinator_;
+}
+
+#pragma mark - Static accessors
+
++ (NSString *)modelPath
+{
+    return [[NSBundle mainBundle] pathForResource:@"lokalite" ofType:@"momd"];
+}
+
++ (NSString *)persistentStorePath
+{
+    NSString *docsDir = [UIApplication applicationDocumentsDirectory];
+    return [docsDir stringByAppendingPathComponent:@"lokalite.sqlite"];
 }
 
 @end

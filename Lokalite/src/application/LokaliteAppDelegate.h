@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LokaliteAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface LokaliteAppDelegate : NSObject
+    <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 

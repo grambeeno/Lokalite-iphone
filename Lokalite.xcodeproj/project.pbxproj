@@ -31,6 +31,12 @@
 		054E06C813CB8990009B7373 /* featured-image-02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C413CB8990009B7373 /* featured-image-02@2x.png */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
+		05EC9A3813CB959E00B7AD61 /* lokalite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */; };
+		05EC9A3D13CB96DF00B7AD61 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3C13CB96DF00B7AD61 /* Event.m */; };
+		05EC9A4013CB96F600B7AD61 /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3F13CB96F600B7AD61 /* Business.m */; };
+		05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EC9A4113CB971400B7AD61 /* CoreData.framework */; };
+		05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */; };
+		05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,9 +67,20 @@
 		054E06C213CB8990009B7373 /* featured-image-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-01@2x.png"; path = "images/mock-images/featured-image-01@2x.png"; sourceTree = "<group>"; };
 		054E06C313CB8990009B7373 /* featured-image-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02.png"; path = "images/mock-images/featured-image-02.png"; sourceTree = "<group>"; };
 		054E06C413CB8990009B7373 /* featured-image-02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02@2x.png"; path = "images/mock-images/featured-image-02@2x.png"; sourceTree = "<group>"; };
-		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
+		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
 		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
+		05EC9A3713CB959E00B7AD61 /* lokalite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lokalite.xcdatamodel; sourceTree = "<group>"; };
+		05EC9A3B13CB96DF00B7AD61 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
+		05EC9A3C13CB96DF00B7AD61 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
+		05EC9A3E13CB96F600B7AD61 /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Business.h; path = src/businesses/Business.h; sourceTree = "<group>"; };
+		05EC9A3F13CB96F600B7AD61 /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Business.m; path = src/businesses/Business.m; sourceTree = "<group>"; };
+		05EC9A4113CB971400B7AD61 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+GeneralHelpers.h"; path = "src/sdk-additions/UIApplication+GeneralHelpers.h"; sourceTree = "<group>"; };
+		05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+GeneralHelpers.m"; path = "src/sdk-additions/UIApplication+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05EC9A4B13CB99B700B7AD61 /* SDKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDKAdditions.h; path = "src/sdk-additions/SDKAdditions.h"; sourceTree = "<group>"; };
+		05EC9A4C13CB99E800B7AD61 /* NSError+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+GeneralHelpers.h"; path = "src/sdk-additions/NSError+GeneralHelpers.h"; sourceTree = "<group>"; };
+		05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+GeneralHelpers.m"; path = "src/sdk-additions/NSError+GeneralHelpers.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +91,7 @@
 				05209EDD13C76F9200CA6A2D /* UIKit.framework in Frameworks */,
 				05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */,
 				05209EE113C76F9200CA6A2D /* CoreGraphics.framework in Frameworks */,
+				05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +132,7 @@
 				05209EDC13C76F9200CA6A2D /* UIKit.framework */,
 				05209EDE13C76F9200CA6A2D /* Foundation.framework */,
 				05209EE013C76F9200CA6A2D /* CoreGraphics.framework */,
+				05EC9A4113CB971400B7AD61 /* CoreData.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -122,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				05209F0B13C7705300CA6A2D /* src */,
+				05EC9A3513CB94F000B7AD61 /* data-model */,
 				0504369C13C77F0C0077F03D /* images */,
 				05209EE313C76F9200CA6A2D /* Supporting Files */,
 			);
@@ -146,6 +166,9 @@
 				05209F0C13C7705800CA6A2D /* application */,
 				05209F0D13C7705D00CA6A2D /* featured */,
 				05209F0E13C7706700CA6A2D /* loyalty */,
+				05EC9A3913CB969700B7AD61 /* events */,
+				05EC9A3A13CB96BA00B7AD61 /* businesses */,
+				05EC9A4713CB990F00B7AD61 /* sdk-additions */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -202,6 +225,44 @@
 				054E06C413CB8990009B7373 /* featured-image-02@2x.png */,
 			);
 			name = "mock-images";
+			sourceTree = "<group>";
+		};
+		05EC9A3513CB94F000B7AD61 /* data-model */ = {
+			isa = PBXGroup;
+			children = (
+				05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */,
+			);
+			name = "data-model";
+			sourceTree = "<group>";
+		};
+		05EC9A3913CB969700B7AD61 /* events */ = {
+			isa = PBXGroup;
+			children = (
+				05EC9A3B13CB96DF00B7AD61 /* Event.h */,
+				05EC9A3C13CB96DF00B7AD61 /* Event.m */,
+			);
+			name = events;
+			sourceTree = "<group>";
+		};
+		05EC9A3A13CB96BA00B7AD61 /* businesses */ = {
+			isa = PBXGroup;
+			children = (
+				05EC9A3E13CB96F600B7AD61 /* Business.h */,
+				05EC9A3F13CB96F600B7AD61 /* Business.m */,
+			);
+			name = businesses;
+			sourceTree = "<group>";
+		};
+		05EC9A4713CB990F00B7AD61 /* sdk-additions */ = {
+			isa = PBXGroup;
+			children = (
+				05EC9A4B13CB99B700B7AD61 /* SDKAdditions.h */,
+				05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */,
+				05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */,
+				05EC9A4C13CB99E800B7AD61 /* NSError+GeneralHelpers.h */,
+				05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */,
+			);
+			name = "sdk-additions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +346,11 @@
 				05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */,
 				05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */,
 				05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */,
+				05EC9A3813CB959E00B7AD61 /* lokalite.xcdatamodeld in Sources */,
+				05EC9A3D13CB96DF00B7AD61 /* Event.m in Sources */,
+				05EC9A4013CB96F600B7AD61 /* Business.m in Sources */,
+				05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */,
+				05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +455,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				05EC9A3713CB959E00B7AD61 /* lokalite.xcdatamodel */,
+			);
+			currentVersion = 05EC9A3713CB959E00B7AD61 /* lokalite.xcdatamodel */;
+			name = lokalite.xcdatamodeld;
+			path = "data-model/lokalite.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 05209ECF13C76F9200CA6A2D /* Project object */;
 }
