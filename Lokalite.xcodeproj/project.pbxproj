@@ -29,8 +29,8 @@
 		054E06C613CB8990009B7373 /* featured-image-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C213CB8990009B7373 /* featured-image-01@2x.png */; };
 		054E06C713CB8990009B7373 /* featured-image-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C313CB8990009B7373 /* featured-image-02.png */; };
 		054E06C813CB8990009B7373 /* featured-image-02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C413CB8990009B7373 /* featured-image-02@2x.png */; };
-		05EC9A3213CB8FBD00B7AD61 /* NewFeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* NewFeaturedViewController.m */; };
-		05EC9A3313CB8FBD00B7AD61 /* NewFeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* NewFeaturedView.xib */; };
+		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
+		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,9 +61,9 @@
 		054E06C213CB8990009B7373 /* featured-image-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-01@2x.png"; path = "images/mock-images/featured-image-01@2x.png"; sourceTree = "<group>"; };
 		054E06C313CB8990009B7373 /* featured-image-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02.png"; path = "images/mock-images/featured-image-02.png"; sourceTree = "<group>"; };
 		054E06C413CB8990009B7373 /* featured-image-02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02@2x.png"; path = "images/mock-images/featured-image-02@2x.png"; sourceTree = "<group>"; };
-		05EC9A2F13CB8FBD00B7AD61 /* NewFeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewFeaturedViewController.h; path = src/featured/NewFeaturedViewController.h; sourceTree = "<group>"; };
-		05EC9A3013CB8FBD00B7AD61 /* NewFeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewFeaturedViewController.m; path = src/featured/NewFeaturedViewController.m; sourceTree = "<group>"; };
-		05EC9A3113CB8FBD00B7AD61 /* NewFeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewFeaturedView.xib; path = src/featured/NewFeaturedView.xib; sourceTree = "<group>"; };
+		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
+		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
+		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,9 +163,9 @@
 		05209F0D13C7705D00CA6A2D /* featured */ = {
 			isa = PBXGroup;
 			children = (
-				05EC9A2F13CB8FBD00B7AD61 /* NewFeaturedViewController.h */,
-				05EC9A3013CB8FBD00B7AD61 /* NewFeaturedViewController.m */,
-				05EC9A3113CB8FBD00B7AD61 /* NewFeaturedView.xib */,
+				05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */,
+				05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */,
+				05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */,
 			);
 			name = featured;
 			sourceTree = "<group>";
@@ -270,7 +270,7 @@
 				054E06C613CB8990009B7373 /* featured-image-01@2x.png in Resources */,
 				054E06C713CB8990009B7373 /* featured-image-02.png in Resources */,
 				054E06C813CB8990009B7373 /* featured-image-02@2x.png in Resources */,
-				05EC9A3313CB8FBD00B7AD61 /* NewFeaturedView.xib in Resources */,
+				05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +284,7 @@
 				05209EE913C76F9200CA6A2D /* main.m in Sources */,
 				05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */,
 				05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */,
-				05EC9A3213CB8FBD00B7AD61 /* NewFeaturedViewController.m in Sources */,
+				05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

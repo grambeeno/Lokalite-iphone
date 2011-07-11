@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewFeaturedViewController : UITableViewController
+@interface FeaturedViewController : UITableViewController
 
 @property (nonatomic, retain) IBOutlet UIView *headerView;
 

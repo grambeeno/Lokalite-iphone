@@ -6,9 +6,9 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "NewFeaturedViewController.h"
+#import "FeaturedViewController.h"
 
-@interface NewFeaturedViewController ()
+@interface FeaturedViewController ()
 
 #pragma mark - View initialization
 
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation NewFeaturedViewController
+@implementation FeaturedViewController
 
 @synthesize headerView = headerView_;
 
