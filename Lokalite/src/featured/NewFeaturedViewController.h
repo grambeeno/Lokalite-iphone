@@ -1,16 +1,14 @@
 //
-//  FeaturedViewController.h
+//  NewFeaturedViewController.h
 //  Lokalite
 //
-//  Created by John Debay on 7/8/11.
+//  Created by John Debay on 7/11/11.
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface FeaturedViewController : UITableViewController
-{
-}
+@interface NewFeaturedViewController : UITableViewController
 
 @property (nonatomic, retain) IBOutlet UIView *headerView;
 
