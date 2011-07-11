@@ -77,6 +77,10 @@
 				<object class="IBUINavigationController" key="IBUISelectedViewController" id="899979478">
 					<object class="IBUITabBarItem" key="IBUITabBarItem" id="1057420901">
 						<string key="IBUITitle">Explore</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">tab-bar-icon-explore.png</string>
+						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<reference key="IBUITabBar" ref="795333663"/>
 					</object>
@@ -98,7 +102,7 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="NSArray" key="IBUIViewControllers">
+					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="IBUIViewController" id="268481961">
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="744541061">
@@ -162,6 +166,10 @@
 					<object class="IBUINavigationController" id="486636681">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="226891341">
 							<string key="IBUITitle">Loyalty</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">tab-bar-icon-loyalty.png</string>
+							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<reference key="IBUITabBar" ref="795333663"/>
 						</object>
@@ -246,6 +254,10 @@
 					<object class="IBUINavigationController" id="406955434">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="282759938">
 							<string key="IBUITitle">Profile</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">tab-bar-icon-profile.png</string>
+							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<reference key="IBUITabBar" ref="795333663"/>
 						</object>
@@ -747,6 +759,21 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>tab-bar-icon-explore.png</string>
+				<string>tab-bar-icon-loyalty.png</string>
+				<string>tab-bar-icon-profile.png</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{26, 21}</string>
+				<string>{22, 26}</string>
+				<string>{24, 21}</string>
+			</object>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">534</string>
 	</data>
 </archive>
