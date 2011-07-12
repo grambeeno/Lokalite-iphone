@@ -7,7 +7,10 @@
 //
 
 #import "FeaturedViewController.h"
+
 #import "LokaliteFeaturedEventStream.h"
+
+#import "Event.h"
 
 #import <CoreData/CoreData.h>
 
@@ -16,14 +19,26 @@
 @property (nonatomic, assign) BOOL hasFetchedData;
 @property (nonatomic, retain) LokaliteFeaturedEventStream *stream;
 
+@property (nonatomic, copy) NSArray *otherEvents;
+
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem;
 - (void)initializeTableView;
 
+#pragma mark - View configuration
+
+- (void)configureCell:(UITableViewCell *)cell
+    forRowAtIndexPath:(NSIndexPath *)path;
+
 #pragma mark - Fetch data
 
 - (void)fetchFeaturedEventsIfNecessary;
+
+#pragma mark - Processing data
+
+- (void)processReceivedEvents:(NSArray *)events;
+- (void)processReceivedError:(NSError *)error;
 
 @end
 
@@ -36,6 +51,8 @@
 @synthesize hasFetchedData = hasFetchedData_;
 @synthesize stream = stream_;
 
+@synthesize otherEvents = otherEvents_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -45,6 +62,8 @@
     [headerView_ release];
 
     [stream_ release];
+
+    [otherEvents_ release];
 
     [super dealloc];
 }
@@ -103,15 +122,10 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [[self otherEvents] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -121,11 +135,12 @@
 
     UITableViewCell *cell =
         [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil)
         cell = [[[UITableViewCell alloc]
                  initWithStyle:UITableViewCellStyleDefault
                  reuseIdentifier:CellIdentifier] autorelease];
-    }
+
+    [self configureCell:cell forRowAtIndexPath:indexPath];
 
     return cell;
 }
@@ -156,6 +171,15 @@
     [[self tableView] setTableHeaderView:[self headerView]];
 }
 
+#pragma mark - View configuration
+
+- (void)configureCell:(UITableViewCell *)cell
+    forRowAtIndexPath:(NSIndexPath *)path
+{
+    Event *event = [[self otherEvents] objectAtIndex:[path row]];
+    [[cell textLabel] setText:[event name]];
+}
+
 #pragma mark - Fetch data
 
 - (void)fetchFeaturedEventsIfNecessary
@@ -163,10 +187,27 @@
     if (![self hasFetchedData]) {
         [[self stream] fetchNextBatchOfObjectsWithResponseHandler:
          ^(NSArray *events, NSError *error) {
-            NSLog(@"Fetched %d events", [events count]);
-             
+             if (events) {
+                 NSLog(@"Fetched %d events", [events count]);
+                 [self processReceivedEvents:events];
+                 [self setHasFetchedData:YES];
+             } else
+                 [self processReceivedError:error];
         }];
     }
+}
+
+#pragma mark - Processing data
+
+- (void)processReceivedEvents:(NSArray *)events
+{
+    [self setOtherEvents:events];
+    [[self tableView] reloadData];
+}
+
+- (void)processReceivedError:(NSError *)error
+{
+    NSLog(@"Received error: %@", error);
 }
 
 #pragma mark - Accessors
