@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class NSManagedObjectContext;
+
 @interface FeaturedViewController : UITableViewController
+
+@property (nonatomic, retain) NSManagedObjectContext *context;
 
 @property (nonatomic, retain) IBOutlet UIView *headerView;
 

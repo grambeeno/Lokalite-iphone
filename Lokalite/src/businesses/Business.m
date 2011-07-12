@@ -11,6 +11,7 @@
 
 
 @implementation Business
+@dynamic identifier;
 @dynamic name;
 @dynamic phone;
 @dynamic address;

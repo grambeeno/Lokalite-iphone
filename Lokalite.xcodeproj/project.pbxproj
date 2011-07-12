@@ -10,6 +10,9 @@
 		050436A013C77F220077F03D /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0504369E13C77F220077F03D /* radar.png */; };
 		050436A113C77F220077F03D /* radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0504369F13C77F220077F03D /* radar@2x.png */; };
 		050436A313C786BA0077F03D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050436A213C786BA0077F03D /* Icon@2x.png */; };
+		0505ECD413CBC2ED009874A7 /* LokaliteServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0505ECD313CBC2ED009874A7 /* LokaliteServiceRequest.m */; };
+		0505ECD713CBC659009874A7 /* NSURL+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */; };
+		05194D4A13CCAC8200EE14F8 /* LokaliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05194D4913CCAC8200EE14F8 /* LokaliteService.m */; };
 		05209EDD13C76F9200CA6A2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDC13C76F9200CA6A2D /* UIKit.framework */; };
 		05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDE13C76F9200CA6A2D /* Foundation.framework */; };
 		05209EE113C76F9200CA6A2D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EE013C76F9200CA6A2D /* CoreGraphics.framework */; };
@@ -29,6 +32,17 @@
 		054E06C613CB8990009B7373 /* featured-image-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C213CB8990009B7373 /* featured-image-01@2x.png */; };
 		054E06C713CB8990009B7373 /* featured-image-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C313CB8990009B7373 /* featured-image-02.png */; };
 		054E06C813CB8990009B7373 /* featured-image-02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C413CB8990009B7373 /* featured-image-02@2x.png */; };
+		056A92A813CCBE1E00C65DC0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92A713CCBE1E00C65DC0 /* JSONKit.m */; };
+		056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */ = {isa = PBXBuildFile; fileRef = 056A92AB13CCC61200C65DC0 /* mock-featured-events.json */; };
+		056A92D513CCD58900C65DC0 /* Event+MockDataHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */; };
+		056A92D813CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92D713CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.m */; };
+		056A92DF13CCD8A700C65DC0 /* Business+MockDataHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92DE13CCD8A700C65DC0 /* Business+MockDataHelpers.m */; };
+		056A92E213CCE81B00C65DC0 /* LokaliteDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92E113CCE81B00C65DC0 /* LokaliteDataParser.m */; };
+		056A92E513CCF07900C65DC0 /* LokaliteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92E413CCF07900C65DC0 /* LokaliteStream.m */; };
+		056A92E813CCF13000C65DC0 /* LokaliteFeaturedEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92E713CCF13000C65DC0 /* LokaliteFeaturedEventStream.m */; };
+		056A92EB13CCF3AB00C65DC0 /* Event+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */; };
+		056A92EE13CCFA3100C65DC0 /* Business+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92ED13CCFA3100C65DC0 /* Business+GeneralHelpers.m */; };
+		056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
 		05EC9A3813CB959E00B7AD61 /* lokalite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */; };
@@ -43,6 +57,12 @@
 		0504369E13C77F220077F03D /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = radar.png; path = images/radar.png; sourceTree = "<group>"; };
 		0504369F13C77F220077F03D /* radar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "radar@2x.png"; path = "images/radar@2x.png"; sourceTree = "<group>"; };
 		050436A213C786BA0077F03D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		0505ECD213CBC2ED009874A7 /* LokaliteServiceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteServiceRequest.h; path = src/lokalite/LokaliteServiceRequest.h; sourceTree = "<group>"; };
+		0505ECD313CBC2ED009874A7 /* LokaliteServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteServiceRequest.m; path = src/lokalite/LokaliteServiceRequest.m; sourceTree = "<group>"; };
+		0505ECD513CBC659009874A7 /* NSURL+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+GeneralHelpers.h"; path = "src/sdk-additions/NSURL+GeneralHelpers.h"; sourceTree = "<group>"; };
+		0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+GeneralHelpers.m"; path = "src/sdk-additions/NSURL+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05194D4813CCAC8200EE14F8 /* LokaliteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteService.h; path = src/lokalite/LokaliteService.h; sourceTree = "<group>"; };
+		05194D4913CCAC8200EE14F8 /* LokaliteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteService.m; path = src/lokalite/LokaliteService.m; sourceTree = "<group>"; };
 		05209ED813C76F9200CA6A2D /* Lokalite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokalite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05209EDC13C76F9200CA6A2D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		05209EDE13C76F9200CA6A2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -67,6 +87,27 @@
 		054E06C213CB8990009B7373 /* featured-image-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-01@2x.png"; path = "images/mock-images/featured-image-01@2x.png"; sourceTree = "<group>"; };
 		054E06C313CB8990009B7373 /* featured-image-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02.png"; path = "images/mock-images/featured-image-02.png"; sourceTree = "<group>"; };
 		054E06C413CB8990009B7373 /* featured-image-02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02@2x.png"; path = "images/mock-images/featured-image-02@2x.png"; sourceTree = "<group>"; };
+		056A92A613CCBE1E00C65DC0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = src/vendor/jsonkit/JSONKit.h; sourceTree = "<group>"; };
+		056A92A713CCBE1E00C65DC0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = src/vendor/jsonkit/JSONKit.m; sourceTree = "<group>"; };
+		056A92AB13CCC61200C65DC0 /* mock-featured-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "mock-featured-events.json"; path = "mock/server-data/mock-featured-events.json"; sourceTree = "<group>"; wrapsLines = 0; };
+		056A92D313CCD58900C65DC0 /* Event+MockDataHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Event+MockDataHelpers.h"; path = "src/events/Event+MockDataHelpers.h"; sourceTree = "<group>"; };
+		056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Event+MockDataHelpers.m"; path = "src/events/Event+MockDataHelpers.m"; sourceTree = "<group>"; };
+		056A92D613CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+GeneralHelpers.h"; path = "src/sdk-additions/NSManagedObject+GeneralHelpers.h"; sourceTree = "<group>"; };
+		056A92D713CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+GeneralHelpers.m"; path = "src/sdk-additions/NSManagedObject+GeneralHelpers.m"; sourceTree = "<group>"; };
+		056A92DD13CCD8A700C65DC0 /* Business+MockDataHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Business+MockDataHelpers.h"; path = "src/businesses/Business+MockDataHelpers.h"; sourceTree = "<group>"; };
+		056A92DE13CCD8A700C65DC0 /* Business+MockDataHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Business+MockDataHelpers.m"; path = "src/businesses/Business+MockDataHelpers.m"; sourceTree = "<group>"; };
+		056A92E013CCE81B00C65DC0 /* LokaliteDataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteDataParser.h; path = src/lokalite/LokaliteDataParser.h; sourceTree = "<group>"; };
+		056A92E113CCE81B00C65DC0 /* LokaliteDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteDataParser.m; path = src/lokalite/LokaliteDataParser.m; sourceTree = "<group>"; };
+		056A92E313CCF07900C65DC0 /* LokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteStream.h; path = src/lokalite/LokaliteStream.h; sourceTree = "<group>"; };
+		056A92E413CCF07900C65DC0 /* LokaliteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteStream.m; path = src/lokalite/LokaliteStream.m; sourceTree = "<group>"; };
+		056A92E613CCF13000C65DC0 /* LokaliteFeaturedEventStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteFeaturedEventStream.h; path = src/lokalite/LokaliteFeaturedEventStream.h; sourceTree = "<group>"; };
+		056A92E713CCF13000C65DC0 /* LokaliteFeaturedEventStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteFeaturedEventStream.m; path = src/lokalite/LokaliteFeaturedEventStream.m; sourceTree = "<group>"; };
+		056A92E913CCF3AB00C65DC0 /* Event+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Event+GeneralHelpers.h"; path = "src/events/Event+GeneralHelpers.h"; sourceTree = "<group>"; };
+		056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Event+GeneralHelpers.m"; path = "src/events/Event+GeneralHelpers.m"; sourceTree = "<group>"; };
+		056A92EC13CCFA3100C65DC0 /* Business+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Business+GeneralHelpers.h"; path = "src/businesses/Business+GeneralHelpers.h"; sourceTree = "<group>"; };
+		056A92ED13CCFA3100C65DC0 /* Business+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Business+GeneralHelpers.m"; path = "src/businesses/Business+GeneralHelpers.m"; sourceTree = "<group>"; };
+		056A92EF13CCFB0600C65DC0 /* LokaliteObjectBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObjectBuilder.h; path = src/lokalite/LokaliteObjectBuilder.h; sourceTree = "<group>"; };
+		056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteObjectBuilder.m; path = src/lokalite/LokaliteObjectBuilder.m; sourceTree = "<group>"; };
 		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
 		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
@@ -109,6 +150,25 @@
 			name = images;
 			sourceTree = "<group>";
 		};
+		0505ECCD13CBC13E009874A7 /* lokalite */ = {
+			isa = PBXGroup;
+			children = (
+				05194D4813CCAC8200EE14F8 /* LokaliteService.h */,
+				05194D4913CCAC8200EE14F8 /* LokaliteService.m */,
+				0505ECD213CBC2ED009874A7 /* LokaliteServiceRequest.h */,
+				0505ECD313CBC2ED009874A7 /* LokaliteServiceRequest.m */,
+				056A92E013CCE81B00C65DC0 /* LokaliteDataParser.h */,
+				056A92E113CCE81B00C65DC0 /* LokaliteDataParser.m */,
+				056A92E313CCF07900C65DC0 /* LokaliteStream.h */,
+				056A92E413CCF07900C65DC0 /* LokaliteStream.m */,
+				056A92E613CCF13000C65DC0 /* LokaliteFeaturedEventStream.h */,
+				056A92E713CCF13000C65DC0 /* LokaliteFeaturedEventStream.m */,
+				056A92EF13CCFB0600C65DC0 /* LokaliteObjectBuilder.h */,
+				056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */,
+			);
+			name = lokalite;
+			sourceTree = "<group>";
+		};
 		05209ECD13C76F9200CA6A2D = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +203,7 @@
 				05209F0B13C7705300CA6A2D /* src */,
 				05EC9A3513CB94F000B7AD61 /* data-model */,
 				0504369C13C77F0C0077F03D /* images */,
+				056A92A913CCC5E100C65DC0 /* mock */,
 				05209EE313C76F9200CA6A2D /* Supporting Files */,
 			);
 			path = Lokalite;
@@ -168,7 +229,9 @@
 				05209F0E13C7706700CA6A2D /* loyalty */,
 				05EC9A3913CB969700B7AD61 /* events */,
 				05EC9A3A13CB96BA00B7AD61 /* businesses */,
+				0505ECCD13CBC13E009874A7 /* lokalite */,
 				05EC9A4713CB990F00B7AD61 /* sdk-additions */,
+				056A92A313CCBD9A00C65DC0 /* vendor */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -227,6 +290,39 @@
 			name = "mock-images";
 			sourceTree = "<group>";
 		};
+		056A92A313CCBD9A00C65DC0 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				056A92A513CCBE1000C65DC0 /* jsonkit */,
+			);
+			name = vendor;
+			sourceTree = "<group>";
+		};
+		056A92A513CCBE1000C65DC0 /* jsonkit */ = {
+			isa = PBXGroup;
+			children = (
+				056A92A613CCBE1E00C65DC0 /* JSONKit.h */,
+				056A92A713CCBE1E00C65DC0 /* JSONKit.m */,
+			);
+			name = jsonkit;
+			sourceTree = "<group>";
+		};
+		056A92A913CCC5E100C65DC0 /* mock */ = {
+			isa = PBXGroup;
+			children = (
+				056A92AA13CCC5EB00C65DC0 /* server-data */,
+			);
+			name = mock;
+			sourceTree = "<group>";
+		};
+		056A92AA13CCC5EB00C65DC0 /* server-data */ = {
+			isa = PBXGroup;
+			children = (
+				056A92AB13CCC61200C65DC0 /* mock-featured-events.json */,
+			);
+			name = "server-data";
+			sourceTree = "<group>";
+		};
 		05EC9A3513CB94F000B7AD61 /* data-model */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +336,10 @@
 			children = (
 				05EC9A3B13CB96DF00B7AD61 /* Event.h */,
 				05EC9A3C13CB96DF00B7AD61 /* Event.m */,
+				056A92E913CCF3AB00C65DC0 /* Event+GeneralHelpers.h */,
+				056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */,
+				056A92D313CCD58900C65DC0 /* Event+MockDataHelpers.h */,
+				056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */,
 			);
 			name = events;
 			sourceTree = "<group>";
@@ -249,6 +349,10 @@
 			children = (
 				05EC9A3E13CB96F600B7AD61 /* Business.h */,
 				05EC9A3F13CB96F600B7AD61 /* Business.m */,
+				056A92EC13CCFA3100C65DC0 /* Business+GeneralHelpers.h */,
+				056A92ED13CCFA3100C65DC0 /* Business+GeneralHelpers.m */,
+				056A92DD13CCD8A700C65DC0 /* Business+MockDataHelpers.h */,
+				056A92DE13CCD8A700C65DC0 /* Business+MockDataHelpers.m */,
 			);
 			name = businesses;
 			sourceTree = "<group>";
@@ -259,8 +363,12 @@
 				05EC9A4B13CB99B700B7AD61 /* SDKAdditions.h */,
 				05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */,
 				05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */,
+				0505ECD513CBC659009874A7 /* NSURL+GeneralHelpers.h */,
+				0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */,
 				05EC9A4C13CB99E800B7AD61 /* NSError+GeneralHelpers.h */,
 				05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */,
+				056A92D613CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.h */,
+				056A92D713CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.m */,
 			);
 			name = "sdk-additions";
 			sourceTree = "<group>";
@@ -332,6 +440,7 @@
 				054E06C713CB8990009B7373 /* featured-image-02.png in Resources */,
 				054E06C813CB8990009B7373 /* featured-image-02@2x.png in Resources */,
 				05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */,
+				056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +460,19 @@
 				05EC9A4013CB96F600B7AD61 /* Business.m in Sources */,
 				05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */,
 				05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */,
+				0505ECD413CBC2ED009874A7 /* LokaliteServiceRequest.m in Sources */,
+				0505ECD713CBC659009874A7 /* NSURL+GeneralHelpers.m in Sources */,
+				05194D4A13CCAC8200EE14F8 /* LokaliteService.m in Sources */,
+				056A92A813CCBE1E00C65DC0 /* JSONKit.m in Sources */,
+				056A92D513CCD58900C65DC0 /* Event+MockDataHelpers.m in Sources */,
+				056A92D813CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.m in Sources */,
+				056A92DF13CCD8A700C65DC0 /* Business+MockDataHelpers.m in Sources */,
+				056A92E213CCE81B00C65DC0 /* LokaliteDataParser.m in Sources */,
+				056A92E513CCF07900C65DC0 /* LokaliteStream.m in Sources */,
+				056A92E813CCF13000C65DC0 /* LokaliteFeaturedEventStream.m in Sources */,
+				056A92EB13CCF3AB00C65DC0 /* Event+GeneralHelpers.m in Sources */,
+				056A92EE13CCFA3100C65DC0 /* Business+GeneralHelpers.m in Sources */,
+				056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +505,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -400,7 +522,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

@@ -10,6 +10,7 @@
 
 
 @implementation Event
+@dynamic identifier;
 @dynamic name;
 @dynamic date;
 @dynamic summary;

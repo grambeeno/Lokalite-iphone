@@ -17,4 +17,5 @@
 // Foundation
 //
 
+#import "NSURL+GeneralHelpers.h"
 #import "NSError+GeneralHelpers.h"

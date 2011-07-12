@@ -10,6 +10,8 @@
 
 #import <CoreData/CoreData.h>
 
+#import "FeaturedViewController.h"
+
 #import "SDKAdditions.h"
 
 @interface LokaliteAppDelegate ()
@@ -46,6 +48,30 @@
     [context_ release];
 
     [super dealloc];
+}
+
+#pragma mark - Initialization
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+
+    UITabBarController *tabBarController = [self tabBarController];
+    __block FeaturedViewController *featuredController = nil;
+    [[tabBarController viewControllers] enumerateObjectsUsingBlock:
+     ^(UIViewController *controller, NSUInteger idx, BOOL *stop) {
+         if ([controller isKindOfClass:[UINavigationController class]]) {
+             UINavigationController *nc = (UINavigationController *) controller;
+             controller = [nc topViewController];
+         }
+
+         if ([controller isKindOfClass:[FeaturedViewController class]]) {
+             featuredController = (FeaturedViewController *) controller;
+             *stop = YES;
+         }
+     }];
+
+    [featuredController setContext:[self context]];
 }
 
 #pragma mark - UIApplicationDelegate implementation

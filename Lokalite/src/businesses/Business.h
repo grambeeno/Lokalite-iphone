@@ -14,6 +14,7 @@
 @interface Business : NSManagedObject {
 @private
 }
+@property (nonatomic, retain) NSNumber * identifier;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * address;

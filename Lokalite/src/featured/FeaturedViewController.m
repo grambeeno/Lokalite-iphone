@@ -7,25 +7,44 @@
 //
 
 #import "FeaturedViewController.h"
+#import "LokaliteFeaturedEventStream.h"
+
+#import <CoreData/CoreData.h>
 
 @interface FeaturedViewController ()
+
+@property (nonatomic, assign) BOOL hasFetchedData;
+@property (nonatomic, retain) LokaliteFeaturedEventStream *stream;
 
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem;
 - (void)initializeTableView;
 
+#pragma mark - Fetch data
+
+- (void)fetchFeaturedEventsIfNecessary;
+
 @end
 
 @implementation FeaturedViewController
 
+@synthesize context = context_;
+
 @synthesize headerView = headerView_;
+
+@synthesize hasFetchedData = hasFetchedData_;
+@synthesize stream = stream_;
 
 #pragma mark - Memory management
 
 - (void)dealloc
 {
+    [context_ release];
+
     [headerView_ release];
+
+    [stream_ release];
 
     [super dealloc];
 }
@@ -35,7 +54,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
+
     NSLog(@"%@: %@", NSStringFromClass([self class]),
           NSStringFromSelector(_cmd));
 }
@@ -58,6 +77,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    [self fetchFeaturedEventsIfNecessary];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -87,7 +108,8 @@
     return 0;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
 {
     return 0;
 }
@@ -132,6 +154,31 @@
 - (void)initializeTableView
 {
     [[self tableView] setTableHeaderView:[self headerView]];
+}
+
+#pragma mark - Fetch data
+
+- (void)fetchFeaturedEventsIfNecessary
+{
+    if (![self hasFetchedData]) {
+        [[self stream] fetchNextBatchOfObjectsWithResponseHandler:
+         ^(NSArray *events, NSError *error) {
+            NSLog(@"Fetched %d events", [events count]);
+             
+        }];
+    }
+}
+
+#pragma mark - Accessors
+
+- (LokaliteStream *)stream
+{
+    if (!stream_) {
+        NSManagedObjectContext *moc = [self context];
+        stream_ = [[LokaliteFeaturedEventStream alloc] initWithContext:moc];
+    }
+
+    return stream_;
 }
 
 @end

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="560" systemVersion="11A511" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11A511" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Business" representedClassName="Business">
         <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="identifier" attributeType="Integer 64" defaultValueString="0" indexed="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
@@ -9,13 +10,14 @@
     </entity>
     <entity name="Event" representedClassName="Event">
         <attribute name="date" optional="YES" attributeType="Date"/>
+        <attribute name="identifier" attributeType="Integer 64" defaultValueString="0" indexed="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
         <relationship name="business" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Business" inverseName="events" inverseEntity="Business"/>
     </entity>
     <elements>
-        <element name="Event" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="Business" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Business" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Event" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
 </model>

@@ -13,6 +13,7 @@
 @interface Event : NSManagedObject {
 @private
 }
+@property (nonatomic, retain) NSNumber * identifier;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * summary;
