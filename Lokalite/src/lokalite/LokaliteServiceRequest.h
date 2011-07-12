@@ -30,5 +30,6 @@ typedef void(^LKRequestHandler)(NSData *, NSHTTPURLResponse *, NSError *);
 #pragma mark - Performing the request
 
 - (void)performRequestWithHandler:(LKRequestHandler)handler;
+- (void)cancel;
 
 @end

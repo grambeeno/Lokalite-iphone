@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Lokalite
+
+  Created by John Debay on 7/12/11.
+  Copyright 2011 Lokalite. All rights reserved.
+*/
+
+"global.dismiss" = "Dismiss";
+
+
+/*
+ * Featured
+ */
+"featured.fetch.failed" = "Failed to Fetch Featured Events";

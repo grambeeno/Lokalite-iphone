@@ -12,11 +12,13 @@
 
 #import "Event.h"
 
+#import "NSManagedObject+GeneralHelpers.h"
+
 #import <CoreData/CoreData.h>
 
 @interface FeaturedViewController ()
 
-@property (nonatomic, assign) BOOL hasFetchedData;
+@property (nonatomic, assign) BOOL shouldFetchedData;
 @property (nonatomic, retain) LokaliteFeaturedEventStream *stream;
 
 @property (nonatomic, copy) NSArray *otherEvents;
@@ -25,6 +27,7 @@
 
 - (void)initializeNavigationItem;
 - (void)initializeTableView;
+- (void)initializeData;
 
 #pragma mark - View configuration
 
@@ -40,6 +43,11 @@
 - (void)processReceivedEvents:(NSArray *)events;
 - (void)processReceivedError:(NSError *)error;
 
+#pragma mark - Application notifications
+
+- (void)subscribeForApplicationLifecycleNotifications;
+- (void)unsubscribeForApplicationLifecycleNotifications;
+
 @end
 
 @implementation FeaturedViewController
@@ -48,7 +56,7 @@
 
 @synthesize headerView = headerView_;
 
-@synthesize hasFetchedData = hasFetchedData_;
+@synthesize shouldFetchedData = shouldFetchedData_;
 @synthesize stream = stream_;
 
 @synthesize otherEvents = otherEvents_;
@@ -57,6 +65,8 @@
 
 - (void)dealloc
 {
+    [self unsubscribeForApplicationLifecycleNotifications];
+
     [context_ release];
 
     [headerView_ release];
@@ -66,6 +76,17 @@
     [otherEvents_ release];
 
     [super dealloc];
+}
+
+#pragma mark - Initialization
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+        shouldFetchedData_ = YES;
+
+    return self;
 }
 
 #pragma mark - UITableViewController implementation
@@ -78,7 +99,12 @@
           NSStringFromSelector(_cmd));
 }
 
-#pragma mark - View lifecycle
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+
+    [self subscribeForApplicationLifecycleNotifications];
+}
 
 - (void)viewDidLoad
 {
@@ -86,6 +112,7 @@
 
     [self initializeNavigationItem];
     [self initializeTableView];
+    [self initializeData];
 }
 
 - (void)viewDidUnload
@@ -96,8 +123,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    [self fetchFeaturedEventsIfNecessary];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -171,6 +196,12 @@
     [[self tableView] setTableHeaderView:[self headerView]];
 }
 
+- (void)initializeData
+{
+    NSArray *events = [Event findAllInContext:[self context]];
+    [self processReceivedEvents:events];
+}
+
 #pragma mark - View configuration
 
 - (void)configureCell:(UITableViewCell *)cell
@@ -184,13 +215,13 @@
 
 - (void)fetchFeaturedEventsIfNecessary
 {
-    if (![self hasFetchedData]) {
+    if ([self shouldFetchedData]) {
         [[self stream] fetchNextBatchOfObjectsWithResponseHandler:
          ^(NSArray *events, NSError *error) {
              if (events) {
                  NSLog(@"Fetched %d events", [events count]);
                  [self processReceivedEvents:events];
-                 [self setHasFetchedData:YES];
+                 [self setShouldFetchedData:NO];
              } else
                  [self processReceivedError:error];
         }];
@@ -201,13 +232,83 @@
 
 - (void)processReceivedEvents:(NSArray *)events
 {
+    UITableView *tableView = [self tableView];
+
+    [tableView beginUpdates];
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndex:0];
+    [tableView deleteSections:sections
+             withRowAnimation:UITableViewRowAnimationTop];
+
     [self setOtherEvents:events];
-    [[self tableView] reloadData];
+
+    [tableView insertSections:sections
+             withRowAnimation:UITableViewRowAnimationBottom];
+    [tableView endUpdates];
 }
 
 - (void)processReceivedError:(NSError *)error
 {
     NSLog(@"Received error: %@", error);
+    NSString *title = NSLocalizedString(@"featured.fetch.failed", nil);
+    NSString *message = [error localizedDescription];
+    NSString *cancel = NSLocalizedString(@"global.dismiss", nil);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:cancel
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release], alert = nil;
+}
+
+#pragma mark - Application notifications
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
+{
+    [self fetchFeaturedEventsIfNecessary];
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+    [self fetchFeaturedEventsIfNecessary];
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    [self setShouldFetchedData:YES];
+}
+
+- (void)subscribeForApplicationLifecycleNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+
+    [nc addObserver:self
+           selector:@selector(applicationDidFinishLaunching:)
+               name:UIApplicationDidFinishLaunchingNotification
+             object:[UIApplication sharedApplication]];
+    [nc addObserver:self
+           selector:@selector(applicationWillEnterForeground:)
+               name:UIApplicationWillEnterForegroundNotification
+             object:[UIApplication sharedApplication]];
+    [nc addObserver:self
+           selector:@selector(applicationDidEnterBackground:)
+               name:UIApplicationDidEnterBackgroundNotification
+             object:[UIApplication sharedApplication]];
+}
+
+- (void)unsubscribeForApplicationLifecycleNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+
+    [nc removeObserver:self
+                  name:UIApplicationDidFinishLaunchingNotification
+                object:[UIApplication sharedApplication]];
+    [nc removeObserver:self
+                  name:UIApplicationWillEnterForegroundNotification
+                object:[UIApplication sharedApplication]];
+    [nc removeObserver:self
+                  name:UIApplicationDidEnterBackgroundNotification
+                object:[UIApplication sharedApplication]];
 }
 
 #pragma mark - Accessors

@@ -12,8 +12,14 @@
 @interface LokaliteServiceRequest ()
 @property (nonatomic, copy) LKRequestHandler requestHandler;
 
+@property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, retain) NSMutableData *data;
 @property (nonatomic, retain) NSHTTPURLResponse *response;
+
+#pragma mark - Connection management
+
+- (void)processConnectionStarted:(NSURLConnection *)connection;
+- (void)processConnectionFinished;
 @end
 
 @implementation LokaliteServiceRequest
@@ -24,6 +30,7 @@
 
 @synthesize requestHandler = requestHandler_;
 
+@synthesize connection = connection_;
 @synthesize data = data_;
 @synthesize response = response_;
 
@@ -36,6 +43,7 @@
 
     [requestHandler_ release];
 
+    [connection_ release];
     [data_ release];
     [response_ release];
 
@@ -58,13 +66,22 @@
     return self;
 }
 
+#pragma mark - Performing the request
+
 - (void)performRequestWithHandler:(LKRequestHandler)handler
 {
     [self setRequestHandler:handler];
 
     NSURL *url = [[self url] URLByAppendingGetParameters:[self parameters]];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
-    [NSURLConnection connectionWithRequest:req delegate:self];
+    NSURLConnection *connection =
+     [NSURLConnection connectionWithRequest:req delegate:self];
+    [self processConnectionStarted:connection];
+}
+
+- (void)cancel
+{
+    [[self connection] cancel];
 }
 
 #pragma mark NSURLConnectionDelegate implementation
@@ -84,12 +101,28 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     [self requestHandler]([self data], [self response], nil);
+    [self processConnectionFinished];
 }
 
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
     [self requestHandler](nil, [self response], error);
+    [self processConnectionFinished];
+}
+
+#pragma mark - Connection management
+
+- (void)processConnectionStarted:(NSURLConnection *)connection
+{
+    [self setConnection:connection];
+    [[UIApplication sharedApplication] networkActivityIsStarting];
+}
+
+- (void)processConnectionFinished
+{
+    [self setConnection:nil];
+    [[UIApplication sharedApplication] networkActivityDidFinish];
 }
 
 @end

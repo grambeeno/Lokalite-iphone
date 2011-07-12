@@ -18,4 +18,26 @@
     return [dirs lastObject];
 }
 
+#pragma mark - Working with the global network activity indicator
+
+static NSInteger networkActivityCount = 0;
+
+- (void)networkActivityIsStarting
+{
+    if (networkActivityCount++ == 0)
+        self.networkActivityIndicatorVisible = YES;
+}
+
+- (void)networkActivityDidFinish
+{
+    networkActivityCount = MAX(networkActivityCount - 1, 0);
+    if (networkActivityCount == 0)
+        self.networkActivityIndicatorVisible = NO;
+}
+
+- (NSInteger)networkActivityCount
+{
+    return networkActivityCount;
+}
+
 @end
