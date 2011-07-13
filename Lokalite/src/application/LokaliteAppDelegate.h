@@ -15,4 +15,13 @@
 
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
+#pragma mark - Displaying the application activity view
+
+- (void)displayActivityViewAnimated:(BOOL)animated;
+- (void)displayActivityViewAnimated:(BOOL)animated
+                         completion:(void(^)(void))completion;
+- (void)hideActivityViewAnimated:(BOOL)animated;
+- (void)hideActivityViewAnimated:(BOOL)animated
+                      completion:(void(^)(void))completion;
+
 @end

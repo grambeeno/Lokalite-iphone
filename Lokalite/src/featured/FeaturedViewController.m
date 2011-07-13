@@ -12,6 +12,8 @@
 
 #import "Event.h"
 
+#import "LokaliteAppDelegate.h"
+
 #import "NSManagedObject+GeneralHelpers.h"
 
 #import <CoreData/CoreData.h>
@@ -175,6 +177,7 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - View initialization
@@ -216,6 +219,12 @@
 - (void)fetchFeaturedEventsIfNecessary
 {
     if ([self shouldFetchedData]) {
+        BOOL showActivityView = ![self otherEvents];
+        LokaliteAppDelegate *appDelegate = (LokaliteAppDelegate *)
+            [[UIApplication sharedApplication] delegate];
+        if (showActivityView)
+            [appDelegate displayActivityViewAnimated:YES];
+
         [[self stream] fetchNextBatchOfObjectsWithResponseHandler:
          ^(NSArray *events, NSError *error) {
              if (events) {
@@ -224,6 +233,9 @@
                  [self setShouldFetchedData:NO];
              } else
                  [self processReceivedError:error];
+
+             if (showActivityView)
+                 [appDelegate hideActivityViewAnimated:YES];
         }];
     }
 }

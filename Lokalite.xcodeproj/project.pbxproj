@@ -12,6 +12,7 @@
 		050436A313C786BA0077F03D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050436A213C786BA0077F03D /* Icon@2x.png */; };
 		0505ECD413CBC2ED009874A7 /* LokaliteServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0505ECD313CBC2ED009874A7 /* LokaliteServiceRequest.m */; };
 		0505ECD713CBC659009874A7 /* NSURL+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */; };
+		0514FBDF13CD468900ACA464 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBDE13CD468900ACA464 /* ActivityView.m */; };
 		05194D4A13CCAC8200EE14F8 /* LokaliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05194D4913CCAC8200EE14F8 /* LokaliteService.m */; };
 		05209EDD13C76F9200CA6A2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDC13C76F9200CA6A2D /* UIKit.framework */; };
 		05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDE13C76F9200CA6A2D /* Foundation.framework */; };
@@ -63,6 +64,8 @@
 		0505ECD313CBC2ED009874A7 /* LokaliteServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteServiceRequest.m; path = src/lokalite/LokaliteServiceRequest.m; sourceTree = "<group>"; };
 		0505ECD513CBC659009874A7 /* NSURL+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+GeneralHelpers.h"; path = "src/sdk-additions/NSURL+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+GeneralHelpers.m"; path = "src/sdk-additions/NSURL+GeneralHelpers.m"; sourceTree = "<group>"; };
+		0514FBDD13CD468900ACA464 /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityView.h; path = src/application/ActivityView.h; sourceTree = "<group>"; };
+		0514FBDE13CD468900ACA464 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityView.m; path = src/application/ActivityView.m; sourceTree = "<group>"; };
 		05194D4813CCAC8200EE14F8 /* LokaliteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteService.h; path = src/lokalite/LokaliteService.h; sourceTree = "<group>"; };
 		05194D4913CCAC8200EE14F8 /* LokaliteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteService.m; path = src/lokalite/LokaliteService.m; sourceTree = "<group>"; };
 		05209ED813C76F9200CA6A2D /* Lokalite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokalite.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,6 +251,8 @@
 				05209F1413C7710F00CA6A2D /* LokaliteAppDelegate.h */,
 				05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */,
 				05209F1613C7710F00CA6A2D /* MainWindow.xib */,
+				0514FBDD13CD468900ACA464 /* ActivityView.h */,
+				0514FBDE13CD468900ACA464 /* ActivityView.m */,
 			);
 			name = application;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				056A92EE13CCFA3100C65DC0 /* Business+GeneralHelpers.m in Sources */,
 				056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */,
 				056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */,
+				0514FBDF13CD468900ACA464 /* ActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

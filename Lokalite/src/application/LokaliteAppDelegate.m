@@ -12,6 +12,8 @@
 
 #import "FeaturedViewController.h"
 
+#import "ActivityView.h"
+
 #import "SDKAdditions.h"
 
 @interface LokaliteAppDelegate ()
@@ -134,6 +136,67 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+#pragma mark - Displaying the application activity view
+
++ (NSInteger)activityViewTag
+{
+    return 201;
+}
+
++ (NSTimeInterval)activityAnimationDuration
+{
+    return 0.3;
+}
+
+- (void)displayActivityViewAnimated:(BOOL)animated
+{
+    [self displayActivityViewAnimated:animated completion:nil];
+}
+
+- (void)displayActivityViewAnimated:(BOOL)animated
+                         completion:(void(^)(void))completion
+{
+    CGRect frame = [[UIScreen mainScreen] applicationFrame];
+    ActivityView *view = [[ActivityView alloc] initWithFrame:frame];
+    [view setTag:[[self class] activityViewTag]];
+    [view setAlpha:0];
+
+    NSTimeInterval duration =
+        animated ? [[self class] activityAnimationDuration] : 0;
+    [UIView animateWithDuration:duration
+                     animations:^{ [view setAlpha:1]; }
+                     completion:^(BOOL done) { if (completion) completion(); }];
+    [view showActivityIndicatorWithAnimationDuration:duration];
+
+    [[self window] addSubview:view];
+    [view release], view = nil;
+}
+
+- (void)hideActivityViewAnimated:(BOOL)animated
+{
+    [self hideActivityViewAnimated:animated completion:nil];
+}
+
+- (void)hideActivityViewAnimated:(BOOL)animated
+                      completion:(void(^)(void))completion
+{
+    NSInteger tag = [[self class] activityViewTag];
+    ActivityView * view = (ActivityView *) [[self window] viewWithTag:tag];
+
+    if (view) {
+        NSTimeInterval duration =
+            animated ? [[self class] activityAnimationDuration] : 0;
+        [UIView animateWithDuration:duration
+                         animations:^{ [view setAlpha:0]; }
+                         completion:^(BOOL done) {
+                             [view removeFromSuperview];
+                             if (completion)
+                                 completion();
+                         }];
+        [view hideActivityIndicatorWithAnimationDuration:duration];
+    }
 }
 
 #pragma mark - Accessors
