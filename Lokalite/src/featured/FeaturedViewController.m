@@ -91,6 +91,18 @@
     return self;
 }
 
+#pragma mark - UI events
+
+- (void)refresh:(id)sender
+{
+    [self setShouldFetchedData:YES];
+    [self fetchFeaturedEventsIfNecessary];
+}
+
+- (void)toggleMapView:(id)sender
+{
+}
+
 #pragma mark - UITableViewController implementation
 
 - (void)didReceiveMemoryWarning
@@ -114,7 +126,6 @@
 
     [self initializeNavigationItem];
     [self initializeTableView];
-    [self initializeData];
 }
 
 - (void)viewDidUnload
@@ -184,6 +195,14 @@
 
 - (void)initializeNavigationItem
 {
+    UIBarButtonItem *refreshButtonItem =
+        [[UIBarButtonItem alloc]
+         initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                              target:self
+                              action:@selector(refresh:)];
+    [[self navigationItem] setLeftBarButtonItem:refreshButtonItem];
+    [refreshButtonItem release], refreshButtonItem = nil;
+
     UIImage *mapImage = [UIImage imageNamed:@"radar"];
     UIBarButtonItem *mapButtonItem =
         [[UIBarButtonItem alloc] initWithImage:mapImage
@@ -219,24 +238,32 @@
 - (void)fetchFeaturedEventsIfNecessary
 {
     if ([self shouldFetchedData]) {
-        BOOL showActivityView = ![self otherEvents];
+        BOOL showActivityView = [[self otherEvents] count] == 0;
         LokaliteAppDelegate *appDelegate = (LokaliteAppDelegate *)
             [[UIApplication sharedApplication] delegate];
+
+        void (^fetchObjects)(LokaliteStream *) = ^(LokaliteStream *stream) {
+            [stream fetchNextBatchOfObjectsWithResponseHandler:
+             ^(NSArray *events, NSError *error) {
+                 if (events) {
+                     NSLog(@"Fetched %d events", [events count]);
+                     [self processReceivedEvents:events];
+                     [self setShouldFetchedData:NO];
+                 } else
+                     [self processReceivedError:error];
+
+                 if (showActivityView)
+                     [appDelegate hideActivityViewAnimated:YES];
+             }];
+        };
+
+        LokaliteStream *stream = [self stream];
         if (showActivityView)
-            [appDelegate displayActivityViewAnimated:YES];
-
-        [[self stream] fetchNextBatchOfObjectsWithResponseHandler:
-         ^(NSArray *events, NSError *error) {
-             if (events) {
-                 NSLog(@"Fetched %d events", [events count]);
-                 [self processReceivedEvents:events];
-                 [self setShouldFetchedData:NO];
-             } else
-                 [self processReceivedError:error];
-
-             if (showActivityView)
-                 [appDelegate hideActivityViewAnimated:YES];
-        }];
+            [appDelegate
+             displayActivityViewAnimated:YES
+                              completion:^{ fetchObjects(stream); }];
+        else
+            fetchObjects(stream);
     }
 }
 
@@ -245,17 +272,22 @@
 - (void)processReceivedEvents:(NSArray *)events
 {
     UITableView *tableView = [self tableView];
+    NSIndexSet *sections = nil;
 
-    [tableView beginUpdates];
-    NSIndexSet *sections = [NSIndexSet indexSetWithIndex:0];
-    [tableView deleteSections:sections
-             withRowAnimation:UITableViewRowAnimationTop];
+    if ([self isViewLoaded]) {
+        [tableView beginUpdates];
+        sections = [NSIndexSet indexSetWithIndex:0];
+        [tableView deleteSections:sections
+                 withRowAnimation:UITableViewRowAnimationTop];
+    }
 
     [self setOtherEvents:events];
 
-    [tableView insertSections:sections
-             withRowAnimation:UITableViewRowAnimationBottom];
-    [tableView endUpdates];
+    if ([self isViewLoaded]) {
+        [tableView insertSections:sections
+                 withRowAnimation:UITableViewRowAnimationBottom];
+        [tableView endUpdates];
+    }
 }
 
 - (void)processReceivedError:(NSError *)error
@@ -277,6 +309,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
+    [self initializeData];
     [self fetchFeaturedEventsIfNecessary];
 }
 
