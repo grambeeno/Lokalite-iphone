@@ -44,6 +44,7 @@
 		056A92EE13CCFA3100C65DC0 /* Business+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92ED13CCFA3100C65DC0 /* Business+GeneralHelpers.m */; };
 		056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */; };
 		056A92F513CD0E0D00C65DC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 056A92F313CD0E0D00C65DC0 /* Localizable.strings */; };
+		056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
 		05EC9A3813CB959E00B7AD61 /* lokalite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */; };
@@ -110,6 +111,8 @@
 		056A92EF13CCFB0600C65DC0 /* LokaliteObjectBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObjectBuilder.h; path = src/lokalite/LokaliteObjectBuilder.h; sourceTree = "<group>"; };
 		056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteObjectBuilder.m; path = src/lokalite/LokaliteObjectBuilder.m; sourceTree = "<group>"; };
 		056A92F413CD0E0D00C65DC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = strings/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		056A92FA13CD174300C65DC0 /* UIColor+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+GeneralHelpers.h"; path = "src/sdk-additions/UIColor+GeneralHelpers.h"; sourceTree = "<group>"; };
+		056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+GeneralHelpers.m"; path = "src/sdk-additions/UIColor+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
 		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
@@ -372,14 +375,16 @@
 			isa = PBXGroup;
 			children = (
 				05EC9A4B13CB99B700B7AD61 /* SDKAdditions.h */,
-				05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */,
-				05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */,
 				0505ECD513CBC659009874A7 /* NSURL+GeneralHelpers.h */,
 				0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */,
 				05EC9A4C13CB99E800B7AD61 /* NSError+GeneralHelpers.h */,
 				05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */,
 				056A92D613CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.h */,
 				056A92D713CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.m */,
+				056A92FA13CD174300C65DC0 /* UIColor+GeneralHelpers.h */,
+				056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */,
+				05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */,
+				05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */,
 			);
 			name = "sdk-additions";
 			sourceTree = "<group>";
@@ -485,6 +490,7 @@
 				056A92EB13CCF3AB00C65DC0 /* Event+GeneralHelpers.m in Sources */,
 				056A92EE13CCFA3100C65DC0 /* Business+GeneralHelpers.m in Sources */,
 				056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */,
+				056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

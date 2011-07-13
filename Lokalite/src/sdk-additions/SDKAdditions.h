@@ -10,6 +10,7 @@
 // UIKit
 //
 
+#import "UIColor+GeneralHelpers.h"
 #import "UIApplication+GeneralHelpers.h"
 
 

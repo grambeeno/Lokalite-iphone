@@ -56,19 +56,20 @@
 {
     [super awakeFromNib];
 
+    UIColor *navBarTintColor = [UIColor navigationBarTintColor];
     UITabBarController *tabBarController = [self tabBarController];
     __block FeaturedViewController *featuredController = nil;
     [[tabBarController viewControllers] enumerateObjectsUsingBlock:
      ^(UIViewController *controller, NSUInteger idx, BOOL *stop) {
          if ([controller isKindOfClass:[UINavigationController class]]) {
              UINavigationController *nc = (UINavigationController *) controller;
+             [[nc navigationBar] setTintColor:navBarTintColor];
+
              controller = [nc topViewController];
          }
 
-         if ([controller isKindOfClass:[FeaturedViewController class]]) {
+         if ([controller isKindOfClass:[FeaturedViewController class]])
              featuredController = (FeaturedViewController *) controller;
-             *stop = YES;
-         }
      }];
 
     [featuredController setContext:[self context]];
