@@ -11,10 +11,11 @@
 #import "LokaliteFeaturedEventStream.h"
 
 #import "Event.h"
+#import "EventTableViewCell.h"
 
 #import "LokaliteAppDelegate.h"
 
-#import "NSManagedObject+GeneralHelpers.h"
+#import "SDKAdditions.h"
 
 #import <CoreData/CoreData.h>
 
@@ -33,7 +34,7 @@
 
 #pragma mark - View configuration
 
-- (void)configureCell:(UITableViewCell *)cell
+- (void)configureCell:(EventTableViewCell *)cell
     forRowAtIndexPath:(NSIndexPath *)path;
 
 #pragma mark - Fetch data
@@ -166,17 +167,23 @@
     return [[self otherEvents] count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView
+    heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [EventTableViewCell cellHeight];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = nil;
+    if (!CellIdentifier)
+        CellIdentifier = [[EventTableViewCell defaultReuseIdentifier] copy];
 
-    UITableViewCell *cell =
+    EventTableViewCell *cell = (EventTableViewCell *)
         [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
-        cell = [[[UITableViewCell alloc]
-                 initWithStyle:UITableViewCellStyleDefault
-                 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [EventTableViewCell instanceFromNib];
 
     [self configureCell:cell forRowAtIndexPath:indexPath];
 
@@ -215,7 +222,7 @@
 
 - (void)initializeTableView
 {
-    [[self tableView] setTableHeaderView:[self headerView]];
+    //[[self tableView] setTableHeaderView:[self headerView]];
 }
 
 - (void)initializeData
@@ -226,11 +233,11 @@
 
 #pragma mark - View configuration
 
-- (void)configureCell:(UITableViewCell *)cell
+- (void)configureCell:(EventTableViewCell *)cell
     forRowAtIndexPath:(NSIndexPath *)path
 {
     Event *event = [[self otherEvents] objectAtIndex:[path row]];
-    [[cell textLabel] setText:[event name]];
+    [cell configureCellForEvent:event];
 }
 
 #pragma mark - Fetch data

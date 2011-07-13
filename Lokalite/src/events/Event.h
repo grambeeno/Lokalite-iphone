@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Business;
 
 @interface Event : NSManagedObject {
 @private
@@ -18,6 +19,6 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * summary;
 @property (nonatomic, retain) NSData * imageData;
-@property (nonatomic, retain) NSManagedObject *business;
+@property (nonatomic, retain) Business *business;
 
 @end

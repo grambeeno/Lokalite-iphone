@@ -13,6 +13,9 @@
 		0505ECD413CBC2ED009874A7 /* LokaliteServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0505ECD313CBC2ED009874A7 /* LokaliteServiceRequest.m */; };
 		0505ECD713CBC659009874A7 /* NSURL+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */; };
 		0514FBDF13CD468900ACA464 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBDE13CD468900ACA464 /* ActivityView.m */; };
+		0514FBE313CDFFF300ACA464 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBE213CDFFF300ACA464 /* EventTableViewCell.m */; };
+		0514FBE513CE000D00ACA464 /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0514FBE413CE000D00ACA464 /* EventTableViewCell.xib */; };
+		0514FBEC13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBEB13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m */; };
 		05194D4A13CCAC8200EE14F8 /* LokaliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05194D4913CCAC8200EE14F8 /* LokaliteService.m */; };
 		05209EDD13C76F9200CA6A2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDC13C76F9200CA6A2D /* UIKit.framework */; };
 		05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDE13C76F9200CA6A2D /* Foundation.framework */; };
@@ -66,6 +69,11 @@
 		0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+GeneralHelpers.m"; path = "src/sdk-additions/NSURL+GeneralHelpers.m"; sourceTree = "<group>"; };
 		0514FBDD13CD468900ACA464 /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityView.h; path = src/application/ActivityView.h; sourceTree = "<group>"; };
 		0514FBDE13CD468900ACA464 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityView.m; path = src/application/ActivityView.m; sourceTree = "<group>"; };
+		0514FBE113CDFFF300ACA464 /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTableViewCell.h; path = src/events/EventTableViewCell.h; sourceTree = "<group>"; };
+		0514FBE213CDFFF300ACA464 /* EventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTableViewCell.m; path = src/events/EventTableViewCell.m; sourceTree = "<group>"; };
+		0514FBE413CE000D00ACA464 /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventTableViewCell.xib; path = src/events/EventTableViewCell.xib; sourceTree = "<group>"; };
+		0514FBEA13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+GeneralHelpers.h"; path = "src/sdk-additions/UITableViewCell+GeneralHelpers.h"; sourceTree = "<group>"; };
+		0514FBEB13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+GeneralHelpers.m"; path = "src/sdk-additions/UITableViewCell+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05194D4813CCAC8200EE14F8 /* LokaliteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteService.h; path = src/lokalite/LokaliteService.h; sourceTree = "<group>"; };
 		05194D4913CCAC8200EE14F8 /* LokaliteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteService.m; path = src/lokalite/LokaliteService.m; sourceTree = "<group>"; };
 		05209ED813C76F9200CA6A2D /* Lokalite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokalite.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,6 +367,9 @@
 				056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */,
 				056A92D313CCD58900C65DC0 /* Event+MockDataHelpers.h */,
 				056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */,
+				0514FBE113CDFFF300ACA464 /* EventTableViewCell.h */,
+				0514FBE213CDFFF300ACA464 /* EventTableViewCell.m */,
+				0514FBE413CE000D00ACA464 /* EventTableViewCell.xib */,
 			);
 			name = events;
 			sourceTree = "<group>";
@@ -388,6 +399,8 @@
 				056A92D713CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.m */,
 				056A92FA13CD174300C65DC0 /* UIColor+GeneralHelpers.h */,
 				056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */,
+				0514FBEA13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.h */,
+				0514FBEB13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m */,
 				05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */,
 				05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */,
 			);
@@ -463,6 +476,7 @@
 				05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */,
 				056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */,
 				056A92F513CD0E0D00C65DC0 /* Localizable.strings in Resources */,
+				0514FBE513CE000D00ACA464 /* EventTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +511,8 @@
 				056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */,
 				056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */,
 				0514FBDF13CD468900ACA464 /* ActivityView.m in Sources */,
+				0514FBE313CDFFF300ACA464 /* EventTableViewCell.m in Sources */,
+				0514FBEC13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

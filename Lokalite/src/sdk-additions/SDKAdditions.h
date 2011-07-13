@@ -11,6 +11,7 @@
 //
 
 #import "UIColor+GeneralHelpers.h"
+#import "UITableViewCell+GeneralHelpers.h"
 #import "UIApplication+GeneralHelpers.h"
 
 
@@ -20,3 +21,4 @@
 
 #import "NSURL+GeneralHelpers.h"
 #import "NSError+GeneralHelpers.h"
+#import "NSManagedObject+GeneralHelpers.h"
