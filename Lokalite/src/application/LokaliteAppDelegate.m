@@ -22,6 +22,10 @@
 @property (nonatomic, retain) NSPersistentStoreCoordinator *coordinator;
 @property (nonatomic, retain) NSManagedObjectContext *context;
 
+#pragma mark - Persistence management
+
+- (void)saveContext;
+
 #pragma mark - Static accessors
 
 + (NSString *)modelPath;
@@ -110,6 +114,8 @@
      If your application supports background execution, this method is called
      instead of applicationWillTerminate: when the user quits.
      */
+
+    [self saveContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -136,6 +142,19 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+#pragma mark - Persistence management
+
+- (void)saveContext
+{
+    NSManagedObjectContext *context = [self context];
+    if ([context hasChanges]) {
+        NSError *error = nil;
+        if (![context save:&error])
+            NSLog(@"WARNING: Failed to save managed object context: %@",
+                  [error detailedDescription]);
+    }
 }
 
 #pragma mark - Displaying the application activity view

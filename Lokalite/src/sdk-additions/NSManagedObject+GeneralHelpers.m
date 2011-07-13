@@ -19,7 +19,7 @@
 
 + (NSArray *)findAllInContext:(NSManagedObjectContext *)context
 {
-    return [self findFirstWithPredicate:nil inContext:context];
+    return [self findAllWithPredicate:nil inContext:context];
 }
 
 + (id)findAllWithPredicate:(NSPredicate *)predicate
