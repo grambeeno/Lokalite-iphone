@@ -31,7 +31,8 @@
 
 + (id)navigationBarTintColor
 {
-    return [self colorWithRGBValue:0x1a1a1a];
+    return nil;
+    //return [self colorWithRGBValue:0x1a1a1a];
     //return [self colorWithRGBValue:0x494848];
     //return [self colorWithRGBValue:0x252525];
 }

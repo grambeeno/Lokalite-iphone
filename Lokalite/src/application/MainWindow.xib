@@ -55,7 +55,6 @@
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -75,11 +74,15 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="1019853438">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="318340058">
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="899979478">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="1057420901">
+						<string key="IBUITitle">Explore</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">tab-bar-icon-explore.png</string>
+						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<reference key="IBUITabBar" ref="795333663"/>
-						<int key="IBUISystemItemIdentifier">2</int>
 					</object>
 					<reference key="IBUIParentViewController" ref="1034742383"/>
 					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -89,7 +92,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="531887869">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="426130637">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -100,52 +103,13 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="260347541">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="297677037">
+						<object class="IBUIViewController" id="268481961">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="744541061">
 								<reference key="IBUINavigationBar"/>
-								<object class="IBUISegmentedControl" key="IBUITitleView" id="342607842">
-									<reference key="NSNextResponder"/>
-									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{61, 7}, {199, 30}}</string>
-									<reference key="NSSuperview"/>
-									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
-									<string key="NSReuseIdentifierKey">_NS:262</string>
-									<bool key="IBUIOpaque">NO</bool>
-									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-									<int key="IBSegmentControlStyle">2</int>
-									<int key="IBNumberOfSegments">2</int>
-									<int key="IBSelectedSegmentIndex">0</int>
-									<object class="NSArray" key="IBSegmentTitles">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-										<string>Featured</string>
-										<string>Trending</string>
-									</object>
-									<object class="NSMutableArray" key="IBSegmentWidths">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-										<real value="0.0"/>
-										<real value="0.0"/>
-									</object>
-									<object class="NSMutableArray" key="IBSegmentEnabledStates">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-										<boolean value="YES"/>
-										<boolean value="YES"/>
-									</object>
-									<object class="NSMutableArray" key="IBSegmentContentOffsets">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-										<string>{0, 0}</string>
-										<string>{0, 0}</string>
-									</object>
-									<object class="NSMutableArray" key="IBSegmentImages">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-										<object class="NSNull" id="4"/>
-										<reference ref="4"/>
-									</object>
-								</object>
+								<string key="IBUITitle">Explore</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="1019853438"/>
-							<string key="IBUINibName">FeaturedView</string>
+							<reference key="IBUIParentViewController" ref="899979478"/>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -157,7 +121,82 @@
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<reference ref="1019853438"/>
+					<object class="IBUINavigationController" id="1019853438">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="318340058">
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="795333663"/>
+							<int key="IBUISystemItemIdentifier">2</int>
+						</object>
+						<reference key="IBUIParentViewController" ref="1034742383"/>
+						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+							<int key="IBUIInterfaceOrientation">1</int>
+							<int key="interfaceOrientation">1</int>
+						</object>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIHorizontal">NO</bool>
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="531887869">
+							<nil key="NSNextResponder"/>
+							<int key="NSvFlags">256</int>
+							<string key="NSFrameSize">{0, 0}</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<bool key="IBUIClipsSubviews">YES</bool>
+							<bool key="IBUIMultipleTouchEnabled">YES</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						</object>
+						<object class="NSMutableArray" key="IBUIViewControllers">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBUIViewController" id="260347541">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="297677037">
+									<object class="IBUISegmentedControl" key="IBUITitleView" id="342607842">
+										<nil key="NSNextResponder"/>
+										<int key="NSvFlags">292</int>
+										<string key="NSFrame">{{61, 7}, {199, 30}}</string>
+										<string key="NSReuseIdentifierKey">_NS:262</string>
+										<bool key="IBUIOpaque">NO</bool>
+										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+										<int key="IBSegmentControlStyle">2</int>
+										<int key="IBNumberOfSegments">2</int>
+										<int key="IBSelectedSegmentIndex">0</int>
+										<object class="NSArray" key="IBSegmentTitles">
+											<bool key="EncodedWithXMLCoder">YES</bool>
+											<string>Featured</string>
+											<string>Trending</string>
+										</object>
+										<object class="NSMutableArray" key="IBSegmentWidths">
+											<bool key="EncodedWithXMLCoder">YES</bool>
+											<real value="0.0"/>
+											<real value="0.0"/>
+										</object>
+										<object class="NSMutableArray" key="IBSegmentEnabledStates">
+											<bool key="EncodedWithXMLCoder">YES</bool>
+											<boolean value="YES"/>
+											<boolean value="YES"/>
+										</object>
+										<object class="NSMutableArray" key="IBSegmentContentOffsets">
+											<bool key="EncodedWithXMLCoder">YES</bool>
+											<string>{0, 0}</string>
+											<string>{0, 0}</string>
+										</object>
+										<object class="NSMutableArray" key="IBSegmentImages">
+											<bool key="EncodedWithXMLCoder">YES</bool>
+											<object class="NSNull" id="4"/>
+											<reference ref="4"/>
+										</object>
+									</object>
+									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								</object>
+								<reference key="IBUIParentViewController" ref="1019853438"/>
+								<string key="IBUINibName">FeaturedView</string>
+								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+									<int key="IBUIInterfaceOrientation">1</int>
+									<int key="interfaceOrientation">1</int>
+								</object>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<bool key="IBUIHorizontal">NO</bool>
+							</object>
+						</object>
+					</object>
 					<object class="IBUINavigationController" id="486636681">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="226891341">
 							<string key="IBUITitle">Loyalty</string>
@@ -203,50 +242,7 @@
 							</object>
 						</object>
 					</object>
-					<object class="IBUINavigationController" id="899979478">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="1057420901">
-							<string key="IBUITitle">Explore</string>
-							<object class="NSCustomResource" key="IBUIImage">
-								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">tab-bar-icon-explore.png</string>
-							</object>
-							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<reference key="IBUITabBar" ref="795333663"/>
-						</object>
-						<reference key="IBUIParentViewController" ref="1034742383"/>
-						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
-						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
-							<int key="IBUIInterfaceOrientation">1</int>
-							<int key="interfaceOrientation">1</int>
-						</object>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="426130637">
-							<nil key="NSNextResponder"/>
-							<int key="NSvFlags">256</int>
-							<string key="NSFrameSize">{0, 0}</string>
-							<bool key="IBUIOpaque">NO</bool>
-							<bool key="IBUIClipsSubviews">YES</bool>
-							<bool key="IBUIMultipleTouchEnabled">YES</bool>
-							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						</object>
-						<object class="NSMutableArray" key="IBUIViewControllers">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="268481961">
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="744541061">
-									<string key="IBUITitle">Explore</string>
-									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								</object>
-								<reference key="IBUIParentViewController" ref="899979478"/>
-								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
-									<int key="IBUIInterfaceOrientation">1</int>
-									<int key="interfaceOrientation">1</int>
-								</object>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<bool key="IBUIHorizontal">NO</bool>
-							</object>
-						</object>
-					</object>
+					<reference ref="899979478"/>
 					<object class="IBUINavigationController" id="985687288">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="400078048">
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -338,7 +334,6 @@
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
@@ -353,7 +348,7 @@
 						<reference ref="400078048"/>
 						<reference ref="282759938"/>
 					</object>
-					<reference key="IBUISelectedItem" ref="318340058"/>
+					<reference key="IBUISelectedItem" ref="1057420901"/>
 				</object>
 			</object>
 		</object>
