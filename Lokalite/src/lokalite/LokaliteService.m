@@ -22,9 +22,16 @@
 
 @implementation LokaliteService
 
-- (id)init
+@synthesize baseUrl = baseUrl_;
+
+#pragma mark - Initialization
+
+- (id)initWithBaseUrl:(NSURL *)url
 {
     self = [super init];
+    if (self)
+        baseUrl_ = [url copy];
+
     return self;
 }
 
@@ -34,7 +41,7 @@
 {
     NSLog(@"%@", NSStringFromSelector(_cmd));
     NSURL *url =
-        [NSURL URLWithString:@"http://72.249.171.49/api/events/browse"];
+        [[self baseUrl] URLByAppendingPathComponent:@"api/events/browse"];
     LokaliteServiceRequest *req =
         [[LokaliteServiceRequest alloc] initWithUrl:url
                                          parameters:[NSDictionary dictionary]

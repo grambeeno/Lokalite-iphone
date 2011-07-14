@@ -15,6 +15,7 @@
 
 #import "LokaliteAppDelegate.h"
 
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
 #import <CoreData/CoreData.h>
@@ -40,6 +41,7 @@
 #pragma mark - Fetch data
 
 - (void)fetchFeaturedEventsIfNecessary;
+- (void)fetchImageForEvent:(Event *)event;
 
 #pragma mark - Processing data
 
@@ -238,6 +240,14 @@
 {
     Event *event = [[self otherEvents] objectAtIndex:[path row]];
     [cell configureCellForEvent:event];
+
+    NSData *imageData = [event imageData];
+    if (imageData)
+        [[cell eventImageView] setImage:[UIImage imageWithData:imageData]];
+    else {
+        [[cell eventImageView] setImage:nil];
+        [self fetchImageForEvent:event];
+    }
 }
 
 #pragma mark - Fetch data
@@ -272,6 +282,36 @@
         else
             fetchObjects(stream);
     }
+}
+
+- (void)fetchImageForEvent:(Event *)event
+{
+    NSURL *baseUrl = [[self stream] baseUrl];
+    NSString *urlPath = [event imageUrl];
+    NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
+
+    UITableView *tableView = [self tableView];
+    NSArray *events = [self otherEvents];
+    [DataFetcher fetchDataAtUrl:url responseHandler:
+     ^(NSData *data, NSError *error) {
+         if (data) {
+             __block UIImage *image = nil;
+             NSArray *visibleCells = [tableView visibleCells];
+             [visibleCells enumerateObjectsUsingBlock:
+              ^(EventTableViewCell *cell, NSUInteger idx, BOOL *stop) {
+                  NSIndexPath *path = [tableView indexPathForCell:cell];
+                  Event *e = [events objectAtIndex:[path row]];
+                  if ([[e imageUrl] isEqualToString:urlPath]) {
+                      if (!image)
+                          image = [UIImage imageWithData:data];
+                      [[cell eventImageView] setImage:image];
+                      [e setImageData:data];
+                  }
+             }];
+         } else
+             NSLog(@"WARNING: Failed to download image data for event: %@: %@",
+                   [event identifier], [error detailedDescription]);
+    }];
 }
 
 #pragma mark - Processing data
@@ -368,8 +408,13 @@
 - (LokaliteStream *)stream
 {
     if (!stream_) {
+        NSString *baseUrlString =
+            [[NSBundle mainBundle]
+             objectForInfoDictionaryKey:@"LokaliteAPIServer"];
+        NSURL *baseUrl = [NSURL URLWithString:baseUrlString];
         NSManagedObjectContext *moc = [self context];
-        stream_ = [[LokaliteFeaturedEventStream alloc] initWithContext:moc];
+        stream_ = [[LokaliteFeaturedEventStream alloc] initWithBaseUrl:baseUrl
+                                                               context:moc];
     }
 
     return stream_;

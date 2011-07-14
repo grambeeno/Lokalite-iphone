@@ -16,6 +16,9 @@
 		0514FBE313CDFFF300ACA464 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBE213CDFFF300ACA464 /* EventTableViewCell.m */; };
 		0514FBE513CE000D00ACA464 /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0514FBE413CE000D00ACA464 /* EventTableViewCell.xib */; };
 		0514FBEC13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBEB13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m */; };
+		0514FBF413CE561D00ACA464 /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBF313CE561D00ACA464 /* DataFetcher.m */; };
+		0514FBF813CE608700ACA464 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBF713CE608700ACA464 /* Event.m */; };
+		0514FBFB13CE60A000ACA464 /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBFA13CE60A000ACA464 /* Business.m */; };
 		05194D4A13CCAC8200EE14F8 /* LokaliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05194D4913CCAC8200EE14F8 /* LokaliteService.m */; };
 		05209EDD13C76F9200CA6A2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDC13C76F9200CA6A2D /* UIKit.framework */; };
 		05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDE13C76F9200CA6A2D /* Foundation.framework */; };
@@ -52,8 +55,6 @@
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
 		05EC9A3813CB959E00B7AD61 /* lokalite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */; };
-		05EC9A3D13CB96DF00B7AD61 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3C13CB96DF00B7AD61 /* Event.m */; };
-		05EC9A4013CB96F600B7AD61 /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3F13CB96F600B7AD61 /* Business.m */; };
 		05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EC9A4113CB971400B7AD61 /* CoreData.framework */; };
 		05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */; };
 		05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */; };
@@ -74,6 +75,13 @@
 		0514FBE413CE000D00ACA464 /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventTableViewCell.xib; path = src/events/EventTableViewCell.xib; sourceTree = "<group>"; };
 		0514FBEA13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+GeneralHelpers.h"; path = "src/sdk-additions/UITableViewCell+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0514FBEB13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+GeneralHelpers.m"; path = "src/sdk-additions/UITableViewCell+GeneralHelpers.m"; sourceTree = "<group>"; };
+		0514FBF213CE561D00ACA464 /* DataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataFetcher.h; path = src/shared/DataFetcher.h; sourceTree = "<group>"; };
+		0514FBF313CE561D00ACA464 /* DataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataFetcher.m; path = src/shared/DataFetcher.m; sourceTree = "<group>"; };
+		0514FBF513CE5FC700ACA464 /* LokaliteShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteShared.h; path = src/shared/LokaliteShared.h; sourceTree = "<group>"; };
+		0514FBF613CE608700ACA464 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
+		0514FBF713CE608700ACA464 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
+		0514FBF913CE60A000ACA464 /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Business.h; path = src/businesses/Business.h; sourceTree = "<group>"; };
+		0514FBFA13CE60A000ACA464 /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Business.m; path = src/businesses/Business.m; sourceTree = "<group>"; };
 		05194D4813CCAC8200EE14F8 /* LokaliteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteService.h; path = src/lokalite/LokaliteService.h; sourceTree = "<group>"; };
 		05194D4913CCAC8200EE14F8 /* LokaliteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteService.m; path = src/lokalite/LokaliteService.m; sourceTree = "<group>"; };
 		05209ED813C76F9200CA6A2D /* Lokalite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokalite.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,10 +136,6 @@
 		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
 		05EC9A3713CB959E00B7AD61 /* lokalite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lokalite.xcdatamodel; sourceTree = "<group>"; };
-		05EC9A3B13CB96DF00B7AD61 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
-		05EC9A3C13CB96DF00B7AD61 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
-		05EC9A3E13CB96F600B7AD61 /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Business.h; path = src/businesses/Business.h; sourceTree = "<group>"; };
-		05EC9A3F13CB96F600B7AD61 /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Business.m; path = src/businesses/Business.m; sourceTree = "<group>"; };
 		05EC9A4113CB971400B7AD61 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+GeneralHelpers.h"; path = "src/sdk-additions/UIApplication+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+GeneralHelpers.m"; path = "src/sdk-additions/UIApplication+GeneralHelpers.m"; sourceTree = "<group>"; };
@@ -183,6 +187,16 @@
 				056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */,
 			);
 			name = lokalite;
+			sourceTree = "<group>";
+		};
+		0514FBF113CE55F200ACA464 /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				0514FBF513CE5FC700ACA464 /* LokaliteShared.h */,
+				0514FBF213CE561D00ACA464 /* DataFetcher.h */,
+				0514FBF313CE561D00ACA464 /* DataFetcher.m */,
+			);
+			name = shared;
 			sourceTree = "<group>";
 		};
 		05209ECD13C76F9200CA6A2D = {
@@ -247,6 +261,7 @@
 				05EC9A3913CB969700B7AD61 /* events */,
 				05EC9A3A13CB96BA00B7AD61 /* businesses */,
 				0505ECCD13CBC13E009874A7 /* lokalite */,
+				0514FBF113CE55F200ACA464 /* shared */,
 				05EC9A4713CB990F00B7AD61 /* sdk-additions */,
 				056A92A313CCBD9A00C65DC0 /* vendor */,
 			);
@@ -361,8 +376,8 @@
 		05EC9A3913CB969700B7AD61 /* events */ = {
 			isa = PBXGroup;
 			children = (
-				05EC9A3B13CB96DF00B7AD61 /* Event.h */,
-				05EC9A3C13CB96DF00B7AD61 /* Event.m */,
+				0514FBF613CE608700ACA464 /* Event.h */,
+				0514FBF713CE608700ACA464 /* Event.m */,
 				056A92E913CCF3AB00C65DC0 /* Event+GeneralHelpers.h */,
 				056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */,
 				056A92D313CCD58900C65DC0 /* Event+MockDataHelpers.h */,
@@ -377,8 +392,8 @@
 		05EC9A3A13CB96BA00B7AD61 /* businesses */ = {
 			isa = PBXGroup;
 			children = (
-				05EC9A3E13CB96F600B7AD61 /* Business.h */,
-				05EC9A3F13CB96F600B7AD61 /* Business.m */,
+				0514FBF913CE60A000ACA464 /* Business.h */,
+				0514FBFA13CE60A000ACA464 /* Business.m */,
 				056A92EC13CCFA3100C65DC0 /* Business+GeneralHelpers.h */,
 				056A92ED13CCFA3100C65DC0 /* Business+GeneralHelpers.m */,
 				056A92DD13CCD8A700C65DC0 /* Business+MockDataHelpers.h */,
@@ -492,8 +507,6 @@
 				05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */,
 				05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */,
 				05EC9A3813CB959E00B7AD61 /* lokalite.xcdatamodeld in Sources */,
-				05EC9A3D13CB96DF00B7AD61 /* Event.m in Sources */,
-				05EC9A4013CB96F600B7AD61 /* Business.m in Sources */,
 				05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */,
 				05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */,
 				0505ECD413CBC2ED009874A7 /* LokaliteServiceRequest.m in Sources */,
@@ -513,6 +526,9 @@
 				0514FBDF13CD468900ACA464 /* ActivityView.m in Sources */,
 				0514FBE313CDFFF300ACA464 /* EventTableViewCell.m in Sources */,
 				0514FBEC13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m in Sources */,
+				0514FBF413CE561D00ACA464 /* DataFetcher.m in Sources */,
+				0514FBF813CE608700ACA464 /* Event.m in Sources */,
+				0514FBFB13CE60A000ACA464 /* Business.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

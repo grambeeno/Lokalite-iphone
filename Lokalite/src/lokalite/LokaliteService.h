@@ -12,6 +12,12 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 
 @interface LokaliteService : NSObject
 
+@property (nonatomic, copy, readonly) NSURL *baseUrl;
+
+#pragma mark - Initialization
+
+- (id)initWithBaseUrl:(NSURL *)url;
+
 #pragma mark - Events
 
 - (void)fetchFeaturedEventsWithResponseHandler:(LSResponseHandler)handler;

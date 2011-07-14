@@ -36,6 +36,17 @@
     [business setAddress:[businessData objectForKey:@"address"]];
     [business setSummary:[businessData objectForKey:@"description"]];
 
+    NSDictionary *imageData =
+        [[businessData objectForKey:@"image"] objectForKey:@"image"];
+    if (imageData) {
+        NSString *url = [imageData objectForKey:@"url"];
+        NSString *oldUrl = [business imageUrl];
+        if (![oldUrl isEqualToString:url]) {
+            [business setImageUrl:url];
+            [business setImageData:nil];
+        }
+    }
+
     return business;
 }
 

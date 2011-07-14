@@ -14,11 +14,12 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 
 @interface LokaliteStream : NSObject
 
+@property (nonatomic, copy, readonly) NSURL *baseUrl;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *context;
 
 #pragma mark - Initialization
 
-- (id)initWithContext:(NSManagedObjectContext *)context;
+- (id)initWithBaseUrl:(NSURL *)url context:(NSManagedObjectContext *)context;
 
 #pragma mark - Walking through the objects
 

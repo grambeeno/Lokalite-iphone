@@ -20,23 +20,27 @@
 
 @implementation LokaliteStream
 
+@synthesize baseUrl = baseUrl_;
 @synthesize context = context_;
 
 #pragma mark - Memory management
 
 - (void)dealloc
 {
+    [baseUrl_ release];
     [context_ release];
     [super dealloc];
 }
 
 #pragma mark - Initialization
 
-- (id)initWithContext:(NSManagedObjectContext *)context
+- (id)initWithBaseUrl:(NSURL *)url context:(NSManagedObjectContext *)context
 {
     self = [super init];
-    if (self)
+    if (self) {
+        baseUrl_ = [url copy];
         context_ = [context retain];
+    }
 
     return self;
 }

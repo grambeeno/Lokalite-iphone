@@ -17,7 +17,8 @@
 
 - (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
 {
-    LokaliteService *service = [[LokaliteService alloc] init];
+    LokaliteService *service =
+        [[LokaliteService alloc] initWithBaseUrl:[self baseUrl]];
     [service fetchFeaturedEventsWithResponseHandler:
      ^(NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;

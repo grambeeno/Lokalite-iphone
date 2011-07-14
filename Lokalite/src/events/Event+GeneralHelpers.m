@@ -53,6 +53,17 @@
     [event setSummary:[eventData objectForKey:@"description"]];
     [event setBusiness:business];
 
+    NSDictionary *imageData =
+        [[eventData objectForKey:@"image"] objectForKey:@"image"];
+    if (imageData) {
+        NSString *url = [imageData objectForKey:@"url"];
+        NSString *oldUrl = [event imageUrl];
+        if (![oldUrl isEqualToString:url]) {
+            [event setImageUrl:url];
+            [event setImageData:nil];
+        }
+    }
+
     return event;
 }
 
