@@ -13,6 +13,8 @@
 #import "Event.h"
 #import "EventTableViewCell.h"
 
+#import "EventDetailsViewController.h"
+
 #import "LokaliteAppDelegate.h"
 
 #import "LokaliteShared.h"
@@ -197,7 +199,11 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Event *event = [[self otherEvents] objectAtIndex:[indexPath row]];
+    EventDetailsViewController *controller =
+        [[EventDetailsViewController alloc] initWithEvent:event];
+    [[self navigationController] pushViewController:controller animated:YES];
+    [controller release], controller = nil;
 }
 
 #pragma mark - View initialization

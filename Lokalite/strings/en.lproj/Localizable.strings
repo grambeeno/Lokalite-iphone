@@ -6,10 +6,20 @@
   Copyright 2011 Lokalite. All rights reserved.
 */
 
+/*
+ * Global text
+ */
+
 "global.dismiss" = "Dismiss";
+"global.details" = "Details";
 
 
 /*
  * Featured
  */
 "featured.fetch.failed" = "Failed to Fetch Featured Events";
+
+
+/*
+ * Event details
+ */
