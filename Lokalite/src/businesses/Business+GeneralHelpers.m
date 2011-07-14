@@ -8,6 +8,7 @@
 
 #import "Business+GeneralHelpers.h"
 
+#import "NSObject+GeneralHelpers.h"
 #import "NSManagedObject+GeneralHelpers.h"
 
 @implementation Business (GeneralHelpers)
@@ -31,20 +32,24 @@
         [business setIdentifier:businessId];
     }
 
-    [business setName:[businessData objectForKey:@"name"]];
-    [business setPhone:[businessData objectForKey:@"phone"]];
-    [business setAddress:[businessData objectForKey:@"address"]];
-    [business setSummary:[businessData objectForKey:@"description"]];
+    NSString *name = [businessData objectForKey:@"name"];
+    [business setValueIfNecessary:name forKey:@"name"];
+
+    NSString *phone = [businessData objectForKey:@"phone"];
+    [business setValueIfNecessary:phone forKey:@"phone"];
+
+    NSString *address = [businessData objectForKey:@"address"];
+    [business setValueIfNecessary:address forKey:@"address"];
+
+    NSString *summary = [businessData objectForKey:@"description"];
+    [business setValueIfNecessary:summary forKey:@"summary"];
 
     NSDictionary *imageData =
         [[businessData objectForKey:@"image"] objectForKey:@"image"];
     if (imageData) {
         NSString *url = [imageData objectForKey:@"url"];
-        NSString *oldUrl = [business imageUrl];
-        if (![oldUrl isEqualToString:url]) {
-            [business setImageUrl:url];
+        if ([business setValueIfNecessary:url forKey:@"imageUrl"])
             [business setImageData:nil];
-        }
     }
 
     return business;

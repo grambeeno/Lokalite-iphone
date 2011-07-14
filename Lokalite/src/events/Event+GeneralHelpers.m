@@ -48,25 +48,28 @@
         [event setIdentifier:eventId];
     }
 
-    [event setName:[eventData objectForKey:@"name"]];
+    [event setBusiness:business];
+
+    NSString *name = [eventData objectForKey:@"name"];
+    [event setValueIfNecessary:name forKey:@"name"];
 
     NSString *startString = [eventData objectForKey:@"starts_at"];
-    NSString *endString = [eventData objectForKey:@"ends_at"];
-    [event setStartDate:[NSDate dateFromLokaliteServerString:startString]];
-    [event setEndDate:[NSDate dateFromLokaliteServerString:endString]];
+    NSDate *startDate = [NSDate dateFromLokaliteServerString:startString];
+    [event setValueIfNecessary:startDate forKey:@"startDate"];
 
-    [event setSummary:[eventData objectForKey:@"description"]];
-    [event setBusiness:business];
+    NSString *endString = [eventData objectForKey:@"ends_at"];
+    NSDate *endDate = [NSDate dateFromLokaliteServerString:endString];
+    [event setValueIfNecessary:endDate forKey:@"endDate"];
+
+    NSString *summary = [eventData objectForKey:@"description"];
+    [event setValueIfNecessary:summary forKey:@"summary"];
 
     NSDictionary *imageData =
         [[eventData objectForKey:@"image"] objectForKey:@"image"];
     if (imageData) {
         NSString *url = [imageData objectForKey:@"url"];
-        NSString *oldUrl = [event imageUrl];
-        if (![oldUrl isEqualToString:url]) {
-            [event setImageUrl:url];
+        if ([event setValueIfNecessary:url forKey:@"imageUrl"])
             [event setImageData:nil];
-        }
     }
 
     return event;
