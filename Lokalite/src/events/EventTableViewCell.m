@@ -14,6 +14,7 @@
 @synthesize eventNameLabel = eventNameLabel_;
 @synthesize businessNameLabel = businessNameLabel_;
 @synthesize summaryLabel = summaryLabel_;
+@synthesize timeLabel = timeLabel_;
 
 #pragma mark - Memory management
 
@@ -23,6 +24,7 @@
     [eventNameLabel_ release];
     [businessNameLabel_ release];
     [summaryLabel_ release];
+    [timeLabel_ release];
 
     [super dealloc];
 }
@@ -39,6 +41,7 @@
 
 #import "Event.h"
 #import "Business.h"
+#import "NSString+GeneralHelpers.h"
 
 @implementation EventTableViewCell (UserInterfaceHelpers)
 
@@ -47,6 +50,11 @@
     [[self eventNameLabel] setText:[event name]];
     [[self businessNameLabel] setText:[[event business] name]];
     [[self summaryLabel] setText:[event summary]];
+
+    NSString *timeRange =
+        [NSString textRangeWithStartDate:[event startDate]
+                                 endDate:[event endDate]];
+    [[self timeLabel] setText:timeRange];
 }
 
 @end

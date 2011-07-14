@@ -94,8 +94,10 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if (self)
+    if (self) {
         shouldFetchedData_ = YES;
+        [self setTitle:NSLocalizedString(@"global.featured", nil)];
+    }
 
     return self;
 }
@@ -210,6 +212,8 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"Back bar button item: %@", [[self navigationItem] backBarButtonItem]);
+
     Event *event = [[self resultsController] objectAtIndexPath:indexPath];
     EventDetailsViewController *controller =
         [[EventDetailsViewController alloc] initWithEvent:event];

@@ -80,7 +80,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    
+
     UITableViewCell *cell =
         [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {

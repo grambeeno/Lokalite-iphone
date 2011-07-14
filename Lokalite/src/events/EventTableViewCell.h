@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventTableViewCell : UITableViewCell
+@interface EventTableViewCell : UITableViewCell {
+    UILabel *timeLabel;
+}
+
 
 @property (nonatomic, retain) IBOutlet UIImageView *eventImageView;
 @property (nonatomic, retain) IBOutlet UILabel *eventNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *businessNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *summaryLabel;
+@property (nonatomic, retain) IBOutlet UILabel *timeLabel;
 
 #pragma mark - Configuration helpers
 

@@ -108,7 +108,7 @@
 								<string key="NSFrame">{{74, 42}, {222, 18}}</string>
 								<reference key="NSSuperview" ref="49790276"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="556507822"/>
+								<reference key="NSNextKeyView" ref="771467982"/>
 								<string key="NSReuseIdentifierKey">_NS:311</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -140,7 +140,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<object class="IBUILabel" id="556507822">
+							<object class="IBUILabel" id="771467982">
 								<reference key="NSNextResponder" ref="49790276"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{74, 59}, {222, 18}}</string>
@@ -160,8 +160,8 @@
 									<int key="NSfFlags">16</int>
 								</object>
 								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4yOTgwMzkyMjc3IDAuMjk4MDM5MjI3NyAwLjI5ODAzOTIyNzcAA</bytes>
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC41Njk2NTY3MDYyAA</bytes>
 								</object>
 								<reference key="IBUIHighlightedColor" ref="1002208266"/>
 								<int key="IBUIBaselineAdjustment">1</int>
@@ -232,6 +232,14 @@
 					</object>
 					<int key="connectionID">12</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">timeLabel</string>
+						<reference key="source" ref="425600432"/>
+						<reference key="destination" ref="771467982"/>
+					</object>
+					<int key="connectionID">14</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -260,7 +268,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="1069929190"/>
 							<reference ref="1019065426"/>
-							<reference ref="556507822"/>
+							<reference ref="771467982"/>
 							<reference ref="384594697"/>
 							<reference ref="1030830954"/>
 						</object>
@@ -288,7 +296,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">13</int>
-						<reference key="object" ref="556507822"/>
+						<reference key="object" ref="771467982"/>
 						<reference key="parent" ref="425600432"/>
 					</object>
 				</object>
@@ -334,7 +342,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">13</int>
+			<int key="maxID">14</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -350,11 +358,13 @@
 							<string>eventImageView</string>
 							<string>eventNameLabel</string>
 							<string>summaryLabel</string>
+							<string>timeLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
 							<string>UIImageView</string>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 						</object>
@@ -367,6 +377,7 @@
 							<string>eventImageView</string>
 							<string>eventNameLabel</string>
 							<string>summaryLabel</string>
+							<string>timeLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -384,6 +395,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">summaryLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">timeLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>
