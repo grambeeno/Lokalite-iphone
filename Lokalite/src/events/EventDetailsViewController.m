@@ -106,12 +106,7 @@
 {
     Event *event = [self event];
     EventDetailsHeaderView *headerView = [self headerView];
-
-    UIImage *image = [UIImage imageWithData:[event imageData]];
-    [[headerView imageView] setImage:image];
-
-    [[headerView titleLabel] setText:[event name]];
-
+    [headerView configureForEvent:event];
     [[self tableView] setTableHeaderView:headerView];
 }
 

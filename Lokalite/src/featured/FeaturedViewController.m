@@ -212,8 +212,6 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Back bar button item: %@", [[self navigationItem] backBarButtonItem]);
-
     Event *event = [[self resultsController] objectAtIndexPath:indexPath];
     EventDetailsViewController *controller =
         [[EventDetailsViewController alloc] initWithEvent:event];
