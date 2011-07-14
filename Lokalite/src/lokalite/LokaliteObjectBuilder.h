@@ -12,7 +12,7 @@
 
 @interface LokaliteObjectBuilder : NSObject
 
-+ (NSArray *)buildEventsFromJsonArray:(NSArray *)jsonObjects
-                            inContext:(NSManagedObjectContext *)context;
++ (NSArray *)replaceEventsInContext:(NSManagedObjectContext *)context
+             withObjectsInJsonArray:(NSArray *)jsonObjects;
 
 @end

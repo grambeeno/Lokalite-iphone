@@ -13,8 +13,17 @@
 + (id)createInstanceInContext:(NSManagedObjectContext *)context;
 
 + (NSArray *)findAllInContext:(NSManagedObjectContext *)context;
++ (NSArray *)findAllInObjectIdsContext:(NSManagedObjectContext *)context;
+
 + (id)findAllWithPredicate:(NSPredicate *)predicate
                  inContext:(NSManagedObjectContext *)context;
++ (id)findAllWithPredicate:(NSPredicate *)predicate
+                fetchLimit:(NSInteger)fetchLimit
+                 inContext:(NSManagedObjectContext *)context;
++ (NSArray *)findAllWithPredicate:(NSPredicate *)predicate
+                       fetchLimit:(NSInteger)fetchLimit
+                       resultType:(NSFetchRequestResultType)resultType
+                        inContext:(NSManagedObjectContext *)context;
 
 + (id)findFirstWithPredicate:(NSPredicate *)predicate
                    inContext:(NSManagedObjectContext *)context;

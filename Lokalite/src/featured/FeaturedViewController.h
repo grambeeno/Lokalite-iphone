@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @class NSManagedObjectContext;
 
 @interface FeaturedViewController : UITableViewController
+    <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 

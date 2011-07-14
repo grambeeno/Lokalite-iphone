@@ -28,8 +28,8 @@
                              withContext:(NSManagedObjectContext *)context
 {
     NSArray *objs = [[jsonOjbects objectForKey:@"data"] objectForKey:@"list"];
-    NSArray *events = [LokaliteObjectBuilder buildEventsFromJsonArray:objs
-                                                            inContext:context];
+    NSArray *events = [LokaliteObjectBuilder replaceEventsInContext:context
+                                             withObjectsInJsonArray:objs];
 
     return events;
 }
@@ -42,15 +42,17 @@
                                                            inContext:context];
 
     NSNumber *eventId = [eventData objectForKey:@"id"];
+    NSString *name = [eventData objectForKey:@"name"];
+
     Event *event = [self eventWithId:eventId inContext:context];
     if (!event) {
+        NSLog(@"Creating new event: %@: %@", eventId, name);
         event = [self createInstanceInContext:context];
         [event setIdentifier:eventId];
     }
 
     [event setBusiness:business];
 
-    NSString *name = [eventData objectForKey:@"name"];
     [event setValueIfNecessary:name forKey:@"name"];
 
     NSString *startString = [eventData objectForKey:@"starts_at"];
@@ -73,6 +75,18 @@
     }
 
     return event;
+}
+
+#pragma mark - Object lifecycle
+
+- (void)deleteInContext:(NSManagedObjectContext *)context
+{
+    Business *business = [self business];
+    [self setBusiness:nil];
+
+    if ([[business events] count] == 0)
+        [context deleteObject:business];
+    [context deleteObject:self];
 }
 
 @end

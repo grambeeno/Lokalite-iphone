@@ -23,4 +23,9 @@
 #import "NSDate+GeneralHelpers.h"
 #import "NSURL+GeneralHelpers.h"
 #import "NSError+GeneralHelpers.h"
+#import "NSArray+GeneralHelpers.h"
+
+//
+// Core Data
+//
 #import "NSManagedObject+GeneralHelpers.h"

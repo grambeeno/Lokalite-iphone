@@ -22,8 +22,34 @@
     return [self findAllWithPredicate:nil inContext:context];
 }
 
-+ (id)findAllWithPredicate:(NSPredicate *)predicate
-                 inContext:(NSManagedObjectContext *)context
++ (NSArray *)findAllInObjectIdsContext:(NSManagedObjectContext *)context
+{
+    return [self findAllWithPredicate:nil
+                           fetchLimit:0
+                           resultType:NSManagedObjectIDResultType
+                            inContext:context];
+}
+
++ (NSArray *)findAllWithPredicate:(NSPredicate *)predicate
+                        inContext:(NSManagedObjectContext *)context
+{
+    return [self findAllWithPredicate:predicate fetchLimit:0 inContext:context];
+}
+
++ (NSArray *)findAllWithPredicate:(NSPredicate *)predicate
+                       fetchLimit:(NSInteger)fetchLimit
+                        inContext:(NSManagedObjectContext *)context
+{
+    return [self findAllWithPredicate:predicate
+                           fetchLimit:fetchLimit
+                           resultType:NSManagedObjectResultType
+                            inContext:context];
+}
+
++ (NSArray *)findAllWithPredicate:(NSPredicate *)predicate
+                       fetchLimit:(NSInteger)fetchLimit
+                       resultType:(NSFetchRequestResultType)resultType
+                        inContext:(NSManagedObjectContext *)context
 {
     NSString * className = NSStringFromClass(self);
     NSEntityDescription * entity =
@@ -33,6 +59,8 @@
     NSFetchRequest * request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
     [request setPredicate:predicate];
+    [request setFetchLimit:fetchLimit];
+    [request setResultType:resultType];
 
     NSError *error = nil;
     NSArray * results = [context executeFetchRequest:request error:&error];
@@ -45,7 +73,9 @@
 + (id)findFirstWithPredicate:(NSPredicate *)predicate
                    inContext:(NSManagedObjectContext *)context
 {
-    NSArray *a = [self findAllWithPredicate:predicate inContext:context];
+    NSArray *a = [self findAllWithPredicate:predicate
+                                 fetchLimit:1
+                                  inContext:context];
     return [a count] > 0 ? [a objectAtIndex:0] : nil;
 }
 

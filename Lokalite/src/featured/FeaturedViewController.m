@@ -20,14 +20,14 @@
 #import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
-#import <CoreData/CoreData.h>
-
 @interface FeaturedViewController ()
+
+@property (nonatomic, retain) NSFetchedResultsController *resultsController;
 
 @property (nonatomic, assign) BOOL shouldFetchedData;
 @property (nonatomic, retain) LokaliteFeaturedEventStream *stream;
 
-@property (nonatomic, copy) NSArray *otherEvents;
+//@property (nonatomic, copy) NSArray *otherEvents;
 
 #pragma mark - View initialization
 
@@ -38,7 +38,7 @@
 #pragma mark - View configuration
 
 - (void)configureCell:(EventTableViewCell *)cell
-    forRowAtIndexPath:(NSIndexPath *)path;
+          atIndexPath:(NSIndexPath *)path;
 
 #pragma mark - Fetch data
 
@@ -63,10 +63,12 @@
 
 @synthesize headerView = headerView_;
 
+@synthesize resultsController = resultsController_;
+
 @synthesize shouldFetchedData = shouldFetchedData_;
 @synthesize stream = stream_;
 
-@synthesize otherEvents = otherEvents_;
+//@synthesize otherEvents = otherEvents_;
 
 #pragma mark - Memory management
 
@@ -78,9 +80,11 @@
 
     [headerView_ release];
 
+    [resultsController_ release];
+
     [stream_ release];
 
-    [otherEvents_ release];
+    //[otherEvents_ release];
 
     [super dealloc];
 }
@@ -165,10 +169,17 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [[[self resultsController] sections] count];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return [[self otherEvents] count];
+    id <NSFetchedResultsSectionInfo> sectionInfo =
+        [[[self resultsController] sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView
@@ -189,21 +200,72 @@
     if (cell == nil)
         cell = [EventTableViewCell instanceFromNib];
 
-    [self configureCell:cell forRowAtIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
 
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - UITableViewDelegate implementation
 
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Event *event = [[self otherEvents] objectAtIndex:[indexPath row]];
+    Event *event = [[self resultsController] objectAtIndexPath:indexPath];
     EventDetailsViewController *controller =
         [[EventDetailsViewController alloc] initWithEvent:event];
     [[self navigationController] pushViewController:controller animated:YES];
     [controller release], controller = nil;
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate implementation
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = [self tableView];
+
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView
+             insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                   withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+
+        case NSFetchedResultsChangeDelete:
+            [tableView
+             deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                   withRowAnimation:UITableViewRowAnimationTop];
+            break;
+
+        case NSFetchedResultsChangeUpdate: {
+                EventTableViewCell *cell = (EventTableViewCell *)
+                    [tableView cellForRowAtIndexPath:indexPath];
+                [self configureCell:cell atIndexPath:indexPath];
+            }
+            break;
+
+        case NSFetchedResultsChangeMove:
+            [tableView
+             deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                   withRowAnimation:UITableViewRowAnimationFade];
+            [tableView
+             insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                   withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] endUpdates];
 }
 
 #pragma mark - View initialization
@@ -242,9 +304,9 @@
 #pragma mark - View configuration
 
 - (void)configureCell:(EventTableViewCell *)cell
-    forRowAtIndexPath:(NSIndexPath *)path
+          atIndexPath:(NSIndexPath *)path
 {
-    Event *event = [[self otherEvents] objectAtIndex:[path row]];
+    Event *event = [[self resultsController] objectAtIndexPath:path];
     [cell configureCellForEvent:event];
 
     NSData *imageData = [event imageData];
@@ -261,7 +323,8 @@
 - (void)fetchFeaturedEventsIfNecessary
 {
     if ([self shouldFetchedData]) {
-        BOOL showActivityView = [[self otherEvents] count] == 0;
+        BOOL showActivityView =
+            [[[self resultsController] fetchedObjects] count] == 0;
         LokaliteAppDelegate *appDelegate = (LokaliteAppDelegate *)
             [[UIApplication sharedApplication] delegate];
 
@@ -292,14 +355,18 @@
 
 - (void)fetchImageForEvent:(Event *)event
 {
+    [[UIApplication sharedApplication] networkActivityIsStarting];
+
     NSURL *baseUrl = [[self stream] baseUrl];
     NSString *urlPath = [event imageUrl];
     NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
 
     UITableView *tableView = [self tableView];
-    NSArray *events = [self otherEvents];
+    NSArray *events = [[self resultsController] fetchedObjects];
     [DataFetcher fetchDataAtUrl:url responseHandler:
      ^(NSData *data, NSError *error) {
+         [[UIApplication sharedApplication] networkActivityDidFinish];
+
          if (data) {
              __block UIImage *image = nil;
              NSArray *visibleCells = [tableView visibleCells];
@@ -324,23 +391,23 @@
 
 - (void)processReceivedEvents:(NSArray *)events
 {
-    UITableView *tableView = [self tableView];
-    NSIndexSet *sections = nil;
-
-    if ([self isViewLoaded]) {
-        [tableView beginUpdates];
-        sections = [NSIndexSet indexSetWithIndex:0];
-        [tableView deleteSections:sections
-                 withRowAnimation:UITableViewRowAnimationTop];
-    }
-
-    [self setOtherEvents:events];
-
-    if ([self isViewLoaded]) {
-        [tableView insertSections:sections
-                 withRowAnimation:UITableViewRowAnimationBottom];
-        [tableView endUpdates];
-    }
+//    UITableView *tableView = [self tableView];
+//    NSIndexSet *sections = nil;
+//
+//    if ([self isViewLoaded]) {
+//        [tableView beginUpdates];
+//        sections = [NSIndexSet indexSetWithIndex:0];
+//        [tableView deleteSections:sections
+//                 withRowAnimation:UITableViewRowAnimationTop];
+//    }
+//
+//    [self setOtherEvents:events];
+//
+//    if ([self isViewLoaded]) {
+//        [tableView insertSections:sections
+//                 withRowAnimation:UITableViewRowAnimationBottom];
+//        [tableView endUpdates];
+//    }
 }
 
 - (void)processReceivedError:(NSError *)error
@@ -424,6 +491,44 @@
     }
 
     return stream_;
+}
+
+- (NSFetchedResultsController *)resultsController
+{
+    if (!resultsController_) {
+        NSManagedObjectContext *context = [self context];
+        NSString *entityName = NSStringFromClass([Event class]);
+        NSEntityDescription *entity =
+            [NSEntityDescription entityForName:entityName
+                        inManagedObjectContext:context];
+
+        NSFetchRequest *req = [[NSFetchRequest alloc] init];
+        [req setEntity:entity];
+
+        NSSortDescriptor *sd =
+            [[NSSortDescriptor alloc] initWithKey:@"endDate" ascending:NO];
+        NSArray *sds = [[NSArray alloc] initWithObjects:sd, nil];
+        [req setSortDescriptors:sds];
+        [sds release], sds = nil;
+        [sd release], sd = nil;
+
+        NSFetchedResultsController *controller =
+            [[NSFetchedResultsController alloc] initWithFetchRequest:req
+                                                managedObjectContext:context
+                                                  sectionNameKeyPath:nil
+                                                           cacheName:nil];
+        [req release], req = nil;
+
+        NSError *error = nil;
+        if ([controller performFetch:&error]) {
+            resultsController_ = controller;
+            [resultsController_ setDelegate:self];
+        } else
+            NSLog(@"Failed to initialize fetched results controller: %@",
+                  [error detailedDescription]);
+    }
+
+    return resultsController_;
 }
 
 @end

@@ -44,6 +44,7 @@
 		0568333013CF65F700520C78 /* EventDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0568332E13CF65F700520C78 /* EventDetailsViewController.xib */; };
 		0568333413CF6A4400520C78 /* EventDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333313CF6A4400520C78 /* EventDetailsHeaderView.m */; };
 		0568333713CF723400520C78 /* NSObject+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333613CF723400520C78 /* NSObject+GeneralHelpers.m */; };
+		0568333E13CF8BAC00520C78 /* NSArray+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333D13CF8BAC00520C78 /* NSArray+GeneralHelpers.m */; };
 		056A92A813CCBE1E00C65DC0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92A713CCBE1E00C65DC0 /* JSONKit.m */; };
 		056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */ = {isa = PBXBuildFile; fileRef = 056A92AB13CCC61200C65DC0 /* mock-featured-events.json */; };
 		056A92D513CCD58900C65DC0 /* Event+MockDataHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */; };
@@ -122,6 +123,8 @@
 		0568333313CF6A4400520C78 /* EventDetailsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsHeaderView.m; path = src/events/EventDetailsHeaderView.m; sourceTree = "<group>"; };
 		0568333513CF723400520C78 /* NSObject+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+GeneralHelpers.h"; path = "src/sdk-additions/NSObject+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0568333613CF723400520C78 /* NSObject+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+GeneralHelpers.m"; path = "src/sdk-additions/NSObject+GeneralHelpers.m"; sourceTree = "<group>"; };
+		0568333C13CF8BAC00520C78 /* NSArray+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+GeneralHelpers.h"; path = "src/sdk-additions/NSArray+GeneralHelpers.h"; sourceTree = "<group>"; };
+		0568333D13CF8BAC00520C78 /* NSArray+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+GeneralHelpers.m"; path = "src/sdk-additions/NSArray+GeneralHelpers.m"; sourceTree = "<group>"; };
 		056A92A613CCBE1E00C65DC0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = src/vendor/jsonkit/JSONKit.h; sourceTree = "<group>"; };
 		056A92A713CCBE1E00C65DC0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = src/vendor/jsonkit/JSONKit.m; sourceTree = "<group>"; };
 		056A92AB13CCC61200C65DC0 /* mock-featured-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "mock-featured-events.json"; path = "mock/server-data/mock-featured-events.json"; sourceTree = "<group>"; wrapsLines = 0; };
@@ -425,6 +428,8 @@
 			isa = PBXGroup;
 			children = (
 				05EC9A4B13CB99B700B7AD61 /* SDKAdditions.h */,
+				0568333513CF723400520C78 /* NSObject+GeneralHelpers.h */,
+				0568333613CF723400520C78 /* NSObject+GeneralHelpers.m */,
 				0514FBFC13CE6B2400ACA464 /* NSDate+GeneralHelpers.h */,
 				0514FBFD13CE6B2400ACA464 /* NSDate+GeneralHelpers.m */,
 				0505ECD513CBC659009874A7 /* NSURL+GeneralHelpers.h */,
@@ -439,8 +444,8 @@
 				0514FBEB13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m */,
 				05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */,
 				05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */,
-				0568333513CF723400520C78 /* NSObject+GeneralHelpers.h */,
-				0568333613CF723400520C78 /* NSObject+GeneralHelpers.m */,
+				0568333C13CF8BAC00520C78 /* NSArray+GeneralHelpers.h */,
+				0568333D13CF8BAC00520C78 /* NSArray+GeneralHelpers.m */,
 			);
 			name = "sdk-additions";
 			sourceTree = "<group>";
@@ -557,6 +562,7 @@
 				0568332F13CF65F700520C78 /* EventDetailsViewController.m in Sources */,
 				0568333413CF6A4400520C78 /* EventDetailsHeaderView.m in Sources */,
 				0568333713CF723400520C78 /* NSObject+GeneralHelpers.m in Sources */,
+				0568333E13CF8BAC00520C78 /* NSArray+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
