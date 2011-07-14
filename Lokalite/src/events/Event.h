@@ -14,7 +14,8 @@
 @interface Event : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSDate * endDate;
 @property (nonatomic, retain) NSNumber * identifier;
 @property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) NSString * name;

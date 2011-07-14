@@ -19,6 +19,7 @@
 		0514FBF413CE561D00ACA464 /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBF313CE561D00ACA464 /* DataFetcher.m */; };
 		0514FBF813CE608700ACA464 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBF713CE608700ACA464 /* Event.m */; };
 		0514FBFB13CE60A000ACA464 /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBFA13CE60A000ACA464 /* Business.m */; };
+		0514FBFE13CE6B2400ACA464 /* NSDate+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBFD13CE6B2400ACA464 /* NSDate+GeneralHelpers.m */; };
 		05194D4A13CCAC8200EE14F8 /* LokaliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05194D4913CCAC8200EE14F8 /* LokaliteService.m */; };
 		05209EDD13C76F9200CA6A2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDC13C76F9200CA6A2D /* UIKit.framework */; };
 		05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05209EDE13C76F9200CA6A2D /* Foundation.framework */; };
@@ -82,6 +83,8 @@
 		0514FBF713CE608700ACA464 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
 		0514FBF913CE60A000ACA464 /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Business.h; path = src/businesses/Business.h; sourceTree = "<group>"; };
 		0514FBFA13CE60A000ACA464 /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Business.m; path = src/businesses/Business.m; sourceTree = "<group>"; };
+		0514FBFC13CE6B2400ACA464 /* NSDate+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+GeneralHelpers.h"; path = "src/sdk-additions/NSDate+GeneralHelpers.h"; sourceTree = "<group>"; };
+		0514FBFD13CE6B2400ACA464 /* NSDate+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+GeneralHelpers.m"; path = "src/sdk-additions/NSDate+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05194D4813CCAC8200EE14F8 /* LokaliteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteService.h; path = src/lokalite/LokaliteService.h; sourceTree = "<group>"; };
 		05194D4913CCAC8200EE14F8 /* LokaliteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteService.m; path = src/lokalite/LokaliteService.m; sourceTree = "<group>"; };
 		05209ED813C76F9200CA6A2D /* Lokalite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokalite.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -406,6 +409,8 @@
 			isa = PBXGroup;
 			children = (
 				05EC9A4B13CB99B700B7AD61 /* SDKAdditions.h */,
+				0514FBFC13CE6B2400ACA464 /* NSDate+GeneralHelpers.h */,
+				0514FBFD13CE6B2400ACA464 /* NSDate+GeneralHelpers.m */,
 				0505ECD513CBC659009874A7 /* NSURL+GeneralHelpers.h */,
 				0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */,
 				05EC9A4C13CB99E800B7AD61 /* NSError+GeneralHelpers.h */,
@@ -529,6 +534,7 @@
 				0514FBF413CE561D00ACA464 /* DataFetcher.m in Sources */,
 				0514FBF813CE608700ACA464 /* Event.m in Sources */,
 				0514FBFB13CE60A000ACA464 /* Business.m in Sources */,
+				0514FBFE13CE6B2400ACA464 /* NSDate+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

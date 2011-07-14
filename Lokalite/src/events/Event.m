@@ -11,7 +11,8 @@
 
 
 @implementation Event
-@dynamic date;
+@dynamic startDate;
+@dynamic endDate;
 @dynamic identifier;
 @dynamic imageData;
 @dynamic name;

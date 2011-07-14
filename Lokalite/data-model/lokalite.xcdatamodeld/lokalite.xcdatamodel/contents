@@ -11,16 +11,17 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="business" inverseEntity="Event"/>
     </entity>
     <entity name="Event" representedClassName="Event">
-        <attribute name="date" optional="YES" attributeType="Date"/>
+        <attribute name="endDate" optional="YES" attributeType="Date"/>
         <attribute name="identifier" attributeType="Integer 64" defaultValueString="0" indexed="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="imageUrl" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="startDate" optional="YES" attributeType="Date"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
         <relationship name="business" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Business" inverseName="events" inverseEntity="Business"/>
     </entity>
     <elements>
-        <element name="Business" positionX="160" positionY="192" width="128" height="165"/>
-        <element name="Event" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Business" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Event" positionX="160" positionY="192" width="128" height="165"/>
     </elements>
 </model>

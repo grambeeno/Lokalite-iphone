@@ -13,7 +13,7 @@
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
 
-#import "NSManagedObject+GeneralHelpers.h"
+#import "SDKAdditions.h"
 
 @implementation Event (GeneralHelpers)
 
@@ -49,7 +49,12 @@
     }
 
     [event setName:[eventData objectForKey:@"name"]];
-    [event setDate:[NSDate date]];
+
+    NSString *startString = [eventData objectForKey:@"starts_at"];
+    NSString *endString = [eventData objectForKey:@"ends_at"];
+    [event setStartDate:[NSDate dateFromLokaliteServerString:startString]];
+    [event setEndDate:[NSDate dateFromLokaliteServerString:endString]];
+
     [event setSummary:[eventData objectForKey:@"description"]];
     [event setBusiness:business];
 
