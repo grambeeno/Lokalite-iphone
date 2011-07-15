@@ -6,14 +6,6 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-//
-// UIKit
-//
-
-#import "UIColor+GeneralHelpers.h"
-#import "UITableViewCell+GeneralHelpers.h"
-#import "UIApplication+GeneralHelpers.h"
-
 
 //
 // Foundation
@@ -29,3 +21,19 @@
 // Core Data
 //
 #import "NSManagedObject+GeneralHelpers.h"
+
+
+
+//
+// UIKit
+//
+
+#import "UIColor+GeneralHelpers.h"
+#import "UITableViewCell+GeneralHelpers.h"
+#import "UIApplication+GeneralHelpers.h"
+
+
+//
+// MapKit
+//
+#import "MKMapView+GeneralHelpers.h"

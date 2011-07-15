@@ -10,12 +10,13 @@
 #import <CoreData/CoreData.h>
 
 @class Event;
+@class Location;
 
 @interface Venue : NSManagedObject {
 @private
 }
 @property (nonatomic, retain) NSNumber * identifier;
-@property (nonatomic, retain) NSManagedObject *location;
+@property (nonatomic, retain) Location *location;
 @property (nonatomic, retain) NSSet *events;
 @end
 

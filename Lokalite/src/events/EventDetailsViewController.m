@@ -9,8 +9,12 @@
 #import "EventDetailsViewController.h"
 
 #import "Event.h"
+#import "Business.h"
+#import "Venue.h"
+#import "Location.h"
 
 #import "EventDetailsHeaderView.h"
+#import "LocationTableViewCell.h"
 
 
 enum {
@@ -37,6 +41,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 + (NSString *)dequeueReusableCellWithReuseIdentifier:(NSIndexPath *)path;
 - (UITableViewCell *)cellInstanceForIndexPath:(NSIndexPath *)path
                               reuseIdentifier:(NSString *)reuseIdentifier;
+- (void)configureCell:(UITableViewCell *)cell
+          atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -117,6 +123,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         cell = [self cellInstanceForIndexPath:indexPath
                               reuseIdentifier:cellIdentifier];
 
+    [self configureCell:cell atIndexPath:indexPath];
+
     return cell;
 }
 
@@ -186,6 +194,23 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     }
 
     return cell;
+}
+
+- (void)configureCell:(UITableViewCell *)cell
+          atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath section] == kSectionLocation) {
+        if ([indexPath row] == kLocationRowMap) {
+            Location *location = [[[self event] venue] location];
+            NSNumber *lat = [location latitude], *lon = [location longitude];
+            CLLocation *loc =
+                [[CLLocation alloc] initWithLatitude:[lat floatValue]
+                                           longitude:[lon floatValue]];
+
+            [[self locationMapCell] setLocation:loc];
+            [loc release], loc = nil;
+        }
+    }
 }
 
 @end

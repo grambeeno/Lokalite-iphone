@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class Event, EventDetailsHeaderView;
+@class LocationTableViewCell;
 
 @interface EventDetailsViewController : UITableViewController
 
 @property (nonatomic, retain, readonly) Event *event;
 
 @property (nonatomic, retain) IBOutlet EventDetailsHeaderView *headerView;
-@property (nonatomic, retain) IBOutlet UITableViewCell *locationMapCell;
+@property (nonatomic, retain) IBOutlet LocationTableViewCell *locationMapCell;
 
 #pragma mark - Initialization
 
