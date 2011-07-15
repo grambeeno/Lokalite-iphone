@@ -20,9 +20,17 @@
 #import "SDKAdditions.h"
 
 enum {
+    kSectionInfo,
     kSectionLocation
 };
-static const NSInteger NUM_SECTIONS = 1;
+static const NSInteger NUM_SECTIONS = kSectionLocation + 1;
+
+
+enum {
+    kInfoRowBusinessName,
+    kInfoRowEventDescription
+};
+static const NSInteger NUM_INFO_ROWS = kInfoRowEventDescription + 1;
 
 enum {
     kLocationRowTitle,
@@ -45,10 +53,12 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 + (NSString *)dequeueReusableCellWithReuseIdentifier:(NSIndexPath *)path;
 - (UITableViewCell *)cellInstanceForIndexPath:(NSIndexPath *)path
                               reuseIdentifier:(NSString *)reuseIdentifier;
+
 - (void)configureCell:(UITableViewCell *)cell
           atIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
 
 @implementation EventDetailsViewController
 
@@ -112,6 +122,9 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     NSInteger nrows = 0;
 
     switch (section) {
+        case kSectionInfo:
+            nrows = NUM_INFO_ROWS;
+            break;
         case kSectionLocation:
             nrows = NUM_LOCATION_ROWS;
             break;
@@ -186,7 +199,12 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     NSString *cellIdentifier = nil;
 
-    if ([path section] == kSectionLocation) {
+    if ([path section] == kSectionInfo) {
+        if ([path row] == kInfoRowBusinessName)
+            cellIdentifier = @"InfoRowBusinessName";
+        else if ([path row] == kInfoRowEventDescription)
+            cellIdentifier = @"InfoRowEventDescription";
+    } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowAddress)
             cellIdentifier = @"LocationRowAddressTableViewCell";
         else if ([path row] == kLocationRowMap)
@@ -203,7 +221,12 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     UITableViewCell *cell = nil;
 
-    if ([path section] == kSectionLocation) {
+    if ([path section] == kSectionInfo) {
+        cell =
+            [[[UITableViewCell alloc]
+              initWithStyle:UITableViewCellStyleDefault
+              reuseIdentifier:reuseIdentifier] autorelease];
+    } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowMap)
             cell = [self locationMapCell];
         else
@@ -219,7 +242,17 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)configureCell:(UITableViewCell *)cell
           atIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath section] == kSectionLocation) {
+    if ([indexPath section] == kSectionInfo) {
+        if ([indexPath row] == kInfoRowBusinessName) {
+            [[cell textLabel] setText:[[[self event] business] name]];
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+        } else if ([indexPath row] == kInfoRowEventDescription) {
+            [[cell textLabel] setText:[[self event] summary]];
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        }
+    } else if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowTitle) {
             [[cell textLabel]
              setText:NSLocalizedString(@"global.location", nil)];

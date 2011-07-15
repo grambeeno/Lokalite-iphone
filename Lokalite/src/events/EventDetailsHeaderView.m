@@ -12,9 +12,7 @@
 
 @synthesize imageView = imageView_;
 @synthesize titleLabel = titleLabel_;
-@synthesize businessNameLabel = businessNameLabel_;
 @synthesize dateRangeLabel = dateRangeLabel_;
-@synthesize descriptionLabel = descriptionLabel_;
 
 #pragma mark - Memory management
 
@@ -22,9 +20,7 @@
 {
     [imageView_ release];
     [titleLabel_ release];
-    [businessNameLabel_ release];
     [dateRangeLabel_ release];
-    [descriptionLabel_ release];
 
     [super dealloc];
 }
@@ -45,8 +41,6 @@
     [[self imageView] setImage:image];
 
     [[self titleLabel] setText:[event name]];
-    [[self businessNameLabel] setText:[[event business] name]];
-    [[self descriptionLabel] setText:[event summary]];
 
     NSString *timeRange =
         [NSString textRangeWithStartDate:[event startDate]
