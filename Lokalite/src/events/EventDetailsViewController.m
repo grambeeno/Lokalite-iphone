@@ -141,7 +141,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
     if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowMap)
-            height = 138;
+            height = 120;
     }
 
     return height;
@@ -211,7 +211,16 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
           atIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == kSectionLocation) {
-        if ([indexPath row] == kLocationRowMap) {
+        if ([indexPath row] == kLocationRowTitle) {
+            [[cell textLabel]
+             setText:NSLocalizedString(@"global.location", nil)];
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        } else if ([indexPath row] == kLocationRowAddress) {
+            Location *location = [[[self event] venue] location];
+            [[cell textLabel] setText:[location formattedAddress]];
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
         }
     }
 }

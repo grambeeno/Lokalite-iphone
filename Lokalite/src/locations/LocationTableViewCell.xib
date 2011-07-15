@@ -37,21 +37,23 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUITableViewCell" id="776518414">
+			<object class="IBUITableViewCell" id="470079189">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIView" id="600796611">
-						<reference key="NSNextResponder" ref="776518414"/>
+					<object class="IBUIView" id="411142155">
+						<reference key="NSNextResponder" ref="470079189"/>
 						<int key="NSvFlags">256</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBMKMapView" id="605851411">
-								<reference key="NSNextResponder" ref="600796611"/>
+							<object class="IBMKMapView" id="1022889844">
+								<reference key="NSNextResponder" ref="411142155"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{320, 138}</string>
-								<reference key="NSSuperview" ref="600796611"/>
+								<string key="NSFrameSize">{320, 120}</string>
+								<reference key="NSSuperview" ref="411142155"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:774</string>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -59,9 +61,10 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
-						<string key="NSFrameSize">{320, 138}</string>
-						<reference key="NSSuperview" ref="776518414"/>
-						<reference key="NSNextKeyView" ref="605851411"/>
+						<string key="NSFrameSize">{320, 120}</string>
+						<reference key="NSSuperview" ref="470079189"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="1022889844"/>
 						<string key="NSReuseIdentifierKey">_NS:370</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -74,9 +77,10 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 138}</string>
+				<string key="NSFrameSize">{320, 120}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="600796611"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="411142155"/>
 				<string key="NSReuseIdentifierKey">_NS:358</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -86,7 +90,7 @@
 				<bool key="IBUIUserInteractionEnabled">NO</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISeparatorStyle">1</int>
-				<reference key="IBUIContentView" ref="600796611"/>
+				<reference key="IBUIContentView" ref="411142155"/>
 				<string key="IBUIReuseIdentifier">LocationRowMapTableViewCell</string>
 			</object>
 		</object>
@@ -96,8 +100,8 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">mapView</string>
-						<reference key="source" ref="776518414"/>
-						<reference key="destination" ref="605851411"/>
+						<reference key="source" ref="470079189"/>
+						<reference key="destination" ref="1022889844"/>
 					</object>
 					<int key="connectionID">4</int>
 				</object>
@@ -124,17 +128,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2</int>
-						<reference key="object" ref="776518414"/>
+						<reference key="object" ref="470079189"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="605851411"/>
+							<reference ref="1022889844"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">3</int>
-						<reference key="object" ref="605851411"/>
-						<reference key="parent" ref="776518414"/>
+						<reference key="object" ref="1022889844"/>
+						<reference key="parent" ref="470079189"/>
 					</object>
 				</object>
 			</object>
@@ -173,7 +177,30 @@
 			<nil key="sourceID"/>
 			<int key="maxID">4</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">LocationTableViewCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">mapView</string>
+						<string key="NS.object.0">MKMapView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">mapView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">mapView</string>
+							<string key="candidateClassName">MKMapView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/LocationTableViewCell.h</string>
+					</object>
+				</object>
+			</object>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
