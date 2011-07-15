@@ -37,6 +37,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 #pragma mark - View initialization
 
 - (void)initializeHeaderView;
+- (void)initializeMapView;
 
 #pragma mark - Table view configuration
 
