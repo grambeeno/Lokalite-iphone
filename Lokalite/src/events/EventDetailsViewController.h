@@ -15,6 +15,7 @@
 @property (nonatomic, retain, readonly) Event *event;
 
 @property (nonatomic, retain) IBOutlet EventDetailsHeaderView *headerView;
+@property (nonatomic, retain) IBOutlet UITableViewCell *locationMapCell;
 
 #pragma mark - Initialization
 

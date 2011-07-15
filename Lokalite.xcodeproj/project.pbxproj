@@ -46,6 +46,8 @@
 		0568333713CF723400520C78 /* NSObject+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333613CF723400520C78 /* NSObject+GeneralHelpers.m */; };
 		0568333E13CF8BAC00520C78 /* NSArray+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333D13CF8BAC00520C78 /* NSArray+GeneralHelpers.m */; };
 		0568334113CF9EC800520C78 /* NSString+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568334013CF9EC700520C78 /* NSString+GeneralHelpers.m */; };
+		0568334313CFAAC900520C78 /* detail-view-header-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0568334213CFAAC900520C78 /* detail-view-header-background@2x.png */; };
+		0568334513CFB9B300520C78 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0568334413CFB9B300520C78 /* MapKit.framework */; };
 		056A92A813CCBE1E00C65DC0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92A713CCBE1E00C65DC0 /* JSONKit.m */; };
 		056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */ = {isa = PBXBuildFile; fileRef = 056A92AB13CCC61200C65DC0 /* mock-featured-events.json */; };
 		056A92D513CCD58900C65DC0 /* Event+MockDataHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */; };
@@ -128,6 +130,8 @@
 		0568333D13CF8BAC00520C78 /* NSArray+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+GeneralHelpers.m"; path = "src/sdk-additions/NSArray+GeneralHelpers.m"; sourceTree = "<group>"; };
 		0568333F13CF9EC700520C78 /* NSString+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+GeneralHelpers.h"; path = "src/sdk-additions/NSString+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0568334013CF9EC700520C78 /* NSString+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+GeneralHelpers.m"; path = "src/sdk-additions/NSString+GeneralHelpers.m"; sourceTree = "<group>"; };
+		0568334213CFAAC900520C78 /* detail-view-header-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "detail-view-header-background@2x.png"; path = "images/detail-view-header-background@2x.png"; sourceTree = "<group>"; };
+		0568334413CFB9B300520C78 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		056A92A613CCBE1E00C65DC0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = src/vendor/jsonkit/JSONKit.h; sourceTree = "<group>"; };
 		056A92A713CCBE1E00C65DC0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = src/vendor/jsonkit/JSONKit.m; sourceTree = "<group>"; };
 		056A92AB13CCC61200C65DC0 /* mock-featured-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "mock-featured-events.json"; path = "mock/server-data/mock-featured-events.json"; sourceTree = "<group>"; wrapsLines = 0; };
@@ -173,6 +177,7 @@
 				05209EDF13C76F9200CA6A2D /* Foundation.framework in Frameworks */,
 				05209EE113C76F9200CA6A2D /* CoreGraphics.framework in Frameworks */,
 				05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */,
+				0568334513CFB9B300520C78 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +191,7 @@
 				054E06C013CB8978009B7373 /* mock-images */,
 				0504369E13C77F220077F03D /* radar.png */,
 				0504369F13C77F220077F03D /* radar@2x.png */,
+				0568334213CFAAC900520C78 /* detail-view-header-background@2x.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -222,6 +228,7 @@
 		05209ECD13C76F9200CA6A2D = {
 			isa = PBXGroup;
 			children = (
+				0568334413CFB9B300520C78 /* MapKit.framework */,
 				05209EE213C76F9200CA6A2D /* Lokalite */,
 				05209EDB13C76F9200CA6A2D /* Frameworks */,
 				05209ED913C76F9200CA6A2D /* Products */,
@@ -526,6 +533,7 @@
 				056A92F513CD0E0D00C65DC0 /* Localizable.strings in Resources */,
 				0514FBE513CE000D00ACA464 /* EventTableViewCell.xib in Resources */,
 				0568333013CF65F700520C78 /* EventDetailsViewController.xib in Resources */,
+				0568334313CFAAC900520C78 /* detail-view-header-background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
