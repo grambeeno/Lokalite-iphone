@@ -508,7 +508,7 @@
         [req setEntity:entity];
 
         NSSortDescriptor *sd =
-            [[NSSortDescriptor alloc] initWithKey:@"endDate" ascending:NO];
+            [[NSSortDescriptor alloc] initWithKey:@"endDate" ascending:YES];
         NSArray *sds = [[NSArray alloc] initWithObjects:sd, nil];
         [req setSortDescriptors:sds];
         [sds release], sds = nil;

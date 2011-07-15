@@ -17,7 +17,6 @@
 		0514FBE513CE000D00ACA464 /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0514FBE413CE000D00ACA464 /* EventTableViewCell.xib */; };
 		0514FBEC13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBEB13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m */; };
 		0514FBF413CE561D00ACA464 /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBF313CE561D00ACA464 /* DataFetcher.m */; };
-		0514FBF813CE608700ACA464 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBF713CE608700ACA464 /* Event.m */; };
 		0514FBFB13CE60A000ACA464 /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBFA13CE60A000ACA464 /* Business.m */; };
 		0514FBFE13CE6B2400ACA464 /* NSDate+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514FBFD13CE6B2400ACA464 /* NSDate+GeneralHelpers.m */; };
 		05194D4A13CCAC8200EE14F8 /* LokaliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 05194D4913CCAC8200EE14F8 /* LokaliteService.m */; };
@@ -48,6 +47,11 @@
 		0568334113CF9EC800520C78 /* NSString+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568334013CF9EC700520C78 /* NSString+GeneralHelpers.m */; };
 		0568334313CFAAC900520C78 /* detail-view-header-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0568334213CFAAC900520C78 /* detail-view-header-background@2x.png */; };
 		0568334513CFB9B300520C78 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0568334413CFB9B300520C78 /* MapKit.framework */; };
+		0568334A13D09C8000520C78 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568334913D09C8000520C78 /* Venue.m */; };
+		0568335013D09CD100520C78 /* Venue+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568334F13D09CD100520C78 /* Venue+GeneralHelpers.m */; };
+		0568335313D09F9E00520C78 /* Location+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568335213D09F9E00520C78 /* Location+GeneralHelpers.m */; };
+		0568335613D09FA900520C78 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568335513D09FA900520C78 /* Location.m */; };
+		0568335913D0A29C00520C78 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568335813D0A29B00520C78 /* Event.m */; };
 		056A92A813CCBE1E00C65DC0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92A713CCBE1E00C65DC0 /* JSONKit.m */; };
 		056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */ = {isa = PBXBuildFile; fileRef = 056A92AB13CCC61200C65DC0 /* mock-featured-events.json */; };
 		056A92D513CCD58900C65DC0 /* Event+MockDataHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */; };
@@ -87,8 +91,6 @@
 		0514FBF213CE561D00ACA464 /* DataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataFetcher.h; path = src/shared/DataFetcher.h; sourceTree = "<group>"; };
 		0514FBF313CE561D00ACA464 /* DataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataFetcher.m; path = src/shared/DataFetcher.m; sourceTree = "<group>"; };
 		0514FBF513CE5FC700ACA464 /* LokaliteShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteShared.h; path = src/shared/LokaliteShared.h; sourceTree = "<group>"; };
-		0514FBF613CE608700ACA464 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
-		0514FBF713CE608700ACA464 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
 		0514FBF913CE60A000ACA464 /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Business.h; path = src/businesses/Business.h; sourceTree = "<group>"; };
 		0514FBFA13CE60A000ACA464 /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Business.m; path = src/businesses/Business.m; sourceTree = "<group>"; };
 		0514FBFC13CE6B2400ACA464 /* NSDate+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+GeneralHelpers.h"; path = "src/sdk-additions/NSDate+GeneralHelpers.h"; sourceTree = "<group>"; };
@@ -132,6 +134,16 @@
 		0568334013CF9EC700520C78 /* NSString+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+GeneralHelpers.m"; path = "src/sdk-additions/NSString+GeneralHelpers.m"; sourceTree = "<group>"; };
 		0568334213CFAAC900520C78 /* detail-view-header-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "detail-view-header-background@2x.png"; path = "images/detail-view-header-background@2x.png"; sourceTree = "<group>"; };
 		0568334413CFB9B300520C78 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0568334813D09C8000520C78 /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Venue.h; path = src/venues/Venue.h; sourceTree = "<group>"; };
+		0568334913D09C8000520C78 /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Venue.m; path = src/venues/Venue.m; sourceTree = "<group>"; };
+		0568334E13D09CD100520C78 /* Venue+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Venue+GeneralHelpers.h"; path = "src/venues/Venue+GeneralHelpers.h"; sourceTree = "<group>"; };
+		0568334F13D09CD100520C78 /* Venue+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Venue+GeneralHelpers.m"; path = "src/venues/Venue+GeneralHelpers.m"; sourceTree = "<group>"; };
+		0568335113D09F9E00520C78 /* Location+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Location+GeneralHelpers.h"; path = "src/locations/Location+GeneralHelpers.h"; sourceTree = "<group>"; };
+		0568335213D09F9E00520C78 /* Location+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Location+GeneralHelpers.m"; path = "src/locations/Location+GeneralHelpers.m"; sourceTree = "<group>"; };
+		0568335413D09FA900520C78 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = src/locations/Location.h; sourceTree = "<group>"; };
+		0568335513D09FA900520C78 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = src/locations/Location.m; sourceTree = "<group>"; };
+		0568335713D0A29B00520C78 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
+		0568335813D0A29B00520C78 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
 		056A92A613CCBE1E00C65DC0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = src/vendor/jsonkit/JSONKit.h; sourceTree = "<group>"; };
 		056A92A713CCBE1E00C65DC0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = src/vendor/jsonkit/JSONKit.m; sourceTree = "<group>"; };
 		056A92AB13CCC61200C65DC0 /* mock-featured-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "mock-featured-events.json"; path = "mock/server-data/mock-featured-events.json"; sourceTree = "<group>"; wrapsLines = 0; };
@@ -228,7 +240,6 @@
 		05209ECD13C76F9200CA6A2D = {
 			isa = PBXGroup;
 			children = (
-				0568334413CFB9B300520C78 /* MapKit.framework */,
 				05209EE213C76F9200CA6A2D /* Lokalite */,
 				05209EDB13C76F9200CA6A2D /* Frameworks */,
 				05209ED913C76F9200CA6A2D /* Products */,
@@ -250,6 +261,7 @@
 				05209EDE13C76F9200CA6A2D /* Foundation.framework */,
 				05209EE013C76F9200CA6A2D /* CoreGraphics.framework */,
 				05EC9A4113CB971400B7AD61 /* CoreData.framework */,
+				0568334413CFB9B300520C78 /* MapKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -287,6 +299,8 @@
 				05209F0E13C7706700CA6A2D /* loyalty */,
 				05EC9A3913CB969700B7AD61 /* events */,
 				05EC9A3A13CB96BA00B7AD61 /* businesses */,
+				0568334613D09C4200520C78 /* venues */,
+				0568334713D09C5200520C78 /* locations */,
 				0505ECCD13CBC13E009874A7 /* lokalite */,
 				0514FBF113CE55F200ACA464 /* shared */,
 				05EC9A4713CB990F00B7AD61 /* sdk-additions */,
@@ -351,6 +365,28 @@
 			name = "mock-images";
 			sourceTree = "<group>";
 		};
+		0568334613D09C4200520C78 /* venues */ = {
+			isa = PBXGroup;
+			children = (
+				0568334813D09C8000520C78 /* Venue.h */,
+				0568334913D09C8000520C78 /* Venue.m */,
+				0568334E13D09CD100520C78 /* Venue+GeneralHelpers.h */,
+				0568334F13D09CD100520C78 /* Venue+GeneralHelpers.m */,
+			);
+			name = venues;
+			sourceTree = "<group>";
+		};
+		0568334713D09C5200520C78 /* locations */ = {
+			isa = PBXGroup;
+			children = (
+				0568335413D09FA900520C78 /* Location.h */,
+				0568335513D09FA900520C78 /* Location.m */,
+				0568335113D09F9E00520C78 /* Location+GeneralHelpers.h */,
+				0568335213D09F9E00520C78 /* Location+GeneralHelpers.m */,
+			);
+			name = locations;
+			sourceTree = "<group>";
+		};
 		056A92A313CCBD9A00C65DC0 /* vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,8 +439,8 @@
 		05EC9A3913CB969700B7AD61 /* events */ = {
 			isa = PBXGroup;
 			children = (
-				0514FBF613CE608700ACA464 /* Event.h */,
-				0514FBF713CE608700ACA464 /* Event.m */,
+				0568335713D0A29B00520C78 /* Event.h */,
+				0568335813D0A29B00520C78 /* Event.m */,
 				056A92E913CCF3AB00C65DC0 /* Event+GeneralHelpers.h */,
 				056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */,
 				056A92D313CCD58900C65DC0 /* Event+MockDataHelpers.h */,
@@ -569,7 +605,6 @@
 				0514FBE313CDFFF300ACA464 /* EventTableViewCell.m in Sources */,
 				0514FBEC13CE44AD00ACA464 /* UITableViewCell+GeneralHelpers.m in Sources */,
 				0514FBF413CE561D00ACA464 /* DataFetcher.m in Sources */,
-				0514FBF813CE608700ACA464 /* Event.m in Sources */,
 				0514FBFB13CE60A000ACA464 /* Business.m in Sources */,
 				0514FBFE13CE6B2400ACA464 /* NSDate+GeneralHelpers.m in Sources */,
 				0568332F13CF65F700520C78 /* EventDetailsViewController.m in Sources */,
@@ -577,6 +612,11 @@
 				0568333713CF723400520C78 /* NSObject+GeneralHelpers.m in Sources */,
 				0568333E13CF8BAC00520C78 /* NSArray+GeneralHelpers.m in Sources */,
 				0568334113CF9EC800520C78 /* NSString+GeneralHelpers.m in Sources */,
+				0568334A13D09C8000520C78 /* Venue.m in Sources */,
+				0568335013D09CD100520C78 /* Venue+GeneralHelpers.m in Sources */,
+				0568335313D09F9E00520C78 /* Location+GeneralHelpers.m in Sources */,
+				0568335613D09FA900520C78 /* Location.m in Sources */,
+				0568335913D0A29C00520C78 /* Event.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

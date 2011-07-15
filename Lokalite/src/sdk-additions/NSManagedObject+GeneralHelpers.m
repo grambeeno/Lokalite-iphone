@@ -80,3 +80,31 @@
 }
 
 @end
+
+
+
+@implementation NSManagedObject (LokaliteHelpers)
+
++ (id)instanceWithIdentifier:(id)identifier
+                   inContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *predicate =
+        [NSPredicate predicateWithFormat:@"identifier == %@", identifier];
+    return [self findFirstWithPredicate:predicate inContext:context];
+}
+
++ (id)existingOrNewInstanceWithIdentifier:(id)identifier
+                                inContext:(NSManagedObjectContext *)context
+{
+    NSManagedObject *obj = [self instanceWithIdentifier:identifier
+                                              inContext:context];
+    if (!obj) {
+        NSLog(@"Creating new %@: %@", NSStringFromClass(self), identifier);
+        obj = [self createInstanceInContext:context];
+        [obj setValue:identifier forKey:@"identifier"];
+    }
+
+    return obj;
+}
+
+@end

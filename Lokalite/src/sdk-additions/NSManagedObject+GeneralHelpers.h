@@ -29,3 +29,14 @@
                    inContext:(NSManagedObjectContext *)context;
 
 @end
+
+
+@interface NSManagedObject (LokaliteHelpers)
+
++ (id)instanceWithIdentifier:(id)identifier
+                   inContext:(NSManagedObjectContext *)context;
+
++ (id)existingOrNewInstanceWithIdentifier:(id)identifier
+                                inContext:(NSManagedObjectContext *)context;
+
+@end

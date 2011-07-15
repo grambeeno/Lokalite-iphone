@@ -138,6 +138,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"%@: %@", NSStringFromSelector(_cmd), indexPath);
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - View initialization

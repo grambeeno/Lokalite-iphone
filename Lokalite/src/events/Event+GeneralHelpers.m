@@ -13,6 +13,9 @@
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
 
+#import "Venue.h"
+#import "Venue+GeneralHelpers.h"
+
 #import "SDKAdditions.h"
 
 @implementation Event (GeneralHelpers)
@@ -73,6 +76,11 @@
         if ([event setValueIfNecessary:url forKey:@"imageUrl"])
             [event setImageData:nil];
     }
+
+    NSDictionary *venueData = [eventData objectForKey:@"venue"];
+    Venue *venue = [Venue existingOrNewVenueFromJsonData:venueData
+                                               inContext:context];
+    [event setVenue:venue];
 
     return event;
 }

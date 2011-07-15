@@ -19,9 +19,25 @@
         <attribute name="startDate" optional="YES" attributeType="Date"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
         <relationship name="business" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Business" inverseName="events" inverseEntity="Business"/>
+        <relationship name="venue" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="events" inverseEntity="Venue"/>
+    </entity>
+    <entity name="Location" representedClassName="Location">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="formattedAddress" optional="YES" attributeType="String"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 64" defaultValueString="0"/>
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0"/>
+        <relationship name="venues" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="location" inverseEntity="Venue"/>
+    </entity>
+    <entity name="Venue" representedClassName="Venue">
+        <attribute name="identifier" optional="YES" attributeType="Integer 64" defaultValueString="0"/>
+        <relationship name="events" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="venue" inverseEntity="Event"/>
+        <relationship name="location" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="venues" inverseEntity="Location"/>
     </entity>
     <elements>
         <element name="Business" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Event" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="Venue" positionX="-171" positionY="-9" width="128" height="90"/>
+        <element name="Location" positionX="-189" positionY="189" width="128" height="135"/>
     </elements>
 </model>

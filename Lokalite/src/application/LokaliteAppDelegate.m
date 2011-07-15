@@ -151,10 +151,14 @@
     NSManagedObjectContext *context = [self context];
     if ([context hasChanges]) {
         NSError *error = nil;
-        if (![context save:&error])
+        NSLog(@"Saving context...");
+        if ([context save:&error])
+            NSLog(@"Done");
+        else
             NSLog(@"WARNING: Failed to save managed object context: %@",
                   [error detailedDescription]);
-    }
+    } else
+        NSLog(@"Context has no changes; not saving.");
 }
 
 #pragma mark - Displaying the application activity view
