@@ -98,3 +98,24 @@
 }
 
 @end
+
+
+
+#import <CoreLocation/CoreLocation.h>
+#import "Venue.h"
+#import "Location.h"
+
+@implementation Event (ConvenienceMethods)
+
+- (CLLocation *)location
+{
+    Location *location = [[self venue] location];
+    NSNumber *lat = [location latitude], *lon = [location longitude];
+    CLLocation *loc = [[CLLocation alloc] initWithLatitude:[lat floatValue]
+                                                 longitude:[lon floatValue]];
+
+    return [loc autorelease];
+}
+
+@end
+

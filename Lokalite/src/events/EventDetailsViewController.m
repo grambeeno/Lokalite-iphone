@@ -9,6 +9,7 @@
 #import "EventDetailsViewController.h"
 
 #import "Event.h"
+#import "Event+GeneralHelpers.h"
 #import "Business.h"
 #import "Venue.h"
 #import "Location.h"
@@ -16,6 +17,7 @@
 #import "EventDetailsHeaderView.h"
 #import "LocationTableViewCell.h"
 
+#import "SDKAdditions.h"
 
 enum {
     kSectionLocation
@@ -84,6 +86,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [super viewDidLoad];
 
     [self initializeHeaderView];
+    [self initializeMapView];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
@@ -160,6 +163,13 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [[self tableView] setTableHeaderView:headerView];
 }
 
+- (void)initializeMapView
+{
+    LocationTableViewCell *cell = [self locationMapCell];
+    CLLocation *location = [[self event] location];
+    [cell setLocation:location];
+}
+
 #pragma mark - Table view configuration
 
 + (NSString *)dequeueReusableCellWithReuseIdentifier:(NSIndexPath *)path
@@ -201,16 +211,18 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowMap) {
-            Location *location = [[[self event] venue] location];
-            NSNumber *lat = [location latitude], *lon = [location longitude];
-            CLLocation *loc =
-                [[CLLocation alloc] initWithLatitude:[lat floatValue]
-                                           longitude:[lon floatValue]];
-
-            [[self locationMapCell] setLocation:loc];
-            [loc release], loc = nil;
         }
     }
+}
+
+#pragma mark - Accessors
+
+- (LocationTableViewCell *)locationMapCell
+{
+    if (!locationMapCell_)
+        locationMapCell_ = [[LocationTableViewCell instanceFromNib] retain];
+
+    return locationMapCell_;
 }
 
 @end

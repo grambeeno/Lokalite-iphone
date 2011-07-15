@@ -27,3 +27,16 @@
 - (void)deleteInContext:(NSManagedObjectContext *)context;
 
 @end
+
+
+@class CLLocation;
+
+@interface Event (ConvenienceMethods)
+
+//
+// Convenience method that reaches through the Venue and the Location instance
+// to get a CLLocation object.
+//
+- (CLLocation *)location;
+
+@end

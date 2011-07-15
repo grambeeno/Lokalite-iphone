@@ -55,6 +55,7 @@
 		0568335C13D0A4D300520C78 /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568335B13D0A4D200520C78 /* LocationTableViewCell.m */; };
 		0568336F13D0AAED00520C78 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0568336E13D0AAEC00520C78 /* CoreLocation.framework */; };
 		0568337213D0ADE500520C78 /* MKMapView+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568337113D0ADE400520C78 /* MKMapView+GeneralHelpers.m */; };
+		0568337413D0B08300520C78 /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0568337313D0B08200520C78 /* LocationTableViewCell.xib */; };
 		056A92A813CCBE1E00C65DC0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92A713CCBE1E00C65DC0 /* JSONKit.m */; };
 		056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */ = {isa = PBXBuildFile; fileRef = 056A92AB13CCC61200C65DC0 /* mock-featured-events.json */; };
 		056A92D513CCD58900C65DC0 /* Event+MockDataHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */; };
@@ -152,6 +153,7 @@
 		0568336E13D0AAEC00520C78 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0568337013D0ADE400520C78 /* MKMapView+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MKMapView+GeneralHelpers.h"; path = "src/sdk-additions/MKMapView+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0568337113D0ADE400520C78 /* MKMapView+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MKMapView+GeneralHelpers.m"; path = "src/sdk-additions/MKMapView+GeneralHelpers.m"; sourceTree = "<group>"; };
+		0568337313D0B08200520C78 /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationTableViewCell.xib; path = src/locations/LocationTableViewCell.xib; sourceTree = "<group>"; };
 		056A92A613CCBE1E00C65DC0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = src/vendor/jsonkit/JSONKit.h; sourceTree = "<group>"; };
 		056A92A713CCBE1E00C65DC0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = src/vendor/jsonkit/JSONKit.m; sourceTree = "<group>"; };
 		056A92AB13CCC61200C65DC0 /* mock-featured-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "mock-featured-events.json"; path = "mock/server-data/mock-featured-events.json"; sourceTree = "<group>"; wrapsLines = 0; };
@@ -395,6 +397,7 @@
 				0568335213D09F9E00520C78 /* Location+GeneralHelpers.m */,
 				0568335A13D0A4D200520C78 /* LocationTableViewCell.h */,
 				0568335B13D0A4D200520C78 /* LocationTableViewCell.m */,
+				0568337313D0B08200520C78 /* LocationTableViewCell.xib */,
 			);
 			name = locations;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				0514FBE513CE000D00ACA464 /* EventTableViewCell.xib in Resources */,
 				0568333013CF65F700520C78 /* EventDetailsViewController.xib in Resources */,
 				0568334313CFAAC900520C78 /* detail-view-header-background@2x.png in Resources */,
+				0568337413D0B08300520C78 /* LocationTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
