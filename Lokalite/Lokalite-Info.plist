@@ -13,9 +13,8 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon@2x.png</string>
+		<string>Icon.png</string>
 	</array>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 	<key>CFBundleIdentifier</key>
 	<string>com.highorderbit.ios.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -32,15 +31,17 @@
 	<string>0.0.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LokaliteAPIServer</key>
+	<string>http://72.249.171.49</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>LokaliteAPIServer</key>
-	<string>http://72.249.171.49</string>
 </dict>
 </plist>
