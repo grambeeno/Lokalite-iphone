@@ -17,6 +17,7 @@
 
 @property (nonatomic, retain) IBOutlet EventDetailsHeaderView *headerView;
 @property (nonatomic, retain) LocationTableViewCell *locationMapCell;
+@property (nonatomic, retain) IBOutlet UIView *footerView;
 
 #pragma mark - Initialization
 

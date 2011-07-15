@@ -38,6 +38,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (void)initializeHeaderView;
 - (void)initializeMapView;
+- (void)initializeFooterView;
 
 #pragma mark - Table view configuration
 
@@ -55,6 +56,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 @synthesize headerView = headerView_;
 @synthesize locationMapCell = locationMapCell_;
+@synthesize footerView = footerView_;
 
 #pragma mark - Memory management
 
@@ -63,6 +65,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [event_ release];
     [headerView_ release];
     [locationMapCell_ release];
+    [footerView_ release];
 
     [super dealloc];
 }
@@ -88,6 +91,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
     [self initializeHeaderView];
     [self initializeMapView];
+    [self initializeFooterView];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
@@ -169,6 +173,11 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     LocationTableViewCell *cell = [self locationMapCell];
     CLLocation *location = [[self event] location];
     [cell setLocation:location];
+}
+
+- (void)initializeFooterView
+{
+    [[self tableView] setTableFooterView:[self footerView]];
 }
 
 #pragma mark - Table view configuration
