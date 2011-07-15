@@ -17,6 +17,8 @@
 #import "EventDetailsHeaderView.h"
 #import "LocationTableViewCell.h"
 
+#import "BusinessDetailsViewController.h"
+
 #import "SDKAdditions.h"
 
 enum {
@@ -84,7 +86,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (id)initWithEvent:(Event *)event
 {
-    self = [super initWithNibName:@"EventDetailsViewController" bundle:nil];
+    self = [super initWithNibName:@"EventDetailsView" bundle:nil];
     if (self) {
         event_ = [event retain];
         [self setTitle:NSLocalizedString(@"global.details", nil)];
@@ -168,7 +170,24 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%@: %@", NSStringFromSelector(_cmd), indexPath);
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    BOOL deselect = YES;
+    if ([indexPath section] == kSectionInfo) {
+        if ([indexPath row] == kInfoRowBusinessName) {
+            deselect = NO;
+
+            Business *business = [[self event] business];
+            BusinessDetailsViewController *controller =
+                [[BusinessDetailsViewController alloc]
+                 initWithBusiness:business];
+            [[self navigationController] pushViewController:controller
+                                                   animated:YES];
+            [controller release], controller = nil;
+        }
+    }
+
+    if (deselect)
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - View initialization

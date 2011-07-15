@@ -41,3 +41,18 @@ static NSInteger networkActivityCount = 0;
 }
 
 @end
+
+
+
+@implementation UIApplication (LokaliteHelpers)
+
+- (NSURL *)baseLokaliteUrl
+{
+    NSString *key = @"LokaliteAPIServer";
+    NSString *s = [[NSBundle mainBundle] objectForInfoDictionaryKey:key];
+
+    return [NSURL URLWithString:s];
+}
+
+@end
+

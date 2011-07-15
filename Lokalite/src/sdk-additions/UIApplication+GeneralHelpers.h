@@ -19,3 +19,10 @@
 - (NSInteger)networkActivityCount;
 
 @end
+
+
+@interface UIApplication (LokaliteHelpers)
+
+- (NSURL *)baseLokaliteUrl;
+
+@end

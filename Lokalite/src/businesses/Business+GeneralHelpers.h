@@ -16,4 +16,9 @@
 + (id)existingOrNewBusinessFromJsonData:(NSDictionary *)businessData
                               inContext:(NSManagedObjectContext *)context;
 
+#pragma mark - Helper methods
+
+- (NSURL *)addressUrl;
+- (NSURL *)phoneUrl;
+
 @end

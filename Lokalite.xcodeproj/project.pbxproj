@@ -40,7 +40,7 @@
 		054E06C713CB8990009B7373 /* featured-image-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C313CB8990009B7373 /* featured-image-02.png */; };
 		054E06C813CB8990009B7373 /* featured-image-02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C413CB8990009B7373 /* featured-image-02@2x.png */; };
 		0568332F13CF65F700520C78 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568332D13CF65F700520C78 /* EventDetailsViewController.m */; };
-		0568333013CF65F700520C78 /* EventDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0568332E13CF65F700520C78 /* EventDetailsViewController.xib */; };
+		0568333013CF65F700520C78 /* EventDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0568332E13CF65F700520C78 /* EventDetailsView.xib */; };
 		0568333413CF6A4400520C78 /* EventDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333313CF6A4400520C78 /* EventDetailsHeaderView.m */; };
 		0568333713CF723400520C78 /* NSObject+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333613CF723400520C78 /* NSObject+GeneralHelpers.m */; };
 		0568333E13CF8BAC00520C78 /* NSArray+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333D13CF8BAC00520C78 /* NSArray+GeneralHelpers.m */; };
@@ -72,12 +72,15 @@
 		056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */; };
 		056A92F513CD0E0D00C65DC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 056A92F313CD0E0D00C65DC0 /* Localizable.strings */; };
 		056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */; };
+		05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
 		05EC9A3813CB959E00B7AD61 /* lokalite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */; };
 		05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EC9A4113CB971400B7AD61 /* CoreData.framework */; };
 		05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */; };
 		05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */; };
+		05FA00E113D0E8AC001B7470 /* BusinessDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FA00DF13D0E8AC001B7470 /* BusinessDetailsViewController.m */; };
+		05FA00E213D0E8AC001B7470 /* BusinessDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05FA00E013D0E8AC001B7470 /* BusinessDetailsView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,7 +133,7 @@
 		054E06C413CB8990009B7373 /* featured-image-02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02@2x.png"; path = "images/mock-images/featured-image-02@2x.png"; sourceTree = "<group>"; };
 		0568332C13CF65F700520C78 /* EventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsViewController.h; path = src/events/EventDetailsViewController.h; sourceTree = "<group>"; };
 		0568332D13CF65F700520C78 /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsViewController.m; path = src/events/EventDetailsViewController.m; sourceTree = "<group>"; };
-		0568332E13CF65F700520C78 /* EventDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventDetailsViewController.xib; path = src/events/EventDetailsViewController.xib; sourceTree = "<group>"; };
+		0568332E13CF65F700520C78 /* EventDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventDetailsView.xib; path = src/events/EventDetailsView.xib; sourceTree = "<group>"; };
 		0568333213CF6A4400520C78 /* EventDetailsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsHeaderView.h; path = src/events/EventDetailsHeaderView.h; sourceTree = "<group>"; };
 		0568333313CF6A4400520C78 /* EventDetailsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsHeaderView.m; path = src/events/EventDetailsHeaderView.m; sourceTree = "<group>"; };
 		0568333513CF723400520C78 /* NSObject+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+GeneralHelpers.h"; path = "src/sdk-additions/NSObject+GeneralHelpers.h"; sourceTree = "<group>"; };
@@ -157,9 +160,9 @@
 		0568337013D0ADE400520C78 /* MKMapView+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MKMapView+GeneralHelpers.h"; path = "src/sdk-additions/MKMapView+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0568337113D0ADE400520C78 /* MKMapView+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MKMapView+GeneralHelpers.m"; path = "src/sdk-additions/MKMapView+GeneralHelpers.m"; sourceTree = "<group>"; };
 		0568337313D0B08200520C78 /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationTableViewCell.xib; path = src/locations/LocationTableViewCell.xib; sourceTree = "<group>"; };
-		0568337513D0DFB000520C78 /* Default.png */ = {isa = PBXFileReference; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		0568337513D0DFB000520C78 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		0568337713D0DFC300520C78 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
-		0568337913D0DFED00520C78 /* Icon.png */ = {isa = PBXFileReference; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		0568337913D0DFED00520C78 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		056A92A613CCBE1E00C65DC0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = src/vendor/jsonkit/JSONKit.h; sourceTree = "<group>"; };
 		056A92A713CCBE1E00C65DC0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = src/vendor/jsonkit/JSONKit.m; sourceTree = "<group>"; };
 		056A92AB13CCC61200C65DC0 /* mock-featured-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "mock-featured-events.json"; path = "mock/server-data/mock-featured-events.json"; sourceTree = "<group>"; wrapsLines = 0; };
@@ -184,6 +187,8 @@
 		056A92F413CD0E0D00C65DC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = strings/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		056A92FA13CD174300C65DC0 /* UIColor+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+GeneralHelpers.h"; path = "src/sdk-additions/UIColor+GeneralHelpers.h"; sourceTree = "<group>"; };
 		056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+GeneralHelpers.m"; path = "src/sdk-additions/UIColor+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05D2CDE613D0ED0D00043FB6 /* BusinessDetailsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessDetailsHeaderView.h; path = src/businesses/BusinessDetailsHeaderView.h; sourceTree = "<group>"; };
+		05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessDetailsHeaderView.m; path = src/businesses/BusinessDetailsHeaderView.m; sourceTree = "<group>"; };
 		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
 		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
@@ -194,6 +199,9 @@
 		05EC9A4B13CB99B700B7AD61 /* SDKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDKAdditions.h; path = "src/sdk-additions/SDKAdditions.h"; sourceTree = "<group>"; };
 		05EC9A4C13CB99E800B7AD61 /* NSError+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+GeneralHelpers.h"; path = "src/sdk-additions/NSError+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+GeneralHelpers.m"; path = "src/sdk-additions/NSError+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05FA00DE13D0E8AC001B7470 /* BusinessDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessDetailsViewController.h; path = src/businesses/BusinessDetailsViewController.h; sourceTree = "<group>"; };
+		05FA00DF13D0E8AC001B7470 /* BusinessDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessDetailsViewController.m; path = src/businesses/BusinessDetailsViewController.m; sourceTree = "<group>"; };
+		05FA00E013D0E8AC001B7470 /* BusinessDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BusinessDetailsView.xib; path = src/businesses/BusinessDetailsView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -474,7 +482,7 @@
 				0514FBE413CE000D00ACA464 /* EventTableViewCell.xib */,
 				0568332C13CF65F700520C78 /* EventDetailsViewController.h */,
 				0568332D13CF65F700520C78 /* EventDetailsViewController.m */,
-				0568332E13CF65F700520C78 /* EventDetailsViewController.xib */,
+				0568332E13CF65F700520C78 /* EventDetailsView.xib */,
 				0568333213CF6A4400520C78 /* EventDetailsHeaderView.h */,
 				0568333313CF6A4400520C78 /* EventDetailsHeaderView.m */,
 			);
@@ -490,6 +498,11 @@
 				056A92ED13CCFA3100C65DC0 /* Business+GeneralHelpers.m */,
 				056A92DD13CCD8A700C65DC0 /* Business+MockDataHelpers.h */,
 				056A92DE13CCD8A700C65DC0 /* Business+MockDataHelpers.m */,
+				05FA00DE13D0E8AC001B7470 /* BusinessDetailsViewController.h */,
+				05FA00DF13D0E8AC001B7470 /* BusinessDetailsViewController.m */,
+				05FA00E013D0E8AC001B7470 /* BusinessDetailsView.xib */,
+				05D2CDE613D0ED0D00043FB6 /* BusinessDetailsHeaderView.h */,
+				05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */,
 			);
 			name = businesses;
 			sourceTree = "<group>";
@@ -594,12 +607,13 @@
 				056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */,
 				056A92F513CD0E0D00C65DC0 /* Localizable.strings in Resources */,
 				0514FBE513CE000D00ACA464 /* EventTableViewCell.xib in Resources */,
-				0568333013CF65F700520C78 /* EventDetailsViewController.xib in Resources */,
+				0568333013CF65F700520C78 /* EventDetailsView.xib in Resources */,
 				0568334313CFAAC900520C78 /* detail-view-header-background@2x.png in Resources */,
 				0568337413D0B08300520C78 /* LocationTableViewCell.xib in Resources */,
 				0568337613D0DFB100520C78 /* Default.png in Resources */,
 				0568337813D0DFC400520C78 /* Default@2x.png in Resources */,
 				0568337A13D0DFEE00520C78 /* Icon.png in Resources */,
+				05FA00E213D0E8AC001B7470 /* BusinessDetailsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,6 +663,8 @@
 				0568335913D0A29C00520C78 /* Event.m in Sources */,
 				0568335C13D0A4D300520C78 /* LocationTableViewCell.m in Sources */,
 				0568337213D0ADE500520C78 /* MKMapView+GeneralHelpers.m in Sources */,
+				05FA00E113D0E8AC001B7470 /* BusinessDetailsViewController.m in Sources */,
+				05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

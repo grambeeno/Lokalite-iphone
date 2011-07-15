@@ -55,4 +55,20 @@
     return business;
 }
 
+#pragma mark - Helper methods
+
+- (NSURL *)addressUrl
+{
+    NSString *s =
+        [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@",
+         [self address]];
+    return [NSURL URLWithString:s];
+}
+
+- (NSURL *)phoneUrl
+{
+    NSString *s = [NSString stringWithFormat:@"tel://%@", [self phone]];
+    return [NSURL URLWithString:s];
+}
+
 @end

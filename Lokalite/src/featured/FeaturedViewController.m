@@ -483,10 +483,7 @@
 - (LokaliteStream *)stream
 {
     if (!stream_) {
-        NSString *baseUrlString =
-            [[NSBundle mainBundle]
-             objectForInfoDictionaryKey:@"LokaliteAPIServer"];
-        NSURL *baseUrl = [NSURL URLWithString:baseUrlString];
+        NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
         NSManagedObjectContext *moc = [self context];
         stream_ = [[LokaliteFeaturedEventStream alloc] initWithBaseUrl:baseUrl
                                                                context:moc];
