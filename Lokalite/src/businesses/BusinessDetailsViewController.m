@@ -13,15 +13,20 @@
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
 
+#import "Event.h"
+#import "EventTableViewCell.h"
+#import "EventDetailsViewController.h"
+
 #import "DataFetcher.h"
 
 #import "SDKAdditions.h"
 
 
 enum {
-    kSectionInfo
+    kSectionInfo,
+    kSectionUpcomingEvents
 };
-static const NSUInteger NUM_SECTIONS = kSectionInfo + 1;
+static const NSUInteger NUM_SECTIONS = kSectionUpcomingEvents + 1;
 
 enum {
     kInfoRowAddress,
@@ -30,8 +35,14 @@ enum {
 };
 static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
 
+enum {
+    kUpcomingRow
+};
+
 
 @interface BusinessDetailsViewController ()
+
+@property (nonatomic, copy) NSArray *events;
 
 #pragma mark - View initialization
 
@@ -44,12 +55,14 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
 #pragma mark - Fetching business images
 
 - (BOOL)fetchBusinessImageIfNecessary;
+- (void)fetchImageForEvent:(Event *)event;
 
 @end
 
 @implementation BusinessDetailsViewController
 
 @synthesize business = business_;
+@synthesize events = events_;
 
 @synthesize headerView = headerView_;
 
@@ -60,6 +73,7 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
     [headerView_ release];
 
     [business_ release];
+    [events_ release];
 
     [super dealloc];
 }
@@ -71,7 +85,7 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
     self = [super initWithNibName:@"BusinessDetailsView" bundle:nil];
     if (self) {
         business_ = [business retain];
-        [self setTitle:NSLocalizedString(@"global.details", nil)];
+        [self setTitle:NSLocalizedString(@"global.business", nil)];
     }
 
     return self;
@@ -87,6 +101,8 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self setEvents:[[[self business] events] allObjects]];
 
     [self initializeHeaderView];
     [self fetchBusinessImageIfNecessary];
@@ -111,6 +127,8 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
 
     if (section == kSectionInfo)
         nrows = NUM_INFO_ROWS;
+    else if (section == kSectionUpcomingEvents)
+        nrows = [[self events] count];
 
     return nrows;
 }
@@ -118,15 +136,26 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = nil;
 
-    UITableViewCell *cell =
-        [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell =
-            [[[UITableViewCell alloc]
-              initWithStyle:UITableViewCellStyleDefault
-              reuseIdentifier:CellIdentifier] autorelease];
+    if ([indexPath section] == kSectionInfo) {
+        static NSString *CellIdentifier = @"Cell";
+
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell =
+                [[[UITableViewCell alloc]
+                  initWithStyle:UITableViewCellStyleDefault
+                  reuseIdentifier:CellIdentifier] autorelease];
+        }
+    } else if ([indexPath section] == kSectionUpcomingEvents) {
+        static NSString *CellIdentifier = nil;
+        if (!CellIdentifier)
+            CellIdentifier = [[EventTableViewCell defaultReuseIdentifier] copy];
+
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil)
+            cell = [EventTableViewCell instanceFromNib];
     }
 
     [self configureCell:cell atIndexPath:indexPath];
@@ -135,6 +164,16 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
 }
 
 #pragma mark - UITableViewDelegate implementation
+
+- (CGFloat)tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 44;
+    if ([indexPath section] == kSectionUpcomingEvents)
+        height = [EventTableViewCell cellHeight];
+
+    return height;
+}
 
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)path
@@ -152,6 +191,13 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
         UIApplication *app = [UIApplication sharedApplication];
         if (url && [app canOpenURL:url])
             [app openURL:url];
+    } else if ([path section] == kSectionUpcomingEvents) {
+        Event *event = [[self events] objectAtIndex:[path row]];
+        EventDetailsViewController *controller =
+            [[EventDetailsViewController alloc] initWithEvent:event];
+        [[self navigationController] pushViewController:controller
+                                               animated:YES];
+        [controller release], controller = nil;
     }
 }
 
@@ -200,10 +246,23 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
             [cell setAccessoryType:UITableViewCellAccessoryNone];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         }
+    } else if ([path section] == kSectionUpcomingEvents) {
+        Event *event = [[self events] objectAtIndex:[path row]];
+        EventTableViewCell *eventCell = (EventTableViewCell *) cell;
+        [eventCell configureCellForEvent:event];
+
+        NSData *imageData = [event imageData];
+        if (imageData)
+            [[eventCell eventImageView] setImage:
+             [UIImage imageWithData:imageData]];
+        else {
+            [[eventCell eventImageView] setImage:nil];
+            [self fetchImageForEvent:event];
+        }
     }
 }
 
-#pragma mark - Fetching business images
+#pragma mark - Fetching data
 
 - (BOOL)fetchBusinessImageIfNecessary
 {
@@ -231,6 +290,40 @@ static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
     }
 
     return fetched;
+}
+
+- (void)fetchImageForEvent:(Event *)event
+{
+    [[UIApplication sharedApplication] networkActivityIsStarting];
+
+    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+    NSString *urlPath = [event imageUrl];
+    NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
+
+    UITableView *tableView = [self tableView];
+    NSArray *events = [self events];
+    [DataFetcher fetchDataAtUrl:url responseHandler:
+     ^(NSData *data, NSError *error) {
+         [[UIApplication sharedApplication] networkActivityDidFinish];
+
+         if (data) {
+             __block UIImage *image = nil;
+             NSArray *visibleCells = [tableView visibleCells];
+             [visibleCells enumerateObjectsUsingBlock:
+              ^(EventTableViewCell *cell, NSUInteger idx, BOOL *stop) {
+                  NSIndexPath *path = [tableView indexPathForCell:cell];
+                  Event *e = [events objectAtIndex:[path row]];
+                  if ([[e imageUrl] isEqualToString:urlPath]) {
+                      if (!image)
+                          image = [UIImage imageWithData:data];
+                      [[cell eventImageView] setImage:image];
+                      [e setImageData:data];
+                  }
+             }];
+         } else
+             NSLog(@"WARNING: Failed to download image data for event: %@: %@",
+                   [event identifier], [error detailedDescription]);
+    }];
 }
 
 @end

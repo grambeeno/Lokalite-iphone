@@ -89,7 +89,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     self = [super initWithNibName:@"EventDetailsView" bundle:nil];
     if (self) {
         event_ = [event retain];
-        [self setTitle:NSLocalizedString(@"global.details", nil)];
+        [self setTitle:NSLocalizedString(@"global.event", nil)];
     }
 
     return self;

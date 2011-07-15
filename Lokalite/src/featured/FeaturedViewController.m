@@ -169,7 +169,7 @@
     return io == UIInterfaceOrientationPortrait;
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource implementation
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -182,12 +182,6 @@
     id <NSFetchedResultsSectionInfo> sectionInfo =
         [[[self resultsController] sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView
-    heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [EventTableViewCell cellHeight];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -208,6 +202,12 @@
 }
 
 #pragma mark - UITableViewDelegate implementation
+
+- (CGFloat)tableView:(UITableView *)tableView
+    heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [EventTableViewCell cellHeight];
+}
 
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath

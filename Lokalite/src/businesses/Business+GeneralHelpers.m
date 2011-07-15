@@ -44,6 +44,15 @@
     NSString *summary = [businessData objectForKey:@"description"];
     [business setValueIfNecessary:summary forKey:@"summary"];
 
+    NSString *url = [businessData objectForKey:@"url"];
+    [business setValueIfNecessary:url forKey:@"url"];
+
+    NSString *email = [businessData objectForKey:@"email"];
+    [business setValueIfNecessary:email forKey:@"email"];
+
+    NSString *status = [businessData objectForKey:@"status"];
+    [business setValueIfNecessary:status forKey:@"status"];
+
     NSDictionary *imageData =
         [[businessData objectForKey:@"image"] objectForKey:@"image"];
     if (imageData) {
@@ -59,9 +68,11 @@
 
 - (NSURL *)addressUrl
 {
+    NSStringEncoding encoding = NSUTF8StringEncoding;
     NSString *s =
         [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@",
-         [self address]];
+         [[self address] stringByAddingPercentEscapesUsingEncoding:encoding]];
+
     return [NSURL URLWithString:s];
 }
 

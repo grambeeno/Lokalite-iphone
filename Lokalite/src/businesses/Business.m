@@ -15,6 +15,9 @@
 @dynamic identifier;
 @dynamic name;
 @dynamic phone;
+@dynamic email;
+@dynamic url;
+@dynamic status;
 @dynamic summary;
 @dynamic imageData;
 @dynamic imageUrl;

@@ -18,6 +18,9 @@
 @property (nonatomic, retain) NSNumber * identifier;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * phone;
+@property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * summary;
 @property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) NSString * imageUrl;

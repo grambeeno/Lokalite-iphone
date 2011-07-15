@@ -2,12 +2,15 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11A511" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Business" representedClassName="Business">
         <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="identifier" attributeType="Integer 64" defaultValueString="0" indexed="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="imageUrl" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="business" inverseEntity="Event"/>
     </entity>
     <entity name="Event" representedClassName="Event">
@@ -35,9 +38,9 @@
         <relationship name="location" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="venues" inverseEntity="Location"/>
     </entity>
     <elements>
-        <element name="Business" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Business" positionX="160" positionY="192" width="128" height="210"/>
         <element name="Event" positionX="160" positionY="192" width="128" height="165"/>
-        <element name="Venue" positionX="-171" positionY="-9" width="128" height="90"/>
         <element name="Location" positionX="-189" positionY="189" width="128" height="135"/>
+        <element name="Venue" positionX="-171" positionY="-9" width="128" height="90"/>
     </elements>
 </model>
