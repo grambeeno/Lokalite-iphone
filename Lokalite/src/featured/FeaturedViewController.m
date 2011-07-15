@@ -507,12 +507,15 @@
         NSFetchRequest *req = [[NSFetchRequest alloc] init];
         [req setEntity:entity];
 
-        NSSortDescriptor *sd =
+        NSSortDescriptor *sd1 =
             [[NSSortDescriptor alloc] initWithKey:@"endDate" ascending:YES];
-        NSArray *sds = [[NSArray alloc] initWithObjects:sd, nil];
+        NSSortDescriptor *sd2 =
+            [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+        NSArray *sds = [[NSArray alloc] initWithObjects:sd1, sd2, nil];
         [req setSortDescriptors:sds];
         [sds release], sds = nil;
-        [sd release], sd = nil;
+        [sd1 release], sd1 = nil;
+        [sd2 release], sd2 = nil;
 
         NSFetchedResultsController *controller =
             [[NSFetchedResultsController alloc] initWithFetchRequest:req
