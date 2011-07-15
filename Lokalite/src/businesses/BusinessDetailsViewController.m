@@ -178,8 +178,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)path
 {
-    [tableView deselectRowAtIndexPath:path animated:YES];
-
     if ([path section] == kSectionInfo) {
         NSURL *url = nil;
 
