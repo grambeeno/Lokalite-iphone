@@ -18,14 +18,6 @@
 + (id)existingOrNewEventFromJsonData:(NSDictionary *)eventData
                            inContext:(NSManagedObjectContext *)context;
 
-#pragma mark - Object lifecycle
-
-//
-// Performs a delete and deletes the associated business if this is the only
-// event still associated with its business.
-//
-- (void)deleteInContext:(NSManagedObjectContext *)context;
-
 @end
 
 

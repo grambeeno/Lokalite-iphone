@@ -43,7 +43,7 @@
     [existingEvents enumerateKeysAndObjectsUsingBlock:
      ^(NSNumber *identifier, Event *event, BOOL *stop) {
         NSLog(@"Deleting event: %@: %@", identifier, [event name]);
-        [event deleteInContext:context];
+        [context deleteObject:event];
     }];
 
     return events;

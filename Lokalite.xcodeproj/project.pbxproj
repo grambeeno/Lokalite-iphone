@@ -72,6 +72,8 @@
 		056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */; };
 		056A92F513CD0E0D00C65DC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 056A92F313CD0E0D00C65DC0 /* Localizable.strings */; };
 		056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */; };
+		059B33FC13D48183007AD11C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FA13D48183007AD11C /* SearchViewController.m */; };
+		059B33FD13D48183007AD11C /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059B33FB13D48183007AD11C /* SearchView.xib */; };
 		05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
@@ -187,6 +189,9 @@
 		056A92F413CD0E0D00C65DC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = strings/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		056A92FA13CD174300C65DC0 /* UIColor+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+GeneralHelpers.h"; path = "src/sdk-additions/UIColor+GeneralHelpers.h"; sourceTree = "<group>"; };
 		056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+GeneralHelpers.m"; path = "src/sdk-additions/UIColor+GeneralHelpers.m"; sourceTree = "<group>"; };
+		059B33F913D48183007AD11C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = src/search/SearchViewController.h; sourceTree = "<group>"; };
+		059B33FA13D48183007AD11C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = src/search/SearchViewController.m; sourceTree = "<group>"; };
+		059B33FB13D48183007AD11C /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchView.xib; path = src/search/SearchView.xib; sourceTree = "<group>"; };
 		05D2CDE613D0ED0D00043FB6 /* BusinessDetailsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessDetailsHeaderView.h; path = src/businesses/BusinessDetailsHeaderView.h; sourceTree = "<group>"; };
 		05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessDetailsHeaderView.m; path = src/businesses/BusinessDetailsHeaderView.m; sourceTree = "<group>"; };
 		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
@@ -326,6 +331,7 @@
 				05209F0C13C7705800CA6A2D /* application */,
 				05209F0D13C7705D00CA6A2D /* featured */,
 				05209F0E13C7706700CA6A2D /* loyalty */,
+				059B33F713D48138007AD11C /* search */,
 				05EC9A3913CB969700B7AD61 /* events */,
 				05EC9A3A13CB96BA00B7AD61 /* businesses */,
 				0568334613D09C4200520C78 /* venues */,
@@ -458,6 +464,16 @@
 				056A92F313CD0E0D00C65DC0 /* Localizable.strings */,
 			);
 			name = strings;
+			sourceTree = "<group>";
+		};
+		059B33F713D48138007AD11C /* search */ = {
+			isa = PBXGroup;
+			children = (
+				059B33F913D48183007AD11C /* SearchViewController.h */,
+				059B33FA13D48183007AD11C /* SearchViewController.m */,
+				059B33FB13D48183007AD11C /* SearchView.xib */,
+			);
+			name = search;
 			sourceTree = "<group>";
 		};
 		05EC9A3513CB94F000B7AD61 /* data-model */ = {
@@ -614,6 +630,7 @@
 				0568337813D0DFC400520C78 /* Default@2x.png in Resources */,
 				0568337A13D0DFEE00520C78 /* Icon.png in Resources */,
 				05FA00E213D0E8AC001B7470 /* BusinessDetailsView.xib in Resources */,
+				059B33FD13D48183007AD11C /* SearchView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +682,7 @@
 				0568337213D0ADE500520C78 /* MKMapView+GeneralHelpers.m in Sources */,
 				05FA00E113D0E8AC001B7470 /* BusinessDetailsViewController.m in Sources */,
 				05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */,
+				059B33FC13D48183007AD11C /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

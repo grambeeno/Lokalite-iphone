@@ -87,14 +87,24 @@
 
 #pragma mark - Object lifecycle
 
-- (void)deleteInContext:(NSManagedObjectContext *)context
+- (void)prepareForDeletion
 {
-    Business *business = [self business];
-    [self setBusiness:nil];
+    NSManagedObjectContext *context = [self managedObjectContext];
 
+    Business *business = [[self business] retain];
+    [self setBusiness:nil];
     if ([[business events] count] == 0)
         [context deleteObject:business];
-    [context deleteObject:self];
+
+    Venue *venue = [[self venue] retain];
+    [self setVenue:nil];
+    if ([[venue events] count] == 0)
+        [context deleteObject:venue];
+
+    [business release], business = nil;
+    [venue release], venue = nil;
+
+    [super prepareForDeletion];
 }
 
 @end

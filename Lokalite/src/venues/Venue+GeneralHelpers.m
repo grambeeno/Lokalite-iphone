@@ -31,4 +31,21 @@
     return venue;
 }
 
+#pragma mark - NSManagedObject implementation
+
+- (void)prepareForDeletion
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+
+    Location *location = [[self location] retain];
+    [self setLocation:nil];
+
+    if ([[location venues] count] == 0)
+        [context deleteObject:location];
+
+    [location release], location = nil;
+
+    [super prepareForDeletion];
+}
+
 @end
