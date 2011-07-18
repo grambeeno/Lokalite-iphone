@@ -203,12 +203,6 @@
 
 #pragma mark - UITableViewDelegate implementation
 
-- (CGFloat)tableView:(UITableView *)tableView
-    heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [EventTableViewCell cellHeight];
-}
-
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -295,6 +289,7 @@
 - (void)initializeTableView
 {
     //[[self tableView] setTableHeaderView:[self headerView]];
+    [[self tableView] setRowHeight:[EventTableViewCell cellHeight]];
 }
 
 - (void)initializeData
@@ -393,23 +388,6 @@
 
 - (void)processReceivedEvents:(NSArray *)events
 {
-//    UITableView *tableView = [self tableView];
-//    NSIndexSet *sections = nil;
-//
-//    if ([self isViewLoaded]) {
-//        [tableView beginUpdates];
-//        sections = [NSIndexSet indexSetWithIndex:0];
-//        [tableView deleteSections:sections
-//                 withRowAnimation:UITableViewRowAnimationTop];
-//    }
-//
-//    [self setOtherEvents:events];
-//
-//    if ([self isViewLoaded]) {
-//        [tableView insertSections:sections
-//                 withRowAnimation:UITableViewRowAnimationBottom];
-//        [tableView endUpdates];
-//    }
 }
 
 - (void)processReceivedError:(NSError *)error
