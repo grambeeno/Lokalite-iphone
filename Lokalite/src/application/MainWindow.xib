@@ -74,14 +74,10 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="899979478">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="1057420901">
-						<string key="IBUITitle">Explore</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">tab-bar-icon-explore.png</string>
-						</object>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="985687288">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="400078048">
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUISystemItemIdentifier">8</int>
 					</object>
 					<reference key="IBUIParentViewController" ref="1034742383"/>
 					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -91,7 +87,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="426130637">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="240255527">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -102,12 +98,13 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="268481961">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="744541061">
-								<string key="IBUITitle">Explore</string>
+						<object class="IBUIViewController" id="919777170">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="393210918">
+								<string key="IBUITitle">Search</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="899979478"/>
+							<reference key="IBUIParentViewController" ref="985687288"/>
+							<string key="IBUINibName">SearchView</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -238,11 +235,14 @@
 							</object>
 						</object>
 					</object>
-					<reference ref="899979478"/>
-					<object class="IBUINavigationController" id="985687288">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="400078048">
+					<object class="IBUINavigationController" id="899979478">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="1057420901">
+							<string key="IBUITitle">Explore</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">tab-bar-icon-explore.png</string>
+							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<int key="IBUISystemItemIdentifier">8</int>
 						</object>
 						<reference key="IBUIParentViewController" ref="1034742383"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -252,7 +252,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="240255527">
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="426130637">
 							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrameSize">{0, 0}</string>
@@ -263,12 +263,12 @@
 						</object>
 						<object class="NSMutableArray" key="IBUIViewControllers">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="919777170">
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="393210918">
-									<string key="IBUITitle">Search</string>
+							<object class="IBUIViewController" id="268481961">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="744541061">
+									<string key="IBUITitle">Explore</string>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
-								<reference key="IBUIParentViewController" ref="985687288"/>
+								<reference key="IBUIParentViewController" ref="899979478"/>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="IBUIInterfaceOrientation">1</int>
 									<int key="interfaceOrientation">1</int>
@@ -278,6 +278,7 @@
 							</object>
 						</object>
 					</object>
+					<reference ref="985687288"/>
 					<object class="IBUINavigationController" id="406955434">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="282759938">
 							<string key="IBUITitle">Profile</string>
