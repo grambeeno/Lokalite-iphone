@@ -34,6 +34,8 @@
         [NSMutableArray arrayWithCapacity:[jsonObjects count]];
     [jsonObjects enumerateObjectsUsingBlock:
      ^(NSDictionary *eventData, NSUInteger idx, BOOL *stop) {
+         NSLog(@"Type: %@", [eventData objectForKey:@"model"]);
+
          Event *event = [Event existingOrNewEventFromJsonData:eventData
                                               inContext:context];
          [events addObject:event];

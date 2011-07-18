@@ -13,3 +13,10 @@
 + (id)textRangeWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
 @end
+
+
+@interface NSString (LokaliteHelpers)
+
+- (NSArray *)arrayByTokenizingWithString:(NSString *)token;
+
+@end

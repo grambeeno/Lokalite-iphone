@@ -74,6 +74,7 @@
 		056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */; };
 		059B33FC13D48183007AD11C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FA13D48183007AD11C /* SearchViewController.m */; };
 		059B33FD13D48183007AD11C /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059B33FB13D48183007AD11C /* SearchView.xib */; };
+		059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */; };
 		05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
@@ -192,6 +193,8 @@
 		059B33F913D48183007AD11C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = src/search/SearchViewController.h; sourceTree = "<group>"; };
 		059B33FA13D48183007AD11C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = src/search/SearchViewController.m; sourceTree = "<group>"; };
 		059B33FB13D48183007AD11C /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchView.xib; path = src/search/SearchView.xib; sourceTree = "<group>"; };
+		059B33FE13D4BC5A007AD11C /* LokaliteSearchStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteSearchStream.h; path = src/lokalite/LokaliteSearchStream.h; sourceTree = "<group>"; };
+		059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteSearchStream.m; path = src/lokalite/LokaliteSearchStream.m; sourceTree = "<group>"; };
 		05D2CDE613D0ED0D00043FB6 /* BusinessDetailsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessDetailsHeaderView.h; path = src/businesses/BusinessDetailsHeaderView.h; sourceTree = "<group>"; };
 		05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessDetailsHeaderView.m; path = src/businesses/BusinessDetailsHeaderView.m; sourceTree = "<group>"; };
 		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
@@ -251,6 +254,8 @@
 				056A92E413CCF07900C65DC0 /* LokaliteStream.m */,
 				056A92E613CCF13000C65DC0 /* LokaliteFeaturedEventStream.h */,
 				056A92E713CCF13000C65DC0 /* LokaliteFeaturedEventStream.m */,
+				059B33FE13D4BC5A007AD11C /* LokaliteSearchStream.h */,
+				059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */,
 				056A92EF13CCFB0600C65DC0 /* LokaliteObjectBuilder.h */,
 				056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */,
 			);
@@ -683,6 +688,7 @@
 				05FA00E113D0E8AC001B7470 /* BusinessDetailsViewController.m in Sources */,
 				05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */,
 				059B33FC13D48183007AD11C /* SearchViewController.m in Sources */,
+				059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

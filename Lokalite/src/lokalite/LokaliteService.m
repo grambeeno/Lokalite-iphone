@@ -40,8 +40,7 @@
 - (void)fetchFeaturedEventsWithResponseHandler:(LSResponseHandler)handler
 {
     NSLog(@"%@", NSStringFromSelector(_cmd));
-    NSURL *url =
-        [[self baseUrl] URLByAppendingPathComponent:@"api/events/browse"];
+    NSURL *url = [self featuredEventUrl];
     LokaliteServiceRequest *req =
         [[LokaliteServiceRequest alloc] initWithUrl:url
                                          parameters:[NSDictionary dictionary]
@@ -56,6 +55,38 @@
              handler(nil, error);
      }];
 }
+
+#pragma mark - Search
+
+- (void)searchForKeywords:(NSArray *)keywords
+            includeEvents:(BOOL)includeEvents
+        includeBusinesses:(BOOL)includeBusinesses
+          responseHandler:(LSResponseHandler)handler
+{
+    NSLog(@"Searching for keywords: '%@', include events: %@, include "
+          "businesses: %@", keywords, includeEvents ? @"YES" : @"NO",
+          includeBusinesses ? @"YES" : @"NO");
+
+    NSURL *url = [self featuredEventUrl];
+    NSDictionary *parameters =
+        [NSDictionary dictionaryWithObject:
+         [keywords componentsJoinedByString:@" "] forKey:@"keywords"];
+    LokaliteServiceRequest *req =
+        [[LokaliteServiceRequest alloc] initWithUrl:url
+                                         parameters:parameters
+                                      requestMethod:LKRequestMethodGET];
+    [req performRequestWithHandler:
+     ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
+        if (data) {
+             NSError *error = nil;
+             id object = [self processJsonData:data error:&error];
+             handler(object, error);
+         } else
+             handler(nil, error);
+     }];
+}
+
+#pragma mark - Processing response data
 
 - (id)processJsonData:(NSData *)data error:(NSError **)error
 {
@@ -80,6 +111,13 @@
     }
 
     return [LokaliteDataParser parseLokaliteData:data error:error];
+}
+
+#pragma mark - URLs
+
+- (NSURL *)featuredEventUrl
+{
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/events/browse"];
 }
 
 @end

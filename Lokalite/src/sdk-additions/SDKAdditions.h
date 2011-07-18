@@ -12,6 +12,7 @@
 //
 
 #import "NSObject+GeneralHelpers.h"
+#import "NSString+GeneralHelpers.h"
 #import "NSDate+GeneralHelpers.h"
 #import "NSURL+GeneralHelpers.h"
 #import "NSError+GeneralHelpers.h"

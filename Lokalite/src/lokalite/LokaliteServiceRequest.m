@@ -73,6 +73,7 @@
     [self setRequestHandler:handler];
 
     NSURL *url = [[self url] URLByAppendingGetParameters:[self parameters]];
+    NSLog(@"Fetching data at URL: '%@'", url);
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     NSURLConnection *connection =
      [NSURLConnection connectionWithRequest:req delegate:self];

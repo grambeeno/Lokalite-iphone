@@ -8,6 +8,9 @@
 
 #import "SearchViewController.h"
 
+#import "LokaliteSearchStream.h"
+
+#import "SDKAdditions.h"
 
 enum {
     kSectionEventSearchResults,
@@ -20,6 +23,8 @@ enum {
 @property (nonatomic, copy) NSArray *eventSearchResults;
 @property (nonatomic, copy) NSArray *businessSearchResults;
 
+@property (nonatomic, retain) LokaliteSearchStream *stream;
+
 #pragma mark - View initialization
 
 - (void)initializeSearchBar;
@@ -28,9 +33,17 @@ enum {
 
 - (NSInteger)effectiveSectionForSection:(NSInteger)section;
 
+#pragma mark - Search implementation
+
+- (void)searchForKeywordComponents:(NSArray *)components
+                     includeEvents:(BOOL)includeEvents
+                 includeBusinesses:(BOOL)includeBusinesses;
+
 @end
 
 @implementation SearchViewController
+
+@synthesize context = context_;
 
 @synthesize searchDisplayController = searchDisplayController_;
 @synthesize searchBar = searchBar_;
@@ -38,15 +51,21 @@ enum {
 @synthesize eventSearchResults = eventSearchResults_;
 @synthesize businessSearchResults = businessSearchResults_;
 
+@synthesize stream = stream_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
 {
+    [context_ release];
+
     [searchDisplayController_ release];
     [searchBar_ release];
 
     [eventSearchResults_ release];
     [businessSearchResults_ release];
+
+    [stream_ release];
 
     [super dealloc];
 }
@@ -56,7 +75,6 @@ enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     [self initializeSearchBar];
 }
 
@@ -120,6 +138,23 @@ enum {
 {
 }
 
+#pragma mark - UISearchBarDelegate implementation
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSString *keywords = [searchBar text];
+    if ([keywords length]) {
+        NSArray *components = [keywords arrayByTokenizingWithString:@" "];
+        NSLog(@"Components: %@", components);
+        if ([components count]) {
+            // start search here
+            [self searchForKeywordComponents:components
+                               includeEvents:YES
+                           includeBusinesses:YES];
+        }
+    }
+}
+
 #pragma mark - View initialization
 
 - (void)initializeSearchBar
@@ -132,6 +167,35 @@ enum {
 - (NSInteger)effectiveSectionForSection:(NSInteger)section
 {
     return section;
+}
+
+#pragma mark - Search implementation
+
+- (void)searchForKeywordComponents:(NSArray *)components
+                     includeEvents:(BOOL)includeEvents
+                 includeBusinesses:(BOOL)includeBusinesses
+{
+    [[self stream] setKeywords:components];
+    [[self stream] setIncludeEvents:includeEvents];
+    [[self stream] setIncludeBusinesses:includeBusinesses];
+
+    [[self stream] fetchNextBatchWithResponseHandler:
+     ^(NSArray *objects, NSError *error) {
+         NSLog(@"Fetched %d objects.", [objects count]);
+         NSLog(@"%@", objects);
+     }];
+}
+
+#pragma mark - Accessors
+
+- (LokaliteSearchStream *)stream
+{
+    if (!stream_) {
+        stream_ = [LokaliteSearchStream streamWithContext:[self context]];
+        [stream_ retain];
+    }
+
+    return stream_;
 }
 
 @end

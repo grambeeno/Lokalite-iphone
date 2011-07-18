@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @interface SearchViewController : UITableViewController
+
+@property (nonatomic, retain) NSManagedObjectContext *context;
 
 @property (nonatomic, retain)
     IBOutlet UISearchDisplayController *searchDisplayController;

@@ -22,4 +22,15 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 
 - (void)fetchFeaturedEventsWithResponseHandler:(LSResponseHandler)handler;
 
+#pragma mark - Search
+
+- (void)searchForKeywords:(NSArray *)keywords
+            includeEvents:(BOOL)includeEvents
+        includeBusinesses:(BOOL)includeBusinesses
+          responseHandler:(LSResponseHandler)handler;
+
+#pragma mark - URLs
+
+- (NSURL *)featuredEventUrl;
+
 @end

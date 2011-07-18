@@ -11,6 +11,7 @@
 #import <CoreData/CoreData.h>
 
 #import "FeaturedViewController.h"
+#import "SearchViewController.h"
 
 #import "ActivityView.h"
 
@@ -142,6 +143,24 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+#pragma mark - UITabBarDelegate implementation
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController
+    shouldSelectViewController:(UIViewController *)viewController
+{
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nc = (UINavigationController *) viewController;
+        UIViewController *topController = [nc topViewController];
+        if ([topController isKindOfClass:[SearchViewController class]]) {
+            SearchViewController *searchController =
+                (SearchViewController *) topController;
+            [searchController setContext:[self context]];
+        }
+    }
+
+    return YES;
 }
 
 #pragma mark - Persistence management

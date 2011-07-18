@@ -26,3 +26,15 @@
 }
 
 @end
+
+
+
+@implementation NSString (LokaliteHelpers)
+
+- (NSArray *)arrayByTokenizingWithString:(NSString *)token
+{
+    return [self componentsSeparatedByString:token];
+}
+
+@end
+

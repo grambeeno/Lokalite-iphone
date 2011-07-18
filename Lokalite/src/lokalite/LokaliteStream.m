@@ -61,3 +61,19 @@
 }
 
 @end
+
+
+#import "UIApplication+GeneralHelpers.h"
+#import <CoreData/CoreData.h>
+
+@implementation LokaliteStream (InstantiationHelpers)
+
++ (id)streamWithContext:(NSManagedObjectContext *)context
+{
+    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+    id obj = [[self alloc] initWithBaseUrl:baseUrl context:context];
+
+    return [obj autorelease];
+}
+
+@end

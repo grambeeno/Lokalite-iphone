@@ -30,3 +30,13 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 - (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler;
 
 @end
+
+
+
+@class NSManagedObjectContext;
+
+@interface LokaliteStream (InstantiationHelpers)
+
++ (id)streamWithContext:(NSManagedObjectContext *)context;
+
+@end

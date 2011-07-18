@@ -22,9 +22,13 @@
              NSString *encodedKey =
                 [key stringByAddingPercentEscapesUsingEncoding:encoding];
              NSString *encodedValue =
-                [key stringByAddingPercentEscapesUsingEncoding:encoding];
+                [value stringByAddingPercentEscapesUsingEncoding:encoding];
              [s appendFormat:@"%@=%@&", encodedKey, encodedValue];
          }];
+
+        NSInteger lastIdx = [s length] - 1;
+        if ([s characterAtIndex:lastIdx] == '&')
+            [s deleteCharactersInRange:NSMakeRange(lastIdx, 1)];
     }
 
     NSURL *url = [NSURL URLWithString:s];
