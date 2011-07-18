@@ -50,8 +50,15 @@
     NSString *email = [businessData objectForKey:@"email"];
     [business setValueIfNecessary:email forKey:@"email"];
 
-    NSString *status = [businessData objectForKey:@"status"];
-    [business setValueIfNecessary:status forKey:@"status"];
+    id status = [businessData objectForKey:@"status"];
+    NSString *statusString = nil;
+    if ([status isKindOfClass:[NSString class]])
+        statusString = status;
+    else if ([status isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *d = (NSDictionary *) status;
+        statusString = [d objectForKey:@"content"];
+    }
+    [business setValueIfNecessary:statusString forKey:@"status"];
 
     NSDictionary *imageData =
         [[businessData objectForKey:@"image"] objectForKey:@"image"];
