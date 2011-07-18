@@ -12,6 +12,7 @@
 
 #import "FeaturedViewController.h"
 #import "SearchViewController.h"
+#import "EventsViewController.h"
 
 #import "ActivityView.h"
 
@@ -152,11 +153,15 @@
 {
     if ([viewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nc = (UINavigationController *) viewController;
-        UIViewController *topController = [nc topViewController];
-        if ([topController isKindOfClass:[SearchViewController class]]) {
+        UIViewController *tc = [nc topViewController];
+        if ([tc isKindOfClass:[SearchViewController class]]) {
             SearchViewController *searchController =
-                (SearchViewController *) topController;
+                (SearchViewController *) tc;
             [searchController setContext:[self context]];
+        } else if ([tc isKindOfClass:[EventsViewController class]]) {
+            EventsViewController *eventsController =
+                (EventsViewController *) tc;
+            [eventsController setContext:[self context]];
         }
     }
 

@@ -21,6 +21,8 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 #pragma mark - Events
 
 - (void)fetchFeaturedEventsWithResponseHandler:(LSResponseHandler)handler;
+- (void)fetchEventsWithCategory:(NSString *)category
+                responseHandler:(LSResponseHandler)handler;
 
 #pragma mark - Search
 

@@ -56,6 +56,30 @@
      }];
 }
 
+- (void)fetchEventsWithCategory:(NSString *)category
+                responseHandler:(LSResponseHandler)handler
+{
+    NSURL *url = [self featuredEventUrl];
+    NSDictionary *params =
+        category ?
+        [NSDictionary dictionaryWithObject:category forKey:@"category"] :
+        nil;
+
+    LokaliteServiceRequest *req =
+        [[LokaliteServiceRequest alloc] initWithUrl:url
+                                         parameters:params
+                                      requestMethod:LKRequestMethodGET];
+    [req performRequestWithHandler:
+     ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
+         if (data) {
+             NSError *error = nil;
+             id object = [self processJsonData:data error:&error];
+             handler(object, error);
+         } else
+             handler(nil, error);
+     }];
+}
+
 #pragma mark - Search
 
 - (void)searchForKeywords:(NSArray *)keywords

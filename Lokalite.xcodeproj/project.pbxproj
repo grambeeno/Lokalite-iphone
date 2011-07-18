@@ -75,6 +75,11 @@
 		059B33FC13D48183007AD11C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FA13D48183007AD11C /* SearchViewController.m */; };
 		059B33FD13D48183007AD11C /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059B33FB13D48183007AD11C /* SearchView.xib */; };
 		059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */; };
+		059B340413D4F291007AD11C /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B340213D4F291007AD11C /* EventsViewController.m */; };
+		059B340513D4F291007AD11C /* EventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059B340313D4F291007AD11C /* EventsView.xib */; };
+		059B340813D4F4BB007AD11C /* tab-bar-icon-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 059B340613D4F4BB007AD11C /* tab-bar-icon-events.png */; };
+		059B340913D4F4BB007AD11C /* tab-bar-icon-events@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059B340713D4F4BB007AD11C /* tab-bar-icon-events@2x.png */; };
+		05D0205213D4F80500FE0A6C /* LokaliteEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */; };
 		05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
@@ -195,6 +200,13 @@
 		059B33FB13D48183007AD11C /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchView.xib; path = src/search/SearchView.xib; sourceTree = "<group>"; };
 		059B33FE13D4BC5A007AD11C /* LokaliteSearchStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteSearchStream.h; path = src/lokalite/LokaliteSearchStream.h; sourceTree = "<group>"; };
 		059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteSearchStream.m; path = src/lokalite/LokaliteSearchStream.m; sourceTree = "<group>"; };
+		059B340113D4F291007AD11C /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsViewController.h; path = src/events/EventsViewController.h; sourceTree = "<group>"; };
+		059B340213D4F291007AD11C /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsViewController.m; path = src/events/EventsViewController.m; sourceTree = "<group>"; };
+		059B340313D4F291007AD11C /* EventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventsView.xib; path = src/events/EventsView.xib; sourceTree = "<group>"; };
+		059B340613D4F4BB007AD11C /* tab-bar-icon-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-events.png"; path = "images/tab-bar-icons/tab-bar-icon-events.png"; sourceTree = "<group>"; };
+		059B340713D4F4BB007AD11C /* tab-bar-icon-events@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-events@2x.png"; path = "images/tab-bar-icons/tab-bar-icon-events@2x.png"; sourceTree = "<group>"; };
+		05D0205013D4F80500FE0A6C /* LokaliteEventStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteEventStream.h; path = src/lokalite/LokaliteEventStream.h; sourceTree = "<group>"; };
+		05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteEventStream.m; path = src/lokalite/LokaliteEventStream.m; sourceTree = "<group>"; };
 		05D2CDE613D0ED0D00043FB6 /* BusinessDetailsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessDetailsHeaderView.h; path = src/businesses/BusinessDetailsHeaderView.h; sourceTree = "<group>"; };
 		05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessDetailsHeaderView.m; path = src/businesses/BusinessDetailsHeaderView.m; sourceTree = "<group>"; };
 		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
@@ -254,6 +266,8 @@
 				056A92E413CCF07900C65DC0 /* LokaliteStream.m */,
 				056A92E613CCF13000C65DC0 /* LokaliteFeaturedEventStream.h */,
 				056A92E713CCF13000C65DC0 /* LokaliteFeaturedEventStream.m */,
+				05D0205013D4F80500FE0A6C /* LokaliteEventStream.h */,
+				05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */,
 				059B33FE13D4BC5A007AD11C /* LokaliteSearchStream.h */,
 				059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */,
 				056A92EF13CCFB0600C65DC0 /* LokaliteObjectBuilder.h */,
@@ -386,6 +400,8 @@
 			children = (
 				054E06B813CB8309009B7373 /* tab-bar-icon-loyalty.png */,
 				054E06B913CB8309009B7373 /* tab-bar-icon-loyalty@2x.png */,
+				059B340613D4F4BB007AD11C /* tab-bar-icon-events.png */,
+				059B340713D4F4BB007AD11C /* tab-bar-icon-events@2x.png */,
 				054E06BC13CB8387009B7373 /* tab-bar-icon-explore.png */,
 				054E06BD13CB8387009B7373 /* tab-bar-icon-explore@2x.png */,
 				054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */,
@@ -498,6 +514,9 @@
 				056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */,
 				056A92D313CCD58900C65DC0 /* Event+MockDataHelpers.h */,
 				056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */,
+				059B340113D4F291007AD11C /* EventsViewController.h */,
+				059B340213D4F291007AD11C /* EventsViewController.m */,
+				059B340313D4F291007AD11C /* EventsView.xib */,
 				0514FBE113CDFFF300ACA464 /* EventTableViewCell.h */,
 				0514FBE213CDFFF300ACA464 /* EventTableViewCell.m */,
 				0514FBE413CE000D00ACA464 /* EventTableViewCell.xib */,
@@ -636,6 +655,9 @@
 				0568337A13D0DFEE00520C78 /* Icon.png in Resources */,
 				05FA00E213D0E8AC001B7470 /* BusinessDetailsView.xib in Resources */,
 				059B33FD13D48183007AD11C /* SearchView.xib in Resources */,
+				059B340513D4F291007AD11C /* EventsView.xib in Resources */,
+				059B340813D4F4BB007AD11C /* tab-bar-icon-events.png in Resources */,
+				059B340913D4F4BB007AD11C /* tab-bar-icon-events@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +711,8 @@
 				05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */,
 				059B33FC13D48183007AD11C /* SearchViewController.m in Sources */,
 				059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */,
+				059B340413D4F291007AD11C /* EventsViewController.m in Sources */,
+				05D0205213D4F80500FE0A6C /* LokaliteEventStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
