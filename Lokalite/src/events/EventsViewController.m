@@ -15,6 +15,8 @@
 #import "Event.h"
 #import "EventTableViewCell.h"
 
+#import "DataFetcher.h"
+
 #import "LokaliteAppDelegate.h"
 
 #import "SDKAdditions.h"
@@ -43,6 +45,7 @@
 #pragma mark - Fetching data
 
 - (void)fetchNextSetOfEvents;
+- (void)fetchImageForEvent:(Event *)event;
 
 #pragma mark - Processing received data
 
@@ -206,6 +209,14 @@
 {
     Event *event = [[self dataController] objectAtIndexPath:path];
     [cell configureCellForEvent:event];
+
+    NSData *imageData = [event imageData];
+    if (imageData)
+        [[cell eventImageView] setImage:[UIImage imageWithData:imageData]];
+    else {
+        [[cell eventImageView] setImage:nil];
+        [self fetchImageForEvent:event];
+    }
 }
 
 - (void)displayActivityView
@@ -250,6 +261,40 @@
 
          [self setHasFetchedData:YES];
      }];
+}
+
+- (void)fetchImageForEvent:(Event *)event
+{
+    [[UIApplication sharedApplication] networkActivityIsStarting];
+
+    NSURL *baseUrl = [[self stream] baseUrl];
+    NSString *urlPath = [event imageUrl];
+    NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
+
+    UITableView *tableView = [self tableView];
+    NSArray *events = [[self dataController] fetchedObjects];
+    [DataFetcher fetchDataAtUrl:url responseHandler:
+     ^(NSData *data, NSError *error) {
+         [[UIApplication sharedApplication] networkActivityDidFinish];
+
+         if (data) {
+             __block UIImage *image = nil;
+             NSArray *visibleCells = [tableView visibleCells];
+             [visibleCells enumerateObjectsUsingBlock:
+              ^(EventTableViewCell *cell, NSUInteger idx, BOOL *stop) {
+                  NSIndexPath *path = [tableView indexPathForCell:cell];
+                  Event *e = [events objectAtIndex:[path row]];
+                  if ([[e imageUrl] isEqualToString:urlPath]) {
+                      if (!image)
+                          image = [UIImage imageWithData:data];
+                      [[cell eventImageView] setImage:image];
+                      [e setImageData:data];
+                  }
+             }];
+         } else
+             NSLog(@"WARNING: Failed to download image data for event: %@: %@",
+                   [event identifier], [error detailedDescription]);
+    }];
 }
 
 #pragma mark - Processing received data
