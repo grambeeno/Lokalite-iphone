@@ -17,6 +17,16 @@
 #import "SDKAdditions.h"
 
 @interface LokaliteService ()
+
+#pragma mark - Sending requests
+
+- (void)sendRequestWithUrl:(NSURL *)url
+                parameters:(NSDictionary *)parameters
+             requestMethod:(LKRequestMethod)requestMethod
+           responseHandler:(LSResponseHandler)handler;
+
+#pragma mark - Processing JSON data
+
 - (id)processJsonData:(NSData *)data error:(NSError **)error;
 @end
 
@@ -41,6 +51,7 @@
 {
     NSLog(@"%@", NSStringFromSelector(_cmd));
     NSURL *url = [self featuredEventUrl];
+    /*
     LokaliteServiceRequest *req =
         [[LokaliteServiceRequest alloc] initWithUrl:url
                                          parameters:[NSDictionary dictionary]
@@ -54,6 +65,12 @@
          } else
              handler(nil, error);
      }];
+     */
+
+    [self sendRequestWithUrl:url
+                  parameters:nil
+               requestMethod:LKRequestMethodGET
+             responseHandler:handler];
 }
 
 - (void)fetchEventsWithCategory:(NSString *)category
@@ -65,19 +82,10 @@
         [NSDictionary dictionaryWithObject:category forKey:@"category"] :
         nil;
 
-    LokaliteServiceRequest *req =
-        [[LokaliteServiceRequest alloc] initWithUrl:url
-                                         parameters:params
-                                      requestMethod:LKRequestMethodGET];
-    [req performRequestWithHandler:
-     ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
-         if (data) {
-             NSError *error = nil;
-             id object = [self processJsonData:data error:&error];
-             handler(object, error);
-         } else
-             handler(nil, error);
-     }];
+    [self sendRequestWithUrl:url
+                  parameters:params
+               requestMethod:LKRequestMethodGET
+             responseHandler:handler];
 }
 
 #pragma mark - Search
@@ -110,10 +118,33 @@
      }];
 }
 
+#pragma mark - Sending requests
+
+- (void)sendRequestWithUrl:(NSURL *)url
+                parameters:(NSDictionary *)parameters
+             requestMethod:(LKRequestMethod)requestMethod
+           responseHandler:(LSResponseHandler)handler
+{
+    LokaliteServiceRequest *req =
+        [[LokaliteServiceRequest alloc] initWithUrl:url
+                                         parameters:parameters
+                                      requestMethod:LKRequestMethodGET];
+    [req performRequestWithHandler:
+     ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
+         if (data) {
+             NSError *error = nil;
+             id object = [self processJsonData:data error:&error];
+             handler(object, error);
+         } else
+             handler(nil, error);
+     }];
+}
+
 #pragma mark - Processing response data
 
 - (id)processJsonData:(NSData *)data error:(NSError **)error
 {
+    /* Removing mock data placeholder because it's not needed
     if ([data length] == 1) {
         NSLog(@"WARNING: nothing received from server; using mock data");
         NSURL *hackedFileUrl =
@@ -133,6 +164,7 @@
                      options:NSDataWritingAtomic
                        error:NULL];
     }
+     */
 
     return [LokaliteDataParser parseLokaliteData:data error:error];
 }

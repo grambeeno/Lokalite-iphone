@@ -386,8 +386,19 @@
 
 #pragma mark - Processing data
 
+#import "LokaliteObjectBuilder.h"
+
 - (void)processReceivedEvents:(NSArray *)events
 {
+    NSManagedObjectContext *context = [self context];
+    NSArray *allEvents = [Event findAllInContext:context];
+
+    [LokaliteObjectBuilder replaceLokaliteObjects:allEvents
+                                      withObjects:events
+                                  usingValueOfKey:@"identifier"
+                                 remainingHandler:^(Event *event) {
+                                     [context deleteObject:event];
+                                 }];
 }
 
 - (void)processReceivedError:(NSError *)error

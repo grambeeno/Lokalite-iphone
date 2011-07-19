@@ -21,8 +21,8 @@
     return [self findFirstWithPredicate:pred inContext:context];
 }
 
-+ (id)existingOrNewBusinessFromJsonData:(NSDictionary *)businessData
-                              inContext:(NSManagedObjectContext *)context
++ (id)createOrUpdateBusinessFromJsonData:(NSDictionary *)businessData
+                               inContext:(NSManagedObjectContext *)context
 {
     NSNumber *businessId = [businessData objectForKey:@"id"];
     Business *business = [Business businessWithId:businessId

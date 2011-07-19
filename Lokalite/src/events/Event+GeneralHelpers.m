@@ -27,22 +27,42 @@
     return [self findFirstWithPredicate:pred inContext:moc];
 }
 
-+ (NSArray *)eventObjectsFromJsonObjects:(NSDictionary *)jsonOjbects
++ (NSArray *)eventObjectsFromJsonObjects:(NSDictionary *)jsonObjects
                              withContext:(NSManagedObjectContext *)context
 {
-    NSArray *objs = [[jsonOjbects objectForKey:@"data"] objectForKey:@"list"];
-    NSArray *events = [LokaliteObjectBuilder replaceEventsInContext:context
-                                             withObjectsInJsonArray:objs];
+    NSArray *objs = [[jsonObjects objectForKey:@"data"] objectForKey:@"list"];
+    NSArray *events =
+        [LokaliteObjectBuilder createOrUpdateEventsInJsonArray:objs
+                                                     inContext:context];
+    return events;
+}
+
++ (NSArray *)replaceObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                                 inContext:(NSManagedObjectContext *)context
+{
+    NSArray *objs = [[jsonObjects objectForKey:@"data"] objectForKey:@"list"];
+    NSArray *events =
+        [LokaliteObjectBuilder createOrUpdateEventsInJsonArray:objs
+                                                     inContext:context];
+
+    NSArray *all = [Event findAllInContext:context];
+    [LokaliteObjectBuilder replaceLokaliteObjects:all
+                                      withObjects:events
+                                  usingValueOfKey:@"identifier"
+                                 remainingHandler:
+     ^(Event *remainingObject) {
+         [context deleteObject:remainingObject];
+     }];
 
     return events;
 }
 
-+ (id)existingOrNewEventFromJsonData:(NSDictionary *)eventData
-                           inContext:(NSManagedObjectContext *)context
++ (id)createOrUpdateEventFromJsonData:(NSDictionary *)eventData
+                            inContext:(NSManagedObjectContext *)context
 {
     NSDictionary *bData = [eventData objectForKey:@"organization"];
-    Business *business = [Business existingOrNewBusinessFromJsonData:bData
-                                                           inContext:context];
+    Business *business = [Business createOrUpdateBusinessFromJsonData:bData
+                                                            inContext:context];
 
     NSNumber *eventId = [eventData objectForKey:@"id"];
     NSString *name = [eventData objectForKey:@"name"];

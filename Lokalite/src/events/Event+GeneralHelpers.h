@@ -15,8 +15,11 @@
 + (NSArray *)eventObjectsFromJsonObjects:(NSDictionary *)jsonOjbects
                              withContext:(NSManagedObjectContext *)context;
 
-+ (id)existingOrNewEventFromJsonData:(NSDictionary *)eventData
-                           inContext:(NSManagedObjectContext *)context;
++ (id)createOrUpdateEventFromJsonData:(NSDictionary *)eventData
+                            inContext:(NSManagedObjectContext *)context;
+
++ (NSArray *)replaceObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                                 inContext:(NSManagedObjectContext *)context;
 
 @end
 

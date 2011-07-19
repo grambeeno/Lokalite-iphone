@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface EventsViewController : UITableViewController <UISearchBarDelegate>
+@interface EventsViewController : UITableViewController
+    <NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 

@@ -65,4 +65,27 @@
             }];
 }
 
+- (NSArray *)arrayByRemovingObjectsInArray:(NSArray *)array
+                               passingTest:(BOOL (^)(id obj1, id obj2))predicate
+{
+    NSMutableArray *a = [NSMutableArray arrayWithCapacity:[self count]];
+
+    [self enumerateObjectsUsingBlock:^(id obj1, NSUInteger idx, BOOL *stop) {
+        __block BOOL found = NO;
+
+        [array enumerateObjectsUsingBlock:
+         ^(id obj2, NSUInteger idx, BOOL *stop) {
+             if (predicate(obj1, obj2)) {
+                 found = YES;
+                 *stop = YES;
+             }
+         }];
+
+        if (!found)
+            [a addObject:obj1];
+    }];
+
+    return a;
+}
+
 @end

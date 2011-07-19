@@ -19,6 +19,21 @@
 
 @implementation LokaliteObjectBuilder
 
++ (NSArray *)createOrUpdateEventsInJsonArray:(NSArray *)jsonObjects
+                                   inContext:(NSManagedObjectContext *)context
+{
+    NSMutableArray *events =
+        [NSMutableArray arrayWithCapacity:[jsonObjects count]];
+    [jsonObjects enumerateObjectsUsingBlock:
+     ^(NSDictionary *eventData, NSUInteger idx, BOOL *stop) {
+         Event *event = [Event createOrUpdateEventFromJsonData:eventData
+                                                     inContext:context];
+         [events addObject:event];
+     }];
+
+    return events;
+}
+
 + (NSArray *)replaceEventsInContext:(NSManagedObjectContext *)context
              withObjectsInJsonArray:(NSArray *)jsonObjects
 {
@@ -34,8 +49,8 @@
         [NSMutableArray arrayWithCapacity:[jsonObjects count]];
     [jsonObjects enumerateObjectsUsingBlock:
      ^(NSDictionary *eventData, NSUInteger idx, BOOL *stop) {
-         Event *event = [Event existingOrNewEventFromJsonData:eventData
-                                              inContext:context];
+         Event *event = [Event createOrUpdateEventFromJsonData:eventData
+                                                     inContext:context];
          [events addObject:event];
          [existingEvents removeObjectForKey:[event identifier]];
      }];
@@ -47,6 +62,56 @@
     }];
 
     return events;
+}
+
+@end
+
+
+@implementation LokaliteObjectBuilder (GeneralHelpers)
+
++ (void)replaceLokaliteObjects:(NSArray *)original
+                   withObjects:(NSArray *)replacement
+               usingValueOfKey:(NSString *)key
+              remainingHandler:(void (^)(id remainingObject))handler
+{
+    NSMutableDictionary *remaining =
+        [NSMutableDictionary dictionaryWithCapacity:[original count]];
+    [original enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         id value = [obj valueForKey:key];
+         [remaining setObject:obj forKey:value];
+     }];
+
+    [replacement enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         id value = [obj valueForKey:key];
+         [remaining removeObjectForKey:value];
+    }];
+
+    [remaining enumerateKeysAndObjectsUsingBlock:
+     ^(id key, id obj, BOOL *stop) {
+         handler(obj);
+     }];
+}
+
+@end
+
+
+@implementation NSArray (LokaliteHelpers)
+
+- (NSArray *)arrayByRemovingObjectsFromArray:(NSArray *)replacement
+                                 passingTest:(BOOL (^)(id obj))predicate
+{
+    NSIndexSet *indexes =
+        [self indexesOfObjectsPassingTest:
+         ^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+             return predicate(obj);
+         }];
+
+    NSMutableArray *a = [[self mutableCopy] autorelease];
+    [a removeObjectsAtIndexes:indexes];
+
+    return a;
 }
 
 @end

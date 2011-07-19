@@ -23,8 +23,9 @@
      ^(NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
          if (jsonObjects)
-             parsedObjects = [Event eventObjectsFromJsonObjects:jsonObjects
-                                                    withContext:[self context]];
+             parsedObjects =
+                [Event eventObjectsFromJsonObjects:jsonObjects
+                                       withContext:[self context]];
 
          handler(parsedObjects, error);
 

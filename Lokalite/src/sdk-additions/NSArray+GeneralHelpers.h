@@ -17,4 +17,7 @@
 
 - (NSArray *)arrayByCompactingContents;
 
+- (NSArray *)arrayByRemovingObjectsInArray:(NSArray *)array
+                               passingTest:(BOOL (^)(id obj1, id obj2))pred;
+
 @end

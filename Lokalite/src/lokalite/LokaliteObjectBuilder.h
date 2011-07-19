@@ -12,7 +12,28 @@
 
 @interface LokaliteObjectBuilder : NSObject
 
++ (NSArray *)createOrUpdateEventsInJsonArray:(NSArray *)jsonObjects
+                                   inContext:(NSManagedObjectContext *)context;
+
 + (NSArray *)replaceEventsInContext:(NSManagedObjectContext *)context
              withObjectsInJsonArray:(NSArray *)jsonObjects;
+
+@end
+
+
+@interface LokaliteObjectBuilder (GeneralHelpers)
+
++ (void)replaceLokaliteObjects:(NSArray *)original
+                   withObjects:(NSArray *)replacement
+               usingValueOfKey:(NSString *)key
+              remainingHandler:(void (^)(id remainingObject))handler;
+
+@end
+
+
+@interface NSArray (LokaliteHelpers)
+
+- (NSArray *)arrayByRemovingObjectsFromArray:(NSArray *)replacement
+                                 passingTest:(BOOL (^)(id obj))predicate;
 
 @end

@@ -13,8 +13,8 @@
 + (id)businessWithId:(NSNumber *)businessId
            inContext:(NSManagedObjectContext *)context;
 
-+ (id)existingOrNewBusinessFromJsonData:(NSDictionary *)businessData
-                              inContext:(NSManagedObjectContext *)context;
++ (id)createOrUpdateBusinessFromJsonData:(NSDictionary *)businessData
+                               inContext:(NSManagedObjectContext *)context;
 
 #pragma mark - Helper methods
 
