@@ -66,7 +66,8 @@
 
     UIColor *navBarTintColor = [UIColor navigationBarTintColor];
     UITabBarController *tabBarController = [self tabBarController];
-    __block FeaturedViewController *featuredController = nil;
+    NSManagedObjectContext *context = [self context];
+
     [[tabBarController viewControllers] enumerateObjectsUsingBlock:
      ^(UIViewController *controller, NSUInteger idx, BOOL *stop) {
          if ([controller isKindOfClass:[UINavigationController class]]) {
@@ -76,11 +77,12 @@
              controller = [nc topViewController];
          }
 
-         if ([controller isKindOfClass:[FeaturedViewController class]])
-             featuredController = (FeaturedViewController *) controller;
+         if ([controller isKindOfClass:[FeaturedViewController class]]) {
+             FeaturedViewController *featuredController =
+                (FeaturedViewController *) controller;
+             [featuredController setContext:context];
+         }
      }];
-
-    [featuredController setContext:[self context]];
 }
 
 #pragma mark - UIApplicationDelegate implementation

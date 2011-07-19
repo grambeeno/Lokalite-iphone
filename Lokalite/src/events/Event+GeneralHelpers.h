@@ -34,4 +34,11 @@
 //
 - (CLLocation *)location;
 
+
+//
+// Get the predicate for a search string
+//
+
++ (NSPredicate *)predicateForSearchString:(NSString *)searchString;
+
 @end

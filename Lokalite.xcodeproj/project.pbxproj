@@ -59,6 +59,7 @@
 		0568337613D0DFB100520C78 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0568337513D0DFB000520C78 /* Default.png */; };
 		0568337813D0DFC400520C78 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0568337713D0DFC300520C78 /* Default@2x.png */; };
 		0568337A13D0DFEE00520C78 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0568337913D0DFED00520C78 /* Icon.png */; };
+		0569FCB513D6397B00146228 /* lokalite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0569FCB313D6397B00146228 /* lokalite.xcdatamodeld */; };
 		056A92A813CCBE1E00C65DC0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92A713CCBE1E00C65DC0 /* JSONKit.m */; };
 		056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */ = {isa = PBXBuildFile; fileRef = 056A92AB13CCC61200C65DC0 /* mock-featured-events.json */; };
 		056A92D513CCD58900C65DC0 /* Event+MockDataHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */; };
@@ -81,9 +82,9 @@
 		059B340913D4F4BB007AD11C /* tab-bar-icon-events@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059B340713D4F4BB007AD11C /* tab-bar-icon-events@2x.png */; };
 		05D0205213D4F80500FE0A6C /* LokaliteEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */; };
 		05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */; };
+		05DD68EB13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
-		05EC9A3813CB959E00B7AD61 /* lokalite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */; };
 		05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EC9A4113CB971400B7AD61 /* CoreData.framework */; };
 		05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */; };
 		05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */; };
@@ -171,9 +172,10 @@
 		0568337513D0DFB000520C78 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		0568337713D0DFC300520C78 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		0568337913D0DFED00520C78 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		0569FCB413D6397B00146228 /* lokalite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lokalite.xcdatamodel; sourceTree = "<group>"; };
 		056A92A613CCBE1E00C65DC0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = src/vendor/jsonkit/JSONKit.h; sourceTree = "<group>"; };
 		056A92A713CCBE1E00C65DC0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = src/vendor/jsonkit/JSONKit.m; sourceTree = "<group>"; };
-		056A92AB13CCC61200C65DC0 /* mock-featured-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "mock-featured-events.json"; path = "mock/server-data/mock-featured-events.json"; sourceTree = "<group>"; wrapsLines = 0; };
+		056A92AB13CCC61200C65DC0 /* mock-featured-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "mock-featured-events.json"; path = "mock/server-data/mock-featured-events.json"; sourceTree = "<group>"; wrapsLines = 0; };
 		056A92D313CCD58900C65DC0 /* Event+MockDataHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Event+MockDataHelpers.h"; path = "src/events/Event+MockDataHelpers.h"; sourceTree = "<group>"; };
 		056A92D413CCD58900C65DC0 /* Event+MockDataHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Event+MockDataHelpers.m"; path = "src/events/Event+MockDataHelpers.m"; sourceTree = "<group>"; };
 		056A92D613CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+GeneralHelpers.h"; path = "src/sdk-additions/NSManagedObject+GeneralHelpers.h"; sourceTree = "<group>"; };
@@ -209,10 +211,11 @@
 		05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteEventStream.m; path = src/lokalite/LokaliteEventStream.m; sourceTree = "<group>"; };
 		05D2CDE613D0ED0D00043FB6 /* BusinessDetailsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessDetailsHeaderView.h; path = src/businesses/BusinessDetailsHeaderView.h; sourceTree = "<group>"; };
 		05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessDetailsHeaderView.m; path = src/businesses/BusinessDetailsHeaderView.m; sourceTree = "<group>"; };
+		05DD68E913D64ED300A196B6 /* NSPredicate+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPredicate+GeneralHelpers.h"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.h"; sourceTree = "<group>"; };
+		05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPredicate+GeneralHelpers.m"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
 		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
-		05EC9A3713CB959E00B7AD61 /* lokalite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lokalite.xcdatamodel; sourceTree = "<group>"; };
 		05EC9A4113CB971400B7AD61 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+GeneralHelpers.h"; path = "src/sdk-additions/UIApplication+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+GeneralHelpers.m"; path = "src/sdk-additions/UIApplication+GeneralHelpers.m"; sourceTree = "<group>"; };
@@ -500,7 +503,7 @@
 		05EC9A3513CB94F000B7AD61 /* data-model */ = {
 			isa = PBXGroup;
 			children = (
-				05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */,
+				0569FCB313D6397B00146228 /* lokalite.xcdatamodeld */,
 			);
 			name = "data-model";
 			sourceTree = "<group>";
@@ -573,6 +576,8 @@
 				05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */,
 				0568337013D0ADE400520C78 /* MKMapView+GeneralHelpers.h */,
 				0568337113D0ADE400520C78 /* MKMapView+GeneralHelpers.m */,
+				05DD68E913D64ED300A196B6 /* NSPredicate+GeneralHelpers.h */,
+				05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */,
 			);
 			name = "sdk-additions";
 			sourceTree = "<group>";
@@ -672,7 +677,6 @@
 				05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */,
 				05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */,
 				05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */,
-				05EC9A3813CB959E00B7AD61 /* lokalite.xcdatamodeld in Sources */,
 				05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */,
 				05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */,
 				0505ECD413CBC2ED009874A7 /* LokaliteServiceRequest.m in Sources */,
@@ -713,6 +717,8 @@
 				059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */,
 				059B340413D4F291007AD11C /* EventsViewController.m in Sources */,
 				05D0205213D4F80500FE0A6C /* LokaliteEventStream.m in Sources */,
+				0569FCB513D6397B00146228 /* lokalite.xcdatamodeld in Sources */,
+				05DD68EB13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,12 +835,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		05EC9A3613CB959E00B7AD61 /* lokalite.xcdatamodeld */ = {
+		0569FCB313D6397B00146228 /* lokalite.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				05EC9A3713CB959E00B7AD61 /* lokalite.xcdatamodel */,
+				0569FCB413D6397B00146228 /* lokalite.xcdatamodel */,
 			);
-			currentVersion = 05EC9A3713CB959E00B7AD61 /* lokalite.xcdatamodel */;
+			currentVersion = 0569FCB413D6397B00146228 /* lokalite.xcdatamodel */;
 			name = lokalite.xcdatamodeld;
 			path = "data-model/lokalite.xcdatamodeld";
 			sourceTree = "<group>";

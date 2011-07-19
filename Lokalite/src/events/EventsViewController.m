@@ -13,6 +13,7 @@
 #import "LokaliteEventStream.h"
 
 #import "Event.h"
+#import "Event+GeneralHelpers.h"
 #import "EventTableViewCell.h"
 
 #import "DataFetcher.h"
@@ -28,14 +29,15 @@
 @property (nonatomic, retain) NSFetchedResultsController *dataController;
 @property (nonatomic, assign) BOOL hasFetchedData;
 
+@property (nonatomic, copy) NSArray *searchResults;
+
 #pragma mark - View initialization
 
 - (void)initializeTableView;
 
 #pragma mark - View configuration
 
-- (void)configureCell:(EventTableViewCell *)cell
-          atIndexPath:(NSIndexPath *)path;
+- (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event;
 
 - (void)displayActivityView;
 - (void)displayActivityViewWithCompletion:(void (^)(void))completion;
@@ -66,6 +68,8 @@
 @synthesize dataController = dataController_;
 @synthesize hasFetchedData = hasFetchedData_;
 
+@synthesize searchResults = searchResults_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -75,6 +79,8 @@
     [stream_ release];
 
     [dataController_ release];
+
+    [searchResults_ release];
 
     [super dealloc];
 }
@@ -109,15 +115,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[[self dataController] sections] count];
+    if ([self tableView] == tableView)
+        return [[[self dataController] sections] count];
+    else
+        return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo =
-        [[[self dataController] sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+    if ([self tableView] == tableView) {
+        id <NSFetchedResultsSectionInfo> sectionInfo =
+            [[[self dataController] sections] objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
+    } else
+        return [[self searchResults] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -132,7 +144,11 @@
     if (cell == nil)
         cell = [EventTableViewCell instanceFromNib];
 
-    [self configureCell:cell atIndexPath:indexPath];
+    Event *event =
+        [self tableView] == tableView ?
+        [[self dataController] objectAtIndexPath:indexPath] :
+        [[self searchResults] objectAtIndex:[indexPath row]];
+    [self configureCell:cell forEvent:event];
 
     return cell;
 }
@@ -175,7 +191,7 @@
         case NSFetchedResultsChangeUpdate: {
             EventTableViewCell *cell = (EventTableViewCell *)
                 [tableView cellForRowAtIndexPath:indexPath];
-            [self configureCell:cell atIndexPath:indexPath];
+            [self configureCell:cell forEvent:anObject];
         }
             break;
  
@@ -195,19 +211,53 @@
     [[self tableView] endUpdates];
 }
 
+#pragma mark - UISearchBarDelegate implementation
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [self setSearchResults:nil];
+}
+
+#pragma mark - UISearchDisplayDelegate implementation
+
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)ctlr
+{
+    [self setSearchResults:[NSArray array]];
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller
+    shouldReloadTableForSearchString:(NSString *)searchString
+{
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
+    searchString = [searchString stringByTrimmingCharactersInSet:whitespace];
+
+    if ([searchString length]) {
+        NSPredicate *pred = [Event predicateForSearchString:searchString];
+        NSArray *objects = [[self dataController] fetchedObjects];
+        objects = [objects filteredArrayUsingPredicate:pred];
+        [self setSearchResults:objects];
+
+        NSLog(@"Search string '%@' matches %d events", searchString,
+              [objects count]);
+    }
+
+    return YES;
+}
+
 #pragma mark - View initialization
 
 - (void)initializeTableView
 {
-    [[self tableView] setRowHeight:[EventTableViewCell cellHeight]];
+    CGFloat rowHeight = [EventTableViewCell cellHeight];
+    [[self tableView] setRowHeight:rowHeight];
+    [[[self searchDisplayController]
+      searchResultsTableView] setRowHeight:rowHeight];
 }
 
 #pragma mark - View configuration
 
-- (void)configureCell:(EventTableViewCell *)cell
-          atIndexPath:(NSIndexPath *)path
+- (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event
 {
-    Event *event = [[self dataController] objectAtIndexPath:path];
     [cell configureCellForEvent:event];
 
     NSData *imageData = [event imageData];
@@ -359,41 +409,5 @@
 
     return stream_;
 }
-
-//- (NSFetchedResultsController *)dataController
-//{
-//    if (!dataController_) {
-//        NSManagedObjectContext *context = [self context];
-//        NSFetchRequest *req = [[NSFetchRequest alloc] init];
-//
-//        NSEntityDescription *entity =
-//            [NSEntityDescription entityForName:@"Event"
-//                        inManagedObjectContext:context];
-//    
-//        [req setEntity:entity];
-//
-//        NSSortDescriptor *sd =
-//            [NSSortDescriptor sortDescriptorWithKey:@"endDate" ascending:YES];
-//        NSArray *sds = [NSArray arrayWithObjects:sd, nil];
-//        [req setSortDescriptors:sds];
-//
-//        NSFetchedResultsController *controller =
-//            [[NSFetchedResultsController alloc] initWithFetchRequest:req
-//                                                managedObjectContext:context
-//                                                  sectionNameKeyPath:nil
-//                                                           cacheName:nil];
-//        NSError *error = nil;
-//        if ([controller performFetch:&error]) {
-//            dataController_ = controller;
-//            [dataController_ setDelegate:self];
-//        } else {
-//            [controller release], controller = nil;
-//            NSLog(@"Failed to fetch event objects: %@",
-//                  [error detailedDescription]);
-//        }
-//    }
-//
-//    return dataController_;
-//}
 
 @end

@@ -137,6 +137,8 @@
 #import "Venue.h"
 #import "Location.h"
 
+#import "NSPredicate+GeneralHelpers.h"
+
 @implementation Event (ConvenienceMethods)
 
 - (CLLocation *)location
@@ -147,6 +149,16 @@
                                                  longitude:[lon floatValue]];
 
     return [loc autorelease];
+}
+
++ (NSPredicate *)predicateForSearchString:(NSString *)searchString
+{
+    NSArray *attributes =
+        [NSArray arrayWithObjects:@"name", @"summary", @"business.name",
+         @"business.status", @"business.summary", nil];
+
+    return [NSPredicate standardSearchPredicateForSearchString:searchString
+                                             attributeKeyPaths:attributes];
 }
 
 @end
