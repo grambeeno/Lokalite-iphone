@@ -39,6 +39,7 @@
 
 - (void)configureCell:(EventTableViewCell *)cell
           atIndexPath:(NSIndexPath *)path;
+- (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event;
 
 #pragma mark - Fetch data
 
@@ -244,11 +245,17 @@
         case NSFetchedResultsChangeUpdate: {
                 EventTableViewCell *cell = (EventTableViewCell *)
                     [tableView cellForRowAtIndexPath:indexPath];
-                [self configureCell:cell atIndexPath:indexPath];
+                // HACK: The data controller cannot be accessed with the
+                // provided index path; doing so causes a crash. I don't know
+                // why. Accessing the cell via the provided anObject parameter
+                // works fine, though.
+                [self configureCell:cell forEvent:anObject];
             }
             break;
 
         case NSFetchedResultsChangeMove:
+            NSLog(@"Moving event from index path: %@ to index path: %@",
+                  indexPath, newIndexPath);
             [tableView
              deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                    withRowAnimation:UITableViewRowAnimationFade];
@@ -304,6 +311,11 @@
           atIndexPath:(NSIndexPath *)path
 {
     Event *event = [[self resultsController] objectAtIndexPath:path];
+    [self configureCell:cell forEvent:event];
+}
+
+- (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event
+{
     [cell configureCellForEvent:event];
 
     NSData *imageData = [event imageData];
@@ -396,9 +408,11 @@
     [LokaliteObjectBuilder replaceLokaliteObjects:allEvents
                                       withObjects:events
                                   usingValueOfKey:@"identifier"
-                                 remainingHandler:^(Event *event) {
-                                     [context deleteObject:event];
-                                 }];
+                                 remainingHandler:
+     ^(Event *event) {
+         NSLog(@"Deleting event: %@: %@", [event identifier], [event name]);
+         [context deleteObject:event];
+     }];
 }
 
 - (void)processReceivedError:(NSError *)error
@@ -514,9 +528,11 @@
         if ([controller performFetch:&error]) {
             resultsController_ = controller;
             [resultsController_ setDelegate:self];
-        } else
+        } else {
             NSLog(@"Failed to initialize fetched results controller: %@",
                   [error detailedDescription]);
+            [controller release], controller = nil;
+        }
     }
 
     return resultsController_;
