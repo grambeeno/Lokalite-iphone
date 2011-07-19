@@ -15,6 +15,8 @@
 #import "Event.h"
 #import "EventTableViewCell.h"
 
+#import "LokaliteAppDelegate.h"
+
 #import "SDKAdditions.h"
 
 @interface EventsViewController ()
@@ -32,6 +34,11 @@
 
 - (void)configureCell:(EventTableViewCell *)cell
           atIndexPath:(NSIndexPath *)path;
+
+- (void)displayActivityView;
+- (void)displayActivityViewWithCompletion:(void (^)(void))completion;
+- (void)hideActivityView;
+- (void)hideActivityViewWithCompletion:(void (^)(void))completion;
 
 #pragma mark - Fetching data
 
@@ -79,8 +86,11 @@
 {
     [super viewWillAppear:animated];
 
-    if ([self hasFetchedData] == NO)
-        [self fetchNextSetOfEvents];
+    if ([self hasFetchedData] == NO) {
+        [self displayActivityViewWithCompletion:^{
+            [self fetchNextSetOfEvents];
+        }];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
@@ -194,6 +204,30 @@
     [cell configureCellForEvent:event];
 }
 
+- (void)displayActivityView
+{
+    [self displayActivityViewWithCompletion:nil];
+}
+
+- (void)displayActivityViewWithCompletion:(void (^)(void))completion
+{
+    LokaliteAppDelegate *delegate =
+        (LokaliteAppDelegate *) [[UIApplication sharedApplication] delegate];
+    [delegate displayActivityViewAnimated:YES completion:completion];
+}
+
+- (void)hideActivityView
+{
+    [self hideActivityViewWithCompletion:nil];
+}
+
+- (void)hideActivityViewWithCompletion:(void (^)(void))completion
+{
+    LokaliteAppDelegate *delegate =
+        (LokaliteAppDelegate *) [[UIApplication sharedApplication] delegate];
+    [delegate hideActivityViewAnimated:YES completion:completion];
+}
+
 #pragma mark - Fetching data
 
 - (void)fetchNextSetOfEvents
@@ -203,6 +237,7 @@
          if (![self hasFetchedData]) {
              [self loadDataController];
              [[self tableView] reloadData];
+             [self hideActivityView];
          }
 
          [self setHasFetchedData:YES];
@@ -214,6 +249,35 @@
 - (void)loadDataController
 {
     [self setDataController:nil];
+
+    NSManagedObjectContext *context = [self context];
+    NSFetchRequest *req = [[NSFetchRequest alloc] init];
+
+    NSEntityDescription *entity =
+        [NSEntityDescription entityForName:@"Event"
+                    inManagedObjectContext:context];
+    
+    [req setEntity:entity];
+
+    NSSortDescriptor *sd =
+        [NSSortDescriptor sortDescriptorWithKey:@"endDate" ascending:YES];
+    NSArray *sds = [NSArray arrayWithObjects:sd, nil];
+    [req setSortDescriptors:sds];
+
+    NSFetchedResultsController *controller =
+        [[NSFetchedResultsController alloc] initWithFetchRequest:req
+                                            managedObjectContext:context
+                                              sectionNameKeyPath:nil
+                                                       cacheName:nil];
+    NSError *error = nil;
+    if ([controller performFetch:&error]) {
+        dataController_ = controller;
+        [dataController_ setDelegate:self];
+    } else {
+        [controller release], controller = nil;
+        NSLog(@"Failed to fetch event objects: %@",
+              [error detailedDescription]);
+    }
 }
 
 #pragma mark - Accessors
@@ -226,40 +290,40 @@
     return stream_;
 }
 
-- (NSFetchedResultsController *)dataController
-{
-    if (!dataController_) {
-        NSManagedObjectContext *context = [self context];
-        NSFetchRequest *req = [[NSFetchRequest alloc] init];
-
-        NSEntityDescription *entity =
-            [NSEntityDescription entityForName:@"Event"
-                        inManagedObjectContext:context];
-    
-        [req setEntity:entity];
-
-        NSSortDescriptor *sd =
-            [NSSortDescriptor sortDescriptorWithKey:@"endDate" ascending:YES];
-        NSArray *sds = [NSArray arrayWithObjects:sd, nil];
-        [req setSortDescriptors:sds];
-
-        NSFetchedResultsController *controller =
-            [[NSFetchedResultsController alloc] initWithFetchRequest:req
-                                                managedObjectContext:context
-                                                  sectionNameKeyPath:nil
-                                                           cacheName:nil];
-        NSError *error = nil;
-        if ([controller performFetch:&error]) {
-            dataController_ = controller;
-            [dataController_ setDelegate:self];
-        } else {
-            [controller release], controller = nil;
-            NSLog(@"Failed to fetch event objects: %@",
-                  [error detailedDescription]);
-        }
-    }
-
-    return dataController_;
-}
+//- (NSFetchedResultsController *)dataController
+//{
+//    if (!dataController_) {
+//        NSManagedObjectContext *context = [self context];
+//        NSFetchRequest *req = [[NSFetchRequest alloc] init];
+//
+//        NSEntityDescription *entity =
+//            [NSEntityDescription entityForName:@"Event"
+//                        inManagedObjectContext:context];
+//    
+//        [req setEntity:entity];
+//
+//        NSSortDescriptor *sd =
+//            [NSSortDescriptor sortDescriptorWithKey:@"endDate" ascending:YES];
+//        NSArray *sds = [NSArray arrayWithObjects:sd, nil];
+//        [req setSortDescriptors:sds];
+//
+//        NSFetchedResultsController *controller =
+//            [[NSFetchedResultsController alloc] initWithFetchRequest:req
+//                                                managedObjectContext:context
+//                                                  sectionNameKeyPath:nil
+//                                                           cacheName:nil];
+//        NSError *error = nil;
+//        if ([controller performFetch:&error]) {
+//            dataController_ = controller;
+//            [dataController_ setDelegate:self];
+//        } else {
+//            [controller release], controller = nil;
+//            NSLog(@"Failed to fetch event objects: %@",
+//                  [error detailedDescription]);
+//        }
+//    }
+//
+//    return dataController_;
+//}
 
 @end
