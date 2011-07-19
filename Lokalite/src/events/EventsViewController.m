@@ -44,6 +44,10 @@
 
 - (void)fetchNextSetOfEvents;
 
+#pragma mark - Processing received data
+
+- (void)processReceivedError:(NSError *)error;
+
 #pragma mark - Managing the fetched results controller
 
 - (void)loadDataController;
@@ -234,14 +238,35 @@
 {
     [[self stream] fetchNextBatchWithResponseHandler:
      ^(NSArray *events, NSError *error) {
-         if (![self hasFetchedData]) {
+         if (events) {
              [self loadDataController];
-             [[self tableView] reloadData];
+             if (![self hasFetchedData])
+                 [[self tableView] reloadData];
+         } else if (error)
+             [self processReceivedError:error];
+
+         if (![self hasFetchedData])
              [self hideActivityView];
-         }
 
          [self setHasFetchedData:YES];
      }];
+}
+
+#pragma mark - Processing received data
+
+- (void)processReceivedError:(NSError *)error
+{
+    NSLog(@"Received error: %@", error);
+    NSString *title = NSLocalizedString(@"featured.fetch.failed", nil);
+    NSString *message = [error localizedDescription];
+    NSString *cancel = NSLocalizedString(@"global.dismiss", nil);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:cancel
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release], alert = nil;
 }
 
 #pragma mark - Managing the fetched results controller
