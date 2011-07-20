@@ -76,7 +76,7 @@
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
 								</object>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
+								<float key="IBUIMinimumFontSize">14</float>
 							</object>
 							<object class="IBUILabel" id="1030830954">
 								<reference key="NSNextResponder" ref="49790276"/>
@@ -100,12 +100,12 @@
 								<reference key="IBUITextColor" ref="856402076"/>
 								<reference key="IBUIHighlightedColor" ref="1002208266"/>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
+								<float key="IBUIMinimumFontSize">14</float>
 							</object>
 							<object class="IBUILabel" id="1019065426">
 								<reference key="NSNextResponder" ref="49790276"/>
 								<int key="NSvFlags">294</int>
-								<string key="NSFrame">{{74, 42}, {222, 18}}</string>
+								<string key="NSFrame">{{74, 41}, {222, 18}}</string>
 								<reference key="NSSuperview" ref="49790276"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="771467982"/>
@@ -125,7 +125,7 @@
 								<reference key="IBUIHighlightedColor" ref="1002208266"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-								<float key="IBUIMinimumFontSize">10</float>
+								<float key="IBUIMinimumFontSize">12</float>
 							</object>
 							<object class="IBUIImageView" id="384594697">
 								<reference key="NSNextResponder" ref="49790276"/>
@@ -164,6 +164,7 @@
 								</object>
 								<reference key="IBUIHighlightedColor" ref="1002208266"/>
 								<int key="IBUIBaselineAdjustment">1</int>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
 						</object>
