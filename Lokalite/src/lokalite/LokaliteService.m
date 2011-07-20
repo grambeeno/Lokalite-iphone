@@ -10,7 +10,6 @@
 #import "LokaliteServiceRequest.h"
 
 #import "Event.h"
-#import "Event+MockDataHelpers.h"
 
 #import "LokaliteDataParser.h"
 

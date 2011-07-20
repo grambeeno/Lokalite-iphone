@@ -16,6 +16,9 @@
 #import "Venue.h"
 #import "Venue+GeneralHelpers.h"
 
+#import "Category.h"
+#import "Category+GeneralHelpers.h"
+
 #import "SDKAdditions.h"
 
 @implementation Event (GeneralHelpers)
@@ -103,6 +106,12 @@
     Venue *venue = [Venue existingOrNewVenueFromJsonData:venueData
                                                inContext:context];
     [event setVenue:venue];
+
+    NSDictionary *categoryData = [eventData objectForKey:@"category"];
+    Category *category =
+        [Category existingOrNewCategoryFromJsonData:categoryData
+                                          inContext:context];
+    [event setCategory:category];
 
     return event;
 }

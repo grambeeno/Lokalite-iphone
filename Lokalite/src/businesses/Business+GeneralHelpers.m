@@ -11,6 +11,9 @@
 #import "NSObject+GeneralHelpers.h"
 #import "NSManagedObject+GeneralHelpers.h"
 
+#import "Category.h"
+#import "Category+GeneralHelpers.h"
+
 @implementation Business (GeneralHelpers)
 
 + (id)businessWithId:(NSNumber *)businessId
@@ -67,6 +70,12 @@
         if ([business setValueIfNecessary:url forKey:@"imageUrl"])
             [business setImageData:nil];
     }
+
+    NSDictionary *categoryData = [businessData objectForKey:@"category"];
+    Category *category =
+        [Category existingOrNewCategoryFromJsonData:categoryData
+                                          inContext:context];
+    [business setCategory:category];
 
     return business;
 }
