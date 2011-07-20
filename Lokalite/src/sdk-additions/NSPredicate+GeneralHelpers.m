@@ -22,7 +22,6 @@
 
     [components enumerateObjectsUsingBlock:
      ^(NSString *component, NSUInteger idx, BOOL *stop) {
-         NSLog(@"Component %d: '%@'", idx, component);
          if ([component length]) {
              if (idx)
                  [s appendString:@" AND "];
@@ -36,7 +35,7 @@
                   else
                       [s appendFormat:@" OR "];
 
-                  [args addObject:searchString];
+                  [args addObject:component];
               }];
          }
      }];
