@@ -34,6 +34,7 @@
 #pragma mark - View initialization
 
 - (void)initializeTableView;
+- (void)initializeSearchBar;
 
 #pragma mark - View configuration
 
@@ -92,6 +93,7 @@
     [super viewDidLoad];
 
     [self initializeTableView];
+    [self initializeSearchBar];
     [self setHasFetchedData:NO];
 }
 
@@ -225,14 +227,19 @@
     [self setSearchResults:[NSArray array]];
 }
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller
-    shouldReloadTableForSearchString:(NSString *)searchString
+- (void)searchLocalContentForSearchString:(NSString *)searchString
+                              searchScope:(NSInteger)scopeIndex
 {
     NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
     searchString = [searchString stringByTrimmingCharactersInSet:whitespace];
 
     if ([searchString length]) {
-        NSPredicate *pred = [Event predicateForSearchString:searchString];
+        BOOL includeEvents = scopeIndex == 0 || scopeIndex == 2;
+        BOOL includeBusinesses = scopeIndex == 1 || scopeIndex == 2;
+
+        NSPredicate *pred = [Event predicateForSearchString:searchString
+                                              includeEvents:includeEvents
+                                          includeBusinesses:includeBusinesses];
         NSArray *objects = [[self dataController] fetchedObjects];
         objects = [objects filteredArrayUsingPredicate:pred];
         [self setSearchResults:objects];
@@ -240,6 +247,25 @@
         NSLog(@"Search string '%@' matches %d events", searchString,
               [objects count]);
     }
+
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller
+    shouldReloadTableForSearchString:(NSString *)searchString
+{
+    NSInteger scopeIndex = [[controller searchBar] selectedScopeButtonIndex];
+    [self searchLocalContentForSearchString:searchString
+                                searchScope:scopeIndex];
+
+    return YES;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller
+    shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    NSString *searchString = [[controller searchBar] text];
+    [self searchLocalContentForSearchString:searchString
+                                searchScope:searchOption];
 
     return YES;
 }
@@ -252,6 +278,11 @@
     [[self tableView] setRowHeight:rowHeight];
     [[[self searchDisplayController]
       searchResultsTableView] setRowHeight:rowHeight];
+}
+
+- (void)initializeSearchBar
+{
+    [[[self searchDisplayController] searchBar] setSelectedScopeButtonIndex:2];
 }
 
 #pragma mark - View configuration

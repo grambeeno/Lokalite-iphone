@@ -39,6 +39,8 @@
 // Get the predicate for a search string
 //
 
-+ (NSPredicate *)predicateForSearchString:(NSString *)searchString;
++ (NSPredicate *)predicateForSearchString:(NSString *)searchString
+                            includeEvents:(BOOL)includeEvents
+                        includeBusinesses:(BOOL)includeBusinesses;
 
 @end

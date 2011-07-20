@@ -152,10 +152,23 @@
 }
 
 + (NSPredicate *)predicateForSearchString:(NSString *)searchString
+                            includeEvents:(BOOL)includeEvents
+                        includeBusinesses:(BOOL)includeBusinesses
 {
-    NSArray *attributes =
-        [NSArray arrayWithObjects:@"name", @"summary", @"business.name",
-         @"business.status", @"business.summary", nil];
+    NSMutableArray *attributes = [NSMutableArray array];
+
+    if (includeEvents) {
+        [attributes addObjectsFromArray:
+         [NSArray arrayWithObjects:@"name", /*@"summary",*/ nil]];
+        NSLog(@"including events");
+    }
+
+    if (includeBusinesses) {
+        [attributes addObjectsFromArray:
+         [NSArray arrayWithObjects:@"business.name", /*@"business.status",
+          @"business.summary",*/ nil]];
+        NSLog(@"including businesses");
+    }
 
     return [NSPredicate standardSearchPredicateForSearchString:searchString
                                              attributeKeyPaths:attributes];
