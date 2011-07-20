@@ -20,6 +20,7 @@
 @dynamic identifier;
 @dynamic imageData;
 @dynamic name;
+@dynamic featured;
 @dynamic venue;
 @dynamic business;
 @dynamic category;

@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSNumber * identifier;
 @property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * featured;
 @property (nonatomic, retain) Venue *venue;
 @property (nonatomic, retain) Business *business;
 @property (nonatomic, retain) Category *category;

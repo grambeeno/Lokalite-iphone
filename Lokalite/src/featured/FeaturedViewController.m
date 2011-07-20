@@ -507,6 +507,10 @@
         NSFetchRequest *req = [[NSFetchRequest alloc] init];
         [req setEntity:entity];
 
+        NSPredicate *predicate =
+            [NSPredicate predicateWithFormat:@"featured == YES"];
+        [req setPredicate:predicate];
+
         NSSortDescriptor *sd1 =
             [[NSSortDescriptor alloc] initWithKey:@"endDate" ascending:YES];
         NSSortDescriptor *sd2 =

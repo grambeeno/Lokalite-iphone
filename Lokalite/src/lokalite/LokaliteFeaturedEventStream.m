@@ -22,10 +22,17 @@
     [service fetchFeaturedEventsWithResponseHandler:
      ^(NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
-         if (jsonObjects)
+         if (jsonObjects) {
              parsedObjects =
                 [Event eventObjectsFromJsonObjects:jsonObjects
                                        withContext:[self context]];
+
+             NSNumber *yes = [NSNumber numberWithBool:YES];
+             [parsedObjects enumerateObjectsUsingBlock:
+              ^(Event *event, NSUInteger idx, BOOL *stop) {
+                 [event setFeatured:yes];
+              }];
+         }
 
          handler(parsedObjects, error);
 
