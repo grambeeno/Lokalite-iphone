@@ -5,59 +5,79 @@
 		<dict>
 			<key>name</key>
 			<string>All</string>
+			<key>short-name</key>
+			<string>All</string>
 			<key>image</key>
 			<string>all</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>Happy Hour</string>
+			<key>short-name</key>
+			<string>Happy Hour</string>
 			<key>image</key>
 			<string>happy-hour</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Musci</string>
+			<string>Music</string>
+			<key>short-name</key>
+			<string>Music</string>
 			<key>image</key>
 			<string>music</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>Retail</string>
+			<key>short-name</key>
+			<string>Shopping</string>
 			<key>image</key>
 			<string>retail</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>Food and Dining</string>
+			<key>short-name</key>
+			<string>Food</string>
 			<key>image</key>
 			<string>food</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>Arts and Entertainment</string>
+			<key>short-name</key>
+			<string>Entertainment</string>
 			<key>image</key>
 			<string>arts</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>Sports and Recreation</string>
+			<key>short-name</key>
+			<string>Sports</string>
 			<key>image</key>
 			<string>sports</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>Health and Medical</string>
+			<key>short-name</key>
+			<string>Health</string>
 			<key>image</key>
 			<string>health</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>Beauty and Spas</string>
+			<key>short-name</key>
+			<string>Beauty</string>
 			<key>image</key>
 			<string>beauty</string>
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>Campus</string>
+			<key>short-name</key>
 			<string>Campus</string>
 			<key>image</key>
 			<string>campus</string>
@@ -65,23 +85,31 @@
 		<dict>
 			<key>name</key>
 			<string>Community</string>
+			<key>short-name</key>
+			<string>Community</string>
 			<key>image</key>
 			<string>community</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>Business and Tech</string>
+			<key>short-name</key>
+			<string>Business</string>
 			<key>image</key>
 			<string>business</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>Non-Profit</string>
+			<key>short-name</key>
+			<string>Non-Profit</string>
 			<key>image</key>
 			<string>non-profit</string>
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>Other</string>
+			<key>short-name</key>
 			<string>Other</string>
 			<key>image</key>
 			<string>other</string>

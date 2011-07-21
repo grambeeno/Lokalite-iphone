@@ -11,15 +11,19 @@
 @implementation CategoryFilter
 
 @synthesize name = name_;
+@synthesize shortName = shortName_;
 @synthesize buttonImage = buttonImage_;
 
 #pragma mark - Initialization
 
-- (id)initWithName:(NSString *)name buttonImage:(UIImage *)buttonImage
+- (id)initWithName:(NSString *)name
+         shortName:(NSString *)shortName
+       buttonImage:(UIImage *)buttonImage
 {
     self = [super init];
     if (self) {
         name_ = [name copy];
+        shortName_ = [shortName copy];
         buttonImage_ = [buttonImage retain];
     }
 
@@ -52,10 +56,13 @@
 + (id)categoryFromPlistDictionary:(NSDictionary *)dictionary
 {
     NSString *name = [dictionary objectForKey:@"name"];
+    NSString *shortName = [dictionary objectForKey:@"short-name"];
     NSString *imageName = [dictionary objectForKey:@"image"];
     UIImage *image = [UIImage imageNamed:imageName];
 
-    return [[[self alloc] initWithName:name buttonImage:image] autorelease];
+    return [[[self alloc] initWithName:name
+                             shortName:shortName
+                           buttonImage:image] autorelease];
 }
 
 @end

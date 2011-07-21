@@ -330,7 +330,7 @@
     UIScrollView *categoryView = [self categoryHeaderView];
     CGRect frame = [categoryView frame];
     CGFloat margin = round((frame.size.height - buttonHeight) / 2);
-    __block CGPoint point = CGPointMake(margin, margin);
+    __block CGPoint point = CGPointMake(margin, 8);
 
     // margin of 30 gives us 15 points of space on the left or right of the
     // scroll view, and 30 points between buttons per page
@@ -344,9 +344,21 @@
             [UIButton lokaliteCategoryButtonWithFrame:buttonFrame];
 
          [button setImage:[filter buttonImage] forState:UIControlStateNormal];
-
-         //[button setTitle:category forState:UIControlStateNormal];
          [categoryView addSubview:button];
+
+         static const CGFloat LABEL_MARGIN = 13;
+         CGRect labelFrame =
+            CGRectMake(buttonFrame.origin.x - LABEL_MARGIN,
+                       buttonFrame.origin.y + buttonFrame.size.height + 3,
+                       buttonFrame.size.width + LABEL_MARGIN * 2,
+                       14);
+         UILabel *nameLabel = [[UILabel alloc] initWithFrame:labelFrame];
+         [nameLabel setBackgroundColor:[UIColor whiteColor]];
+         [nameLabel setFont:[UIFont systemFontOfSize:12]];
+         [nameLabel setText:[filter shortName]];
+         [nameLabel setTextAlignment:UITextAlignmentCenter];
+         [categoryView addSubview:nameLabel];
+         [nameLabel release], nameLabel = nil;
 
          point.x += buttonWidth + margin;
      }];
