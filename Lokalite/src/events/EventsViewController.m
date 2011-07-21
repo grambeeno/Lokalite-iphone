@@ -49,6 +49,8 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 
 #pragma mark - View configuration
 
+- (void)configureTitleViewForCategoryFilter:(CategoryFilter *)filter;
+
 - (NSIndexPath *)dataControllerIndexPathForTableViewIndexPath:(NSIndexPath *)ip
                                                   inTableView:(UITableView *)tv;
 - (NSIndexPath *)tableViewIndexPathForDataControllerIndexPath:(NSIndexPath *)ip
@@ -132,6 +134,7 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
     [button setImage:[filter selectedButtonImage]
             forState:UIControlStateNormal];
 
+    [self configureTitleViewForCategoryFilter:filter];
     [self setSelectedCategoryFilterIndex:filterIndex];
 }
 
@@ -369,15 +372,19 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 
     [categories enumerateObjectsUsingBlock:
      ^(CategoryFilter *filter, NSUInteger idx, BOOL *stop) {
+         BOOL isSelectedFilter = selectedFilterIndex == idx;
+
+         if (isSelectedFilter)
+             [self configureTitleViewForCategoryFilter:filter];
+
          CGRect buttonFrame =
             CGRectMake(point.x, point.y, buttonWidth, buttonHeight);
          UIButton *button =
             [UIButton lokaliteCategoryButtonWithFrame:buttonFrame];
 
          UIImage *buttonImage =
-            selectedFilterIndex == idx ?
-            [filter selectedButtonImage] :
-            [filter buttonImage];
+            isSelectedFilter ?
+            [filter selectedButtonImage] : [filter buttonImage];
          [button setImage:buttonImage forState:UIControlStateNormal];
 
          [button addTarget:self
@@ -430,6 +437,19 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 }
 
 #pragma mark - View configuration
+
+- (void)configureTitleViewForCategoryFilter:(CategoryFilter *)filter
+{
+    [self setTitle:[filter name]];
+
+    UIBarButtonItem *backButtonItem =
+        [[UIBarButtonItem alloc] initWithTitle:[filter shortName]
+                                         style:UIBarButtonItemStylePlain
+                                        target:nil
+                                        action:nil];
+    [[self navigationItem] setBackBarButtonItem:backButtonItem];
+    [backButtonItem release], backButtonItem = nil;
+}
 
 - (NSIndexPath *)dataControllerIndexPathForTableViewIndexPath:(NSIndexPath *)ip
                                                   inTableView:(UITableView *)tv
