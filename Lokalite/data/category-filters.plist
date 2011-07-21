@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <array>
+		<dict>
+			<key>name</key>
+			<string>All</string>
+			<key>image</key>
+			<string>all</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Happy Hour</string>
+			<key>image</key>
+			<string>happy-hour</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Musci</string>
+			<key>image</key>
+			<string>music</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Retail</string>
+			<key>image</key>
+			<string>retail</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Food and Dining</string>
+			<key>image</key>
+			<string>food</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Arts and Entertainment</string>
+			<key>image</key>
+			<string>arts</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Sports and Recreation</string>
+			<key>image</key>
+			<string>sports</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Health and Medical</string>
+			<key>image</key>
+			<string>health</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Beauty and Spas</string>
+			<key>image</key>
+			<string>beauty</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Campus</string>
+			<key>image</key>
+			<string>campus</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Community</string>
+			<key>image</key>
+			<string>community</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Business and Tech</string>
+			<key>image</key>
+			<string>business</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Non-Profit</string>
+			<key>image</key>
+			<string>non-profit</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Other</string>
+			<key>image</key>
+			<string>other</string>
+		</dict>
+	</array>
+</plist>

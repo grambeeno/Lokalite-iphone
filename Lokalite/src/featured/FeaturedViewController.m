@@ -411,7 +411,8 @@
                                  remainingHandler:
      ^(Event *event) {
          NSLog(@"Deleting event: %@: %@", [event identifier], [event name]);
-         [context deleteObject:event];
+         if ([[event featured] boolValue])
+             [context deleteObject:event];
      }];
 }
 

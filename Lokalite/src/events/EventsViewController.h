@@ -15,4 +15,7 @@
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 
+@property (nonatomic, retain) IBOutlet UITableViewCell *categoryTableViewCell;
+@property (nonatomic, retain) IBOutlet UIScrollView *categoryHeaderView;
+
 @end

@@ -16,6 +16,10 @@
 #import "Event+GeneralHelpers.h"
 #import "EventTableViewCell.h"
 
+#import "EventDetailsViewController.h"
+
+#import "CategoryFilter.h"
+
 #import "DataFetcher.h"
 
 #import "LokaliteAppDelegate.h"
@@ -23,6 +27,8 @@
 #import "SDKAdditions.h"
 
 @interface EventsViewController ()
+
+@property (nonatomic, copy) NSArray *categoryFilters;
 
 @property (nonatomic, retain) LokaliteEventStream *stream;
 
@@ -38,6 +44,10 @@
 
 #pragma mark - View configuration
 
+- (NSIndexPath *)dataControllerIndexPathForTableViewIndexPath:(NSIndexPath *)ip
+                                                  inTableView:(UITableView *)tv;
+- (NSIndexPath *)tableViewIndexPathForDataControllerIndexPath:(NSIndexPath *)ip
+                                                  inTableView:(UITableView *)tv;
 - (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event;
 
 - (void)displayActivityView;
@@ -62,6 +72,8 @@
 
 @implementation EventsViewController
 
+@synthesize categoryFilters = categoryFilters_;
+
 @synthesize context = context_;
 
 @synthesize stream = stream_;
@@ -71,10 +83,15 @@
 
 @synthesize searchResults = searchResults_;
 
+@synthesize categoryTableViewCell = categoryTableViewCell_;
+@synthesize categoryHeaderView = categoryHeaderView_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
 {
+    [categoryFilters_ release];
+
     [context_ release];
 
     [stream_ release];
@@ -82,6 +99,9 @@
     [dataController_ release];
 
     [searchResults_ release];
+
+    [categoryTableViewCell_ release];
+    [categoryHeaderView_ release];
 
     [super dealloc];
 }
@@ -126,33 +146,45 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
+    NSInteger nrows = 0;
+
     if ([self tableView] == tableView) {
         id <NSFetchedResultsSectionInfo> sectionInfo =
             [[[self dataController] sections] objectAtIndex:section];
-        return [sectionInfo numberOfObjects];
+        nrows = [sectionInfo numberOfObjects];
     } else
-        return [[self searchResults] count];
+        nrows = [[self searchResults] count];
+
+    return nrows + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = nil;
-    if (!CellIdentifier)
-        CellIdentifier = [[EventTableViewCell defaultReuseIdentifier] copy];
+    if ([indexPath section] == 0 && [indexPath row] == 0)
+        return [self categoryTableViewCell];
+    else {
+        indexPath =
+            [self dataControllerIndexPathForTableViewIndexPath:indexPath
+                                                   inTableView:tableView];
 
-    EventTableViewCell *cell = (EventTableViewCell *)
-        [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-        cell = [EventTableViewCell instanceFromNib];
+        static NSString *CellIdentifier = nil;
+        if (!CellIdentifier)
+            CellIdentifier = [[EventTableViewCell defaultReuseIdentifier] copy];
 
-    Event *event =
-        [self tableView] == tableView ?
-        [[self dataController] objectAtIndexPath:indexPath] :
-        [[self searchResults] objectAtIndex:[indexPath row]];
-    [self configureCell:cell forEvent:event];
+        EventTableViewCell *cell = (EventTableViewCell *)
+            [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil)
+            cell = [EventTableViewCell instanceFromNib];
 
-    return cell;
+        Event *event =
+            [self tableView] == tableView ?
+            [[self dataController] objectAtIndexPath:indexPath] :
+            [[self searchResults] objectAtIndex:[indexPath row]];
+        [self configureCell:cell forEvent:event];
+
+        return cell;
+    }
 }
 
 #pragma mark - UITableViewDelegate implementation
@@ -160,7 +192,18 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Event *event = nil;
+    indexPath = [self dataControllerIndexPathForTableViewIndexPath:indexPath
+                                                       inTableView:tableView];
+    if (tableView == [self tableView])
+        event = [[self dataController] objectAtIndexPath:indexPath];
+    else
+        event = [[self searchResults] objectAtIndex:[indexPath row]];
+
+    EventDetailsViewController *controller =
+        [[EventDetailsViewController alloc] initWithEvent:event];
+    [[self navigationController] pushViewController:controller animated:YES];
+    [controller release], controller = nil;
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate implementation
@@ -177,6 +220,13 @@
       newIndexPath:(NSIndexPath *)newIndexPath
 {
     UITableView *tableView = [self tableView];
+
+    indexPath =
+        [self tableViewIndexPathForDataControllerIndexPath:indexPath
+                                               inTableView:[self tableView]];
+    newIndexPath =
+        [self tableViewIndexPathForDataControllerIndexPath:newIndexPath
+                                               inTableView:[self tableView]];
 
     switch(type) {
         case NSFetchedResultsChangeInsert:
@@ -272,12 +322,51 @@
 
 #pragma mark - View initialization
 
+- (void)initializeCategoryFilter
+{
+    NSArray *categories = [self categoryFilters];
+
+    static const CGFloat buttonHeight = 50, buttonWidth = 50;
+    UIScrollView *categoryView = [self categoryHeaderView];
+    CGRect frame = [categoryView frame];
+    CGFloat margin = round((frame.size.height - buttonHeight) / 2);
+    __block CGPoint point = CGPointMake(margin, margin);
+
+    // margin of 30 gives us 15 points of space on the left or right of the
+    // scroll view, and 30 points between buttons per page
+    margin = 30;
+
+    [categories enumerateObjectsUsingBlock:
+     ^(CategoryFilter *filter, NSUInteger idx, BOOL *stop) {
+         CGRect buttonFrame =
+            CGRectMake(point.x, point.y, buttonWidth, buttonHeight);
+         UIButton *button =
+            [UIButton lokaliteCategoryButtonWithFrame:buttonFrame];
+
+         [button setImage:[filter buttonImage] forState:UIControlStateNormal];
+
+         //[button setTitle:category forState:UIControlStateNormal];
+         [categoryView addSubview:button];
+
+         point.x += buttonWidth + margin;
+     }];
+
+    // set the content size to an even number of pages
+    CGFloat totalButtonWidths = point.x + margin;
+    NSInteger npages = ceil(totalButtonWidths / frame.size.width);
+    CGSize contentSize = CGSizeMake(frame.size.width * npages, frame.size.height);
+    [categoryView setContentSize:contentSize];
+}
+
 - (void)initializeTableView
 {
     CGFloat rowHeight = [EventTableViewCell cellHeight];
     [[self tableView] setRowHeight:rowHeight];
     [[[self searchDisplayController]
       searchResultsTableView] setRowHeight:rowHeight];
+
+    [[self categoryHeaderView] setScrollsToTop:NO];
+    [self initializeCategoryFilter];
 }
 
 - (void)initializeSearchBar
@@ -286,6 +375,26 @@
 }
 
 #pragma mark - View configuration
+
+- (NSIndexPath *)dataControllerIndexPathForTableViewIndexPath:(NSIndexPath *)ip
+                                                  inTableView:(UITableView *)tv
+{
+    if (tv == [self tableView])
+        return [NSIndexPath indexPathForRow:[ip row] - 1
+                                  inSection:[ip section]];
+    else
+        return ip;
+}
+
+- (NSIndexPath *)tableViewIndexPathForDataControllerIndexPath:(NSIndexPath *)ip
+                                                  inTableView:(UITableView *)tv
+{
+    if (tv == [self tableView])
+        return [NSIndexPath indexPathForRow:[ip row] + 1
+                                  inSection:[ip section]];
+    else
+        return ip;
+}
 
 - (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event
 {
@@ -362,14 +471,23 @@
              __block UIImage *image = nil;
              NSArray *visibleCells = [tableView visibleCells];
              [visibleCells enumerateObjectsUsingBlock:
-              ^(EventTableViewCell *cell, NSUInteger idx, BOOL *stop) {
-                  NSIndexPath *path = [tableView indexPathForCell:cell];
-                  Event *e = [events objectAtIndex:[path row]];
-                  if ([[e imageUrl] isEqualToString:urlPath]) {
-                      if (!image)
-                          image = [UIImage imageWithData:data];
-                      [[cell eventImageView] setImage:image];
-                      [e setImageData:data];
+              ^(UITableViewCell *tvc, NSUInteger idx, BOOL *stop) {
+                  if ([tvc isKindOfClass:[EventTableViewCell class]]) {
+                      EventTableViewCell *cell = (EventTableViewCell *) tvc;
+
+                      NSIndexPath *ip = [tableView indexPathForCell:cell];
+                      ip =
+                          [self
+                           dataControllerIndexPathForTableViewIndexPath:ip
+                           inTableView:tableView];
+
+                      Event *e = [events objectAtIndex:[ip row]];
+                      if ([[e imageUrl] isEqualToString:urlPath]) {
+                          if (!image)
+                              image = [UIImage imageWithData:data];
+                          [[cell eventImageView] setImage:image];
+                          [e setImageData:data];
+                      }
                   }
              }];
          } else
@@ -432,6 +550,15 @@
 }
 
 #pragma mark - Accessors
+
+- (NSArray *)categoryFilters
+{
+    if (!categoryFilters_)
+        categoryFilters_ = [[CategoryFilter defaultFilters] copy];
+
+    return categoryFilters_;
+}
+
 
 - (LokaliteEventStream *)stream
 {

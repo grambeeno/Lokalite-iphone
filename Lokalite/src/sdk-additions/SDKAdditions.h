@@ -30,6 +30,7 @@
 //
 
 #import "UIColor+GeneralHelpers.h"
+#import "UIButton+GeneralHelpers.h"
 #import "UITableViewCell+GeneralHelpers.h"
 #import "UIApplication+GeneralHelpers.h"
 
