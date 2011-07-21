@@ -11,6 +11,7 @@
 
 @interface CategoryFilter : NSObject
 
+@property (nonatomic, copy, readonly) NSNumber *categoryId;
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *shortName;
 @property (nonatomic, retain, readonly) UIImage *buttonImage;
@@ -18,10 +19,11 @@
 
 #pragma mark - Initialization
 
-- (id)initWithName:(NSString *)name
-         shortName:(NSString *)shortName
-       buttonImage:(UIImage *)buttonImage
-selectedButtonImage:(UIImage *)selectedButtonImage;
+- (id)initWithCategoryId:(NSNumber *)categoryId
+                    name:(NSString *)name
+               shortName:(NSString *)shortName
+             buttonImage:(UIImage *)buttonImage
+     selectedButtonImage:(UIImage *)selectedButtonImage;
 
 @end
 

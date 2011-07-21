@@ -73,7 +73,8 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 
 #pragma mark - Managing the fetched results controller
 
-- (void)loadDataController;
+- (void)loadDataControllerForFilter:(CategoryFilter *)filter;
+- (void)loadDataControllerForCurrentFilter;
 
 @end
 
@@ -134,6 +135,7 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
     [button setImage:[filter selectedButtonImage]
             forState:UIControlStateNormal];
 
+    [self loadDataControllerForFilter:filter];
     [self configureTitleViewForCategoryFilter:filter];
     [self setSelectedCategoryFilterIndex:filterIndex];
 }
@@ -515,7 +517,7 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
     [[self stream] fetchNextBatchWithResponseHandler:
      ^(NSArray *events, NSError *error) {
          if (events) {
-             [self loadDataController];
+             [self loadDataControllerForCurrentFilter];
              if (![self hasFetchedData])
                  [[self tableView] reloadData];
          } else if (error)
@@ -590,7 +592,7 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 
 #pragma mark - Managing the fetched results controller
 
-- (void)loadDataController
+- (void)loadDataControllerForFilter:(CategoryFilter *)filter
 {
     [self setDataController:nil];
 
@@ -600,8 +602,20 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
     NSEntityDescription *entity =
         [NSEntityDescription entityForName:@"Event"
                     inManagedObjectContext:context];
-    
+
     [req setEntity:entity];
+
+    /*
+     * jad: removing until category/tag implementation is resolved
+     */
+    /*
+    if (filter) {
+        NSPredicate *predicate =
+            [NSPredicate predicateWithFormat:@"category.index == %@",
+             [filter categoryId]];
+        [req setPredicate:predicate];
+    }
+     */
 
     NSSortDescriptor *sd =
         [NSSortDescriptor sortDescriptorWithKey:@"endDate" ascending:YES];
@@ -622,6 +636,14 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
         NSLog(@"Failed to fetch event objects: %@",
               [error detailedDescription]);
     }
+}
+
+- (void)loadDataControllerForCurrentFilter
+{
+    NSInteger idx = [self selectedCategoryFilterIndex];
+    CategoryFilter *filter =
+        idx == 0 ? nil : [[self categoryFilters] objectAtIndex:idx];
+    [self loadDataControllerForFilter:filter];
 }
 
 #pragma mark - Accessors

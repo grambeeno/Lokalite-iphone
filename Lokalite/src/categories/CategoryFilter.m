@@ -10,20 +10,36 @@
 
 @implementation CategoryFilter
 
+@synthesize categoryId = categoryId_;
 @synthesize name = name_;
 @synthesize shortName = shortName_;
 @synthesize buttonImage = buttonImage_;
 @synthesize selectedButtonImage = selectedButtonImage_;
 
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    [categoryId_ release];
+    [name_ release];
+    [shortName_ release];
+    [buttonImage_ release];
+    [selectedButtonImage_ release];
+
+    [super dealloc];
+}
+
 #pragma mark - Initialization
 
-- (id)initWithName:(NSString *)name
-         shortName:(NSString *)shortName
-       buttonImage:(UIImage *)buttonImage
-    selectedButtonImage:(UIImage *)selectedButtonImage
+- (id)initWithCategoryId:(NSNumber *)categoryId
+                    name:(NSString *)name
+               shortName:(NSString *)shortName
+             buttonImage:(UIImage *)buttonImage
+     selectedButtonImage:(UIImage *)selectedButtonImage
 {
     self = [super init];
     if (self) {
+        categoryId_ = [categoryId copy];
         name_ = [name copy];
         shortName_ = [shortName copy];
         buttonImage_ = [buttonImage retain];
@@ -58,6 +74,7 @@
 
 + (id)categoryFromPlistDictionary:(NSDictionary *)dictionary
 {
+    NSNumber *identifier = [dictionary objectForKey:@"identifier"];
     NSString *name = [dictionary objectForKey:@"name"];
     NSString *shortName = [dictionary objectForKey:@"short-name"];
     NSString *imageName = [dictionary objectForKey:@"image"];
@@ -66,10 +83,11 @@
     UIImage *image = [UIImage imageNamed:imageName];
     UIImage *selectedImage = [UIImage imageNamed:selectedImageName];
 
-    return [[[self alloc] initWithName:name
-                             shortName:shortName
-                           buttonImage:image
-                   selectedButtonImage:selectedImage] autorelease];
+    return [[[self alloc] initWithCategoryId:identifier
+                                        name:name
+                                   shortName:shortName
+                                 buttonImage:image
+                         selectedButtonImage:selectedImage] autorelease];
 }
 
 @end
