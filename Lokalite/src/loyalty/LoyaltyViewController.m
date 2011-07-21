@@ -10,11 +10,25 @@
 
 @implementation LoyaltyViewController
 
-#pragma mark - UIViewController implementation
+#pragma mark - UITableViewController implementation
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
 {
     return io == UIInterfaceOrientationPortrait;
+}
+
+#pragma mark - UITableViewDataSource implementation
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
 }
 
 @end

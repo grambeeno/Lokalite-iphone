@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoyaltyViewController : UIViewController
+@interface LoyaltyViewController : UITableViewController
 
 @end
