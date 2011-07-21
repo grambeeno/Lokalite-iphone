@@ -26,9 +26,14 @@
 
 #import "SDKAdditions.h"
 
+
+static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
+
+
 @interface EventsViewController ()
 
 @property (nonatomic, copy) NSArray *categoryFilters;
+@property (nonatomic, assign) NSInteger selectedCategoryFilterIndex;
 
 @property (nonatomic, retain) LokaliteEventStream *stream;
 
@@ -73,6 +78,7 @@
 @implementation EventsViewController
 
 @synthesize categoryFilters = categoryFilters_;
+@synthesize selectedCategoryFilterIndex = selectedCategoryFilterIndex_;
 
 @synthesize context = context_;
 
@@ -104,6 +110,29 @@
     [categoryHeaderView_ release];
 
     [super dealloc];
+}
+
+#pragma mark - UI events
+
+- (void)didChangeCategoryFilter:(UIButton *)button
+{
+    const NSInteger indexOffset = CATEGORY_FILTER_TAG_INDEX_OFFSET;
+
+    NSInteger oldFilterIndex = [self selectedCategoryFilterIndex];
+    NSInteger oldFilterButtonTag = oldFilterIndex + indexOffset;
+    CategoryFilter *oldFilter =
+        [[self categoryFilters] objectAtIndex:oldFilterIndex];
+    UIButton *oldButton = (UIButton *)
+        [[self categoryHeaderView] viewWithTag:oldFilterButtonTag];
+    [oldButton setImage:[oldFilter buttonImage] forState:UIControlStateNormal];
+
+    NSInteger filterButtonTag = [button tag];
+    NSInteger filterIndex = filterButtonTag - indexOffset;
+    CategoryFilter *filter = [[self categoryFilters] objectAtIndex:filterIndex];
+    [button setImage:[filter selectedButtonImage]
+            forState:UIControlStateNormal];
+
+    [self setSelectedCategoryFilterIndex:filterIndex];
 }
 
 #pragma mark - UITableViewController implementation
@@ -325,6 +354,8 @@
 - (void)initializeCategoryFilter
 {
     NSArray *categories = [self categoryFilters];
+    NSInteger selectedFilterIndex = 0;
+    [self setSelectedCategoryFilterIndex:selectedFilterIndex];
 
     static const CGFloat buttonHeight = 50, buttonWidth = 50;
     UIScrollView *categoryView = [self categoryHeaderView];
@@ -343,7 +374,18 @@
          UIButton *button =
             [UIButton lokaliteCategoryButtonWithFrame:buttonFrame];
 
-         [button setImage:[filter buttonImage] forState:UIControlStateNormal];
+         UIImage *buttonImage =
+            selectedFilterIndex == idx ?
+            [filter selectedButtonImage] :
+            [filter buttonImage];
+         [button setImage:buttonImage forState:UIControlStateNormal];
+
+         [button addTarget:self
+                    action:@selector(didChangeCategoryFilter:)
+          forControlEvents:UIControlEventTouchUpInside];
+
+         [button setTag:idx + CATEGORY_FILTER_TAG_INDEX_OFFSET];
+
          [categoryView addSubview:button];
 
          static const CGFloat LABEL_MARGIN = 13;
@@ -366,7 +408,8 @@
     // set the content size to an even number of pages
     CGFloat totalButtonWidths = point.x + margin;
     NSInteger npages = ceil(totalButtonWidths / frame.size.width);
-    CGSize contentSize = CGSizeMake(frame.size.width * npages, frame.size.height);
+    CGSize contentSize =
+        CGSizeMake(frame.size.width * npages, frame.size.height);
     [categoryView setContentSize:contentSize];
 }
 

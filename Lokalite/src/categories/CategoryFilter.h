@@ -14,12 +14,14 @@
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *shortName;
 @property (nonatomic, retain, readonly) UIImage *buttonImage;
+@property (nonatomic, retain, readonly) UIImage *selectedButtonImage;
 
 #pragma mark - Initialization
 
 - (id)initWithName:(NSString *)name
          shortName:(NSString *)shortName
-       buttonImage:(UIImage *)buttonImage;
+       buttonImage:(UIImage *)buttonImage
+selectedButtonImage:(UIImage *)selectedButtonImage;
 
 @end
 

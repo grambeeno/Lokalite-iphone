@@ -13,18 +13,21 @@
 @synthesize name = name_;
 @synthesize shortName = shortName_;
 @synthesize buttonImage = buttonImage_;
+@synthesize selectedButtonImage = selectedButtonImage_;
 
 #pragma mark - Initialization
 
 - (id)initWithName:(NSString *)name
          shortName:(NSString *)shortName
        buttonImage:(UIImage *)buttonImage
+    selectedButtonImage:(UIImage *)selectedButtonImage
 {
     self = [super init];
     if (self) {
         name_ = [name copy];
         shortName_ = [shortName copy];
         buttonImage_ = [buttonImage retain];
+        selectedButtonImage_ = [selectedButtonImage retain];
     }
 
     return self;
@@ -58,11 +61,15 @@
     NSString *name = [dictionary objectForKey:@"name"];
     NSString *shortName = [dictionary objectForKey:@"short-name"];
     NSString *imageName = [dictionary objectForKey:@"image"];
+    NSString *selectedImageName = [dictionary objectForKey:@"image-selected"];
+
     UIImage *image = [UIImage imageNamed:imageName];
+    UIImage *selectedImage = [UIImage imageNamed:selectedImageName];
 
     return [[[self alloc] initWithName:name
                              shortName:shortName
-                           buttonImage:image] autorelease];
+                           buttonImage:image
+                   selectedButtonImage:selectedImage] autorelease];
 }
 
 @end

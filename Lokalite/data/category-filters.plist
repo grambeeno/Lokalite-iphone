@@ -9,6 +9,8 @@
 			<string>All</string>
 			<key>image</key>
 			<string>all</string>
+			<key>image-selected</key>
+			<string>all-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -17,6 +19,8 @@
 			<string>Happy Hour</string>
 			<key>image</key>
 			<string>happy-hour</string>
+			<key>image-selected</key>
+			<string>happy-hour-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -25,6 +29,8 @@
 			<string>Music</string>
 			<key>image</key>
 			<string>music</string>
+			<key>image-selected</key>
+			<string>music-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -33,6 +39,8 @@
 			<string>Shopping</string>
 			<key>image</key>
 			<string>retail</string>
+			<key>image-selected</key>
+			<string>retail-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -41,6 +49,8 @@
 			<string>Food</string>
 			<key>image</key>
 			<string>food</string>
+			<key>image-selected</key>
+			<string>food-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -49,6 +59,8 @@
 			<string>Entertainment</string>
 			<key>image</key>
 			<string>arts</string>
+			<key>image-selected</key>
+			<string>arts-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -57,6 +69,8 @@
 			<string>Sports</string>
 			<key>image</key>
 			<string>sports</string>
+			<key>image-selected</key>
+			<string>sports-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -65,6 +79,8 @@
 			<string>Health</string>
 			<key>image</key>
 			<string>health</string>
+			<key>image-selected</key>
+			<string>health-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -73,6 +89,8 @@
 			<string>Beauty</string>
 			<key>image</key>
 			<string>beauty</string>
+			<key>image-selected</key>
+			<string>beauty-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -81,6 +99,8 @@
 			<string>Campus</string>
 			<key>image</key>
 			<string>campus</string>
+			<key>image-selected</key>
+			<string>campus-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -89,6 +109,8 @@
 			<string>Community</string>
 			<key>image</key>
 			<string>community</string>
+			<key>image-selected</key>
+			<string>community-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -97,6 +119,8 @@
 			<string>Business</string>
 			<key>image</key>
 			<string>business</string>
+			<key>image-selected</key>
+			<string>business-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -105,6 +129,8 @@
 			<string>Non-Profit</string>
 			<key>image</key>
 			<string>non-profit</string>
+			<key>image-selected</key>
+			<string>non-profit-selected</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -113,6 +139,8 @@
 			<string>Other</string>
 			<key>image</key>
 			<string>other</string>
+			<key>image-selected</key>
+			<string>other-selected</string>
 		</dict>
 	</array>
 </plist>
