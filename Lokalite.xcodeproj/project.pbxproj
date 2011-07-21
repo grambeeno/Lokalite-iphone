@@ -102,6 +102,8 @@
 		0590FF7613D8DD3B006A2254 /* PlacesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7413D8DD3B006A2254 /* PlacesView.xib */; };
 		0590FF7913D8E045006A2254 /* tab-bar-icon-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7713D8E045006A2254 /* tab-bar-icon-events.png */; };
 		0590FF7A13D8E045006A2254 /* tab-bar-icon-events@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7813D8E045006A2254 /* tab-bar-icon-events@2x.png */; };
+		0590FF7F13D8E17F006A2254 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590FF7D13D8E17F006A2254 /* ProfileViewController.m */; };
+		0590FF8013D8E17F006A2254 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7E13D8E17F006A2254 /* ProfileView.xib */; };
 		059B33FC13D48183007AD11C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FA13D48183007AD11C /* SearchViewController.m */; };
 		059B33FD13D48183007AD11C /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059B33FB13D48183007AD11C /* SearchView.xib */; };
 		059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */; };
@@ -261,6 +263,9 @@
 		0590FF7413D8DD3B006A2254 /* PlacesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlacesView.xib; path = src/businesses/PlacesView.xib; sourceTree = "<group>"; };
 		0590FF7713D8E045006A2254 /* tab-bar-icon-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-events.png"; path = "images/tab-bar-icons/tab-bar-icon-events.png"; sourceTree = "<group>"; };
 		0590FF7813D8E045006A2254 /* tab-bar-icon-events@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-events@2x.png"; path = "images/tab-bar-icons/tab-bar-icon-events@2x.png"; sourceTree = "<group>"; };
+		0590FF7C13D8E17F006A2254 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = src/profile/ProfileViewController.h; sourceTree = "<group>"; };
+		0590FF7D13D8E17F006A2254 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = src/profile/ProfileViewController.m; sourceTree = "<group>"; };
+		0590FF7E13D8E17F006A2254 /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileView.xib; path = src/profile/ProfileView.xib; sourceTree = "<group>"; };
 		059B33F913D48183007AD11C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = src/search/SearchViewController.h; sourceTree = "<group>"; };
 		059B33FA13D48183007AD11C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = src/search/SearchViewController.m; sourceTree = "<group>"; };
 		059B33FB13D48183007AD11C /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchView.xib; path = src/search/SearchView.xib; sourceTree = "<group>"; };
@@ -435,6 +440,7 @@
 				059B33F713D48138007AD11C /* search */,
 				05EC9A3913CB969700B7AD61 /* events */,
 				05EC9A3A13CB96BA00B7AD61 /* businesses */,
+				0590FF7B13D8E15D006A2254 /* profile */,
 				05A7B41713D73111008E737C /* categories */,
 				0568334613D09C4200520C78 /* venues */,
 				0568334713D09C5200520C78 /* locations */,
@@ -605,6 +611,16 @@
 				0590FF5313D8BAD4006A2254 /* sports@2x.png */,
 			);
 			name = "category-filter-images";
+			sourceTree = "<group>";
+		};
+		0590FF7B13D8E15D006A2254 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				0590FF7C13D8E17F006A2254 /* ProfileViewController.h */,
+				0590FF7D13D8E17F006A2254 /* ProfileViewController.m */,
+				0590FF7E13D8E17F006A2254 /* ProfileView.xib */,
+			);
+			name = profile;
 			sourceTree = "<group>";
 		};
 		059B33F713D48138007AD11C /* search */ = {
@@ -846,6 +862,7 @@
 				0590FF7613D8DD3B006A2254 /* PlacesView.xib in Resources */,
 				0590FF7913D8E045006A2254 /* tab-bar-icon-events.png in Resources */,
 				0590FF7A13D8E045006A2254 /* tab-bar-icon-events@2x.png in Resources */,
+				0590FF8013D8E17F006A2254 /* ProfileView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,6 +922,7 @@
 				05D06E7513D76B7900878AD6 /* UIButton+GeneralHelpers.m in Sources */,
 				0549AB5513D77A6800F9C2C2 /* CategoryFilter.m in Sources */,
 				0590FF7513D8DD3B006A2254 /* PlacesViewController.m in Sources */,
+				0590FF7F13D8E17F006A2254 /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
