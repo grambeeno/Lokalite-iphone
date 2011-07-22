@@ -456,21 +456,25 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 - (NSIndexPath *)dataControllerIndexPathForTableViewIndexPath:(NSIndexPath *)ip
                                                   inTableView:(UITableView *)tv
 {
-    if (tv == [self tableView])
+    // removing temporarily until I decide if the category filter should be
+    // visible while performing a search (right now it is)
+    //if (tv == [self tableView])
         return [NSIndexPath indexPathForRow:[ip row] - 1
                                   inSection:[ip section]];
-    else
-        return ip;
+    //else
+    //    return ip;
 }
 
 - (NSIndexPath *)tableViewIndexPathForDataControllerIndexPath:(NSIndexPath *)ip
                                                   inTableView:(UITableView *)tv
 {
-    if (tv == [self tableView])
+    // removing temporarily until I decide if the category filter should be
+    // visible while performing a search (right now it is)
+    //if (tv == [self tableView])
         return [NSIndexPath indexPathForRow:[ip row] + 1
                                   inSection:[ip section]];
-    else
-        return ip;
+    //else
+    //    return ip;
 }
 
 - (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event
