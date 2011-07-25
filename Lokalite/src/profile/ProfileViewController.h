@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LogInViewController.h"
 
 @interface ProfileViewController : UITableViewController
+    <LogInViewControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIView *headerView;
 

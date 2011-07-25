@@ -75,6 +75,8 @@
 		05770E8713DDD75A00B841D4 /* TableViewImageFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 05770E8613DDD75A00B841D4 /* TableViewImageFetcher.m */; };
 		05770E8A13DE1B8D00B841D4 /* lokalite-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 05770E8813DE1B8D00B841D4 /* lokalite-logo.png */; };
 		05770E8B13DE1B8D00B841D4 /* lokalite-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05770E8913DE1B8D00B841D4 /* lokalite-logo@2x.png */; };
+		05770E9013DE228700B841D4 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05770E8E13DE228700B841D4 /* LogInViewController.m */; };
+		05770E9113DE228700B841D4 /* LogInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05770E8F13DE228700B841D4 /* LogInView.xib */; };
 		058962BF13DA299700556F6D /* LokalitePlacesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962BE13DA299700556F6D /* LokalitePlacesStream.m */; };
 		058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */; };
 		0590FF5413D8BAD4006A2254 /* all-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3813D8BAD4006A2254 /* all-selected@2x.png */; };
@@ -244,6 +246,9 @@
 		05770E8613DDD75A00B841D4 /* TableViewImageFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewImageFetcher.m; path = src/shared/TableViewImageFetcher.m; sourceTree = "<group>"; };
 		05770E8813DE1B8D00B841D4 /* lokalite-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lokalite-logo.png"; path = "images/lokalite-logo.png"; sourceTree = "<group>"; };
 		05770E8913DE1B8D00B841D4 /* lokalite-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lokalite-logo@2x.png"; path = "images/lokalite-logo@2x.png"; sourceTree = "<group>"; };
+		05770E8D13DE228700B841D4 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogInViewController.h; path = "src/log-in/LogInViewController.h"; sourceTree = "<group>"; };
+		05770E8E13DE228700B841D4 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogInViewController.m; path = "src/log-in/LogInViewController.m"; sourceTree = "<group>"; };
+		05770E8F13DE228700B841D4 /* LogInView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LogInView.xib; path = "src/log-in/LogInView.xib"; sourceTree = "<group>"; };
 		058962BD13DA299700556F6D /* LokalitePlacesStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokalitePlacesStream.h; path = src/lokalite/LokalitePlacesStream.h; sourceTree = "<group>"; };
 		058962BE13DA299700556F6D /* LokalitePlacesStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokalitePlacesStream.m; path = src/lokalite/LokalitePlacesStream.m; sourceTree = "<group>"; };
 		058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteStreamViewController.h; path = src/shared/LokaliteStreamViewController.h; sourceTree = "<group>"; };
@@ -461,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				05209F0C13C7705800CA6A2D /* application */,
+				05770E8C13DE1F1B00B841D4 /* log-in */,
 				05209F0D13C7705D00CA6A2D /* featured */,
 				05209F0E13C7706700CA6A2D /* loyalty */,
 				05EC9A3913CB969700B7AD61 /* events */,
@@ -602,6 +608,16 @@
 				056A92F313CD0E0D00C65DC0 /* Localizable.strings */,
 			);
 			name = strings;
+			sourceTree = "<group>";
+		};
+		05770E8C13DE1F1B00B841D4 /* log-in */ = {
+			isa = PBXGroup;
+			children = (
+				05770E8D13DE228700B841D4 /* LogInViewController.h */,
+				05770E8E13DE228700B841D4 /* LogInViewController.m */,
+				05770E8F13DE228700B841D4 /* LogInView.xib */,
+			);
+			name = "log-in";
 			sourceTree = "<group>";
 		};
 		0590FF1B13D8B229006A2254 /* category-filter-images */ = {
@@ -895,6 +911,7 @@
 				05770E8413DDCD9800B841D4 /* PlaceTableViewCell.xib in Resources */,
 				05770E8A13DE1B8D00B841D4 /* lokalite-logo.png in Resources */,
 				05770E8B13DE1B8D00B841D4 /* lokalite-logo@2x.png in Resources */,
+				05770E9113DE228700B841D4 /* LogInView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,6 +976,7 @@
 				058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */,
 				05770E8113DDCD8500B841D4 /* PlaceTableViewCell.m in Sources */,
 				05770E8713DDD75A00B841D4 /* TableViewImageFetcher.m in Sources */,
+				05770E9013DE228700B841D4 /* LogInViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -116,7 +116,43 @@ static const NSInteger NUM_META_ACTION_ROWS = kMetaActionHelpRow + 1;
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UIViewController *c = nil;
+
+    if ([indexPath section] == kSectionUserActions) {
+        if ([indexPath row] == kUserActionLogInRow) {
+            LogInViewController *livc =
+                [[[LogInViewController alloc] init] autorelease];
+            [livc setDelegate:self];
+            c = livc;
+        } else if ([indexPath row] == kUserActionSignUpRow) {
+
+        }
+    } else if ([indexPath section] == kSectionMetaActions) {
+        if ([indexPath row] == kMetaActionLearnMoreRow) {
+        } else if ([indexPath row] == kMetaActionHelpRow) {
+        }
+    }
+
+    if (c) {
+        UINavigationController *nc =
+            [[UINavigationController alloc] initWithRootViewController:c];
+        [self presentModalViewController:nc animated:YES];
+        [nc release], nc = nil;
+    } else
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - LogInViewControllerDelegate implementation
+
+- (void)logInViewController:(LogInViewController *)controller
+       didLogInWithUsername:(NSString *)username
+                   password:(NSString *)password
+{
+}
+
+- (void)logInViewControllerDidCancel:(LogInViewController *)controller
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - View initialization
