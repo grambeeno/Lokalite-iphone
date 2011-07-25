@@ -33,6 +33,7 @@
 #import "UIButton+GeneralHelpers.h"
 #import "UITableViewCell+GeneralHelpers.h"
 #import "UIApplication+GeneralHelpers.h"
+#import "UIViewController+GeneralHelpers.h"
 
 
 //

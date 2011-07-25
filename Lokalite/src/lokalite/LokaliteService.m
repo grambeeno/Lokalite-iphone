@@ -44,6 +44,23 @@
     return self;
 }
 
+#pragma mark - Authentication
+
+- (void)fetchProfileForUsername:(NSString *)username
+                       password:(NSString *)password
+                responseHandler:(LSResponseHandler)handler
+{
+    NSURL *url = [self profileUrl];
+    NSDictionary *parameters =
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         username, @"username", password, @"password", nil];
+
+    [self sendRequestWithUrl:url
+                  parameters:parameters
+               requestMethod:LKRequestMethodGET
+             responseHandler:handler];
+}
+
 #pragma mark - Events
 
 - (void)fetchFeaturedEventsWithResponseHandler:(LSResponseHandler)handler
@@ -165,6 +182,11 @@
 }
 
 #pragma mark - URLs
+
+- (NSURL *)profileUrl
+{
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/profile"];
+}
 
 - (NSURL *)featuredEventUrl
 {

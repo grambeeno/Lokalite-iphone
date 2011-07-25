@@ -18,6 +18,12 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 
 - (id)initWithBaseUrl:(NSURL *)url;
 
+#pragma mark - Authentication
+
+- (void)fetchProfileForUsername:(NSString *)username
+                       password:(NSString *)password
+                responseHandler:(LSResponseHandler)handler;
+
 #pragma mark - Events
 
 - (void)fetchFeaturedEventsWithResponseHandler:(LSResponseHandler)handler;
@@ -38,6 +44,7 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 
 #pragma mark - URLs
 
+- (NSURL *)profileUrl;
 - (NSURL *)featuredEventUrl;
 - (NSURL *)placesUrl;
 

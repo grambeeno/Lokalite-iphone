@@ -8,7 +8,13 @@
 
 #import "LogInViewController.h"
 
+#import "LokaliteService.h"
+
+#import "SDKAdditions.h"
+
 @interface LogInViewController ()
+
+@property (nonatomic, retain) LokaliteService *service;
 
 #pragma mark - View initialization
 
@@ -36,6 +42,8 @@
 @synthesize usernameTextField = usernameTextField_;
 @synthesize passwordTextField = passwordTextField_;
 
+@synthesize service = service_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -47,7 +55,9 @@
 
     [usernameTextField_ release];
     [passwordTextField_ release];
-    
+
+    [service_ release];
+
     [super dealloc];
 }
 
@@ -165,7 +175,7 @@
          initWithTitle:NSLocalizedString(@"global.log-in", nil)
                  style:UIBarButtonItemStyleDone
                 target:self
-                action:@selector(done:)];
+                action:@selector(logIn:)];
     [navItem setRightBarButtonItem:logInButton];
     [logInButton release], logInButton = nil;
 }
@@ -184,6 +194,32 @@
 - (void)attemptLogInWithUsername:(NSString *)username
                         password:(NSString *)password
 {
+    NSLog(@"Attempting log in of user: '%@'", username);
+
+    [[self usernameTextField] resignFirstResponder];
+    [[self passwordTextField] resignFirstResponder];
+
+    [self displayActivityViewWithCompletion:^{
+        [[self service] fetchProfileForUsername:username
+                                       password:password
+                                responseHandler:
+         ^(NSDictionary *dictionary, NSError *error) {
+             NSLog(@"dictionary: %@", dictionary);
+             NSLog(@"error: %@", error);
+         }];
+    }];
+}
+
+#pragma mark - Accessors
+
+- (LokaliteService *)service
+{
+    if (!service_) {
+        NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+        service_ = [[LokaliteService alloc] initWithBaseUrl:baseUrl];
+    }
+
+    return service_;
 }
 
 @end

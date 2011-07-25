@@ -94,6 +94,13 @@ didReceiveResponse:(NSURLResponse *)response
     [self setData:[NSMutableData data]];
 }
 
+- (void)connection:(NSURLConnection *)connection
+    didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    NSLog(@"%@: %@", NSStringFromClass([self class]),
+          NSStringFromSelector(_cmd));
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     [[self data] appendData:data];
