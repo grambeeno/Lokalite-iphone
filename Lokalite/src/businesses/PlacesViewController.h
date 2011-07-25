@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LokaliteStreamViewController.h"
 
-@interface PlacesViewController : UITableViewController
+@interface PlacesViewController : LokaliteStreamViewController
 
 @end

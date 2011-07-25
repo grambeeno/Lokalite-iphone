@@ -8,6 +8,8 @@
 
 #import "Business+GeneralHelpers.h"
 
+#import "LokaliteObjectBuilder.h"
+
 #import "NSObject+GeneralHelpers.h"
 #import "NSManagedObject+GeneralHelpers.h"
 
@@ -78,6 +80,24 @@
     [business setCategory:category];
 
     return business;
+}
+
++ (NSArray *)businessObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                                withContext:(NSManagedObjectContext *)context
+{
+    NSArray *objs = [[jsonObjects objectForKey:@"data"] objectForKey:@"list"];
+
+    NSMutableArray *places =
+        [NSMutableArray arrayWithCapacity:[jsonObjects count]];
+    [objs enumerateObjectsUsingBlock:
+     ^(NSDictionary *placeData, NSUInteger idx, BOOL *stop) {
+         Business *business =
+            [Business createOrUpdateBusinessFromJsonData:placeData
+                                               inContext:context];
+         [places addObject:business];
+     }];
+
+    return places;
 }
 
 #pragma mark - Helper methods

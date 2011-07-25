@@ -8,51 +8,55 @@
 
 #import "PlacesViewController.h"
 
+#import "PlaceTableViewCell.h"
+#import "UITableViewCell+GeneralHelpers.h"
+
+#import "LokaliteStream.h"
+#import "LokalitePlacesStream.h"
+
 @implementation PlacesViewController
 
-#pragma mark - UITableViewController implementation
+#pragma mark - LokaliteStreamViewController implementation
 
-- (void)viewDidLoad
+- (NSString *)lokaliteObjectEntityName
 {
-    [super viewDidLoad];
+    return @"Business";
 }
 
-#pragma mark - UITableViewDataSource implementation
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSArray *)dataControllerSortDescriptors
 {
-    return 0;
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                         ascending:YES];
+    return [NSArray arrayWithObject:sd];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section
+- (LokaliteStream *)lokaliteStreamInstance
 {
-    return 0;
+    return [LokalitePlacesStream streamWithContext:[self context]];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Configuring the table view
+
+- (CGFloat)cellHeightForTableView:(UITableView *)tableView
 {
-    static NSString *CellIdentifier = @"Cell";
-
-    UITableViewCell *cell =
-        [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell =
-            [[[UITableViewCell alloc]
-              initWithStyle:UITableViewCellStyleDefault
-              reuseIdentifier:CellIdentifier] autorelease];
-    }
-
-    return cell;
+    return [PlaceTableViewCell cellHeight];
 }
 
-#pragma mark - UITableViewDelegate implementation
-
-- (void)tableView:(UITableView *)tableView
-    didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
+                              inTableView:(UITableView *)tableView
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    return [PlaceTableViewCell defaultReuseIdentifier];
+}
+
+- (UITableViewCell *)tableViewCellInstanceForTableView:(UITableView *)tableView
+                                       reuseIdentifier:(NSString *)identifier
+{
+    return [PlaceTableViewCell instanceFromNib];
+}
+
+- (void)configureCell:(PlaceTableViewCell *)cell forObject:(Business *)place
+{
+    [cell configureCellForPlace:place];
 }
 
 @end

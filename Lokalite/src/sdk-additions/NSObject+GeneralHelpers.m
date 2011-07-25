@@ -12,6 +12,8 @@
 
 - (BOOL)setValueIfNecessary:(id)value forKey:(NSString *)key
 {
+    value = [[NSNull null] isEqual:value] ? nil : value;
+
     id current = [self valueForKey:key];
     if (![current isEqual:value]) {
         [self setValue:value forKey:key];

@@ -11,8 +11,8 @@
 #import <CoreData/CoreData.h>
 
 #import "FeaturedViewController.h"
-#import "SearchViewController.h"
 #import "EventsViewController.h"
+#import "PlacesViewController.h"
 
 #import "ActivityView.h"
 
@@ -81,6 +81,14 @@
              FeaturedViewController *featuredController =
                 (FeaturedViewController *) controller;
              [featuredController setContext:context];
+         } else if ([controller isKindOfClass:[EventsViewController class]]) {
+             EventsViewController *eventsController =
+                (EventsViewController *) controller;
+             [eventsController setContext:context];
+         } else if ([controller isKindOfClass:[PlacesViewController class]]) {
+             PlacesViewController *placesController =
+                (PlacesViewController *) controller;
+             [placesController setContext:context];
          }
      }];
 }
@@ -153,19 +161,17 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController
     shouldSelectViewController:(UIViewController *)viewController
 {
+    /*
     if ([viewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nc = (UINavigationController *) viewController;
         UIViewController *tc = [nc topViewController];
-        if ([tc isKindOfClass:[SearchViewController class]]) {
-            SearchViewController *searchController =
-                (SearchViewController *) tc;
-            [searchController setContext:[self context]];
-        } else if ([tc isKindOfClass:[EventsViewController class]]) {
+        if ([tc isKindOfClass:[EventsViewController class]]) {
             EventsViewController *eventsController =
                 (EventsViewController *) tc;
             [eventsController setContext:[self context]];
         }
     }
+     */
 
     return YES;
 }

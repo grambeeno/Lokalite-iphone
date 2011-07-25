@@ -12,7 +12,7 @@
 
 + (id)eventWithId:(NSNumber *)eventId inContext:(NSManagedObjectContext *)moc;
 
-+ (NSArray *)eventObjectsFromJsonObjects:(NSDictionary *)jsonOjbects
++ (NSArray *)eventObjectsFromJsonObjects:(NSDictionary *)jsonObjects
                              withContext:(NSManagedObjectContext *)context;
 
 + (id)createOrUpdateEventFromJsonData:(NSDictionary *)eventData

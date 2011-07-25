@@ -50,21 +50,6 @@
 {
     NSLog(@"%@", NSStringFromSelector(_cmd));
     NSURL *url = [self featuredEventUrl];
-    /*
-    LokaliteServiceRequest *req =
-        [[LokaliteServiceRequest alloc] initWithUrl:url
-                                         parameters:[NSDictionary dictionary]
-                                      requestMethod:LKRequestMethodGET];
-    [req performRequestWithHandler:
-     ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
-         if (data) {
-             NSError *error = nil;
-             id object = [self processJsonData:data error:&error];
-             handler(object, error);
-         } else
-             handler(nil, error);
-     }];
-     */
 
     [self sendRequestWithUrl:url
                   parameters:nil
@@ -83,6 +68,17 @@
 
     [self sendRequestWithUrl:url
                   parameters:params
+               requestMethod:LKRequestMethodGET
+             responseHandler:handler];
+}
+
+#pragma mark - Places
+
+- (void)fetchPlacesWithCategory:(NSString *)category
+                responseHandler:(LSResponseHandler)handler
+{
+    [self sendRequestWithUrl:[self placesUrl]
+                  parameters:nil
                requestMethod:LKRequestMethodGET
              responseHandler:handler];
 }
@@ -173,6 +169,13 @@
 - (NSURL *)featuredEventUrl
 {
     return [[self baseUrl] URLByAppendingPathComponent:@"api/events/browse"];
+}
+
+- (NSURL *)placesUrl
+{
+    return
+        [[self baseUrl]
+         URLByAppendingPathComponent:@"api/organizations/browse"];
 }
 
 @end

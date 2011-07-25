@@ -70,6 +70,10 @@
 		056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */; };
 		056A92F513CD0E0D00C65DC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 056A92F313CD0E0D00C65DC0 /* Localizable.strings */; };
 		056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */; };
+		05770E8113DDCD8500B841D4 /* PlaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05770E8013DDCD8500B841D4 /* PlaceTableViewCell.m */; };
+		05770E8413DDCD9800B841D4 /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05770E8313DDCD9800B841D4 /* PlaceTableViewCell.xib */; };
+		058962BF13DA299700556F6D /* LokalitePlacesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962BE13DA299700556F6D /* LokalitePlacesStream.m */; };
+		058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */; };
 		0590FF5413D8BAD4006A2254 /* all-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3813D8BAD4006A2254 /* all-selected@2x.png */; };
 		0590FF5513D8BAD4006A2254 /* all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3913D8BAD4006A2254 /* all@2x.png */; };
 		0590FF5713D8BAD4006A2254 /* arts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3B13D8BAD4006A2254 /* arts@2x.png */; };
@@ -230,6 +234,13 @@
 		056A92F413CD0E0D00C65DC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = strings/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		056A92FA13CD174300C65DC0 /* UIColor+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+GeneralHelpers.h"; path = "src/sdk-additions/UIColor+GeneralHelpers.h"; sourceTree = "<group>"; };
 		056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+GeneralHelpers.m"; path = "src/sdk-additions/UIColor+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05770E7F13DDCD8500B841D4 /* PlaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceTableViewCell.h; path = src/businesses/PlaceTableViewCell.h; sourceTree = "<group>"; };
+		05770E8013DDCD8500B841D4 /* PlaceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceTableViewCell.m; path = src/businesses/PlaceTableViewCell.m; sourceTree = "<group>"; };
+		05770E8313DDCD9800B841D4 /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlaceTableViewCell.xib; path = src/businesses/PlaceTableViewCell.xib; sourceTree = "<group>"; };
+		058962BD13DA299700556F6D /* LokalitePlacesStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokalitePlacesStream.h; path = src/lokalite/LokalitePlacesStream.h; sourceTree = "<group>"; };
+		058962BE13DA299700556F6D /* LokalitePlacesStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokalitePlacesStream.m; path = src/lokalite/LokalitePlacesStream.m; sourceTree = "<group>"; };
+		058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteStreamViewController.h; path = src/shared/LokaliteStreamViewController.h; sourceTree = "<group>"; };
+		058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteStreamViewController.m; path = src/shared/LokaliteStreamViewController.m; sourceTree = "<group>"; };
 		0590FF3813D8BAD4006A2254 /* all-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all-selected@2x.png"; path = "images/buttons/category-filter-images/all-selected@2x.png"; sourceTree = "<group>"; };
 		0590FF3913D8BAD4006A2254 /* all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all@2x.png"; path = "images/buttons/category-filter-images/all@2x.png"; sourceTree = "<group>"; };
 		0590FF3B13D8BAD4006A2254 /* arts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arts@2x.png"; path = "images/buttons/category-filter-images/arts@2x.png"; sourceTree = "<group>"; };
@@ -354,6 +365,8 @@
 				056A92E713CCF13000C65DC0 /* LokaliteFeaturedEventStream.m */,
 				05D0205013D4F80500FE0A6C /* LokaliteEventStream.h */,
 				05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */,
+				058962BD13DA299700556F6D /* LokalitePlacesStream.h */,
+				058962BE13DA299700556F6D /* LokalitePlacesStream.m */,
 				059B33FE13D4BC5A007AD11C /* LokaliteSearchStream.h */,
 				059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */,
 				056A92EF13CCFB0600C65DC0 /* LokaliteObjectBuilder.h */,
@@ -368,6 +381,8 @@
 				0514FBF513CE5FC700ACA464 /* LokaliteShared.h */,
 				0514FBF213CE561D00ACA464 /* DataFetcher.h */,
 				0514FBF313CE561D00ACA464 /* DataFetcher.m */,
+				058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */,
+				058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */,
 			);
 			name = shared;
 			sourceTree = "<group>";
@@ -437,10 +452,10 @@
 				05209F0C13C7705800CA6A2D /* application */,
 				05209F0D13C7705D00CA6A2D /* featured */,
 				05209F0E13C7706700CA6A2D /* loyalty */,
-				059B33F713D48138007AD11C /* search */,
 				05EC9A3913CB969700B7AD61 /* events */,
 				05EC9A3A13CB96BA00B7AD61 /* businesses */,
 				0590FF7B13D8E15D006A2254 /* profile */,
+				059B33F713D48138007AD11C /* search */,
 				05A7B41713D73111008E737C /* categories */,
 				0568334613D09C4200520C78 /* venues */,
 				0568334713D09C5200520C78 /* locations */,
@@ -709,6 +724,9 @@
 				0590FF7213D8DD3B006A2254 /* PlacesViewController.h */,
 				0590FF7313D8DD3B006A2254 /* PlacesViewController.m */,
 				0590FF7413D8DD3B006A2254 /* PlacesView.xib */,
+				05770E7F13DDCD8500B841D4 /* PlaceTableViewCell.h */,
+				05770E8013DDCD8500B841D4 /* PlaceTableViewCell.m */,
+				05770E8313DDCD9800B841D4 /* PlaceTableViewCell.xib */,
 			);
 			name = businesses;
 			sourceTree = "<group>";
@@ -863,6 +881,7 @@
 				0590FF7913D8E045006A2254 /* tab-bar-icon-events.png in Resources */,
 				0590FF7A13D8E045006A2254 /* tab-bar-icon-events@2x.png in Resources */,
 				0590FF8013D8E17F006A2254 /* ProfileView.xib in Resources */,
+				05770E8413DDCD9800B841D4 /* PlaceTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,6 +942,9 @@
 				0549AB5513D77A6800F9C2C2 /* CategoryFilter.m in Sources */,
 				0590FF7513D8DD3B006A2254 /* PlacesViewController.m in Sources */,
 				0590FF7F13D8E17F006A2254 /* ProfileViewController.m in Sources */,
+				058962BF13DA299700556F6D /* LokalitePlacesStream.m in Sources */,
+				058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */,
+				05770E8113DDCD8500B841D4 /* PlaceTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

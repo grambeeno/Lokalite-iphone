@@ -16,6 +16,9 @@
 + (id)createOrUpdateBusinessFromJsonData:(NSDictionary *)businessData
                                inContext:(NSManagedObjectContext *)context;
 
++ (NSArray *)businessObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                                withContext:(NSManagedObjectContext *)context;
+
 #pragma mark - Helper methods
 
 - (NSURL *)addressUrl;

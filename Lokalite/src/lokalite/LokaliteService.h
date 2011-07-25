@@ -24,6 +24,11 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 - (void)fetchEventsWithCategory:(NSString *)category
                 responseHandler:(LSResponseHandler)handler;
 
+#pragma mark - Places
+
+- (void)fetchPlacesWithCategory:(NSString *)category
+                responseHandler:(LSResponseHandler)handler;
+
 #pragma mark - Search
 
 - (void)searchForKeywords:(NSArray *)keywords
@@ -34,5 +39,6 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 #pragma mark - URLs
 
 - (NSURL *)featuredEventUrl;
+- (NSURL *)placesUrl;
 
 @end
