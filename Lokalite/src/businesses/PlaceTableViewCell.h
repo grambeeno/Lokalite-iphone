@@ -10,6 +10,8 @@
 
 @interface PlaceTableViewCell : UITableViewCell
 
+@property (nonatomic, copy) NSNumber *placeId;
+
 @property (nonatomic, retain) IBOutlet UIImageView *placeImageView;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *summaryLabel;

@@ -10,6 +10,8 @@
 
 @implementation PlaceTableViewCell
 
+@synthesize placeId = placeId_;
+
 @synthesize placeImageView = placeImageView_;
 @synthesize nameLabel = nameLabel_;
 @synthesize summaryLabel = summaryLabel_;
@@ -18,6 +20,8 @@
 
 - (void)dealloc
 {
+    [placeId_ release];
+
     [placeImageView_ release];
     [nameLabel_ release];
     [summaryLabel_ release];
@@ -42,6 +46,8 @@
 
 - (void)configureCellForPlace:(Business *)place
 {
+    [self setPlaceId:[place identifier]];
+
     [[self nameLabel] setText:[place name]];
     [[self summaryLabel] setText:[place status]];
 }

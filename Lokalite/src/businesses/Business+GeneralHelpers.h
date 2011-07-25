@@ -21,6 +21,8 @@
 
 #pragma mark - Helper methods
 
+- (UIImage *)image;
+
 - (NSURL *)addressUrl;
 - (NSURL *)phoneUrl;
 

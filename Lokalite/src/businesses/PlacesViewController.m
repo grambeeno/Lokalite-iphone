@@ -8,13 +8,36 @@
 
 #import "PlacesViewController.h"
 
+#import "Business.h"
+#import "Business+GeneralHelpers.h"
+
 #import "PlaceTableViewCell.h"
-#import "UITableViewCell+GeneralHelpers.h"
 
 #import "LokaliteStream.h"
 #import "LokalitePlacesStream.h"
 
+#import "TableViewImageFetcher.h"
+
+#import "SDKAdditions.h"
+
+@interface PlacesViewController ()
+
+@property (nonatomic, retain) TableViewImageFetcher *imageFetcher;
+
+@end
+
+
 @implementation PlacesViewController
+
+@synthesize imageFetcher = imageFetcher_;
+
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    [imageFetcher_ release];
+    [super dealloc];
+}
 
 #pragma mark - LokaliteStreamViewController implementation
 
@@ -57,6 +80,44 @@
 - (void)configureCell:(PlaceTableViewCell *)cell forObject:(Business *)place
 {
     [cell configureCellForPlace:place];
+
+    UIImage *image = [place image];
+    if (image)
+        [[cell placeImageView] setImage:image];
+    else {
+        NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+        NSString *urlPath = [place imageUrl];
+        NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
+
+        __block UIImage *image = nil;
+        [[self imageFetcher] fetchImageDataAtUrl:url
+                                       tableView:[self tableView]
+                             dataReceivedHandler:
+         ^(NSData *data) {
+             [place setImageData:data];
+             image = [UIImage imageWithData:data];
+         }
+                            tableViewCellHandler:
+         ^(UITableViewCell *tvc, NSIndexPath *path) {
+             PlaceTableViewCell *cell = (PlaceTableViewCell *) tvc;
+             if ([[cell placeId] isEqualToNumber:[place identifier]])
+                 [[cell placeImageView] setImage:image];
+         }
+                                    errorHandler:
+         ^(NSError *error) {
+             NSLog(@"WARNING: Failed to fetch place image at: %@", url);
+         }];
+    }
+}
+
+#pragma mark - Accessors
+
+- (TableViewImageFetcher *)imageFetcher
+{
+    if (!imageFetcher_)
+        imageFetcher_ = [[TableViewImageFetcher alloc] init];
+
+    return imageFetcher_;
 }
 
 @end

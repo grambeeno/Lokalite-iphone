@@ -72,6 +72,7 @@
 		056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */; };
 		05770E8113DDCD8500B841D4 /* PlaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05770E8013DDCD8500B841D4 /* PlaceTableViewCell.m */; };
 		05770E8413DDCD9800B841D4 /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05770E8313DDCD9800B841D4 /* PlaceTableViewCell.xib */; };
+		05770E8713DDD75A00B841D4 /* TableViewImageFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 05770E8613DDD75A00B841D4 /* TableViewImageFetcher.m */; };
 		058962BF13DA299700556F6D /* LokalitePlacesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962BE13DA299700556F6D /* LokalitePlacesStream.m */; };
 		058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */; };
 		0590FF5413D8BAD4006A2254 /* all-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3813D8BAD4006A2254 /* all-selected@2x.png */; };
@@ -237,6 +238,8 @@
 		05770E7F13DDCD8500B841D4 /* PlaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceTableViewCell.h; path = src/businesses/PlaceTableViewCell.h; sourceTree = "<group>"; };
 		05770E8013DDCD8500B841D4 /* PlaceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceTableViewCell.m; path = src/businesses/PlaceTableViewCell.m; sourceTree = "<group>"; };
 		05770E8313DDCD9800B841D4 /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlaceTableViewCell.xib; path = src/businesses/PlaceTableViewCell.xib; sourceTree = "<group>"; };
+		05770E8513DDD75A00B841D4 /* TableViewImageFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewImageFetcher.h; path = src/shared/TableViewImageFetcher.h; sourceTree = "<group>"; };
+		05770E8613DDD75A00B841D4 /* TableViewImageFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewImageFetcher.m; path = src/shared/TableViewImageFetcher.m; sourceTree = "<group>"; };
 		058962BD13DA299700556F6D /* LokalitePlacesStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokalitePlacesStream.h; path = src/lokalite/LokalitePlacesStream.h; sourceTree = "<group>"; };
 		058962BE13DA299700556F6D /* LokalitePlacesStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokalitePlacesStream.m; path = src/lokalite/LokalitePlacesStream.m; sourceTree = "<group>"; };
 		058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteStreamViewController.h; path = src/shared/LokaliteStreamViewController.h; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 				0514FBF313CE561D00ACA464 /* DataFetcher.m */,
 				058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */,
 				058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */,
+				05770E8513DDD75A00B841D4 /* TableViewImageFetcher.h */,
+				05770E8613DDD75A00B841D4 /* TableViewImageFetcher.m */,
 			);
 			name = shared;
 			sourceTree = "<group>";
@@ -945,6 +950,7 @@
 				058962BF13DA299700556F6D /* LokalitePlacesStream.m in Sources */,
 				058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */,
 				05770E8113DDCD8500B841D4 /* PlaceTableViewCell.m in Sources */,
+				05770E8713DDD75A00B841D4 /* TableViewImageFetcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
