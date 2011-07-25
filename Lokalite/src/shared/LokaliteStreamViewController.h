@@ -29,6 +29,10 @@
 
 #pragma mark - Protected interface
 
+#pragma mark Configuring the view
+
+- (NSString *)titleForView;
+
 #pragma mark Configuring the table view
 
 - (CGFloat)cellHeightForTableView:(UITableView *)tableView;
@@ -40,7 +44,9 @@
 - (void)configureCell:(UITableViewCell *)cell
             forObject:(NSManagedObject *)object;
 
-#pragma mark - Working with the local data store
+- (void)displayDetailsForObject:(NSManagedObject *)object;
+
+#pragma mark Working with the local data store
 
 //
 // Override to configure the results controller yourself. Optionally you can

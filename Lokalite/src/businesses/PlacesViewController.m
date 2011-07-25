@@ -10,6 +10,7 @@
 
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
+#import "BusinessDetailsViewController.h"
 
 #import "PlaceTableViewCell.h"
 
@@ -41,21 +42,11 @@
 
 #pragma mark - LokaliteStreamViewController implementation
 
-- (NSString *)lokaliteObjectEntityName
-{
-    return @"Business";
-}
+#pragma mark Configuring the view
 
-- (NSArray *)dataControllerSortDescriptors
+- (NSString *)titleForView
 {
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
-                                                         ascending:YES];
-    return [NSArray arrayWithObject:sd];
-}
-
-- (LokaliteStream *)lokaliteStreamInstance
-{
-    return [LokalitePlacesStream streamWithContext:[self context]];
+    return @"Places";
 }
 
 #pragma mark - Configuring the table view
@@ -108,6 +99,33 @@
              NSLog(@"WARNING: Failed to fetch place image at: %@", url);
          }];
     }
+}
+
+- (void)displayDetailsForObject:(Business *)place
+{
+    BusinessDetailsViewController *controller =
+        [[BusinessDetailsViewController alloc] initWithBusiness:place];
+    [[self navigationController] pushViewController:controller animated:YES];
+    [controller release], controller = nil;
+}
+
+#pragma mark Working with the local data store
+
+- (NSString *)lokaliteObjectEntityName
+{
+    return @"Business";
+}
+
+- (NSArray *)dataControllerSortDescriptors
+{
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                         ascending:YES];
+    return [NSArray arrayWithObject:sd];
+}
+
+- (LokaliteStream *)lokaliteStreamInstance
+{
+    return [LokalitePlacesStream streamWithContext:[self context]];
 }
 
 #pragma mark - Accessors

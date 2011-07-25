@@ -113,6 +113,8 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSManagedObject *obj = [[self dataController] objectAtIndexPath:indexPath];
+    [self displayDetailsForObject:obj];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate implementation
@@ -198,7 +200,16 @@
 }
 
 #pragma mark - Protected interface
-    
+
+#pragma mark Configuring the view
+
+- (NSString *)titleForView
+{
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));    
+    return nil;
+}
+
 #pragma mark Configuring the table view
 
 - (CGFloat)cellHeightForTableView:(UITableView *)tableView
@@ -223,6 +234,10 @@
 {
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+}
+
+- (void)displayDetailsForObject:(NSManagedObject *)object
+{
 }
 
 #pragma mark - Working with the local data store
