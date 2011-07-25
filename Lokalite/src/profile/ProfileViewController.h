@@ -10,4 +10,6 @@
 
 @interface ProfileViewController : UITableViewController
 
+@property (nonatomic, retain) IBOutlet UIView *headerView;
+
 @end

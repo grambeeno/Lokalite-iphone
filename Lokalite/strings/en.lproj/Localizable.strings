@@ -17,6 +17,11 @@
 "global.event" = "Event";
 "global.business" = "Business";
 
+"global.log-in" = "Log In";
+"global.sign-up" = "Sign Up";
+"global.learn-more" = "Learn More";
+"global.help" = "Help";
+
 
 /*
  * Featured
