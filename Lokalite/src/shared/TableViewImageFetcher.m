@@ -35,7 +35,7 @@
     self = [super init];
     if (self)
         pendingUrls_ = [[NSMutableSet alloc] init];
-    
+
     return self;
 }
 
