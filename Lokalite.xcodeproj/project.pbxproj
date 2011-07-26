@@ -138,6 +138,8 @@
 		05EB58E113DF347500436F13 /* LokaliteAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58E013DF347500436F13 /* LokaliteAccount.m */; };
 		05EB58E413DF356700436F13 /* LokaliteAccount+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58E313DF356700436F13 /* LokaliteAccount+GeneralHelpers.m */; };
 		05EB58E613DF37FE00436F13 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EB58E513DF37FE00436F13 /* Security.framework */; };
+		05EB58EA13DF648800436F13 /* AccountDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58E813DF648700436F13 /* AccountDetailsViewController.m */; };
+		05EB58EB13DF648800436F13 /* AccountDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EB58E913DF648800436F13 /* AccountDetailsView.xib */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
 		05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EC9A4113CB971400B7AD61 /* CoreData.framework */; };
@@ -338,6 +340,9 @@
 		05EB58E213DF356600436F13 /* LokaliteAccount+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteAccount+GeneralHelpers.h"; path = "src/accounts/LokaliteAccount+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05EB58E313DF356700436F13 /* LokaliteAccount+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LokaliteAccount+GeneralHelpers.m"; path = "src/accounts/LokaliteAccount+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05EB58E513DF37FE00436F13 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		05EB58E713DF648700436F13 /* AccountDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccountDetailsViewController.h; path = src/accounts/AccountDetailsViewController.h; sourceTree = "<group>"; };
+		05EB58E813DF648700436F13 /* AccountDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccountDetailsViewController.m; path = src/accounts/AccountDetailsViewController.m; sourceTree = "<group>"; };
+		05EB58E913DF648800436F13 /* AccountDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccountDetailsView.xib; path = src/accounts/AccountDetailsView.xib; sourceTree = "<group>"; };
 		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
 		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
@@ -739,6 +744,9 @@
 				05EB58D613DF312800436F13 /* LokaliteAccount+KeychainAdditions.m */,
 				05EB58E213DF356600436F13 /* LokaliteAccount+GeneralHelpers.h */,
 				05EB58E313DF356700436F13 /* LokaliteAccount+GeneralHelpers.m */,
+				05EB58E713DF648700436F13 /* AccountDetailsViewController.h */,
+				05EB58E813DF648700436F13 /* AccountDetailsViewController.m */,
+				05EB58E913DF648800436F13 /* AccountDetailsView.xib */,
 			);
 			name = accounts;
 			sourceTree = "<group>";
@@ -962,6 +970,7 @@
 				05770E8A13DE1B8D00B841D4 /* lokalite-logo.png in Resources */,
 				05770E8B13DE1B8D00B841D4 /* lokalite-logo@2x.png in Resources */,
 				05770E9113DE228700B841D4 /* LogInView.xib in Resources */,
+				05EB58EB13DF648800436F13 /* AccountDetailsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1033,6 +1042,7 @@
 				05EB58DB13DF326900436F13 /* SFHFKeychainUtils.m in Sources */,
 				05EB58E113DF347500436F13 /* LokaliteAccount.m in Sources */,
 				05EB58E413DF356700436F13 /* LokaliteAccount+GeneralHelpers.m in Sources */,
+				05EB58EA13DF648800436F13 /* AccountDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

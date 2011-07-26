@@ -17,7 +17,11 @@
 
 #import "ActivityView.h"
 
+#import "LokaliteAccount.h"
+
 #import "SDKAdditions.h"
+
+static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
 @interface LokaliteAppDelegate ()
 
@@ -25,9 +29,21 @@
 @property (nonatomic, retain) NSPersistentStoreCoordinator *coordinator;
 @property (nonatomic, retain) NSManagedObjectContext *context;
 
+#pragma mark - User interface management
+
+- (void)initializeTabBarController:(UITabBarController *)tabBarController;
+
+- (void)updateInterfaceForNoAccount;
+- (void)updateInterfaceForAccount:(LokaliteAccount *)account;
+- (void)exchangeTabBarViewControllerAtIndex:(NSInteger)index
+                         withViewController:(UIViewController *)controller;
+
 #pragma mark - Persistence management
 
 - (void)saveContext;
+
+- (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context;
+- (void)unsubscribeForNotoficationsForContext:(NSManagedObjectContext *)context;
 
 #pragma mark - Static accessors
 
@@ -103,6 +119,10 @@
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self subscribeForNotificationsForContext:[self context]];
+
+    [self initializeTabBarController:[self tabBarController]];
+
     [[self window] setRootViewController:[self tabBarController]];
     [[self window] makeKeyAndVisible];
 
@@ -161,27 +181,122 @@
      */
 }
 
-#pragma mark - UITabBarDelegate implementation
+#pragma mark - AccountDetailsViewControllerDelegate implementation
 
-- (BOOL)tabBarController:(UITabBarController *)tabBarController
-    shouldSelectViewController:(UIViewController *)viewController
+- (void)accountDetailsViewController:(AccountDetailsViewController *)controller
+                       logOutAccount:(LokaliteAccount *)account
 {
-    /*
-    if ([viewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *nc = (UINavigationController *) viewController;
-        UIViewController *tc = [nc topViewController];
-        if ([tc isKindOfClass:[EventsViewController class]]) {
-            EventsViewController *eventsController =
-                (EventsViewController *) tc;
-            [eventsController setContext:[self context]];
-        }
-    }
-     */
+    NSString *title = nil;
+    NSString *cancelTitle = NSLocalizedString(@"global.cancel", nil);
+    NSString *logOutTitle = NSLocalizedString(@"global.log-out", nil);
 
-    return YES;
+    UIActionSheet *sheet =
+        [[UIActionSheet alloc] initWithTitle:title
+                                    delegate:self
+                           cancelButtonTitle:cancelTitle
+                      destructiveButtonTitle:logOutTitle
+                           otherButtonTitles:nil];
+
+    [sheet showFromTabBar:[[self tabBarController] tabBar]];
+    [sheet release], sheet = nil;
+}
+
+#pragma mark - User interface management
+
+- (void)initializeTabBarController:(UITabBarController *)tabBarController
+{
+    LokaliteAccount *account =
+        [LokaliteAccount findFirstWithPredicate:nil inContext:[self context]];
+
+    if (account)
+        [self updateInterfaceForAccount:account];
+}
+
+- (void)updateInterfaceForNoAccount
+{
+    ProfileViewController *controller = [[ProfileViewController alloc] init];
+    [controller setContext:[self context]];
+    UINavigationController *nc =
+        [[UINavigationController alloc] initWithRootViewController:controller];
+
+    [self exchangeTabBarViewControllerAtIndex:PROFILE_TAB_BAR_ITEM_INDEX
+                           withViewController:nc];
+
+    [nc release], nc = nil;
+    [controller release], controller = nil;
+}
+
+- (void)updateInterfaceForAccount:(LokaliteAccount *)account
+{
+    AccountDetailsViewController *controller =
+        [[AccountDetailsViewController alloc] initWithAccount:account];
+    [controller setDelegate:self];
+    UINavigationController *nc =
+        [[UINavigationController alloc] initWithRootViewController:controller];
+
+    [self exchangeTabBarViewControllerAtIndex:PROFILE_TAB_BAR_ITEM_INDEX
+                           withViewController:nc];
+
+    [nc release], nc = nil;
+    [controller release], controller = nil;
+}
+
+- (void)exchangeTabBarViewControllerAtIndex:(NSInteger)index
+                         withViewController:(UIViewController *)controller
+{
+    NSMutableArray *viewControllers =
+        [[[self tabBarController] viewControllers] mutableCopy];
+
+    UITabBarItem *tabBarItem =
+        [[viewControllers objectAtIndex:index] tabBarItem];
+    [controller setTabBarItem:tabBarItem];
+
+    [viewControllers replaceObjectAtIndex:index withObject:controller];
+    [[self tabBarController] setViewControllers:viewControllers];
+
+    [viewControllers release], viewControllers = nil;
 }
 
 #pragma mark - Persistence management
+
+- (void)managedObjectContextDidChange:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+
+    NSArray *insertedObjects = [userInfo objectForKey:NSInsertedObjectsKey];
+    [insertedObjects enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         if ([obj isKindOfClass:[LokaliteAccount class]]) {
+             LokaliteAccount *account = (LokaliteAccount *) obj;
+             [self updateInterfaceForAccount:account];
+         }
+     }];
+
+    NSArray *deletedObjects = [userInfo objectForKey:NSDeletedObjectsKey];
+    [deletedObjects enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         if ([obj isKindOfClass:[LokaliteAccount class]]) {
+             [self updateInterfaceForNoAccount];
+         }
+     }];
+}
+
+- (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(managedObjectContextDidChange:)
+               name:NSManagedObjectContextObjectsDidChangeNotification
+             object:context];
+}
+
+- (void)unsubscribeForNotoficationsForContext:(NSManagedObjectContext *)context
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self
+                  name:NSManagedObjectContextObjectsDidChangeNotification
+                object:context];
+}
 
 - (void)saveContext
 {
@@ -256,6 +371,19 @@
                                  completion();
                          }];
         [view hideActivityIndicatorWithAnimationDuration:duration];
+    }
+}
+
+#pragma mark - UIActionSheetDelegate implementation
+
+- (void)actionSheet:(UIActionSheet *)actionSheet
+    willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {  // log out confirmed
+        LokaliteAccount *account =
+            [LokaliteAccount findFirstWithPredicate:nil
+                                          inContext:[self context]];
+        [[self context] deleteObject:account];
     }
 }
 

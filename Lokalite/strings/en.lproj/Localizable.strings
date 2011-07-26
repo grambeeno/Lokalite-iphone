@@ -10,14 +10,17 @@
  * Global text
  */
 
+"global.cancel" = "Cancel";
 "global.dismiss" = "Dismiss";
 "global.details" = "Details";
 "global.featured" = "Featured";
 "global.location" = "Location";
 "global.event" = "Event";
 "global.business" = "Business";
+"global.profile" = "Profile";
 
 "global.log-in" = "Log In";
+"global.log-out" = "Log Out";
 "global.sign-up" = "Sign Up";
 "global.learn-more" = "Learn More";
 "global.help" = "Help";

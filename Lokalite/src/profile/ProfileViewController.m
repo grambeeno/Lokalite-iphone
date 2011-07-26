@@ -8,6 +8,8 @@
 
 #import "ProfileViewController.h"
 
+#import "LokaliteAccount.h"
+
 #import <CoreData/CoreData.h>
 
 enum {
@@ -52,6 +54,15 @@ static const NSInteger NUM_META_ACTION_ROWS = kMetaActionHelpRow + 1;
     [headerView_ release];
 
     [super dealloc];
+}
+
+
+#pragma mark - Initialization
+
+- (id)init
+{
+    self = [super initWithNibName:@"ProfileView" bundle:nil];
+    return self;
 }
 
 #pragma mark - UITableViewController implementation

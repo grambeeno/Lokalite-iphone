@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AccountDetailsViewController.h"
+
 @interface LokaliteAppDelegate : NSObject
-    <UIApplicationDelegate, UITabBarControllerDelegate>
+    <UIApplicationDelegate, UITabBarControllerDelegate, UIActionSheetDelegate,
+     AccountDetailsViewControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
