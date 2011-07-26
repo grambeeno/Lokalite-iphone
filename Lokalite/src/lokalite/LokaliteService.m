@@ -23,6 +23,12 @@
                 parameters:(NSDictionary *)parameters
              requestMethod:(LKRequestMethod)requestMethod
            responseHandler:(LSResponseHandler)handler;
+- (void)sendRequestWithUrl:(NSURL *)url
+                parameters:(NSDictionary *)parameters
+                  username:(NSString *)username
+                  password:(NSString *)password
+             requestMethod:(LKRequestMethod)requestMethod
+           responseHandler:(LSResponseHandler)handler;
 
 #pragma mark - Processing JSON data
 
@@ -50,13 +56,10 @@
                        password:(NSString *)password
                 responseHandler:(LSResponseHandler)handler
 {
-    NSURL *url = [self profileUrl];
-    NSDictionary *parameters =
-        [NSDictionary dictionaryWithObjectsAndKeys:
-         username, @"username", password, @"password", nil];
-
-    [self sendRequestWithUrl:url
-                  parameters:parameters
+    [self sendRequestWithUrl:[self profileUrl]
+                  parameters:nil
+                    username:username
+                    password:password
                requestMethod:LKRequestMethodGET
              responseHandler:handler];
 }
@@ -137,18 +140,45 @@
              requestMethod:(LKRequestMethod)requestMethod
            responseHandler:(LSResponseHandler)handler
 {
+    [self sendRequestWithUrl:url
+                  parameters:parameters
+                    username:nil
+                    password:nil
+               requestMethod:requestMethod
+             responseHandler:handler];
+}
+
+- (void)sendRequestWithUrl:(NSURL *)url
+                parameters:(NSDictionary *)parameters
+                  username:(NSString *)username
+                  password:(NSString *)password
+             requestMethod:(LKRequestMethod)requestMethod
+           responseHandler:(LSResponseHandler)handler
+{
     LokaliteServiceRequest *req =
         [[LokaliteServiceRequest alloc] initWithUrl:url
                                          parameters:parameters
                                       requestMethod:LKRequestMethodGET];
+
+    if (username && password)
+        [req authenticateWithUsername:username password:password];
+
     [req performRequestWithHandler:
      ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
-         if (data) {
-             NSError *error = nil;
-             id object = [self processJsonData:data error:&error];
-             handler(object, error);
+         id processedData = nil;
+         if ([response statusCode] == 200) {
+             if (data) {
+                 NSLog(@"Received: %@",
+                       [[[NSString alloc] initWithData:data
+                                              encoding:NSUTF8StringEncoding]
+                        autorelease]);
+                 NSError *error = nil;
+                 processedData = [self processJsonData:data error:&error];
+             }
          } else
-             handler(nil, error);
+             error = [NSError errorForHTTPStatusCode:[response statusCode]];
+
+         handler(processedData, error);
      }];
 }
 

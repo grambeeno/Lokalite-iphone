@@ -29,6 +29,7 @@
 
 - (void)attemptLogInWithUsername:(NSString *)username
                         password:(NSString *)password;
+- (void)processLogInError:(NSError *)error;
 
 @end
 
@@ -204,10 +205,30 @@
                                        password:password
                                 responseHandler:
          ^(NSDictionary *dictionary, NSError *error) {
+             [self hideActivityView];
              NSLog(@"dictionary: %@", dictionary);
-             NSLog(@"error: %@", error);
+             if (error)
+                 [self processLogInError:error];
          }];
     }];
+}
+
+- (void)processLogInError:(NSError *)error
+{
+    NSString *title = NSLocalizedString(@"log-in.failed", nil);
+    NSString *message = [error localizedDescription];
+    NSString *dismiss = NSLocalizedString(@"global.dismiss", nil);
+
+    UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle:title
+                                   message:message
+                                  delegate:nil
+                         cancelButtonTitle:dismiss
+                         otherButtonTitles:nil];
+    [alert show];
+    [alert release], alert = nil;
+
+    [[self passwordTextField] becomeFirstResponder];
 }
 
 #pragma mark - Accessors

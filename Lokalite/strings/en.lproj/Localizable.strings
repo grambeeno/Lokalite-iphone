@@ -24,11 +24,19 @@
 
 
 /*
+ * HTTP error messages
+ */
+"http.401.message" = "Invalid username/password combination.";
+"http:unknown.message" = "An unknown error occurred.";
+
+
+/*
  * Featured
  */
 "featured.fetch.failed" = "Failed to Fetch Featured Events";
 
 
 /*
- * Event details
+ * Log in
  */
+"log-in.failed" = "Log In Failed";

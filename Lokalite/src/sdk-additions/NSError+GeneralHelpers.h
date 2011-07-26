@@ -13,3 +13,10 @@
 - (NSString *)detailedDescription;
 
 @end
+
+
+@interface NSError (HTTPHelpers)
+
++ (id)errorForHTTPStatusCode:(NSInteger)statusCode;
+
+@end

@@ -16,6 +16,13 @@
 @property (nonatomic, retain) NSMutableData *data;
 @property (nonatomic, retain) NSHTTPURLResponse *response;
 
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
+
+#pragma mark - Authentication helpers
+
+- (BOOL)shouldAuthenticateRequest;
+
 #pragma mark - Connection management
 
 - (void)processConnectionStarted:(NSURLConnection *)connection;
@@ -27,6 +34,9 @@
 @synthesize url = url_;
 @synthesize parameters = parameters_;
 @synthesize requestMethod = requestMethod_;
+
+@synthesize username = username_;
+@synthesize password = password_;
 
 @synthesize requestHandler = requestHandler_;
 
@@ -40,6 +50,9 @@
 {
     [url_ release];
     [parameters_ release];
+
+    [username_ release];
+    [password_ release];
 
     [requestHandler_ release];
 
@@ -66,6 +79,15 @@
     return self;
 }
 
+#pragma mark - Authenticating the request
+
+- (void)authenticateWithUsername:(NSString *)username
+                        password:(NSString *)password
+{
+    [self setUsername:username];
+    [self setPassword:password];
+}
+
 #pragma mark - Performing the request
 
 - (void)performRequestWithHandler:(LKRequestHandler)handler
@@ -74,9 +96,20 @@
 
     NSURL *url = [[self url] URLByAppendingGetParameters:[self parameters]];
     NSLog(@"Fetching data at URL: '%@'", url);
-    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+    if ([self shouldAuthenticateRequest]) {
+         NSString *authString =
+            [NSString stringWithFormat:@"%@:%@", [self username],
+             [self password]];
+        NSData *authData = [authString dataUsingEncoding:NSASCIIStringEncoding];
+        NSString *authValue =
+            [NSString stringWithFormat:@"Basic %@",
+             [authData base64EncodingWithLineLength:80]];
+        [req setValue:authValue forHTTPHeaderField:@"Authorization"];
+    }
+
     NSURLConnection *connection =
-     [NSURLConnection connectionWithRequest:req delegate:self];
+        [NSURLConnection connectionWithRequest:req delegate:self];
     [self processConnectionStarted:connection];
 }
 
@@ -92,13 +125,6 @@ didReceiveResponse:(NSURLResponse *)response
 {
     [self setResponse:(NSHTTPURLResponse *) response];
     [self setData:[NSMutableData data]];
-}
-
-- (void)connection:(NSURLConnection *)connection
-    didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-    NSLog(@"%@: %@", NSStringFromClass([self class]),
-          NSStringFromSelector(_cmd));
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -117,6 +143,13 @@ didReceiveResponse:(NSURLResponse *)response
 {
     [self requestHandler](nil, [self response], error);
     [self processConnectionFinished];
+}
+
+#pragma mark - Authentication helpers
+
+- (BOOL)shouldAuthenticateRequest
+{
+    return [self username] && [self password];
 }
 
 #pragma mark - Connection management

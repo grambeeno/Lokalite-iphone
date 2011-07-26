@@ -32,3 +32,32 @@
 }
 
 @end
+
+
+@implementation NSError (HTTPHelpers)
+
++ (id)errorForHTTPStatusCode:(NSInteger)statusCode
+{
+    NSString *message = nil;
+
+    switch (statusCode) {
+        case 401:
+            message = NSLocalizedString(@"http.401.message", nil);
+            break;
+
+        default:
+            message = NSLocalizedString(@"http.unknown.message", nil);
+            message =
+                [message stringByAppendingFormat:@" HTTP error code %d",
+                 statusCode];
+            break;
+    }
+
+    NSDictionary *userInfo =
+        [NSDictionary dictionaryWithObject:message
+                                    forKey:NSLocalizedDescriptionKey];
+
+    return [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:userInfo];
+}
+
+@end
