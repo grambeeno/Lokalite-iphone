@@ -33,6 +33,7 @@
 #pragma mark - Processing JSON data
 
 - (id)processJsonData:(NSData *)data error:(NSError **)error;
+
 @end
 
 @implementation LokaliteService

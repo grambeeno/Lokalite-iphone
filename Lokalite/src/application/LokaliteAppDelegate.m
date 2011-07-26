@@ -18,6 +18,8 @@
 #import "ActivityView.h"
 
 #import "LokaliteAccount.h"
+#import "Event.h"
+#import "Business.h"
 
 #import "SDKAdditions.h"
 
@@ -37,6 +39,12 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)updateInterfaceForAccount:(LokaliteAccount *)account;
 - (void)exchangeTabBarViewControllerAtIndex:(NSInteger)index
                          withViewController:(UIViewController *)controller;
+
+#pragma mark - Account management
+
+- (void)processAccountAddition:(LokaliteAccount *)account;
+- (void)processAccountDeletion:(LokaliteAccount *)account;
+- (void)deleteAllEventAndBusinessData;
 
 #pragma mark - Persistence management
 
@@ -257,6 +265,34 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     [viewControllers release], viewControllers = nil;
 }
 
+#pragma mark - Account management
+
+- (void)processAccountAddition:(LokaliteAccount *)account
+{
+    [self updateInterfaceForAccount:account];
+    [self deleteAllEventAndBusinessData];
+}
+
+- (void)processAccountDeletion:(LokaliteAccount *)account
+{
+    [self updateInterfaceForNoAccount];
+}
+
+- (void)deleteAllEventAndBusinessData
+{
+    NSManagedObjectContext *context = [self context];
+    void (^deleteObject)(id, NSUInteger, BOOL *) =
+        ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+            [context deleteObject:obj];
+        };
+
+    NSArray *events = [Event findAllInContext:context];
+    [events enumerateObjectsUsingBlock:deleteObject];
+
+    NSArray *businesses = [Business findAllInContext:context];
+    [businesses enumerateObjectsUsingBlock:deleteObject];
+}
+
 #pragma mark - Persistence management
 
 - (void)managedObjectContextDidChange:(NSNotification *)notification
@@ -268,7 +304,7 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
      ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
          if ([obj isKindOfClass:[LokaliteAccount class]]) {
              LokaliteAccount *account = (LokaliteAccount *) obj;
-             [self updateInterfaceForAccount:account];
+             [self processAccountAddition:account];
          }
      }];
 
@@ -276,7 +312,8 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     [deletedObjects enumerateObjectsUsingBlock:
      ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
          if ([obj isKindOfClass:[LokaliteAccount class]]) {
-             [self updateInterfaceForNoAccount];
+             LokaliteAccount *account = (LokaliteAccount *) obj;
+             [self processAccountDeletion:account];
          }
      }];
 }
