@@ -19,6 +19,9 @@
 "global.business" = "Business";
 "global.profile" = "Profile";
 
+"global.email" = "Email";
+"global.registered" = "Registered";
+
 "global.log-in" = "Log In";
 "global.log-out" = "Log Out";
 "global.sign-up" = "Sign Up";

@@ -8,11 +8,30 @@
 
 #import "AccountDetailsViewController.h"
 
+#import "LokaliteAccount.h"
+
+enum {
+    kSectionAccountDetails
+};
+static const NSInteger NUM_SECTIONS = kSectionAccountDetails + 1;
+
+enum {
+    kAccountDetailsRowEmail,
+    kAccountDetailsRowCreationDate
+};
+static const NSInteger NUM_ACCOUNT_DETAILS_ROWS =
+    kAccountDetailsRowCreationDate + 1;
+
+
 @interface AccountDetailsViewController ()
 
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem:(UINavigationItem *)navItem;
+
+#pragma mark - View configuration
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path;
 
 @end
 
@@ -67,13 +86,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 0;
+    return NUM_SECTIONS;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    NSInteger nrows = 0;
+
+    if (section == 0)
+        nrows = NUM_ACCOUNT_DETAILS_ROWS;
+
+    return nrows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -83,12 +107,13 @@
 
     UITableViewCell *cell =
         [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil)
         cell =
             [[[UITableViewCell alloc]
-              initWithStyle:UITableViewCellStyleDefault
+              initWithStyle:UITableViewCellStyleValue2
               reuseIdentifier:CellIdentifier] autorelease];
-    }
+
+    [self configureCell:cell atIndexPath:indexPath];
 
     return cell;
 }
@@ -105,6 +130,36 @@
                                         action:@selector(logOut:)];
     [navItem setRightBarButtonItem:logOutButtonItem];
     [logOutButtonItem release], logOutButtonItem = nil;
+}
+
+#pragma mark - View configuration
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path
+{
+    if ([path section] == kSectionAccountDetails) {
+        NSString *text = nil, *detailText = nil;
+
+        if ([path row] == kAccountDetailsRowEmail) {
+            text = NSLocalizedString(@"global.email", nil);
+            detailText = [[self account] email];
+        } else if ([path row] == kAccountDetailsRowCreationDate) {
+            text = NSLocalizedString(@"global.registered", nil);
+
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setLocale:[NSLocale currentLocale]];
+            [formatter setDateStyle:NSDateFormatterLongStyle];
+            [formatter setTimeStyle:NSDateFormatterNoStyle];
+            detailText =
+                [formatter stringFromDate:[[self account] creationDate]];
+            [formatter release], formatter = nil;
+        }
+
+        [[cell textLabel] setText:text];
+        [[cell detailTextLabel] setText:detailText];
+
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
 }
 
 @end
