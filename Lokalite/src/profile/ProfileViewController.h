@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "LogInViewController.h"
 
+@class NSManagedObjectContext;
+
 @interface ProfileViewController : UITableViewController
     <LogInViewControllerDelegate>
+
+@property (nonatomic, retain) NSManagedObjectContext *context;
 
 @property (nonatomic, retain) IBOutlet UIView *headerView;
 

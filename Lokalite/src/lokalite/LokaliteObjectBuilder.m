@@ -8,6 +8,9 @@
 
 #import "LokaliteObjectBuilder.h"
 
+#import "LokaliteAccount.h"
+#import "LokaliteAccount+GeneralHelpers.h"
+
 #import "Business.h"
 
 #import "Event.h"
@@ -18,6 +21,14 @@
 #import <CoreData/CoreData.h>
 
 @implementation LokaliteObjectBuilder
+
++ (id)createOrUpdateLokaliteAccountFromJsonData:(NSDictionary *)jsonData
+                                      inContext:(NSManagedObjectContext *)moc
+{
+    NSDictionary *data = [jsonData objectForKey:@"data"];
+    return [LokaliteAccount createOrUpdateLokaliteAccountFromJsonData:data
+                                                            inContext:moc];
+}
 
 + (NSArray *)createOrUpdateEventsInJsonArray:(NSArray *)jsonObjects
                                    inContext:(NSManagedObjectContext *)context

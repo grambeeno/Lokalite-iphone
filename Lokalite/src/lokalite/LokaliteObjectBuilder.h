@@ -12,6 +12,9 @@
 
 @interface LokaliteObjectBuilder : NSObject
 
++ (id)createOrUpdateLokaliteAccountFromJsonData:(NSDictionary *)jsonData
+                                      inContext:(NSManagedObjectContext *)moc;
+
 + (NSArray *)createOrUpdateEventsInJsonArray:(NSArray *)jsonObjects
                                    inContext:(NSManagedObjectContext *)context;
 

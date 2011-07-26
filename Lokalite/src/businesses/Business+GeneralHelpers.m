@@ -21,9 +21,7 @@
 + (id)businessWithId:(NSNumber *)businessId
            inContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *pred =
-        [NSPredicate predicateWithFormat:@"identifier == %@", businessId];
-    return [self findFirstWithPredicate:pred inContext:context];
+    return [self instanceWithIdentifier:businessId inContext:context];
 }
 
 + (id)createOrUpdateBusinessFromJsonData:(NSDictionary *)businessData

@@ -25,9 +25,7 @@
 
 + (id)eventWithId:(NSNumber *)eventId inContext:(NSManagedObjectContext *)moc
 {
-    NSPredicate *pred =
-        [NSPredicate predicateWithFormat:@"identifier == %@", eventId];
-    return [self findFirstWithPredicate:pred inContext:moc];
+    return [self instanceWithIdentifier:eventId inContext:moc];
 }
 
 + (NSArray *)eventObjectsFromJsonObjects:(NSDictionary *)jsonObjects

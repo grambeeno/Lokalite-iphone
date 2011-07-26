@@ -13,6 +13,7 @@
 #import "FeaturedViewController.h"
 #import "EventsViewController.h"
 #import "PlacesViewController.h"
+#import "ProfileViewController.h"
 
 #import "ActivityView.h"
 
@@ -89,6 +90,10 @@
              PlacesViewController *placesController =
                 (PlacesViewController *) controller;
              [placesController setContext:context];
+         } else if ([controller isKindOfClass:[ProfileViewController class]]) {
+             ProfileViewController *profileController =
+                (ProfileViewController *) controller;
+             [profileController setContext:context];
          }
      }];
 }

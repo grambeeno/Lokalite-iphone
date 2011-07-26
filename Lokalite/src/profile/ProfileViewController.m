@@ -8,6 +8,8 @@
 
 #import "ProfileViewController.h"
 
+#import <CoreData/CoreData.h>
+
 enum {
     kSectionUserActions,
     kSectionMetaActions
@@ -38,13 +40,17 @@ static const NSInteger NUM_META_ACTION_ROWS = kMetaActionHelpRow + 1;
 
 @implementation ProfileViewController
 
+@synthesize context = context_;
+
 @synthesize headerView = headerView_;
 
 #pragma mark - Memory management
 
 - (void)dealloc
 {
+    [context_ release];
     [headerView_ release];
+
     [super dealloc];
 }
 
@@ -121,7 +127,8 @@ static const NSInteger NUM_META_ACTION_ROWS = kMetaActionHelpRow + 1;
     if ([indexPath section] == kSectionUserActions) {
         if ([indexPath row] == kUserActionLogInRow) {
             LogInViewController *livc =
-                [[[LogInViewController alloc] init] autorelease];
+                [[[LogInViewController alloc] initWithContext:[self context]]
+                 autorelease];
             [livc setDelegate:self];
             c = livc;
         } else if ([indexPath row] == kUserActionSignUpRow) {
@@ -145,9 +152,10 @@ static const NSInteger NUM_META_ACTION_ROWS = kMetaActionHelpRow + 1;
 #pragma mark - LogInViewControllerDelegate implementation
 
 - (void)logInViewController:(LogInViewController *)controller
-       didLogInWithUsername:(NSString *)username
-                   password:(NSString *)password
+        didLogInWithAccount:(LokaliteAccount *)account
 {
+    NSLog(@"Logged in with account: %@", [account email]);
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)logInViewControllerDidCancel:(LogInViewController *)controller

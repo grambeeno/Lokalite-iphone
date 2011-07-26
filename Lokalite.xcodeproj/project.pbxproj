@@ -133,6 +133,11 @@
 		05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */; };
 		05DD68EB13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */; };
 		05EB58CF13DF226100436F13 /* NSData+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58CE13DF226100436F13 /* NSData+GeneralHelpers.m */; };
+		05EB58D713DF312800436F13 /* LokaliteAccount+KeychainAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58D613DF312800436F13 /* LokaliteAccount+KeychainAdditions.m */; };
+		05EB58DB13DF326900436F13 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58DA13DF326900436F13 /* SFHFKeychainUtils.m */; };
+		05EB58E113DF347500436F13 /* LokaliteAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58E013DF347500436F13 /* LokaliteAccount.m */; };
+		05EB58E413DF356700436F13 /* LokaliteAccount+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58E313DF356700436F13 /* LokaliteAccount+GeneralHelpers.m */; };
+		05EB58E613DF37FE00436F13 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EB58E513DF37FE00436F13 /* Security.framework */; };
 		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
 		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
 		05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EC9A4113CB971400B7AD61 /* CoreData.framework */; };
@@ -324,6 +329,15 @@
 		05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPredicate+GeneralHelpers.m"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05EB58CD13DF226100436F13 /* NSData+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+GeneralHelpers.h"; path = "src/sdk-additions/NSData+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05EB58CE13DF226100436F13 /* NSData+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+GeneralHelpers.m"; path = "src/sdk-additions/NSData+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05EB58D513DF312800436F13 /* LokaliteAccount+KeychainAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteAccount+KeychainAdditions.h"; path = "src/accounts/LokaliteAccount+KeychainAdditions.h"; sourceTree = "<group>"; };
+		05EB58D613DF312800436F13 /* LokaliteAccount+KeychainAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LokaliteAccount+KeychainAdditions.m"; path = "src/accounts/LokaliteAccount+KeychainAdditions.m"; sourceTree = "<group>"; };
+		05EB58D913DF326900436F13 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = "src/vendor/sfhf-keychain-utils/SFHFKeychainUtils.h"; sourceTree = "<group>"; };
+		05EB58DA13DF326900436F13 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = "src/vendor/sfhf-keychain-utils/SFHFKeychainUtils.m"; sourceTree = "<group>"; };
+		05EB58DF13DF347500436F13 /* LokaliteAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteAccount.h; path = src/accounts/LokaliteAccount.h; sourceTree = "<group>"; };
+		05EB58E013DF347500436F13 /* LokaliteAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteAccount.m; path = src/accounts/LokaliteAccount.m; sourceTree = "<group>"; };
+		05EB58E213DF356600436F13 /* LokaliteAccount+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteAccount+GeneralHelpers.h"; path = "src/accounts/LokaliteAccount+GeneralHelpers.h"; sourceTree = "<group>"; };
+		05EB58E313DF356700436F13 /* LokaliteAccount+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LokaliteAccount+GeneralHelpers.m"; path = "src/accounts/LokaliteAccount+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05EB58E513DF37FE00436F13 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
 		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
 		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
@@ -349,6 +363,7 @@
 				05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */,
 				0568334513CFB9B300520C78 /* MapKit.framework in Frameworks */,
 				0568336F13D0AAED00520C78 /* CoreLocation.framework in Frameworks */,
+				05EB58E613DF37FE00436F13 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +450,7 @@
 				05EC9A4113CB971400B7AD61 /* CoreData.framework */,
 				0568334413CFB9B300520C78 /* MapKit.framework */,
 				0568336E13D0AAEC00520C78 /* CoreLocation.framework */,
+				05EB58E513DF37FE00436F13 /* Security.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -472,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				05209F0C13C7705800CA6A2D /* application */,
+				05EB58D113DF302100436F13 /* accounts */,
 				05770E8C13DE1F1B00B841D4 /* log-in */,
 				05209F0D13C7705D00CA6A2D /* featured */,
 				05209F0E13C7706700CA6A2D /* loyalty */,
@@ -578,6 +595,7 @@
 		056A92A313CCBD9A00C65DC0 /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				05EB58D813DF322B00436F13 /* sfhfh-keychain-utils */,
 				056A92A513CCBE1000C65DC0 /* jsonkit */,
 			);
 			name = vendor;
@@ -710,6 +728,28 @@
 				05D06E6F13D76B4900878AD6 /* category-button-pressed@2x.png */,
 			);
 			name = buttons;
+			sourceTree = "<group>";
+		};
+		05EB58D113DF302100436F13 /* accounts */ = {
+			isa = PBXGroup;
+			children = (
+				05EB58DF13DF347500436F13 /* LokaliteAccount.h */,
+				05EB58E013DF347500436F13 /* LokaliteAccount.m */,
+				05EB58D513DF312800436F13 /* LokaliteAccount+KeychainAdditions.h */,
+				05EB58D613DF312800436F13 /* LokaliteAccount+KeychainAdditions.m */,
+				05EB58E213DF356600436F13 /* LokaliteAccount+GeneralHelpers.h */,
+				05EB58E313DF356700436F13 /* LokaliteAccount+GeneralHelpers.m */,
+			);
+			name = accounts;
+			sourceTree = "<group>";
+		};
+		05EB58D813DF322B00436F13 /* sfhfh-keychain-utils */ = {
+			isa = PBXGroup;
+			children = (
+				05EB58D913DF326900436F13 /* SFHFKeychainUtils.h */,
+				05EB58DA13DF326900436F13 /* SFHFKeychainUtils.m */,
+			);
+			name = "sfhfh-keychain-utils";
 			sourceTree = "<group>";
 		};
 		05EC9A3513CB94F000B7AD61 /* data-model */ = {
@@ -989,6 +1029,10 @@
 				05770E9013DE228700B841D4 /* LogInViewController.m in Sources */,
 				05770E9413DE33E100B841D4 /* UIViewController+GeneralHelpers.m in Sources */,
 				05EB58CF13DF226100436F13 /* NSData+GeneralHelpers.m in Sources */,
+				05EB58D713DF312800436F13 /* LokaliteAccount+KeychainAdditions.m in Sources */,
+				05EB58DB13DF326900436F13 /* SFHFKeychainUtils.m in Sources */,
+				05EB58E113DF347500436F13 /* LokaliteAccount.m in Sources */,
+				05EB58E413DF356700436F13 /* LokaliteAccount+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,9 +8,13 @@
 
 #import "LogInViewController.h"
 
+#import "LokaliteAccount.h"
+#import "LokaliteObjectBuilder.h"
 #import "LokaliteService.h"
 
 #import "SDKAdditions.h"
+
+#import <CoreData/CoreData.h>
 
 @interface LogInViewController ()
 
@@ -29,6 +33,7 @@
 
 - (void)attemptLogInWithUsername:(NSString *)username
                         password:(NSString *)password;
+- (void)processLogInData:(NSDictionary *)data;
 - (void)processLogInError:(NSError *)error;
 
 @end
@@ -37,6 +42,8 @@
 @implementation LogInViewController
 
 @synthesize delegate = delegate_;
+
+@synthesize context = context_;
 
 @synthesize usernameCell = usernameCell_;
 @synthesize passwordCell = passwordCell_;
@@ -64,11 +71,13 @@
 
 #pragma mark - Initialization
 
-- (id)init
+- (id)initWithContext:(NSManagedObjectContext *)context
 {
     self = [super initWithNibName:@"LogInView" bundle:nil];
-    if (self)
+    if (self) {
+        context_ = [context retain];
         [self setTitle:NSLocalizedString(@"global.log-in", nil)];
+    }
 
     return self;
 }
@@ -204,13 +213,23 @@
         [[self service] fetchProfileForUsername:username
                                        password:password
                                 responseHandler:
-         ^(NSDictionary *dictionary, NSError *error) {
+         ^(NSDictionary *data, NSError *error) {
              [self hideActivityView];
-             NSLog(@"dictionary: %@", dictionary);
-             if (error)
+             if (data)
+                 [self processLogInData:data];
+             else if (error)
                  [self processLogInError:error];
          }];
     }];
+}
+
+- (void)processLogInData:(NSDictionary *)data
+{
+    LokaliteAccount *account =
+        [LokaliteObjectBuilder
+         createOrUpdateLokaliteAccountFromJsonData:data
+                                         inContext:[self context]];
+    [[self delegate] logInViewController:self didLogInWithAccount:account];
 }
 
 - (void)processLogInError:(NSError *)error

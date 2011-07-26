@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class NSManagedObjectContext;
 @protocol LogInViewControllerDelegate;
 
 @interface LogInViewController : UITableViewController <UITextFieldDelegate>
 
 @property (nonatomic, assign) id<LogInViewControllerDelegate> delegate;
+
+@property (nonatomic, retain) NSManagedObjectContext *context;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell *usernameCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell *passwordCell;
@@ -22,16 +25,18 @@
 
 #pragma mark - Initialization
 
-- (id)init;
+- (id)initWithContext:(NSManagedObjectContext *)context;
 
 @end
 
 
+
+@class LokaliteAccount;
+
 @protocol LogInViewControllerDelegate <NSObject>
 
 - (void)logInViewController:(LogInViewController *)controller
-       didLogInWithUsername:(NSString *)username
-                   password:(NSString *)password;
+        didLogInWithAccount:(LokaliteAccount *)account;
 - (void)logInViewControllerDidCancel:(LogInViewController *)controller;
 
 @end
