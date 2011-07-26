@@ -266,6 +266,7 @@
                                             managedObjectContext:context
                                               sectionNameKeyPath:sectionKeyPath
                                                        cacheName:cacheName];
+    [controller autorelease];
 
     NSError *error = nil;
     if ([controller performFetch:&error])
@@ -274,9 +275,10 @@
         NSLog(@"%@: %@ - WARNING: Failed to initialize fetched results "
               "controller: %@", NSStringFromClass([self class]),
               NSStringFromSelector(_cmd), [error detailedDescription]);
+        controller = nil;
     }
 
-    return [controller autorelease];
+    return controller;
 }
 
 - (NSString *)lokaliteObjectEntityName
