@@ -21,6 +21,9 @@
 
 @property (nonatomic, assign) NSInteger pagesFetched;
 
+#pragma mark - Button actions
+
+- (void)refresh:(id)sender;
 
 #pragma mark - Displaying the activity view
 

@@ -19,6 +19,7 @@
 
 #pragma mark - View initialization
 
+- (void)initializeNavigationItem:(UINavigationItem *)navItem;
 - (void)initializeTableView:(UITableView *)tableView;
 
 #pragma mark - Account events
@@ -26,11 +27,21 @@
 - (void)processAccountAddition:(LokaliteAccount *)account;
 - (void)processAccountDeletion:(LokaliteAccount *)account;
 
+#pragma mark - Fetching data from the network
+
+- (void)fetchFeaturedEventsIfNecessary;
+
 #pragma mark - Persistence management
 
+- (void)deleteAllStreamObjects;
 - (void)managedObjectContextDidChange:(NSNotification *)notification;
 - (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context;
 - (void)unsubscribeForNotoficationsForContext:(NSManagedObjectContext *)context;
+
+#pragma mark - Application notifications
+
+- (void)subscribeForApplicationLifecycleNotifications;
+- (void)unsubscribeForApplicationLifecycleNotifications;
 
 @end
 
@@ -48,12 +59,21 @@
 
 - (void)dealloc
 {
+    [self unsubscribeForApplicationLifecycleNotifications];
     [self unsubscribeForNotoficationsForContext:context_];
 
     [context_ release];
     [dataController_ release];
     [lokaliteStream_ release];
     [super dealloc];
+}
+
+#pragma mark - Button actions
+
+- (void)refresh:(id)sender
+{
+    [self setPagesFetched:0];
+    [self fetchFeaturedEventsIfNecessary];
 }
 
 #pragma mark - UITableViewController implementation
@@ -63,7 +83,9 @@
     [super viewDidLoad];
 
     [self subscribeForNotificationsForContext:[self context]];
+    [self subscribeForApplicationLifecycleNotifications];
 
+    [self initializeNavigationItem:[self navigationItem]];
     [self initializeTableView:[self tableView]];
 }
 
@@ -71,13 +93,7 @@
 {
     [super viewWillAppear:animated];
 
-    if ([self pagesFetched] == 0)
-        [self displayActivityViewWithCompletion:^{
-            [self fetchNextSetOfObjectsWithCompletion:
-             ^(NSArray * objects, NSError *error) {
-                 [self hideActivityView];
-            }];
-        }];
+    [self fetchFeaturedEventsIfNecessary];
 }
 
 #pragma mark - UITableViewDataSource implementation
@@ -154,9 +170,11 @@
                    withRowAnimation:UITableViewRowAnimationBottom];
             break;
  
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+        case NSFetchedResultsChangeDelete: {
+            NSArray *paths = [NSArray arrayWithObject:indexPath];
+            [tableView deleteRowsAtIndexPaths:paths
                        withRowAnimation:UITableViewRowAnimationTop];
+        }
             break;
  
         case NSFetchedResultsChangeUpdate: {
@@ -212,6 +230,17 @@
 }
 
 #pragma mark - View initialization
+
+- (void)initializeNavigationItem:(UINavigationItem *)navItem
+{
+    UIBarButtonItem *refreshButton =
+        [[UIBarButtonItem alloc]
+         initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                              target:self 
+                              action:@selector(refresh:)];
+    [navItem setLeftBarButtonItem:refreshButton];
+    [refreshButton release], refreshButton = nil;
+}
 
 - (void)initializeTableView:(UITableView *)tableView
 {
@@ -331,6 +360,22 @@
 
 #pragma mark Fetching data from the network
 
+- (void)fetchFeaturedEventsIfNecessary
+{
+    BOOL fetchNecessary = [self pagesFetched] == 0;
+    BOOL activityViewNecessary =
+        [[[self dataController] fetchedObjects] count] == 0;
+
+    if (fetchNecessary) {
+        if (activityViewNecessary)
+            [self displayActivityView];
+        [self fetchNextSetOfObjectsWithCompletion:^(NSArray *a, NSError *e) {
+            if (activityViewNecessary)
+                [self hideActivityView];
+        }];
+    }
+}
+
 - (void)fetchNextSetOfObjectsWithCompletion:(void (^)(NSArray *, NSError *))fun
 {
     NSInteger pagesFetched = [self pagesFetched];
@@ -366,64 +411,7 @@
     return nil;
 }
 
-#pragma mark - Persistence management
-
-- (void)managedObjectContextDidChange:(NSNotification *)notification
-{
-    NSDictionary *userInfo = [notification userInfo];
-
-    NSArray *insertedObjects = [userInfo objectForKey:NSInsertedObjectsKey];
-    [insertedObjects enumerateObjectsUsingBlock:
-     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
-         if ([obj isKindOfClass:[LokaliteAccount class]]) {
-             LokaliteAccount *account = (LokaliteAccount *) obj;
-             [self processAccountAddition:account];
-         }
-     }];
-
-    NSArray *deletedObjects = [userInfo objectForKey:NSDeletedObjectsKey];
-    [deletedObjects enumerateObjectsUsingBlock:
-     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
-         if ([obj isKindOfClass:[LokaliteAccount class]]) {
-             LokaliteAccount *account = (LokaliteAccount *) obj;
-             [self processAccountDeletion:account];
-         }
-     }];
-}
-
-- (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context
-{
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-           selector:@selector(managedObjectContextDidChange:)
-               name:NSManagedObjectContextObjectsDidChangeNotification
-             object:context];
-}
-
-- (void)unsubscribeForNotoficationsForContext:(NSManagedObjectContext *)context
-{
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc removeObserver:self
-                  name:NSManagedObjectContextObjectsDidChangeNotification
-                object:context];
-}
-
-#pragma mark - Handling account events
-
-- (void)deleteAllStreamObjects
-{
-    // this operation should probably not be done in this class
-    NSManagedObjectContext *context = [self context];
-    NSString *entityName = [self lokaliteObjectEntityName];
-    Class class = NSClassFromString(entityName);
-    NSPredicate *pred = [self dataControllerPredicate];
-    NSArray *objects = [class findAllWithPredicate:pred inContext:context];
-
-    [objects enumerateObjectsUsingBlock:
-     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
-         [context deleteObject:obj];
-     }];
-}
+#pragma mark - Account events
 
 - (void)processAccountAddition:(LokaliteAccount *)account
 {
@@ -449,6 +437,100 @@
 - (BOOL)shouldResetDataForAccountDeletion:(LokaliteAccount *)account
 {
     return NO;
+}
+
+#pragma mark - Persistence management
+
+- (void)deleteAllStreamObjects
+{
+    // this operation should probably not be done in this class
+    NSManagedObjectContext *context = [self context];
+    NSString *entityName = [self lokaliteObjectEntityName];
+    Class class = NSClassFromString(entityName);
+    NSPredicate *pred = [self dataControllerPredicate];
+    NSArray *objects = [class findAllWithPredicate:pred inContext:context];
+
+    [objects enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         [context deleteObject:obj];
+     }];
+}
+
+- (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(managedObjectContextDidChange:)
+               name:NSManagedObjectContextObjectsDidChangeNotification
+             object:context];
+}
+
+- (void)unsubscribeForNotoficationsForContext:(NSManagedObjectContext *)context
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self
+                  name:NSManagedObjectContextObjectsDidChangeNotification
+                object:context];
+}
+
+- (void)managedObjectContextDidChange:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+
+    NSArray *insertedObjects = [userInfo objectForKey:NSInsertedObjectsKey];
+    [insertedObjects enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         if ([obj isKindOfClass:[LokaliteAccount class]]) {
+             LokaliteAccount *account = (LokaliteAccount *) obj;
+             [self processAccountAddition:account];
+         }
+     }];
+
+    NSArray *deletedObjects = [userInfo objectForKey:NSDeletedObjectsKey];
+    [deletedObjects enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         if ([obj isKindOfClass:[LokaliteAccount class]]) {
+             LokaliteAccount *account = (LokaliteAccount *) obj;
+             [self processAccountDeletion:account];
+         }
+     }];
+}
+
+#pragma mark - Application notifications
+
+- (void)subscribeForApplicationLifecycleNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+
+    [nc addObserver:self
+           selector:@selector(applicationWillEnterForeground:)
+               name:UIApplicationWillEnterForegroundNotification
+             object:[UIApplication sharedApplication]];
+    [nc addObserver:self
+           selector:@selector(applicationDidEnterBackground:)
+               name:UIApplicationDidEnterBackgroundNotification
+             object:[UIApplication sharedApplication]];
+}
+
+- (void)unsubscribeForApplicationLifecycleNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+
+    [nc removeObserver:self
+                  name:UIApplicationWillEnterForegroundNotification
+                object:[UIApplication sharedApplication]];
+    [nc removeObserver:self
+                  name:UIApplicationDidEnterBackgroundNotification
+                object:[UIApplication sharedApplication]];
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+    [self refresh:self];
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
 }
 
 #pragma mark - Accessors
