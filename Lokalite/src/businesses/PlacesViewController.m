@@ -48,7 +48,7 @@
 
 - (NSString *)titleForView
 {
-    return @"Places";
+    return NSLocalizedString(@"global.places", nil);
 }
 
 #pragma mark - Configuring the table view

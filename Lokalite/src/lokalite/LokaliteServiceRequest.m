@@ -95,9 +95,10 @@
     [self setRequestHandler:handler];
 
     NSURL *url = [[self url] URLByAppendingGetParameters:[self parameters]];
-    NSLog(@"Fetching data at URL: '%@'", url);
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
     if ([self shouldAuthenticateRequest]) {
+        NSLog(@"'%@': fetching data for '%@'", url, [self username]);
+
          NSString *authString =
             [NSString stringWithFormat:@"%@:%@", [self username],
              [self password]];
@@ -106,7 +107,8 @@
             [NSString stringWithFormat:@"Basic %@",
              [authData base64EncodingWithLineLength:80]];
         [req setValue:authValue forHTTPHeaderField:@"Authorization"];
-    }
+    } else
+        NSLog(@"'%@': fetching data", url);
 
     NSURLConnection *connection =
         [NSURLConnection connectionWithRequest:req delegate:self];
@@ -130,10 +132,14 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     [[self data] appendData:data];
+    NSLog(@"'%@': received %d bytes (%d bytes total)", [self url],
+          [data length], [[self data] length]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    NSLog(@"'%@': connection completed", [self url]);
+
     [self requestHandler]([self data], [self response], nil);
     [self processConnectionFinished];
 }
@@ -141,6 +147,8 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
+    NSLog(@"'%@': connection failed: %@", [self url], error);
+
     [self requestHandler](nil, [self response], error);
     [self processConnectionFinished];
 }

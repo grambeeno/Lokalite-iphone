@@ -16,7 +16,6 @@
 #import "SDKAdditions.h"
 
 @interface LokaliteStreamViewController ()
-@property (nonatomic, assign) BOOL hasFetchedData;
 
 #pragma mark - View initialization
 
@@ -41,8 +40,9 @@
 @synthesize context = context_;
 @synthesize dataController = dataController_;
 
+@synthesize pagesFetched = pagesFetched_;
+
 @synthesize lokaliteStream = lokaliteStream_;
-@synthesize hasFetchedData = hasFetchedData_;
 
 #pragma mark - Memory management
 
@@ -60,8 +60,6 @@
 {
     [super viewDidLoad];
 
-    [self setHasFetchedData:NO];
-
     [self initializeTableView:[self tableView]];
 }
 
@@ -69,7 +67,7 @@
 {
     [super viewWillAppear:animated];
 
-    if ([self hasFetchedData] == NO)
+    if ([self pagesFetched] == 0)
         [self displayActivityViewWithCompletion:^{
             [self fetchNextSetOfObjectsWithCompletion:
              ^(NSArray * objects, NSError *error) {
@@ -159,6 +157,10 @@
  
         case NSFetchedResultsChangeUpdate: {
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            // HACK: The data controller cannot be accessed with the
+            // provided index path; doing so causes a crash. I don't know
+            // why. Accessing the cell via the provided anObject parameter
+            // works fine, though.
             [self configureCell:cell forObject:anObject];
         }
             break;
@@ -327,13 +329,16 @@
 
 - (void)fetchNextSetOfObjectsWithCompletion:(void (^)(NSArray *, NSError *))fun
 {
+    NSInteger pagesFetched = [self pagesFetched];
     [[self lokaliteStream] fetchNextBatchWithResponseHandler:
      ^(NSArray *objects, NSError *error) {
+         NSInteger pageNumber = pagesFetched + 1;
          if (objects) {
-             [self processNextBatchOfFetchedObjects:objects];
-             [self setHasFetchedData:YES];
+             [self setPagesFetched:pageNumber];
+             [self processNextBatchOfFetchedObjects:objects
+                                         pageNumber:pageNumber];
          } else if (error)
-             [self processObjectFetchError:error];
+             [self processObjectFetchError:error pageNumber:pageNumber];
 
          if (fun)
              fun(objects, error);
@@ -341,10 +346,12 @@
 }
 
 - (void)processNextBatchOfFetchedObjects:(NSArray *)objects
+                              pageNumber:(NSInteger)pageNumber
 {
 }
 
 - (void)processObjectFetchError:(NSError *)error
+                     pageNumber:(NSInteger)pageNumber
 {
 }
 

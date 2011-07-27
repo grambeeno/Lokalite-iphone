@@ -19,6 +19,8 @@
 @property (nonatomic, retain) NSManagedObjectContext *context;
 @property (nonatomic, retain) NSFetchedResultsController *dataController;
 
+@property (nonatomic, assign) NSInteger pagesFetched;
+
 
 #pragma mark - Displaying the activity view
 
@@ -27,11 +29,16 @@
 - (void)hideActivityView;
 - (void)hideActivityViewWithCompletion:(void (^)(void))completion;
 
+
+
+
 #pragma mark - Protected interface
+
 
 #pragma mark Configuring the view
 
 - (NSString *)titleForView;
+
 
 #pragma mark Configuring the table view
 
@@ -45,6 +52,7 @@
             forObject:(NSManagedObject *)object;
 
 - (void)displayDetailsForObject:(NSManagedObject *)object;
+
 
 #pragma mark Working with the local data store
 
@@ -70,8 +78,10 @@
 
 - (void)fetchNextSetOfObjectsWithCompletion:(void (^)(NSArray *, NSError *))fun;
 
-- (void)processNextBatchOfFetchedObjects:(NSArray *)objects;
-- (void)processObjectFetchError:(NSError *)error;
+- (void)processNextBatchOfFetchedObjects:(NSArray *)objects
+                              pageNumber:(NSInteger)pageNumber;
+- (void)processObjectFetchError:(NSError *)error
+                     pageNumber:(NSInteger)pageNumber;
 
 - (LokaliteStream *)lokaliteStreamInstance;
 

@@ -69,7 +69,6 @@
 
 - (void)fetchFeaturedEventsWithResponseHandler:(LSResponseHandler)handler
 {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
     NSURL *url = [self featuredEventUrl];
 
     [self sendRequestWithUrl:url
@@ -169,10 +168,6 @@
          id processedData = nil;
          if ([response statusCode] == 200) {
              if (data) {
-                 NSLog(@"Received: %@",
-                       [[[NSString alloc] initWithData:data
-                                              encoding:NSUTF8StringEncoding]
-                        autorelease]);
                  NSError *error = nil;
                  processedData = [self processJsonData:data error:&error];
              }
@@ -187,28 +182,6 @@
 
 - (id)processJsonData:(NSData *)data error:(NSError **)error
 {
-    /* Removing mock data placeholder because it's not needed
-    if ([data length] == 1) {
-        NSLog(@"WARNING: nothing received from server; using mock data");
-        NSURL *hackedFileUrl =
-            [[NSBundle mainBundle] URLForResource:@"mock-featured-events"
-                                    withExtension:@"json"];
-        data = [NSData dataWithContentsOfURL:hackedFileUrl
-                                     options:0
-                                       error:NULL];
-    } else {
-        NSString *docsDir = [UIApplication applicationDocumentsDirectory];
-        NSString *path =
-            [docsDir stringByAppendingPathComponent:
-             @"mock-featured-events.json"];
-        NSURL *hackedFileUrl = [NSURL fileURLWithPath:path];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:path])
-            [data writeToURL:hackedFileUrl
-                     options:NSDataWritingAtomic
-                       error:NULL];
-    }
-     */
-
     return [LokaliteDataParser parseLokaliteData:data error:error];
 }
 
