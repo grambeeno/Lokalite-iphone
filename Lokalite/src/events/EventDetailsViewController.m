@@ -15,6 +15,7 @@
 #import "Location.h"
 
 #import "EventDetailsHeaderView.h"
+#import "EventDetailsFooterView.h"
 #import "LocationTableViewCell.h"
 
 #import "BusinessDetailsViewController.h"
@@ -209,7 +210,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (void)initializeFooterView
 {
-    [[self tableView] setTableFooterView:[self footerView]];
+    Event *event = [self event];
+    EventDetailsFooterView *footerView = [self footerView];
+    [footerView configureForEvent:event];
+    [[self tableView] setTableFooterView:footerView];
 }
 
 #pragma mark - Table view configuration

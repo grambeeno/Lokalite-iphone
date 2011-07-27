@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class Event, EventDetailsHeaderView;
+@class Event, EventDetailsHeaderView, EventDetailsFooterView;
 @class LocationTableViewCell;
 
 @interface EventDetailsViewController : UITableViewController
@@ -17,7 +17,7 @@
 
 @property (nonatomic, retain) IBOutlet EventDetailsHeaderView *headerView;
 @property (nonatomic, retain) LocationTableViewCell *locationMapCell;
-@property (nonatomic, retain) IBOutlet UIView *footerView;
+@property (nonatomic, retain) IBOutlet EventDetailsFooterView *footerView;
 
 #pragma mark - Initialization
 

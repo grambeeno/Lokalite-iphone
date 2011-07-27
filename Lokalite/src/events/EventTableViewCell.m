@@ -53,7 +53,11 @@
 {
     [self setEventId:[event identifier]];
 
-    [[self eventNameLabel] setText:[event name]];
+    NSString *name =
+        [event trended] ?
+        [NSString stringWithFormat:@"%@ (trended!)", [event name]] :
+        [event name];
+    [[self eventNameLabel] setText:/*[event name]*/ name];
     [[self businessNameLabel] setText:[[event business] name]];
     [[self summaryLabel] setText:[event summary]];
 
