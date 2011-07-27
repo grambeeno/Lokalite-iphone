@@ -152,6 +152,23 @@
     }
 }
 
+- (void)processObjectFetchError:(NSError *)error
+                     pageNumber:(NSInteger)pageNumber
+{
+    NSLog(@"%@: processing fetch error for page %d: %@",
+          NSStringFromClass([self class]), pageNumber, error);
+    NSString *title = NSLocalizedString(@"featured.fetch.failed", nil);
+    NSString *message = [error localizedDescription];
+    NSString *dismiss = NSLocalizedString(@"global.dismiss", nil);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:dismiss
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release], alert = nil;
+}
+
 - (LokaliteStream *)lokaliteStreamInstance
 {
     return [LokaliteFeaturedEventStream streamWithContext:[self context]];
