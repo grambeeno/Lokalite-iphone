@@ -28,6 +28,8 @@
 + (id)findFirstWithPredicate:(NSPredicate *)predicate
                    inContext:(NSManagedObjectContext *)context;
 
++ (NSInteger)deleteAllInContext:(NSManagedObjectContext *)context;
+
 @end
 
 

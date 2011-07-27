@@ -19,6 +19,7 @@
 "global.business" = "Business";
 "global.profile" = "Profile";
 
+"global.account-details" = "Account Details";
 "global.email" = "Email";
 "global.registered" = "Registered";
 

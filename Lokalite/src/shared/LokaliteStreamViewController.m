@@ -9,6 +9,8 @@
 #import "LokaliteStreamViewController.h"
 #import "LokaliteStream.h"
 
+#import "LokaliteAccount.h"
+
 #import "LokaliteAppDelegate.h"
 
 #import "SDKAdditions.h"
@@ -19,6 +21,17 @@
 #pragma mark - View initialization
 
 - (void)initializeTableView:(UITableView *)tableView;
+
+#pragma mark - Account events
+
+- (void)processAccountAddition:(LokaliteAccount *)account;
+- (void)processAccountDeletion:(LokaliteAccount *)account;
+
+#pragma mark - Persistence management
+
+- (void)managedObjectContextDidChange:(NSNotification *)notification;
+- (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context;
+- (void)unsubscribeForNotoficationsForContext:(NSManagedObjectContext *)context;
 
 @end
 
@@ -340,6 +353,69 @@
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     return nil;
+}
+
+#pragma mark - Persistence management
+
+- (void)managedObjectContextDidChange:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+
+    NSArray *insertedObjects = [userInfo objectForKey:NSInsertedObjectsKey];
+    [insertedObjects enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         if ([obj isKindOfClass:[LokaliteAccount class]]) {
+             LokaliteAccount *account = (LokaliteAccount *) obj;
+             [self processAccountAddition:account];
+         }
+     }];
+
+    NSArray *deletedObjects = [userInfo objectForKey:NSDeletedObjectsKey];
+    [deletedObjects enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         if ([obj isKindOfClass:[LokaliteAccount class]]) {
+             LokaliteAccount *account = (LokaliteAccount *) obj;
+             [self processAccountDeletion:account];
+         }
+     }];
+}
+
+- (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(managedObjectContextDidChange:)
+               name:NSManagedObjectContextObjectsDidChangeNotification
+             object:context];
+}
+
+- (void)unsubscribeForNotoficationsForContext:(NSManagedObjectContext *)context
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self
+                  name:NSManagedObjectContextObjectsDidChangeNotification
+                object:context];
+}
+
+#pragma mark - Handling account events
+
+- (void)processAccountAddition:(LokaliteAccount *)account
+{
+    if ([self shouldResetDataForAccountAddition:account]) {
+        // this operation should probably not be done in this class
+        NSString *entityName = [self lokaliteObjectEntityName];
+        Class class = NSClassFromString(entityName);
+        [class deleteAllInContext:[self context]];
+    }
+}
+
+- (void)processAccountDeletion:(LokaliteAccount *)account
+{
+}
+
+- (BOOL)shouldResetDataForAccountAddition:(LokaliteAccount *)account
+{
+    return NO;
 }
 
 #pragma mark - Accessors

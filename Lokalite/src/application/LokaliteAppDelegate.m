@@ -270,12 +270,13 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)processAccountAddition:(LokaliteAccount *)account
 {
     [self updateInterfaceForAccount:account];
-    [self deleteAllEventAndBusinessData];
+    //[self deleteAllEventAndBusinessData];
 }
 
 - (void)processAccountDeletion:(LokaliteAccount *)account
 {
     [self updateInterfaceForNoAccount];
+    //[self deleteAllEventAndBusinessData];
 }
 
 - (void)deleteAllEventAndBusinessData

@@ -8,6 +8,8 @@
 
 #import "PlacesViewController.h"
 
+#import "LokaliteAccount.h"
+
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
 #import "BusinessDetailsViewController.h"
@@ -126,6 +128,13 @@
 - (LokaliteStream *)lokaliteStreamInstance
 {
     return [LokalitePlacesStream streamWithContext:[self context]];
+}
+
+#pragma mark - Account events
+
+- (BOOL)shouldResetDataForAccountAddition:(LokaliteAccount *)account
+{
+    return NO;
 }
 
 #pragma mark - Accessors

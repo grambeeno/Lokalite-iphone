@@ -18,6 +18,8 @@
 
 @property (nonatomic, retain, readonly) LokaliteAccount *account;
 
+@property (nonatomic, retain) IBOutlet UIView *headerView;
+
 #pragma mark - Initialization
 
 - (id)initWithAccount:(LokaliteAccount *)account;

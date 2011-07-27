@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@class LokaliteStream;
+@class LokaliteAccount, LokaliteStream;
 
 @interface LokaliteStreamViewController : UITableViewController
     <NSFetchedResultsControllerDelegate>
@@ -61,6 +61,10 @@
 
 - (NSString *)dataControllerSectionNameKeyPath;
 - (NSString *)dataControllerCacheName;
+
+#pragma mark - Account events
+
+- (BOOL)shouldResetDataForAccountAddition:(LokaliteAccount *)account;
 
 #pragma mark Fetching data from the network
 

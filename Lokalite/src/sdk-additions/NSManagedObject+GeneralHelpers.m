@@ -79,6 +79,17 @@
     return [a count] > 0 ? [a objectAtIndex:0] : nil;
 }
 
++ (NSInteger)deleteAllInContext:(NSManagedObjectContext *)context
+{
+    NSArray *all = [self findAllInContext:context];
+    NSInteger count = [all count];
+    [all enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [context deleteObject:obj];
+    }];
+
+    return count;
+}
+
 @end
 
 

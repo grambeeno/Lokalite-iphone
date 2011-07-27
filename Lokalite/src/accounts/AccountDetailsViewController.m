@@ -27,7 +27,8 @@ static const NSInteger NUM_ACCOUNT_DETAILS_ROWS =
 
 #pragma mark - View initialization
 
-- (void)initializeNavigationItem:(UINavigationItem *)navItem;
+- (void)initializeNavigationItem;
+- (void)initializeTableView;
 
 #pragma mark - View configuration
 
@@ -40,6 +41,7 @@ static const NSInteger NUM_ACCOUNT_DETAILS_ROWS =
 
 @synthesize delegate = delegate_;
 @synthesize account = account_;
+@synthesize headerView = headerView_;
 
 #pragma mark - Memory management
 
@@ -48,6 +50,8 @@ static const NSInteger NUM_ACCOUNT_DETAILS_ROWS =
     delegate_ = nil;
 
     [account_ release];
+
+    [headerView_ release];
     
     [super dealloc];
 }
@@ -79,7 +83,7 @@ static const NSInteger NUM_ACCOUNT_DETAILS_ROWS =
 {
     [super viewDidLoad];
 
-    [self initializeNavigationItem:[self navigationItem]];
+    [self initializeNavigationItem];
 }
 
 #pragma mark - UITableViewDataSource implementation
@@ -98,6 +102,17 @@ static const NSInteger NUM_ACCOUNT_DETAILS_ROWS =
         nrows = NUM_ACCOUNT_DETAILS_ROWS;
 
     return nrows;
+}
+
+- (NSString *)tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section
+{
+    NSString *title = nil;
+
+    if (section == kSectionAccountDetails)
+        title = NSLocalizedString(@"global.account-details", nil);
+
+    return title;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -120,8 +135,10 @@ static const NSInteger NUM_ACCOUNT_DETAILS_ROWS =
 
 #pragma mark - View initialization
 
-- (void)initializeNavigationItem:(UINavigationItem *)navItem
+- (void)initializeNavigationItem
 {
+    UINavigationItem *navItem = [self navigationItem];
+
     NSString *logOutTitle = NSLocalizedString(@"global.log-out", nil);
     UIBarButtonItem *logOutButtonItem =
         [[UIBarButtonItem alloc] initWithTitle:logOutTitle
@@ -130,6 +147,11 @@ static const NSInteger NUM_ACCOUNT_DETAILS_ROWS =
                                         action:@selector(logOut:)];
     [navItem setRightBarButtonItem:logOutButtonItem];
     [logOutButtonItem release], logOutButtonItem = nil;
+}
+
+- (void)initializeTableView
+{
+    [[self tableView] setTableHeaderView:[self headerView]];
 }
 
 #pragma mark - View configuration
