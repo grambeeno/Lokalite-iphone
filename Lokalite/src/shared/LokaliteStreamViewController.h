@@ -73,6 +73,7 @@
 #pragma mark - Account events
 
 - (BOOL)shouldResetDataForAccountAddition:(LokaliteAccount *)account;
+- (BOOL)shouldResetDataForAccountDeletion:(LokaliteAccount *)account;
 
 #pragma mark Fetching data from the network
 

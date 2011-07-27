@@ -148,7 +148,12 @@
 
 - (BOOL)shouldResetDataForAccountAddition:(LokaliteAccount *)account
 {
-    return NO;
+    return YES;
+}
+
+- (BOOL)shouldResetDataForAccountDeletion:(LokaliteAccount *)account
+{
+    return YES;
 }
 
 @end

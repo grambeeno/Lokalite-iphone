@@ -48,6 +48,8 @@
 
 - (void)dealloc
 {
+    [self unsubscribeForNotoficationsForContext:context_];
+
     [context_ release];
     [dataController_ release];
     [lokaliteStream_ release];
@@ -59,6 +61,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self subscribeForNotificationsForContext:[self context]];
 
     [self initializeTableView:[self tableView]];
 }
@@ -406,21 +410,43 @@
 
 #pragma mark - Handling account events
 
+- (void)deleteAllStreamObjects
+{
+    // this operation should probably not be done in this class
+    NSManagedObjectContext *context = [self context];
+    NSString *entityName = [self lokaliteObjectEntityName];
+    Class class = NSClassFromString(entityName);
+    NSPredicate *pred = [self dataControllerPredicate];
+    NSArray *objects = [class findAllWithPredicate:pred inContext:context];
+
+    [objects enumerateObjectsUsingBlock:
+     ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+         [context deleteObject:obj];
+     }];
+}
+
 - (void)processAccountAddition:(LokaliteAccount *)account
 {
     if ([self shouldResetDataForAccountAddition:account]) {
-        // this operation should probably not be done in this class
-        NSString *entityName = [self lokaliteObjectEntityName];
-        Class class = NSClassFromString(entityName);
-        [class deleteAllInContext:[self context]];
+        [self deleteAllStreamObjects];
+        [self setPagesFetched:0];
     }
 }
 
 - (void)processAccountDeletion:(LokaliteAccount *)account
 {
+    if ([self shouldResetDataForAccountDeletion:account]) {
+        [self deleteAllStreamObjects];
+        [self setPagesFetched:0];
+    }
 }
 
 - (BOOL)shouldResetDataForAccountAddition:(LokaliteAccount *)account
+{
+    return NO;
+}
+
+- (BOOL)shouldResetDataForAccountDeletion:(LokaliteAccount *)account
 {
     return NO;
 }
