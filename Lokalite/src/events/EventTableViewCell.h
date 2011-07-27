@@ -12,6 +12,7 @@
     UILabel *timeLabel;
 }
 
+@property (nonatomic, copy) NSNumber *eventId;
 
 @property (nonatomic, retain) IBOutlet UIImageView *eventImageView;
 @property (nonatomic, retain) IBOutlet UILabel *eventNameLabel;

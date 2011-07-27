@@ -9,6 +9,7 @@
 #import "FeaturedEventsViewController.h"
 
 #import "Event.h"
+#import "Event+GeneralHelpers.h"
 
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
@@ -16,10 +17,27 @@
 #import "LokaliteFeaturedEventStream.h"
 
 #import "LokaliteObjectBuilder.h"
+#import "TableViewImageFetcher.h"
 
 #import "SDKAdditions.h"
 
+@interface FeaturedEventsViewController ()
+@property (nonatomic, retain) TableViewImageFetcher *imageFetcher;
+@end
+
+
 @implementation FeaturedEventsViewController
+
+@synthesize imageFetcher = imageFetcher_;
+
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    [imageFetcher_ release];
+    
+    [super dealloc];
+}
 
 #pragma mark - LokaliteStreamViewController implementation
 
@@ -54,35 +72,30 @@
 {
     [cell configureCellForEvent:event];
 
-    /*
-    UIImage *image = [place image];
-    if (image)
-        [[cell placeImageView] setImage:image];
-    else {
-        NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
-        NSString *urlPath = [place imageUrl];
-        NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
+    UIImage *image = [event image];
+    if (!image) {
+        NSURL *url = [event fullImageUrl];
 
-        __block UIImage *image = nil;
         [[self imageFetcher] fetchImageDataAtUrl:url
                                        tableView:[self tableView]
                              dataReceivedHandler:
          ^(NSData *data) {
-             [place setImageData:data];
-             image = [UIImage imageWithData:data];
+             [event setImageData:data];
          }
                             tableViewCellHandler:
-         ^(UITableViewCell *tvc, NSIndexPath *path) {
-             PlaceTableViewCell *cell = (PlaceTableViewCell *) tvc;
-             if ([[cell placeId] isEqualToNumber:[place identifier]])
-                 [[cell placeImageView] setImage:image];
+         ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {
+             EventTableViewCell *cell = (EventTableViewCell *) tvc;
+             if ([[cell eventId] isEqualToNumber:[event identifier]])
+                 [[cell eventImageView] setImage:image];
          }
                                     errorHandler:
          ^(NSError *error) {
-             NSLog(@"WARNING: Failed to fetch place image at: %@", url);
+             NSLog(@"WARNING: Failed to fetch place image at: %@: %@", url,
+                   error);
          }];
     }
-     */
+
+    [[cell eventImageView] setImage:image];
 }
 
 - (void)displayDetailsForObject:(Event *)event
@@ -154,6 +167,16 @@
 - (BOOL)shouldResetDataForAccountDeletion:(LokaliteAccount *)account
 {
     return YES;
+}
+
+#pragma mark - Accessors
+
+- (TableViewImageFetcher *)imageFetcher
+{
+    if (!imageFetcher_)
+        imageFetcher_ = [[TableViewImageFetcher alloc] init];
+
+    return imageFetcher_;
 }
 
 @end

@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^TVIFDataReceivedHandler)(NSData *data);
-typedef void(^TVIFTableViewCellHandler)(UITableViewCell *cell,
+typedef void(^TVIFTableViewCellHandler)(UIImage *image,
+                                        UITableViewCell *cell,
                                         NSIndexPath *path);
 typedef void(^TVIFErrorHandler)(NSError *error);
 

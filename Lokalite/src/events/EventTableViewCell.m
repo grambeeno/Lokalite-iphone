@@ -10,6 +10,8 @@
 
 @implementation EventTableViewCell
 
+@synthesize eventId = eventId_;
+
 @synthesize eventImageView = eventImageView_;
 @synthesize eventNameLabel = eventNameLabel_;
 @synthesize businessNameLabel = businessNameLabel_;
@@ -20,6 +22,8 @@
 
 - (void)dealloc
 {
+    [eventId_ release];
+
     [eventImageView_ release];
     [eventNameLabel_ release];
     [businessNameLabel_ release];
@@ -47,6 +51,8 @@
 
 - (void)configureCellForEvent:(Event *)event
 {
+    [self setEventId:[event identifier]];
+
     [[self eventNameLabel] setText:[event name]];
     [[self businessNameLabel] setText:[[event business] name]];
     [[self summaryLabel] setText:[event summary]];

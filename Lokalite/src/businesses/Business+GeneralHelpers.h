@@ -19,8 +19,12 @@
 + (NSArray *)businessObjectsFromJsonObjects:(NSDictionary *)jsonObjects
                                 withContext:(NSManagedObjectContext *)context;
 
-#pragma mark - Helper methods
+@end
 
+
+@interface Business (ConvenienceMethods)
+
+- (NSURL *)fullImageUrl;
 - (UIImage *)image;
 
 - (NSURL *)addressUrl;

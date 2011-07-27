@@ -8,13 +8,14 @@
 
 #import "Business+GeneralHelpers.h"
 
+#import "Category.h"
+#import "Category+GeneralHelpers.h"
+
 #import "LokaliteObjectBuilder.h"
 
 #import "NSObject+GeneralHelpers.h"
 #import "NSManagedObject+GeneralHelpers.h"
-
-#import "Category.h"
-#import "Category+GeneralHelpers.h"
+#import "UIApplication+GeneralHelpers.h"
 
 @implementation Business (GeneralHelpers)
 
@@ -98,7 +99,17 @@
     return places;
 }
 
-#pragma mark - Helper methods
+@end
+
+
+@implementation Business (ConvenienceMethods)
+
+- (NSURL *)fullImageUrl
+{
+    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+    NSString *urlPath = [self imageUrl];
+    return [baseUrl URLByAppendingPathComponent:urlPath];
+}
 
 - (UIImage *)image
 {

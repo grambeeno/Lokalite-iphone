@@ -47,6 +47,7 @@
        tableViewCellHandler:(TVIFTableViewCellHandler)cellHandler
                errorHandler:(TVIFErrorHandler)errorHandler
 {
+    NSLog(@"am fetching: %@", [self pendingUrls]);
     BOOL needsFetching = ![[self pendingUrls] containsObject:url];
 
     if (needsFetching) {
@@ -59,17 +60,26 @@
          ^(NSData *data, NSError *error) {
              [[UIApplication sharedApplication] networkActivityDidFinish];
 
-             if (data) {
+             // HACK: if the image is not found, we get a 404 HTML page that
+             // UIImage correctly can not create an image from. Check for that
+             // case specifically.
+             UIImage *image = [UIImage imageWithData:data];
+             if (data && image) {
                  dataHandler(data);
 
                  NSArray *visibleCells = [tableView visibleCells];
                  [visibleCells enumerateObjectsUsingBlock:
                   ^(UITableViewCell *cell, NSUInteger idx, BOOL *stop) {
                       NSIndexPath *path = [tableView indexPathForCell:cell];
-                      cellHandler(cell, path);
+                      cellHandler(image, cell, path);
                   }];
-             } else
+             } else {
+                 if (!error)
+                     // HACK: see note above
+                     error = [NSError errorForHTTPStatusCode:404];
+
                  errorHandler(error);
+             }
 
              [[self pendingUrls] removeObject:url];
          }];

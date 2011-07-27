@@ -82,16 +82,14 @@
         NSString *urlPath = [place imageUrl];
         NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
 
-        __block UIImage *image = nil;
         [[self imageFetcher] fetchImageDataAtUrl:url
                                        tableView:[self tableView]
                              dataReceivedHandler:
          ^(NSData *data) {
              [place setImageData:data];
-             image = [UIImage imageWithData:data];
          }
                             tableViewCellHandler:
-         ^(UITableViewCell *tvc, NSIndexPath *path) {
+         ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {
              PlaceTableViewCell *cell = (PlaceTableViewCell *) tvc;
              if ([[cell placeId] isEqualToNumber:[place identifier]])
                  [[cell placeImageView] setImage:image];

@@ -148,6 +148,19 @@
 
 @implementation Event (ConvenienceMethods)
 
+- (NSURL *)fullImageUrl
+{
+    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+    NSString *urlPath = [self imageUrl];
+    return [baseUrl URLByAppendingPathComponent:urlPath];
+}
+
+- (UIImage *)image
+{
+    NSData *data = [self imageData];
+    return data ? [UIImage imageWithData:data] : nil;
+}
+
 - (CLLocation *)location
 {
     Location *location = [[self venue] location];

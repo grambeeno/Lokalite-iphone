@@ -44,6 +44,9 @@
         case 401:
             message = NSLocalizedString(@"http.401.message", nil);
             break;
+        case 404:
+            message = NSLocalizedString(@"http.404.message", nil);
+            break;
 
         default:
             message = NSLocalizedString(@"http.unknown.message", nil);

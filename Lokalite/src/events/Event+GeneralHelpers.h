@@ -28,6 +28,9 @@
 
 @interface Event (ConvenienceMethods)
 
+- (NSURL *)fullImageUrl;
+- (UIImage *)image;
+
 //
 // Convenience method that reaches through the Venue and the Location instance
 // to get a CLLocation object.
