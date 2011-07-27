@@ -25,6 +25,7 @@
                        resultType:(NSFetchRequestResultType)resultType
                         inContext:(NSManagedObjectContext *)context;
 
++ (id)findFirstInContext:(NSManagedObjectContext *)context;
 + (id)findFirstWithPredicate:(NSPredicate *)predicate
                    inContext:(NSManagedObjectContext *)context;
 

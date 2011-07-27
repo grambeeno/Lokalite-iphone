@@ -14,15 +14,19 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 
 @property (nonatomic, copy, readonly) NSURL *baseUrl;
 
+@property (nonatomic, copy, readonly) NSString *email;
+@property (nonatomic, copy, readonly) NSString *password;
+
 #pragma mark - Initialization
 
 - (id)initWithBaseUrl:(NSURL *)url;
 
 #pragma mark - Authentication
 
-- (void)fetchProfileForUsername:(NSString *)username
-                       password:(NSString *)password
-                responseHandler:(LSResponseHandler)handler;
+- (void)fetchProfileWithResponseHandler:(LSResponseHandler)handler;
+
+- (void)setEmail:(NSString *)email password:(NSString *)password;
+- (void)removeEmailAndPassword;
 
 #pragma mark - Events
 

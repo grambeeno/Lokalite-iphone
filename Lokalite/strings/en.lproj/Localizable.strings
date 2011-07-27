@@ -17,6 +17,8 @@
 "global.location" = "Location";
 "global.event" = "Event";
 "global.business" = "Business";
+"global.places" = "Places";
+"global.place" = "Place";
 "global.profile" = "Profile";
 
 "global.account-details" = "Account Details";

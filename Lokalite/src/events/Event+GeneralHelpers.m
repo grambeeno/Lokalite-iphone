@@ -100,6 +100,12 @@
             [event setImageData:nil];
     }
 
+    NSNumber *featured = [eventData objectForKey:@"featured?"];
+    [event setValueIfNecessary:featured forKey:@"featured"];
+
+    NSNumber *trended = [eventData objectForKey:@"trended?"];
+    [event setValueIfNecessary:trended forKey:@"trended"];
+
     NSDictionary *venueData = [eventData objectForKey:@"venue"];
     Venue *venue = [Venue existingOrNewVenueFromJsonData:venueData
                                                inContext:context];

@@ -47,7 +47,6 @@
        tableViewCellHandler:(TVIFTableViewCellHandler)cellHandler
                errorHandler:(TVIFErrorHandler)errorHandler
 {
-    NSLog(@"am fetching: %@", [self pendingUrls]);
     BOOL needsFetching = ![[self pendingUrls] containsObject:url];
 
     if (needsFetching) {

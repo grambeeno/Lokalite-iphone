@@ -176,12 +176,12 @@
 
 #pragma mark - Account events
 
-- (BOOL)shouldResetDataForAccountAddition:(LokaliteAccount *)account
+- (BOOL)shouldResetForAccountAddition:(LokaliteAccount *)account
 {
     return YES;
 }
 
-- (BOOL)shouldResetDataForAccountDeletion:(LokaliteAccount *)account
+- (BOOL)shouldResetForAccountDeletion:(LokaliteAccount *)account
 {
     return YES;
 }

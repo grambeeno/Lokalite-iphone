@@ -17,16 +17,13 @@
 
 @interface LokaliteService ()
 
+@property (nonatomic, copy) NSString *email;
+@property (nonatomic, copy) NSString *password;
+
 #pragma mark - Sending requests
 
 - (void)sendRequestWithUrl:(NSURL *)url
                 parameters:(NSDictionary *)parameters
-             requestMethod:(LKRequestMethod)requestMethod
-           responseHandler:(LSResponseHandler)handler;
-- (void)sendRequestWithUrl:(NSURL *)url
-                parameters:(NSDictionary *)parameters
-                  username:(NSString *)username
-                  password:(NSString *)password
              requestMethod:(LKRequestMethod)requestMethod
            responseHandler:(LSResponseHandler)handler;
 
@@ -39,6 +36,21 @@
 @implementation LokaliteService
 
 @synthesize baseUrl = baseUrl_;
+
+@synthesize email = email_;
+@synthesize password = password_;
+
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    [baseUrl_ release];
+
+    [email_ release];
+    [password_ release];
+    
+    [super dealloc];
+}
 
 #pragma mark - Initialization
 
@@ -53,16 +65,23 @@
 
 #pragma mark - Authentication
 
-- (void)fetchProfileForUsername:(NSString *)username
-                       password:(NSString *)password
-                responseHandler:(LSResponseHandler)handler
+- (void)fetchProfileWithResponseHandler:(LSResponseHandler)handler
 {
     [self sendRequestWithUrl:[self profileUrl]
                   parameters:nil
-                    username:username
-                    password:password
                requestMethod:LKRequestMethodGET
              responseHandler:handler];
+}
+
+- (void)setEmail:(NSString *)email password:(NSString *)password
+{
+    [self setEmail:email];
+    [self setPassword:password];
+}
+
+- (void)removeEmailAndPassword
+{
+    [self setEmail:nil password:nil];
 }
 
 #pragma mark - Events
@@ -140,28 +159,14 @@
              requestMethod:(LKRequestMethod)requestMethod
            responseHandler:(LSResponseHandler)handler
 {
-    [self sendRequestWithUrl:url
-                  parameters:parameters
-                    username:nil
-                    password:nil
-               requestMethod:requestMethod
-             responseHandler:handler];
-}
-
-- (void)sendRequestWithUrl:(NSURL *)url
-                parameters:(NSDictionary *)parameters
-                  username:(NSString *)username
-                  password:(NSString *)password
-             requestMethod:(LKRequestMethod)requestMethod
-           responseHandler:(LSResponseHandler)handler
-{
     LokaliteServiceRequest *req =
         [[LokaliteServiceRequest alloc] initWithUrl:url
                                          parameters:parameters
                                       requestMethod:LKRequestMethodGET];
 
-    if (username && password)
-        [req authenticateWithUsername:username password:password];
+    NSString *email = [self email], *password = [self password];
+    if (email && password)
+        [req authenticateWithUsername:email password:password];
 
     [req performRequestWithHandler:
      ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {

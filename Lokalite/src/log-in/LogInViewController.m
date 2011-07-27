@@ -9,6 +9,8 @@
 #import "LogInViewController.h"
 
 #import "LokaliteAccount.h"
+#import "LokaliteAccount+KeychainAdditions.h"
+
 #import "LokaliteObjectBuilder.h"
 #import "LokaliteService.h"
 
@@ -33,7 +35,7 @@
 
 - (void)attemptLogInWithUsername:(NSString *)username
                         password:(NSString *)password;
-- (void)processLogInData:(NSDictionary *)data;
+- (void)processLogInData:(NSDictionary *)data password:(NSString *)password;
 - (void)processLogInError:(NSError *)error;
 
 @end
@@ -210,25 +212,25 @@
     [[self passwordTextField] resignFirstResponder];
 
     [self displayActivityViewWithCompletion:^{
-        [[self service] fetchProfileForUsername:username
-                                       password:password
-                                responseHandler:
+        [[self service] setEmail:username password:password];
+        [[self service] fetchProfileWithResponseHandler:
          ^(NSDictionary *data, NSError *error) {
              [self hideActivityView];
              if (data)
-                 [self processLogInData:data];
+                 [self processLogInData:data password:password];
              else if (error)
                  [self processLogInError:error];
          }];
     }];
 }
 
-- (void)processLogInData:(NSDictionary *)data
+- (void)processLogInData:(NSDictionary *)data password:(NSString *)password
 {
     LokaliteAccount *account =
         [LokaliteObjectBuilder
          createOrUpdateLokaliteAccountFromJsonData:data
                                          inContext:[self context]];
+    [account setPassword:password];
     [[self delegate] logInViewController:self didLogInWithAccount:account];
 }
 

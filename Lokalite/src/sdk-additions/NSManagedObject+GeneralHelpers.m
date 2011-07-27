@@ -70,6 +70,11 @@
     return results;
 }
 
++ (id)findFirstInContext:(NSManagedObjectContext *)context
+{
+    return [self findFirstWithPredicate:nil inContext:context];
+}
+
 + (id)findFirstWithPredicate:(NSPredicate *)predicate
                    inContext:(NSManagedObjectContext *)context
 {

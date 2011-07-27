@@ -10,6 +10,7 @@
 #import "LokaliteStream.h"
 
 #import "LokaliteAccount.h"
+#import "LokaliteAccount+KeychainAdditions.h"
 
 #import "LokaliteAppDelegate.h"
 
@@ -65,7 +66,19 @@
     [context_ release];
     [dataController_ release];
     [lokaliteStream_ release];
+
     [super dealloc];
+}
+
+#pragma mark - Initialization
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+        [self setTitle:[self titleForView]];
+
+    return self;
 }
 
 #pragma mark - Button actions
@@ -415,7 +428,9 @@
 
 - (void)processAccountAddition:(LokaliteAccount *)account
 {
-    if ([self shouldResetDataForAccountAddition:account]) {
+    if ([self shouldResetForAccountAddition:account]) {
+        [[self lokaliteStream] setEmail:[account email]
+                               password:[account password]];
         [self deleteAllStreamObjects];
         [self setPagesFetched:0];
     }
@@ -423,18 +438,19 @@
 
 - (void)processAccountDeletion:(LokaliteAccount *)account
 {
-    if ([self shouldResetDataForAccountDeletion:account]) {
+    if ([self shouldResetForAccountDeletion:account]) {
+        [[self lokaliteStream] removeEmailAndPassword];
         [self deleteAllStreamObjects];
         [self setPagesFetched:0];
     }
 }
 
-- (BOOL)shouldResetDataForAccountAddition:(LokaliteAccount *)account
+- (BOOL)shouldResetForAccountAddition:(LokaliteAccount *)account
 {
     return NO;
 }
 
-- (BOOL)shouldResetDataForAccountDeletion:(LokaliteAccount *)account
+- (BOOL)shouldResetForAccountDeletion:(LokaliteAccount *)account
 {
     return NO;
 }
@@ -537,8 +553,14 @@
 
 - (LokaliteStream *)lokaliteStream
 {
-    if (!lokaliteStream_)
+    if (!lokaliteStream_) {
         lokaliteStream_ = [[self lokaliteStreamInstance] retain];
+        LokaliteAccount *account =
+            [LokaliteAccount findFirstInContext:[self context]];
+        if (account)
+            [lokaliteStream_ setEmail:[account email]
+                             password:[account password]];
+    }
 
     return lokaliteStream_;
 }
