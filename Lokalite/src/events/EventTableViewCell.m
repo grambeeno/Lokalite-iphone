@@ -54,7 +54,7 @@
     [self setEventId:[event identifier]];
 
     NSString *name =
-        [event trended] ?
+        [[event trended] boolValue] ?
         [NSString stringWithFormat:@"%@ (trended!)", [event name]] :
         [event name];
     [[self eventNameLabel] setText:/*[event name]*/ name];
