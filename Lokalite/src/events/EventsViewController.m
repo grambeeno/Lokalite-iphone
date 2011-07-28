@@ -424,6 +424,8 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 
 - (void)initializeTableView
 {
+    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+
     CGFloat rowHeight = [EventTableViewCell cellHeight];
     [[self tableView] setRowHeight:rowHeight];
     [[[self searchDisplayController]

@@ -80,6 +80,8 @@
 		05770E9413DE33E100B841D4 /* UIViewController+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05770E9313DE33E100B841D4 /* UIViewController+GeneralHelpers.m */; };
 		057DC63813E0CE6D004107C4 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC63713E0CE6C004107C4 /* Event.m */; };
 		057DC63B13E0D263004107C4 /* EventDetailsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC63A13E0D262004107C4 /* EventDetailsFooterView.m */; };
+		057DC63E13E11B42004107C4 /* event-cell-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 057DC63D13E11B42004107C4 /* event-cell-background@2x.png */; };
+		057DC64013E11B58004107C4 /* event-cell-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 057DC63F13E11B58004107C4 /* event-cell-background.png */; };
 		058962BF13DA299700556F6D /* LokalitePlacesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962BE13DA299700556F6D /* LokalitePlacesStream.m */; };
 		058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */; };
 		0590FF5413D8BAD4006A2254 /* all-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3813D8BAD4006A2254 /* all-selected@2x.png */; };
@@ -267,6 +269,8 @@
 		057DC63713E0CE6C004107C4 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
 		057DC63913E0D262004107C4 /* EventDetailsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsFooterView.h; path = src/events/EventDetailsFooterView.h; sourceTree = "<group>"; };
 		057DC63A13E0D262004107C4 /* EventDetailsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsFooterView.m; path = src/events/EventDetailsFooterView.m; sourceTree = "<group>"; };
+		057DC63D13E11B42004107C4 /* event-cell-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-background@2x.png"; path = "images/events/event-cell-background@2x.png"; sourceTree = "<group>"; };
+		057DC63F13E11B58004107C4 /* event-cell-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-background.png"; path = "images/events/event-cell-background.png"; sourceTree = "<group>"; };
 		058962BD13DA299700556F6D /* LokalitePlacesStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokalitePlacesStream.h; path = src/lokalite/LokalitePlacesStream.h; sourceTree = "<group>"; };
 		058962BE13DA299700556F6D /* LokalitePlacesStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokalitePlacesStream.m; path = src/lokalite/LokalitePlacesStream.m; sourceTree = "<group>"; };
 		058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteStreamViewController.h; path = src/shared/LokaliteStreamViewController.h; sourceTree = "<group>"; };
@@ -389,6 +393,7 @@
 				054E06B213CB8293009B7373 /* tab-bar-icons */,
 				05D06E6E13D76B3300878AD6 /* buttons */,
 				054E06C013CB8978009B7373 /* mock-images */,
+				057DC63C13E11B2D004107C4 /* events */,
 				05770E8813DE1B8D00B841D4 /* lokalite-logo.png */,
 				05770E8913DE1B8D00B841D4 /* lokalite-logo@2x.png */,
 				0504369E13C77F220077F03D /* radar.png */,
@@ -658,6 +663,15 @@
 				05770E8F13DE228700B841D4 /* LogInView.xib */,
 			);
 			name = "log-in";
+			sourceTree = "<group>";
+		};
+		057DC63C13E11B2D004107C4 /* events */ = {
+			isa = PBXGroup;
+			children = (
+				057DC63F13E11B58004107C4 /* event-cell-background.png */,
+				057DC63D13E11B42004107C4 /* event-cell-background@2x.png */,
+			);
+			name = events;
 			sourceTree = "<group>";
 		};
 		0590FF1B13D8B229006A2254 /* category-filter-images */ = {
@@ -985,6 +999,8 @@
 				05770E9113DE228700B841D4 /* LogInView.xib in Resources */,
 				05EB58EB13DF648800436F13 /* AccountDetailsView.xib in Resources */,
 				05EB58F013E0757800436F13 /* FeaturedEventsView.xib in Resources */,
+				057DC63E13E11B42004107C4 /* event-cell-background@2x.png in Resources */,
+				057DC64013E11B58004107C4 /* event-cell-background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

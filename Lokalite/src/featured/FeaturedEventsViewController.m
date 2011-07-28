@@ -41,6 +41,13 @@
 
 #pragma mark - LokaliteStreamViewController implementation
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
+
 #pragma mark Configuring the view
 
 - (NSString *)titleForView
