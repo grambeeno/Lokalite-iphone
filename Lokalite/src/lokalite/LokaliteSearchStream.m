@@ -50,7 +50,7 @@
                  includeEvents:[self includeEvents]
              includeBusinesses:[self includeBusinesses]
                responseHandler:
-     ^(NSDictionary *jsonObjects, NSError *error) {
+     ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
          if (jsonObjects)
              parsedObjects = [Event eventObjectsFromJsonObjects:jsonObjects

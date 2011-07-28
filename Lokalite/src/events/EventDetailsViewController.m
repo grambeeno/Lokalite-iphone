@@ -20,6 +20,8 @@
 
 #import "BusinessDetailsViewController.h"
 
+#import "LokaliteService.h"
+
 #import "SDKAdditions.h"
 
 enum {
@@ -45,6 +47,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 @interface EventDetailsViewController ()
 
+@property (nonatomic, retain) LokaliteService *service;
+
 #pragma mark - View initialization
 
 - (void)initializeHeaderView;
@@ -60,6 +64,13 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)configureCell:(UITableViewCell *)cell
           atIndexPath:(NSIndexPath *)indexPath;
 
+- (void)configureFooterForEvent:(Event *)event;
+
+#pragma mark - Updating for event states
+
+- (void)observeChangesForEvent:(Event *)event;
+- (void)stopObservingChangesForEvent:(Event *)event;
+
 @end
 
 
@@ -71,14 +82,20 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 @synthesize locationMapCell = locationMapCell_;
 @synthesize footerView = footerView_;
 
+@synthesize service = service_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
 {
+    [self stopObservingChangesForEvent:event_];
+
     [event_ release];
     [headerView_ release];
     [locationMapCell_ release];
     [footerView_ release];
+
+    [service_ release];
 
     [super dealloc];
 }
@@ -96,6 +113,38 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     return self;
 }
 
+#pragma mark - Button actions
+
+- (IBAction)toggleTrendStatus:(id)sender
+{
+    Event *event = [self event];
+    NSNumber *eventId = [event identifier];
+    BOOL isTrended = [[ event trended] boolValue];
+
+    LSResponseHandler handler =
+        ^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
+            NSInteger statusCode = [response statusCode];
+            if (statusCode == 200) {
+                NSLog(@"%@", json);
+                json = [json objectForKey:@"data"];
+                NSManagedObjectContext *context = [event managedObjectContext];
+                Event *e = [Event createOrUpdateEventFromJsonData:json inContext:context];
+                NSLog(@"Trended state: %@", [event trended]);
+                NSLog(@"Trended new event: %@", [e trended]);
+            } else {
+                if (!error)
+                    error = [NSError errorForHTTPStatusCode:statusCode];
+                NSLog(@"Failed: %@", error);
+            }
+        };
+
+    if (isTrended)
+        [[self service] untrendEventWithEventId:eventId
+                                responseHandler:handler];
+    else
+        [[self service] trendEventWithEventId:eventId responseHandler:handler];
+}
+
 #pragma mark - UITableViewController implementation
 
 - (void)viewDidLoad
@@ -105,6 +154,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [self initializeHeaderView];
     [self initializeMapView];
     [self initializeFooterView];
+
+    [self observeChangesForEvent:[self event]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
@@ -210,10 +261,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (void)initializeFooterView
 {
-    Event *event = [self event];
-    EventDetailsFooterView *footerView = [self footerView];
-    [footerView configureForEvent:event];
-    [[self tableView] setTableFooterView:footerView];
+    [self configureFooterForEvent:[self event]];
+    [[self tableView] setTableFooterView:[self footerView]];
 }
 
 #pragma mark - Table view configuration
@@ -290,6 +339,36 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     }
 }
 
+- (void)configureFooterForEvent:(Event *)event
+{
+    [[self footerView] configureForEvent:event];
+}
+
+#pragma mark - Updating for event states
+
+- (void)observeChangesForEvent:(Event *)event
+{
+    [event addObserver:self
+            forKeyPath:@"trended"
+               options:NSKeyValueObservingOptionNew |
+                       NSKeyValueObservingOptionOld
+               context:NULL];
+}
+
+- (void)stopObservingChangesForEvent:(Event *)event
+{
+    [event removeObserver:self forKeyPath:@"trended"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([keyPath isEqualToString:@"trended"])
+        [self configureFooterForEvent:[self event]];
+}
+
 #pragma mark - Accessors
 
 - (LocationTableViewCell *)locationMapCell
@@ -298,6 +377,19 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         locationMapCell_ = [[LocationTableViewCell instanceFromNib] retain];
 
     return locationMapCell_;
+}
+
+- (LokaliteService *)service
+{
+    if (!service_) {
+        NSManagedObjectContext *context = [[self event] managedObjectContext];
+        service_ =
+            [[LokaliteService lokaliteServiceAuthenticatedIfPossible:YES
+                                                           inContext:context]
+             retain];
+    }
+
+    return service_;
 }
 
 @end

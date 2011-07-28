@@ -214,7 +214,7 @@
     [self displayActivityViewWithCompletion:^{
         [[self service] setEmail:username password:password];
         [[self service] fetchProfileWithResponseHandler:
-         ^(NSDictionary *data, NSError *error) {
+         ^(NSHTTPURLResponse *response, NSDictionary *data, NSError *error) {
              [self hideActivityView];
              if (data)
                  [self processLogInData:data password:password];

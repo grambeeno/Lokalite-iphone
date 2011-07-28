@@ -10,6 +10,7 @@
 #import "SDKAdditions.h"
 
 @interface LokaliteServiceRequest ()
+
 @property (nonatomic, copy) LKRequestHandler requestHandler;
 
 @property (nonatomic, retain) NSURLConnection *connection;
@@ -96,6 +97,9 @@
 
     NSURL *url = [[self url] URLByAppendingGetParameters:[self parameters]];
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+    [req setHTTPMethod:
+     [self requestMethod] == LKRequestMethodGET ? @"GET" : @"POST"];
+
     if ([self shouldAuthenticateRequest]) {
         NSLog(@"'%@': fetching data for '%@'", url, [self username]);
 

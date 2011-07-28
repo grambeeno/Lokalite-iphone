@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
+typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
+                                 NSDictionary *,
+                                 NSError *);
 
 @interface LokaliteService : NSObject
 
@@ -34,6 +36,13 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 - (void)fetchEventsWithCategory:(NSString *)category
                 responseHandler:(LSResponseHandler)handler;
 
+#pragma mark - Trending events
+
+- (void)trendEventWithEventId:(NSNumber *)eventId
+              responseHandler:(LSResponseHandler)handler;
+- (void)untrendEventWithEventId:(NSNumber *)eventId
+                responseHandler:(LSResponseHandler)handler;
+
 #pragma mark - Places
 
 - (void)fetchPlacesWithCategory:(NSString *)category
@@ -50,6 +59,19 @@ typedef void(^LSResponseHandler)(NSDictionary *, NSError *);
 
 - (NSURL *)profileUrl;
 - (NSURL *)featuredEventUrl;
+- (NSURL *)trendUrl;
+- (NSURL *)untrendUrl;
 - (NSURL *)placesUrl;
+
+@end
+
+
+
+@class NSManagedObjectContext;
+
+@interface LokaliteService (InstantiationHelpers)
+
++ (id)lokaliteServiceAuthenticatedIfPossible:(BOOL)authenticatedIfPossible
+                                   inContext:(NSManagedObjectContext *)context;
 
 @end

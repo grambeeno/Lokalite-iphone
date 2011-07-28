@@ -23,4 +23,8 @@
 
 - (id)initWithEvent:(Event *)event;
 
+#pragma mark - Button actions
+
+- (IBAction)toggleTrendStatus:(id)sender;
+
 @end

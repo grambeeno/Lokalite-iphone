@@ -111,6 +111,35 @@
              responseHandler:handler];
 }
 
+#pragma mark - Trending events
+
+- (void)trendEventWithEventId:(NSNumber *)eventId
+              responseHandler:(LSResponseHandler)handler
+{
+    NSURL *url = [self trendUrl];
+    NSDictionary *params =
+        [NSDictionary dictionaryWithObject:[eventId description]
+                                    forKey:@"event_id"];
+    [self sendRequestWithUrl:url
+                  parameters:params
+               requestMethod:LKRequestMethodPOST
+             responseHandler:handler];
+}
+
+- (void)untrendEventWithEventId:(NSNumber *)eventId
+                responseHandler:(LSResponseHandler)handler
+{
+    NSURL *url = [self untrendUrl];
+    NSDictionary *params =
+        [NSDictionary dictionaryWithObject:[eventId description]
+                                    forKey:@"event_id"];
+    [self sendRequestWithUrl:url
+                  parameters:params
+               requestMethod:LKRequestMethodPOST
+             responseHandler:handler];
+
+}
+
 #pragma mark - Places
 
 - (void)fetchPlacesWithCategory:(NSString *)category
@@ -146,9 +175,9 @@
         if (data) {
              NSError *error = nil;
              id object = [self processJsonData:data error:&error];
-             handler(object, error);
+             handler(response, object, error);
          } else
-             handler(nil, error);
+             handler(response, nil, error);
      }];
 }
 
@@ -162,7 +191,7 @@
     LokaliteServiceRequest *req =
         [[LokaliteServiceRequest alloc] initWithUrl:url
                                          parameters:parameters
-                                      requestMethod:LKRequestMethodGET];
+                                      requestMethod:requestMethod];
 
     NSString *email = [self email], *password = [self password];
     if (email && password)
@@ -179,7 +208,7 @@
          } else
              error = [NSError errorForHTTPStatusCode:[response statusCode]];
 
-         handler(processedData, error);
+         handler(response, processedData, error);
      }];
 }
 
@@ -202,11 +231,50 @@
     return [[self baseUrl] URLByAppendingPathComponent:@"api/events/browse"];
 }
 
+- (NSURL *)trendUrl
+{
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/events/trend"];
+}
+
+- (NSURL *)untrendUrl
+{
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/events/untrend"];
+}
+
 - (NSURL *)placesUrl
 {
     return
         [[self baseUrl]
          URLByAppendingPathComponent:@"api/organizations/browse"];
+}
+
+@end
+
+
+
+#import "LokaliteAccount.h"
+#import "LokaliteAccount+KeychainAdditions.h"
+#import "NSManagedObject+GeneralHelpers.h"
+#import "UIApplication+GeneralHelpers.h"
+
+#import <CoreData/CoreData.h>
+
+@implementation LokaliteService (InstantiationHelpers)
+
++ (id)lokaliteServiceAuthenticatedIfPossible:(BOOL)authenticatedIfPossible
+                                   inContext:(NSManagedObjectContext *)context
+{
+    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+    LokaliteService *service =
+        [[LokaliteService alloc] initWithBaseUrl:baseUrl];
+
+    if (authenticatedIfPossible) {
+        LokaliteAccount *account = [LokaliteAccount findFirstInContext:context];
+        if (account)
+            [service setEmail:[account email] password:[account password]];
+    }
+
+    return [service autorelease];
 }
 
 @end

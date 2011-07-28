@@ -22,7 +22,7 @@
         [[LokaliteService alloc] initWithBaseUrl:[self baseUrl]];
     [service fetchPlacesWithCategory:@""
                      responseHandler:
-     ^(NSDictionary *jsonObjects, NSError *error) {
+     ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
          if (jsonObjects) {
              NSManagedObjectContext *context = [self context];

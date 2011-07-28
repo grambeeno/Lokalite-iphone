@@ -19,7 +19,7 @@
 {
     LokaliteService *service = [self service];
     [service fetchFeaturedEventsWithResponseHandler:
-     ^(NSDictionary *jsonObjects, NSError *error) {
+     ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
          if (jsonObjects) {
              parsedObjects =
