@@ -32,7 +32,7 @@
 - (void)configureForEvent:(Event *)event
 {
     NSString *trendButtonTitleKey =
-        [event trended] ? @"global.untrend" : @"global.trend";
+        [[event trended] boolValue] ? @"global.untrend" : @"global.trend";
     NSString *trendButtonTitle = NSLocalizedString(trendButtonTitleKey, nil);
     [[self trendButton] setTitle:trendButtonTitle
                         forState:UIControlStateNormal];
