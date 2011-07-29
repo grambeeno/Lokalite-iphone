@@ -78,10 +78,10 @@
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<object class="IBUIImageView" id="761321283">
+							<object class="IBUIImageView" id="222641464">
 								<reference key="NSNextResponder" ref="49790276"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{295, 1}, {25, 25}}</string>
+								<int key="NSvFlags">289</int>
+								<string key="NSFrame">{{300, 1}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="49790276"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1030830954"/>
@@ -99,7 +99,7 @@
 								<string key="NSFrame">{{74, 8}, {224, 22}}</string>
 								<reference key="NSSuperview" ref="49790276"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="761321283"/>
+								<reference key="NSNextKeyView" ref="222641464"/>
 								<string key="NSReuseIdentifierKey">_NS:311</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -130,7 +130,7 @@
 							<object class="IBUILabel" id="1030830954">
 								<reference key="NSNextResponder" ref="49790276"/>
 								<int key="NSvFlags">294</int>
-								<string key="NSFrame">{{74, 31}, {222, 20}}</string>
+								<string key="NSFrame">{{74, 33}, {222, 20}}</string>
 								<reference key="NSSuperview" ref="49790276"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="771467982"/>
@@ -176,7 +176,7 @@
 							<object class="IBUILabel" id="771467982">
 								<reference key="NSNextResponder" ref="49790276"/>
 								<int key="NSvFlags">294</int>
-								<string key="NSFrame">{{74, 54}, {222, 18}}</string>
+								<string key="NSFrame">{{74, 57}, {222, 18}}</string>
 								<reference key="NSSuperview" ref="49790276"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="663194185"/>
@@ -290,7 +290,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">trendedImageView</string>
 						<reference key="source" ref="425600432"/>
-						<reference key="destination" ref="761321283"/>
+						<reference key="destination" ref="222641464"/>
 					</object>
 					<int key="connectionID">19</int>
 				</object>
@@ -326,7 +326,7 @@
 							<reference ref="771467982"/>
 							<reference ref="1069929190"/>
 							<reference ref="663194185"/>
-							<reference ref="761321283"/>
+							<reference ref="222641464"/>
 							<reference ref="1029310028"/>
 						</object>
 						<reference key="parent" ref="0"/>
@@ -372,7 +372,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
-						<reference key="object" ref="761321283"/>
+						<reference key="object" ref="222641464"/>
 						<reference key="parent" ref="425600432"/>
 						<string key="objectName">Trend Image View</string>
 					</object>
@@ -518,7 +518,7 @@
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{320, 80}</string>
-				<string>{25, 25}</string>
+				<string>{20, 20}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">534</string>
