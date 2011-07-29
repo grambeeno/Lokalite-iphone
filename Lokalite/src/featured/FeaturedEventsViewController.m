@@ -45,6 +45,12 @@
 {
     [super viewDidLoad];
 
+    UIImage *image = [UIImage imageNamed:@"navigation-bar-banner-featured"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    //[imageView sizeToFit];
+    [imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [[self navigationItem] setTitleView:imageView];
+
     [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 

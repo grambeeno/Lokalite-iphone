@@ -15,6 +15,13 @@
 @implementation TrendingViewController
 
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    NSLog(@"nav bar frame: %@", NSStringFromCGRect([[[self navigationController] navigationBar] frame]));
+}
+
 #pragma mark - LokaliteStreamViewController implementation
 
 - (NSString *)titleForView
