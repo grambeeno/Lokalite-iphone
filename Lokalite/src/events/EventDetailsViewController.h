@@ -12,6 +12,7 @@
 @class LocationTableViewCell;
 
 @interface EventDetailsViewController : UITableViewController
+    <UIActionSheetDelegate>
 
 @property (nonatomic, retain, readonly) Event *event;
 

@@ -20,6 +20,8 @@
 
 #import "BusinessDetailsViewController.h"
 
+#import "LokaliteAppDelegate.h"
+
 #import "LokaliteService.h"
 
 #import "SDKAdditions.h"
@@ -51,6 +53,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 #pragma mark - View initialization
 
+- (void)initializeNavigationItem;
 - (void)initializeHeaderView;
 - (void)initializeMapView;
 - (void)initializeFooterView;
@@ -115,6 +118,36 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 #pragma mark - Button actions
 
+- (IBAction)presentSharingOptions:(id)sender
+{
+    NSString *title = nil;
+    NSString *cancelButtonTitle = NSLocalizedString(@"global.cancel", nil);
+    NSString *sendEmailButtonTitle =
+        NSLocalizedString(@"global.send-email", nil);
+    NSString *sendTextMessageButtonTitle =
+        NSLocalizedString(@"global.send-text-message", nil);
+    NSString *postToFacebookButtonTitle =
+        NSLocalizedString(@"global.post-to-facebook", nil);
+    NSString *postToTwitterButtonTitle =
+        NSLocalizedString(@"global.post-to-twitter", nil);
+
+    UIActionSheet *sheet =
+        [[UIActionSheet alloc] initWithTitle:title
+                                    delegate:self
+                           cancelButtonTitle:cancelButtonTitle
+                      destructiveButtonTitle:nil
+                           otherButtonTitles:sendEmailButtonTitle,
+                                             sendTextMessageButtonTitle,
+                                             postToFacebookButtonTitle,
+                                             postToTwitterButtonTitle, nil];
+
+    LokaliteAppDelegate *appDelegate =
+        (LokaliteAppDelegate *) [[UIApplication sharedApplication] delegate];
+    UITabBar *tabBar = [[appDelegate tabBarController] tabBar];
+    [sheet showFromTabBar:tabBar];
+    [sheet release], sheet = nil;
+}
+
 - (IBAction)toggleTrendStatus:(id)sender
 {
     Event *event = [self event];
@@ -151,6 +184,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     [super viewDidLoad];
 
+    [self initializeNavigationItem];
     [self initializeHeaderView];
     [self initializeMapView];
     [self initializeFooterView];
@@ -243,6 +277,17 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 }
 
 #pragma mark - View initialization
+
+- (void)initializeNavigationItem
+{
+    UIBarButtonItem *shareButtonItem =
+        [[UIBarButtonItem alloc]
+         initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                              target:self
+                              action:@selector(presentSharingOptions:)];
+    [[self navigationItem] setRightBarButtonItem:shareButtonItem];
+    [shareButtonItem release], shareButtonItem = nil;
+}
 
 - (void)initializeHeaderView
 {
@@ -367,6 +412,14 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     if ([keyPath isEqualToString:@"trended"])
         [self configureFooterForEvent:[self event]];
+}
+
+#pragma mark - UIActionSheetDelegate implementation
+
+- (void)actionSheet:(UIActionSheet *)actionSheet
+    clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%@ %d", NSStringFromSelector(_cmd), buttonIndex);
 }
 
 #pragma mark - Accessors

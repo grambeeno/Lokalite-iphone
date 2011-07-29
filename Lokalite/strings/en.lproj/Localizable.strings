@@ -35,6 +35,11 @@
 "global.learn-more" = "Learn More";
 "global.help" = "Help";
 
+"global.send-email" = "Send in Email";
+"global.send-text-message" = "Send in Text Message";
+"global.post-to-facebook" = "Send to Facebook";
+"global.post-to-twitter" = "Send to Twitter";
+
 
 /*
  * HTTP error messages
