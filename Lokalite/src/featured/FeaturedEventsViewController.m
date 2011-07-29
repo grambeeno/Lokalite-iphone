@@ -35,7 +35,7 @@
 - (void)dealloc
 {
     [imageFetcher_ release];
-    
+
     [super dealloc];
 }
 

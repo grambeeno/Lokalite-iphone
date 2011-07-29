@@ -10,8 +10,8 @@
 
 #import <CoreData/CoreData.h>
 
-//#import "FeaturedViewController.h"
 #import "FeaturedEventsViewController.h"
+#import "TrendingViewController.h"
 #import "EventsViewController.h"
 #import "PlacesViewController.h"
 #import "ProfileViewController.h"
@@ -103,10 +103,18 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
              controller = [nc topViewController];
          }
 
+         if ([controller respondsToSelector:@selector(setContext:)])
+             [controller setValue:context forKey:@"context"];
+
+         /*
          if ([controller isKindOfClass:[FeaturedEventsViewController class]]) {
              FeaturedEventsViewController *featuredController =
                 (FeaturedEventsViewController *) controller;
              [featuredController setContext:context];
+         } else if ([controller isKindOfClass:[TrendingViewController class]]) {
+             TrendingViewController *trendingController =
+                (TrendingViewController *) controller;
+             [trendingController setContext:context];
          } else if ([controller isKindOfClass:[EventsViewController class]]) {
              EventsViewController *eventsController =
                 (EventsViewController *) controller;
@@ -120,6 +128,7 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
                 (ProfileViewController *) controller;
              [profileController setContext:context];
          }
+          */
      }];
 }
 

@@ -23,6 +23,7 @@
 
 "global.trend" = "Trend";
 "global.untrend" = "Untrend";
+"global.trending" = "Trending";
 
 "global.account-details" = "Account Details";
 "global.email" = "Email";

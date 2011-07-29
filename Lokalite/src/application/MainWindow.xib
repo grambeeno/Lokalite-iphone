@@ -54,6 +54,7 @@
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -75,10 +76,10 @@
 				<bool key="IBUIHorizontal">NO</bool>
 				<object class="IBUINavigationController" key="IBUISelectedViewController" id="486636681">
 					<object class="IBUITabBarItem" key="IBUITabBarItem" id="226891341">
-						<string key="IBUITitle">Loyalty</string>
+						<string key="IBUITitle">Trending</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">tab-bar-icon-loyalty.png</string>
+							<string key="NSResourceName">tab-bar-icon-trending.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -103,11 +104,11 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="IBUIViewController" id="934535765">
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="608171807">
-								<string key="IBUITitle">Loyalty</string>
+								<string key="IBUITitle">Trending</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<reference key="IBUIParentViewController" ref="486636681"/>
-							<string key="IBUINibName">LoyaltyView</string>
+							<string key="IBUINibName">TrendingView</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -403,6 +404,7 @@
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSNextKeyView"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
@@ -780,7 +782,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>LoyaltyViewController</string>
+					<string>TrendingViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -835,16 +837,16 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>tab-bar-icon-events.png</string>
-				<string>tab-bar-icon-loyalty.png</string>
 				<string>tab-bar-icon-places.png</string>
 				<string>tab-bar-icon-profile.png</string>
+				<string>tab-bar-icon-trending.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{23, 26}</string>
-				<string>{22, 26}</string>
 				<string>{16, 26}</string>
 				<string>{24, 21}</string>
+				<string>{24, 22}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">534</string>

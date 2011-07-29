@@ -70,6 +70,10 @@
 		056A92F113CCFB0600C65DC0 /* LokaliteObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */; };
 		056A92F513CD0E0D00C65DC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 056A92F313CD0E0D00C65DC0 /* Localizable.strings */; };
 		056A92FC13CD174300C65DC0 /* UIColor+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */; };
+		0570CBFD13E32D3300C4DDCA /* tab-bar-icon-trending.png in Resources */ = {isa = PBXBuildFile; fileRef = 0570CBFB13E32D3300C4DDCA /* tab-bar-icon-trending.png */; };
+		0570CBFE13E32D3300C4DDCA /* tab-bar-icon-trending@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0570CBFC13E32D3300C4DDCA /* tab-bar-icon-trending@2x.png */; };
+		0570CC0413E32D9E00C4DDCA /* TrendingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0570CC0213E32D9E00C4DDCA /* TrendingViewController.m */; };
+		0570CC0513E32D9E00C4DDCA /* TrendingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0570CC0313E32D9E00C4DDCA /* TrendingView.xib */; };
 		05770E8113DDCD8500B841D4 /* PlaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05770E8013DDCD8500B841D4 /* PlaceTableViewCell.m */; };
 		05770E8413DDCD9800B841D4 /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05770E8313DDCD9800B841D4 /* PlaceTableViewCell.xib */; };
 		05770E8713DDD75A00B841D4 /* TableViewImageFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 05770E8613DDD75A00B841D4 /* TableViewImageFetcher.m */; };
@@ -255,6 +259,11 @@
 		056A92F413CD0E0D00C65DC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = strings/en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		056A92FA13CD174300C65DC0 /* UIColor+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+GeneralHelpers.h"; path = "src/sdk-additions/UIColor+GeneralHelpers.h"; sourceTree = "<group>"; };
 		056A92FB13CD174300C65DC0 /* UIColor+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+GeneralHelpers.m"; path = "src/sdk-additions/UIColor+GeneralHelpers.m"; sourceTree = "<group>"; };
+		0570CBFB13E32D3300C4DDCA /* tab-bar-icon-trending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-trending.png"; path = "images/tab-bar-icons/tab-bar-icon-trending.png"; sourceTree = "<group>"; };
+		0570CBFC13E32D3300C4DDCA /* tab-bar-icon-trending@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-trending@2x.png"; path = "images/tab-bar-icons/tab-bar-icon-trending@2x.png"; sourceTree = "<group>"; };
+		0570CC0113E32D9E00C4DDCA /* TrendingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrendingViewController.h; path = src/trending/TrendingViewController.h; sourceTree = "<group>"; };
+		0570CC0213E32D9E00C4DDCA /* TrendingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrendingViewController.m; path = src/trending/TrendingViewController.m; sourceTree = "<group>"; };
+		0570CC0313E32D9E00C4DDCA /* TrendingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TrendingView.xib; path = src/trending/TrendingView.xib; sourceTree = "<group>"; };
 		05770E7F13DDCD8500B841D4 /* PlaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceTableViewCell.h; path = src/businesses/PlaceTableViewCell.h; sourceTree = "<group>"; };
 		05770E8013DDCD8500B841D4 /* PlaceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceTableViewCell.m; path = src/businesses/PlaceTableViewCell.m; sourceTree = "<group>"; };
 		05770E8313DDCD9800B841D4 /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlaceTableViewCell.xib; path = src/businesses/PlaceTableViewCell.xib; sourceTree = "<group>"; };
@@ -513,6 +522,7 @@
 				05EB58D113DF302100436F13 /* accounts */,
 				05770E8C13DE1F1B00B841D4 /* log-in */,
 				05209F0D13C7705D00CA6A2D /* featured */,
+				0570CC0013E32D5F00C4DDCA /* trending */,
 				05209F0E13C7706700CA6A2D /* loyalty */,
 				05EC9A3913CB969700B7AD61 /* events */,
 				05EC9A3A13CB96BA00B7AD61 /* businesses */,
@@ -567,6 +577,8 @@
 		054E06B213CB8293009B7373 /* tab-bar-icons */ = {
 			isa = PBXGroup;
 			children = (
+				0570CBFB13E32D3300C4DDCA /* tab-bar-icon-trending.png */,
+				0570CBFC13E32D3300C4DDCA /* tab-bar-icon-trending@2x.png */,
 				0590FF7713D8E045006A2254 /* tab-bar-icon-events.png */,
 				0590FF7813D8E045006A2254 /* tab-bar-icon-events@2x.png */,
 				054E06B813CB8309009B7373 /* tab-bar-icon-loyalty.png */,
@@ -657,6 +669,16 @@
 				056A92F313CD0E0D00C65DC0 /* Localizable.strings */,
 			);
 			name = strings;
+			sourceTree = "<group>";
+		};
+		0570CC0013E32D5F00C4DDCA /* trending */ = {
+			isa = PBXGroup;
+			children = (
+				0570CC0113E32D9E00C4DDCA /* TrendingViewController.h */,
+				0570CC0213E32D9E00C4DDCA /* TrendingViewController.m */,
+				0570CC0313E32D9E00C4DDCA /* TrendingView.xib */,
+			);
+			name = trending;
 			sourceTree = "<group>";
 		};
 		05770E8C13DE1F1B00B841D4 /* log-in */ = {
@@ -1009,6 +1031,9 @@
 				057DC64013E11B58004107C4 /* event-cell-background.png in Resources */,
 				05B1577213E269CC00F20FF8 /* event-cell-trend-badge.png in Resources */,
 				05B1577313E269CC00F20FF8 /* event-cell-trend-badge@2x.png in Resources */,
+				0570CBFD13E32D3300C4DDCA /* tab-bar-icon-trending.png in Resources */,
+				0570CBFE13E32D3300C4DDCA /* tab-bar-icon-trending@2x.png in Resources */,
+				0570CC0513E32D9E00C4DDCA /* TrendingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1083,6 +1108,7 @@
 				05EB58EE13E0755400436F13 /* FeaturedEventsViewController.m in Sources */,
 				057DC63813E0CE6D004107C4 /* Event.m in Sources */,
 				057DC63B13E0D263004107C4 /* EventDetailsFooterView.m in Sources */,
+				0570CC0413E32D9E00C4DDCA /* TrendingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

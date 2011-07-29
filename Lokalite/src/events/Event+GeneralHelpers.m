@@ -105,7 +105,6 @@
 
     NSNumber *trended = [eventData objectForKey:@"trended?"];
     [event setValueIfNecessary:trended forKey:@"trended"];
-    NSLog(@"%@ trended: %@ (%@)", [event name], [event trended], trended);
 
     NSDictionary *venueData = [eventData objectForKey:@"venue"];
     Venue *venue = [Venue existingOrNewVenueFromJsonData:venueData
