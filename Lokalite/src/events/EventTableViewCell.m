@@ -17,6 +17,7 @@
 @synthesize businessNameLabel = businessNameLabel_;
 @synthesize summaryLabel = summaryLabel_;
 @synthesize timeLabel = timeLabel_;
+@synthesize trendedImageView = trendedImageView_;
 
 #pragma mark - Memory management
 
@@ -29,6 +30,7 @@
     [businessNameLabel_ release];
     [summaryLabel_ release];
     [timeLabel_ release];
+    [trendedImageView_ release];
 
     [super dealloc];
 }
@@ -44,6 +46,7 @@
 
 
 #import "Event.h"
+#import "Event+GeneralHelpers.h"
 #import "Business.h"
 #import "NSString+GeneralHelpers.h"
 
@@ -53,11 +56,7 @@
 {
     [self setEventId:[event identifier]];
 
-    NSString *name =
-        [[event trended] boolValue] ?
-        [NSString stringWithFormat:@"%@ (trended!)", [event name]] :
-        [event name];
-    [[self eventNameLabel] setText:/*[event name]*/ name];
+    [[self eventNameLabel] setText:[event name]];
     [[self businessNameLabel] setText:[[event business] name]];
     [[self summaryLabel] setText:[event summary]];
 
@@ -65,6 +64,8 @@
         [NSString textRangeWithStartDate:[event startDate]
                                  endDate:[event endDate]];
     [[self timeLabel] setText:timeRange];
+
+    [[self trendedImageView] setHidden:![event isTrended]];
 }
 
 @end

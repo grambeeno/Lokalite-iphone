@@ -155,6 +155,12 @@
 
 @implementation Event (ConvenienceMethods)
 
+- (BOOL)isTrended
+{
+    NSNumber *trended = [self trended];
+    return trended ? [trended boolValue] : NO;
+}
+
 - (NSURL *)fullImageUrl
 {
     NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];

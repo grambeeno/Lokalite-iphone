@@ -28,6 +28,8 @@
 
 @interface Event (ConvenienceMethods)
 
+- (BOOL)isTrended;
+
 - (NSURL *)fullImageUrl;
 - (UIImage *)image;
 
