@@ -154,6 +154,12 @@
 
 @implementation Event (ConvenienceMethods)
 
+- (NSString *)dateStringDescription
+{
+    return [NSString textRangeWithStartDate:[self startDate]
+                                    endDate:[self endDate]];
+}
+
 - (BOOL)isTrended
 {
     NSNumber *trended = [self trended];

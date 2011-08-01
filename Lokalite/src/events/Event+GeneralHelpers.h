@@ -28,6 +28,8 @@
 
 @interface Event (ConvenienceMethods)
 
+- (NSString *)dateStringDescription;
+
 - (BOOL)isTrended;
 
 - (NSURL *)fullImageUrl;
