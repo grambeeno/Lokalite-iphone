@@ -179,16 +179,6 @@
     return data ? [UIImage imageWithData:data] : nil;
 }
 
-- (CLLocation *)location
-{
-    Location *location = [[self venue] location];
-    NSNumber *lat = [location latitude], *lon = [location longitude];
-    CLLocation *loc = [[CLLocation alloc] initWithLatitude:[lat floatValue]
-                                                 longitude:[lon floatValue]];
-
-    return [loc autorelease];
-}
-
 + (NSPredicate *)predicateForSearchString:(NSString *)searchString
                             includeEvents:(BOOL)includeEvents
                         includeBusinesses:(BOOL)includeBusinesses
@@ -210,6 +200,34 @@
 
     return [NSPredicate standardSearchPredicateForSearchString:searchString
                                              attributeKeyPaths:attributes];
+}
+
+@end
+
+
+#import "NSArray+GeneralHelpers.h"
+#import "EventMapAnnotation.h"
+
+@implementation Event (GeoHelpers)
+
+- (CLLocation *)location
+{
+    Location *location = [[self venue] location];
+    NSNumber *lat = [location latitude], *lon = [location longitude];
+    CLLocation *loc = [[CLLocation alloc] initWithLatitude:[lat floatValue]
+                                                 longitude:[lon floatValue]];
+
+    return [loc autorelease];
+}
+
++ (NSArray *)eventAnnotationsFromEvents:(NSArray *)events
+{
+    return [events arrayByMappingArray:
+            ^(Event *event, NSUInteger idx, BOOL *stop) {
+                EventMapAnnotation *annotation =
+                    [[EventMapAnnotation alloc] initWithEvent:event];
+                return [annotation autorelease];
+            }];
 }
 
 @end

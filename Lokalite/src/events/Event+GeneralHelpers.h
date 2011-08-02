@@ -35,12 +35,6 @@
 - (NSURL *)fullImageUrl;
 - (UIImage *)image;
 
-//
-// Convenience method that reaches through the Venue and the Location instance
-// to get a CLLocation object.
-//
-- (CLLocation *)location;
-
 
 //
 // Get the predicate for a search string
@@ -49,5 +43,18 @@
 + (NSPredicate *)predicateForSearchString:(NSString *)searchString
                             includeEvents:(BOOL)includeEvents
                         includeBusinesses:(BOOL)includeBusinesses;
+
+@end
+
+
+@interface Event (GeoHelpers)
+
+//
+// Convenience method that reaches through the Venue and the Location instance
+// to get a CLLocation object.
+//
+- (CLLocation *)location;
+
++ (NSArray *)eventAnnotationsFromEvents:(NSArray *)events;
 
 @end

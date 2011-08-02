@@ -19,24 +19,68 @@
 #import "LokaliteObjectBuilder.h"
 #import "TableViewImageFetcher.h"
 
+#import "EventMapViewController.h"
+
 #import "SDKAdditions.h"
 
 @interface FeaturedEventsViewController ()
+
+@property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
+
 @property (nonatomic, retain) TableViewImageFetcher *imageFetcher;
+
+#pragma mark - View initialization
+
+- (void)initializeNavigationItem;
+- (void)initializeTableView;
+
 @end
 
 
 @implementation FeaturedEventsViewController
 
+@synthesize mapView = mapView_;
+@synthesize mapViewController = mapViewController_;
+
+@synthesize showingMapView = showingMapView_;
 @synthesize imageFetcher = imageFetcher_;
 
 #pragma mark - Memory management
 
 - (void)dealloc
 {
+    [mapView_ release];
+    [mapViewController_ release];
+
     [imageFetcher_ release];
 
     [super dealloc];
+}
+
+#pragma mark - UI events
+
+- (void)toggleMapView:(id)sender
+{
+    BOOL showingMap = [self isShowingMapView];
+    if (showingMap) {
+        [[self tableView] setFrame:[[self mapView] frame]];
+        [UIView transitionFromView:[self mapView]
+                            toView:[self tableView]
+                          duration:1
+                           options:UIViewAnimationOptionTransitionCurlDown
+                        completion:nil];
+    } else {
+        NSArray *events = [[self dataController] fetchedObjects];
+        NSArray *eventAnnotations = [Event eventAnnotationsFromEvents:events];
+        [[self mapViewController] setAnnotations:eventAnnotations];
+        [[self mapView] setFrame:[[self tableView] frame]];
+        [UIView transitionFromView:[self tableView]
+                            toView:[self mapView]
+                          duration:1
+                           options:UIViewAnimationOptionTransitionCurlUp
+                        completion:nil];
+    }
+    [self setShowingMapView:!showingMap];
 }
 
 #pragma mark - LokaliteStreamViewController implementation
@@ -45,13 +89,10 @@
 {
     [super viewDidLoad];
 
-    UIImage *image = [UIImage imageNamed:@"navigation-bar-banner-featured"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    //[imageView sizeToFit];
-    [imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [[self navigationItem] setTitleView:imageView];
+    [self setShowingMapView:NO];
 
-    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self initializeNavigationItem];
+    [self initializeTableView];
 }
 
 #pragma mark Configuring the view
@@ -61,8 +102,7 @@
     return NSLocalizedString(@"global.featured", nil);
 }
 
-
-#pragma mark - Configuring the table view
+#pragma mark Configuring the table view
 
 - (CGFloat)cellHeightForTableView:(UITableView *)tableView
 {
@@ -185,6 +225,31 @@
 - (LokaliteStream *)lokaliteStreamInstance
 {
     return [LokaliteFeaturedEventStream streamWithContext:[self context]];
+}
+
+#pragma mark - View initialization
+
+- (void)initializeNavigationItem
+{
+    UIImage *image = [UIImage imageNamed:@"navigation-bar-banner-featured"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    [imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [[self navigationItem] setTitleView:imageView];
+
+    UIImage *mapViewImage = [UIImage imageNamed:@"radar"];
+    UIBarButtonItem *toggleMapViewButton =
+        [[UIBarButtonItem alloc]
+         initWithImage:mapViewImage
+                 style:UIBarButtonItemStyleBordered
+                target:self
+                action:@selector(toggleMapView:)];
+    [[self navigationItem] setRightBarButtonItem:toggleMapViewButton];
+    [toggleMapViewButton release], toggleMapViewButton = nil;
+}
+
+- (void)initializeTableView
+{
+    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 #pragma mark - Account events

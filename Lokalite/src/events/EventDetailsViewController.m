@@ -35,12 +35,12 @@ static const NSInteger NUM_SECTIONS = kSectionLocation + 1;
 
 enum {
     
-    kInfoRowHours/*,*/
+    kInfoRowHours,
     //kInfoRowPhone,
     //kInfoRowBusinessName,
-    //kInfoRowEventDescription
+    kInfoRowEventDescription
 };
-static const NSInteger NUM_INFO_ROWS = kInfoRowHours /*kInfoRowEventDescription*/ + 1;
+static const NSInteger NUM_INFO_ROWS = kInfoRowEventDescription + 1;
 
 enum {
     kLocationRowTitle,
@@ -322,10 +322,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     NSString *cellIdentifier = nil;
 
     if ([path section] == kSectionInfo) {
-        //if ([path row] == kInfoRowBusinessName)
-        //    cellIdentifier = @"InfoRowBusinessName";
-        //else if ([path row] == kInfoRowEventDescription)
-        //    cellIdentifier = @"InfoRowEventDescription";
+        /*if ([path row] == kInfoRowBusinessName)
+            cellIdentifier = @"InfoRowBusinessName";
+        else*/ if ([path row] == kInfoRowEventDescription)
+            cellIdentifier = @"InfoRowEventDescription";
     } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowAddress)
             cellIdentifier = @"LocationRowAddressTableViewCell";
@@ -366,7 +366,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     if ([indexPath section] == kSectionInfo) {
         if ([indexPath row] == kInfoRowHours) {
-            [[cell detailTextLabel] setText:[[self event] dateStringDescription]];
+            [[cell detailTextLabel] setText:
+             [[self event] dateStringDescription]];
             [[cell textLabel] setText:NSLocalizedString(@"global.hours", nil)];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
             [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
@@ -378,11 +379,11 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
             [[cell textLabel] setText:[[[self event] business] name]];
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
-        }*/ /*else if ([indexPath row] == kInfoRowEventDescription) {
+        }*/ else if ([indexPath row] == kInfoRowEventDescription) {
             [[cell textLabel] setText:[[self event] summary]];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        }*/
+        }
     } else if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowTitle) {
             [[cell textLabel] setText:[[[self event] business] name]];

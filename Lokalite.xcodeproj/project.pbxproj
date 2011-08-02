@@ -89,6 +89,7 @@
 		057DC64013E11B58004107C4 /* event-cell-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 057DC63F13E11B58004107C4 /* event-cell-background.png */; };
 		058962BF13DA299700556F6D /* LokalitePlacesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962BE13DA299700556F6D /* LokalitePlacesStream.m */; };
 		058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */; };
+		0589E4F413E7706F00149713 /* EventMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589E4F313E7706F00149713 /* EventMapAnnotation.m */; };
 		0590FF5413D8BAD4006A2254 /* all-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3813D8BAD4006A2254 /* all-selected@2x.png */; };
 		0590FF5513D8BAD4006A2254 /* all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3913D8BAD4006A2254 /* all@2x.png */; };
 		0590FF5713D8BAD4006A2254 /* arts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3B13D8BAD4006A2254 /* arts@2x.png */; };
@@ -124,6 +125,7 @@
 		0590FF7F13D8E17F006A2254 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590FF7D13D8E17F006A2254 /* ProfileViewController.m */; };
 		0590FF8013D8E17F006A2254 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7E13D8E17F006A2254 /* ProfileView.xib */; };
 		059AEE0F13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */; };
+		059AEE1313E7667F00AA4DF7 /* EventMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059AEE1213E7667F00AA4DF7 /* EventMapViewController.m */; };
 		059B33FC13D48183007AD11C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FA13D48183007AD11C /* SearchViewController.m */; };
 		059B33FD13D48183007AD11C /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059B33FB13D48183007AD11C /* SearchView.xib */; };
 		059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */; };
@@ -289,6 +291,8 @@
 		058962BE13DA299700556F6D /* LokalitePlacesStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokalitePlacesStream.m; path = src/lokalite/LokalitePlacesStream.m; sourceTree = "<group>"; };
 		058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteStreamViewController.h; path = src/shared/LokaliteStreamViewController.h; sourceTree = "<group>"; };
 		058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteStreamViewController.m; path = src/shared/LokaliteStreamViewController.m; sourceTree = "<group>"; };
+		0589E4F213E7706F00149713 /* EventMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventMapAnnotation.h; path = src/geo/EventMapAnnotation.h; sourceTree = "<group>"; };
+		0589E4F313E7706F00149713 /* EventMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventMapAnnotation.m; path = src/geo/EventMapAnnotation.m; sourceTree = "<group>"; };
 		0590FF3813D8BAD4006A2254 /* all-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all-selected@2x.png"; path = "images/buttons/category-filter-images/all-selected@2x.png"; sourceTree = "<group>"; };
 		0590FF3913D8BAD4006A2254 /* all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all@2x.png"; path = "images/buttons/category-filter-images/all@2x.png"; sourceTree = "<group>"; };
 		0590FF3B13D8BAD4006A2254 /* arts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arts@2x.png"; path = "images/buttons/category-filter-images/arts@2x.png"; sourceTree = "<group>"; };
@@ -326,6 +330,8 @@
 		0590FF7D13D8E17F006A2254 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = src/profile/ProfileViewController.m; sourceTree = "<group>"; };
 		0590FF7E13D8E17F006A2254 /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileView.xib; path = src/profile/ProfileView.xib; sourceTree = "<group>"; };
 		059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-details-header-image-frame@2x.png"; path = "images/event-details/event-details-header-image-frame@2x.png"; sourceTree = "<group>"; };
+		059AEE1113E7667F00AA4DF7 /* EventMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventMapViewController.h; path = src/geo/EventMapViewController.h; sourceTree = "<group>"; };
+		059AEE1213E7667F00AA4DF7 /* EventMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventMapViewController.m; path = src/geo/EventMapViewController.m; sourceTree = "<group>"; };
 		059B33F913D48183007AD11C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = src/search/SearchViewController.h; sourceTree = "<group>"; };
 		059B33FA13D48183007AD11C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = src/search/SearchViewController.m; sourceTree = "<group>"; };
 		059B33FB13D48183007AD11C /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchView.xib; path = src/search/SearchView.xib; sourceTree = "<group>"; };
@@ -532,6 +538,7 @@
 				05209F0E13C7706700CA6A2D /* loyalty */,
 				05EC9A3913CB969700B7AD61 /* events */,
 				05EC9A3A13CB96BA00B7AD61 /* businesses */,
+				059AEE1013E765D300AA4DF7 /* geo */,
 				0590FF7B13D8E15D006A2254 /* profile */,
 				059B33F713D48138007AD11C /* search */,
 				05A7B41713D73111008E737C /* categories */,
@@ -767,6 +774,17 @@
 				059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */,
 			);
 			name = "event-details";
+			sourceTree = "<group>";
+		};
+		059AEE1013E765D300AA4DF7 /* geo */ = {
+			isa = PBXGroup;
+			children = (
+				059AEE1113E7667F00AA4DF7 /* EventMapViewController.h */,
+				059AEE1213E7667F00AA4DF7 /* EventMapViewController.m */,
+				0589E4F213E7706F00149713 /* EventMapAnnotation.h */,
+				0589E4F313E7706F00149713 /* EventMapAnnotation.m */,
+			);
+			name = geo;
 			sourceTree = "<group>";
 		};
 		059B33F713D48138007AD11C /* search */ = {
@@ -1133,6 +1151,8 @@
 				057DC63813E0CE6D004107C4 /* Event.m in Sources */,
 				057DC63B13E0D263004107C4 /* EventDetailsFooterView.m in Sources */,
 				0570CC0413E32D9E00C4DDCA /* TrendingViewController.m in Sources */,
+				059AEE1313E7667F00AA4DF7 /* EventMapViewController.m in Sources */,
+				0589E4F413E7706F00149713 /* EventMapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
