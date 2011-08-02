@@ -8,6 +8,11 @@
 
 #import "EventMapViewController.h"
 
+#import "EventMapAnnotation.h"
+
+#import "Event.h"
+#import "Event+GeneralHelpers.h"
+
 @implementation EventMapViewController
 
 @synthesize mapView = mapView_;
@@ -38,6 +43,19 @@
         [view setPinColor:MKPinAnnotationColorPurple];
         [view setCanShowCallout:YES];
     }
+
+    EventMapAnnotation *eventAnnotation = (EventMapAnnotation *) annotation;
+    Event *event = [eventAnnotation event];
+    UIImage *image = [event image];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    CGRect imageViewFrame = [imageView frame];
+    imageViewFrame.size = CGSizeMake(32, 32);
+    [imageView setFrame:imageViewFrame];
+    [view setLeftCalloutAccessoryView:imageView];
+    [imageView release], imageView = nil;
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [view setRightCalloutAccessoryView:button];
 
     return view;
 }
