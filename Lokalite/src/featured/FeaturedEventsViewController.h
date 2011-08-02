@@ -7,11 +7,13 @@
 //
 
 #import "LokaliteStreamViewController.h"
+
+#import "EventMapViewController.h"
+
 #import <MapKit/MapKit.h>
 
-@class EventMapViewController;
-
 @interface FeaturedEventsViewController : LokaliteStreamViewController
+    <EventMapViewControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain)

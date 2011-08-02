@@ -15,6 +15,7 @@
 
 @implementation EventMapViewController
 
+@synthesize delegate = delegate_;
 @synthesize mapView = mapView_;
 @synthesize annotations = annotations_;
 
@@ -22,6 +23,8 @@
 
 - (void)dealloc
 {
+    delegate_ = nil;
+
     [mapView_ release];
     [annotations_ release];
     
@@ -58,6 +61,16 @@
     [view setRightCalloutAccessoryView:button];
 
     return view;
+}
+
+- (void)mapView:(MKMapView *)mapView
+ annotationView:(MKAnnotationView *)view
+    calloutAccessoryControlTapped:(UIControl *)control
+{
+    EventMapAnnotation *annotation = (EventMapAnnotation *) [view annotation];
+    Event *event = [annotation event];
+
+    [[self delegate] eventMapViewController:self didSelectEvent:event];
 }
 
 #pragma mark - Accessors

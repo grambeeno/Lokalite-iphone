@@ -90,6 +90,7 @@
     [super viewDidLoad];
 
     [self setShowingMapView:NO];
+    [[self mapViewController] setDelegate:self];
 
     [self initializeNavigationItem];
     [self initializeTableView];
@@ -225,6 +226,14 @@
 - (LokaliteStream *)lokaliteStreamInstance
 {
     return [LokaliteFeaturedEventStream streamWithContext:[self context]];
+}
+
+#pragma mark - EventMapViewControllerDelegate implementation
+
+- (void)eventMapViewController:(EventMapViewController *)controller
+                didSelectEvent:(Event *)event
+{
+    [self displayDetailsForObject:event];
 }
 
 #pragma mark - View initialization
