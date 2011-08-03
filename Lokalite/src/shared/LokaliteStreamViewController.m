@@ -337,6 +337,7 @@
                     toView:(UIView *)toView
                    options:(UIViewAnimationOptions)options
                   animated:(BOOL)animated
+                completion:(void (^)(BOOL completed))completion
 {
     NSTimeInterval duration = animated ? 1 : 0;
     [toView setFrame:[fromView frame]];
@@ -345,20 +346,23 @@
                         toView:toView
                       duration:duration
                        options:options
-                    completion:nil];
+                    completion:completion];
 }
 
 - (void)presentMapViewAnimated:(BOOL)animated
 {
     if (![self isShowingMapView]) {
-        NSArray *objects = [[self dataController] fetchedObjects];
-        NSArray *annotations =
-            [NSArray mapAnnotationsFromLokaliteObjects:objects];
-        [[self mapViewController] setAnnotations:annotations];
         [self transitionFromView:[self tableView]
                           toView:[self mapView]
                          options:UIViewAnimationOptionTransitionCurlUp
-                        animated:animated];
+                        animated:animated
+                      completion:
+         ^(BOOL completed) {
+             NSArray *objects = [[self dataController] fetchedObjects];
+             NSArray *annotations =
+                [NSArray mapAnnotationsFromLokaliteObjects:objects];
+             [[self mapViewController] setAnnotations:annotations];
+         }];
         [self setShowingMapView:YES];
     }
 }
@@ -369,7 +373,10 @@
         [self transitionFromView:[self mapView]
                           toView:[self tableView]
                          options:UIViewAnimationOptionTransitionCurlDown
-                        animated:animated];
+                        animated:animated
+                      completion:^(BOOL completed) {
+                          [[self mapViewController] setAnnotations:nil];
+                      }];
         [self setShowingMapView:NO];
     }
 }

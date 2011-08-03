@@ -86,11 +86,13 @@
         }
         annotations_ = [annotations copy];
 
-        MKCoordinateRegion region =
-            [[self class] coordinateRegionForMapAnnotations:annotations_];
-        [[self mapView] setRegion:region];
+        if (annotations_) {
+            MKCoordinateRegion region =
+                [[self class] coordinateRegionForMapAnnotations:annotations_];
+            [[self mapView] setRegion:region];
 
-        [[self mapView] addAnnotations:annotations_];
+            [[self mapView] addAnnotations:annotations_];
+        }
     }
 }
 
