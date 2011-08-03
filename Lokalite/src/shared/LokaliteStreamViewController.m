@@ -28,6 +28,14 @@
 - (void)initializeTableView:(UITableView *)tableView;
 - (void)initializeMapView:(MKMapView *)mapView;
 
+#pragma mark Working with the map view
+
+- (void)transitionFromView:(UIView *)fromView
+                    toView:(UIView *)toView
+                   options:(UIViewAnimationOptions)options
+                  animated:(BOOL)animated
+                completion:(void (^)(BOOL completed))completion;
+
 #pragma mark - Account events
 
 - (void)processAccountAddition:(LokaliteAccount *)account;
@@ -57,6 +65,7 @@
 @synthesize showingMapView = showingMapView_;
 @synthesize mapView = mapView_;
 @synthesize mapViewController = mapViewController_;
+@synthesize toggleMapViewButtonItem = toggleMapViewButtonItem_;
 
 @synthesize context = context_;
 @synthesize dataController = dataController_;
@@ -74,6 +83,7 @@
 
     [mapView_ release];
     [mapViewController_ release];
+    [toggleMapViewButtonItem_ release];
 
     [context_ release];
     [dataController_ release];
@@ -103,6 +113,11 @@
     [self fetchFeaturedEventsIfNecessary];
 }
 
+- (void)toggleMapView:(id)sender
+{
+    [self toggleMapViewAnimated:YES];
+}
+
 #pragma mark - UITableViewController implementation
 
 - (void)viewDidLoad
@@ -121,8 +136,16 @@
 {
     [super viewWillAppear:animated];
 
-    if ([self isShowingMapView])
-        [self presentMapViewAnimated:NO];
+    if ([self isShowingMapView]) {
+        // HACK: this fixes a bug when tapping a map annotation; when tapping
+        // the back button on the detail view, the table view is visible unless
+        // the transition is run again (done here with no animation).
+        [self transitionFromView:[self tableView]
+                          toView:[self mapView]
+                         options:0
+                        animated:NO
+                      completion:nil];
+    }
 
     [self fetchFeaturedEventsIfNecessary];
 }
@@ -377,6 +400,7 @@
                   completion:^(BOOL completed) {
                       [[self mapViewController] setAnnotations:nil];
                   }];
+    [self setShowingMapView:NO];
 }
 
 - (void)toggleMapViewAnimated:(BOOL)animated
@@ -636,6 +660,18 @@
 }
 
 #pragma mark - Accessors
+
+- (UIBarButtonItem *)toggleMapViewButtonItem
+{
+    if (!toggleMapViewButtonItem_) {
+        SEL action = @selector(toggleMapView:);
+        toggleMapViewButtonItem_ =
+            [[UIBarButtonItem mapViewBarButtonItemWithTarget:self
+                                                      action:action] retain];
+    }
+
+    return toggleMapViewButtonItem_;
+}
 
 - (LokaliteStream *)lokaliteStream
 {

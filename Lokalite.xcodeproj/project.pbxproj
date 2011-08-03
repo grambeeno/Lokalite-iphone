@@ -28,6 +28,7 @@
 		05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1113C770FF00CA6A2D /* LoyaltyViewController.m */; };
 		05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */; };
 		05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1613C7710F00CA6A2D /* MainWindow.xib */; };
+		0530CEEC13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */; };
 		0549AB5513D77A6800F9C2C2 /* CategoryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */; };
 		054E06B613CB82B6009B7373 /* tab-bar-icon-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */; };
 		054E06B713CB82B6009B7373 /* tab-bar-icon-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B513CB82B6009B7373 /* tab-bar-icon-profile@2x.png */; };
@@ -201,6 +202,8 @@
 		05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteAppDelegate.m; path = src/application/LokaliteAppDelegate.m; sourceTree = "<group>"; };
 		05209F1613C7710F00CA6A2D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = src/application/MainWindow.xib; sourceTree = "<group>"; };
 		0530CEE813E8C20700601BFB /* LokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObject.h; path = src/lokalite/LokaliteObject.h; sourceTree = "<group>"; };
+		0530CEEA13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+GeneralHelpers.h"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.h"; sourceTree = "<group>"; };
+		0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+GeneralHelpers.m"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.m"; sourceTree = "<group>"; };
 		0549AB5313D77A6800F9C2C2 /* CategoryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilter.h; path = src/categories/CategoryFilter.h; sourceTree = "<group>"; };
 		0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilter.m; path = src/categories/CategoryFilter.m; sourceTree = "<group>"; };
 		054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-profile.png"; path = "images/tab-bar-icons/tab-bar-icon-profile.png"; sourceTree = "<group>"; };
@@ -943,6 +946,8 @@
 				05D06E7413D76B7900878AD6 /* UIButton+GeneralHelpers.m */,
 				05770E9213DE33E100B841D4 /* UIViewController+GeneralHelpers.h */,
 				05770E9313DE33E100B841D4 /* UIViewController+GeneralHelpers.m */,
+				0530CEEA13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.h */,
+				0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */,
 			);
 			name = "sdk-additions";
 			sourceTree = "<group>";
@@ -1155,6 +1160,7 @@
 				0570CC0413E32D9E00C4DDCA /* TrendingViewController.m in Sources */,
 				059AEE1313E7667F00AA4DF7 /* EventMapViewController.m in Sources */,
 				0589E4F413E7706F00149713 /* LokaliteObjectMapAnnotation.m in Sources */,
+				0530CEEC13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

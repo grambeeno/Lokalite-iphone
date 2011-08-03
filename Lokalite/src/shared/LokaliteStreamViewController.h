@@ -28,6 +28,8 @@
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain)
     IBOutlet EventMapViewController *mapViewController;
+@property (nonatomic, retain, readonly)
+    UIBarButtonItem *toggleMapViewButtonItem;
 
 #pragma mark Data store
 

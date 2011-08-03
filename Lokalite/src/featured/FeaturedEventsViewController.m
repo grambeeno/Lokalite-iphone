@@ -212,15 +212,8 @@
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
     [[self navigationItem] setTitleView:imageView];
 
-    UIImage *mapViewImage = [UIImage imageNamed:@"radar"];
-    UIBarButtonItem *toggleMapViewButton =
-        [[UIBarButtonItem alloc]
-         initWithImage:mapViewImage
-                 style:UIBarButtonItemStyleBordered
-                target:self
-                action:@selector(toggleMapView:)];
-    [[self navigationItem] setRightBarButtonItem:toggleMapViewButton];
-    [toggleMapViewButton release], toggleMapViewButton = nil;
+    [[self navigationItem] setRightBarButtonItem:
+     [self toggleMapViewButtonItem]];
 }
 
 - (void)initializeTableView

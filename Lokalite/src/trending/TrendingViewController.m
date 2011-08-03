@@ -12,14 +12,24 @@
 
 #import "LokaliteEventStream.h"
 
+#import "SDKAdditions.h"
+
+@interface TrendingViewController ()
+
+- (void)initializeNavigationItem;
+
+@end
+
+
 @implementation TrendingViewController
 
+#pragma mark - UIViewController implementation
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    NSLog(@"nav bar frame: %@", NSStringFromCGRect([[[self navigationController] navigationBar] frame]));
+    [self initializeNavigationItem];
 }
 
 #pragma mark - LokaliteStreamViewController implementation
@@ -52,6 +62,14 @@
 - (void)configureCell:(UITableViewCell *)cell forObject:(Event *)event
 {
     [[cell textLabel] setText:[event name]];
+}
+
+#pragma mark - View initialization
+
+- (void)initializeNavigationItem
+{
+    [[self navigationItem] setRightBarButtonItem:
+     [self toggleMapViewButtonItem]];
 }
 
 @end
