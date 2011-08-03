@@ -29,8 +29,6 @@
 		05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */; };
 		05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1613C7710F00CA6A2D /* MainWindow.xib */; };
 		0530CEEC13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */; };
-		0530CEEF13E8DE9200601BFB /* navigation-bar-banner-featured.png in Resources */ = {isa = PBXBuildFile; fileRef = 0530CEED13E8DE9200601BFB /* navigation-bar-banner-featured.png */; };
-		0530CEF013E8DE9200601BFB /* navigation-bar-banner-featured@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0530CEEE13E8DE9200601BFB /* navigation-bar-banner-featured@2x.png */; };
 		0549AB5513D77A6800F9C2C2 /* CategoryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */; };
 		054E06B613CB82B6009B7373 /* tab-bar-icon-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */; };
 		054E06B713CB82B6009B7373 /* tab-bar-icon-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B513CB82B6009B7373 /* tab-bar-icon-profile@2x.png */; };
@@ -209,8 +207,6 @@
 		0530CEE813E8C20700601BFB /* LokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObject.h; path = src/lokalite/LokaliteObject.h; sourceTree = "<group>"; };
 		0530CEEA13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+GeneralHelpers.h"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+GeneralHelpers.m"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.m"; sourceTree = "<group>"; };
-		0530CEED13E8DE9200601BFB /* navigation-bar-banner-featured.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigation-bar-banner-featured.png"; path = "images/navigation-bar/navigation-bar-banner-featured.png"; sourceTree = "<group>"; };
-		0530CEEE13E8DE9200601BFB /* navigation-bar-banner-featured@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigation-bar-banner-featured@2x.png"; path = "images/navigation-bar/navigation-bar-banner-featured@2x.png"; sourceTree = "<group>"; };
 		0549AB5313D77A6800F9C2C2 /* CategoryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilter.h; path = src/categories/CategoryFilter.h; sourceTree = "<group>"; };
 		0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilter.m; path = src/categories/CategoryFilter.m; sourceTree = "<group>"; };
 		054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-profile.png"; path = "images/tab-bar-icons/tab-bar-icon-profile.png"; sourceTree = "<group>"; };
@@ -429,7 +425,6 @@
 			isa = PBXGroup;
 			children = (
 				054E06B213CB8293009B7373 /* tab-bar-icons */,
-				0570CC0613E33A5C00C4DDCA /* navigation-bar */,
 				05D06E6E13D76B3300878AD6 /* buttons */,
 				054E06C013CB8978009B7373 /* mock-images */,
 				057DC63C13E11B2D004107C4 /* events */,
@@ -709,15 +704,6 @@
 				0570CC0313E32D9E00C4DDCA /* TrendingView.xib */,
 			);
 			name = trending;
-			sourceTree = "<group>";
-		};
-		0570CC0613E33A5C00C4DDCA /* navigation-bar */ = {
-			isa = PBXGroup;
-			children = (
-				0530CEED13E8DE9200601BFB /* navigation-bar-banner-featured.png */,
-				0530CEEE13E8DE9200601BFB /* navigation-bar-banner-featured@2x.png */,
-			);
-			name = "navigation-bar";
 			sourceTree = "<group>";
 		};
 		05770E8C13DE1F1B00B841D4 /* log-in */ = {
@@ -1107,8 +1093,6 @@
 				0570CBFE13E32D3300C4DDCA /* tab-bar-icon-trending@2x.png in Resources */,
 				0570CC0513E32D9E00C4DDCA /* TrendingView.xib in Resources */,
 				059AEE0F13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png in Resources */,
-				0530CEEF13E8DE9200601BFB /* navigation-bar-banner-featured.png in Resources */,
-				0530CEF013E8DE9200601BFB /* navigation-bar-banner-featured@2x.png in Resources */,
 				05BC9C0513E9A43000FBAD23 /* AllEventsView.xib in Resources */,
 				05BC9C0D13E9BFD700FBAD23 /* standard-button-background@2x.png in Resources */,
 				05BC9C0E13E9BFD700FBAD23 /* standard-button-pressed-background@2x.png in Resources */,
