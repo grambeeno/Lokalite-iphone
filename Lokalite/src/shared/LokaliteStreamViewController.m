@@ -20,11 +20,7 @@
 
 #pragma mark - Working with the table view
 
-@property (nonatomic, retain) UIView *loadMoreFooterView;
 @property (nonatomic, retain) UIView *loadingMoreActivityView;
-
-- (void)displayLoadMoreActivityViewAnimated:(BOOL)animated;
-- (void)hideLoadMoreActivityViewAnimated:(BOOL)animated;
 
 #pragma mark - Working with the map view
 
@@ -74,7 +70,6 @@
 
 @implementation LokaliteStreamViewController
 
-@synthesize loadMoreFooterView = loadMoreFooterView_;
 @synthesize loadingMoreActivityView = loadingMoreActivityView_;
 
 @synthesize showingMapView = showingMapView_;
@@ -96,7 +91,6 @@
     [self unsubscribeForApplicationLifecycleNotifications];
     [self unsubscribeForNotoficationsForContext:context_];
 
-    [loadMoreFooterView_ release];
     [loadingMoreActivityView_ release];
 
     [mapView_ release];
@@ -140,10 +134,8 @@
 
 - (void)loadMoreButtonTapped:(id)sender
 {
-    if (![self isFetchingData]) {
-        //[self displayLoadMoreActivityViewAnimated:YES];
+    if (![self isFetchingData])
         [self fetchNextSetOfObjectsWithCompletion:nil];
-    }
 }
 
 #pragma mark - UITableViewController implementation
@@ -184,7 +176,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     UITableView *tableView = [self tableView];
-    if ([tableView tableFooterView]) {
+    if (![self isFetchingData] && [tableView tableFooterView]) {
         CGPoint contentOffset = [tableView contentOffset];
         CGRect footerFrame = [[tableView tableFooterView] frame];
         CGRect frame = [tableView frame];
@@ -359,38 +351,8 @@
     BOOL hasFooter =
         [self showsDataBeforeFirstFetch] &&
         [[self lokaliteStream] hasMorePages];
-    [tableView setTableFooterView:hasFooter ? [self loadingMoreActivityView] : nil];
-    //[tableView setTableFooterView:hasFooter ? [self loadMoreFooterView] : nil];
-}
-
-- (void)displayLoadMoreActivityViewAnimated:(BOOL)animated
-{
-    NSTimeInterval duration = animated ? 0.1 : 0;
-
-    UIView *loadMoreView = [self loadMoreFooterView];
-    [UIView animateWithDuration:duration
-                     animations:
-     ^{
-         [loadMoreView setAlpha:0];
-     }
-                     completion:
-     ^(BOOL finished) {
-     }];
-}
-
-- (void)hideLoadMoreActivityViewAnimated:(BOOL)animated
-{
-    NSTimeInterval duration = animated ? 0.1 : 0;
-
-    UIView *loadMoreView = [self loadMoreFooterView];
-    [UIView animateWithDuration:duration
-                     animations:
-     ^{
-         [loadMoreView setAlpha:1];
-     }
-                     completion:
-     ^(BOOL finished) {
-     }];
+    [tableView setTableFooterView:
+     hasFooter ? [self loadingMoreActivityView] : nil];
 }
 
 - (void)initializeMapView:(MKMapView *)mapView
@@ -624,13 +586,9 @@
         [[self tableView] reloadData];
     }
 
-    if ([[self lokaliteStream] hasMorePages]) {
-        if (pageNumber == 1)
-            //[[self tableView] setTableFooterView:[self loadMoreFooterView]];
-            [[self tableView] setTableFooterView:[self loadingMoreActivityView]];
-        else
-            [self hideLoadMoreActivityViewAnimated:YES];
-    } else
+    if ([[self lokaliteStream] hasMorePages] && pageNumber == 1)
+        [[self tableView] setTableFooterView:[self loadingMoreActivityView]];
+    else
         [[self tableView] setTableFooterView:nil];
 }
 
@@ -772,37 +730,6 @@
 }
 
 #pragma mark - Accessors
-
-- (UIView *)loadMoreFooterView
-{
-    if (!loadMoreFooterView_) {
-        const CGFloat frameWidth = 320;
-        const CGFloat margin = 10;
-
-        UIButton *button = [UIButton standardButton];
-        UIImage *img = [button backgroundImageForState:UIControlStateNormal];
-        CGFloat buttonHeight = [img size].height;
-        [button setTitle:NSLocalizedString(@"global.load-more", nil)
-                forState:UIControlStateNormal];
-        CGRect buttonFrame = [button frame];
-        buttonFrame = CGRectMake(margin, margin,
-                                 frameWidth - margin * 2, buttonHeight);
-        [button setFrame:buttonFrame];
-
-        [button addTarget:self
-                   action:@selector(loadMoreButtonTapped:)
-         forControlEvents:UIControlEventTouchUpInside];
-
-        CGRect viewFrame =
-            CGRectMake(0, 0, frameWidth, buttonHeight + margin * 2);
-        UIView *backgroundView = [[UIView alloc] initWithFrame:viewFrame];
-        [backgroundView addSubview:button];
-
-        loadMoreFooterView_ = backgroundView;
-    }
-
-    return loadMoreFooterView_;
-}
 
 - (UIView *)loadingMoreActivityView
 {
