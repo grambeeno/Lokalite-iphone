@@ -19,7 +19,7 @@
 #import "LokaliteObjectBuilder.h"
 #import "TableViewImageFetcher.h"
 
-#import "EventMapViewController.h"
+#import "MapDisplayController.h"
 
 #import "SDKAdditions.h"
 

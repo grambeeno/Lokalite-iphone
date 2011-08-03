@@ -258,10 +258,10 @@
     [[self tableView] endUpdates];
 }
 
-#pragma mark - EventMapViewControllerDelegate implementation
+#pragma mark - MapDisplayControllerDelegate implementation
 
-- (void)eventMapViewController:(EventMapViewController *)controller
-               didSelectObject:(id<LokaliteObject>)object
+- (void)mapDisplayController:(MapDisplayController *)controller
+             didSelectObject:(id<LokaliteObject>)object
 {
     [self displayDetailsForObject:object];
 }

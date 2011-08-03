@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-#import "EventMapViewController.h"
+#import "MapDisplayController.h"
 
 #import <MapKit/MapKit.h>
 
@@ -17,7 +17,7 @@
 @class LokaliteAccount, LokaliteStream;
 
 @interface LokaliteStreamViewController : UITableViewController
-    <NSFetchedResultsControllerDelegate, EventMapViewControllerDelegate>
+    <NSFetchedResultsControllerDelegate, MapDisplayControllerDelegate>
 
 #pragma mark Lokalite service
 
@@ -27,7 +27,7 @@
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain)
-    IBOutlet EventMapViewController *mapViewController;
+    IBOutlet MapDisplayController *mapViewController;
 @property (nonatomic, retain, readonly)
     UIBarButtonItem *toggleMapViewButtonItem;
 
