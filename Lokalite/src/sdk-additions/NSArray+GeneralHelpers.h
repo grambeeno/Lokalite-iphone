@@ -21,3 +21,14 @@
                                passingTest:(BOOL (^)(id obj1, id obj2))pred;
 
 @end
+
+
+
+@interface NSArray (LokaliteHelpers)
+
+- (NSArray *)arrayByRemovingObjectsFromArray:(NSArray *)replacement
+                                 passingTest:(BOOL (^)(id obj))predicate;
+
++ (NSArray *)mapAnnotationsFromLokaliteObjects:(NSArray *)objects;
+
+@end

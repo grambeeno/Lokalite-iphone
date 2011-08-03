@@ -25,8 +25,6 @@
 
 @interface FeaturedEventsViewController ()
 
-@property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
-
 @property (nonatomic, retain) TableViewImageFetcher *imageFetcher;
 
 #pragma mark - View initialization
@@ -42,7 +40,6 @@
 @synthesize mapView = mapView_;
 @synthesize mapViewController = mapViewController_;
 
-@synthesize showingMapView = showingMapView_;
 @synthesize imageFetcher = imageFetcher_;
 
 #pragma mark - Memory management
@@ -61,26 +58,7 @@
 
 - (void)toggleMapView:(id)sender
 {
-    BOOL showingMap = [self isShowingMapView];
-    if (showingMap) {
-        [[self tableView] setFrame:[[self mapView] frame]];
-        [UIView transitionFromView:[self mapView]
-                            toView:[self tableView]
-                          duration:1
-                           options:UIViewAnimationOptionTransitionCurlDown
-                        completion:nil];
-    } else {
-        NSArray *events = [[self dataController] fetchedObjects];
-        NSArray *eventAnnotations = [Event eventAnnotationsFromEvents:events];
-        [[self mapViewController] setAnnotations:eventAnnotations];
-        [[self mapView] setFrame:[[self tableView] frame]];
-        [UIView transitionFromView:[self tableView]
-                            toView:[self mapView]
-                          duration:1
-                           options:UIViewAnimationOptionTransitionCurlUp
-                        completion:nil];
-    }
-    [self setShowingMapView:!showingMap];
+    [self toggleMapViewAnimated:YES];
 }
 
 #pragma mark - LokaliteStreamViewController implementation
@@ -88,9 +66,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [self setShowingMapView:NO];
-    [[self mapViewController] setDelegate:self];
 
     [self initializeNavigationItem];
     [self initializeTableView];
@@ -226,14 +201,6 @@
 - (LokaliteStream *)lokaliteStreamInstance
 {
     return [LokaliteFeaturedEventStream streamWithContext:[self context]];
-}
-
-#pragma mark - EventMapViewControllerDelegate implementation
-
-- (void)eventMapViewController:(EventMapViewController *)controller
-                didSelectEvent:(Event *)event
-{
-    [self displayDetailsForObject:event];
 }
 
 #pragma mark - View initialization

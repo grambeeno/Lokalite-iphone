@@ -106,23 +106,3 @@
 }
 
 @end
-
-
-@implementation NSArray (LokaliteHelpers)
-
-- (NSArray *)arrayByRemovingObjectsFromArray:(NSArray *)replacement
-                                 passingTest:(BOOL (^)(id obj))predicate
-{
-    NSIndexSet *indexes =
-        [self indexesOfObjectsPassingTest:
-         ^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-             return predicate(obj);
-         }];
-
-    NSMutableArray *a = [[self mutableCopy] autorelease];
-    [a removeObjectsAtIndexes:indexes];
-
-    return a;
-}
-
-@end

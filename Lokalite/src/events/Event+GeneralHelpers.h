@@ -33,7 +33,6 @@
 - (BOOL)isTrended;
 
 - (NSURL *)fullImageUrl;
-- (UIImage *)image;
 
 
 //
@@ -54,7 +53,5 @@
 // to get a CLLocation object.
 //
 - (CLLocation *)location;
-
-+ (NSArray *)eventAnnotationsFromEvents:(NSArray *)events;
 
 @end

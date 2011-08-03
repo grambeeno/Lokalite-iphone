@@ -32,11 +32,3 @@
               remainingHandler:(void (^)(id remainingObject))handler;
 
 @end
-
-
-@interface NSArray (LokaliteHelpers)
-
-- (NSArray *)arrayByRemovingObjectsFromArray:(NSArray *)replacement
-                                 passingTest:(BOOL (^)(id obj))predicate;
-
-@end

@@ -173,12 +173,6 @@
     return [baseUrl URLByAppendingPathComponent:urlPath];
 }
 
-- (UIImage *)image
-{
-    NSData *data = [self imageData];
-    return data ? [UIImage imageWithData:data] : nil;
-}
-
 + (NSPredicate *)predicateForSearchString:(NSString *)searchString
                             includeEvents:(BOOL)includeEvents
                         includeBusinesses:(BOOL)includeBusinesses
@@ -206,7 +200,6 @@
 
 
 #import "NSArray+GeneralHelpers.h"
-#import "EventMapAnnotation.h"
 
 @implementation Event (GeoHelpers)
 
@@ -218,16 +211,6 @@
                                                  longitude:[lon floatValue]];
 
     return [loc autorelease];
-}
-
-+ (NSArray *)eventAnnotationsFromEvents:(NSArray *)events
-{
-    return [events arrayByMappingArray:
-            ^(Event *event, NSUInteger idx, BOOL *stop) {
-                EventMapAnnotation *annotation =
-                    [[EventMapAnnotation alloc] initWithEvent:event];
-                return [annotation autorelease];
-            }];
 }
 
 @end

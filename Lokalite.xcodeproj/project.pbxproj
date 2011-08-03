@@ -89,7 +89,7 @@
 		057DC64013E11B58004107C4 /* event-cell-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 057DC63F13E11B58004107C4 /* event-cell-background.png */; };
 		058962BF13DA299700556F6D /* LokalitePlacesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962BE13DA299700556F6D /* LokalitePlacesStream.m */; };
 		058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */; };
-		0589E4F413E7706F00149713 /* EventMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589E4F313E7706F00149713 /* EventMapAnnotation.m */; };
+		0589E4F413E7706F00149713 /* LokaliteObjectMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589E4F313E7706F00149713 /* LokaliteObjectMapAnnotation.m */; };
 		0590FF5413D8BAD4006A2254 /* all-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3813D8BAD4006A2254 /* all-selected@2x.png */; };
 		0590FF5513D8BAD4006A2254 /* all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3913D8BAD4006A2254 /* all@2x.png */; };
 		0590FF5713D8BAD4006A2254 /* arts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3B13D8BAD4006A2254 /* arts@2x.png */; };
@@ -200,6 +200,7 @@
 		05209F1413C7710F00CA6A2D /* LokaliteAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteAppDelegate.h; path = src/application/LokaliteAppDelegate.h; sourceTree = "<group>"; };
 		05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteAppDelegate.m; path = src/application/LokaliteAppDelegate.m; sourceTree = "<group>"; };
 		05209F1613C7710F00CA6A2D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = src/application/MainWindow.xib; sourceTree = "<group>"; };
+		0530CEE813E8C20700601BFB /* LokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObject.h; path = src/lokalite/LokaliteObject.h; sourceTree = "<group>"; };
 		0549AB5313D77A6800F9C2C2 /* CategoryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilter.h; path = src/categories/CategoryFilter.h; sourceTree = "<group>"; };
 		0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilter.m; path = src/categories/CategoryFilter.m; sourceTree = "<group>"; };
 		054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-profile.png"; path = "images/tab-bar-icons/tab-bar-icon-profile.png"; sourceTree = "<group>"; };
@@ -291,8 +292,8 @@
 		058962BE13DA299700556F6D /* LokalitePlacesStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokalitePlacesStream.m; path = src/lokalite/LokalitePlacesStream.m; sourceTree = "<group>"; };
 		058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteStreamViewController.h; path = src/shared/LokaliteStreamViewController.h; sourceTree = "<group>"; };
 		058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteStreamViewController.m; path = src/shared/LokaliteStreamViewController.m; sourceTree = "<group>"; };
-		0589E4F213E7706F00149713 /* EventMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventMapAnnotation.h; path = src/geo/EventMapAnnotation.h; sourceTree = "<group>"; };
-		0589E4F313E7706F00149713 /* EventMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventMapAnnotation.m; path = src/geo/EventMapAnnotation.m; sourceTree = "<group>"; };
+		0589E4F213E7706F00149713 /* LokaliteObjectMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObjectMapAnnotation.h; path = src/geo/LokaliteObjectMapAnnotation.h; sourceTree = "<group>"; };
+		0589E4F313E7706F00149713 /* LokaliteObjectMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteObjectMapAnnotation.m; path = src/geo/LokaliteObjectMapAnnotation.m; sourceTree = "<group>"; };
 		0590FF3813D8BAD4006A2254 /* all-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all-selected@2x.png"; path = "images/buttons/category-filter-images/all-selected@2x.png"; sourceTree = "<group>"; };
 		0590FF3913D8BAD4006A2254 /* all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all@2x.png"; path = "images/buttons/category-filter-images/all@2x.png"; sourceTree = "<group>"; };
 		0590FF3B13D8BAD4006A2254 /* arts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arts@2x.png"; path = "images/buttons/category-filter-images/arts@2x.png"; sourceTree = "<group>"; };
@@ -431,6 +432,7 @@
 		0505ECCD13CBC13E009874A7 /* lokalite */ = {
 			isa = PBXGroup;
 			children = (
+				0530CEE813E8C20700601BFB /* LokaliteObject.h */,
 				05194D4813CCAC8200EE14F8 /* LokaliteService.h */,
 				05194D4913CCAC8200EE14F8 /* LokaliteService.m */,
 				0505ECD213CBC2ED009874A7 /* LokaliteServiceRequest.h */,
@@ -781,8 +783,8 @@
 			children = (
 				059AEE1113E7667F00AA4DF7 /* EventMapViewController.h */,
 				059AEE1213E7667F00AA4DF7 /* EventMapViewController.m */,
-				0589E4F213E7706F00149713 /* EventMapAnnotation.h */,
-				0589E4F313E7706F00149713 /* EventMapAnnotation.m */,
+				0589E4F213E7706F00149713 /* LokaliteObjectMapAnnotation.h */,
+				0589E4F313E7706F00149713 /* LokaliteObjectMapAnnotation.m */,
 			);
 			name = geo;
 			sourceTree = "<group>";
@@ -1152,7 +1154,7 @@
 				057DC63B13E0D263004107C4 /* EventDetailsFooterView.m in Sources */,
 				0570CC0413E32D9E00C4DDCA /* TrendingViewController.m in Sources */,
 				059AEE1313E7667F00AA4DF7 /* EventMapViewController.m in Sources */,
-				0589E4F413E7706F00149713 /* EventMapAnnotation.m in Sources */,
+				0589E4F413E7706F00149713 /* LokaliteObjectMapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

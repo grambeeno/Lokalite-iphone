@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "LokaliteObject.h"
+
 @class Business, Category, Venue;
 
-@interface Event : NSManagedObject {
+@interface Event : NSManagedObject <LokaliteObject> {
 @private
 }
 @property (nonatomic, retain) NSString * summary;

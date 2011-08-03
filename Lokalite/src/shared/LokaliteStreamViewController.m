@@ -18,10 +18,15 @@
 
 @interface LokaliteStreamViewController ()
 
+#pragma mark - Working with the map view
+
+@property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
+
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem:(UINavigationItem *)navItem;
 - (void)initializeTableView:(UITableView *)tableView;
+- (void)initializeMapView:(MKMapView *)mapView;
 
 #pragma mark - Account events
 
@@ -49,6 +54,10 @@
 
 @implementation LokaliteStreamViewController
 
+@synthesize showingMapView = showingMapView_;
+@synthesize mapView = mapView_;
+@synthesize mapViewController = mapViewController_;
+
 @synthesize context = context_;
 @synthesize dataController = dataController_;
 
@@ -63,6 +72,9 @@
     [self unsubscribeForApplicationLifecycleNotifications];
     [self unsubscribeForNotoficationsForContext:context_];
 
+    [mapView_ release];
+    [mapViewController_ release];
+
     [context_ release];
     [dataController_ release];
     [lokaliteStream_ release];
@@ -75,8 +87,10 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if (self)
+    if (self) {
+        showingMapView_ = NO;
         [self setTitle:[self titleForView]];
+    }
 
     return self;
 }
@@ -100,6 +114,7 @@
 
     [self initializeNavigationItem:[self navigationItem]];
     [self initializeTableView:[self tableView]];
+    [self initializeMapView:[self mapView]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -157,7 +172,8 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *obj = [[self dataController] objectAtIndexPath:indexPath];
+    id<LokaliteObject> obj =
+        [[self dataController] objectAtIndexPath:indexPath];
     [self displayDetailsForObject:obj];
 }
 
@@ -216,6 +232,14 @@
     [[self tableView] endUpdates];
 }
 
+#pragma mark - EventMapViewControllerDelegate implementation
+
+- (void)eventMapViewController:(EventMapViewController *)controller
+               didSelectObject:(id<LokaliteObject>)object
+{
+    [self displayDetailsForObject:object];
+}
+
 #pragma mark - Displaying the activity view
 
 - (void)displayActivityView
@@ -260,6 +284,10 @@
     [tableView setRowHeight:[self cellHeightForTableView:tableView]];
 }
 
+- (void)initializeMapView:(MKMapView *)mapView
+{
+}
+
 #pragma mark - Protected interface
 
 #pragma mark Configuring the view
@@ -297,8 +325,61 @@
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
 
-- (void)displayDetailsForObject:(NSManagedObject *)object
+- (void)displayDetailsForObject:(id<LokaliteObject>)object
 {
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+}
+
+#pragma mark Working with the map view
+
+- (void)transitionFromView:(UIView *)fromView
+                    toView:(UIView *)toView
+                   options:(UIViewAnimationOptions)options
+                  animated:(BOOL)animated
+{
+    NSTimeInterval duration = animated ? 1 : 0;
+    [toView setFrame:[fromView frame]];
+
+    [UIView transitionFromView:fromView
+                        toView:toView
+                      duration:duration
+                       options:options
+                    completion:nil];
+}
+
+- (void)presentMapViewAnimated:(BOOL)animated
+{
+    if (![self isShowingMapView]) {
+        NSArray *objects = [[self dataController] fetchedObjects];
+        NSArray *annotations =
+            [NSArray mapAnnotationsFromLokaliteObjects:objects];
+        [[self mapViewController] setAnnotations:annotations];
+        [self transitionFromView:[self tableView]
+                          toView:[self mapView]
+                         options:UIViewAnimationOptionTransitionCurlUp
+                        animated:animated];
+        [self setShowingMapView:YES];
+    }
+}
+
+- (void)dismissMapViewAnimated:(BOOL)animated
+{
+    if ([self isShowingMapView]) {
+        [self transitionFromView:[self mapView]
+                          toView:[self tableView]
+                         options:UIViewAnimationOptionTransitionCurlDown
+                        animated:animated];
+        [self setShowingMapView:NO];
+    }
+}
+
+- (void)toggleMapViewAnimated:(BOOL)animated
+{
+    if ([self isShowingMapView])
+        [self dismissMapViewAnimated:animated];
+    else
+        [self presentMapViewAnimated:animated];
 }
 
 #pragma mark - Working with the local data store

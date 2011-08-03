@@ -25,4 +25,17 @@
 @dynamic events;
 @dynamic category;
 
+#pragma mark - LokaliteObject implementation
+
+- (UIImage *)image
+{
+    NSData *data = [self imageData];
+    return data ? [UIImage imageWithData:data] : nil;
+}
+
+- (id<MKAnnotation>)mapAnnotation
+{
+    return nil;
+}
+
 @end

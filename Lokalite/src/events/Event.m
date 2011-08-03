@@ -11,6 +11,9 @@
 #import "Category.h"
 #import "Venue.h"
 
+#import "Event+GeneralHelpers.h"
+#import "LokaliteObjectMapAnnotation.h"
+
 
 @implementation Event
 @dynamic summary;
@@ -25,5 +28,23 @@
 @dynamic category;
 @dynamic venue;
 @dynamic business;
+
+#pragma mark - LokaliteObject implementation
+
+- (UIImage *)image
+{
+    NSData *data = [self imageData];
+    return data ? [UIImage imageWithData:data] : nil;
+}
+
+- (id<MKAnnotation>)mapAnnotation
+{
+    return [[[LokaliteObjectMapAnnotation alloc]
+             initWithCoordinate:[[self location] coordinate]
+                          title:[self name]
+                       subtitle:[self summary]
+                         object:self]
+            autorelease];
+}
 
 @end

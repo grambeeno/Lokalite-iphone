@@ -9,12 +9,27 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#import "EventMapViewController.h"
+
+#import <MapKit/MapKit.h>
+
+@protocol LokaliteObject;
 @class LokaliteAccount, LokaliteStream;
 
 @interface LokaliteStreamViewController : UITableViewController
-    <NSFetchedResultsControllerDelegate>
+    <NSFetchedResultsControllerDelegate, EventMapViewControllerDelegate>
+
+#pragma mark Lokalite service
 
 @property (nonatomic, retain) LokaliteStream *lokaliteStream;
+
+#pragma mark Map view
+
+@property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain)
+    IBOutlet EventMapViewController *mapViewController;
+
+#pragma mark Data store
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 @property (nonatomic, retain) NSFetchedResultsController *dataController;
@@ -35,6 +50,10 @@
 
 
 
+//
+// Protected interface - do not call these methods directly
+//
+
 #pragma mark - Protected interface
 
 
@@ -54,7 +73,14 @@
 - (void)configureCell:(UITableViewCell *)cell
             forObject:(NSManagedObject *)object;
 
-- (void)displayDetailsForObject:(NSManagedObject *)object;
+- (void)displayDetailsForObject:(id<LokaliteObject>)object;
+
+
+#pragma mark Working with the map view
+
+- (void)presentMapViewAnimated:(BOOL)animated;
+- (void)dismissMapViewAnimated:(BOOL)animated;
+- (void)toggleMapViewAnimated:(BOOL)animated;
 
 
 #pragma mark Working with the local data store
@@ -73,7 +99,7 @@
 - (NSString *)dataControllerSectionNameKeyPath;
 - (NSString *)dataControllerCacheName;
 
-#pragma mark - Account events
+#pragma mark Account events
 
 - (BOOL)shouldResetForAccountAddition:(LokaliteAccount *)account;
 - (BOOL)shouldResetForAccountDeletion:(LokaliteAccount *)account;

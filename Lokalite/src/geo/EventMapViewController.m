@@ -8,7 +8,7 @@
 
 #import "EventMapViewController.h"
 
-#import "EventMapAnnotation.h"
+#import "LokaliteObjectMapAnnotation.h"
 
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
@@ -47,9 +47,10 @@
         [view setCanShowCallout:YES];
     }
 
-    EventMapAnnotation *eventAnnotation = (EventMapAnnotation *) annotation;
-    Event *event = [eventAnnotation event];
-    UIImage *image = [event image];
+    LokaliteObjectMapAnnotation *lokaliteAnnotation =
+        (LokaliteObjectMapAnnotation *) annotation;
+    id<LokaliteObject> lokaliteObject = [lokaliteAnnotation lokaliteObject];
+    UIImage *image = [lokaliteObject image];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     CGRect imageViewFrame = [imageView frame];
     imageViewFrame.size = CGSizeMake(32, 32);
@@ -67,10 +68,11 @@
  annotationView:(MKAnnotationView *)view
     calloutAccessoryControlTapped:(UIControl *)control
 {
-    EventMapAnnotation *annotation = (EventMapAnnotation *) [view annotation];
-    Event *event = [annotation event];
+    LokaliteObjectMapAnnotation *annotation =
+        (LokaliteObjectMapAnnotation *) [view annotation];
+    id<LokaliteObject> object = [annotation lokaliteObject];
 
-    [[self delegate] eventMapViewController:self didSelectEvent:event];
+    [[self delegate] eventMapViewController:self didSelectObject:object];
 }
 
 #pragma mark - Accessors
@@ -78,16 +80,17 @@
 - (void)setAnnotations:(NSArray *)annotations
 {
     if (annotations_ != annotations) {
-        [[self mapView] removeAnnotations:annotations_];
-
-        [annotations_ release];
+        if (annotations_) {
+            [[self mapView] removeAnnotations:annotations_];
+            [annotations_ release];
+        }
         annotations_ = [annotations copy];
-
-        [[self mapView] addAnnotations:annotations_];
 
         MKCoordinateRegion region =
             [[self class] coordinateRegionForMapAnnotations:annotations_];
         [[self mapView] setRegion:region];
+
+        [[self mapView] addAnnotations:annotations_];
     }
 }
 
@@ -111,7 +114,7 @@
         CLLocationCoordinate2DMake((maxLat + minLat) / 2,
                                    (maxLon + minLon) / 2);
     MKCoordinateSpan span =
-        MKCoordinateSpanMake((maxLat - minLat) / 2, (maxLon - minLon) / 2);
+        MKCoordinateSpanMake((maxLat - minLat), (maxLon - minLon));
 
     return MKCoordinateRegionMake(center, span);
 }

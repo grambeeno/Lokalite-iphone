@@ -111,12 +111,6 @@
     return [baseUrl URLByAppendingPathComponent:urlPath];
 }
 
-- (UIImage *)image
-{
-    NSData *data = [self imageData];
-    return data ? [UIImage imageWithData:data] : nil;
-}
-
 - (NSURL *)addressUrl
 {
     NSStringEncoding encoding = NSUTF8StringEncoding;

@@ -25,7 +25,6 @@
 @interface Business (ConvenienceMethods)
 
 - (NSURL *)fullImageUrl;
-- (UIImage *)image;
 
 - (NSURL *)addressUrl;
 - (NSURL *)phoneUrl;

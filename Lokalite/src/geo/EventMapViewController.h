@@ -13,7 +13,8 @@
 
 @interface EventMapViewController : NSObject <MKMapViewDelegate>
 
-@property (nonatomic, assign) id<EventMapViewControllerDelegate> delegate;
+@property (nonatomic, assign)
+    IBOutlet id<EventMapViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, copy) NSArray *annotations;
@@ -26,11 +27,11 @@
 
 
 
-@class Event;
+@protocol LokaliteObject;
 
 @protocol EventMapViewControllerDelegate <NSObject>
 
 - (void)eventMapViewController:(EventMapViewController *)controller
-                didSelectEvent:(Event *)event;
+               didSelectObject:(id<LokaliteObject>)object;
 
 @end
