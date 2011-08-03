@@ -54,13 +54,6 @@
     [super dealloc];
 }
 
-#pragma mark - UI events
-
-- (void)toggleMapView:(id)sender
-{
-    [self toggleMapViewAnimated:YES];
-}
-
 #pragma mark - LokaliteStreamViewController implementation
 
 - (void)viewDidLoad
