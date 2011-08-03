@@ -18,7 +18,13 @@
 
 @interface LokaliteStreamViewController ()
 
+#pragma mark - Working with the table view
+
 @property (nonatomic, retain) UIView *loadMoreFooterView;
+@property (nonatomic, retain) UIView *loadingMoreActivityView;
+
+- (void)displayLoadMoreActivityViewAnimated:(BOOL)animated;
+- (void)hideLoadMoreActivityViewAnimated:(BOOL)animated;
 
 #pragma mark - Working with the map view
 
@@ -46,7 +52,9 @@
 
 #pragma mark - Fetching data from the network
 
-- (void)fetchFeaturedEventsIfNecessary;
+@property (nonatomic, assign) BOOL isFetchingData;
+
+- (void)fetchInitialSetOfObjectsIfNecessary;
 
 #pragma mark - Persistence management
 
@@ -67,6 +75,7 @@
 @implementation LokaliteStreamViewController
 
 @synthesize loadMoreFooterView = loadMoreFooterView_;
+@synthesize loadingMoreActivityView = loadingMoreActivityView_;
 
 @synthesize showingMapView = showingMapView_;
 @synthesize mapView = mapView_;
@@ -78,6 +87,7 @@
 
 @synthesize lokaliteStream = lokaliteStream_;
 @synthesize showsDataBeforeFirstFetch = showsDataBeforeFirstFetch_;
+@synthesize isFetchingData = isFetchingData_;
 
 #pragma mark - Memory management
 
@@ -87,6 +97,7 @@
     [self unsubscribeForNotoficationsForContext:context_];
 
     [loadMoreFooterView_ release];
+    [loadingMoreActivityView_ release];
 
     [mapView_ release];
     [mapViewController_ release];
@@ -106,6 +117,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         showsDataBeforeFirstFetch_ = NO;
+        isFetchingData_ = NO;
 
         showingMapView_ = NO;
         [self setTitle:[self titleForView]];
@@ -118,7 +130,7 @@
 
 - (void)refresh:(id)sender
 {
-    [self fetchFeaturedEventsIfNecessary];
+    [self fetchInitialSetOfObjectsIfNecessary];
 }
 
 - (void)toggleMapView:(id)sender
@@ -128,7 +140,10 @@
 
 - (void)loadMoreButtonTapped:(id)sender
 {
-    [self fetchNextSetOfObjectsWithCompletion:nil];
+    if (![self isFetchingData]) {
+        //[self displayLoadMoreActivityViewAnimated:YES];
+        [self fetchNextSetOfObjectsWithCompletion:nil];
+    }
 }
 
 #pragma mark - UITableViewController implementation
@@ -161,7 +176,25 @@
                       completion:nil];
     }
 
-    [self fetchFeaturedEventsIfNecessary];
+    [self fetchInitialSetOfObjectsIfNecessary];
+}
+
+#pragma mark - UIScrollViewDelegate implementation
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    UITableView *tableView = [self tableView];
+    if ([tableView tableFooterView]) {
+        CGPoint contentOffset = [tableView contentOffset];
+        CGRect footerFrame = [[tableView tableFooterView] frame];
+        CGRect frame = [tableView frame];
+
+        BOOL visible =
+            footerFrame.origin.y <= (contentOffset.y + frame.size.height);
+
+        if (visible)
+            [self loadMoreButtonTapped:self];
+    }
 }
 
 #pragma mark - UITableViewDataSource implementation
@@ -326,7 +359,38 @@
     BOOL hasFooter =
         [self showsDataBeforeFirstFetch] &&
         [[self lokaliteStream] hasMorePages];
-    [tableView setTableFooterView:hasFooter ? [self loadMoreFooterView] : nil];
+    [tableView setTableFooterView:hasFooter ? [self loadingMoreActivityView] : nil];
+    //[tableView setTableFooterView:hasFooter ? [self loadMoreFooterView] : nil];
+}
+
+- (void)displayLoadMoreActivityViewAnimated:(BOOL)animated
+{
+    NSTimeInterval duration = animated ? 0.1 : 0;
+
+    UIView *loadMoreView = [self loadMoreFooterView];
+    [UIView animateWithDuration:duration
+                     animations:
+     ^{
+         [loadMoreView setAlpha:0];
+     }
+                     completion:
+     ^(BOOL finished) {
+     }];
+}
+
+- (void)hideLoadMoreActivityViewAnimated:(BOOL)animated
+{
+    NSTimeInterval duration = animated ? 0.1 : 0;
+
+    UIView *loadMoreView = [self loadMoreFooterView];
+    [UIView animateWithDuration:duration
+                     animations:
+     ^{
+         [loadMoreView setAlpha:1];
+     }
+                     completion:
+     ^(BOOL finished) {
+     }];
 }
 
 - (void)initializeMapView:(MKMapView *)mapView
@@ -513,26 +577,33 @@
 
 #pragma mark Fetching data from the network
 
-- (void)fetchFeaturedEventsIfNecessary
+- (void)fetchInitialSetOfObjectsIfNecessary
 {
-    BOOL fetchNecessary = [[self lokaliteStream] pagesFetched] == 0;
-    BOOL activityViewNecessary =
-        [[[self dataController] fetchedObjects] count] == 0;
+    if (![self isFetchingData]) {
+        BOOL fetchNecessary = [[self lokaliteStream] pagesFetched] == 0;
+        BOOL activityViewNecessary =
+            [[[self dataController] fetchedObjects] count] == 0;
 
-    if (fetchNecessary) {
-        if (activityViewNecessary)
-            [self displayActivityView];
-        [self fetchNextSetOfObjectsWithCompletion:^(NSArray *a, NSError *e) {
+        if (fetchNecessary) {
             if (activityViewNecessary)
-                [self hideActivityView];
-        }];
+                [self displayActivityView];
+            [self fetchNextSetOfObjectsWithCompletion:
+             ^(NSArray *a, NSError *e) {
+                 if (activityViewNecessary)
+                     [self hideActivityView];
+             }];
+        }
     }
 }
 
 - (void)fetchNextSetOfObjectsWithCompletion:(void (^)(NSArray *, NSError *))fun
 {
+    [self setIsFetchingData:YES];
+
     [[self lokaliteStream] fetchNextBatchWithResponseHandler:
      ^(NSArray *objects, NSError *error) {
+         [self setIsFetchingData:NO];
+
          NSInteger pageNumber = [[self lokaliteStream] pagesFetched];
          if (objects)
              [self processNextBatchOfFetchedObjects:objects
@@ -553,8 +624,14 @@
         [[self tableView] reloadData];
     }
 
-    [[self tableView] setTableFooterView:
-     [[self lokaliteStream] hasMorePages] ? [self loadMoreFooterView] : nil];
+    if ([[self lokaliteStream] hasMorePages]) {
+        if (pageNumber == 1)
+            //[[self tableView] setTableFooterView:[self loadMoreFooterView]];
+            [[self tableView] setTableFooterView:[self loadingMoreActivityView]];
+        else
+            [self hideLoadMoreActivityViewAnimated:YES];
+    } else
+        [[self tableView] setTableFooterView:nil];
 }
 
 - (void)processObjectFetchError:(NSError *)error
@@ -725,6 +802,35 @@
     }
 
     return loadMoreFooterView_;
+}
+
+- (UIView *)loadingMoreActivityView
+{
+    if (!loadingMoreActivityView_) {
+        UIActivityIndicatorView *activityIndicator =
+            [[UIActivityIndicatorView alloc]
+             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [activityIndicator startAnimating];
+
+        CGRect viewFrame = CGRectMake(0, 0, 320, 60);
+        UIView *view = [[UIView alloc] initWithFrame:viewFrame];
+
+        CGRect activityIndicatorFrame = [activityIndicator frame];
+        activityIndicatorFrame.origin.x =
+            round((viewFrame.size.width - activityIndicatorFrame.size.width)
+                  / 2);
+        activityIndicatorFrame.origin.y =
+            round((viewFrame.size.height - activityIndicatorFrame.size.height)
+                  / 2);
+        [activityIndicator setFrame:activityIndicatorFrame];
+
+        [view addSubview:activityIndicator];
+        [activityIndicator release], activityIndicator = nil;
+
+        loadingMoreActivityView_ = view;
+    }
+
+    return loadingMoreActivityView_;
 }
 
 - (UIBarButtonItem *)toggleMapViewButtonItem
