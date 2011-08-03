@@ -27,6 +27,10 @@
 @synthesize baseUrl = baseUrl_;
 @synthesize context = context_;
 
+@synthesize objectsPerPage = objectsPerPage_;
+@synthesize pagesFetched = pagesFetched_;
+@synthesize hasMorePages = hasMorePages_;
+
 @synthesize email = email_;
 @synthesize password = password_;
 
@@ -55,6 +59,10 @@
     if (self) {
         baseUrl_ = [url copy];
         context_ = [context retain];
+
+        objectsPerPage_ = [[self class] defaultObjectsPerPage];
+        pagesFetched_ = 0;
+        hasMorePages_ = YES;
     }
 
     return self;
@@ -79,7 +87,18 @@
 
 - (void)fetchNextBatchWithResponseHandler:(LKSResponseHandler)handler
 {
-    [self fetchNextBatchOfObjectsWithResponseHandler:handler];
+    [self fetchNextBatchOfObjectsWithResponseHandler:
+     ^(NSArray *objects, NSError *error) {
+         ++pagesFetched_;
+         hasMorePages_ = [objects count] == [self objectsPerPage];
+         handler(objects, error);
+     }];
+}
+
+- (void)resetStream
+{
+    pagesFetched_ = 0;
+    hasMorePages_ = YES;
 }
 
 #pragma mark - Protected interface
@@ -98,6 +117,17 @@
         service_ = [[LokaliteService alloc] initWithBaseUrl:[self baseUrl]];
 
     return service_;
+}
+
+#pragma mark - Default configuration
+
++ (NSUInteger)defaultObjectsPerPage
+{
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSNumber *n =
+        [bundle objectForInfoDictionaryKey:@"LokaliteDefaultObjectsPerFetch"];
+
+    return [n integerValue];
 }
 
 @end

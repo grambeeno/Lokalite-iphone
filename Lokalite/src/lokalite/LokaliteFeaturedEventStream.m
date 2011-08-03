@@ -18,7 +18,10 @@
 - (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
 {
     LokaliteService *service = [self service];
-    [service fetchFeaturedEventsWithResponseHandler:
+    [service fetchEventsWithCategory:@"featured"
+                            fromPage:[self pagesFetched]
+                      objectsPerPage:[self objectsPerPage]
+                     responseHandler:
      ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
          if (jsonObjects) {

@@ -18,6 +18,10 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 @property (nonatomic, copy, readonly) NSURL *baseUrl;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *context;
 
+@property (nonatomic, assign) NSUInteger objectsPerPage;
+@property (nonatomic, assign, readonly) NSUInteger pagesFetched;
+@property (nonatomic, assign, readonly) NSUInteger hasMorePages;
+
 @property (nonatomic, copy, readonly) NSString *email;
 @property (nonatomic, copy, readonly) NSString *password;
 
@@ -35,10 +39,15 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 #pragma mark - Walking through the objects
 
 - (void)fetchNextBatchWithResponseHandler:(LKSResponseHandler)handler;
+- (void)resetStream;
 
 #pragma mark - Protected interface; do not call
 
 - (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler;
+
+#pragma mark - Default configuration
+
++ (NSUInteger)defaultObjectsPerPage;
 
 @end
 

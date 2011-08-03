@@ -41,7 +41,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *context;
 @property (nonatomic, retain) NSFetchedResultsController *dataController;
 
-@property (nonatomic, assign) NSInteger pagesFetched;
+//@property (nonatomic, assign) NSInteger pagesFetched;
 
 #pragma mark - Button actions
 

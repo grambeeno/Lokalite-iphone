@@ -32,8 +32,9 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 
 #pragma mark - Events
 
-- (void)fetchFeaturedEventsWithResponseHandler:(LSResponseHandler)handler;
 - (void)fetchEventsWithCategory:(NSString *)category
+                       fromPage:(NSInteger)page
+                 objectsPerPage:(NSInteger)objectsPerPage
                 responseHandler:(LSResponseHandler)handler;
 
 #pragma mark - Trending events

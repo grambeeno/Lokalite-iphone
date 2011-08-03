@@ -86,24 +86,21 @@
 
 #pragma mark - Events
 
-- (void)fetchFeaturedEventsWithResponseHandler:(LSResponseHandler)handler
-{
-    NSURL *url = [self featuredEventUrl];
-
-    [self sendRequestWithUrl:url
-                  parameters:nil
-               requestMethod:LKRequestMethodGET
-             responseHandler:handler];
-}
-
 - (void)fetchEventsWithCategory:(NSString *)category
+                       fromPage:(NSInteger)page
+                 objectsPerPage:(NSInteger)objectsPerPage
                 responseHandler:(LSResponseHandler)handler
 {
     NSURL *url = [self featuredEventUrl];
-    NSDictionary *params =
-        category ?
-        [NSDictionary dictionaryWithObject:category forKey:@"category"] :
-        nil;
+
+    NSMutableDictionary *params =
+        [NSMutableDictionary
+         dictionaryWithObjectsAndKeys:
+         [[NSNumber numberWithInteger:page] description], @"page",
+         [[NSNumber numberWithInteger:objectsPerPage] description], @"per_page",
+         nil];
+    if (category)
+        [params setObject:category forKey:@"category"];
 
     [self sendRequestWithUrl:url
                   parameters:params

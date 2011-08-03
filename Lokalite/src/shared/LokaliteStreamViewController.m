@@ -72,8 +72,6 @@
 @synthesize context = context_;
 @synthesize dataController = dataController_;
 
-@synthesize pagesFetched = pagesFetched_;
-
 @synthesize lokaliteStream = lokaliteStream_;
 @synthesize showsDataBeforeFirstFetch = showsDataBeforeFirstFetch_;
 
@@ -114,7 +112,7 @@
 
 - (void)refresh:(id)sender
 {
-    [self setPagesFetched:0];
+    //[self setPagesFetched:0];
     [self fetchFeaturedEventsIfNecessary];
 }
 
@@ -502,7 +500,7 @@
 
 - (void)fetchFeaturedEventsIfNecessary
 {
-    BOOL fetchNecessary = [self pagesFetched] == 0;
+    BOOL fetchNecessary = [[self lokaliteStream] pagesFetched] == 0;
     BOOL activityViewNecessary =
         [[[self dataController] fetchedObjects] count] == 0;
 
@@ -518,15 +516,13 @@
 
 - (void)fetchNextSetOfObjectsWithCompletion:(void (^)(NSArray *, NSError *))fun
 {
-    NSInteger pagesFetched = [self pagesFetched];
     [[self lokaliteStream] fetchNextBatchWithResponseHandler:
      ^(NSArray *objects, NSError *error) {
-         NSInteger pageNumber = pagesFetched + 1;
-         if (objects) {
-             [self setPagesFetched:pageNumber];
+         NSInteger pageNumber = [[self lokaliteStream] pagesFetched];
+         if (objects)
              [self processNextBatchOfFetchedObjects:objects
                                          pageNumber:pageNumber];
-         } else if (error)
+         else if (error)
              [self processObjectFetchError:error pageNumber:pageNumber];
 
          if (fun)
@@ -560,19 +556,19 @@
 - (void)processAccountAddition:(LokaliteAccount *)account
 {
     if ([self shouldResetForAccountAddition:account]) {
+        [[self lokaliteStream] resetStream];
         [[self lokaliteStream] setEmail:[account email]
                                password:[account password]];
         [self deleteAllStreamObjects];
-        [self setPagesFetched:0];
     }
 }
 
 - (void)processAccountDeletion:(LokaliteAccount *)account
 {
     if ([self shouldResetForAccountDeletion:account]) {
+        [[self lokaliteStream] resetStream];
         [[self lokaliteStream] removeEmailAndPassword];
         [self deleteAllStreamObjects];
-        [self setPagesFetched:0];
     }
 }
 

@@ -21,6 +21,8 @@
     LokaliteService *service =
         [[LokaliteService alloc] initWithBaseUrl:[self baseUrl]];
     [service fetchEventsWithCategory:@""
+                            fromPage:[self pagesFetched]
+                      objectsPerPage:[self objectsPerPage]
                      responseHandler:
      ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
