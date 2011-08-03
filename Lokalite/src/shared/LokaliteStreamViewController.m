@@ -18,6 +18,8 @@
 
 @interface LokaliteStreamViewController ()
 
+@property (nonatomic, retain) UIView *loadMoreFooterView;
+
 #pragma mark - Working with the map view
 
 @property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
@@ -64,6 +66,8 @@
 
 @implementation LokaliteStreamViewController
 
+@synthesize loadMoreFooterView = loadMoreFooterView_;
+
 @synthesize showingMapView = showingMapView_;
 @synthesize mapView = mapView_;
 @synthesize mapViewController = mapViewController_;
@@ -81,6 +85,8 @@
 {
     [self unsubscribeForApplicationLifecycleNotifications];
     [self unsubscribeForNotoficationsForContext:context_];
+
+    [loadMoreFooterView_ release];
 
     [mapView_ release];
     [mapViewController_ release];
@@ -112,13 +118,17 @@
 
 - (void)refresh:(id)sender
 {
-    //[self setPagesFetched:0];
     [self fetchFeaturedEventsIfNecessary];
 }
 
 - (void)toggleMapView:(id)sender
 {
     [self toggleMapViewAnimated:YES];
+}
+
+- (void)loadMoreButtonTapped:(id)sender
+{
+    [self fetchNextSetOfObjectsWithCompletion:nil];
 }
 
 #pragma mark - UITableViewController implementation
@@ -312,6 +322,11 @@
 - (void)initializeTableView:(UITableView *)tableView
 {
     [tableView setRowHeight:[self cellHeightForTableView:tableView]];
+
+    BOOL hasFooter =
+        [self showsDataBeforeFirstFetch] &&
+        [[self lokaliteStream] hasMorePages];
+    [tableView setTableFooterView:hasFooter ? [self loadMoreFooterView] : nil];
 }
 
 - (void)initializeMapView:(MKMapView *)mapView
@@ -537,6 +552,9 @@
         [self loadDataController];
         [[self tableView] reloadData];
     }
+
+    [[self tableView] setTableFooterView:
+     [[self lokaliteStream] hasMorePages] ? [self loadMoreFooterView] : nil];
 }
 
 - (void)processObjectFetchError:(NSError *)error
@@ -677,6 +695,37 @@
 }
 
 #pragma mark - Accessors
+
+- (UIView *)loadMoreFooterView
+{
+    if (!loadMoreFooterView_) {
+        const CGFloat frameWidth = 320;
+        const CGFloat margin = 10;
+
+        UIButton *button = [UIButton standardButton];
+        UIImage *img = [button backgroundImageForState:UIControlStateNormal];
+        CGFloat buttonHeight = [img size].height;
+        [button setTitle:NSLocalizedString(@"global.load-more", nil)
+                forState:UIControlStateNormal];
+        CGRect buttonFrame = [button frame];
+        buttonFrame = CGRectMake(margin, margin,
+                                 frameWidth - margin * 2, buttonHeight);
+        [button setFrame:buttonFrame];
+
+        [button addTarget:self
+                   action:@selector(loadMoreButtonTapped:)
+         forControlEvents:UIControlEventTouchUpInside];
+
+        CGRect viewFrame =
+            CGRectMake(0, 0, frameWidth, buttonHeight + margin * 2);
+        UIView *backgroundView = [[UIView alloc] initWithFrame:viewFrame];
+        [backgroundView addSubview:button];
+
+        loadMoreFooterView_ = backgroundView;
+    }
+
+    return loadMoreFooterView_;
+}
 
 - (UIBarButtonItem *)toggleMapViewButtonItem
 {

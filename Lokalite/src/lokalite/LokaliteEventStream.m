@@ -21,7 +21,7 @@
     LokaliteService *service =
         [[LokaliteService alloc] initWithBaseUrl:[self baseUrl]];
     [service fetchEventsWithCategory:@""
-                            fromPage:[self pagesFetched]
+                            fromPage:[self pagesFetched] + 1
                       objectsPerPage:[self objectsPerPage]
                      responseHandler:
      ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {

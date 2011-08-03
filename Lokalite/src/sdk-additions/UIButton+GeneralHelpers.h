@@ -10,6 +10,8 @@
 
 @interface UIButton (GeneralHelpers)
 
++ (id)standardButton;
+
 + (id)lokaliteCategoryButtonWithFrame:(CGRect)frame;
 
 @end

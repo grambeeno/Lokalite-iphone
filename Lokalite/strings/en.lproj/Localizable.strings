@@ -23,6 +23,8 @@
 "global.place" = "Place";
 "global.profile" = "Profile";
 
+"global.load-more" = "Load More";
+
 "global.trend" = "Trend";
 "global.untrend" = "Untrend";
 "global.trending" = "Trending";

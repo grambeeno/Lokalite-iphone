@@ -10,6 +10,38 @@
 
 @implementation UIButton (GeneralHelpers)
 
++ (id)standardButton
+{
+    UIColor *buttonTextColor =
+        [UIColor colorWithRed:.349 green:.408 blue:.58 alpha:1];
+
+    UIImage *bgImage = [UIImage imageNamed:@"standard-button-background"];
+    UIImage *bgImagePressed =
+        [UIImage imageNamed:@"standard-button-background-pressed"];
+    bgImage = [bgImage stretchableImageWithLeftCapWidth:9 topCapHeight:0];
+    bgImagePressed = [bgImagePressed stretchableImageWithLeftCapWidth:9
+                                                         topCapHeight:0];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+
+    [[button titleLabel] setFont:[UIFont boldSystemFontOfSize:14]];
+    [[button titleLabel] setShadowOffset:CGSizeMake(0, 1)];
+
+    [button setBackgroundImage:bgImage forState:UIControlStateNormal];
+    [button setTitleColor:buttonTextColor forState:UIControlStateNormal];
+    [button setTitleShadowColor:[UIColor whiteColor]
+                       forState:UIControlStateNormal];
+ 
+    [button setBackgroundImage:bgImagePressed
+                      forState:UIControlStateHighlighted];
+    [button setTitleColor:[UIColor whiteColor]
+                 forState:UIControlStateHighlighted];
+    [button setTitleShadowColor:[UIColor clearColor]
+                       forState:UIControlStateHighlighted];
+
+    return button;
+}
+
 + (id)lokaliteCategoryButtonWithFrame:(CGRect)frame
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

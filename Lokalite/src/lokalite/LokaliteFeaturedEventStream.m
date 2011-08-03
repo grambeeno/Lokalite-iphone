@@ -19,7 +19,7 @@
 {
     LokaliteService *service = [self service];
     [service fetchEventsWithCategory:@"featured"
-                            fromPage:[self pagesFetched]
+                            fromPage:[self pagesFetched] + 1
                       objectsPerPage:[self objectsPerPage]
                      responseHandler:
      ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
