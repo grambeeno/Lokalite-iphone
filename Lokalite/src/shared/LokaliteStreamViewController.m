@@ -27,6 +27,7 @@
 - (void)initializeNavigationItem:(UINavigationItem *)navItem;
 - (void)initializeTableView:(UITableView *)tableView;
 - (void)initializeMapView:(MKMapView *)mapView;
+- (void)initializeDataController;
 
 #pragma mark Working with the map view
 
@@ -47,6 +48,7 @@
 
 #pragma mark - Persistence management
 
+- (void)loadDataController;
 - (void)deleteAllStreamObjects;
 - (void)managedObjectContextDidChange:(NSNotification *)notification;
 - (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context;
@@ -73,6 +75,7 @@
 @synthesize pagesFetched = pagesFetched_;
 
 @synthesize lokaliteStream = lokaliteStream_;
+@synthesize showsDataBeforeFirstFetch = showsDataBeforeFirstFetch_;
 
 #pragma mark - Memory management
 
@@ -98,6 +101,8 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        showsDataBeforeFirstFetch_ = NO;
+
         showingMapView_ = NO;
         [self setTitle:[self titleForView]];
     }
@@ -130,6 +135,7 @@
     [self initializeNavigationItem:[self navigationItem]];
     [self initializeTableView:[self tableView]];
     [self initializeMapView:[self mapView]];
+    [self initializeDataController];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -314,6 +320,12 @@
 {
 }
 
+- (void)initializeDataController
+{
+    if ([self showsDataBeforeFirstFetch])
+        [self loadDataController];
+}
+
 #pragma mark - Protected interface
 
 #pragma mark Configuring the view
@@ -481,6 +493,11 @@
     return nil;
 }
 
+- (void)loadDataController
+{
+    [self setDataController:[self configuredFetchedResultsController]];
+}
+
 #pragma mark Fetching data from the network
 
 - (void)fetchFeaturedEventsIfNecessary
@@ -520,6 +537,10 @@
 - (void)processNextBatchOfFetchedObjects:(NSArray *)objects
                               pageNumber:(NSInteger)pageNumber
 {
+    if (pageNumber == 1 && ![self showsDataBeforeFirstFetch]) {
+        [self loadDataController];
+        [[self tableView] reloadData];
+    }
 }
 
 - (void)processObjectFetchError:(NSError *)error
@@ -685,14 +706,6 @@
     }
 
     return lokaliteStream_;
-}
-
-- (NSFetchedResultsController *)dataController
-{
-    if (!dataController_)
-        dataController_ = [[self configuredFetchedResultsController] retain];
-
-    return dataController_;
 }
 
 @end

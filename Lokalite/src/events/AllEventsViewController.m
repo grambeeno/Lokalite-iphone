@@ -1,12 +1,12 @@
 //
-//  FeaturedEventsViewController.m
+//  AllEventsViewController.m
 //  Lokalite
 //
-//  Created by John Debay on 7/27/11.
+//  Created by John Debay on 8/3/11.
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "FeaturedEventsViewController.h"
+#import "AllEventsViewController.h"
 
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
@@ -14,17 +14,14 @@
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 
-#import "LokaliteFeaturedEventStream.h"
-
 #import "LokaliteObjectBuilder.h"
-#import "TableViewImageFetcher.h"
+#import "LokaliteEventStream.h"
 
-#import "MapDisplayController.h"
+#import "TableViewImageFetcher.h"
 
 #import "SDKAdditions.h"
 
-@interface FeaturedEventsViewController ()
-
+@interface AllEventsViewController ()
 @property (nonatomic, retain) TableViewImageFetcher *imageFetcher;
 
 #pragma mark - View initialization
@@ -35,10 +32,7 @@
 @end
 
 
-@implementation FeaturedEventsViewController
-
-@synthesize mapView = mapView_;
-@synthesize mapViewController = mapViewController_;
+@implementation AllEventsViewController
 
 @synthesize imageFetcher = imageFetcher_;
 
@@ -46,15 +40,12 @@
 
 - (void)dealloc
 {
-    [mapView_ release];
-    [mapViewController_ release];
-
     [imageFetcher_ release];
 
     [super dealloc];
 }
 
-#pragma mark - LokaliteStreamViewController implementation
+#pragma mark - UIViewController implementation
 
 - (void)viewDidLoad
 {
@@ -64,11 +55,13 @@
     [self initializeTableView];
 }
 
+#pragma mark - LokaliteStreamViewController implementation
+
 #pragma mark Configuring the view
 
 - (NSString *)titleForView
 {
-    return NSLocalizedString(@"global.featured", nil);
+    return NSLocalizedString(@"global.events", nil);
 }
 
 #pragma mark Configuring the table view
@@ -137,7 +130,7 @@
 
 - (NSPredicate *)dataControllerPredicate
 {
-    return [NSPredicate predicateWithFormat:@"featured == YES"];
+    return nil;
 }
 
 - (NSArray *)dataControllerSortDescriptors
@@ -156,24 +149,6 @@
                               pageNumber:(NSInteger)pageNumber
 {
     [super processNextBatchOfFetchedObjects:events pageNumber:pageNumber];
-
-    if (pageNumber == 1) {
-        NSManagedObjectContext *context = [self context];
-
-        NSPredicate *pred = [self dataControllerPredicate];
-        NSArray *allEvents = [Event findAllWithPredicate:pred
-                                               inContext:context];
-
-        [LokaliteObjectBuilder replaceLokaliteObjects:allEvents
-                                          withObjects:events
-                                      usingValueOfKey:@"identifier"
-                                     remainingHandler:
-         ^(Event *event) {
-             NSLog(@"Deleting event: %@: %@", [event identifier], [event name]);
-             if ([[event featured] boolValue])
-                 [context deleteObject:event];
-         }];
-    }
 }
 
 - (void)processObjectFetchError:(NSError *)error
@@ -197,47 +172,18 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [LokaliteFeaturedEventStream streamWithContext:[self context]];
+    return [LokaliteEventStream streamWithContext:[self context]];
 }
 
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem
 {
-    UIImage *image = [UIImage imageNamed:@"navigation-bar-banner-featured"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    [imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [[self navigationItem] setTitleView:imageView];
-
-    [[self navigationItem] setRightBarButtonItem:
-     [self toggleMapViewButtonItem]];
 }
 
 - (void)initializeTableView
 {
     [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-}
-
-#pragma mark - Account events
-
-- (BOOL)shouldResetForAccountAddition:(LokaliteAccount *)account
-{
-    return YES;
-}
-
-- (BOOL)shouldResetForAccountDeletion:(LokaliteAccount *)account
-{
-    return YES;
-}
-
-#pragma mark - Accessors
-
-- (TableViewImageFetcher *)imageFetcher
-{
-    if (!imageFetcher_)
-        imageFetcher_ = [[TableViewImageFetcher alloc] init];
-
-    return imageFetcher_;
 }
 
 @end

@@ -17,6 +17,7 @@
 "global.location" = "Location";
 "global.hours" = "Hours";
 "global.event" = "Event";
+"global.events" = "Events";
 "global.business" = "Business";
 "global.places" = "Places";
 "global.place" = "Place";

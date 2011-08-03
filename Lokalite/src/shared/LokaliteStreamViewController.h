@@ -19,11 +19,16 @@
 @interface LokaliteStreamViewController : UITableViewController
     <NSFetchedResultsControllerDelegate, MapDisplayControllerDelegate>
 
-#pragma mark Lokalite service
+#pragma mark - Fetching data
 
 @property (nonatomic, retain) LokaliteStream *lokaliteStream;
+@property (nonatomic, assign) BOOL showsDataBeforeFirstFetch;
 
-#pragma mark Map view
+#pragma mark - View configuration
+
+//@property (nonatomic, assign) BOOL showsSearchBar;
+
+#pragma mark - Map view
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain)
@@ -31,7 +36,7 @@
 @property (nonatomic, retain, readonly)
     UIBarButtonItem *toggleMapViewButtonItem;
 
-#pragma mark Data store
+#pragma mark - Data store
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 @property (nonatomic, retain) NSFetchedResultsController *dataController;
@@ -41,6 +46,7 @@
 #pragma mark - Button actions
 
 - (void)refresh:(id)sender;
+
 
 #pragma mark - Displaying the activity view
 
