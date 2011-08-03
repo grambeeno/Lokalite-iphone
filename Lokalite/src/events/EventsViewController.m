@@ -444,7 +444,7 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 
 - (void)configureTitleViewForCategoryFilter:(CategoryFilter *)filter
 {
-    [self setTitle:[filter name]];
+    [[self navigationItem] setTitle:[filter name]];
 
     UIBarButtonItem *backButtonItem =
         [[UIBarButtonItem alloc] initWithTitle:[filter shortName]
