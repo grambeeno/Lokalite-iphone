@@ -121,6 +121,9 @@
 {
     [super viewWillAppear:animated];
 
+    if ([self isShowingMapView])
+        [self presentMapViewAnimated:NO];
+
     [self fetchFeaturedEventsIfNecessary];
 }
 
@@ -351,34 +354,29 @@
 
 - (void)presentMapViewAnimated:(BOOL)animated
 {
-    if (![self isShowingMapView]) {
-        [self transitionFromView:[self tableView]
-                          toView:[self mapView]
-                         options:UIViewAnimationOptionTransitionCurlUp
-                        animated:animated
-                      completion:
+    [self transitionFromView:[self tableView]
+                      toView:[self mapView]
+                     options:UIViewAnimationOptionTransitionCurlUp
+                    animated:animated
+                  completion:
          ^(BOOL completed) {
              NSArray *objects = [[self dataController] fetchedObjects];
              NSArray *annotations =
                 [NSArray mapAnnotationsFromLokaliteObjects:objects];
              [[self mapViewController] setAnnotations:annotations];
          }];
-        [self setShowingMapView:YES];
-    }
+    [self setShowingMapView:YES];
 }
 
 - (void)dismissMapViewAnimated:(BOOL)animated
 {
-    if ([self isShowingMapView]) {
-        [self transitionFromView:[self mapView]
-                          toView:[self tableView]
-                         options:UIViewAnimationOptionTransitionCurlDown
-                        animated:animated
-                      completion:^(BOOL completed) {
-                          [[self mapViewController] setAnnotations:nil];
-                      }];
-        [self setShowingMapView:NO];
-    }
+    [self transitionFromView:[self mapView]
+                      toView:[self tableView]
+                     options:UIViewAnimationOptionTransitionCurlDown
+                    animated:animated
+                  completion:^(BOOL completed) {
+                      [[self mapViewController] setAnnotations:nil];
+                  }];
 }
 
 - (void)toggleMapViewAnimated:(BOOL)animated
