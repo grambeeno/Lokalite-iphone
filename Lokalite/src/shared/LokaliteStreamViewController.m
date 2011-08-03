@@ -438,6 +438,7 @@
              NSArray *annotations =
                 [NSArray mapAnnotationsFromLokaliteObjects:objects];
              [[self mapViewController] setAnnotations:annotations];
+             [[[self mapViewController] mapView] setShowsUserLocation:YES];
          }];
     [self setShowingMapView:YES];
 }

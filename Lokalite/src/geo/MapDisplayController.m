@@ -36,6 +36,9 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView
             viewForAnnotation:(id<MKAnnotation>)annotation
 {
+    if ([mapView userLocation] == annotation)
+        return nil;
+
     static NSString *AnnotationId = @"MapAnnotation";
     MKPinAnnotationView *view = (MKPinAnnotationView *)
         [mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationId];
