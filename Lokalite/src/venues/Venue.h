@@ -2,20 +2,19 @@
 //  Venue.h
 //  Lokalite
 //
-//  Created by John Debay on 7/15/11.
+//  Created by John Debay on 8/4/11.
 //  Copyright (c) 2011 Lokalite. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "LokaliteObject.h"
 
-@class Event;
-@class Location;
+@class Event, Location;
 
-@interface Venue : NSManagedObject {
+@interface Venue : LokaliteObject {
 @private
 }
-@property (nonatomic, retain) NSNumber * identifier;
 @property (nonatomic, retain) Location *location;
 @property (nonatomic, retain) NSSet *events;
 @end
@@ -26,5 +25,4 @@
 - (void)removeEventsObject:(Event *)value;
 - (void)addEvents:(NSSet *)values;
 - (void)removeEvents:(NSSet *)values;
-
 @end

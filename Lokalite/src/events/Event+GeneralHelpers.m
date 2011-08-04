@@ -166,6 +166,12 @@
     return trended ? [trended boolValue] : NO;
 }
 
+- (UIImage *)image
+{
+    NSData *data = [self imageData];
+    return data ? [UIImage imageWithData:data] : nil;
+}
+
 - (NSURL *)fullImageUrl
 {
     NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];

@@ -32,6 +32,7 @@
 
 - (BOOL)isTrended;
 
+- (UIImage *)image;
 - (NSURL *)fullImageUrl;
 
 

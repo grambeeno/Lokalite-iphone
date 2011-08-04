@@ -2,7 +2,7 @@
 //  Location.m
 //  Lokalite
 //
-//  Created by John Debay on 7/15/11.
+//  Created by John Debay on 8/4/11.
 //  Copyright (c) 2011 Lokalite. All rights reserved.
 //
 
@@ -11,11 +11,10 @@
 
 
 @implementation Location
-@dynamic identifier;
 @dynamic address;
-@dynamic formattedAddress;
 @dynamic latitude;
 @dynamic longitude;
+@dynamic formattedAddress;
 @dynamic venues;
 
 @end

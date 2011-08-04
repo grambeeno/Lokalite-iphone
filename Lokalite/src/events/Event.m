@@ -2,7 +2,7 @@
 //  Event.m
 //  Lokalite
 //
-//  Created by John Debay on 7/27/11.
+//  Created by John Debay on 8/4/11.
 //  Copyright (c) 2011 Lokalite. All rights reserved.
 //
 
@@ -18,23 +18,21 @@
 @implementation Event
 @dynamic summary;
 @dynamic endDate;
-@dynamic startDate;
 @dynamic featured;
+@dynamic trended;
+@dynamic startDate;
 @dynamic imageUrl;
-@dynamic identifier;
 @dynamic imageData;
 @dynamic name;
-@dynamic trended;
 @dynamic category;
 @dynamic venue;
 @dynamic business;
 
 #pragma mark - LokaliteObject implementation
 
-- (UIImage *)image
+- (UIImage *)mapAnnotationViewImage
 {
-    NSData *data = [self imageData];
-    return data ? [UIImage imageWithData:data] : nil;
+    return [self image];
 }
 
 - (id<MKAnnotation>)mapAnnotation

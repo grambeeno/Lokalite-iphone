@@ -11,7 +11,7 @@
 
 @protocol MappableLokaliteObject <NSObject>
 
-- (UIImage *)image;
+- (UIImage *)mapAnnotationViewImage;
 
 - (id<MKAnnotation>)mapAnnotation;
 

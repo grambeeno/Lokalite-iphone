@@ -2,7 +2,7 @@
 //  Category.m
 //  Lokalite
 //
-//  Created by John Debay on 7/20/11.
+//  Created by John Debay on 8/4/11.
 //  Copyright (c) 2011 Lokalite. All rights reserved.
 //
 
@@ -13,8 +13,7 @@
 
 @implementation Category
 @dynamic name;
-@dynamic identifier;
-@dynamic events;
 @dynamic businesses;
+@dynamic events;
 
 @end

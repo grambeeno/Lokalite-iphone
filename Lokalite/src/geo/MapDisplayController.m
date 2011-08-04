@@ -53,7 +53,7 @@
     LokaliteObjectMapAnnotation *lokaliteAnnotation =
         (LokaliteObjectMapAnnotation *) annotation;
     id<MappableLokaliteObject> lokaliteObject = [lokaliteAnnotation lokaliteObject];
-    UIImage *image = [lokaliteObject image];
+    UIImage *image = [lokaliteObject mapAnnotationViewImage];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     CGRect imageViewFrame = [imageView frame];
     imageViewFrame.size = CGSizeMake(32, 32);

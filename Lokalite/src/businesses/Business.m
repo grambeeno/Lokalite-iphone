@@ -2,7 +2,7 @@
 //  Business.m
 //  Lokalite
 //
-//  Created by John Debay on 7/20/11.
+//  Created by John Debay on 8/4/11.
 //  Copyright (c) 2011 Lokalite. All rights reserved.
 //
 
@@ -12,30 +12,16 @@
 
 
 @implementation Business
-@dynamic address;
 @dynamic phone;
-@dynamic status;
 @dynamic summary;
-@dynamic name;
+@dynamic address;
+@dynamic status;
 @dynamic imageUrl;
 @dynamic email;
-@dynamic identifier;
+@dynamic name;
 @dynamic imageData;
 @dynamic url;
-@dynamic events;
 @dynamic category;
-
-#pragma mark - LokaliteObject implementation
-
-- (UIImage *)image
-{
-    NSData *data = [self imageData];
-    return data ? [UIImage imageWithData:data] : nil;
-}
-
-- (id<MKAnnotation>)mapAnnotation
-{
-    return nil;
-}
+@dynamic events;
 
 @end
