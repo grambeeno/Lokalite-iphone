@@ -19,6 +19,7 @@
     NSNumber *identifier = [jsonData objectForKey:@"id"];
     Location *location = [self existingOrNewInstanceWithIdentifier:identifier
                                                          inContext:context];
+    [location setLastUpdated:[NSDate date]];
 
     [location setValueIfNecessary:[jsonData objectForKey:@"address"]
                                                   forKey:@"address"];

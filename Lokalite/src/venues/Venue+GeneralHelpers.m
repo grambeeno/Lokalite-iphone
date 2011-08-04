@@ -21,6 +21,7 @@
     NSNumber *venueId = [jsonData objectForKey:@"id"];
     Venue *venue = [self existingOrNewInstanceWithIdentifier:venueId
                                                    inContext:context];
+    [venue setLastUpdated:[NSDate date]];
 
     NSDictionary *locationData = [jsonData objectForKey:@"location"];
     Location *location =

@@ -11,6 +11,6 @@
 
 @implementation LokaliteObject
 @dynamic identifier;
-@dynamic updatedTime;
+@dynamic lastUpdated;
 
 @end

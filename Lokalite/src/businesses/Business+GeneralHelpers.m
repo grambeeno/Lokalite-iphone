@@ -29,12 +29,11 @@
                                inContext:(NSManagedObjectContext *)context
 {
     NSNumber *businessId = [businessData objectForKey:@"id"];
-    Business *business = [Business businessWithId:businessId
-                                        inContext:context];
-    if (!business) {
-        business = [Business createInstanceInContext:context];
-        [business setIdentifier:businessId];
-    }
+    Business *business =
+        [Business existingOrNewInstanceWithIdentifier:businessId
+                                            inContext:context];
+
+    [business setLastUpdated:[NSDate date]];
 
     NSString *name = [businessData objectForKey:@"name"];
     [business setValueIfNecessary:name forKey:@"name"];

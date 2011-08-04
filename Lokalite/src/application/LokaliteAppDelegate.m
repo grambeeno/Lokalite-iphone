@@ -18,6 +18,9 @@
 
 #import "ActivityView.h"
 
+#import "LokaliteApplicationState.h"
+#import "LokaliteApplicationState+GeneralHelpers.h"
+
 #import "LokaliteAccount.h"
 #import "Event.h"
 #import "Business.h"
@@ -49,6 +52,7 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
 #pragma mark - Persistence management
 
+- (void)setDataFreshnessRequirementToDate:(NSDate *)date;
 - (void)saveContext;
 
 - (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context;
@@ -105,30 +109,6 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
          if ([controller respondsToSelector:@selector(setContext:)])
              [controller setValue:context forKey:@"context"];
-
-         /*
-         if ([controller isKindOfClass:[FeaturedEventsViewController class]]) {
-             FeaturedEventsViewController *featuredController =
-                (FeaturedEventsViewController *) controller;
-             [featuredController setContext:context];
-         } else if ([controller isKindOfClass:[TrendingViewController class]]) {
-             TrendingViewController *trendingController =
-                (TrendingViewController *) controller;
-             [trendingController setContext:context];
-         } else if ([controller isKindOfClass:[EventsViewController class]]) {
-             EventsViewController *eventsController =
-                (EventsViewController *) controller;
-             [eventsController setContext:context];
-         } else if ([controller isKindOfClass:[PlacesViewController class]]) {
-             PlacesViewController *placesController =
-                (PlacesViewController *) controller;
-             [placesController setContext:context];
-         } else if ([controller isKindOfClass:[ProfileViewController class]]) {
-             ProfileViewController *profileController =
-                (ProfileViewController *) controller;
-             [profileController setContext:context];
-         }
-          */
      }];
 }
 
@@ -137,6 +117,8 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self setDataFreshnessRequirementToDate:[NSDate date]];
+
     [self subscribeForNotificationsForContext:[self context]];
 
     [self initializeTabBarController:[self tabBarController]];
@@ -344,6 +326,13 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     [nc removeObserver:self
                   name:NSManagedObjectContextObjectsDidChangeNotification
                 object:context];
+}
+
+- (void)setDataFreshnessRequirementToDate:(NSDate *)date
+{
+    LokaliteApplicationState *appState =
+        [LokaliteApplicationState currentState:[self context]];
+    [appState setDataFreshnessDate:date];
 }
 
 - (void)saveContext

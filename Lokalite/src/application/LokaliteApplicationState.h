@@ -1,5 +1,5 @@
 //
-//  LokaliteObject.h
+//  ApplicationState.h
 //  Lokalite
 //
 //  Created by John Debay on 8/4/11.
@@ -10,10 +10,9 @@
 #import <CoreData/CoreData.h>
 
 
-@interface LokaliteObject : NSManagedObject {
+@interface LokaliteApplicationState : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSNumber * identifier;
-@property (nonatomic, retain) NSDate * lastUpdated;
+@property (nonatomic, retain) NSDate * dataFreshnessDate;
 
 @end

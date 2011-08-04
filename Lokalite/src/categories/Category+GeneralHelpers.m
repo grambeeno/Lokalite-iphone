@@ -23,6 +23,8 @@
         [category setIdentifier:identifier];
     }
 
+    [category setLastUpdated:[NSDate date]];
+
     NSString *name = [jsonData objectForKey:@"name"];
     [category setValueIfNecessary:name forKey:@"name"];
 

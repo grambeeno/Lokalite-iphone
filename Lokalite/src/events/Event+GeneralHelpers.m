@@ -68,15 +68,10 @@
     NSNumber *eventId = [eventData objectForKey:@"id"];
     NSString *name = [eventData objectForKey:@"name"];
 
-    Event *event = [self eventWithId:eventId inContext:context];
-    if (event)
-        NSLog(@"Event exists: %@: %@", eventId, name);
-    else {
-        NSLog(@"Creating new event: %@: %@", eventId, name);
-        event = [self createInstanceInContext:context];
-        [event setIdentifier:eventId];
-    }
+    Event *event = [self existingOrNewInstanceWithIdentifier:eventId
+                                                   inContext:context];
 
+    [event setLastUpdated:[NSDate date]];
     [event setBusiness:business];
 
     [event setValueIfNecessary:name forKey:@"name"];
