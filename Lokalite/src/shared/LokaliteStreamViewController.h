@@ -23,7 +23,7 @@
 #pragma mark - Fetching data
 
 @property (nonatomic, retain) LokaliteStream *lokaliteStream;
-@property (nonatomic, assign) BOOL showsDataBeforeFirstFetch;
+//@property (nonatomic, assign) BOOL showsDataBeforeFirstFetch;
 
 #pragma mark - View configuration
 
@@ -49,10 +49,12 @@
 
 #pragma mark - Displaying the activity view
 
+/*
 - (void)displayActivityView;
 - (void)displayActivityViewWithCompletion:(void (^)(void))completion;
 - (void)hideActivityView;
 - (void)hideActivityViewWithCompletion:(void (^)(void))completion;
+ */
 
 
 

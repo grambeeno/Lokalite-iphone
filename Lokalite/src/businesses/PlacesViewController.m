@@ -21,6 +21,7 @@
 
 #import "TableViewImageFetcher.h"
 
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
 @interface PlacesViewController ()
@@ -53,9 +54,9 @@
 
 #pragma mark - Configuring the table view
 
-- (CGFloat)cellHeightForTableView:(UITableView *)tableView
+- (void)initializeTableView:(UITableView *)tableView
 {
-    return [PlaceTableViewCell cellHeight];
+    [tableView setRowHeight:[PlaceTableViewCell cellHeight]];
 }
 
 - (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
@@ -114,6 +115,15 @@
 - (NSString *)lokaliteObjectEntityName
 {
     return @"Business";
+}
+
+- (NSPredicate *)dataControllerPredicate
+{
+    NSDate *date =
+        [[LokaliteApplicationState currentState:[self context]]
+         dataFreshnessDate];
+
+    return [NSPredicate predicateWithFormat:@"lastUpdated >= %@", date];
 }
 
 - (NSArray *)dataControllerSortDescriptors

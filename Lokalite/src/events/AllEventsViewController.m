@@ -14,11 +14,11 @@
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 
-#import "LokaliteObjectBuilder.h"
 #import "LokaliteEventStream.h"
 
 #import "TableViewImageFetcher.h"
 
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
 @interface AllEventsViewController ()
@@ -142,7 +142,11 @@
 
 - (NSPredicate *)dataControllerPredicate
 {
-    return nil;
+    NSDate *date =
+    [[LokaliteApplicationState currentState:[self context]]
+     dataFreshnessDate];
+
+    return [NSPredicate predicateWithFormat:@"lastUpdated >= %@", date];
 }
 
 - (NSArray *)dataControllerSortDescriptors

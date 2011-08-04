@@ -16,11 +16,11 @@
 
 #import "LokaliteFeaturedEventStream.h"
 
-#import "LokaliteObjectBuilder.h"
 #import "TableViewImageFetcher.h"
 
 #import "MapDisplayController.h"
 
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
 @interface FeaturedEventsViewController ()
@@ -138,7 +138,11 @@
 
 - (NSPredicate *)dataControllerPredicate
 {
-    return [NSPredicate predicateWithFormat:@"featured == YES"];
+    NSDate *date =
+        [[LokaliteApplicationState currentState:[self context]]
+         dataFreshnessDate];
+    return [NSPredicate predicateWithFormat:
+            @"lastUpdated >= %@ AND featured == YES", date];
 }
 
 - (NSArray *)dataControllerSortDescriptors

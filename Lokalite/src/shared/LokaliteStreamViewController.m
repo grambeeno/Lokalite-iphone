@@ -89,7 +89,7 @@
 @synthesize dataController = dataController_;
 
 @synthesize lokaliteStream = lokaliteStream_;
-@synthesize showsDataBeforeFirstFetch = showsDataBeforeFirstFetch_;
+//@synthesize showsDataBeforeFirstFetch = showsDataBeforeFirstFetch_;
 @synthesize isFetchingData = isFetchingData_;
 
 #pragma mark - Memory management
@@ -122,7 +122,7 @@
     if (self) {
         showsSearchBar_ = NO;
 
-        showsDataBeforeFirstFetch_ = NO;
+        //showsDataBeforeFirstFetch_ = NO;
         isFetchingData_ = NO;
 
         showingMapView_ = NO;
@@ -158,6 +158,8 @@
 
     [self subscribeForNotificationsForContext:[self context]];
     [self subscribeForApplicationLifecycleNotifications];
+
+    [self loadDataController];
 
     [self initializeNavigationItem:[self navigationItem]];
     [self initializeTableView:[self tableView]];
@@ -373,6 +375,7 @@
 
 #pragma mark - Displaying the activity view
 
+/*
 - (void)displayActivityView
 {
     [self displayActivityViewWithCompletion:nil];
@@ -396,6 +399,7 @@
         (LokaliteAppDelegate *) [[UIApplication sharedApplication] delegate];
     [delegate hideActivityViewAnimated:YES completion:completion];
 }
+ */
 
 #pragma mark - View initialization
 
@@ -414,7 +418,7 @@
 {
     if (tableView == [self tableView]) {
         BOOL hasFooter =
-            [self showsDataBeforeFirstFetch] &&
+            /*[self showsDataBeforeFirstFetch] &&*/
             [[self lokaliteStream] hasMorePages];
         [tableView setTableFooterView:
          hasFooter ? [self loadingMoreActivityView] : nil];
@@ -427,8 +431,8 @@
 
 - (void)initializeDataController
 {
-    if ([self showsDataBeforeFirstFetch])
-        [self loadDataController];
+    //if ([self showsDataBeforeFirstFetch])
+    //    [self loadDataController];
 }
 
 #pragma mark - Protected interface
@@ -615,16 +619,16 @@
 {
     if (![self isFetchingData]) {
         BOOL fetchNecessary = [[self lokaliteStream] pagesFetched] == 0;
-        BOOL activityViewNecessary =
-            [[[self dataController] fetchedObjects] count] == 0;
+        //BOOL activityViewNecessary =
+        //    [[[self dataController] fetchedObjects] count] == 0;
 
         if (fetchNecessary) {
-            if (activityViewNecessary)
-                [self displayActivityView];
+            //if (activityViewNecessary)
+            //    [self displayActivityView];
             [self fetchNextSetOfObjectsWithCompletion:
              ^(NSArray *a, NSError *e) {
-                 if (activityViewNecessary)
-                     [self hideActivityView];
+                 //if (activityViewNecessary)
+                 //    [self hideActivityView];
              }];
         }
     }
@@ -653,10 +657,10 @@
 - (void)processNextBatchOfFetchedObjects:(NSArray *)objects
                               pageNumber:(NSInteger)pageNumber
 {
-    if (pageNumber == 1 && ![self showsDataBeforeFirstFetch]) {
-        [self loadDataController];
-        [[self tableView] reloadData];
-    }
+    //if (pageNumber == 1 && ![self showsDataBeforeFirstFetch]) {
+    //    [self loadDataController];
+    //    [[self tableView] reloadData];
+    //}
 
     if ([[self lokaliteStream] hasMorePages] && pageNumber == 1)
         [[self tableView] setTableFooterView:[self loadingMoreActivityView]];
