@@ -27,7 +27,6 @@
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem;
-- (void)initializeTableView;
 
 @end
 
@@ -52,7 +51,10 @@
     [super viewDidLoad];
 
     [self initializeNavigationItem];
-    [self initializeTableView];
+
+    [self setShowsSearchBar:YES];
+    [[[self searchDisplayController] searchResultsTableView]
+     setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 #pragma mark - LokaliteStreamViewController implementation
@@ -66,9 +68,12 @@
 
 #pragma mark Configuring the table view
 
-- (CGFloat)cellHeightForTableView:(UITableView *)tableView
+- (void)initializeTableView:(UITableView *)tableView
 {
-    return [EventTableViewCell cellHeight];
+    [super initializeTableView:tableView];
+
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [tableView setRowHeight:[EventTableViewCell cellHeight]];
 }
 
 - (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
@@ -119,6 +124,13 @@
         [[EventDetailsViewController alloc] initWithEvent:event];
     [[self navigationController] pushViewController:controller animated:YES];
     [controller release], controller = nil;
+}
+
+- (NSPredicate *)predicateForQueryString:(NSString *)queryString
+{
+    return [Event predicateForSearchString:queryString
+                             includeEvents:YES
+                         includeBusinesses:NO];
 }
 
 #pragma mark Working with the local data store
@@ -179,11 +191,6 @@
 
 - (void)initializeNavigationItem
 {
-}
-
-- (void)initializeTableView
-{
-    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 @end

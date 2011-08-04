@@ -27,7 +27,7 @@
 
     [mapView_ release];
     [annotations_ release];
-    
+
     [super dealloc];
 }
 

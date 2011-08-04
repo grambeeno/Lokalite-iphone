@@ -17,7 +17,8 @@
 @class LokaliteAccount, LokaliteStream;
 
 @interface LokaliteStreamViewController : UITableViewController
-    <NSFetchedResultsControllerDelegate, MapDisplayControllerDelegate>
+    <NSFetchedResultsControllerDelegate, MapDisplayControllerDelegate,
+     UISearchBarDelegate, UISearchDisplayDelegate>
 
 #pragma mark - Fetching data
 
@@ -26,7 +27,7 @@
 
 #pragma mark - View configuration
 
-//@property (nonatomic, assign) BOOL showsSearchBar;
+@property (nonatomic, assign) BOOL showsSearchBar;
 
 #pragma mark - Map view
 
@@ -40,8 +41,6 @@
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 @property (nonatomic, retain) NSFetchedResultsController *dataController;
-
-//@property (nonatomic, assign) NSInteger pagesFetched;
 
 #pragma mark - Button actions
 
@@ -72,7 +71,8 @@
 
 #pragma mark Configuring the table view
 
-- (CGFloat)cellHeightForTableView:(UITableView *)tableView;
+- (void)initializeTableView:(UITableView *)tableView;
+
 - (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
                               inTableView:(UITableView *)tableView;
 - (UITableViewCell *)tableViewCellInstanceForTableView:(UITableView *)tableView
@@ -82,6 +82,11 @@
             forObject:(NSManagedObject *)object;
 
 - (void)displayDetailsForObject:(id<LokaliteObject>)object;
+
+
+#pragma mark - Searching local results
+
+- (NSPredicate *)predicateForQueryString:(NSString *)queryString;
 
 
 #pragma mark Working with the map view

@@ -30,7 +30,6 @@
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem;
-- (void)initializeTableView;
 
 @end
 
@@ -61,7 +60,6 @@
     [super viewDidLoad];
 
     [self initializeNavigationItem];
-    [self initializeTableView];
 }
 
 #pragma mark Configuring the view
@@ -73,9 +71,12 @@
 
 #pragma mark Configuring the table view
 
-- (CGFloat)cellHeightForTableView:(UITableView *)tableView
+- (void)initializeTableView:(UITableView *)tableView
 {
-    return [EventTableViewCell cellHeight];
+    [super initializeTableView:tableView];
+
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [tableView setRowHeight:[EventTableViewCell cellHeight]];
 }
 
 - (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
@@ -206,11 +207,6 @@
 {
     [[self navigationItem] setRightBarButtonItem:
      [self toggleMapViewButtonItem]];
-}
-
-- (void)initializeTableView
-{
-    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 #pragma mark - Account events

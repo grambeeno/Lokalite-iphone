@@ -22,6 +22,10 @@
 
 @property (nonatomic, retain) UIView *loadingMoreActivityView;
 
+#pragma mark - Working with the search interface
+
+@property (nonatomic, copy) NSArray *searchResults;
+
 #pragma mark - Working with the map view
 
 @property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
@@ -70,7 +74,11 @@
 
 @implementation LokaliteStreamViewController
 
+@synthesize showsSearchBar = showsSearchBar_;
+
 @synthesize loadingMoreActivityView = loadingMoreActivityView_;
+
+@synthesize searchResults = searchResults_;
 
 @synthesize showingMapView = showingMapView_;
 @synthesize mapView = mapView_;
@@ -93,6 +101,8 @@
 
     [loadingMoreActivityView_ release];
 
+    [searchResults_ release];
+
     [mapView_ release];
     [mapViewController_ release];
     [toggleMapViewButtonItem_ release];
@@ -110,6 +120,8 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        showsSearchBar_ = NO;
+
         showsDataBeforeFirstFetch_ = NO;
         isFetchingData_ = NO;
 
@@ -209,7 +221,7 @@
             [[[self dataController] sections] objectAtIndex:section];
         nrows = [sectionInfo numberOfObjects];
     } else
-        nrows = 0; //[[self searchResults] count];
+        nrows = [[self searchResults] count];
 
     return nrows;
 
@@ -237,9 +249,59 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<LokaliteObject> obj =
-        [[self dataController] objectAtIndexPath:indexPath];
+    id<LokaliteObject> obj = nil;
+
+    if ([self tableView] == tableView)
+        obj = [[self dataController] objectAtIndexPath:indexPath];
+    else
+        obj = [[self searchResults] objectAtIndex:[indexPath row]];
+
     [self displayDetailsForObject:obj];
+}
+
+#pragma mark - UISearchBarDelegate implementation
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [self setSearchResults:nil];
+}
+
+#pragma mark - UISearchDisplayControllerDelegate implementation
+
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)ctlr
+{
+    [self setSearchResults:[NSArray array]];
+
+    //
+    // HACK: This configuration needs to be called every time a search begins.
+    //       I'm not sure why. Calling it only in "loadSearchBar" gives a
+    //       correct row height and separator style for the first search, but if
+    //       the user cancels and then performs a second search, the row height
+    //       reverts to the default value. I assume this is because the table
+    //       view is destroyed and recreated?
+    //
+    UITableView *resultsTableView =
+        [[self searchDisplayController] searchResultsTableView];
+    [self initializeTableView:resultsTableView];
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller 
+    shouldReloadTableForSearchString:(NSString *)searchString
+{
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
+    searchString = [searchString stringByTrimmingCharactersInSet:whitespace];
+
+    if ([searchString length]) {
+        NSPredicate *pred = [self predicateForQueryString:searchString];
+        NSArray *objects = [[self dataController] fetchedObjects];
+        objects = [objects filteredArrayUsingPredicate:pred];
+        [self setSearchResults:objects];
+
+        NSLog(@"Search string '%@' matches %d events", searchString,
+              [objects count]);
+    }
+
+    return YES;
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate implementation
@@ -346,13 +408,13 @@
 
 - (void)initializeTableView:(UITableView *)tableView
 {
-    [tableView setRowHeight:[self cellHeightForTableView:tableView]];
-
-    BOOL hasFooter =
-        [self showsDataBeforeFirstFetch] &&
-        [[self lokaliteStream] hasMorePages];
-    [tableView setTableFooterView:
-     hasFooter ? [self loadingMoreActivityView] : nil];
+    if (tableView == [self tableView]) {
+        BOOL hasFooter =
+            [self showsDataBeforeFirstFetch] &&
+            [[self lokaliteStream] hasMorePages];
+        [tableView setTableFooterView:
+         hasFooter ? [self loadingMoreActivityView] : nil];
+    }
 }
 
 - (void)initializeMapView:(MKMapView *)mapView
@@ -378,11 +440,6 @@
 
 #pragma mark Configuring the table view
 
-- (CGFloat)cellHeightForTableView:(UITableView *)tableView
-{
-    return 44;
-}
-
 - (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
                               inTableView:(UITableView *)tableView
 {
@@ -406,6 +463,16 @@
 {
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+}
+
+#pragma mark - Searching local results
+
+- (NSPredicate *)predicateForQueryString:(NSString *)queryString
+{
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+
+    return nil;
 }
 
 #pragma mark Working with the map view
@@ -693,6 +760,31 @@
      }];
 }
 
+#pragma mark - Search bar management
+
+- (void)loadSearchBar
+{
+    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    [searchBar setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    [searchBar setAutocorrectionType:UITextAutocorrectionTypeNo];
+    UISearchDisplayController *searchDisplayController =
+        [[UISearchDisplayController alloc] initWithSearchBar:searchBar
+                                          contentsController:self];
+    [searchBar setDelegate:self];
+    [searchBar sizeToFit];
+    [[self tableView] setTableHeaderView:searchBar];
+    [searchBar release], searchBar = nil;
+
+    [searchDisplayController setDelegate:self];
+    [searchDisplayController setSearchResultsDataSource:self];
+    [searchDisplayController setSearchResultsDelegate:self];
+}
+
+- (void)unloadSearchBar
+{
+    [[self tableView] setTableHeaderView:nil];
+}
+
 #pragma mark - Application notifications
 
 - (void)subscribeForApplicationLifecycleNotifications
@@ -731,6 +823,18 @@
 }
 
 #pragma mark - Accessors
+
+- (void)setShowsSearchBar:(BOOL)showsSearchBar
+{
+    if (showsSearchBar_ != showsSearchBar) {
+        showsSearchBar_ = showsSearchBar;
+
+        if (showsSearchBar)
+            [self loadSearchBar];
+        else
+            [self unloadSearchBar];
+    }
+}
 
 - (UIView *)loadingMoreActivityView
 {
