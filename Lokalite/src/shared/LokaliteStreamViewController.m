@@ -238,7 +238,13 @@
         cell = [self tableViewCellInstanceForTableView:tableView
                                        reuseIdentifier:reuseIdentifier];
 
-    NSManagedObject *obj = [[self dataController] objectAtIndexPath:indexPath];
+    id<LokaliteObject> obj = nil;
+
+    if ([self tableView] == tableView)
+        obj = [[self dataController] objectAtIndexPath:indexPath];
+    else
+        obj = [[self searchResults] objectAtIndex:[indexPath row]];
+
     [self configureCell:cell forObject:obj];
 
     return cell;
@@ -280,9 +286,7 @@
     //       reverts to the default value. I assume this is because the table
     //       view is destroyed and recreated?
     //
-    UITableView *resultsTableView =
-        [[self searchDisplayController] searchResultsTableView];
-    [self initializeTableView:resultsTableView];
+    [self initializeTableView:[ctlr searchResultsTableView]];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller 
@@ -453,7 +457,7 @@
                                    reuseIdentifier:identifier] autorelease];
 }
 
-- (void)configureCell:(UITableViewCell *)cell forObject:(NSManagedObject *)obj
+- (void)configureCell:(UITableViewCell *)cell forObject:(id<LokaliteObject>)obj
 {
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));

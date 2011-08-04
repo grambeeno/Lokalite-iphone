@@ -78,8 +78,7 @@
 - (UITableViewCell *)tableViewCellInstanceForTableView:(UITableView *)tableView
                                        reuseIdentifier:(NSString *)identifier;
 
-- (void)configureCell:(UITableViewCell *)cell
-            forObject:(NSManagedObject *)object;
+- (void)configureCell:(UITableViewCell *)cell forObject:(id<LokaliteObject>)obj;
 
 - (void)displayDetailsForObject:(id<LokaliteObject>)object;
 
