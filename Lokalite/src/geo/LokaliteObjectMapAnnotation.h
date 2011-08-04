@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@protocol LokaliteObject;
+@protocol MappableLokaliteObject;
 
 @interface LokaliteObjectMapAnnotation : NSObject <MKAnnotation>
 {
@@ -17,13 +17,13 @@
     NSString *title_, *subtitle_;
 }
 
-@property (nonatomic, retain, readonly) id<LokaliteObject> lokaliteObject;
+@property (nonatomic, retain, readonly) id<MappableLokaliteObject> lokaliteObject;
 
 #pragma mark - Initialization
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate
                    title:(NSString *)title
                 subtitle:(NSString *)subtitle
-                  object:(id<LokaliteObject>)object;
+                  object:(id<MappableLokaliteObject>)object;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  LokaliteObject.h
+//  MappableLokaliteObject.h
 //  Lokalite
 //
 //  Created by John Debay on 8/2/11.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@protocol LokaliteObject <NSObject>
+@protocol MappableLokaliteObject <NSObject>
 
 - (UIImage *)image;
 

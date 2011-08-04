@@ -27,11 +27,11 @@
 
 
 
-@protocol LokaliteObject;
+@protocol MappableLokaliteObject;
 
 @protocol MapDisplayControllerDelegate <NSObject>
 
 - (void)mapDisplayController:(MapDisplayController *)controller
-             didSelectObject:(id<LokaliteObject>)object;
+             didSelectObject:(id<MappableLokaliteObject>)object;
 
 @end

@@ -238,7 +238,7 @@
         cell = [self tableViewCellInstanceForTableView:tableView
                                        reuseIdentifier:reuseIdentifier];
 
-    id<LokaliteObject> obj = nil;
+    id<MappableLokaliteObject> obj = nil;
 
     if ([self tableView] == tableView)
         obj = [[self dataController] objectAtIndexPath:indexPath];
@@ -255,7 +255,7 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<LokaliteObject> obj = nil;
+    id<MappableLokaliteObject> obj = nil;
 
     if ([self tableView] == tableView)
         obj = [[self dataController] objectAtIndexPath:indexPath];
@@ -366,7 +366,7 @@
 #pragma mark - MapDisplayControllerDelegate implementation
 
 - (void)mapDisplayController:(MapDisplayController *)controller
-             didSelectObject:(id<LokaliteObject>)object
+             didSelectObject:(id<MappableLokaliteObject>)object
 {
     [self displayDetailsForObject:object];
 }
@@ -457,13 +457,13 @@
                                    reuseIdentifier:identifier] autorelease];
 }
 
-- (void)configureCell:(UITableViewCell *)cell forObject:(id<LokaliteObject>)obj
+- (void)configureCell:(UITableViewCell *)cell forObject:(id<MappableLokaliteObject>)obj
 {
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
 
-- (void)displayDetailsForObject:(id<LokaliteObject>)object
+- (void)displayDetailsForObject:(id<MappableLokaliteObject>)object
 {
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));

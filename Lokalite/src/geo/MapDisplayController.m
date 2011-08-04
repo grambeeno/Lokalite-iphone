@@ -52,7 +52,7 @@
 
     LokaliteObjectMapAnnotation *lokaliteAnnotation =
         (LokaliteObjectMapAnnotation *) annotation;
-    id<LokaliteObject> lokaliteObject = [lokaliteAnnotation lokaliteObject];
+    id<MappableLokaliteObject> lokaliteObject = [lokaliteAnnotation lokaliteObject];
     UIImage *image = [lokaliteObject image];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     CGRect imageViewFrame = [imageView frame];
@@ -73,7 +73,7 @@
 {
     LokaliteObjectMapAnnotation *annotation =
         (LokaliteObjectMapAnnotation *) [view annotation];
-    id<LokaliteObject> object = [annotation lokaliteObject];
+    id<MappableLokaliteObject> object = [annotation lokaliteObject];
 
     [[self delegate] mapDisplayController:self didSelectObject:object];
 }

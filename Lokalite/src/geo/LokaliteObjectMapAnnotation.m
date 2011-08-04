@@ -32,7 +32,7 @@
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate
                    title:(NSString *)title
                 subtitle:(NSString *)subtitle
-                  object:(id<LokaliteObject>)object
+                  object:(id<MappableLokaliteObject>)object
 {
     self = [super init];
     if (self) {

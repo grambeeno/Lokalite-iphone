@@ -204,7 +204,7 @@
 		05209F1413C7710F00CA6A2D /* LokaliteAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteAppDelegate.h; path = src/application/LokaliteAppDelegate.h; sourceTree = "<group>"; };
 		05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteAppDelegate.m; path = src/application/LokaliteAppDelegate.m; sourceTree = "<group>"; };
 		05209F1613C7710F00CA6A2D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = src/application/MainWindow.xib; sourceTree = "<group>"; };
-		0530CEE813E8C20700601BFB /* LokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObject.h; path = src/lokalite/LokaliteObject.h; sourceTree = "<group>"; };
+		0530CEE813E8C20700601BFB /* MappableLokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; name = MappableLokaliteObject.h; path = src/lokalite/MappableLokaliteObject.h; sourceTree = "<group>"; };
 		0530CEEA13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+GeneralHelpers.h"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+GeneralHelpers.m"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.m"; sourceTree = "<group>"; };
 		0549AB5313D77A6800F9C2C2 /* CategoryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilter.h; path = src/categories/CategoryFilter.h; sourceTree = "<group>"; };
@@ -442,7 +442,7 @@
 		0505ECCD13CBC13E009874A7 /* lokalite */ = {
 			isa = PBXGroup;
 			children = (
-				0530CEE813E8C20700601BFB /* LokaliteObject.h */,
+				0530CEE813E8C20700601BFB /* MappableLokaliteObject.h */,
 				05194D4813CCAC8200EE14F8 /* LokaliteService.h */,
 				05194D4913CCAC8200EE14F8 /* LokaliteService.m */,
 				0505ECD213CBC2ED009874A7 /* LokaliteServiceRequest.h */,

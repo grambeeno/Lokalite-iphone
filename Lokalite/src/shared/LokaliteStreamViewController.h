@@ -13,7 +13,7 @@
 
 #import <MapKit/MapKit.h>
 
-@protocol LokaliteObject;
+@protocol MappableLokaliteObject;
 @class LokaliteAccount, LokaliteStream;
 
 @interface LokaliteStreamViewController : UITableViewController
@@ -78,9 +78,9 @@
 - (UITableViewCell *)tableViewCellInstanceForTableView:(UITableView *)tableView
                                        reuseIdentifier:(NSString *)identifier;
 
-- (void)configureCell:(UITableViewCell *)cell forObject:(id<LokaliteObject>)obj;
+- (void)configureCell:(UITableViewCell *)cell forObject:(id<MappableLokaliteObject>)obj;
 
-- (void)displayDetailsForObject:(id<LokaliteObject>)object;
+- (void)displayDetailsForObject:(id<MappableLokaliteObject>)object;
 
 
 #pragma mark - Searching local results

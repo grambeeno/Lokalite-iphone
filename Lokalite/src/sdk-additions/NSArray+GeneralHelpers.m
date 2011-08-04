@@ -92,7 +92,7 @@
 
 
 
-#import "LokaliteObject.h"
+#import "MappableLokaliteObject.h"
 
 @implementation NSArray (LokaliteHelpers)
 
@@ -114,7 +114,7 @@
 + (NSArray *)mapAnnotationsFromLokaliteObjects:(NSArray *)objects
 {
     return [objects arrayByMappingArray:
-            ^(id<LokaliteObject> obj, NSUInteger idx, BOOL *stop) {
+            ^(id<MappableLokaliteObject> obj, NSUInteger idx, BOOL *stop) {
                 return [obj mapAnnotation];
             }];
 }
