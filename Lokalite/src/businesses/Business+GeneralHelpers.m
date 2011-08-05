@@ -11,6 +11,8 @@
 #import "Category.h"
 #import "Category+GeneralHelpers.h"
 
+#import "LokaliteDownloadSource.h"
+
 #import "LokaliteObjectBuilder.h"
 
 #import "NSObject+GeneralHelpers.h"
@@ -19,13 +21,8 @@
 
 @implementation Business (GeneralHelpers)
 
-+ (id)businessWithId:(NSNumber *)businessId
-           inContext:(NSManagedObjectContext *)context
-{
-    return [self instanceWithIdentifier:businessId inContext:context];
-}
-
 + (id)createOrUpdateBusinessFromJsonData:(NSDictionary *)businessData
+                          downloadSource:(LokaliteDownloadSource *)source
                                inContext:(NSManagedObjectContext *)context
 {
     NSNumber *businessId = [businessData objectForKey:@"id"];
@@ -33,7 +30,7 @@
         [Business existingOrNewInstanceWithIdentifier:businessId
                                             inContext:context];
 
-    [business setLastUpdated:[NSDate date]];
+    [business addDownloadSourcesObject:source];
 
     NSString *name = [businessData objectForKey:@"name"];
     [business setValueIfNecessary:name forKey:@"name"];
@@ -74,6 +71,7 @@
     NSDictionary *categoryData = [businessData objectForKey:@"category"];
     Category *category =
         [Category existingOrNewCategoryFromJsonData:categoryData
+                                     downloadSource:source
                                           inContext:context];
     [business setCategory:category];
 
@@ -81,6 +79,7 @@
 }
 
 + (NSArray *)businessObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                             downloadSource:(LokaliteDownloadSource *)source
                                 withContext:(NSManagedObjectContext *)context
 {
     NSArray *objs = [[jsonObjects objectForKey:@"data"] objectForKey:@"list"];
@@ -91,6 +90,7 @@
      ^(NSDictionary *placeData, NSUInteger idx, BOOL *stop) {
          Business *business =
             [Business createOrUpdateBusinessFromJsonData:placeData
+                                          downloadSource:source
                                                inContext:context];
          [places addObject:business];
      }];

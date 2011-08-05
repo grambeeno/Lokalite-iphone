@@ -11,3 +11,10 @@
 @interface LokaliteEventStream : LokaliteStream
 
 @end
+
+
+@interface LokaliteEventStream (InstantiationHelpers)
+
++ (id)streamWithContext:(NSManagedObjectContext *)context;
+
+@end

@@ -8,6 +8,9 @@
 
 #import "LokaliteStream.h"
 
+#import "LokaliteObject+GeneralHelpers.h"
+#import "LokaliteDownloadSource.h"
+
 #import "LokaliteService.h"
 
 #import "Event.h"
@@ -25,6 +28,7 @@
 @implementation LokaliteStream
 
 @synthesize baseUrl = baseUrl_;
+@synthesize downloadSource = downloadSource_;
 @synthesize context = context_;
 
 @synthesize objectsPerPage = objectsPerPage_;
@@ -41,6 +45,7 @@
 - (void)dealloc
 {
     [baseUrl_ release];
+    [downloadSource_ release];
     [context_ release];
 
     [email_ release];
@@ -53,11 +58,14 @@
 
 #pragma mark - Initialization
 
-- (id)initWithBaseUrl:(NSURL *)url context:(NSManagedObjectContext *)context
+- (id)initWithBaseUrl:(NSURL *)url
+       downloadSource:(LokaliteDownloadSource *)source
+              context:(NSManagedObjectContext *)context
 {
     self = [super init];
     if (self) {
         baseUrl_ = [url copy];
+        downloadSource_ = [source retain];
         context_ = [context retain];
 
         objectsPerPage_ = [[self class] defaultObjectsPerPage];
@@ -91,6 +99,10 @@
      ^(NSArray *objects, NSError *error) {
          ++pagesFetched_;
          hasMorePages_ = [objects count] == [self objectsPerPage];
+
+         LokaliteDownloadSource *source = [self downloadSource];
+         [source setLastUpdated:[NSDate date]];
+
          handler(objects, error);
      }];
 }
@@ -133,15 +145,32 @@
 @end
 
 
+#import "LokaliteDownloadSource+GeneralHelpers.h"
 #import "UIApplication+GeneralHelpers.h"
 #import <CoreData/CoreData.h>
 
 @implementation LokaliteStream (InstantiationHelpers)
 
-+ (id)streamWithContext:(NSManagedObjectContext *)context
++ (id)streamWithDownloadSourceName:(NSString *)sourceName
+                           context:(NSManagedObjectContext *)context
+{
+    LokaliteDownloadSource *source =
+        [LokaliteDownloadSource downloadSourceWithName:sourceName
+                                             inContext:context
+                                     createIfNecessary:YES];
+
+    return [self streamWithDownloadSource:source context:context];
+}
+
+//+ (id)streamWithDownloadSourceName:(NSString *)downloadSourceName
++ (id)streamWithDownloadSource:(LokaliteDownloadSource *)source
+                       context:(NSManagedObjectContext *)context
 {
     NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
-    id obj = [[self alloc] initWithBaseUrl:baseUrl context:context];
+    id obj = [[self alloc] initWithBaseUrl:baseUrl
+                            downloadSource:source
+//                        downloadSourceName:downloadSourceName
+                                   context:context];
 
     return [obj autorelease];
 }

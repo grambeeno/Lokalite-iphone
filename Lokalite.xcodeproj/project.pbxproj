@@ -138,9 +138,12 @@
 		05A7B41D13D731F6008E737C /* Category+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A7B41C13D731F6008E737C /* Category+GeneralHelpers.m */; };
 		05B1577213E269CC00F20FF8 /* event-cell-trend-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B1577013E269CC00F20FF8 /* event-cell-trend-badge.png */; };
 		05B1577313E269CC00F20FF8 /* event-cell-trend-badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B1577113E269CC00F20FF8 /* event-cell-trend-badge@2x.png */; };
-		05B91DC913EB439C00E3A898 /* LokaliteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DC813EB439C00E3A898 /* LokaliteObject.m */; };
 		05B91DCD13EB4F5900E3A898 /* LokaliteApplicationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DCC13EB4F5900E3A898 /* LokaliteApplicationState.m */; };
 		05B91DD013EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DCF13EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.m */; };
+		05B91DD913EC475800E3A898 /* LokaliteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DD813EC475800E3A898 /* LokaliteObject.m */; };
+		05B91DDC13EC478000E3A898 /* LokaliteDownloadSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DDB13EC478000E3A898 /* LokaliteDownloadSource.m */; };
+		05B91DDF13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DDE13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m */; };
+		05B91DE213EC51AB00E3A898 /* LokaliteDownloadSource+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DE113EC51AA00E3A898 /* LokaliteDownloadSource+GeneralHelpers.m */; };
 		05BC9C0213E9A41B00FBAD23 /* AllEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BC9C0113E9A41B00FBAD23 /* AllEventsViewController.m */; };
 		05BC9C0513E9A43000FBAD23 /* AllEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BC9C0413E9A43000FBAD23 /* AllEventsView.xib */; };
 		05BC9C0D13E9BFD700FBAD23 /* standard-button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BC9C0B13E9BFD700FBAD23 /* standard-button-background@2x.png */; };
@@ -359,12 +362,18 @@
 		05A7B41C13D731F6008E737C /* Category+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Category+GeneralHelpers.m"; path = "src/categories/Category+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05B1577013E269CC00F20FF8 /* event-cell-trend-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-trend-badge.png"; path = "images/events/event-cell-trend-badge.png"; sourceTree = "<group>"; };
 		05B1577113E269CC00F20FF8 /* event-cell-trend-badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-trend-badge@2x.png"; path = "images/events/event-cell-trend-badge@2x.png"; sourceTree = "<group>"; };
-		05B91DC713EB439C00E3A898 /* LokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObject.h; path = src/lokalite/LokaliteObject.h; sourceTree = "<group>"; };
-		05B91DC813EB439C00E3A898 /* LokaliteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteObject.m; path = src/lokalite/LokaliteObject.m; sourceTree = "<group>"; };
 		05B91DCB13EB4F5900E3A898 /* LokaliteApplicationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteApplicationState.h; path = src/application/LokaliteApplicationState.h; sourceTree = "<group>"; };
 		05B91DCC13EB4F5900E3A898 /* LokaliteApplicationState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteApplicationState.m; path = src/application/LokaliteApplicationState.m; sourceTree = "<group>"; };
 		05B91DCE13EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteApplicationState+GeneralHelpers.h"; path = "src/application/LokaliteApplicationState+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05B91DCF13EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LokaliteApplicationState+GeneralHelpers.m"; path = "src/application/LokaliteApplicationState+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05B91DD713EC475800E3A898 /* LokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObject.h; path = src/lokalite/LokaliteObject.h; sourceTree = "<group>"; };
+		05B91DD813EC475800E3A898 /* LokaliteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteObject.m; path = src/lokalite/LokaliteObject.m; sourceTree = "<group>"; };
+		05B91DDA13EC478000E3A898 /* LokaliteDownloadSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteDownloadSource.h; path = src/lokalite/LokaliteDownloadSource.h; sourceTree = "<group>"; };
+		05B91DDB13EC478000E3A898 /* LokaliteDownloadSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteDownloadSource.m; path = src/lokalite/LokaliteDownloadSource.m; sourceTree = "<group>"; };
+		05B91DDD13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteObject+GeneralHelpers.h"; path = "src/lokalite/LokaliteObject+GeneralHelpers.h"; sourceTree = "<group>"; };
+		05B91DDE13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LokaliteObject+GeneralHelpers.m"; path = "src/lokalite/LokaliteObject+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05B91DE013EC51AA00E3A898 /* LokaliteDownloadSource+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteDownloadSource+GeneralHelpers.h"; path = "src/lokalite/LokaliteDownloadSource+GeneralHelpers.h"; sourceTree = "<group>"; };
+		05B91DE113EC51AA00E3A898 /* LokaliteDownloadSource+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LokaliteDownloadSource+GeneralHelpers.m"; path = "src/lokalite/LokaliteDownloadSource+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05BC9C0013E9A41B00FBAD23 /* AllEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllEventsViewController.h; path = src/events/AllEventsViewController.h; sourceTree = "<group>"; };
 		05BC9C0113E9A41B00FBAD23 /* AllEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllEventsViewController.m; path = src/events/AllEventsViewController.m; sourceTree = "<group>"; };
 		05BC9C0413E9A43000FBAD23 /* AllEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AllEventsView.xib; path = src/events/AllEventsView.xib; sourceTree = "<group>"; };
@@ -451,9 +460,15 @@
 		0505ECCD13CBC13E009874A7 /* lokalite */ = {
 			isa = PBXGroup;
 			children = (
-				05B91DC713EB439C00E3A898 /* LokaliteObject.h */,
-				05B91DC813EB439C00E3A898 /* LokaliteObject.m */,
+				05B91DD713EC475800E3A898 /* LokaliteObject.h */,
+				05B91DD813EC475800E3A898 /* LokaliteObject.m */,
+				05B91DDD13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.h */,
+				05B91DDE13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m */,
 				0530CEE813E8C20700601BFB /* MappableLokaliteObject.h */,
+				05B91DDA13EC478000E3A898 /* LokaliteDownloadSource.h */,
+				05B91DDB13EC478000E3A898 /* LokaliteDownloadSource.m */,
+				05B91DE013EC51AA00E3A898 /* LokaliteDownloadSource+GeneralHelpers.h */,
+				05B91DE113EC51AA00E3A898 /* LokaliteDownloadSource+GeneralHelpers.m */,
 				05194D4813CCAC8200EE14F8 /* LokaliteService.h */,
 				05194D4913CCAC8200EE14F8 /* LokaliteService.m */,
 				0505ECD213CBC2ED009874A7 /* LokaliteServiceRequest.h */,
@@ -1190,9 +1205,12 @@
 				056413CA13EB3930003E5C95 /* Location.m in Sources */,
 				056413CD13EB3950003E5C95 /* Venue.m in Sources */,
 				056413D013EB399B003E5C95 /* Event.m in Sources */,
-				05B91DC913EB439C00E3A898 /* LokaliteObject.m in Sources */,
 				05B91DCD13EB4F5900E3A898 /* LokaliteApplicationState.m in Sources */,
 				05B91DD013EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.m in Sources */,
+				05B91DD913EC475800E3A898 /* LokaliteObject.m in Sources */,
+				05B91DDC13EC478000E3A898 /* LokaliteDownloadSource.m in Sources */,
+				05B91DDF13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m in Sources */,
+				05B91DE213EC51AB00E3A898 /* LokaliteDownloadSource+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

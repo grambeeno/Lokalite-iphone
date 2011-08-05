@@ -8,9 +8,12 @@
 
 #import "Venue.h"
 
+@class LokaliteDownloadSource;
+
 @interface Venue (GeneralHelpers)
 
 + (id)existingOrNewVenueFromJsonData:(NSDictionary *)jsonData
+                      downloadSource:(LokaliteDownloadSource *)source
                            inContext:(NSManagedObjectContext *)context;
 
 @end

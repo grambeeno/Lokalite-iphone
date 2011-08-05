@@ -19,6 +19,11 @@
 #import "Category.h"
 #import "Category+GeneralHelpers.h"
 
+#import "LokaliteDownloadSource.h"
+#import "LokaliteDownloadSource+GeneralHelpers.h"
+
+#import "NSPredicate+GeneralHelpers.h"
+
 #import "SDKAdditions.h"
 
 @implementation Event (GeneralHelpers)
@@ -29,40 +34,48 @@
 }
 
 + (NSArray *)eventObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                          downloadSource:(LokaliteDownloadSource *)source
                              withContext:(NSManagedObjectContext *)context
 {
+    /*
+    NSDictionary *apiParams = [jsonObjects objectForKey:@"params"];
+    LokaliteDownloadSource *source =
+        [LokaliteDownloadSource downloadSourceFromAPIParams:apiParams
+                                                  inContext:context];
+     */
+
     NSArray *objs = [[jsonObjects objectForKey:@"data"] objectForKey:@"list"];
-    NSArray *events =
-        [LokaliteObjectBuilder createOrUpdateEventsInJsonArray:objs
-                                                     inContext:context];
+    NSArray *events = [self createOrUpdateEventsFromJsonArray:objs
+                                               downloadSource:source
+                                                    inContext:context];
+
     return events;
 }
 
-+ (NSArray *)replaceObjectsFromJsonObjects:(NSDictionary *)jsonObjects
-                                 inContext:(NSManagedObjectContext *)context
++ (NSArray *)createOrUpdateEventsFromJsonArray:(NSArray *)jsonObjects
+                                downloadSource:(LokaliteDownloadSource *)source
+                                     inContext:(NSManagedObjectContext *)context
 {
-    NSArray *objs = [[jsonObjects objectForKey:@"data"] objectForKey:@"list"];
-    NSArray *events =
-        [LokaliteObjectBuilder createOrUpdateEventsInJsonArray:objs
+    NSMutableArray *events =
+        [NSMutableArray arrayWithCapacity:[jsonObjects count]];
+    [jsonObjects enumerateObjectsUsingBlock:
+     ^(NSDictionary *eventData, NSUInteger idx, BOOL *stop) {
+         Event *event = [Event createOrUpdateEventFromJsonData:eventData
+                                                downloadSource:source
                                                      inContext:context];
-
-    NSArray *all = [Event findAllInContext:context];
-    [LokaliteObjectBuilder replaceLokaliteObjects:all
-                                      withObjects:events
-                                  usingValueOfKey:@"identifier"
-                                 remainingHandler:
-     ^(Event *remainingObject) {
-         [context deleteObject:remainingObject];
+         [events addObject:event];
      }];
 
     return events;
 }
 
 + (id)createOrUpdateEventFromJsonData:(NSDictionary *)eventData
+                       downloadSource:(LokaliteDownloadSource *)source
                             inContext:(NSManagedObjectContext *)context
 {
     NSDictionary *bData = [eventData objectForKey:@"organization"];
     Business *business = [Business createOrUpdateBusinessFromJsonData:bData
+                                                       downloadSource:source
                                                             inContext:context];
 
     NSNumber *eventId = [eventData objectForKey:@"id"];
@@ -71,7 +84,7 @@
     Event *event = [self existingOrNewInstanceWithIdentifier:eventId
                                                    inContext:context];
 
-    [event setLastUpdated:[NSDate date]];
+    [event addDownloadSourcesObject:source];
     [event setBusiness:business];
 
     [event setValueIfNecessary:name forKey:@"name"];
@@ -103,16 +116,62 @@
 
     NSDictionary *venueData = [eventData objectForKey:@"venue"];
     Venue *venue = [Venue existingOrNewVenueFromJsonData:venueData
+                                          downloadSource:source
                                                inContext:context];
     [event setVenue:venue];
 
     NSDictionary *categoryData = [eventData objectForKey:@"category"];
     Category *category =
         [Category existingOrNewCategoryFromJsonData:categoryData
+                                     downloadSource:source
                                           inContext:context];
     [event setCategory:category];
 
     return event;
+}
+
++ (NSArray *)replaceObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                            downloadSource:(LokaliteDownloadSource *)source
+                                 inContext:(NSManagedObjectContext *)context
+{
+    NSArray *objs = [[jsonObjects objectForKey:@"data"] objectForKey:@"list"];
+    NSArray *events = [self createOrUpdateEventsFromJsonArray:objs
+                                               downloadSource:source
+                                                    inContext:context];
+
+    NSArray *all = [Event findAllInContext:context];
+    [LokaliteObjectBuilder replaceLokaliteObjects:all
+                                      withObjects:events
+                                  usingValueOfKey:@"identifier"
+                                 remainingHandler:
+     ^(Event *remainingObject) {
+         [context deleteObject:remainingObject];
+     }];
+
+    return events;
+}
+
++ (NSPredicate *)predicateForSearchString:(NSString *)searchString
+                            includeEvents:(BOOL)includeEvents
+                        includeBusinesses:(BOOL)includeBusinesses
+{
+    NSMutableArray *attributes = [NSMutableArray array];
+
+    if (includeEvents) {
+        [attributes addObjectsFromArray:
+         [NSArray arrayWithObjects:@"name", /*@"summary",*/ nil]];
+        NSLog(@"including events");
+    }
+
+    if (includeBusinesses) {
+        [attributes addObjectsFromArray:
+         [NSArray arrayWithObjects:@"business.name", /*@"business.status",
+          @"business.summary",*/ nil]];
+        NSLog(@"including businesses");
+    }
+
+    return [NSPredicate standardSearchPredicateForSearchString:searchString
+                                             attributeKeyPaths:attributes];
 }
 
 #pragma mark - Object lifecycle
@@ -145,8 +204,6 @@
 #import "Venue.h"
 #import "Location.h"
 
-#import "NSPredicate+GeneralHelpers.h"
-
 @implementation Event (ConvenienceMethods)
 
 - (NSString *)dateStringDescription
@@ -174,27 +231,8 @@
     return [baseUrl URLByAppendingPathComponent:urlPath];
 }
 
-+ (NSPredicate *)predicateForSearchString:(NSString *)searchString
-                            includeEvents:(BOOL)includeEvents
-                        includeBusinesses:(BOOL)includeBusinesses
+- (void)setLastUpdatedDate:(NSDate *)date forDownloadSource:(NSString *)source
 {
-    NSMutableArray *attributes = [NSMutableArray array];
-
-    if (includeEvents) {
-        [attributes addObjectsFromArray:
-         [NSArray arrayWithObjects:@"name", /*@"summary",*/ nil]];
-        NSLog(@"including events");
-    }
-
-    if (includeBusinesses) {
-        [attributes addObjectsFromArray:
-         [NSArray arrayWithObjects:@"business.name", /*@"business.status",
-          @"business.summary",*/ nil]];
-        NSLog(@"including businesses");
-    }
-
-    return [NSPredicate standardSearchPredicateForSearchString:searchString
-                                             attributeKeyPaths:attributes];
 }
 
 @end

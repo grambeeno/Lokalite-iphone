@@ -161,12 +161,11 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         ^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
             NSInteger statusCode = [response statusCode];
             if (statusCode == 200) {
-                NSLog(@"%@", json);
                 json = [json objectForKey:@"data"];
                 NSManagedObjectContext *context = [event managedObjectContext];
-                Event *e = [Event createOrUpdateEventFromJsonData:json inContext:context];
-                NSLog(@"Trended state: %@", [event trended]);
-                NSLog(@"Trended new event: %@", [e trended]);
+                [Event createOrUpdateEventFromJsonData:json
+                                        downloadSource:nil
+                                             inContext:context];
             } else {
                 if (!error)
                     error = [NSError errorForHTTPStatusCode:statusCode];

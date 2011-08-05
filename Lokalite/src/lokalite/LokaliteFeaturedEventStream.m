@@ -27,17 +27,27 @@
          if (jsonObjects) {
              parsedObjects =
                 [Event eventObjectsFromJsonObjects:jsonObjects
+                                    downloadSource:[self downloadSource]
                                        withContext:[self context]];
 
              NSNumber *yes = [NSNumber numberWithBool:YES];
-             [parsedObjects enumerateObjectsUsingBlock:
-              ^(Event *event, NSUInteger idx, BOOL *stop) {
-                 [event setFeatured:yes];
-              }];
+             [parsedObjects makeObjectsPerformSelector:@selector(setFeatured:)
+                                            withObject:yes];
          }
 
          handler(parsedObjects, error);
      }];
+}
+
+@end
+
+
+@implementation LokaliteFeaturedEventStream (InstantiationHelpers)
+
++ (id)streamWithContext:(NSManagedObjectContext *)context
+{
+    NSString *name = @"events?category=featured";
+    return [self streamWithDownloadSourceName:name context:context];
 }
 
 @end

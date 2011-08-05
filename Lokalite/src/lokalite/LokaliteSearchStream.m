@@ -29,9 +29,13 @@
 
 #pragma mark - Initialization
 
-- (id)initWithBaseUrl:(NSURL *)url context:(NSManagedObjectContext *)context
+- (id)initWithBaseUrl:(NSURL *)url
+       downloadSource:(LokaliteDownloadSource *)downloadSource
+              context:(NSManagedObjectContext *)context
 {
-    self = [super initWithBaseUrl:url context:context];
+    self = [super initWithBaseUrl:url
+                   downloadSource:downloadSource
+                          context:context];
     if (self) {
         includeEvents_ = YES;
         includeBusinesses_ = YES;
@@ -53,8 +57,10 @@
      ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
          if (jsonObjects)
-             parsedObjects = [Event eventObjectsFromJsonObjects:jsonObjects
-                                                    withContext:[self context]];
+             parsedObjects =
+                [Event eventObjectsFromJsonObjects:jsonObjects
+                                    downloadSource:[self downloadSource]
+                                       withContext:[self context]];
 
          handler(parsedObjects, error);
 

@@ -8,6 +8,8 @@
 
 #import "Venue+GeneralHelpers.h"
 
+#import "LokaliteDownloadSource.h"
+
 #import "Location.h"
 #import "Location+GeneralHelpers.h"
 
@@ -16,16 +18,18 @@
 @implementation Venue (GeneralHelpers)
 
 + (id)existingOrNewVenueFromJsonData:(NSDictionary *)jsonData
+                      downloadSource:(LokaliteDownloadSource *)source
                            inContext:(NSManagedObjectContext *)context
 {
     NSNumber *venueId = [jsonData objectForKey:@"id"];
     Venue *venue = [self existingOrNewInstanceWithIdentifier:venueId
                                                    inContext:context];
-    [venue setLastUpdated:[NSDate date]];
+    [venue addDownloadSourcesObject:source];
 
     NSDictionary *locationData = [jsonData objectForKey:@"location"];
     Location *location =
         [Location existingOrNewLocationFromJsonData:locationData
+                                     downloadSource:source
                                           inContext:context];
     [venue setLocation:location];
 

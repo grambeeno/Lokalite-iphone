@@ -191,8 +191,11 @@ enum {
 - (LokaliteSearchStream *)stream
 {
     if (!stream_) {
-        stream_ = [LokaliteSearchStream streamWithContext:[self context]];
-        [stream_ retain];
+        NSAssert(0, @"Not implemented");
+        stream_ =
+            [[LokaliteSearchStream streamWithDownloadSourceName:nil
+                                                        context:[self context]]
+             retain];
     }
 
     return stream_;

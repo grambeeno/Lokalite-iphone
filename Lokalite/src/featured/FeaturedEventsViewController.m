@@ -138,11 +138,10 @@
 
 - (NSPredicate *)dataControllerPredicate
 {
-    NSDate *date =
-        [[LokaliteApplicationState currentState:[self context]]
-         dataFreshnessDate];
+    LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
+
     return [NSPredicate predicateWithFormat:
-            @"lastUpdated >= %@ AND featured == YES", date];
+            @"featured == YES AND ANY downloadSources == %@", source];
 }
 
 - (NSArray *)dataControllerSortDescriptors

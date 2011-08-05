@@ -8,11 +8,14 @@
 
 #import "Category+GeneralHelpers.h"
 
+#import "LokaliteDownloadSource.h"
+
 #import "SDKAdditions.h"
 
 @implementation Category (GeneralHelpers)
 
 + (id)existingOrNewCategoryFromJsonData:(NSDictionary *)jsonData
+                         downloadSource:(LokaliteDownloadSource *)source
                               inContext:(NSManagedObjectContext *)context
 {
     NSNumber *identifier = [jsonData objectForKey:@"id"];
@@ -23,7 +26,7 @@
         [category setIdentifier:identifier];
     }
 
-    [category setLastUpdated:[NSDate date]];
+    [category addDownloadSourcesObject:source];
 
     NSString *name = [jsonData objectForKey:@"name"];
     [category setValueIfNecessary:name forKey:@"name"];

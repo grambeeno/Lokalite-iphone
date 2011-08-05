@@ -8,18 +8,35 @@
 
 #import "Event.h"
 
+@class LokaliteDownloadSource;
+
 @interface Event (GeneralHelpers)
 
 + (id)eventWithId:(NSNumber *)eventId inContext:(NSManagedObjectContext *)moc;
 
 + (NSArray *)eventObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                          downloadSource:(LokaliteDownloadSource *)source
                              withContext:(NSManagedObjectContext *)context;
 
++ (NSArray *)createOrUpdateEventsFromJsonArray:(NSArray *)jsonObjects
+                                downloadSource:(LokaliteDownloadSource *)source
+                                     inContext:(NSManagedObjectContext *)context;
+
 + (id)createOrUpdateEventFromJsonData:(NSDictionary *)eventData
+                       downloadSource:(LokaliteDownloadSource *)source
                             inContext:(NSManagedObjectContext *)context;
 
 + (NSArray *)replaceObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                            downloadSource:(LokaliteDownloadSource *)source
                                  inContext:(NSManagedObjectContext *)context;
+
+//
+// Get the predicate for a search string
+//
+
++ (NSPredicate *)predicateForSearchString:(NSString *)searchString
+                            includeEvents:(BOOL)includeEvents
+                        includeBusinesses:(BOOL)includeBusinesses;
 
 @end
 
@@ -35,14 +52,7 @@
 - (UIImage *)image;
 - (NSURL *)fullImageUrl;
 
-
-//
-// Get the predicate for a search string
-//
-
-+ (NSPredicate *)predicateForSearchString:(NSString *)searchString
-                            includeEvents:(BOOL)includeEvents
-                        includeBusinesses:(BOOL)includeBusinesses;
+- (void)setLastUpdatedDate:(NSDate *)date forDownloadSource:(NSString *)source;
 
 @end
 

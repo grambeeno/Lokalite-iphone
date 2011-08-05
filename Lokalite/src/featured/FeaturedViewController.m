@@ -487,10 +487,10 @@
 - (LokaliteStream *)stream
 {
     if (!stream_) {
-        NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
         NSManagedObjectContext *moc = [self context];
-        stream_ = [[LokaliteFeaturedEventStream alloc] initWithBaseUrl:baseUrl
-                                                               context:moc];
+        stream_ = [[LokaliteFeaturedEventStream streamWithContext:moc] retain];
+        //stream_ = [[LokaliteFeaturedEventStream alloc] initWithBaseUrl:baseUrl
+        //                                                       context:moc];
     }
 
     return stream_;

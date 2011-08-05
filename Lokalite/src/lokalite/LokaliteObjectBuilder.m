@@ -30,6 +30,7 @@
                                                             inContext:moc];
 }
 
+/*
 + (NSArray *)createOrUpdateEventsInJsonArray:(NSArray *)jsonObjects
                                    inContext:(NSManagedObjectContext *)context
 {
@@ -74,6 +75,7 @@
 
     return events;
 }
+*/
 
 @end
 

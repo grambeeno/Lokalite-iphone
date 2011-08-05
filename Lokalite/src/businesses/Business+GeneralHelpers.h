@@ -8,15 +8,16 @@
 
 #import "Business.h"
 
+@class LokaliteDownloadSource;
+
 @interface Business (GeneralHelpers)
 
-+ (id)businessWithId:(NSNumber *)businessId
-           inContext:(NSManagedObjectContext *)context;
-
 + (id)createOrUpdateBusinessFromJsonData:(NSDictionary *)businessData
+                          downloadSource:(LokaliteDownloadSource *)source
                                inContext:(NSManagedObjectContext *)context;
 
 + (NSArray *)businessObjectsFromJsonObjects:(NSDictionary *)jsonObjects
+                             downloadSource:(LokaliteDownloadSource *)source
                                 withContext:(NSManagedObjectContext *)context;
 
 @end

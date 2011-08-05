@@ -28,6 +28,7 @@
              NSManagedObjectContext *context = [self context];
              parsedObjects =
                 [Business businessObjectsFromJsonObjects:jsonObjects
+                                          downloadSource:[self downloadSource]
                                              withContext:context];
          }
 
@@ -38,3 +39,16 @@
 }
 
 @end
+
+
+
+@implementation LokalitePlacesStream (InstantiationHelpers)
+
++ (id)streamWithContext:(NSManagedObjectContext *)context
+{
+    NSString *name = @"places";
+    return [self streamWithDownloadSourceName:name context:context];
+}
+
+@end
+

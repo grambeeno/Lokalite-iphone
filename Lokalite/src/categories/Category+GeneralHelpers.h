@@ -8,9 +8,12 @@
 
 #import "Category.h"
 
+@class LokaliteDownloadSource;
+
 @interface Category (GeneralHelpers)
 
 + (id)existingOrNewCategoryFromJsonData:(NSDictionary *)jsonData
+                         downloadSource:(LokaliteDownloadSource *)source
                               inContext:(NSManagedObjectContext *)context;
 
 @end

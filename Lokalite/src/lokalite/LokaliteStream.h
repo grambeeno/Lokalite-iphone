@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class NSManagedObjectContext;
-@class LokaliteService;
+@class LokaliteService, LokaliteDownloadSource;
 
 typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 
 @interface LokaliteStream : NSObject
 
 @property (nonatomic, copy, readonly) NSURL *baseUrl;
+@property (nonatomic, retain, readonly) LokaliteDownloadSource *downloadSource;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *context;
 
 @property (nonatomic, assign) NSUInteger objectsPerPage;
@@ -29,7 +31,9 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 
 #pragma mark - Initialization
 
-- (id)initWithBaseUrl:(NSURL *)url context:(NSManagedObjectContext *)context;
+- (id)initWithBaseUrl:(NSURL *)url
+       downloadSource:(LokaliteDownloadSource *)source
+              context:(NSManagedObjectContext *)context;
 
 #pragma mark - Making authenticated requests
 
@@ -57,6 +61,10 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 
 @interface LokaliteStream (InstantiationHelpers)
 
-+ (id)streamWithContext:(NSManagedObjectContext *)context;
++ (id)streamWithDownloadSourceName:(NSString *)sourceName
+                           context:(NSManagedObjectContext *)context;
+
++ (id)streamWithDownloadSource:(LokaliteDownloadSource *)downloadSource
+                       context:(NSManagedObjectContext *)context;
 
 @end

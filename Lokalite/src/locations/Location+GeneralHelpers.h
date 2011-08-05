@@ -8,9 +8,12 @@
 
 #import "Location.h"
 
+@class LokaliteDownloadSource;
+
 @interface Location (GeneralHelpers)
 
 + (id)existingOrNewLocationFromJsonData:(NSDictionary *)jsonData
+                         downloadSource:(LokaliteDownloadSource *)source
                               inContext:(NSManagedObjectContext *)context;
 
 @end

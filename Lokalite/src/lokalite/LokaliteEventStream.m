@@ -27,8 +27,10 @@
      ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
          if (jsonObjects)
-             parsedObjects = [Event eventObjectsFromJsonObjects:jsonObjects
-                                                    withContext:[self context]];
+             parsedObjects =
+                [Event eventObjectsFromJsonObjects:jsonObjects
+                                    downloadSource:[self downloadSource]
+                                       withContext:[self context]];
 
          handler(parsedObjects, error);
 
@@ -36,5 +38,16 @@
      }];
 }
 
+
+@end
+
+
+@implementation LokaliteEventStream (InstantiationHelpers)
+
++ (id)streamWithContext:(NSManagedObjectContext *)context
+{
+    NSString *name = @"events";
+    return [self streamWithDownloadSourceName:name context:context];
+}
 
 @end
