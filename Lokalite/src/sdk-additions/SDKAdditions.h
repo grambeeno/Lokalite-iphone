@@ -18,6 +18,7 @@
 #import "NSURL+GeneralHelpers.h"
 #import "NSError+GeneralHelpers.h"
 #import "NSArray+GeneralHelpers.h"
+#import "NSPredicate+GeneralHelpers.h"
 
 
 //

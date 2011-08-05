@@ -10,6 +10,13 @@
 
 @implementation NSPredicate (GeneralHelpers)
 
++ (NSPredicate *)predicateForDownloadSourceName:(NSString *)name
+                                lastUpdatedDate:(NSDate *)date
+{
+    return [NSPredicate predicateWithFormat:@"ANY downloadSources.name == %@ "
+            "AND ANY downloadSources.lastUpdated >= %@", name, date];
+}
+
 + (NSPredicate *)standardSearchPredicateForSearchString:(NSString *)searchString
                                       attributeKeyPaths:(NSArray *)keyPaths
 {

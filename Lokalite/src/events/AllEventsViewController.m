@@ -142,11 +142,14 @@
 
 - (NSPredicate *)dataControllerPredicate
 {
+    NSManagedObjectContext *context = [self context];
     NSDate *date =
-    [[LokaliteApplicationState currentState:[self context]]
-     dataFreshnessDate];
+        [[LokaliteApplicationState currentState:context] dataFreshnessDate];
+    LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
+    NSString *sourceName = [source name];
 
-    return [NSPredicate predicateWithFormat:@"lastUpdated >= %@", date];
+    return [NSPredicate predicateForDownloadSourceName:sourceName
+                                       lastUpdatedDate:date];
 }
 
 - (NSArray *)dataControllerSortDescriptors

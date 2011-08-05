@@ -10,6 +10,9 @@
 
 @interface NSPredicate (GeneralHelpers)
 
++ (NSPredicate *)predicateForDownloadSourceName:(NSString *)name
+                                lastUpdatedDate:(NSDate *)date;
+
 //
 // Given a non-empty search string, returns an NSPredicate instance that will
 // perform standard (case-insensitive, non-diacritic) text search for the

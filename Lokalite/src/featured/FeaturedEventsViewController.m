@@ -138,10 +138,20 @@
 
 - (NSPredicate *)dataControllerPredicate
 {
+    NSManagedObjectContext *context = [self context];
+    NSDate *date =
+        [[LokaliteApplicationState currentState:context] dataFreshnessDate];
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
+    NSString *sourceName = [source name];
 
-    return [NSPredicate predicateWithFormat:
-            @"featured == YES AND ANY downloadSources == %@", source];
+    NSPredicate *all =
+        [NSPredicate predicateForDownloadSourceName:sourceName
+                                    lastUpdatedDate:date];
+    NSPredicate *featured =
+        [NSPredicate predicateWithFormat:@"featured == YES"];
+    NSArray *subpredicates = [NSArray arrayWithObjects:featured, all, nil];
+
+    return [NSCompoundPredicate andPredicateWithSubpredicates:subpredicates];
 }
 
 - (NSArray *)dataControllerSortDescriptors
