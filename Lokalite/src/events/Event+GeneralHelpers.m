@@ -218,6 +218,12 @@
     return trended ? [trended boolValue] : NO;
 }
 
+- (BOOL)isFeatured
+{
+    NSNumber *featured = [self featured];
+    return [featured boolValue];
+}
+
 - (UIImage *)image
 {
     NSData *data = [self imageData];

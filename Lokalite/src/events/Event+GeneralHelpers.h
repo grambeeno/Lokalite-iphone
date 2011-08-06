@@ -48,6 +48,7 @@
 - (NSString *)dateStringDescription;
 
 - (BOOL)isTrended;
+- (BOOL)isFeatured;
 
 - (UIImage *)image;
 - (NSURL *)fullImageUrl;
