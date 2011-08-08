@@ -260,3 +260,18 @@
 
 @end
 
+
+@implementation Event (ViewControllerHelpers)
+
++ (NSArray *)defaultTableViewSortDescriptors
+{
+    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"endDate"
+                                                          ascending:YES];
+    NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                          ascending:YES];
+
+    return [NSArray arrayWithObjects:sd1, sd2, nil];
+}
+
+@end
+

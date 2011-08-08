@@ -12,6 +12,8 @@
 
 @interface Event (GeneralHelpers)
 
+#pragma mark - Creating and finding events
+
 + (id)eventWithId:(NSNumber *)eventId inContext:(NSManagedObjectContext *)moc;
 
 + (NSArray *)eventObjectsFromJsonObjects:(NSDictionary *)jsonObjects
@@ -65,5 +67,13 @@
 // to get a CLLocation object.
 //
 - (CLLocation *)location;
+
+@end
+
+
+
+@interface Event (ViewControllerHelpers)
+
++ (NSArray *)defaultTableViewSortDescriptors;
 
 @end
