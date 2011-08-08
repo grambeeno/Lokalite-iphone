@@ -662,6 +662,10 @@
     //    [[self tableView] reloadData];
     //}
 
+    NSLog(@"Number of objects on page %d: %d", pageNumber, [objects count]);
+    NSLog(@"Total number of objects: %d",
+          [[[self dataController] fetchedObjects] count]);
+
     if ([[self lokaliteStream] hasMorePages] && pageNumber == 1)
         [[self tableView] setTableFooterView:[self loadingMoreActivityView]];
     else

@@ -1019,6 +1019,7 @@
 		05209ECF13C76F9200CA6A2D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = Lokalite;
 			};
 			buildConfigurationList = 05209ED213C76F9200CA6A2D /* Build configuration list for PBXProject "Lokalite" */;

@@ -140,71 +140,24 @@
     return @"Event";
 }
 
+#import "LokaliteDownloadSource.h"
+
 - (NSPredicate *)dataControllerPredicate
 {
     NSManagedObjectContext *context = [self context];
     NSDate *date =
         [[LokaliteApplicationState currentState:context] dataFreshnessDate];
-    NSLog(@"Freshness date: %@", date);
 
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
     NSString *sourceName = [source name];
 
-    /*
-    NSString *formatString =
-        @"(ALL downloadSources.name == %@) AND (ALL downloadSources.lastUpdated >= %@)";
-
-    NSPredicate *p = [NSPredicate predicateWithFormat:formatString, sourceName, date];
-    NSArray *currentMatches = [Event findAllWithPredicate:p inContext:context];
-    NSLog(@"Freshness date: %@", date);
-    NSLog(@"%d current matches", [currentMatches count]);
-    for (Event *event in currentMatches) {
-        NSLog(@"%@: %@ (%@)", [event identifier], [event name],
-              [event isFeatured] ? @"featured" : @"not featured");
-        NSLog(@"%@", [event downloadSources]);
-    }
-
-    return p;
-     */
-
-    /*
-    return [NSPredicate predicateForDownloadSourceName:sourceName
-                                       lastUpdatedDate:date];
-     */
-
-    NSPredicate *tagPred =
+    NSPredicate *predicate =
         [NSPredicate predicateWithFormat:
-         @"ANY downloadSources.name == %@", sourceName];
-    NSPredicate *datePred =
-        [NSPredicate predicateWithFormat:
-         @"ANY downloadSources.lastUpdated >= %@", date];
-    NSArray *preds = [NSArray arrayWithObjects:tagPred, datePred, nil];
+         @"(SUBQUERY(SELF.downloadSources, $source, "
+           "$source.name == %@ AND $source.lastUpdated >= %@).@count != 0)",
+         sourceName, date];
 
-    NSPredicate *p = [NSCompoundPredicate andPredicateWithSubpredicates:preds];
-
-    void (^print_event)(Event *event) = ^(Event *event) {
-        NSLog(@"%@: %@ (%@)", [event identifier], [event name],
-              [event isFeatured] ? @"featured" : @"not featured");
-        NSLog(@"%@", [event downloadSources]);
-    };
-    void (^print_events)(NSArray *) = ^(NSArray *events) {
-        for (Event *event in events)
-            print_event(event);
-    };
-
-    NSArray *currentMatches = [Event findAllWithPredicate:p inContext:context];
-    NSLog(@"%d current matches", [currentMatches count]);
-    print_events(currentMatches);
-
-    NSArray *tagMatches = [currentMatches filteredArrayUsingPredicate:tagPred];
-    NSLog(@"Objects matching tag predicate: %d", [tagMatches count]);
-    print_events(tagMatches);
-
-    NSArray *dateMatches = [currentMatches filteredArrayUsingPredicate:datePred];
-    NSLog(@"Objects matching date predicate: %d", [dateMatches count]);
-    print_events(dateMatches);
-
-    return p;
+    return predicate;
 }
 
 - (NSArray *)dataControllerSortDescriptors
