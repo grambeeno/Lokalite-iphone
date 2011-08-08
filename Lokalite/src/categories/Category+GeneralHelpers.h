@@ -12,6 +12,10 @@
 
 @interface Category (GeneralHelpers)
 
++ (id)existingOrNewCategoriesFromJsonData:(NSArray *)jsonData
+                           downloadSource:(LokaliteDownloadSource *)source
+                                inContext:(NSManagedObjectContext *)context;
+
 + (id)existingOrNewCategoryFromJsonData:(NSDictionary *)jsonData
                          downloadSource:(LokaliteDownloadSource *)source
                               inContext:(NSManagedObjectContext *)context;

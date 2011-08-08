@@ -2,7 +2,7 @@
 //  Business.m
 //  Lokalite
 //
-//  Created by John Debay on 8/4/11.
+//  Created by John Debay on 8/8/11.
 //  Copyright (c) 2011 Lokalite. All rights reserved.
 //
 
@@ -12,16 +12,16 @@
 
 
 @implementation Business
-@dynamic phone;
-@dynamic summary;
-@dynamic address;
 @dynamic status;
+@dynamic phone;
+@dynamic address;
+@dynamic summary;
 @dynamic imageUrl;
 @dynamic email;
-@dynamic name;
 @dynamic imageData;
+@dynamic name;
 @dynamic url;
-@dynamic category;
+@dynamic categories;
 @dynamic events;
 
 @end

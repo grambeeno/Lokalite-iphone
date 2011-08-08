@@ -27,10 +27,17 @@
 {
     NSManagedObjectContext *context = [self managedObjectContext];
 
-    Category *category = [[self category] retain];
-    [self setCategory:nil];
-    if ([[category events] count] == 0 && [[category businesses] count] == 0)
-        [context deleteObject:category];
+    NSSet *categories = [[self categories] retain];
+    [self setCategories:nil];
+
+    for (Category *category in categories) {
+        BOOL shouldDelete =
+            [[category events] count] == 0 &&
+            [[category businesses] count] == 0;
+
+        if (shouldDelete)
+            [context deleteObject:category];
+    }
 
     [super prepareForDeletion];
 }
@@ -84,12 +91,13 @@
             [business setImageData:nil];
     }
 
-    NSDictionary *categoryData = [businessData objectForKey:@"category"];
-    Category *category =
-        [Category existingOrNewCategoryFromJsonData:categoryData
-                                     downloadSource:source
-                                          inContext:context];
-    [business setCategory:category];
+    NSArray *categoryData = [businessData objectForKey:@"categories"];
+    NSArray *categories =
+        [Category existingOrNewCategoriesFromJsonData:categoryData
+                                       downloadSource:source
+                                            inContext:context];
+    [business removeCategories:[business categories]];
+    [business addCategories:[NSSet setWithArray:categories]];
 
     return business;
 }

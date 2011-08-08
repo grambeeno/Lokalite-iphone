@@ -17,7 +17,8 @@
     NSString *title_, *subtitle_;
 }
 
-@property (nonatomic, retain, readonly) id<MappableLokaliteObject> lokaliteObject;
+@property (nonatomic, retain, readonly)
+    id<MappableLokaliteObject> lokaliteObject;
 
 #pragma mark - Initialization
 

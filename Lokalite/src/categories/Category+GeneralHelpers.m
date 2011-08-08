@@ -14,6 +14,21 @@
 
 @implementation Category (GeneralHelpers)
 
++ (id)existingOrNewCategoriesFromJsonData:(NSArray *)jsonData
+                           downloadSource:(LokaliteDownloadSource *)source
+                                inContext:(NSManagedObjectContext *)context
+{
+    NSArray *categories =
+        [jsonData arrayByMappingArray:
+         ^(NSDictionary *categoryData, NSUInteger idx, BOOL *stop) {
+            return [self existingOrNewCategoryFromJsonData:categoryData
+                                            downloadSource:source
+                                                 inContext:context];
+        }];
+
+    return categories;
+}
+
 + (id)existingOrNewCategoryFromJsonData:(NSDictionary *)jsonData
                          downloadSource:(LokaliteDownloadSource *)source
                               inContext:(NSManagedObjectContext *)context

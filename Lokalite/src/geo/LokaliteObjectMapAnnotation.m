@@ -8,8 +8,8 @@
 
 #import "LokaliteObjectMapAnnotation.h"
 
-#import "Event.h"
-#import "Event+GeneralHelpers.h"
+#import "MappableLokaliteObject.h"
+#import "LokaliteObject.h"
 
 @implementation LokaliteObjectMapAnnotation
 

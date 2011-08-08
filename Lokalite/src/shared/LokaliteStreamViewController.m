@@ -240,18 +240,20 @@
     if ([self tableView] == tableView) {
         id <NSFetchedResultsSectionInfo> sectionInfo =
             [[[self dataController] sections] objectAtIndex:section];
-        nrows = [sectionInfo numberOfObjects] + 1;
+        nrows = [sectionInfo numberOfObjects];
+        if ([self showsCategoryFilter])
+            ++nrows;
     } else
         nrows = [[self searchResults] count];
 
     return nrows;
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath section] == 0 && [indexPath row] == 0)
+    if ([self showsCategoryFilter] &&
+        [indexPath section] == 0 && [indexPath row] == 0)
         return [self categoryFilterCell];
     else {
         NSString *reuseIdentifier = [self reuseIdentifierForIndexPath:indexPath

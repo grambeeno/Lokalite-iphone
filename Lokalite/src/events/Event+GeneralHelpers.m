@@ -120,12 +120,13 @@
                                                inContext:context];
     [event setVenue:venue];
 
-    NSDictionary *categoryData = [eventData objectForKey:@"category"];
-    Category *category =
-        [Category existingOrNewCategoryFromJsonData:categoryData
-                                     downloadSource:source
-                                          inContext:context];
-    [event setCategory:category];
+    NSArray *categoryData = [eventData objectForKey:@"categories"];
+    NSArray *categories =
+        [Category existingOrNewCategoriesFromJsonData:categoryData
+                                       downloadSource:source
+                                            inContext:context];
+    [event removeCategories:[event categories]];
+    [event setCategories:[NSSet setWithArray:categories]];
 
     return event;
 }
@@ -190,14 +191,20 @@
     if ([[venue events] count] == 0)
         [context deleteObject:venue];
 
-    Category *category = [[self category] retain];
-    [self setCategory:nil];
-    if ([[category events] count] == 0 && [[category businesses] count] == 0)
-        [context deleteObject:category];
+    NSSet *categories = [[self categories] retain];
+    [self setCategories:nil];
+    for (Category *category in categories) {
+        BOOL needsDeleting =
+            [[category events] count] == 0 &&
+            [[category businesses] count] == 0;
+
+        if (needsDeleting)
+            [context deleteObject:category];
+    }
 
     [business release], business = nil;
     [venue release], venue = nil;
-    [category release], category = nil;
+    [categories release], categories = nil;
 
     [super prepareForDeletion];
 }
