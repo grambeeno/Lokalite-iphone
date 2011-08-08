@@ -13,8 +13,11 @@
 + (NSPredicate *)predicateForDownloadSourceName:(NSString *)name
                                 lastUpdatedDate:(NSDate *)date
 {
-    return [NSPredicate predicateWithFormat:@"ANY downloadSources.name == %@ "
-            "AND ANY downloadSources.lastUpdated >= %@", name, date];
+    static NSString *format =
+        @"(SUBQUERY(SELF.downloadSources, $source, "
+           "$source.name == %@ AND $source.lastUpdated >= %@).@count != 0)";
+
+    return [NSPredicate predicateWithFormat:format, name, date];
 }
 
 + (NSPredicate *)standardSearchPredicateForSearchString:(NSString *)searchString

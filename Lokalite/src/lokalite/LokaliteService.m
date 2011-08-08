@@ -99,8 +99,11 @@
          [[NSNumber numberWithInteger:page] description], @"page",
          [[NSNumber numberWithInteger:objectsPerPage] description], @"per_page",
          nil];
-    if (category)
-        [params setObject:category forKey:@"category"];
+
+    if (!category)
+        category = @"";
+
+    [params setObject:category forKey:@"category"];
 
     [self sendRequestWithUrl:url
                   parameters:params

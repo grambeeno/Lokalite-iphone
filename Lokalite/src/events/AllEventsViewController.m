@@ -151,13 +151,8 @@
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
     NSString *sourceName = [source name];
 
-    NSPredicate *predicate =
-        [NSPredicate predicateWithFormat:
-         @"(SUBQUERY(SELF.downloadSources, $source, "
-           "$source.name == %@ AND $source.lastUpdated >= %@).@count != 0)",
-         sourceName, date];
-
-    return predicate;
+    return [NSPredicate predicateForDownloadSourceName:sourceName
+                                       lastUpdatedDate:date];
 }
 
 - (NSArray *)dataControllerSortDescriptors

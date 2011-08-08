@@ -13,7 +13,6 @@
 @end
 
 
-
 @interface LokaliteFeaturedEventStream (InstantiationHelpers)
 
 + (id)streamWithContext:(NSManagedObjectContext *)context;

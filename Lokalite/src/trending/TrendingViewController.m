@@ -14,10 +14,11 @@
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 
-#import "LokaliteEventStream.h"
+#import "LokaliteTrendingEventStream.h"
 
 #import "TableViewImageFetcher.h"
 
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
 @interface TrendingViewController ()
@@ -127,6 +128,18 @@
     return @"Event";
 }
 
+- (NSPredicate *)dataControllerPredicate
+{
+    NSManagedObjectContext *context = [self context];
+    NSDate *date =
+        [[LokaliteApplicationState currentState:context] dataFreshnessDate];
+    LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
+    NSString *sourceName = [source name];
+
+    return [NSPredicate predicateForDownloadSourceName:sourceName
+                                       lastUpdatedDate:date];
+}
+
 - (NSArray *)dataControllerSortDescriptors
 {
     return [Event defaultTableViewSortDescriptors];
@@ -134,7 +147,7 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [LokaliteEventStream streamWithContext:[self context]];
+    return [LokaliteTrendingEventStream streamWithContext:[self context]];
 }
 
 #pragma mark Fetching data from the network
