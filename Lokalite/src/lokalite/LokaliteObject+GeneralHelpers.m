@@ -18,13 +18,17 @@
 {
     NSManagedObjectContext *context = [self managedObjectContext];
 
-    NSSet *downloadSources = [self downloadSources];
+    NSSet *downloadSources = [[self downloadSources] copy];
     [downloadSources enumerateObjectsUsingBlock:
      ^(LokaliteDownloadSource *source, BOOL *stop) {
          [source removeLokaliteObjectsObject:self];
-         if ([[source lokaliteObjects] count] == 0)
+         if ([[source lokaliteObjects] count] == 0) {
+             NSLog(@"Deleting download source: %@, %@",
+                   [source name], [source lastUpdated]);
              [context deleteObject:source];
+         }
      }];
+    [downloadSources release], downloadSources = nil;
 
     [super prepareForDeletion];
 }

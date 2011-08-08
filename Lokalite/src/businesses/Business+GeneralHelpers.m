@@ -21,6 +21,22 @@
 
 @implementation Business (GeneralHelpers)
 
+#pragma mark - NSManagedObject implementation
+
+- (void)prepareForDeletion
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+
+    Category *category = [[self category] retain];
+    [self setCategory:nil];
+    if ([[category events] count] == 0 && [[category businesses] count] == 0)
+        [context deleteObject:category];
+
+    [super prepareForDeletion];
+}
+
+#pragma mark - Creating and finding businesses
+
 + (id)createOrUpdateBusinessFromJsonData:(NSDictionary *)businessData
                           downloadSource:(LokaliteDownloadSource *)source
                                inContext:(NSManagedObjectContext *)context

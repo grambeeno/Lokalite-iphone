@@ -190,8 +190,14 @@
     if ([[venue events] count] == 0)
         [context deleteObject:venue];
 
+    Category *category = [[self category] retain];
+    [self setCategory:nil];
+    if ([[category events] count] == 0 && [[category businesses] count] == 0)
+        [context deleteObject:category];
+
     [business release], business = nil;
     [venue release], venue = nil;
+    [category release], category = nil;
 
     [super prepareForDeletion];
 }

@@ -24,6 +24,7 @@
 #import "LokaliteAccount.h"
 #import "Event.h"
 #import "Business.h"
+#import "LokaliteDownloadSource.h"
 
 #import "SDKAdditions.h"
 
@@ -48,11 +49,16 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
 - (void)processAccountAddition:(LokaliteAccount *)account;
 - (void)processAccountDeletion:(LokaliteAccount *)account;
-- (void)deleteAllEventAndBusinessData;
 
 #pragma mark - Persistence management
 
+- (NSDate *)currentFreshnessDate;
 - (void)setDataFreshnessRequirementToDate:(NSDate *)date;
+
+- (void)deleteAllEventAndBusinessData;
+- (void)deleteAllEventAndBusinessDataLessFreshThanDate:(NSDate *)date;
+- (void)deleteStaleData;
+
 - (void)saveContext;
 
 - (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context;
@@ -117,7 +123,10 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setDataFreshnessRequirementToDate:[NSDate date]];
+    NSDate *freshnessDate = [NSDate date];
+    [self setDataFreshnessRequirementToDate:freshnessDate];
+
+    [self deleteStaleData];
 
     [self subscribeForNotificationsForContext:[self context]];
 
@@ -271,21 +280,6 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     //[self deleteAllEventAndBusinessData];
 }
 
-- (void)deleteAllEventAndBusinessData
-{
-    NSManagedObjectContext *context = [self context];
-    void (^deleteObject)(id, NSUInteger, BOOL *) =
-        ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
-            [context deleteObject:obj];
-        };
-
-    NSArray *events = [Event findAllInContext:context];
-    [events enumerateObjectsUsingBlock:deleteObject];
-
-    NSArray *businesses = [Business findAllInContext:context];
-    [businesses enumerateObjectsUsingBlock:deleteObject];
-}
-
 #pragma mark - Persistence management
 
 - (void)managedObjectContextDidChange:(NSNotification *)notification
@@ -328,11 +322,53 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
                 object:context];
 }
 
+- (NSDate *)currentFreshnessDate
+{
+    LokaliteApplicationState *appState =
+        [LokaliteApplicationState currentState:[self context]];
+    return [appState dataFreshnessDate];
+}
+
 - (void)setDataFreshnessRequirementToDate:(NSDate *)date
 {
     LokaliteApplicationState *appState =
         [LokaliteApplicationState currentState:[self context]];
     [appState setDataFreshnessDate:date];
+}
+     
+- (void)deleteAllEventAndBusinessData
+{
+    [self deleteAllEventAndBusinessDataLessFreshThanDate:nil];
+}
+
+- (void)deleteAllEventAndBusinessDataLessFreshThanDate:(NSDate *)date
+{
+    NSManagedObjectContext *context = [self context];
+
+    void (^deleteObject)(id, NSUInteger, BOOL *) =
+        ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+            NSLog(@"Deleting %@ with ID %@: %@", NSStringFromClass([obj class]),
+                  [obj valueForKey:@"identifier"], [obj valueForKey:@"name"]);
+            [context deleteObject:obj];
+        };
+
+    NSPredicate *pred = nil;
+    if (date)
+        [NSPredicate predicateWithFormat:
+         @"(SUBQUERY(downloadSources, $source, "
+           "$source.lastUpdated < %@).@count != 0)", date];
+
+    NSArray *events = [Event findAllWithPredicate:pred inContext:context];
+    [events enumerateObjectsUsingBlock:deleteObject];
+
+    NSArray *businesses = [Business findAllWithPredicate:pred inContext:context];
+    [businesses enumerateObjectsUsingBlock:deleteObject];
+}
+
+- (void)deleteStaleData
+{
+    NSDate *freshnessDate = [self currentFreshnessDate];
+    [self deleteAllEventAndBusinessDataLessFreshThanDate:freshnessDate];
 }
 
 - (void)saveContext
