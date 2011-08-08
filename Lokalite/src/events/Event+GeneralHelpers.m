@@ -265,7 +265,7 @@
 
 + (NSArray *)defaultTableViewSortDescriptors
 {
-    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"endDate"
+    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
                                                           ascending:YES];
     NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"name"
                                                           ascending:YES];
