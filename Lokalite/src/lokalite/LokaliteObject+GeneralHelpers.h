@@ -12,6 +12,8 @@
 
 @interface LokaliteObject (GeneralHelpers)
 
+#pragma mark - Helping with download sources
+
 - (LokaliteDownloadSource *)addDownloadSourceWithName:(NSString *)name;
 
 - (LokaliteDownloadSource *)downloadSourceWithName:(NSString *)name;

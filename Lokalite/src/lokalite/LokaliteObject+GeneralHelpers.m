@@ -12,6 +12,25 @@
 
 @implementation LokaliteObject (GeneralHelpers)
 
+#pragma mark - NSManagedObject implementation
+
+- (void)prepareForDeletion
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+
+    NSSet *downloadSources = [self downloadSources];
+    [downloadSources enumerateObjectsUsingBlock:
+     ^(LokaliteDownloadSource *source, BOOL *stop) {
+         [source removeLokaliteObjectsObject:self];
+         if ([[source lokaliteObjects] count] == 0)
+             [context deleteObject:source];
+     }];
+
+    [super prepareForDeletion];
+}
+
+#pragma mark - Helping with download sources
+
 - (LokaliteDownloadSource *)addDownloadSourceWithName:(NSString *)name
 {
     LokaliteDownloadSource *source = [self downloadSourceWithName:name];
@@ -33,22 +52,6 @@
 
     return [LokaliteDownloadSource findFirstWithPredicate:predicate
                                                 inContext:context];
-
-
-    /*
-    NSSet *sources = [self downloadSources];
-    NSSet *found =
-        [sources objectsPassingTest:
-         ^(LokaliteDownloadSource *source, BOOL *stop) {
-             BOOL matches = [[source name] isEqualToString:name];
-             if (matches)
-                 *stop = YES;
-
-             return matches;
-    }];
-
-    return [found count] ? [found anyObject] : found;
-     */
 }
 
 - (LokaliteDownloadSource *)setLastUpdatedDate:(NSDate *)date

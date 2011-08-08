@@ -10,14 +10,13 @@
 
 @interface LokaliteDownloadSource (GeneralHelpers)
 
+#pragma mark - Creating and finding
+
 + (id)downloadSourceWithName:(NSString *)name
                    inContext:(NSManagedObjectContext *)context
            createIfNecessary:(BOOL)createIfNecessary;
 
 + (id)downloadSourceWithName:(NSString *)name
                    inContext:(NSManagedObjectContext *)context;
-
-//+ (id)downloadSourceFromAPIParams:(NSDictionary *)apiParams
-//                        inContext:(NSManagedObjectContext *)context;
 
 @end

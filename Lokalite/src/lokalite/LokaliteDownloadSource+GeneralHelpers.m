@@ -11,6 +11,8 @@
 
 @implementation LokaliteDownloadSource (GeneralHelpers)
 
+#pragma mark - Creating and finding
+
 + (id)downloadSourceWithName:(NSString *)name
                    inContext:(NSManagedObjectContext *)context
            createIfNecessary:(BOOL)createIfNecessary
@@ -31,25 +33,5 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"name == %@", name];
     return [self findFirstWithPredicate:pred inContext:context];
 }
-
-/*
-+ (id)downloadSourceFromAPIParams:(NSDictionary *)apiParams
-                        inContext:(NSManagedObjectContext *)context
-{
-    NSString *category = [apiParams objectForKey:@"category"];
-    NSString *path = [apiParams objectForKey:@"path"];
-    NSString *name =
-        [NSString stringWithFormat:@"%@?category=%@", path, category];
-
-    LokaliteDownloadSource *source =
-        [self downloadSourceWithName:name inContext:context];
-    if (!source) {
-        source = [LokaliteDownloadSource createInstanceInContext:context];
-        [source setName:name];
-    }
-
-    return source;
-}
- */
 
 @end
