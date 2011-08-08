@@ -28,6 +28,7 @@
 #pragma mark - View configuration
 
 @property (nonatomic, assign) BOOL showsSearchBar;
+@property (nonatomic, assign) BOOL showsCategoryFilter;
 
 #pragma mark - Map view
 
@@ -95,6 +96,11 @@
 - (void)presentMapViewAnimated:(BOOL)animated;
 - (void)dismissMapViewAnimated:(BOOL)animated;
 - (void)toggleMapViewAnimated:(BOOL)animated;
+
+
+#pragma mark - Working with category filters
+
+- (NSArray *)categoryFilters;
 
 
 #pragma mark Working with the local data store

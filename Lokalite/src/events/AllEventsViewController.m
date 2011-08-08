@@ -55,6 +55,8 @@
     [self setShowsSearchBar:YES];
     [[[self searchDisplayController] searchResultsTableView]
      setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+
+    [self setShowsCategoryFilter:YES];
 }
 
 #pragma mark - LokaliteStreamViewController implementation

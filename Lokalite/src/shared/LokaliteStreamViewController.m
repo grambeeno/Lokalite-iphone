@@ -14,6 +14,9 @@
 
 #import "LokaliteAppDelegate.h"
 
+#import "CategoryFilter.h"
+#import "CategoryFilterView.h"
+
 #import "SDKAdditions.h"
 
 @interface LokaliteStreamViewController ()
@@ -25,6 +28,12 @@
 #pragma mark - Working with the search interface
 
 @property (nonatomic, copy) NSArray *searchResults;
+
+#pragma mark - Working with the category filters
+
+@property (nonatomic, copy) NSArray *loadedCategoryFilters;
+@property (nonatomic, retain) CategoryFilterView *categoryFilterView;
+@property (nonatomic, retain) UITableViewCell *categoryFilterCell;
 
 #pragma mark - Working with the map view
 
@@ -75,10 +84,15 @@
 @implementation LokaliteStreamViewController
 
 @synthesize showsSearchBar = showsSearchBar_;
+@synthesize showsCategoryFilter = showsCategoryFilter_;
 
 @synthesize loadingMoreActivityView = loadingMoreActivityView_;
 
 @synthesize searchResults = searchResults_;
+
+@synthesize loadedCategoryFilters = loadedCategoryFilters_;
+@synthesize categoryFilterView = categoryFilterView_;
+@synthesize categoryFilterCell = categoryFilterCell_;
 
 @synthesize showingMapView = showingMapView_;
 @synthesize mapView = mapView_;
@@ -103,6 +117,10 @@
 
     [searchResults_ release];
 
+    [loadedCategoryFilters_ release];
+    [categoryFilterView_ release];
+    [categoryFilterCell_ release];
+
     [mapView_ release];
     [mapViewController_ release];
     [toggleMapViewButtonItem_ release];
@@ -121,6 +139,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         showsSearchBar_ = NO;
+        showsCategoryFilter_ = NO;
 
         //showsDataBeforeFirstFetch_ = NO;
         isFetchingData_ = NO;
@@ -221,7 +240,7 @@
     if ([self tableView] == tableView) {
         id <NSFetchedResultsSectionInfo> sectionInfo =
             [[[self dataController] sections] objectAtIndex:section];
-        nrows = [sectionInfo numberOfObjects];
+        nrows = [sectionInfo numberOfObjects] + 1;
     } else
         nrows = [[self searchResults] count];
 
@@ -232,24 +251,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *reuseIdentifier = [self reuseIdentifierForIndexPath:indexPath
-                                                      inTableView:tableView];
-    UITableViewCell *cell =
-        [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil)
-        cell = [self tableViewCellInstanceForTableView:tableView
-                                       reuseIdentifier:reuseIdentifier];
+    if ([indexPath section] == 0 && [indexPath row] == 0)
+        return [self categoryFilterCell];
+    else {
+        NSString *reuseIdentifier = [self reuseIdentifierForIndexPath:indexPath
+                                                          inTableView:tableView];
+        UITableViewCell *cell =
+            [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        if (cell == nil)
+            cell = [self tableViewCellInstanceForTableView:tableView
+                                           reuseIdentifier:reuseIdentifier];
 
-    id<MappableLokaliteObject> obj = nil;
+        id<MappableLokaliteObject> obj = nil;
 
-    if ([self tableView] == tableView)
-        obj = [[self dataController] objectAtIndexPath:indexPath];
-    else
-        obj = [[self searchResults] objectAtIndex:[indexPath row]];
+        if ([self tableView] == tableView)
+            obj = [[self dataController] objectAtIndexPath:indexPath];
+        else
+            obj = [[self searchResults] objectAtIndex:[indexPath row]];
 
-    [self configureCell:cell forObject:obj];
+        [self configureCell:cell forObject:obj];
 
-    return cell;
+        return cell;
+    }
 }
 
 #pragma mark - UITableViewDelegate implementation
@@ -538,6 +561,13 @@
         [self presentMapViewAnimated:animated];
 }
 
+#pragma mark - Working with category filters
+
+- (NSArray *)categoryFilters
+{
+    return [CategoryFilter defaultFilters];
+}
+
 #pragma mark - Working with the local data store
 
 - (NSFetchedResultsController *)configuredFetchedResultsController
@@ -797,6 +827,32 @@
     [[self tableView] setTableHeaderView:nil];
 }
 
+#pragma mark - Category filter management
+
+- (void)loadCategoryFilter
+{
+    [self setLoadedCategoryFilters:[self categoryFilters]];
+
+    if ([self isViewLoaded]) {
+        NSIndexPath *first = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSArray *paths = [NSArray arrayWithObject:first];
+        [[self tableView] insertRowsAtIndexPaths:paths
+                                withRowAnimation:UITableViewRowAnimationBottom];
+    }
+}
+
+- (void)unloadCategoryFilter
+{
+    [self setLoadedCategoryFilters:nil];
+
+    if ([self isViewLoaded]) {
+        NSIndexPath *first = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSArray *paths = [NSArray arrayWithObject:first];
+        [[self tableView] deleteRowsAtIndexPaths:paths
+                                withRowAnimation:UITableViewRowAnimationTop];
+    }
+}
+
 #pragma mark - Application notifications
 
 - (void)subscribeForApplicationLifecycleNotifications
@@ -846,6 +902,40 @@
         else
             [self unloadSearchBar];
     }
+}
+
+- (void)setShowsCategoryFilter:(BOOL)showsCategoryFilter
+{
+    if (showsCategoryFilter_ != showsCategoryFilter) {
+        showsCategoryFilter_ = showsCategoryFilter;
+
+        if (showsCategoryFilter)
+            [self loadCategoryFilter];
+        else
+            [self unloadCategoryFilter];
+    }
+}
+
+- (CategoryFilterView *)categoryFilterView
+{
+    if (!categoryFilterView_) {
+        CGRect frame = CGRectMake(0, 0, 320, 80);
+        categoryFilterView_ = [[CategoryFilterView alloc] initWithFrame:frame];
+    }
+
+    return categoryFilterView_;
+}
+
+- (UITableViewCell *)categoryFilterCell
+{
+    if (!categoryFilterCell_) {
+        categoryFilterCell_ =
+            [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:@"CategoryFilterCell"];
+        [categoryFilterCell_ addSubview:[self categoryFilterView]];
+    }
+
+    return categoryFilterCell_;
 }
 
 - (UIView *)loadingMoreActivityView

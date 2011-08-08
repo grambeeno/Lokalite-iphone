@@ -41,6 +41,7 @@
 		054E06C713CB8990009B7373 /* featured-image-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C313CB8990009B7373 /* featured-image-02.png */; };
 		054E06C813CB8990009B7373 /* featured-image-02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06C413CB8990009B7373 /* featured-image-02@2x.png */; };
 		055286AD13F08A7D0072A662 /* LokaliteTrendingEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286AC13F08A7D0072A662 /* LokaliteTrendingEventStream.m */; };
+		055286B113F095510072A662 /* CategoryFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286B013F095510072A662 /* CategoryFilterView.m */; };
 		056413C113EB38B8003E5C95 /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 056413C013EB38B8003E5C95 /* Business.m */; };
 		056413C413EB38DA003E5C95 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 056413C313EB38DA003E5C95 /* Category.m */; };
 		056413CA13EB3930003E5C95 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 056413C913EB3930003E5C95 /* Location.m */; };
@@ -226,8 +227,10 @@
 		054E06C213CB8990009B7373 /* featured-image-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-01@2x.png"; path = "images/mock-images/featured-image-01@2x.png"; sourceTree = "<group>"; };
 		054E06C313CB8990009B7373 /* featured-image-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02.png"; path = "images/mock-images/featured-image-02.png"; sourceTree = "<group>"; };
 		054E06C413CB8990009B7373 /* featured-image-02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02@2x.png"; path = "images/mock-images/featured-image-02@2x.png"; sourceTree = "<group>"; };
-		055286AB13F08A7D0072A662 /* LokaliteTrendingEventStream.h */ = {isa = PBXFileReference; fileEncoding = 4; name = LokaliteTrendingEventStream.h; path = src/lokalite/LokaliteTrendingEventStream.h; sourceTree = "<group>"; };
+		055286AB13F08A7D0072A662 /* LokaliteTrendingEventStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteTrendingEventStream.h; path = src/lokalite/LokaliteTrendingEventStream.h; sourceTree = "<group>"; };
 		055286AC13F08A7D0072A662 /* LokaliteTrendingEventStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteTrendingEventStream.m; path = src/lokalite/LokaliteTrendingEventStream.m; sourceTree = "<group>"; };
+		055286AF13F095510072A662 /* CategoryFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilterView.h; path = src/categories/CategoryFilterView.h; sourceTree = "<group>"; };
+		055286B013F095510072A662 /* CategoryFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilterView.m; path = src/categories/CategoryFilterView.m; sourceTree = "<group>"; };
 		056413BF13EB38B8003E5C95 /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Business.h; path = src/businesses/Business.h; sourceTree = "<group>"; };
 		056413C013EB38B8003E5C95 /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Business.m; path = src/businesses/Business.m; sourceTree = "<group>"; };
 		056413C213EB38DA003E5C95 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = src/categories/Category.h; sourceTree = "<group>"; };
@@ -845,6 +848,8 @@
 				05A7B41C13D731F6008E737C /* Category+GeneralHelpers.m */,
 				0549AB5313D77A6800F9C2C2 /* CategoryFilter.h */,
 				0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */,
+				055286AF13F095510072A662 /* CategoryFilterView.h */,
+				055286B013F095510072A662 /* CategoryFilterView.m */,
 			);
 			name = categories;
 			sourceTree = "<group>";
@@ -1218,6 +1223,7 @@
 				05B91DDF13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m in Sources */,
 				05B91DE213EC51AB00E3A898 /* LokaliteDownloadSource+GeneralHelpers.m in Sources */,
 				055286AD13F08A7D0072A662 /* LokaliteTrendingEventStream.m in Sources */,
+				055286B113F095510072A662 /* CategoryFilterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
