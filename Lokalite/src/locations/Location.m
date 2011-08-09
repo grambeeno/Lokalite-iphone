@@ -7,13 +7,15 @@
 //
 
 #import "Location.h"
+#import "Business.h"
 #import "Event.h"
 
 
 @implementation Location
 @dynamic latitude;
-@dynamic longitude;
 @dynamic formattedAddress;
+@dynamic longitude;
 @dynamic events;
+@dynamic businesses;
 
 @end

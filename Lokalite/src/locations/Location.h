@@ -10,15 +10,16 @@
 #import <CoreData/CoreData.h>
 #import "LokaliteObject.h"
 
-@class Event;
+@class Business, Event;
 
 @interface Location : LokaliteObject {
 @private
 }
 @property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSString * formattedAddress;
+@property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSSet *events;
+@property (nonatomic, retain) NSSet *businesses;
 @end
 
 @interface Location (CoreDataGeneratedAccessors)
@@ -27,4 +28,8 @@
 - (void)removeEventsObject:(Event *)value;
 - (void)addEvents:(NSSet *)values;
 - (void)removeEvents:(NSSet *)values;
+- (void)addBusinessesObject:(Business *)value;
+- (void)removeBusinessesObject:(Business *)value;
+- (void)addBusinesses:(NSSet *)values;
+- (void)removeBusinesses:(NSSet *)values;
 @end

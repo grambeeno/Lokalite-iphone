@@ -12,6 +12,16 @@
 
 @interface Location (GeneralHelpers)
 
+#pragma mark - Lifecycle
+
+//
+// Deletes the receiver if all of its relationships are empty; that is, if no
+// objects are referencing it any longer.
+//
+- (BOOL)deleteIfAppropriate;
+
+#pragma mark - Creating and finding instances
+
 + (id)existingOrNewLocationFromJsonData:(NSDictionary *)jsonData
                          downloadSource:(LokaliteDownloadSource *)source
                               inContext:(NSManagedObjectContext *)context;

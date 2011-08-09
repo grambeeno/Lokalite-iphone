@@ -12,6 +12,12 @@
 
 @interface Business (GeneralHelpers)
 
+#pragma mark - Lifecycle
+
+- (BOOL)deleteIfAppropriate;
+
+#pragma mark - Creating and finding businesses
+
 + (id)createOrUpdateBusinessFromJsonData:(NSDictionary *)businessData
                           downloadSource:(LokaliteDownloadSource *)source
                                inContext:(NSManagedObjectContext *)context;

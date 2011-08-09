@@ -12,6 +12,15 @@
 
 @interface Category (GeneralHelpers)
 
+#pragma mark - Lifecycle
+
+//
+// Delete the receiver if all of its relationships are empty.
+//
+- (BOOL)deleteIfAppropriate;
+
+#pragma mark - Creating and finding instances
+
 + (id)existingOrNewCategoriesFromJsonData:(NSArray *)jsonData
                            downloadSource:(LokaliteDownloadSource *)source
                                 inContext:(NSManagedObjectContext *)context;

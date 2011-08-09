@@ -15,6 +15,20 @@
 
 @implementation Location (GeneralHelpers)
 
+#pragma mark - Lifecycle
+
+- (BOOL)deleteIfAppropriate
+{
+    if ([[self events] count] == 0 && [[self businesses] count] == 0) {
+        [[self managedObjectContext] deleteObject:self];
+        return YES;
+    }
+
+    return NO;
+}
+
+#pragma mark - Creating and finding instances
+
 + (id)existingOrNewLocationFromJsonData:(NSDictionary *)jsonData
                          downloadSource:(LokaliteDownloadSource *)source
                               inContext:(NSManagedObjectContext *)context

@@ -14,6 +14,18 @@
 
 @implementation Category (GeneralHelpers)
 
+#pragma mark - Lifecycle
+
+- (BOOL)deleteIfAppropriate
+{
+    if ([[self events] count] == 0 && [[self businesses] count] == 0) {
+        [[self managedObjectContext] deleteObject:self];
+        return YES;
+    }
+
+    return NO;
+}
+
 + (id)existingOrNewCategoriesFromJsonData:(NSArray *)jsonData
                            downloadSource:(LokaliteDownloadSource *)source
                                 inContext:(NSManagedObjectContext *)context

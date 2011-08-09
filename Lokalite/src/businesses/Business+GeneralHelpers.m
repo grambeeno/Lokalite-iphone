@@ -8,6 +8,9 @@
 
 #import "Business+GeneralHelpers.h"
 
+#import "Location.h"
+#import "Location+GeneralHelpers.h"
+
 #import "Category.h"
 #import "Category+GeneralHelpers.h"
 
@@ -25,21 +28,29 @@
 
 - (void)prepareForDeletion
 {
-    NSManagedObjectContext *context = [self managedObjectContext];
+    Location *location = [[self location] retain];
+    [self setLocation:nil];
+    [location deleteIfAppropriate];
+    [location release], location = nil;
 
     NSSet *categories = [[self categories] retain];
     [self setCategories:nil];
-
-    for (Category *category in categories) {
-        BOOL shouldDelete =
-            [[category events] count] == 0 &&
-            [[category businesses] count] == 0;
-
-        if (shouldDelete)
-            [context deleteObject:category];
-    }
+    [categories makeObjectsPerformSelector:@selector(deleteIfAppropriate)];
+    [categories release], categories = nil;
 
     [super prepareForDeletion];
+}
+
+#pragma mark - Lifecycle
+
+- (BOOL)deleteIfAppropriate
+{
+    if ([[self events] count] == 0) {
+        [[self managedObjectContext] deleteObject:self];
+        return YES;
+    }
+
+    return NO;
 }
 
 #pragma mark - Creating and finding businesses
@@ -90,6 +101,13 @@
         if ([business setValueIfNecessary:url forKey:@"imageUrl"])
             [business setImageData:nil];
     }
+
+    NSDictionary *locationData = [businessData objectForKey:@"location"];
+    Location *location =
+        [Location existingOrNewLocationFromJsonData:locationData
+                                     downloadSource:source
+                                          inContext:context];
+    [business setLocation:location];
 
     NSArray *categoryData = [businessData objectForKey:@"categories"];
     NSArray *categories =

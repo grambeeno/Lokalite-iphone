@@ -9,19 +9,21 @@
 #import "Business.h"
 #import "Category.h"
 #import "Event.h"
+#import "Location.h"
 
 
 @implementation Business
 @dynamic status;
 @dynamic phone;
-@dynamic address;
 @dynamic summary;
+@dynamic address;
 @dynamic imageUrl;
 @dynamic email;
-@dynamic imageData;
 @dynamic name;
+@dynamic imageData;
 @dynamic url;
 @dynamic categories;
 @dynamic events;
+@dynamic location;
 
 @end

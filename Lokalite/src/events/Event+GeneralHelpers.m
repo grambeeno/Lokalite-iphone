@@ -180,31 +180,19 @@
 
 - (void)prepareForDeletion
 {
-    NSManagedObjectContext *context = [self managedObjectContext];
-
     Business *business = [[self business] retain];
     [self setBusiness:nil];
-    if ([[business events] count] == 0)
-        [context deleteObject:business];
+    [business deleteIfAppropriate];
+    [business release], business = nil;
 
     Location *location = [[self location] retain];
     [self setLocation:nil];
-    if ([[location events] count] == 0)
-        [context deleteObject:location];
+    [location deleteIfAppropriate];
+    [location release], location = nil;
 
     NSSet *categories = [[self categories] retain];
     [self setCategories:nil];
-    for (Category *category in categories) {
-        BOOL needsDeleting =
-            [[category events] count] == 0 &&
-            [[category businesses] count] == 0;
-
-        if (needsDeleting)
-            [context deleteObject:category];
-    }
-
-    [business release], business = nil;
-    [location release], location = nil;
+    [categories makeObjectsPerformSelector:@selector(deleteIfAppropriate)];
     [categories release], categories = nil;
 
     [super prepareForDeletion];
