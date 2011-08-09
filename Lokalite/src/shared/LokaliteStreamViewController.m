@@ -257,7 +257,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self showsCategoryFilter] &&
+    if ([self showsCategoryFilter] && tableView == [self tableView] &&
         [indexPath section] == 0 && [indexPath row] == 0)
         return [self categoryFilterCell];
     else {
@@ -885,7 +885,7 @@
         NSIndexPath *first = [NSIndexPath indexPathForRow:0 inSection:0];
         NSArray *paths = [NSArray arrayWithObject:first];
         [[self tableView] insertRowsAtIndexPaths:paths
-                                withRowAnimation:UITableViewRowAnimationTop];
+                                withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -897,7 +897,7 @@
         NSIndexPath *first = [NSIndexPath indexPathForRow:0 inSection:0];
         NSArray *paths = [NSArray arrayWithObject:first];
         [[self tableView] deleteRowsAtIndexPaths:paths
-                                withRowAnimation:UITableViewRowAnimationTop];
+                                withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
