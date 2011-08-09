@@ -10,4 +10,11 @@
 
 @interface RemoteSearchTableFooterView : UIView
 
+@property (nonatomic, retain, readonly) UIButton *searchButton;
+
+#pragma mark - Activity
+
+- (void)displayActivity;
+- (void)hideActivity;
+
 @end

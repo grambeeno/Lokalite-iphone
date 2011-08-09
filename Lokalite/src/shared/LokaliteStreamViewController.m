@@ -32,7 +32,8 @@
 
 #pragma mark - Search - remote
 
-@property (nonatomic, retain) UIView *remoteSearchFooterView;
+@property (nonatomic, retain)
+    RemoteSearchTableFooterView *remoteSearchFooterView;
 
 #pragma mark - Working with the category filters
 
@@ -328,6 +329,7 @@
             [self configureCell:cell forObject:obj];
         }
 
+        NSLog(@"Returning cell: %@", NSStringFromClass([cell class]));
         return cell;
     }
 }
@@ -555,6 +557,8 @@
         cell =
             [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                     reuseIdentifier:identifier] autorelease];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
         [[cell contentView] addSubview:[self remoteSearchFooterView]];
     } else
         cell = [self tableViewCellInstanceAtIndexPath:indexPath
@@ -601,7 +605,7 @@
     return nil;
 }
 
-#pragma mark - Searching remotely
+#pragma mark - Search - remote
 
 - (BOOL)isRemoteSearchRow:(UITableView *)tableView indexPath:(NSIndexPath *)path
 {
@@ -609,6 +613,11 @@
         [self canSearchServer] &&
         tableView != [self tableView] &&
         [path row] == [[self searchResults] count];
+}
+
+- (void)performRemoteSearch:(id)sender
+{
+    [[self remoteSearchFooterView] displayActivity];
 }
 
 #pragma mark Working with the map view
@@ -1039,12 +1048,18 @@
     }
 }
 
-- (UIView *)remoteSearchFooterView
+- (RemoteSearchTableFooterView *)remoteSearchFooterView
 {
     if (!remoteSearchFooterView_) {
-        CGRect frame = CGRectMake(0, 0, 320, 60);
+        CGFloat height =
+            [[[self searchDisplayController] searchResultsTableView] rowHeight];
+        CGRect frame = CGRectMake(0, 0, 320, height);
         remoteSearchFooterView_ =
             [[RemoteSearchTableFooterView alloc] initWithFrame:frame];
+        UIButton *searchButton = [remoteSearchFooterView_ searchButton];
+        [searchButton addTarget:self
+                         action:@selector(performRemoteSearch:)
+               forControlEvents:UIControlEventTouchUpInside];
     }
 
     return remoteSearchFooterView_;

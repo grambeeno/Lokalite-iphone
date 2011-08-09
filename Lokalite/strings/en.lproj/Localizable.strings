@@ -24,6 +24,8 @@
 "global.profile" = "Profile";
 
 "global.load-more" = "Load More";
+"global.search-server" = "Continue Search on Server...";
+"global.searching-server" = "Searching Server...";
 
 "global.trend" = "Trend";
 "global.untrend" = "Untrend";
