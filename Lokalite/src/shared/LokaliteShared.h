@@ -9,6 +9,8 @@
 #import "DataFetcher.h"
 #import "TableViewImageFetcher.h"
 
+#import "RemoteSearchTableFooterView.h"
+
 #import "LokaliteApplicationState.h"
 
 #import "LokaliteObject.h"

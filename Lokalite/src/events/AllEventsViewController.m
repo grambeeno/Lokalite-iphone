@@ -57,6 +57,7 @@
     [self initializeNavigationItem];
 
     [self setShowsSearchBar:YES];
+    [self setCanSearchServer:YES];
     [[[self searchDisplayController] searchResultsTableView]
      setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
@@ -88,8 +89,9 @@
     return [EventTableViewCell defaultReuseIdentifier];
 }
 
-- (UITableViewCell *)tableViewCellInstanceForTableView:(UITableView *)tableView
-                                       reuseIdentifier:(NSString *)identifier
+- (UITableViewCell *)tableViewCellInstanceAtIndexPath:(NSIndexPath *)indexPath
+                                         forTableView:(UITableView *)tableView
+                                      reuseIdentifier:(NSString *)identifier
 {
     return [EventTableViewCell instanceFromNib];
 }

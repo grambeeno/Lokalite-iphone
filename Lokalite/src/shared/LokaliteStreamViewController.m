@@ -17,6 +17,7 @@
 #import "CategoryFilter.h"
 #import "CategoryFilterView.h"
 
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
 @interface LokaliteStreamViewController ()
@@ -25,9 +26,13 @@
 
 @property (nonatomic, retain) UIView *loadingMoreActivityView;
 
-#pragma mark - Working with the search interface
+#pragma mark - Search - general
 
 @property (nonatomic, copy) NSArray *searchResults;
+
+#pragma mark - Search - remote
+
+@property (nonatomic, retain) UIView *remoteSearchFooterView;
 
 #pragma mark - Working with the category filters
 
@@ -50,6 +55,19 @@
 - (void)initializeTableView:(UITableView *)tableView;
 - (void)initializeMapView:(MKMapView *)mapView;
 - (void)initializeDataController;
+
+#pragma mark - View configuration
+
+- (NSString *)_reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
+                               inTableView:(UITableView *)tableView;
+- (UITableViewCell *)_tableViewCellInstanceAtIndexPath:(NSIndexPath *)indexPath
+                                          forTableView:(UITableView *)tableView
+                                       reuseIdentifier:(NSString *)identifier;
+
+#pragma mark - Searching remotely
+
+- (BOOL)isRemoteSearchRow:(UITableView *)tableView
+                indexPath:(NSIndexPath *)path;
 
 #pragma mark Working with the map view
 
@@ -94,6 +112,8 @@
 @synthesize loadingMoreActivityView = loadingMoreActivityView_;
 
 @synthesize searchResults = searchResults_;
+@synthesize canSearchServer = canSearchServer_;
+@synthesize remoteSearchFooterView = remoteSearchFooterView_;
 
 @synthesize loadedCategoryFilters = loadedCategoryFilters_;
 @synthesize categoryFilterView = categoryFilterView_;
@@ -123,6 +143,7 @@
     [loadingMoreActivityView_ release];
 
     [searchResults_ release];
+    [remoteSearchFooterView_ release];
 
     [loadedCategoryFilters_ release];
     [categoryFilterView_ release];
@@ -144,6 +165,7 @@
 - (void)initialize
 {
     showsSearchBar_ = NO;
+    canSearchServer_ = NO;
     showsCategoryFilter_ = NO;
 
     isFetchingData_ = NO;
@@ -267,8 +289,11 @@
         nrows = [sectionInfo numberOfObjects];
         if ([self showsCategoryFilter])
             ++nrows;
-    } else
+    } else {
         nrows = [[self searchResults] count];
+        if ([self canSearchServer])
+            ++nrows;
+    }
 
     return nrows;
 }
@@ -284,21 +309,24 @@
                                                  inTableView:tableView];
 
         NSString *reuseIdentifier =
-            [self reuseIdentifierForIndexPath:indexPath inTableView:tableView];
+            [self _reuseIdentifierForIndexPath:indexPath inTableView:tableView];
         UITableViewCell *cell =
             [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (cell == nil)
-            cell = [self tableViewCellInstanceForTableView:tableView
+            cell = [self _tableViewCellInstanceAtIndexPath:indexPath
+                                              forTableView:tableView
                                            reuseIdentifier:reuseIdentifier];
 
-        id<MappableLokaliteObject> obj = nil;
+        if (![self isRemoteSearchRow:tableView indexPath:indexPath]) {
+            id<MappableLokaliteObject> obj = nil;
 
-        if ([self tableView] == tableView)
-            obj = [[self dataController] objectAtIndexPath:indexPath];
-        else
-            obj = [[self searchResults] objectAtIndex:[indexPath row]];
+            if ([self tableView] == tableView)
+                obj = [[self dataController] objectAtIndexPath:indexPath];
+            else
+                obj = [[self searchResults] objectAtIndex:[indexPath row]];
 
-        [self configureCell:cell forObject:obj];
+            [self configureCell:cell forObject:obj];
+        }
 
         return cell;
     }
@@ -501,20 +529,57 @@
 
 #pragma mark Configuring the table view
 
+- (NSString *)_reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
+                               inTableView:(UITableView *)tableView
+{
+    return
+        [self isRemoteSearchRow:tableView indexPath:indexPath] ?
+        @"SearchResultsLoadMoreTableViewCell" :
+        [self reuseIdentifierForIndexPath:indexPath inTableView:tableView];
+}
+
 - (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
                               inTableView:(UITableView *)tableView
 {
     return @"TableViewCellIdentifier";
 }
 
-- (UITableViewCell *)tableViewCellInstanceForTableView:(UITableView *)tableView
+- (UITableViewCell *)_tableViewCellInstanceAtIndexPath:(NSIndexPath *)indexPath
+                                          forTableView:(UITableView *)tableView
                                        reuseIdentifier:(NSString *)identifier
 {
-    return [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                   reuseIdentifier:identifier] autorelease];
+
+    UITableViewCell *cell = nil;
+
+    if ([self isRemoteSearchRow:tableView indexPath:indexPath]) {
+        cell =
+            [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                    reuseIdentifier:identifier] autorelease];
+        [[cell contentView] addSubview:[self remoteSearchFooterView]];
+    } else
+        cell = [self tableViewCellInstanceAtIndexPath:indexPath
+                                         forTableView:tableView
+                                      reuseIdentifier:identifier];
+
+    return cell;
 }
 
-- (void)configureCell:(UITableViewCell *)cell forObject:(id<MappableLokaliteObject>)obj
+- (UITableViewCell *)tableViewCellInstanceAtIndexPath:(NSIndexPath *)indexPath
+                                         forTableView:(UITableView *)tableView
+                                      reuseIdentifier:(NSString *)identifier
+{
+    UITableViewCell *cell =
+        [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                reuseIdentifier:identifier] autorelease];
+
+    if ([self isRemoteSearchRow:tableView indexPath:indexPath])
+        [[cell contentView] addSubview:[self remoteSearchFooterView]];
+
+    return cell;
+}
+
+- (void)configureCell:(UITableViewCell *)cell
+            forObject:(id<MappableLokaliteObject>)obj
 {
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
@@ -534,6 +599,16 @@
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
     return nil;
+}
+
+#pragma mark - Searching remotely
+
+- (BOOL)isRemoteSearchRow:(UITableView *)tableView indexPath:(NSIndexPath *)path
+{
+    return
+        [self canSearchServer] &&
+        tableView != [self tableView] &&
+        [path row] == [[self searchResults] count];
 }
 
 #pragma mark Working with the map view
@@ -962,6 +1037,17 @@
         else
             [self unloadSearchBar];
     }
+}
+
+- (UIView *)remoteSearchFooterView
+{
+    if (!remoteSearchFooterView_) {
+        CGRect frame = CGRectMake(0, 0, 320, 60);
+        remoteSearchFooterView_ =
+            [[RemoteSearchTableFooterView alloc] initWithFrame:frame];
+    }
+
+    return remoteSearchFooterView_;
 }
 
 - (void)setShowsCategoryFilter:(BOOL)showsCategoryFilter

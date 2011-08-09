@@ -77,8 +77,9 @@
     return [EventTableViewCell defaultReuseIdentifier];
 }
 
-- (UITableViewCell *)tableViewCellInstanceForTableView:(UITableView *)tableView
-                                       reuseIdentifier:(NSString *)identifier
+- (UITableViewCell *)tableViewCellInstanceAtIndexPath:(NSIndexPath *)indexPath
+                                         forTableView:(UITableView *)tableView
+                                      reuseIdentifier:(NSString *)identifier
 {
     return [EventTableViewCell instanceFromNib];
 }

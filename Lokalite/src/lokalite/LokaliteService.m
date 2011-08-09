@@ -228,7 +228,7 @@
 
 - (NSURL *)featuredEventUrl
 {
-    return [[self baseUrl] URLByAppendingPathComponent:@"api/events/browse"];
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/events"];
 }
 
 - (NSURL *)trendUrl

@@ -80,8 +80,9 @@
 
 - (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
                               inTableView:(UITableView *)tableView;
-- (UITableViewCell *)tableViewCellInstanceForTableView:(UITableView *)tableView
-                                       reuseIdentifier:(NSString *)identifier;
+- (UITableViewCell *)tableViewCellInstanceAtIndexPath:(NSIndexPath *)indexPath
+                                         forTableView:(UITableView *)tableView
+                                      reuseIdentifier:(NSString *)identifier;
 
 - (void)configureCell:(UITableViewCell *)cell forObject:(id<MappableLokaliteObject>)obj;
 
@@ -92,6 +93,9 @@
 
 - (NSPredicate *)predicateForQueryString:(NSString *)queryString;
 
+#pragma mark - Searching remotely
+
+@property (nonatomic, assign) BOOL canSearchServer;
 
 #pragma mark Working with the map view
 
