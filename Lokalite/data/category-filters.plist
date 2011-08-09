@@ -34,6 +34,16 @@
 	</dict>
 	<dict>
 		<key>name</key>
+		<string>Nightlife</string>
+		<key>short-name</key>
+		<string>Nightlife</string>
+		<key>image</key>
+		<string>happy-hour</string>
+		<key>image-selected</key>
+		<string>happy-hour-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
 		<string>Shopping</string>
 		<key>short-name</key>
 		<string>Shopping</string>
@@ -51,16 +61,6 @@
 		<string>food</string>
 		<key>image-selected</key>
 		<string>food-selected</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>Arts and Entertainment</string>
-		<key>short-name</key>
-		<string>Entertainment</string>
-		<key>image</key>
-		<string>arts</string>
-		<key>image-selected</key>
-		<string>arts-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -86,7 +86,7 @@
 		<key>name</key>
 		<string>Learn Something New</string>
 		<key>short-name</key>
-		<string>Something New</string>
+		<string>Learn</string>
 		<key>image</key>
 		<string>beauty</string>
 		<key>image-selected</key>
