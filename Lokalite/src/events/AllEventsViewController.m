@@ -211,4 +211,14 @@
 {
 }
 
+#pragma mark - Accessors
+
+- (TableViewImageFetcher *)imageFetcher
+{
+    if (!imageFetcher_)
+        imageFetcher_ = [[TableViewImageFetcher alloc] init];
+
+    return imageFetcher_;
+}
+
 @end
