@@ -14,6 +14,8 @@
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 
+#import "CategoryFilter.h"
+
 #import "LokaliteEventStream.h"
 
 #import "TableViewImageFetcher.h"
@@ -106,9 +108,11 @@
          }
                             tableViewCellHandler:
          ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {
-             EventTableViewCell *cell = (EventTableViewCell *) tvc;
-             if ([[cell eventId] isEqualToNumber:[event identifier]])
-                 [[cell eventImageView] setImage:image];
+             if ([tvc isKindOfClass:[EventTableViewCell class]]) {
+                 EventTableViewCell *cell = (EventTableViewCell *) tvc;
+                 if ([[cell eventId] isEqualToNumber:[event identifier]])
+                     [[cell eventImageView] setImage:image];
+             }
          }
                                     errorHandler:
          ^(NSError *error) {
@@ -133,6 +137,13 @@
     return [Event predicateForSearchString:queryString
                              includeEvents:YES
                          includeBusinesses:NO];
+}
+
+#pragma mark - Working with category filters
+
+- (NSArray *)categoryFilters
+{
+    return [CategoryFilter defaultFilters];
 }
 
 #pragma mark Working with the local data store

@@ -35,6 +35,11 @@
 @property (nonatomic, retain) CategoryFilterView *categoryFilterView;
 @property (nonatomic, retain) UITableViewCell *categoryFilterCell;
 
+- (NSIndexPath *)dataIndexPathForTableViewIndexPath:(NSIndexPath *)ip
+                                        inTableView:(UITableView *)tv;
+- (NSIndexPath *)tableViewIndexPathForDataIndexPath:(NSIndexPath *)ip
+                                        inTableView:(UITableView *)tv;
+
 #pragma mark - Working with the map view
 
 @property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
@@ -256,8 +261,11 @@
         [indexPath section] == 0 && [indexPath row] == 0)
         return [self categoryFilterCell];
     else {
-        NSString *reuseIdentifier = [self reuseIdentifierForIndexPath:indexPath
-                                                          inTableView:tableView];
+        indexPath = [self dataIndexPathForTableViewIndexPath:indexPath
+                                                 inTableView:tableView];
+
+        NSString *reuseIdentifier =
+            [self reuseIdentifierForIndexPath:indexPath inTableView:tableView];
         UITableViewCell *cell =
             [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (cell == nil)
@@ -283,6 +291,9 @@
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id<MappableLokaliteObject> obj = nil;
+
+    indexPath = [self dataIndexPathForTableViewIndexPath:indexPath
+                                             inTableView:tableView];
 
     if ([self tableView] == tableView)
         obj = [[self dataController] objectAtIndexPath:indexPath];
@@ -349,6 +360,11 @@
       newIndexPath:(NSIndexPath *)newIndexPath
 {
     UITableView *tableView = [self tableView];
+
+    indexPath = [self tableViewIndexPathForDataIndexPath:indexPath
+                                             inTableView:tableView];
+    newIndexPath = [self tableViewIndexPathForDataIndexPath:newIndexPath
+                                                inTableView:tableView];
 
     switch(type) {
         case NSFetchedResultsChangeInsert:
@@ -567,7 +583,29 @@
 
 - (NSArray *)categoryFilters
 {
-    return [CategoryFilter defaultFilters];
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclasses",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    return nil;
+}
+
+- (NSIndexPath *)dataIndexPathForTableViewIndexPath:(NSIndexPath *)path
+                                        inTableView:(UITableView *)tableView
+{
+    if ([self showsCategoryFilter] && tableView == [self tableView])
+         return [NSIndexPath indexPathForRow:[path row] - 1
+                                   inSection:[path section]];
+    else
+        return path;
+}
+
+- (NSIndexPath *)tableViewIndexPathForDataIndexPath:(NSIndexPath *)path
+                                        inTableView:(UITableView *)tableView
+{
+    if ([self showsCategoryFilter] && tableView == [self tableView])
+        return [NSIndexPath indexPathForRow:[path row] + 1
+                                  inSection:[path section]];
+    else
+        return path;
 }
 
 #pragma mark - Working with the local data store
@@ -833,9 +871,11 @@
 
 - (void)loadCategoryFilter
 {
-    [self setLoadedCategoryFilters:[self categoryFilters]];
+    NSArray *filters = [self categoryFilters];
+    [self setLoadedCategoryFilters:filters];
 
     if ([self isViewLoaded]) {
+        [[self categoryFilterView] setCategoryFilters:filters];
         NSIndexPath *first = [NSIndexPath indexPathForRow:0 inSection:0];
         NSArray *paths = [NSArray arrayWithObject:first];
         [[self tableView] insertRowsAtIndexPaths:paths
@@ -921,7 +961,7 @@
 - (CategoryFilterView *)categoryFilterView
 {
     if (!categoryFilterView_) {
-        CGRect frame = CGRectMake(0, 0, 320, 80);
+        CGRect frame = CGRectMake(0, 0, 320, [[self tableView] rowHeight]);
         categoryFilterView_ = [[CategoryFilterView alloc] initWithFrame:frame];
     }
 

@@ -20,6 +20,20 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 @synthesize categoryFilters = categoryFilters_;
 @synthesize selectedCategoryFilterIndex = selectedCategoryFilterIndex_;
 
+#pragma mark - Initialization
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setShowsHorizontalScrollIndicator:NO];
+        [self setShowsVerticalScrollIndicator:NO];
+        [self setPagingEnabled:YES];
+    }
+
+    return self;
+}
+
 #pragma mark - UI events
 
 - (void)didChangeCategoryFilter:(UIButton *)button
