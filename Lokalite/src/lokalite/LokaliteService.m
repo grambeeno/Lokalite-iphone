@@ -245,7 +245,7 @@
 {
     return
         [[self baseUrl]
-         URLByAppendingPathComponent:@"api/organizations/browse"];
+         URLByAppendingPathComponent:@"api/places/"];
 }
 
 @end
