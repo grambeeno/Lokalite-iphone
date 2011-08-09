@@ -136,7 +136,7 @@
 {
     return [Event predicateForSearchString:queryString
                              includeEvents:YES
-                         includeBusinesses:NO];
+                         includeBusinesses:YES];
 }
 
 #pragma mark - Working with category filters
