@@ -13,3 +13,20 @@
 @dynamic dataFreshnessDate;
 
 @end
+
+
+#import "NSManagedObject+GeneralHelpers.h"
+
+@implementation LokaliteApplicationState (GeneralHelpers)
+
++ (id)currentState:(NSManagedObjectContext *)context
+{
+    LokaliteApplicationState *state = [self findFirstInContext:context];
+    if (!state)
+        state = [LokaliteApplicationState createInstanceInContext:context];
+
+    return state;
+}
+
+@end
+

@@ -31,6 +31,9 @@
 		0530CEEC13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */; };
 		0548320013F0DEDF0099125B /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 054831FF13F0DEDF0099125B /* Business.m */; };
 		0548320413F0DEFE0099125B /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320313F0DEFE0099125B /* Location.m */; };
+		0548320713F1AB070099125B /* EventStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320613F1AB070099125B /* EventStreamViewController.m */; };
+		0548320A13F1AEA70099125B /* SimpleEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320913F1AEA70099125B /* SimpleEventsViewController.m */; };
+		0548320D13F1B09B0099125B /* LokaliteCategoryEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320C13F1B09B0099125B /* LokaliteCategoryEventStream.m */; };
 		0549AB5513D77A6800F9C2C2 /* CategoryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */; };
 		054E06B613CB82B6009B7373 /* tab-bar-icon-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */; };
 		054E06B713CB82B6009B7373 /* tab-bar-icon-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B513CB82B6009B7373 /* tab-bar-icon-profile@2x.png */; };
@@ -139,7 +142,6 @@
 		05B1577213E269CC00F20FF8 /* event-cell-trend-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B1577013E269CC00F20FF8 /* event-cell-trend-badge.png */; };
 		05B1577313E269CC00F20FF8 /* event-cell-trend-badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B1577113E269CC00F20FF8 /* event-cell-trend-badge@2x.png */; };
 		05B91DCD13EB4F5900E3A898 /* LokaliteApplicationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DCC13EB4F5900E3A898 /* LokaliteApplicationState.m */; };
-		05B91DD013EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DCF13EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.m */; };
 		05B91DD913EC475800E3A898 /* LokaliteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DD813EC475800E3A898 /* LokaliteObject.m */; };
 		05B91DDC13EC478000E3A898 /* LokaliteDownloadSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DDB13EC478000E3A898 /* LokaliteDownloadSource.m */; };
 		05B91DDF13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DDE13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m */; };
@@ -217,6 +219,12 @@
 		054831FF13F0DEDF0099125B /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Business.m; path = src/businesses/Business.m; sourceTree = "<group>"; };
 		0548320213F0DEFE0099125B /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = src/locations/Location.h; sourceTree = "<group>"; };
 		0548320313F0DEFE0099125B /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = src/locations/Location.m; sourceTree = "<group>"; };
+		0548320513F1AB070099125B /* EventStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventStreamViewController.h; path = src/events/EventStreamViewController.h; sourceTree = "<group>"; };
+		0548320613F1AB070099125B /* EventStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventStreamViewController.m; path = src/events/EventStreamViewController.m; sourceTree = "<group>"; };
+		0548320813F1AEA60099125B /* SimpleEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleEventsViewController.h; path = src/events/SimpleEventsViewController.h; sourceTree = "<group>"; };
+		0548320913F1AEA70099125B /* SimpleEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleEventsViewController.m; path = src/events/SimpleEventsViewController.m; sourceTree = "<group>"; };
+		0548320B13F1B09B0099125B /* LokaliteCategoryEventStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteCategoryEventStream.h; path = src/lokalite/LokaliteCategoryEventStream.h; sourceTree = "<group>"; };
+		0548320C13F1B09B0099125B /* LokaliteCategoryEventStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteCategoryEventStream.m; path = src/lokalite/LokaliteCategoryEventStream.m; sourceTree = "<group>"; };
 		0549AB5313D77A6800F9C2C2 /* CategoryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilter.h; path = src/categories/CategoryFilter.h; sourceTree = "<group>"; };
 		0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilter.m; path = src/categories/CategoryFilter.m; sourceTree = "<group>"; };
 		054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-profile.png"; path = "images/tab-bar-icons/tab-bar-icon-profile.png"; sourceTree = "<group>"; };
@@ -364,8 +372,6 @@
 		05B1577113E269CC00F20FF8 /* event-cell-trend-badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-trend-badge@2x.png"; path = "images/events/event-cell-trend-badge@2x.png"; sourceTree = "<group>"; };
 		05B91DCB13EB4F5900E3A898 /* LokaliteApplicationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteApplicationState.h; path = src/application/LokaliteApplicationState.h; sourceTree = "<group>"; };
 		05B91DCC13EB4F5900E3A898 /* LokaliteApplicationState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteApplicationState.m; path = src/application/LokaliteApplicationState.m; sourceTree = "<group>"; };
-		05B91DCE13EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteApplicationState+GeneralHelpers.h"; path = "src/application/LokaliteApplicationState+GeneralHelpers.h"; sourceTree = "<group>"; };
-		05B91DCF13EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LokaliteApplicationState+GeneralHelpers.m"; path = "src/application/LokaliteApplicationState+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05B91DD713EC475800E3A898 /* LokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObject.h; path = src/lokalite/LokaliteObject.h; sourceTree = "<group>"; };
 		05B91DD813EC475800E3A898 /* LokaliteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteObject.m; path = src/lokalite/LokaliteObject.m; sourceTree = "<group>"; };
 		05B91DDA13EC478000E3A898 /* LokaliteDownloadSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteDownloadSource.h; path = src/lokalite/LokaliteDownloadSource.h; sourceTree = "<group>"; };
@@ -483,6 +489,8 @@
 				055286AC13F08A7D0072A662 /* LokaliteTrendingEventStream.m */,
 				05D0205013D4F80500FE0A6C /* LokaliteEventStream.h */,
 				05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */,
+				0548320B13F1B09B0099125B /* LokaliteCategoryEventStream.h */,
+				0548320C13F1B09B0099125B /* LokaliteCategoryEventStream.m */,
 				058962BD13DA299700556F6D /* LokalitePlacesStream.h */,
 				058962BE13DA299700556F6D /* LokalitePlacesStream.m */,
 				059B33FE13D4BC5A007AD11C /* LokaliteSearchStream.h */,
@@ -601,8 +609,6 @@
 				0514FBDE13CD468900ACA464 /* ActivityView.m */,
 				05B91DCB13EB4F5900E3A898 /* LokaliteApplicationState.h */,
 				05B91DCC13EB4F5900E3A898 /* LokaliteApplicationState.m */,
-				05B91DCE13EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.h */,
-				05B91DCF13EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.m */,
 			);
 			name = application;
 			sourceTree = "<group>";
@@ -919,6 +925,10 @@
 				0568333313CF6A4400520C78 /* EventDetailsHeaderView.m */,
 				057DC63913E0D262004107C4 /* EventDetailsFooterView.h */,
 				057DC63A13E0D262004107C4 /* EventDetailsFooterView.m */,
+				0548320513F1AB070099125B /* EventStreamViewController.h */,
+				0548320613F1AB070099125B /* EventStreamViewController.m */,
+				0548320813F1AEA60099125B /* SimpleEventsViewController.h */,
+				0548320913F1AEA70099125B /* SimpleEventsViewController.m */,
 			);
 			name = events;
 			sourceTree = "<group>";
@@ -1193,7 +1203,6 @@
 				0530CEEC13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m in Sources */,
 				05BC9C0213E9A41B00FBAD23 /* AllEventsViewController.m in Sources */,
 				05B91DCD13EB4F5900E3A898 /* LokaliteApplicationState.m in Sources */,
-				05B91DD013EB504800E3A898 /* LokaliteApplicationState+GeneralHelpers.m in Sources */,
 				05B91DD913EC475800E3A898 /* LokaliteObject.m in Sources */,
 				05B91DDC13EC478000E3A898 /* LokaliteDownloadSource.m in Sources */,
 				05B91DDF13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m in Sources */,
@@ -1204,6 +1213,9 @@
 				055286C013F0B1700072A662 /* Event.m in Sources */,
 				0548320013F0DEDF0099125B /* Business.m in Sources */,
 				0548320413F0DEFE0099125B /* Location.m in Sources */,
+				0548320713F1AB070099125B /* EventStreamViewController.m in Sources */,
+				0548320A13F1AEA70099125B /* SimpleEventsViewController.m in Sources */,
+				0548320D13F1B09B0099125B /* LokaliteCategoryEventStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

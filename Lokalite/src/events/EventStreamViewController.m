@@ -1,41 +1,34 @@
 //
-//  AllEventsViewController.m
+//  EventStreamViewController.m
 //  Lokalite
 //
-//  Created by John Debay on 8/3/11.
+//  Created by John Debay on 8/9/11.
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "AllEventsViewController.h"
+#import "EventStreamViewController.h"
 
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
-#import "SimpleEventsViewController.h"
-
-#import "CategoryFilter.h"
-
-#import "LokaliteEventStream.h"
-#import "LokaliteCategoryEventStream.h"
 
 #import "TableViewImageFetcher.h"
+#import "LokaliteApplicationState.h"
 
-#import "LokaliteShared.h"
+#import "LokaliteStream.h"
+
 #import "SDKAdditions.h"
 
-@interface AllEventsViewController ()
+@interface EventStreamViewController ()
+
 @property (nonatomic, retain) TableViewImageFetcher *imageFetcher;
-
-#pragma mark - View initialization
-
-- (void)initializeNavigationItem;
 
 @end
 
 
-@implementation AllEventsViewController
+@implementation EventStreamViewController
 
 @synthesize imageFetcher = imageFetcher_;
 
@@ -54,13 +47,9 @@
 {
     [super viewDidLoad];
 
-    [self initializeNavigationItem];
-
     [self setShowsSearchBar:YES];
     [[[self searchDisplayController] searchResultsTableView]
      setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-
-    [self setShowsCategoryFilter:YES];
 }
 
 #pragma mark - LokaliteStreamViewController implementation
@@ -141,37 +130,12 @@
                          includeBusinesses:YES];
 }
 
-#pragma mark - Working with category filters
-
-- (NSArray *)categoryFilters
-{
-    return [CategoryFilter defaultFilters];
-}
-
-- (void)didSelectCategoryFilter:(CategoryFilter *)filter
-{
-    NSManagedObjectContext *context = [self context];
-
-    NSString *serverFilter = [filter serverFilter];
-    LokaliteStream *stream =
-        [LokaliteCategoryEventStream streamWithCategoryName:serverFilter
-                                                    context:context];
-    SimpleEventsViewController *controller =
-        [[SimpleEventsViewController alloc] initWithCategoryName:[filter name]
-                                                  lokaliteStream:stream
-                                                         context:context];
-    [[self navigationController] pushViewController:controller animated:YES];
-    [controller release], controller = nil;
-}
-
 #pragma mark Working with the local data store
 
 - (NSString *)lokaliteObjectEntityName
 {
     return @"Event";
 }
-
-#import "LokaliteDownloadSource.h"
 
 - (NSPredicate *)dataControllerPredicate
 {
@@ -216,18 +180,6 @@
                                           otherButtonTitles:nil];
     [alert show];
     [alert release], alert = nil;
-}
-
-- (LokaliteStream *)lokaliteStreamInstance
-{
-    return [LokaliteEventStream streamWithContext:[self context]];
-}
-
-#pragma mark - View initialization
-
-- (void)initializeNavigationItem
-{
-    [[self navigationItem] setLeftBarButtonItem:[self refreshButtonItem]];
 }
 
 #pragma mark - Accessors

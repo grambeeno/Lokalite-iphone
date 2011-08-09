@@ -19,7 +19,6 @@
 #import "ActivityView.h"
 
 #import "LokaliteApplicationState.h"
-#import "LokaliteApplicationState+GeneralHelpers.h"
 
 #import "LokaliteAccount.h"
 #import "Event.h"

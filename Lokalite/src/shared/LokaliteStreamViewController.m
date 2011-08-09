@@ -104,6 +104,8 @@
 @synthesize mapViewController = mapViewController_;
 @synthesize toggleMapViewButtonItem = toggleMapViewButtonItem_;
 
+@synthesize refreshButtonItem = refreshButtonItem_;
+
 @synthesize context = context_;
 @synthesize dataController = dataController_;
 
@@ -139,19 +141,31 @@
 
 #pragma mark - Initialization
 
+- (void)initialize
+{
+    showsSearchBar_ = NO;
+    showsCategoryFilter_ = NO;
+
+    isFetchingData_ = NO;
+
+    showingMapView_ = NO;
+    [self setTitle:[self titleForView]];
+}
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self)
+        [self initialize];
+
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if (self) {
-        showsSearchBar_ = NO;
-        showsCategoryFilter_ = NO;
-
-        //showsDataBeforeFirstFetch_ = NO;
-        isFetchingData_ = NO;
-
-        showingMapView_ = NO;
-        [self setTitle:[self titleForView]];
-    }
+    if (self)
+        [self initialize];
 
     return self;
 }
@@ -179,6 +193,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // HACK: Setting here because in some cases the title isn't available
+    // until the view loads. Consider refactoring in the future.
+    NSLog(@"Setting title to: %@", [self titleForView]);
+    [self setTitle:[self titleForView]];
 
     [self subscribeForNotificationsForContext:[self context]];
     [self subscribeForApplicationLifecycleNotifications];
@@ -446,13 +465,6 @@
 
 - (void)initializeNavigationItem:(UINavigationItem *)navItem
 {
-    UIBarButtonItem *refreshButton =
-        [[UIBarButtonItem alloc]
-         initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                              target:self 
-                              action:@selector(refresh:)];
-    [navItem setLeftBarButtonItem:refreshButton];
-    [refreshButton release], refreshButton = nil;
 }
 
 - (void)initializeTableView:(UITableView *)tableView
@@ -1017,6 +1029,18 @@
     }
 
     return loadingMoreActivityView_;
+}
+
+- (UIBarButtonItem *)refreshButtonItem
+{
+    if (!refreshButtonItem_)
+        refreshButtonItem_ =
+            [[UIBarButtonItem alloc]
+             initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                  target:self 
+                                  action:@selector(refresh:)];
+
+    return refreshButtonItem_;
 }
 
 - (UIBarButtonItem *)toggleMapViewButtonItem

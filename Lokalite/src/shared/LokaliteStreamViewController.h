@@ -39,15 +39,16 @@
 @property (nonatomic, retain, readonly)
     UIBarButtonItem *toggleMapViewButtonItem;
 
+#pragma mark - Refreshing data
+
+@property (nonatomic, retain, readonly) UIBarButtonItem *refreshButtonItem;
+
+- (void)refresh:(id)sender;
+
 #pragma mark - Data store
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 @property (nonatomic, retain) NSFetchedResultsController *dataController;
-
-#pragma mark - Button actions
-
-- (void)refresh:(id)sender;
-
 
 #pragma mark - Displaying the activity view
 

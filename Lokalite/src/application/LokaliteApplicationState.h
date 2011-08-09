@@ -16,3 +16,10 @@
 @property (nonatomic, retain) NSDate * dataFreshnessDate;
 
 @end
+
+
+@interface LokaliteApplicationState (GeneralHelpers)
+
++ (id)currentState:(NSManagedObjectContext *)context;
+
+@end

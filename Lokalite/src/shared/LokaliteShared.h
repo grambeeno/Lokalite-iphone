@@ -7,9 +7,9 @@
 //
 
 #import "DataFetcher.h"
+#import "TableViewImageFetcher.h"
 
 #import "LokaliteApplicationState.h"
-#import "LokaliteApplicationState+GeneralHelpers.h"
 
 #import "LokaliteObject.h"
 

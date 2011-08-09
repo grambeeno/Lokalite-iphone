@@ -126,6 +126,7 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 {
     if (categoryFilters != categoryFilters_) {
         [categoryFilters_ release];
+        categoryFilters_ = [categoryFilters copy];
 
         [self configureForCategoryFilters:categoryFilters];
     }

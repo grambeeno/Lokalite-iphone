@@ -162,14 +162,12 @@
     return [self streamWithDownloadSource:source context:context];
 }
 
-//+ (id)streamWithDownloadSourceName:(NSString *)downloadSourceName
 + (id)streamWithDownloadSource:(LokaliteDownloadSource *)source
                        context:(NSManagedObjectContext *)context
 {
     NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
     id obj = [[self alloc] initWithBaseUrl:baseUrl
                             downloadSource:source
-//                        downloadSourceName:downloadSourceName
                                    context:context];
 
     return [obj autorelease];

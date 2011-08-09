@@ -49,6 +49,13 @@
     return self;
 }
 
+#pragma mark - Accessors
+
+- (NSString *)serverFilter
+{
+    return [self name];
+}
+
 @end
 
 

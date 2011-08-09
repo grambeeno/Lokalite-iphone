@@ -25,6 +25,11 @@
              buttonImage:(UIImage *)buttonImage
      selectedButtonImage:(UIImage *)selectedButtonImage;
 
+#pragma mark - Accessors
+
+// The term sent to the server to retrieve objects that match this category
+- (NSString *)serverFilter;
+
 @end
 
 

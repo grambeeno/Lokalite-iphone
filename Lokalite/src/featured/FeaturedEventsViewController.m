@@ -213,6 +213,7 @@
 
 - (void)initializeNavigationItem
 {
+    [[self navigationItem] setLeftBarButtonItem:[self refreshButtonItem]];
     [[self navigationItem] setRightBarButtonItem:
      [self toggleMapViewButtonItem]];
 }
