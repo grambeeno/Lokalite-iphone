@@ -146,6 +146,14 @@
     return [CategoryFilter defaultFilters];
 }
 
+- (void)didSelectCategoryFilter:(CategoryFilter *)filter
+{
+    UITableViewController *tvc =
+        [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [[self navigationController] pushViewController:tvc animated:YES];
+    [tvc release], tvc = nil;
+}
+
 #pragma mark Working with the local data store
 
 - (NSString *)lokaliteObjectEntityName

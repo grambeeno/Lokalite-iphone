@@ -18,7 +18,17 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 @implementation CategoryFilterView
 
 @synthesize categoryFilters = categoryFilters_;
-@synthesize selectedCategoryFilterIndex = selectedCategoryFilterIndex_;
+@synthesize categoryChangedHandler = categoryChangedHandler_;
+
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    [categoryFilters_ release];
+    [categoryChangedHandler_ release];
+
+    [super dealloc];
+}
 
 #pragma mark - Initialization
 
@@ -40,20 +50,12 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 {
     const NSInteger indexOffset = CATEGORY_FILTER_TAG_INDEX_OFFSET;
 
-    NSInteger oldFilterIndex = [self selectedCategoryFilterIndex];
-    NSInteger oldFilterButtonTag = oldFilterIndex + indexOffset;
-    CategoryFilter *oldFilter =
-        [[self categoryFilters] objectAtIndex:oldFilterIndex];
-    UIButton *oldButton = (UIButton *) [self  viewWithTag:oldFilterButtonTag];
-    [oldButton setImage:[oldFilter buttonImage] forState:UIControlStateNormal];
-
     NSInteger filterButtonTag = [button tag];
     NSInteger filterIndex = filterButtonTag - indexOffset;
     CategoryFilter *filter = [[self categoryFilters] objectAtIndex:filterIndex];
-    [button setImage:[filter selectedButtonImage]
-            forState:UIControlStateNormal];
 
-    [self setSelectedCategoryFilterIndex:filterIndex];
+    if ([self categoryChangedHandler])
+        [self categoryChangedHandler](filter);
 }
 
 #pragma mark - View configuration
@@ -61,7 +63,6 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 - (void)configureForCategoryFilters:(NSArray *)filters
 {
     NSInteger selectedFilterIndex = 0;
-    [self setSelectedCategoryFilterIndex:selectedFilterIndex];
 
     static const CGFloat buttonHeight = 50, buttonWidth = 50;
     CGRect frame = [self frame];

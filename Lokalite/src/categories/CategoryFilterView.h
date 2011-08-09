@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class CategoryFilter;
+
+typedef void(^CFVCategoryChangedHandler)(CategoryFilter *filter);
+
 @interface CategoryFilterView : UIScrollView
 
 @property (nonatomic, copy) NSArray *categoryFilters;
-@property (nonatomic, assign) NSInteger selectedCategoryFilterIndex;
+@property (nonatomic, copy) CFVCategoryChangedHandler categoryChangedHandler;
 
 @end

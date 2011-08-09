@@ -15,6 +15,7 @@
 
 @protocol MappableLokaliteObject;
 @class LokaliteAccount, LokaliteStream;
+@class CategoryFilter;
 
 @interface LokaliteStreamViewController : UITableViewController
     <NSFetchedResultsControllerDelegate, MapDisplayControllerDelegate,
@@ -101,7 +102,7 @@
 #pragma mark - Working with category filters
 
 - (NSArray *)categoryFilters;
-
+- (void)didSelectCategoryFilter:(CategoryFilter *)filter;
 
 #pragma mark Working with the local data store
 

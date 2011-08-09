@@ -588,6 +588,12 @@
     return nil;
 }
 
+- (void)didSelectCategoryFilter:(CategoryFilter *)filter
+{
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclasses",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+}
+
 - (NSIndexPath *)dataIndexPathForTableViewIndexPath:(NSIndexPath *)path
                                         inTableView:(UITableView *)tableView
 {
@@ -879,7 +885,7 @@
         NSIndexPath *first = [NSIndexPath indexPathForRow:0 inSection:0];
         NSArray *paths = [NSArray arrayWithObject:first];
         [[self tableView] insertRowsAtIndexPaths:paths
-                                withRowAnimation:UITableViewRowAnimationBottom];
+                                withRowAnimation:UITableViewRowAnimationTop];
     }
 }
 
@@ -963,6 +969,9 @@
     if (!categoryFilterView_) {
         CGRect frame = CGRectMake(0, 0, 320, [[self tableView] rowHeight]);
         categoryFilterView_ = [[CategoryFilterView alloc] initWithFrame:frame];
+        [categoryFilterView_ setCategoryChangedHandler:^(CategoryFilter *fltr) {
+            [self didSelectCategoryFilter:fltr];
+        }];
     }
 
     return categoryFilterView_;
@@ -974,7 +983,8 @@
         categoryFilterCell_ =
             [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                    reuseIdentifier:@"CategoryFilterCell"];
-        [categoryFilterCell_ addSubview:[self categoryFilterView]];
+        [[categoryFilterCell_ contentView]
+         addSubview:[self categoryFilterView]];
     }
 
     return categoryFilterCell_;
