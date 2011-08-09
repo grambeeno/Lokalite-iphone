@@ -24,8 +24,6 @@
                                                          inContext:context];
     [location addDownloadSourcesObject:source];
 
-    [location setValueIfNecessary:[jsonData objectForKey:@"address"]
-                                                  forKey:@"address"];
     [location setValueIfNecessary:[jsonData objectForKey:@"formatted_address"]
                                                   forKey:@"formattedAddress"];
 

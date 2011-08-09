@@ -66,7 +66,7 @@
 // Convenience method that reaches through the Venue and the Location instance
 // to get a CLLocation object.
 //
-- (CLLocation *)location;
+- (CLLocation *)locationInstance;
 
 @end
 

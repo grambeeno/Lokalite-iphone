@@ -13,11 +13,11 @@
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
 
-#import "Venue.h"
-#import "Venue+GeneralHelpers.h"
-
 #import "Category.h"
 #import "Category+GeneralHelpers.h"
+
+#import "Location.h"
+#import "Location+GeneralHelpers.h"
 
 #import "LokaliteDownloadSource.h"
 #import "LokaliteDownloadSource+GeneralHelpers.h"
@@ -114,11 +114,12 @@
     NSNumber *trended = [eventData objectForKey:@"trended?"];
     [event setValueIfNecessary:trended forKey:@"trended"];
 
-    NSDictionary *venueData = [eventData objectForKey:@"venue"];
-    Venue *venue = [Venue existingOrNewVenueFromJsonData:venueData
-                                          downloadSource:source
-                                               inContext:context];
-    [event setVenue:venue];
+    NSDictionary *locationData = [eventData objectForKey:@"location"];
+    Location *location =
+        [Location existingOrNewLocationFromJsonData:locationData
+                                     downloadSource:source
+                                          inContext:context];
+    [event setLocation:location];
 
     NSArray *categoryData = [eventData objectForKey:@"categories"];
     NSArray *categories =
@@ -186,10 +187,10 @@
     if ([[business events] count] == 0)
         [context deleteObject:business];
 
-    Venue *venue = [[self venue] retain];
-    [self setVenue:nil];
-    if ([[venue events] count] == 0)
-        [context deleteObject:venue];
+    Location *location = [[self location] retain];
+    [self setLocation:nil];
+    if ([[location events] count] == 0)
+        [context deleteObject:location];
 
     NSSet *categories = [[self categories] retain];
     [self setCategories:nil];
@@ -203,7 +204,7 @@
     }
 
     [business release], business = nil;
-    [venue release], venue = nil;
+    [location release], location = nil;
     [categories release], categories = nil;
 
     [super prepareForDeletion];
@@ -214,7 +215,6 @@
 
 
 #import <CoreLocation/CoreLocation.h>
-#import "Venue.h"
 #import "Location.h"
 
 @implementation Event (ConvenienceMethods)
@@ -261,9 +261,9 @@
 
 @implementation Event (GeoHelpers)
 
-- (CLLocation *)location
+- (CLLocation *)locationInstance
 {
-    Location *location = [[self venue] location];
+    Location *location = [self location];
     NSNumber *lat = [location latitude], *lon = [location longitude];
     CLLocation *loc = [[CLLocation alloc] initWithLatitude:[lat floatValue]
                                                  longitude:[lon floatValue]];

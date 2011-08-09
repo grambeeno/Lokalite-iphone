@@ -12,7 +12,7 @@
 
 #import "MappableLokaliteObject.h"
 
-@class Business, Category, Venue;
+@class Business, Category, Location;
 
 @interface Event : LokaliteObject <MappableLokaliteObject> {
 @private
@@ -26,7 +26,7 @@
 @property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *categories;
-@property (nonatomic, retain) Venue *venue;
+@property (nonatomic, retain) Location *location;
 @property (nonatomic, retain) Business *business;
 @end
 

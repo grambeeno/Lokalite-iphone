@@ -9,7 +9,7 @@
 #import "Event.h"
 #import "Business.h"
 #import "Category.h"
-#import "Venue.h"
+#import "Location.h"
 
 #import "Event+GeneralHelpers.h"
 #import "LokaliteObjectMapAnnotation.h"
@@ -24,7 +24,7 @@
 @dynamic imageData;
 @dynamic name;
 @dynamic categories;
-@dynamic venue;
+@dynamic location;
 @dynamic business;
 
 #pragma mark - LokaliteObject implementation
@@ -37,7 +37,7 @@
 - (id<MKAnnotation>)mapAnnotation
 {
     return [[[LokaliteObjectMapAnnotation alloc]
-             initWithCoordinate:[[self location] coordinate]
+             initWithCoordinate:[[self locationInstance] coordinate]
              title:[self name]
              subtitle:[self summary]
              object:self]

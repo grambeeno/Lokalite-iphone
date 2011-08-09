@@ -2,7 +2,7 @@
 //  Location.h
 //  Lokalite
 //
-//  Created by John Debay on 8/4/11.
+//  Created by John Debay on 8/8/11.
 //  Copyright (c) 2011 Lokalite. All rights reserved.
 //
 
@@ -10,22 +10,21 @@
 #import <CoreData/CoreData.h>
 #import "LokaliteObject.h"
 
-@class Venue;
+@class Event;
 
 @interface Location : LokaliteObject {
 @private
 }
-@property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSString * formattedAddress;
-@property (nonatomic, retain) NSSet *venues;
+@property (nonatomic, retain) NSSet *events;
 @end
 
 @interface Location (CoreDataGeneratedAccessors)
 
-- (void)addVenuesObject:(Venue *)value;
-- (void)removeVenuesObject:(Venue *)value;
-- (void)addVenues:(NSSet *)values;
-- (void)removeVenues:(NSSet *)values;
+- (void)addEventsObject:(Event *)value;
+- (void)removeEventsObject:(Event *)value;
+- (void)addEvents:(NSSet *)values;
+- (void)removeEvents:(NSSet *)values;
 @end

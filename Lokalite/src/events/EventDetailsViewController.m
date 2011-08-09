@@ -11,7 +11,6 @@
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 #import "Business.h"
-#import "Venue.h"
 #import "Location.h"
 
 #import "EventDetailsHeaderView.h"
@@ -304,7 +303,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)initializeMapView
 {
     LocationTableViewCell *cell = [self locationMapCell];
-    CLLocation *location = [[self event] location];
+    CLLocation *location = [[self event] locationInstance];
     [cell setLocation:location];
 }
 
@@ -390,7 +389,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
             [cell setAccessoryType:UITableViewCellAccessoryNone];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         } else if ([indexPath row] == kLocationRowAddress) {
-            Location *location = [[[self event] venue] location];
+            Location *location = [[self event] location];
             [[cell textLabel] setText:[location formattedAddress]];
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
