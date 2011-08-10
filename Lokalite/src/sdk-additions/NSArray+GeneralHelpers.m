@@ -14,13 +14,6 @@
 - (BOOL)isNotEqual:(id)obj;
 @end
 
-@implementation NSNull (BlockHelpers)
-- (BOOL)isNotEqual:(id)obj
-{
-    return ![self isEqual:obj];
-}
-@end
-
 @implementation NSArray (GeneralHelpers)
 
 - (NSArray *)arrayByMappingArray:(id (^)(id, NSUInteger, BOOL *))fun
@@ -38,14 +31,13 @@
     return mapped;
 }
 
-- (NSArray *)arrayByIncludingObjectsPassingTest:
-    (BOOL (^)(id, NSUInteger, BOOL *))predicate
+- (NSArray *)arrayByRemovingObjectsPassingTest:
+    (BOOL (^)(id obj, NSUInteger idx, BOOL *stop))predicate
 {
     NSIndexSet *indexes =
-        [self indexesOfObjectsPassingTest:
-         ^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        [self indexesOfObjectsPassingTest:^(id obj, NSUInteger i, BOOL *stop) {
              BOOL shouldStop = NO;
-             BOOL answer = predicate(obj, idx, &shouldStop);
+             BOOL answer = predicate(obj, i, &shouldStop);
              if (shouldStop)
                  *stop = YES;
              return answer;
@@ -59,9 +51,9 @@
 
 - (NSArray *)arrayByCompactingContents
 {
-    return [self arrayByIncludingObjectsPassingTest:
+    return [self arrayByRemovingObjectsPassingTest:
             ^(id obj, NSUInteger idx, BOOL *stop) {
-                return [[NSNull null] isNotEqual:obj];
+                return [[NSNull null] isEqual:obj];
             }];
 }
 

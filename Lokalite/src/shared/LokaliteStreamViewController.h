@@ -89,11 +89,11 @@
 - (void)displayDetailsForObject:(id<MappableLokaliteObject>)object;
 
 
-#pragma mark - Searching local results
+#pragma mark - Searching - local
 
 - (NSPredicate *)predicateForQueryString:(NSString *)queryString;
 
-#pragma mark - Searching remotely
+#pragma mark - Searching - remote
 
 @property (nonatomic, assign) BOOL canSearchServer;
 

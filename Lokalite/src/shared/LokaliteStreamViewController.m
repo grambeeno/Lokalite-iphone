@@ -32,6 +32,7 @@
 
 #pragma mark - Search - remote
 
+@property (nonatomic, assign) BOOL hasSearchedServer;
 @property (nonatomic, retain)
     RemoteSearchTableFooterView *remoteSearchFooterView;
 @property (nonatomic, retain) LokaliteStream *remoteSearchLokaliteStream;
@@ -66,11 +67,13 @@
                                           forTableView:(UITableView *)tableView
                                        reuseIdentifier:(NSString *)identifier;
 
-#pragma mark - Searching remotely
+#pragma mark - Search - remote
 
 - (BOOL)isRemoteSearchRow:(UITableView *)tableView
                 indexPath:(NSIndexPath *)path;
 - (void)performRemoteSearch:(NSString *)query;
+- (void)processRemoteSearchResults:(NSArray *)results;
+- (NSArray *)extractNewObjectsFromSearchResults:(NSArray *)results;
 
 #pragma mark Working with the map view
 
@@ -116,6 +119,7 @@
 
 @synthesize searchResults = searchResults_;
 @synthesize canSearchServer = canSearchServer_;
+@synthesize hasSearchedServer = hasSearchedServer_;
 @synthesize remoteSearchFooterView = remoteSearchFooterView_;
 @synthesize remoteSearchLokaliteStream = remoteSearchLokaliteStream_;
 
@@ -171,6 +175,7 @@
 {
     showsSearchBar_ = NO;
     canSearchServer_ = NO;
+    hasSearchedServer_ = NO;
     showsCategoryFilter_ = NO;
 
     isFetchingData_ = NO;
@@ -296,7 +301,7 @@
             ++nrows;
     } else {
         nrows = [[self searchResults] count];
-        if ([self canSearchServer])
+        if ([self canSearchServer] && ![self hasSearchedServer])
             ++nrows;
     }
 
@@ -333,7 +338,6 @@
             [self configureCell:cell forObject:obj];
         }
 
-        NSLog(@"Returning cell: %@", NSStringFromClass([cell class]));
         return cell;
     }
 }
@@ -599,7 +603,7 @@
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
 
-#pragma mark - Searching local results
+#pragma mark - Search - local
 
 - (NSPredicate *)predicateForQueryString:(NSString *)queryString
 {
@@ -615,6 +619,7 @@
 {
     return
         [self canSearchServer] &&
+        ![self hasSearchedServer] &&
         tableView != [self tableView] &&
         [path row] == [[self searchResults] count];
 }
@@ -635,23 +640,30 @@
 
     [[self remoteSearchLokaliteStream] fetchNextBatchWithResponseHandler:
      ^(NSArray *results, NSError *error) {
+         [[self remoteSearchFooterView] hideActivity];
+
          if (results) {
              NSLog(@"Search for '%@' finished; %d results", query,
                    [results count]);
-             NSArray *searchResults =
-                [[self searchResults] arrayByAddingObjectsFromArray:results];
-             [self setSearchResults:searchResults];
-             [[[self searchDisplayController] searchResultsTableView]
-              reloadData];
+
+             [self setHasSearchedServer:YES];
+
+             UITableView *tv =
+                [[self searchDisplayController] searchResultsTableView];
+             [tv beginUpdates];
+             [self processRemoteSearchResults:results];
+             NSInteger lastRowIndex = MIN(0, [[self searchResults] count] - 1);
+             NSIndexPath *lastRow =
+                [NSIndexPath indexPathForRow:lastRowIndex inSection:0];
+             [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:lastRow]
+                       withRowAnimation:UITableViewRowAnimationBottom];
+             [tv endUpdates];
          } else {
              if (!error) {
                  // TODO: create an "unknown error"
              }
              // TODO: display error
          }
-
-         // TODO: remove the remote search view altogether
-         [[self remoteSearchFooterView] hideActivity];
      }];
 }
 
@@ -661,6 +673,63 @@
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclasses",
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     return nil;
+}
+
+- (void)processRemoteSearchResults:(NSArray *)results
+{
+    NSArray *uniqueResults = [self extractNewObjectsFromSearchResults:results];
+
+    if ([uniqueResults count]) {
+        NSInteger offset = [[self searchResults] count];
+        NSArray *searchResults =
+            [[self searchResults]
+             arrayByAddingObjectsFromArray:uniqueResults];
+        [self setSearchResults:searchResults];
+
+        UITableView *tv =
+            [[self searchDisplayController] searchResultsTableView];
+        NSMutableArray *paths =
+            [NSMutableArray arrayWithCapacity:[searchResults count]];
+        [uniqueResults enumerateObjectsUsingBlock:
+         ^(LokaliteObject *obj, NSUInteger idx, BOOL *stop) {
+             NSIndexPath *path = [NSIndexPath indexPathForRow:idx + offset
+                                                    inSection:0];
+             [paths addObject:path];
+        }];
+
+        [tv insertRowsAtIndexPaths:paths
+                  withRowAnimation:UITableViewRowAnimationTop];
+    }
+}
+
+- (NSArray *)extractNewObjectsFromSearchResults:(NSArray *)results
+{
+    NSArray *current = [[self dataController] fetchedObjects];
+    NSSet *currentIds =
+        [NSSet setWithArray:
+         [current arrayByMappingArray:
+          ^(LokaliteObject *obj, NSUInteger idx, BOOL *stop) {
+              return [obj identifier];
+          }]];
+
+    NSMutableSet *resultIds =
+        [NSMutableSet setWithArray:
+         [results arrayByMappingArray:
+          ^(LokaliteObject *obj, NSUInteger idx, BOOL *stop) {
+              return [obj identifier];
+          }]];
+
+    [resultIds minusSet:currentIds];
+
+    NSArray *finalResults =
+        [results arrayByRemovingObjectsPassingTest:
+         ^(LokaliteObject *obj, NSUInteger idx, BOOL *stop) {
+             // declare a variable to pacify the compiler
+             BOOL passed = ![resultIds containsObject:[obj identifier]];
+             return passed;
+         }];
+
+    return finalResults;
 }
 
 #pragma mark Working with the map view

@@ -12,8 +12,8 @@
 
 - (NSArray *)arrayByMappingArray:(id (^)(id obj, NSUInteger idx, BOOL *stop))f;
 
-- (NSArray *)arrayByIncludingObjectsPassingTest:
-(BOOL (^)(id, NSUInteger, BOOL *))predicate;
+- (NSArray *)arrayByRemovingObjectsPassingTest:
+    (BOOL (^)(id obj, NSUInteger idx, BOOL *stop))predicate;
 
 - (NSArray *)arrayByCompactingContents;
 
