@@ -374,6 +374,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
+    NSLog(@"Search: cancelled");
+
     [self setSearchResults:nil];
     if ([self canSearchServer]) {
         [self setHasSearchedServer:NO];
@@ -381,10 +383,12 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     }
 }
 
-#pragma mark - UISearchDisplayControllerDelegate implementation
+#pragma mark - UISearchDisplayDelegate implementation
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)ctlr
 {
+    NSLog(@"Search: will begin");
+
     [self setSearchResults:[NSArray array]];
 
     //
@@ -415,7 +419,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
         objects = [objects filteredArrayUsingPredicate:pred];
         [self setSearchResults:objects];
 
-        NSLog(@"Search string '%@' matches %d events", searchString,
+        NSLog(@"Search: query string '%@' matches %d events", searchString,
               [objects count]);
     }
 
@@ -1212,10 +1216,9 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 {
     if (!remoteSearchTableViewCell_) {
         remoteSearchTableViewCell_ =
-            [[[UITableViewCell alloc]
+            [[UITableViewCell alloc]
               initWithStyle:UITableViewCellStyleDefault
-              reuseIdentifier:RemoteSearchTableViewCellReuseIdentifier]
-             autorelease];
+              reuseIdentifier:RemoteSearchTableViewCellReuseIdentifier];
         [remoteSearchTableViewCell_
          setSelectionStyle:UITableViewCellSelectionStyleNone];
         [remoteSearchTableViewCell_
