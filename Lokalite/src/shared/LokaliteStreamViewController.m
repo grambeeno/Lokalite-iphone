@@ -364,10 +364,11 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
     if ([self tableView] == tableView)
         obj = [[self dataController] objectAtIndexPath:indexPath];
-    else
+    else if ([indexPath row] < [[self searchResults] count])
         obj = [[self searchResults] objectAtIndex:[indexPath row]];
 
-    [self displayDetailsForObject:obj];
+    if (obj)
+        [self displayDetailsForObject:obj];
 }
 
 #pragma mark - UISearchBarDelegate implementation
