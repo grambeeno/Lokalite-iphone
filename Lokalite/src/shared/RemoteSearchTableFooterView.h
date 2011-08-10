@@ -12,9 +12,16 @@
 
 @property (nonatomic, retain, readonly) UIButton *searchButton;
 
+#pragma mark - Perform search controls
+
+- (void)displayPerformSearchControls;
+
 #pragma mark - Activity
 
 - (void)displayActivity;
-- (void)hideActivity;
+
+#pragma mark - No results
+
+- (void)displayNoResults;
 
 @end

@@ -375,8 +375,10 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [self setSearchResults:nil];
-    if ([self canSearchServer])
+    if ([self canSearchServer]) {
         [self setHasSearchedServer:NO];
+        [[self remoteSearchFooterView] displayPerformSearchControls];
+    }
 }
 
 #pragma mark - UISearchDisplayControllerDelegate implementation
@@ -384,8 +386,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)ctlr
 {
     [self setSearchResults:[NSArray array]];
-    if ([self canSearchServer])
-        [self setHasSearchedServer:NO];
 
     //
     // HACK: This configuration needs to be called every time a search begins.
@@ -401,8 +401,10 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller 
     shouldReloadTableForSearchString:(NSString *)searchString
 {
-    if ([self canSearchServer])
+    if ([self canSearchServer]) {
         [self setHasSearchedServer:NO];
+        [[self remoteSearchFooterView] displayPerformSearchControls];
+    }
 
     NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
     searchString = [searchString stringByTrimmingCharactersInSet:whitespace];
@@ -652,27 +654,29 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
     [[self remoteSearchLokaliteStream] fetchNextBatchWithResponseHandler:
      ^(NSArray *results, NSError *error) {
-         [[self remoteSearchFooterView] hideActivity];
-
-         if (NO && results) {
+         if (results) {
              NSLog(@"Search for '%@' finished; %d results", query,
                    [results count]);
 
              [self setHasSearchedServer:YES];
 
-             UITableView *tv =
-                [[self searchDisplayController] searchResultsTableView];
-             NSIndexPath *lastRow =
-                [tv indexPathForCell:[self remoteSearchTableViewCell]];
-             [tv beginUpdates];
-             [self processRemoteSearchResults:results];
-             [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:lastRow]
-                       withRowAnimation:UITableViewRowAnimationBottom];
-             [tv endUpdates];
+             if ([results count]) {
+                 UITableView *tv =
+                    [[self searchDisplayController] searchResultsTableView];
+                 NSIndexPath *lastRow =
+                    [tv indexPathForCell:[self remoteSearchTableViewCell]];
+                 [tv beginUpdates];
+                 [self processRemoteSearchResults:results];
+                 [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:lastRow]
+                           withRowAnimation:UITableViewRowAnimationBottom];
+                 [tv endUpdates];
+             } else
+                 [[self remoteSearchFooterView] displayNoResults];
          } else {
+             [[self remoteSearchFooterView] displayPerformSearchControls];
+
              if (!error)
                  error = [NSError unknownError];
-
              [self processRemoteSearchError:error];
          }
      }];

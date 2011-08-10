@@ -24,8 +24,6 @@
 "global.profile" = "Profile";
 
 "global.load-more" = "Load More";
-"global.search-server" = "Continue Search on Server...";
-"global.searching-server" = "Searching Server...";
 
 "global.trend" = "Trend";
 "global.untrend" = "Untrend";
@@ -49,6 +47,10 @@
 /*
  * Search
  */
+
+"search.search-server" = "Continue Search on Server...";
+"global.searching-server" = "Searching Server...";
+"search.no-results" = "No Results Found on Server";
 
 "search.error.title" = "Failed to Search Server";
 

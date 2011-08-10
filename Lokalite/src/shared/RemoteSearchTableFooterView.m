@@ -56,23 +56,47 @@
     return self;
 }
 
+#pragma mark - Perform search controls
+
+- (void)displayPerformSearchControls
+{
+    if ([searchButton_ superview] == nil) {
+        [[self activityIndicator] removeFromSuperview];
+        [[self activityLabel] removeFromSuperview];
+        [self addSubview:[self searchButton]];
+
+        [self setActivityIndicator:nil];
+        [self setActivityLabel:nil];
+    }
+}
+
 #pragma mark - Activity
 
 - (void)displayActivity
 {
-    [[self searchButton] removeFromSuperview];
-    [self addSubview:[self activityIndicator]];
-    [self addSubview:[self activityLabel]];
+    if ([activityIndicator_ superview] == nil) {
+        [[self searchButton] removeFromSuperview];
+
+        [self addSubview:[self activityIndicator]];
+        [self addSubview:[self activityLabel]];
+    }
+
+    [[self activityIndicator] startAnimating];
+    [[self activityLabel]
+     setText:NSLocalizedString(@"global.searching-server", nil)];
+    [[self activityLabel] sizeToFit];
 }
 
-- (void)hideActivity
-{
-    [[self activityIndicator] removeFromSuperview];
-    [[self activityLabel] removeFromSuperview];
-    [self addSubview:[self searchButton]];
+#pragma mark - No results
 
-    [self setActivityIndicator:nil];
-    [self setActivityLabel:nil];
+- (void)displayNoResults
+{
+    if ([activityIndicator_ superview] == nil)
+        [self displayActivity];
+
+    [[self activityIndicator] stopAnimating];
+    [[self activityLabel] setText:NSLocalizedString(@"search.no-results", nil)];
+    [[self activityLabel] sizeToFit];
 }
 
 #pragma mark - Accessors
@@ -82,7 +106,7 @@
     if (!searchButton_) {
         searchButton_ =
             [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-        [searchButton_ setTitle:NSLocalizedString(@"global.search-server", nil)
+        [searchButton_ setTitle:NSLocalizedString(@"search.search-server", nil)
                        forState:UIControlStateNormal];
         UIFont *font = [[searchButton_ titleLabel] font];
         font = [UIFont boldSystemFontOfSize:[font pointSize]];
