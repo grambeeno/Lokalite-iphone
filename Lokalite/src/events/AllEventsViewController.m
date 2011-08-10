@@ -159,7 +159,7 @@
 
 - (NSArray *)categoryFilters
 {
-    return [CategoryFilter defaultFilters];
+    return [CategoryFilter defaultEventFilters];
 }
 
 - (void)didSelectCategoryFilter:(CategoryFilter *)filter
