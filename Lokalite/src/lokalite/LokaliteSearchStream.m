@@ -7,7 +7,10 @@
 //
 
 #import "LokaliteSearchStream.h"
+
 #import "LokaliteService.h"
+#import "LokaliteDownloadSource.h"
+#import "LokaliteDownloadSource+GeneralHelpers.h"
 
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
@@ -29,16 +32,24 @@
 
 #pragma mark - Initialization
 
-- (id)initWithBaseUrl:(NSURL *)url
-       downloadSource:(LokaliteDownloadSource *)downloadSource
-              context:(NSManagedObjectContext *)context
+- (id)initWithKeywords:(NSString *)keywords
+               baseUrl:(NSURL *)baseUrl
+               context:(NSManagedObjectContext *)context
 {
-    self = [super initWithBaseUrl:url
-                   downloadSource:downloadSource
+    NSString *sourceName =
+        [NSString stringWithFormat:@"search/events?keywords=%@", keywords];
+    LokaliteDownloadSource *source =
+        [LokaliteDownloadSource downloadSourceWithName:sourceName
+                                             inContext:context
+                                     createIfNecessary:YES];
+
+    self = [super initWithBaseUrl:baseUrl
+                   downloadSource:source
                           context:context];
     if (self) {
+        keywords_ = [keywords copy];
         includeEvents_ = YES;
-        includeBusinesses_ = YES;
+        includeBusinesses_ = NO;
     }
 
     return self;
@@ -66,6 +77,24 @@
 
          [service release];
      }];
+}
+
+@end
+
+
+#import "UIApplication+GeneralHelpers.h"
+
+@implementation LokaliteSearchStream (InstantiationHelpers)
+
++ (id)streamWithKeywords:(NSString *)keywords
+                 context:(NSManagedObjectContext *)context
+{
+    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+    id obj = [[self alloc] initWithKeywords:keywords
+                                    baseUrl:baseUrl
+                                    context:context];
+
+    return [obj autorelease];
 }
 
 @end

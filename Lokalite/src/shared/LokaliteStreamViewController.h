@@ -97,6 +97,9 @@
 
 @property (nonatomic, assign) BOOL canSearchServer;
 
+- (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
+    (NSString *)keywords;
+
 #pragma mark Working with the map view
 
 - (void)presentMapViewAnimated:(BOOL)animated;

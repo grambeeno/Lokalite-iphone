@@ -175,7 +175,7 @@ enum {
                      includeEvents:(BOOL)includeEvents
                  includeBusinesses:(BOOL)includeBusinesses
 {
-    [[self stream] setKeywords:components];
+    //[[self stream] setKeywords:[components componentsJoinedByString:@" "]];
     [[self stream] setIncludeEvents:includeEvents];
     [[self stream] setIncludeBusinesses:includeBusinesses];
 

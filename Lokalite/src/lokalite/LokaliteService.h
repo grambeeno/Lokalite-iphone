@@ -51,7 +51,7 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 
 #pragma mark - Search
 
-- (void)searchForKeywords:(NSArray *)keywords
+- (void)searchForKeywords:(NSString *)keywords
             includeEvents:(BOOL)includeEvents
         includeBusinesses:(BOOL)includeBusinesses
           responseHandler:(LSResponseHandler)handler;

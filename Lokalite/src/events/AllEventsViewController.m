@@ -19,6 +19,7 @@
 
 #import "LokaliteEventStream.h"
 #import "LokaliteCategoryEventStream.h"
+#import "LokaliteSearchStream.h"
 
 #import "TableViewImageFetcher.h"
 
@@ -141,6 +142,13 @@
     return [Event predicateForSearchString:queryString
                              includeEvents:YES
                          includeBusinesses:YES];
+}
+
+- (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
+    (NSString *)keywords
+{
+    return [LokaliteSearchStream streamWithKeywords:keywords
+                                            context:[self context]];
 }
 
 #pragma mark - Working with category filters

@@ -34,6 +34,7 @@
 
 @property (nonatomic, retain)
     RemoteSearchTableFooterView *remoteSearchFooterView;
+@property (nonatomic, retain) LokaliteStream *remoteSearchLokaliteStream;
 
 #pragma mark - Working with the category filters
 
@@ -69,6 +70,7 @@
 
 - (BOOL)isRemoteSearchRow:(UITableView *)tableView
                 indexPath:(NSIndexPath *)path;
+- (void)performRemoteSearch:(NSString *)query;
 
 #pragma mark Working with the map view
 
@@ -115,6 +117,7 @@
 @synthesize searchResults = searchResults_;
 @synthesize canSearchServer = canSearchServer_;
 @synthesize remoteSearchFooterView = remoteSearchFooterView_;
+@synthesize remoteSearchLokaliteStream = remoteSearchLokaliteStream_;
 
 @synthesize loadedCategoryFilters = loadedCategoryFilters_;
 @synthesize categoryFilterView = categoryFilterView_;
@@ -145,6 +148,7 @@
 
     [searchResults_ release];
     [remoteSearchFooterView_ release];
+    [remoteSearchLokaliteStream_ release];
 
     [loadedCategoryFilters_ release];
     [categoryFilterView_ release];
@@ -615,9 +619,48 @@
         [path row] == [[self searchResults] count];
 }
 
-- (void)performRemoteSearch:(id)sender
+- (void)performRemoteSearchTapped:(id)sender
 {
     [[self remoteSearchFooterView] displayActivity];
+
+    NSString *query = [[[self searchDisplayController] searchBar] text];
+    [self performRemoteSearch:query];
+}
+
+- (void)performRemoteSearch:(NSString *)query
+{
+    LokaliteStream *stream =
+        [self remoteSearchLokaliteStreamInstanceForKeywords:query];
+    [self setRemoteSearchLokaliteStream:stream];
+
+    [[self remoteSearchLokaliteStream] fetchNextBatchWithResponseHandler:
+     ^(NSArray *results, NSError *error) {
+         if (results) {
+             NSLog(@"Search for '%@' finished; %d results", query,
+                   [results count]);
+             NSArray *searchResults =
+                [[self searchResults] arrayByAddingObjectsFromArray:results];
+             [self setSearchResults:searchResults];
+             [[[self searchDisplayController] searchResultsTableView]
+              reloadData];
+         } else {
+             if (!error) {
+                 // TODO: create an "unknown error"
+             }
+             // TODO: display error
+         }
+
+         // TODO: remove the remote search view altogether
+         [[self remoteSearchFooterView] hideActivity];
+     }];
+}
+
+- (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
+    (NSString *)keywords
+{
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclasses",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    return nil;
 }
 
 #pragma mark Working with the map view
@@ -1058,7 +1101,7 @@
             [[RemoteSearchTableFooterView alloc] initWithFrame:frame];
         UIButton *searchButton = [remoteSearchFooterView_ searchButton];
         [searchButton addTarget:self
-                         action:@selector(performRemoteSearch:)
+                         action:@selector(performRemoteSearchTapped:)
                forControlEvents:UIControlEventTouchUpInside];
     }
 

@@ -153,7 +153,7 @@
 
 #pragma mark - Search
 
-- (void)searchForKeywords:(NSArray *)keywords
+- (void)searchForKeywords:(NSString *)keywords
             includeEvents:(BOOL)includeEvents
         includeBusinesses:(BOOL)includeBusinesses
           responseHandler:(LSResponseHandler)handler
@@ -163,9 +163,12 @@
           includeBusinesses ? @"YES" : @"NO");
 
     NSURL *url = [self featuredEventUrl];
+    NSString *encodedKeywords =
+        [keywords
+         stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *parameters =
-        [NSDictionary dictionaryWithObject:
-         [keywords componentsJoinedByString:@" "] forKey:@"keywords"];
+        [NSDictionary dictionaryWithObject:encodedKeywords
+                                    forKey:@"keywords"];
     LokaliteServiceRequest *req =
         [[LokaliteServiceRequest alloc] initWithUrl:url
                                          parameters:parameters
