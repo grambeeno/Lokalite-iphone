@@ -12,6 +12,8 @@
 
 - (NSString *)detailedDescription;
 
++ (id)unknownError;
+
 @end
 
 

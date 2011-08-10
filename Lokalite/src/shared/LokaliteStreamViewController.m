@@ -79,6 +79,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
                 indexPath:(NSIndexPath *)path;
 - (void)performRemoteSearch:(NSString *)query;
 - (void)processRemoteSearchResults:(NSArray *)results;
+- (void)processRemoteSearchError:(NSError *)error;
 - (NSArray *)extractNewObjectsFromSearchResults:(NSArray *)results;
 
 #pragma mark Working with the map view
@@ -653,7 +654,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
      ^(NSArray *results, NSError *error) {
          [[self remoteSearchFooterView] hideActivity];
 
-         if (results) {
+         if (NO && results) {
              NSLog(@"Search for '%@' finished; %d results", query,
                    [results count]);
 
@@ -669,10 +670,10 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
                        withRowAnimation:UITableViewRowAnimationBottom];
              [tv endUpdates];
          } else {
-             if (!error) {
-                 // TODO: create an "unknown error"
-             }
-             // TODO: display error
+             if (!error)
+                 error = [NSError unknownError];
+
+             [self processRemoteSearchError:error];
          }
      }];
 }
@@ -710,6 +711,23 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
         [tv insertRowsAtIndexPaths:paths
                   withRowAnimation:UITableViewRowAnimationTop];
     }
+}
+
+- (void)processRemoteSearchError:(NSError *)error
+{
+    NSString *title = NSLocalizedString(@"search.error.title", nil);
+    NSString *message =
+        [[error userInfo] objectForKey:NSLocalizedDescriptionKey];
+    NSString *cancelButtonTitle = NSLocalizedString(@"global.dismiss", nil);
+
+    UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle:title
+                                   message:message
+                                  delegate:nil
+                         cancelButtonTitle:cancelButtonTitle
+                         otherButtonTitles:nil];
+    [alert show];
+    [alert release], alert = nil;
 }
 
 - (NSArray *)extractNewObjectsFromSearchResults:(NSArray *)results

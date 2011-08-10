@@ -46,6 +46,16 @@
 "global.post-to-facebook" = "Send to Facebook";
 "global.post-to-twitter" = "Send to Twitter";
 
+/*
+ * Search
+ */
+
+"search.error.title" = "Failed to Search Server";
+
+/*
+ * General error messages
+ */
+"error.unknown-error" = "An unknown error occurred.";
 
 /*
  * HTTP error messages

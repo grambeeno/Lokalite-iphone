@@ -31,6 +31,16 @@
     return [desc autorelease];
 }
 
++ (id)unknownError
+{
+    NSString *message = NSLocalizedString(@"error.unknown-error", nil);
+    NSDictionary *userInfo =
+        [NSDictionary dictionaryWithObject:message
+                                    forKey:NSLocalizedDescriptionKey];
+
+    return [NSError errorWithDomain:@"Lokalite" code:-1 userInfo:userInfo];
+}
+
 @end
 
 
