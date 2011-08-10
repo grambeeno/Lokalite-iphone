@@ -365,6 +365,8 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [self setSearchResults:nil];
+    if ([self canSearchServer])
+        [self setHasSearchedServer:NO];
 }
 
 #pragma mark - UISearchDisplayControllerDelegate implementation
@@ -372,6 +374,8 @@
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)ctlr
 {
     [self setSearchResults:[NSArray array]];
+    if ([self canSearchServer])
+        [self setHasSearchedServer:NO];
 
     //
     // HACK: This configuration needs to be called every time a search begins.
@@ -387,6 +391,9 @@
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller 
     shouldReloadTableForSearchString:(NSString *)searchString
 {
+    if ([self canSearchServer])
+        [self setHasSearchedServer:NO];
+
     NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
     searchString = [searchString stringByTrimmingCharactersInSet:whitespace];
 
