@@ -139,6 +139,8 @@
     [controller release], controller = nil;
 }
 
+#pragma mark - Search - remote
+
 - (NSPredicate *)predicateForQueryString:(NSString *)queryString
 {
     return [Event predicateForSearchString:queryString
@@ -149,8 +151,8 @@
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
     (NSString *)keywords
 {
-    return [LokaliteSearchStream streamWithKeywords:keywords
-                                            context:[self context]];
+    return [LokaliteSearchStream eventSearchStreamWithKeywords:keywords
+                                                       context:[self context]];
 }
 
 #pragma mark - Working with category filters

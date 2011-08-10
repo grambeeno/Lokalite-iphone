@@ -17,6 +17,7 @@
 #import "PlaceTableViewCell.h"
 
 #import "LokaliteStream.h"
+#import "LokaliteSearchStream.h"
 #import "LokalitePlacesStream.h"
 
 #import "TableViewImageFetcher.h"
@@ -43,6 +44,16 @@
     [super dealloc];
 }
 
+#pragma mark - UIViewController implementation
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self setShowsSearchBar:YES];
+    [self setCanSearchServer:YES];
+}
+
 #pragma mark - LokaliteStreamViewController implementation
 
 #pragma mark Configuring the view
@@ -56,6 +67,8 @@
 
 - (void)initializeTableView:(UITableView *)tableView
 {
+    [super initializeTableView:tableView];
+
     [tableView setRowHeight:[PlaceTableViewCell cellHeight]];
 }
 
@@ -111,6 +124,20 @@
         [[BusinessDetailsViewController alloc] initWithBusiness:place];
     [[self navigationController] pushViewController:controller animated:YES];
     [controller release], controller = nil;
+}
+
+#pragma mark - Search - remote
+
+- (NSPredicate *)predicateForQueryString:(NSString *)queryString
+{
+    return [Business predicateForSearchString:queryString];
+}
+
+- (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
+    (NSString *)keywords
+{
+    return [LokaliteSearchStream placesSearchStreamWithKeywords:keywords
+                                                        context:[self context]];
 }
 
 #pragma mark Working with the local data store

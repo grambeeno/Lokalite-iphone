@@ -153,16 +153,10 @@
 
 #pragma mark - Search
 
-- (void)searchForKeywords:(NSString *)keywords
-            includeEvents:(BOOL)includeEvents
-        includeBusinesses:(BOOL)includeBusinesses
-          responseHandler:(LSResponseHandler)handler
+- (void)performSearchForKeywords:(NSString *)keywords
+                             url:(NSURL *)url
+                 responseHandler:(LSResponseHandler)handler
 {
-    NSLog(@"Searching for keywords: '%@', include events: %@, include "
-          "businesses: %@", keywords, includeEvents ? @"YES" : @"NO",
-          includeBusinesses ? @"YES" : @"NO");
-
-    NSURL *url = [self featuredEventUrl];
     NSString *encodedKeywords =
         [keywords
          stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -182,6 +176,24 @@
          } else
              handler(response, nil, error);
      }];
+}
+
+- (void)searchEventsForKeywords:(NSString *)keywords
+                responseHandler:(LSResponseHandler)handler
+{
+    NSLog(@"Searching events for keywords: '%@'", keywords);
+    [self performSearchForKeywords:keywords
+                               url:[self featuredEventUrl]
+                   responseHandler:handler];
+}
+
+- (void)searchPlacesForKeywords:(NSString *)keywords
+                responseHandler:(LSResponseHandler)handler
+{
+    NSLog(@"Searching places for keywords: '%@'", keywords);
+    [self performSearchForKeywords:keywords
+                               url:[self placesUrl]
+                   responseHandler:handler];
 }
 
 #pragma mark - Sending requests
@@ -246,9 +258,7 @@
 
 - (NSURL *)placesUrl
 {
-    return
-        [[self baseUrl]
-         URLByAppendingPathComponent:@"api/places/"];
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/places"];
 }
 
 @end

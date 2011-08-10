@@ -26,6 +26,10 @@
                              downloadSource:(LokaliteDownloadSource *)source
                                 withContext:(NSManagedObjectContext *)context;
 
+#pragma mark - Searching
+
++ (NSPredicate *)predicateForSearchString:(NSString *)searchString;
+
 @end
 
 

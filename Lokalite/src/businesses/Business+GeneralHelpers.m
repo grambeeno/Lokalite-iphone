@@ -18,9 +18,7 @@
 
 #import "LokaliteObjectBuilder.h"
 
-#import "NSObject+GeneralHelpers.h"
-#import "NSManagedObject+GeneralHelpers.h"
-#import "UIApplication+GeneralHelpers.h"
+#import "SDKAdditions.h"
 
 @implementation Business (GeneralHelpers)
 
@@ -138,6 +136,16 @@
      }];
 
     return places;
+}
+
+#pragma mark - Searching
+
++ (NSPredicate *)predicateForSearchString:(NSString *)searchString
+{
+    NSArray *keyPaths = [NSArray arrayWithObject:@"name"];
+
+    return [NSPredicate standardSearchPredicateForSearchString:searchString
+                                             attributeKeyPaths:keyPaths];
 }
 
 @end

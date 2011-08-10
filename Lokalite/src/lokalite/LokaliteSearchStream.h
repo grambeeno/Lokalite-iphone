@@ -8,19 +8,32 @@
 
 #import "LokaliteStream.h"
 
+typedef enum {
+    LokaliteSearchStreamSearchEvents = 1,
+    LokaliteSearchStreamSearchPlaces
+} LokaliteSearchStreamSearchType;
+
 @interface LokaliteSearchStream : LokaliteStream
 
+@property (nonatomic, assign, readonly)
+    LokaliteSearchStreamSearchType searchType;
 @property (nonatomic, copy, readonly) NSString *keywords;
 
-@property (nonatomic, assign) BOOL includeEvents;
-@property (nonatomic, assign) BOOL includeBusinesses;
+#pragma mark - Initialization
+
+- (id)initWithSearchStreamType:(LokaliteSearchStreamSearchType)type
+                      keywords:(NSString *)keywords
+                       baseUrl:(NSURL *)baseUrl
+                       context:(NSManagedObjectContext *)context;
 
 @end
 
 
 @interface LokaliteSearchStream (InstantiationHelpers)
 
-+ (id)streamWithKeywords:(NSString *)keywords
-                 context:(NSManagedObjectContext *)context;
++ (id)eventSearchStreamWithKeywords:(NSString *)keywords
+                            context:(NSManagedObjectContext *)context;
++ (id)placesSearchStreamWithKeywords:(NSString *)keywords
+                             context:(NSManagedObjectContext *)context;
 
 @end

@@ -15,12 +15,13 @@
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 
+#import "Business.h"
+#import "Business+GeneralHelpers.h"
+
 @implementation LokaliteSearchStream
 
+@synthesize searchType = searchType_;
 @synthesize keywords = keywords_;
-
-@synthesize includeEvents = includeEvents_;
-@synthesize includeBusinesses = includeBusinesses_;
 
 #pragma mark - Memory management
 
@@ -32,9 +33,10 @@
 
 #pragma mark - Initialization
 
-- (id)initWithKeywords:(NSString *)keywords
-               baseUrl:(NSURL *)baseUrl
-               context:(NSManagedObjectContext *)context
+- (id)initWithSearchStreamType:(LokaliteSearchStreamSearchType)type
+                      keywords:(NSString *)keywords
+                       baseUrl:(NSURL *)baseUrl
+                       context:(NSManagedObjectContext *)context
 {
     NSString *sourceName =
         [NSString stringWithFormat:@"search/events?keywords=%@", keywords];
@@ -47,9 +49,8 @@
                    downloadSource:source
                           context:context];
     if (self) {
+        searchType_ = type;
         keywords_ = [keywords copy];
-        includeEvents_ = YES;
-        includeBusinesses_ = NO;
     }
 
     return self;
@@ -59,24 +60,39 @@
 
 - (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
 {
+    BOOL searchEvents = [self searchType] == LokaliteSearchStreamSearchEvents;
+    BOOL searchPlaces = [self searchType] == LokaliteSearchStreamSearchPlaces;
+    NSAssert(searchEvents || searchPlaces, @"Invalid search criteria");
+
+    LSResponseHandler responseHandler =
+        ^(NSHTTPURLResponse *response, NSDictionary *objects, NSError *error) {
+            NSArray *parsedObjects = nil;
+            if (objects) {
+                NSManagedObjectContext *context = [self context];
+                LokaliteDownloadSource *source = [self downloadSource];
+
+                parsedObjects =
+                    searchEvents ?
+                    [Event eventObjectsFromJsonObjects:objects
+                                        downloadSource:source
+                                           withContext:context] :
+                    [Business businessObjectsFromJsonObjects:objects
+                                              downloadSource:source
+                                                 withContext:context];
+            }
+
+            handler(parsedObjects, error);
+        };
+
     LokaliteService *service =
         [[LokaliteService alloc] initWithBaseUrl:[self baseUrl]];
-    [service searchForKeywords:[self keywords]
-                 includeEvents:[self includeEvents]
-             includeBusinesses:[self includeBusinesses]
-               responseHandler:
-     ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
-         NSArray *parsedObjects = nil;
-         if (jsonObjects)
-             parsedObjects =
-                [Event eventObjectsFromJsonObjects:jsonObjects
-                                    downloadSource:[self downloadSource]
-                                       withContext:[self context]];
 
-         handler(parsedObjects, error);
-
-         [service release];
-     }];
+    if (searchEvents)
+        [service searchEventsForKeywords:[self keywords]
+                         responseHandler:responseHandler];
+    else
+        [service searchPlacesForKeywords:[self keywords]
+                         responseHandler:responseHandler];
 }
 
 @end
@@ -86,13 +102,28 @@
 
 @implementation LokaliteSearchStream (InstantiationHelpers)
 
-+ (id)streamWithKeywords:(NSString *)keywords
-                 context:(NSManagedObjectContext *)context
++ (id)eventSearchStreamWithKeywords:(NSString *)keywords
+                            context:(NSManagedObjectContext *)context
 {
     NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
-    id obj = [[self alloc] initWithKeywords:keywords
-                                    baseUrl:baseUrl
-                                    context:context];
+    LokaliteSearchStreamSearchType type = LokaliteSearchStreamSearchEvents;
+    id obj = [[self alloc] initWithSearchStreamType:type
+                                           keywords:keywords
+                                            baseUrl:baseUrl
+                                            context:context];
+
+    return [obj autorelease];
+}
+
++ (id)placesSearchStreamWithKeywords:(NSString *)keywords
+                             context:(NSManagedObjectContext *)context
+{
+    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+    LokaliteSearchStreamSearchType type = LokaliteSearchStreamSearchPlaces;
+    id obj = [[self alloc] initWithSearchStreamType:type
+                                           keywords:keywords
+                                            baseUrl:baseUrl
+                                            context:context];
 
     return [obj autorelease];
 }

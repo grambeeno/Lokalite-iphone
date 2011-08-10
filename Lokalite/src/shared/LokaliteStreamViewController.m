@@ -662,14 +662,16 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
                    [results count]);
 
              [self setHasSearchedServer:YES];
+             NSArray *uniqueResults =
+                [self extractNewObjectsFromSearchResults:results];
 
-             if ([results count]) {
+             if ([uniqueResults count]) {
                  UITableView *tv =
                     [[self searchDisplayController] searchResultsTableView];
                  NSIndexPath *lastRow =
                     [tv indexPathForCell:[self remoteSearchTableViewCell]];
                  [tv beginUpdates];
-                 [self processRemoteSearchResults:results];
+                 [self processRemoteSearchResults:uniqueResults];
                  [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:lastRow]
                            withRowAnimation:UITableViewRowAnimationBottom];
                  [tv endUpdates];
@@ -695,20 +697,17 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (void)processRemoteSearchResults:(NSArray *)results
 {
-    NSArray *uniqueResults = [self extractNewObjectsFromSearchResults:results];
-
-    if ([uniqueResults count]) {
+    if ([results count]) {
         NSInteger offset = [[self searchResults] count];
         NSArray *searchResults =
-            [[self searchResults]
-             arrayByAddingObjectsFromArray:uniqueResults];
+            [[self searchResults] arrayByAddingObjectsFromArray:results];
         [self setSearchResults:searchResults];
 
         UITableView *tv =
             [[self searchDisplayController] searchResultsTableView];
         NSMutableArray *paths =
             [NSMutableArray arrayWithCapacity:[searchResults count]];
-        [uniqueResults enumerateObjectsUsingBlock:
+        [results enumerateObjectsUsingBlock:
          ^(LokaliteObject *obj, NSUInteger idx, BOOL *stop) {
              NSIndexPath *path = [NSIndexPath indexPathForRow:idx + offset
                                                     inSection:0];
