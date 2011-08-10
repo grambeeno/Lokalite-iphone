@@ -81,6 +81,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)processRemoteSearchResults:(NSArray *)results;
 - (void)processRemoteSearchError:(NSError *)error;
 - (NSArray *)extractNewObjectsFromSearchResults:(NSArray *)results;
+- (void)resetRemoteSearchState;
+- (void)cleanupRemoteSearchResults:(LokaliteDownloadSource *)source;
 
 #pragma mark Working with the map view
 
@@ -378,8 +380,9 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
     [self setSearchResults:nil];
     if ([self canSearchServer]) {
-        [self setHasSearchedServer:NO];
-        [[self remoteSearchFooterView] displayPerformSearchControls];
+        [self resetRemoteSearchState];
+        [self setRemoteSearchLokaliteStream:nil];
+        [self setRemoteSearchTableViewCell:nil];
     }
 }
 
@@ -405,10 +408,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller 
     shouldReloadTableForSearchString:(NSString *)searchString
 {
-    if ([self canSearchServer]) {
-        [self setHasSearchedServer:NO];
-        [[self remoteSearchFooterView] displayPerformSearchControls];
-    }
+    if ([self canSearchServer])
+        [self resetRemoteSearchState];
 
     NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
     searchString = [searchString stringByTrimmingCharactersInSet:whitespace];
@@ -764,6 +765,28 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
          }];
 
     return finalResults;
+}
+
+- (void)resetRemoteSearchState
+{
+    LokaliteDownloadSource *source =
+        [[[self remoteSearchLokaliteStream] downloadSource] retain];
+
+    if (source) {
+        [self cleanupRemoteSearchResults:source];
+        if ([[source lokaliteObjects] count] == 0)
+            [[self context] deleteObject:source];
+    }
+
+    [self setHasSearchedServer:NO];
+    [[self remoteSearchFooterView] displayPerformSearchControls];
+
+    [source release], source = nil;
+}
+
+- (void)cleanupRemoteSearchResults:(LokaliteDownloadSource *)source
+{
+    [source unassociateAndDeleteDownloadedObjects];
 }
 
 #pragma mark Working with the map view

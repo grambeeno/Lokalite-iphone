@@ -14,5 +14,7 @@
 #import "LokaliteApplicationState.h"
 
 #import "LokaliteObject.h"
+#import "LokaliteDownloadSource.h"
+#import "LokaliteDownloadSource+GeneralHelpers.h"
 
 #import "LokaliteObjectBuilder.h"

@@ -9,7 +9,28 @@
 #import "LokaliteDownloadSource+GeneralHelpers.h"
 #import "NSManagedObject+GeneralHelpers.h"
 
+#import "LokaliteObject.h"
+
 @implementation LokaliteDownloadSource (GeneralHelpers)
+
+- (void)prepareForDeletion
+{
+    NSLog(@"%@: %@", NSStringFromClass([self class]),
+          NSStringFromSelector(_cmd));
+    [super prepareForDeletion];
+}
+
+- (void)unassociateAndDeleteDownloadedObjects
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSSet *objects = [[self lokaliteObjects] mutableCopy];
+    [objects enumerateObjectsUsingBlock:^(LokaliteObject *obj, BOOL *stop) {
+        [obj removeDownloadSourcesObject:self];
+        if ([[obj downloadSources] count] == 0)
+            [context deleteObject:obj];
+    }];
+    [objects release], objects = nil;
+}
 
 #pragma mark - Creating and finding
 

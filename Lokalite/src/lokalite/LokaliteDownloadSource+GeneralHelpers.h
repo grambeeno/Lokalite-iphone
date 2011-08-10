@@ -10,6 +10,8 @@
 
 @interface LokaliteDownloadSource (GeneralHelpers)
 
+- (void)unassociateAndDeleteDownloadedObjects;
+
 #pragma mark - Creating and finding
 
 + (id)downloadSourceWithName:(NSString *)name
