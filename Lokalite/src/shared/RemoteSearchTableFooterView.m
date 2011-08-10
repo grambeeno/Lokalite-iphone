@@ -8,10 +8,13 @@
 
 #import "RemoteSearchTableFooterView.h"
 
+#import "SDKAdditions.h"
+
 @interface RemoteSearchTableFooterView ()
 
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) UILabel *activityLabel;
+@property (nonatomic, retain) UIView *horizontalLine;
 
 @end
 
@@ -23,6 +26,8 @@
 @synthesize activityIndicator = activityIndicator_;
 @synthesize activityLabel = activityLabel_;
 
+@synthesize horizontalLine = horizontalLine_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -31,6 +36,8 @@
 
     [activityIndicator_ release];
     [activityLabel_ release];
+
+    [horizontalLine_ release];
 
     [super dealloc];
 }
@@ -43,6 +50,7 @@
     if (self) {
         [self setOpaque:YES];
         [self addSubview:[self searchButton]];
+        [self addSubview:[self horizontalLine]];
     }
 
     return self;
@@ -80,7 +88,7 @@
         font = [UIFont boldSystemFontOfSize:[font pointSize]];
         [[searchButton_ titleLabel] setFont:font];
 
-        [searchButton_ setTitleColor:[UIColor blackColor]
+        [searchButton_ setTitleColor:[UIColor colorWithRGBValue:0x1058d2]
                             forState:UIControlStateNormal];
 
         CGRect frame = [self frame];
@@ -115,16 +123,35 @@
 - (UILabel *)activityLabel
 {
     if (!activityLabel_) {
-        CGRect labelFrame = CGRectMake(36, 0, 260, [self frame].size.height);
+        NSString *text = NSLocalizedString(@"global.searching-server", nil);
+        UIFont *font = [UIFont boldSystemFontOfSize:18];
+        CGSize size = [text sizeWithFont:font];
+        CGFloat y = round(([self frame].size.height - size.height) / 2);
+        CGFloat x = 36;
+
+        CGRect labelFrame = CGRectMake(x, y, size.width, size.height);
         activityLabel_ =
             [[UILabel alloc] initWithFrame:labelFrame];
-        [activityLabel_
-         setText:NSLocalizedString(@"global.searching-server", nil)];
-        [activityLabel_ setFont:[UIFont boldSystemFontOfSize:18]];
-        [activityLabel_ setTextColor:[UIColor grayColor]];
+        [activityLabel_ setText:text];
+        [activityLabel_ setFont:font];
+        [activityLabel_ setTextColor:[UIColor colorWithRGBValue:0x6c6c6c]];
     }
 
     return activityLabel_;
+}
+
+- (UIView *)horizontalLine
+{
+    if (!horizontalLine_) {
+        CGRect frame = [self frame];
+        CGRect lineFrame =
+            CGRectMake(0, frame.size.height - 1, frame.size.width, 1);
+        horizontalLine_ = [[UIView alloc] initWithFrame:lineFrame];
+        [horizontalLine_
+         setBackgroundColor:[UIColor colorWithRGBValue:0xd8d8d8]];
+    }
+
+    return horizontalLine_;
 }
 
 @end
