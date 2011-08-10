@@ -657,7 +657,7 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 - (NSArray *)categoryFilters
 {
     if (!categoryFilters_)
-        categoryFilters_ = [[CategoryFilter defaultFilters] copy];
+        categoryFilters_ = [[CategoryFilter defaultEventFilters] copy];
 
     return categoryFilters_;
 }
