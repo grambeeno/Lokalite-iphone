@@ -20,6 +20,11 @@
 #import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
+
+static NSString *RemoteSearchTableViewCellReuseIdentifier =
+    @"SearchResultsLoadMoreTableViewCell";
+
+
 @interface LokaliteStreamViewController ()
 
 #pragma mark - Working with the table view
@@ -35,6 +40,7 @@
 @property (nonatomic, assign) BOOL hasSearchedServer;
 @property (nonatomic, retain)
     RemoteSearchTableFooterView *remoteSearchFooterView;
+@property (nonatomic, retain) UITableViewCell *remoteSearchTableViewCell;
 @property (nonatomic, retain) LokaliteStream *remoteSearchLokaliteStream;
 
 #pragma mark - Working with the category filters
@@ -121,6 +127,7 @@
 @synthesize canSearchServer = canSearchServer_;
 @synthesize hasSearchedServer = hasSearchedServer_;
 @synthesize remoteSearchFooterView = remoteSearchFooterView_;
+@synthesize remoteSearchTableViewCell = remoteSearchTableViewCell_;
 @synthesize remoteSearchLokaliteStream = remoteSearchLokaliteStream_;
 
 @synthesize loadedCategoryFilters = loadedCategoryFilters_;
@@ -152,6 +159,7 @@
 
     [searchResults_ release];
     [remoteSearchFooterView_ release];
+    [remoteSearchTableViewCell_ release];
     [remoteSearchLokaliteStream_ release];
 
     [loadedCategoryFilters_ release];
@@ -320,6 +328,7 @@
 
         NSString *reuseIdentifier =
             [self _reuseIdentifierForIndexPath:indexPath inTableView:tableView];
+        NSLog(@"%@: %@", indexPath, reuseIdentifier);
         UITableViewCell *cell =
             [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (cell == nil)
@@ -551,7 +560,7 @@
 {
     return
         [self isRemoteSearchRow:tableView indexPath:indexPath] ?
-        @"SearchResultsLoadMoreTableViewCell" :
+        RemoteSearchTableViewCellReuseIdentifier :
         [self reuseIdentifierForIndexPath:indexPath inTableView:tableView];
 }
 
@@ -565,17 +574,11 @@
                                           forTableView:(UITableView *)tableView
                                        reuseIdentifier:(NSString *)identifier
 {
-
     UITableViewCell *cell = nil;
 
-    if ([self isRemoteSearchRow:tableView indexPath:indexPath]) {
-        cell =
-            [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:identifier] autorelease];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-        [[cell contentView] addSubview:[self remoteSearchFooterView]];
-    } else
+    if ([self isRemoteSearchRow:tableView indexPath:indexPath])
+        cell = [self remoteSearchTableViewCell];
+    else
         cell = [self tableViewCellInstanceAtIndexPath:indexPath
                                          forTableView:tableView
                                       reuseIdentifier:identifier];
@@ -658,11 +661,10 @@
 
              UITableView *tv =
                 [[self searchDisplayController] searchResultsTableView];
+             NSIndexPath *lastRow =
+                [tv indexPathForCell:[self remoteSearchTableViewCell]];
              [tv beginUpdates];
              [self processRemoteSearchResults:results];
-             NSInteger lastRowIndex = MIN(0, [[self searchResults] count] - 1);
-             NSIndexPath *lastRow =
-                [NSIndexPath indexPathForRow:lastRowIndex inSection:0];
              [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:lastRow]
                        withRowAnimation:UITableViewRowAnimationBottom];
              [tv endUpdates];
@@ -1183,6 +1185,25 @@
     }
 
     return remoteSearchFooterView_;
+}
+
+- (UITableViewCell *)remoteSearchTableViewCell
+{
+    if (!remoteSearchTableViewCell_) {
+        remoteSearchTableViewCell_ =
+            [[[UITableViewCell alloc]
+              initWithStyle:UITableViewCellStyleDefault
+              reuseIdentifier:RemoteSearchTableViewCellReuseIdentifier]
+             autorelease];
+        [remoteSearchTableViewCell_
+         setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [remoteSearchTableViewCell_
+         setAccessoryType:UITableViewCellAccessoryNone];
+        [[remoteSearchTableViewCell_ contentView]
+         addSubview:[self remoteSearchFooterView]];
+    }
+
+    return remoteSearchTableViewCell_;
 }
 
 - (void)setShowsCategoryFilter:(BOOL)showsCategoryFilter
