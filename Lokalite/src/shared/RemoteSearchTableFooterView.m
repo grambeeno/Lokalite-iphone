@@ -133,7 +133,7 @@
         CGRect frame = [self frame];
         CGRect activityFrame = [activityIndicator_ frame];
         activityFrame.origin =
-            CGPointMake(10,
+            CGPointMake(8,
                         round((frame.size.height - activityFrame.size.height) /
                               2));
         [activityIndicator_ setFrame:activityFrame];
