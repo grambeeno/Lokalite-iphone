@@ -329,7 +329,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
         NSString *reuseIdentifier =
             [self _reuseIdentifierForIndexPath:indexPath inTableView:tableView];
-        NSLog(@"%@: %@", indexPath, reuseIdentifier);
         UITableViewCell *cell =
             [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (cell == nil)
@@ -634,7 +633,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 {
     return
         [self canSearchServer] &&
-        ![self hasSearchedServer] &&
         tableView != [self tableView] &&
         [path row] == [[self searchResults] count];
 }
