@@ -92,7 +92,9 @@
     return [EventTableViewCell instanceFromNib];
 }
 
-- (void)configureCell:(EventTableViewCell *)cell forObject:(Event *)event
+- (void)configureCell:(EventTableViewCell *)cell
+          inTableView:(UITableView *)tableView
+            forObject:(Event *)event
 {
     [cell configureCellForEvent:event];
 
@@ -101,7 +103,7 @@
         NSURL *url = [event fullImageUrl];
 
         [[self imageFetcher] fetchImageDataAtUrl:url
-                                       tableView:[self tableView]
+                                       tableView:tableView
                              dataReceivedHandler:
          ^(NSData *data) {
              [event setImageData:data];

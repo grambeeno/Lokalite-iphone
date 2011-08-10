@@ -335,7 +335,7 @@
             else
                 obj = [[self searchResults] objectAtIndex:[indexPath row]];
 
-            [self configureCell:cell forObject:obj];
+            [self configureCell:cell inTableView:tableView forObject:obj];
         }
 
         return cell;
@@ -443,7 +443,7 @@
             // provided index path; doing so causes a crash. I don't know
             // why. Accessing the cell via the provided anObject parameter
             // works fine, though.
-            [self configureCell:cell forObject:anObject];
+            [self configureCell:cell inTableView:tableView forObject:anObject];
         }
             break;
  
@@ -591,6 +591,7 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell
+          inTableView:(UITableView *)tableView
             forObject:(id<MappableLokaliteObject>)obj
 {
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",

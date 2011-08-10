@@ -72,7 +72,9 @@
     return [PlaceTableViewCell instanceFromNib];
 }
 
-- (void)configureCell:(PlaceTableViewCell *)cell forObject:(Business *)place
+- (void)configureCell:(PlaceTableViewCell *)cell
+          inTableView:(UITableView *)tableView
+            forObject:(Business *)place
 {
     [cell configureCellForPlace:place];
 
@@ -85,7 +87,7 @@
         NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
 
         [[self imageFetcher] fetchImageDataAtUrl:url
-                                       tableView:[self tableView]
+                                       tableView:tableView
                              dataReceivedHandler:
          ^(NSData *data) {
              [place setImageData:data];

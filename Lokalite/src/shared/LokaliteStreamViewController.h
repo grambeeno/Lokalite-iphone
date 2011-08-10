@@ -84,7 +84,9 @@
                                          forTableView:(UITableView *)tableView
                                       reuseIdentifier:(NSString *)identifier;
 
-- (void)configureCell:(UITableViewCell *)cell forObject:(id<MappableLokaliteObject>)obj;
+- (void)configureCell:(UITableViewCell *)cell
+          inTableView:(UITableView *)tableView
+            forObject:(id<MappableLokaliteObject>)obj;
 
 - (void)displayDetailsForObject:(id<MappableLokaliteObject>)object;
 
