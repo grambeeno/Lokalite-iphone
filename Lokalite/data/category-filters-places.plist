@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>All Events</string>
+		<key>short-name</key>
+		<string>All</string>
+		<key>image</key>
+		<string>all</string>
+		<key>image-selected</key>
+		<string>all-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Shopping</string>
+		<key>short-name</key>
+		<string>Shopping</string>
+		<key>image</key>
+		<string>retail</string>
+		<key>image-selected</key>
+		<string>retail-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Restaurants and Bars</string>
+		<key>short-name</key>
+		<string>Food</string>
+		<key>image</key>
+		<string>food</string>
+		<key>image-selected</key>
+		<string>food-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Coffee and Tea</string>
+		<key>short-name</key>
+		<string>Coffee</string>
+		<key>image</key>
+		<string>business</string>
+		<key>image-selected</key>
+		<string>business-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Arts and Entertainment</string>
+		<key>short-name</key>
+		<string>Entertainment</string>
+		<key>image</key>
+		<string>music</string>
+		<key>image-selected</key>
+		<string>music-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Services</string>
+		<key>short-name</key>
+		<string>Services</string>
+		<key>image</key>
+		<string>beauty</string>
+		<key>image-selected</key>
+		<string>beauty-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Campus</string>
+		<key>short-name</key>
+		<string>Campus</string>
+		<key>image</key>
+		<string>campus</string>
+		<key>image-selected</key>
+		<string>campus-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Sports and Fitness</string>
+		<key>short-name</key>
+		<string>Sports</string>
+		<key>image</key>
+		<string>sports</string>
+		<key>image-selected</key>
+		<string>sports-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Beer, Wine and Spirits</string>
+		<key>short-name</key>
+		<string>Booze</string>
+		<key>image</key>
+		<string>happy-hour</string>
+		<key>image-selected</key>
+		<string>happy-hour-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Health and Beauty</string>
+		<key>short-name</key>
+		<string>Bitches</string>
+		<key>image</key>
+		<string>health</string>
+		<key>image-selected</key>
+		<string>health-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>MMJ</string>
+		<key>short-name</key>
+		<string>Weed</string>
+		<key>image</key>
+		<string>non-profit</string>
+		<key>image-selected</key>
+		<string>non-profit-selected</string>
+	</dict>
+</array>
+</plist>

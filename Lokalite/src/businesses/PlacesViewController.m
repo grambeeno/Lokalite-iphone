@@ -52,6 +52,7 @@
 
     [self setShowsSearchBar:YES];
     [self setCanSearchServer:YES];
+    [self setShowsCategoryFilter:YES];
 }
 
 #pragma mark - LokaliteStreamViewController implementation
@@ -107,9 +108,11 @@
          }
                             tableViewCellHandler:
          ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {
-             PlaceTableViewCell *cell = (PlaceTableViewCell *) tvc;
-             if ([[cell placeId] isEqualToNumber:[place identifier]])
-                 [[cell placeImageView] setImage:image];
+             if ([tvc isKindOfClass:[PlaceTableViewCell class]]) {
+                 PlaceTableViewCell *cell = (PlaceTableViewCell *) tvc;
+                 if ([[cell placeId] isEqualToNumber:[place identifier]])
+                     [[cell placeImageView] setImage:image];
+             }
          }
                                     errorHandler:
          ^(NSError *error) {
@@ -139,6 +142,33 @@
     return [LokaliteSearchStream placesSearchStreamWithKeywords:keywords
                                                         context:[self context]];
 }
+
+#pragma mark - Working with category filters
+
+- (NSArray *)categoryFilters
+{
+    return [CategoryFilter defaultPlaceFilters];
+}
+
+- (void)didSelectCategoryFilter:(CategoryFilter *)filter
+{
+    /*
+    NSManagedObjectContext *context = [self context];
+
+    NSString *serverFilter = [filter serverFilter];
+    LokaliteStream *stream =
+        [LokaliteCategoryEventStream streamWithCategoryName:serverFilter
+                                                    context:context];
+    SimpleEventsViewController *controller =
+        [[SimpleEventsViewController alloc] initWithCategoryName:[filter name]
+                                                  lokaliteStream:stream
+                                                         context:context];
+    [[self navigationController] pushViewController:controller animated:YES];
+    [controller release], controller = nil;
+     */
+}
+
+
 
 #pragma mark Working with the local data store
 

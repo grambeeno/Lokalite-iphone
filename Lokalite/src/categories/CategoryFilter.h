@@ -36,6 +36,8 @@
 @interface CategoryFilter (InstantiationHelpers)
 
 + (NSArray *)defaultEventFilters;
++ (NSArray *)defaultPlaceFilters;
+
 + (id)categoryFromPlistDictionary:(NSDictionary *)dictionary;
 
 @end

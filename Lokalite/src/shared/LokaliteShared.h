@@ -13,6 +13,8 @@
 
 #import "LokaliteApplicationState.h"
 
+#import "CategoryFilter.h"
+
 #import "LokaliteObject.h"
 #import "LokaliteDownloadSource.h"
 #import "LokaliteDownloadSource+GeneralHelpers.h"

@@ -61,11 +61,11 @@
 
 @implementation CategoryFilter (InstantiationHelpers)
 
-+ (NSArray *)defaultEventFilters
++ (NSArray *)categoryFiltersFromPlistFile:(NSString *)fileName
 {
-    NSString *file =
-        [[NSBundle mainBundle] pathForResource:@"category-filters-events"
-                                        ofType:@"plist"];
+    NSString *file = [[NSBundle mainBundle] pathForResource:fileName
+                                                     ofType:@"plist"];
+
     NSArray *filterData = [NSArray arrayWithContentsOfFile:file];
 
     NSMutableArray *filters =
@@ -78,6 +78,16 @@
      }];
 
     return filters;
+}
+
++ (NSArray *)defaultEventFilters
+{
+    return [self categoryFiltersFromPlistFile:@"category-filters-events"];
+}
+
++ (NSArray *)defaultPlaceFilters
+{
+    return [self categoryFiltersFromPlistFile:@"category-filters-places"];
 }
 
 + (id)categoryFromPlistDictionary:(NSDictionary *)dictionary

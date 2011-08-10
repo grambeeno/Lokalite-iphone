@@ -156,6 +156,7 @@
 		05D06E7513D76B7900878AD6 /* UIButton+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D06E7413D76B7900878AD6 /* UIButton+GeneralHelpers.m */; };
 		05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */; };
 		05DD68EB13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */; };
+		05E5555713F340C900DF0F31 /* category-filters-places.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05E5555613F340C900DF0F31 /* category-filters-places.plist */; };
 		05EB58CF13DF226100436F13 /* NSData+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58CE13DF226100436F13 /* NSData+GeneralHelpers.m */; };
 		05EB58D713DF312800436F13 /* LokaliteAccount+KeychainAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58D613DF312800436F13 /* LokaliteAccount+KeychainAdditions.m */; };
 		05EB58DB13DF326900436F13 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58DA13DF326900436F13 /* SFHFKeychainUtils.m */; };
@@ -394,6 +395,7 @@
 		05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessDetailsHeaderView.m; path = src/businesses/BusinessDetailsHeaderView.m; sourceTree = "<group>"; };
 		05DD68E913D64ED300A196B6 /* NSPredicate+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPredicate+GeneralHelpers.h"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPredicate+GeneralHelpers.m"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05E5555613F340C900DF0F31 /* category-filters-places.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "category-filters-places.plist"; path = "data/category-filters-places.plist"; sourceTree = "<group>"; };
 		05EB58CD13DF226100436F13 /* NSData+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+GeneralHelpers.h"; path = "src/sdk-additions/NSData+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05EB58CE13DF226100436F13 /* NSData+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+GeneralHelpers.m"; path = "src/sdk-additions/NSData+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05EB58D513DF312800436F13 /* LokaliteAccount+KeychainAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteAccount+KeychainAdditions.h"; path = "src/accounts/LokaliteAccount+KeychainAdditions.h"; sourceTree = "<group>"; };
@@ -843,6 +845,7 @@
 		05D06E6913D75FB600878AD6 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				05E5555613F340C900DF0F31 /* category-filters-places.plist */,
 				05D06E6C13D75FDE00878AD6 /* category-filters-events.plist */,
 			);
 			name = data;
@@ -1117,6 +1120,7 @@
 				05BC9C0513E9A43000FBAD23 /* AllEventsView.xib in Resources */,
 				05BC9C0D13E9BFD700FBAD23 /* standard-button-background@2x.png in Resources */,
 				05BC9C0E13E9BFD700FBAD23 /* standard-button-pressed-background@2x.png in Resources */,
+				05E5555713F340C900DF0F31 /* category-filters-places.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
