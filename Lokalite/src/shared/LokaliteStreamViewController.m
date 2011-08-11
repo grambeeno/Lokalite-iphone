@@ -158,6 +158,9 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     [self unsubscribeForApplicationLifecycleNotifications];
     [self unsubscribeForNotoficationsForContext:context_];
 
+    LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
+    [source unassociateAndDeleteDownloadedObjects];
+
     [loadingMoreActivityView_ release];
 
     [searchResults_ release];
