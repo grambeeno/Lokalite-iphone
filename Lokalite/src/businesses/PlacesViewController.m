@@ -175,8 +175,6 @@
     [controller release], controller = nil;
 }
 
-
-
 #pragma mark Working with the local data store
 
 - (NSString *)lokaliteObjectEntityName
@@ -211,6 +209,7 @@
 
 - (void)initializeNavigationItem
 {
+    [[self navigationItem] setLeftBarButtonItem:[self refreshButtonItem]];
     [[self navigationItem] setRightBarButtonItem:[self mapViewButtonItem]];
 }
 
