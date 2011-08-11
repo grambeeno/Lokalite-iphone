@@ -49,7 +49,7 @@
     [self setPlaceId:[place identifier]];
 
     [[self nameLabel] setText:[place name]];
-    [[self summaryLabel] setText:[place status]];
+    [[self summaryLabel] setText:[place summary]];
 }
 
 @end
