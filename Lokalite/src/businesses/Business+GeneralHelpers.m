@@ -70,9 +70,6 @@
     NSString *phone = [businessData objectForKey:@"phone"];
     [business setValueIfNecessary:phone forKey:@"phone"];
 
-    NSString *address = [businessData objectForKey:@"address"];
-    [business setValueIfNecessary:address forKey:@"address"];
-
     NSString *summary = [businessData objectForKey:@"description"];
     [business setValueIfNecessary:summary forKey:@"summary"];
 
@@ -168,12 +165,7 @@
 
 - (NSURL *)addressUrl
 {
-    NSStringEncoding encoding = NSUTF8StringEncoding;
-    NSString *s =
-        [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@",
-         [[self address] stringByAddingPercentEscapesUsingEncoding:encoding]];
-
-    return [NSURL URLWithString:s];
+    return [[self location] addressUrl];
 }
 
 - (NSURL *)phoneUrl

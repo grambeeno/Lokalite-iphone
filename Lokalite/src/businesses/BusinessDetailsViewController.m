@@ -13,6 +13,8 @@
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
 
+#import "Location.h"
+
 #import "Event.h"
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
@@ -166,7 +168,7 @@ enum {
 #pragma mark - UITableViewDelegate implementation
 
 - (CGFloat)tableView:(UITableView *)tableView
-heightForRowAtIndexPath:(NSIndexPath *)indexPath
+    heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = 44;
     if ([indexPath section] == kSectionUpcomingEvents)
@@ -212,10 +214,11 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path
 {
     if ([path section] == kSectionInfo) {
-        if ([path row] == kInfoRowAddress) {
-            [[cell textLabel] setText:[[self business] address]];
+        UIApplication *app = [UIApplication sharedApplication];
 
-            UIApplication *app = [UIApplication sharedApplication];
+        if ([path row] == kInfoRowAddress) {
+            [[cell textLabel] setText:[[[self business] location] formattedAddress]];
+
             if ([app canOpenURL:[[self business] addressUrl]]) {
                 [cell setAccessoryType:
                  UITableViewCellAccessoryDisclosureIndicator];
@@ -228,7 +231,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
         } else if ([path row] == kInfoRowPhoneNumber) {
             [[cell textLabel] setText:[[self business] phone]];
 
-            UIApplication *app = [UIApplication sharedApplication];
             if ([app canOpenURL:[[self business] phoneUrl]]) {
                 [cell setAccessoryType:
                  UITableViewCellAccessoryDisclosureIndicator];

@@ -20,6 +20,10 @@
 //
 - (BOOL)deleteIfAppropriate;
 
+#pragma mark - Convenience methods
+
+- (NSURL *)addressUrl;
+
 #pragma mark - Creating and finding instances
 
 + (id)existingOrNewLocationFromJsonData:(NSDictionary *)jsonData

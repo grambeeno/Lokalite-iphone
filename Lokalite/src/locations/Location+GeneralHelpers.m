@@ -27,6 +27,20 @@
     return NO;
 }
 
+#pragma mark - Convenience methods
+
+- (NSURL *)addressUrl
+{
+    NSString *encodedString =
+        [[self formattedAddress]
+         stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *s =
+        [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@",
+         encodedString];
+
+    return [NSURL URLWithString:s];
+}
+
 #pragma mark - Creating and finding instances
 
 + (id)existingOrNewLocationFromJsonData:(NSDictionary *)jsonData

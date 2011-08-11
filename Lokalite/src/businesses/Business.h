@@ -20,7 +20,6 @@
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * summary;
-@property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * imageUrl;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * name;

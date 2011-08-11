@@ -18,7 +18,6 @@
 @dynamic status;
 @dynamic phone;
 @dynamic summary;
-@dynamic address;
 @dynamic imageUrl;
 @dynamic email;
 @dynamic name;
