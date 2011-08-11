@@ -13,7 +13,7 @@
 
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
-#import "SimpleEventsViewController.h"
+#import "CategoryEventStreamViewController.h"
 
 #import "CategoryFilter.h"
 
@@ -170,8 +170,8 @@
     LokaliteStream *stream =
         [LokaliteCategoryStream eventStreamWithCategoryName:serverFilter
                                                          context:context];
-    SimpleEventsViewController *controller =
-        [[SimpleEventsViewController alloc] initWithCategoryName:[filter name]
+    CategoryEventStreamViewController *controller =
+        [[CategoryEventStreamViewController alloc] initWithCategoryName:[filter name]
                                                   lokaliteStream:stream
                                                          context:context];
     [[self navigationController] pushViewController:controller animated:YES];

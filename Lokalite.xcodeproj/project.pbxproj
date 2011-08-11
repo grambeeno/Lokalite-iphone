@@ -32,7 +32,7 @@
 		0548320013F0DEDF0099125B /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 054831FF13F0DEDF0099125B /* Business.m */; };
 		0548320413F0DEFE0099125B /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320313F0DEFE0099125B /* Location.m */; };
 		0548320713F1AB070099125B /* EventStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320613F1AB070099125B /* EventStreamViewController.m */; };
-		0548320A13F1AEA70099125B /* SimpleEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320913F1AEA70099125B /* SimpleEventsViewController.m */; };
+		0548320A13F1AEA70099125B /* CategoryEventStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320913F1AEA70099125B /* CategoryEventStreamViewController.m */; };
 		0548320D13F1B09B0099125B /* LokaliteCategoryStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320C13F1B09B0099125B /* LokaliteCategoryStream.m */; };
 		0548321013F1CF6B0099125B /* RemoteSearchTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */; };
 		0549AB5513D77A6800F9C2C2 /* CategoryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */; };
@@ -223,8 +223,8 @@
 		0548320313F0DEFE0099125B /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = src/locations/Location.m; sourceTree = "<group>"; };
 		0548320513F1AB070099125B /* EventStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventStreamViewController.h; path = src/events/EventStreamViewController.h; sourceTree = "<group>"; };
 		0548320613F1AB070099125B /* EventStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventStreamViewController.m; path = src/events/EventStreamViewController.m; sourceTree = "<group>"; };
-		0548320813F1AEA60099125B /* SimpleEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleEventsViewController.h; path = src/events/SimpleEventsViewController.h; sourceTree = "<group>"; };
-		0548320913F1AEA70099125B /* SimpleEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleEventsViewController.m; path = src/events/SimpleEventsViewController.m; sourceTree = "<group>"; };
+		0548320813F1AEA60099125B /* CategoryEventStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryEventStreamViewController.h; path = src/events/CategoryEventStreamViewController.h; sourceTree = "<group>"; };
+		0548320913F1AEA70099125B /* CategoryEventStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryEventStreamViewController.m; path = src/events/CategoryEventStreamViewController.m; sourceTree = "<group>"; };
 		0548320B13F1B09B0099125B /* LokaliteCategoryStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteCategoryStream.h; path = src/lokalite/LokaliteCategoryStream.h; sourceTree = "<group>"; };
 		0548320C13F1B09B0099125B /* LokaliteCategoryStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteCategoryStream.m; path = src/lokalite/LokaliteCategoryStream.m; sourceTree = "<group>"; };
 		0548320E13F1CF6B0099125B /* RemoteSearchTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoteSearchTableFooterView.h; path = src/shared/RemoteSearchTableFooterView.h; sourceTree = "<group>"; };
@@ -925,8 +925,8 @@
 				057DC63A13E0D262004107C4 /* EventDetailsFooterView.m */,
 				0548320513F1AB070099125B /* EventStreamViewController.h */,
 				0548320613F1AB070099125B /* EventStreamViewController.m */,
-				0548320813F1AEA60099125B /* SimpleEventsViewController.h */,
-				0548320913F1AEA70099125B /* SimpleEventsViewController.m */,
+				0548320813F1AEA60099125B /* CategoryEventStreamViewController.h */,
+				0548320913F1AEA70099125B /* CategoryEventStreamViewController.m */,
 			);
 			name = events;
 			sourceTree = "<group>";
@@ -1215,7 +1215,7 @@
 				0548320013F0DEDF0099125B /* Business.m in Sources */,
 				0548320413F0DEFE0099125B /* Location.m in Sources */,
 				0548320713F1AB070099125B /* EventStreamViewController.m in Sources */,
-				0548320A13F1AEA70099125B /* SimpleEventsViewController.m in Sources */,
+				0548320A13F1AEA70099125B /* CategoryEventStreamViewController.m in Sources */,
 				0548320D13F1B09B0099125B /* LokaliteCategoryStream.m in Sources */,
 				0548321013F1CF6B0099125B /* RemoteSearchTableFooterView.m in Sources */,
 				05E5555A13F42C9800DF0F31 /* PlaceStreamViewController.m in Sources */,

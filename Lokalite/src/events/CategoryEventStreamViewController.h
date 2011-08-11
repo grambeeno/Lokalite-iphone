@@ -10,7 +10,7 @@
 
 @class LokaliteStream;
 
-@interface SimpleEventsViewController : EventStreamViewController
+@interface CategoryEventStreamViewController : EventStreamViewController
 
 @property (nonatomic, copy, readonly) NSString *categoryName;
 @property (nonatomic, retain) LokaliteStream *providedLokaliteStream;

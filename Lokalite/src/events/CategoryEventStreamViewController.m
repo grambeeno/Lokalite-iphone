@@ -6,11 +6,11 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "SimpleEventsViewController.h"
+#import "CategoryEventStreamViewController.h"
 
 #import "LokaliteStream.h"
 
-@implementation SimpleEventsViewController
+@implementation CategoryEventStreamViewController
 
 @synthesize categoryName = categoryName_;
 @synthesize providedLokaliteStream = providedLokaliteStream_;
