@@ -55,10 +55,14 @@
     [location setValueIfNecessary:[jsonData objectForKey:@"formatted_address"]
                                                   forKey:@"formattedAddress"];
 
-    NSNumber *lat = [jsonData objectForKey:@"lat"];
-    NSNumber *lon = [jsonData objectForKey:@"lng"];
-    [location setValueIfNecessary:lat forKey:@"latitude"];
-    [location setValueIfNecessary:lon forKey:@"longitude"];
+    NSString *lat = [jsonData objectForKey:@"latitude"];
+    NSString *lon = [jsonData objectForKey:@"longitude"];
+
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    [location setValueIfNecessary:[f numberFromString:lat] forKey:@"latitude"];
+    [location setValueIfNecessary:[f numberFromString:lon] forKey:@"longitude"];
+    [f release], f = nil;
 
     return location;
 }
