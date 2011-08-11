@@ -176,6 +176,7 @@ didReceiveResponse:(NSURLResponse *)response
 {
     [self setConnection:nil];
     [[UIApplication sharedApplication] networkActivityDidFinish];
+    [self setRequestHandler:nil];
 }
 
 @end
