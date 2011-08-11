@@ -1203,7 +1203,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
-    [self refresh:self];
 }
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
