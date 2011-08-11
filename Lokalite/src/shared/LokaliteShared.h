@@ -16,7 +16,16 @@
 #import "CategoryFilter.h"
 
 #import "LokaliteObject.h"
+
 #import "LokaliteDownloadSource.h"
 #import "LokaliteDownloadSource+GeneralHelpers.h"
 
+#import "Event.h"
+#import "Event+GeneralHelpers.h"
+
+#import "Business.h"
+#import "Business+GeneralHelpers.h"
+
 #import "LokaliteObjectBuilder.h"
+
+#import "LokaliteStream.h"

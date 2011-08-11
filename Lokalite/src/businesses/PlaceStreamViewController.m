@@ -1,44 +1,27 @@
 //
-//  PlacesViewController.m
+//  PlaceStreamViewController.m
 //  Lokalite
 //
-//  Created by John Debay on 7/21/11.
+//  Created by John Debay on 8/11/11.
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "PlacesViewController.h"
-
-#import "LokaliteAccount.h"
-
-#import "Business.h"
-#import "Business+GeneralHelpers.h"
-#import "BusinessDetailsViewController.h"
-#import "CategoryPlaceStreamViewController.h"
+#import "PlaceStreamViewController.h"
 
 #import "PlaceTableViewCell.h"
-
-#import "LokaliteStream.h"
-#import "LokaliteSearchStream.h"
-#import "LokalitePlacesStream.h"
-#import "LokaliteCategoryStream.h"
-
-#import "TableViewImageFetcher.h"
+#import "BusinessDetailsViewController.h"
 
 #import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
-@interface PlacesViewController ()
+@interface PlaceStreamViewController ()
 
 @property (nonatomic, retain) TableViewImageFetcher *imageFetcher;
-
-#pragma mark - View initialization
-
-- (void)initializeNavigationItem;
 
 @end
 
 
-@implementation PlacesViewController
+@implementation PlaceStreamViewController
 
 @synthesize imageFetcher = imageFetcher_;
 
@@ -47,6 +30,7 @@
 - (void)dealloc
 {
     [imageFetcher_ release];
+
     [super dealloc];
 }
 
@@ -56,11 +40,12 @@
 {
     [super viewDidLoad];
 
-    [self initializeNavigationItem];
-
     [self setShowsSearchBar:YES];
-    [self setCanSearchServer:YES];
-    [self setShowsCategoryFilter:YES];
+    [self setCanSearchServer:NO];
+    [[[self searchDisplayController] searchResultsTableView]
+     setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+
+    [self setShowsCategoryFilter:NO];
 }
 
 #pragma mark - LokaliteStreamViewController implementation
@@ -69,15 +54,16 @@
 
 - (NSString *)titleForView
 {
-    return NSLocalizedString(@"global.places", nil);
+    return NSLocalizedString(@"global.events", nil);
 }
 
-#pragma mark - Configuring the table view
+#pragma mark Configuring the table view
 
 - (void)initializeTableView:(UITableView *)tableView
 {
     [super initializeTableView:tableView];
 
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [tableView setRowHeight:[PlaceTableViewCell cellHeight]];
 }
 
@@ -101,12 +87,8 @@
     [cell configureCellForPlace:place];
 
     UIImage *image = [place image];
-    if (image)
-        [[cell placeImageView] setImage:image];
-    else {
-        NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
-        NSString *urlPath = [place imageUrl];
-        NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
+    if (!image) {
+        NSURL *url = [place fullImageUrl];
 
         [[self imageFetcher] fetchImageDataAtUrl:url
                                        tableView:tableView
@@ -124,9 +106,12 @@
          }
                                     errorHandler:
          ^(NSError *error) {
-             NSLog(@"WARNING: Failed to fetch place image at: %@", url);
+             NSLog(@"WARNING: Failed to fetch place image at: %@: %@", url,
+                   error);
          }];
     }
+
+    [[cell placeImageView] setImage:image];
 }
 
 - (void)displayDetailsForObject:(Business *)place
@@ -137,45 +122,10 @@
     [controller release], controller = nil;
 }
 
-#pragma mark - Search - remote
-
 - (NSPredicate *)predicateForQueryString:(NSString *)queryString
 {
     return [Business predicateForSearchString:queryString];
 }
-
-- (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
-    (NSString *)keywords
-{
-    return [LokaliteSearchStream placesSearchStreamWithKeywords:keywords
-                                                        context:[self context]];
-}
-
-#pragma mark - Working with category filters
-
-- (NSArray *)categoryFilters
-{
-    return [CategoryFilter defaultPlaceFilters];
-}
-
-- (void)didSelectCategoryFilter:(CategoryFilter *)filter
-{
-    NSManagedObjectContext *context = [self context];
-
-    NSString *serverFilter = [filter serverFilter];
-    LokaliteStream *stream =
-        [LokaliteCategoryStream placeStreamWithCategoryName:serverFilter
-                                                    context:context];
-    CategoryPlaceStreamViewController *controller =
-        [[CategoryPlaceStreamViewController alloc]
-         initWithCategoryName:[filter name]
-               lokaliteStream:stream
-                      context:context];
-    [[self navigationController] pushViewController:controller animated:YES];
-    [controller release], controller = nil;
-}
-
-
 
 #pragma mark Working with the local data store
 
@@ -202,23 +152,31 @@
     return [Business defaultTableViewSortDescriptors];
 }
 
-- (LokaliteStream *)lokaliteStreamInstance
+#pragma mark Fetching data from the network
+
+- (void)processNextBatchOfFetchedObjects:(NSArray *)events
+                              pageNumber:(NSInteger)pageNumber
 {
-    return [LokalitePlacesStream streamWithContext:[self context]];
+    [super processNextBatchOfFetchedObjects:events pageNumber:pageNumber];
 }
 
-#pragma mark - View initialization
-
-- (void)initializeNavigationItem
+- (void)processObjectFetchError:(NSError *)error
+                     pageNumber:(NSInteger)pageNumber
 {
-    [[self navigationItem] setRightBarButtonItem:[self mapViewButtonItem]];
-}
+    [super processObjectFetchError:error pageNumber:pageNumber];
 
-#pragma mark - Account events
-
-- (BOOL)shouldResetForAccountAddition:(LokaliteAccount *)account
-{
-    return NO;
+    NSLog(@"%@: processing fetch error for page %d: %@",
+          NSStringFromClass([self class]), pageNumber, error);
+    NSString *title = NSLocalizedString(@"featured.fetch.failed", nil);
+    NSString *message = [error localizedDescription];
+    NSString *dismiss = NSLocalizedString(@"global.dismiss", nil);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:dismiss
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release], alert = nil;
 }
 
 #pragma mark - Accessors

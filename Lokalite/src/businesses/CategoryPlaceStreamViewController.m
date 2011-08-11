@@ -1,16 +1,16 @@
 //
-//  SimpleEventsViewController.m
+//  CategoryPlaceStreamViewController.m
 //  Lokalite
 //
-//  Created by John Debay on 8/9/11.
+//  Created by John Debay on 8/11/11.
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "SimpleEventsViewController.h"
+#import "CategoryPlaceStreamViewController.h"
 
 #import "LokaliteStream.h"
 
-@implementation SimpleEventsViewController
+@implementation CategoryPlaceStreamViewController
 
 @synthesize categoryName = categoryName_;
 @synthesize providedLokaliteStream = providedLokaliteStream_;
@@ -41,7 +41,7 @@
     return self;
 }
 
-#pragma mark - EventStreamViewController implementation
+#pragma mark - PlaceStreamViewController implementation
 
 - (LokaliteStream *)lokaliteStreamInstance
 {

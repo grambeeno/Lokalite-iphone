@@ -200,3 +200,16 @@
 }
 
 @end
+
+
+@implementation Business (TableViewHelpers)
+
++ (NSArray *)defaultTableViewSortDescriptors
+{
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                         ascending:YES];
+    return [NSArray arrayWithObject:sd];
+}
+
+@end
+

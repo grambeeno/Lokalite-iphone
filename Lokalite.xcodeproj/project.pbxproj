@@ -33,7 +33,7 @@
 		0548320413F0DEFE0099125B /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320313F0DEFE0099125B /* Location.m */; };
 		0548320713F1AB070099125B /* EventStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320613F1AB070099125B /* EventStreamViewController.m */; };
 		0548320A13F1AEA70099125B /* SimpleEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320913F1AEA70099125B /* SimpleEventsViewController.m */; };
-		0548320D13F1B09B0099125B /* LokaliteCategoryEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320C13F1B09B0099125B /* LokaliteCategoryEventStream.m */; };
+		0548320D13F1B09B0099125B /* LokaliteCategoryStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320C13F1B09B0099125B /* LokaliteCategoryStream.m */; };
 		0548321013F1CF6B0099125B /* RemoteSearchTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */; };
 		0549AB5513D77A6800F9C2C2 /* CategoryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */; };
 		054E06B613CB82B6009B7373 /* tab-bar-icon-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */; };
@@ -157,6 +157,8 @@
 		05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */; };
 		05DD68EB13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */; };
 		05E5555713F340C900DF0F31 /* category-filters-places.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05E5555613F340C900DF0F31 /* category-filters-places.plist */; };
+		05E5555A13F42C9800DF0F31 /* PlaceStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */; };
+		05E5555D13F433AD00DF0F31 /* CategoryPlaceStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5555C13F433AC00DF0F31 /* CategoryPlaceStreamViewController.m */; };
 		05EB58CF13DF226100436F13 /* NSData+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58CE13DF226100436F13 /* NSData+GeneralHelpers.m */; };
 		05EB58D713DF312800436F13 /* LokaliteAccount+KeychainAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58D613DF312800436F13 /* LokaliteAccount+KeychainAdditions.m */; };
 		05EB58DB13DF326900436F13 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58DA13DF326900436F13 /* SFHFKeychainUtils.m */; };
@@ -223,8 +225,8 @@
 		0548320613F1AB070099125B /* EventStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventStreamViewController.m; path = src/events/EventStreamViewController.m; sourceTree = "<group>"; };
 		0548320813F1AEA60099125B /* SimpleEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleEventsViewController.h; path = src/events/SimpleEventsViewController.h; sourceTree = "<group>"; };
 		0548320913F1AEA70099125B /* SimpleEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleEventsViewController.m; path = src/events/SimpleEventsViewController.m; sourceTree = "<group>"; };
-		0548320B13F1B09B0099125B /* LokaliteCategoryEventStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteCategoryEventStream.h; path = src/lokalite/LokaliteCategoryEventStream.h; sourceTree = "<group>"; };
-		0548320C13F1B09B0099125B /* LokaliteCategoryEventStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteCategoryEventStream.m; path = src/lokalite/LokaliteCategoryEventStream.m; sourceTree = "<group>"; };
+		0548320B13F1B09B0099125B /* LokaliteCategoryStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteCategoryStream.h; path = src/lokalite/LokaliteCategoryStream.h; sourceTree = "<group>"; };
+		0548320C13F1B09B0099125B /* LokaliteCategoryStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteCategoryStream.m; path = src/lokalite/LokaliteCategoryStream.m; sourceTree = "<group>"; };
 		0548320E13F1CF6B0099125B /* RemoteSearchTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoteSearchTableFooterView.h; path = src/shared/RemoteSearchTableFooterView.h; sourceTree = "<group>"; };
 		0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoteSearchTableFooterView.m; path = src/shared/RemoteSearchTableFooterView.m; sourceTree = "<group>"; };
 		0549AB5313D77A6800F9C2C2 /* CategoryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilter.h; path = src/categories/CategoryFilter.h; sourceTree = "<group>"; };
@@ -396,6 +398,10 @@
 		05DD68E913D64ED300A196B6 /* NSPredicate+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPredicate+GeneralHelpers.h"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPredicate+GeneralHelpers.m"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05E5555613F340C900DF0F31 /* category-filters-places.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "category-filters-places.plist"; path = "data/category-filters-places.plist"; sourceTree = "<group>"; };
+		05E5555813F42C9700DF0F31 /* PlaceStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceStreamViewController.h; path = src/businesses/PlaceStreamViewController.h; sourceTree = "<group>"; };
+		05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceStreamViewController.m; path = src/businesses/PlaceStreamViewController.m; sourceTree = "<group>"; };
+		05E5555B13F433AC00DF0F31 /* CategoryPlaceStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryPlaceStreamViewController.h; path = src/businesses/CategoryPlaceStreamViewController.h; sourceTree = "<group>"; };
+		05E5555C13F433AC00DF0F31 /* CategoryPlaceStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryPlaceStreamViewController.m; path = src/businesses/CategoryPlaceStreamViewController.m; sourceTree = "<group>"; };
 		05EB58CD13DF226100436F13 /* NSData+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+GeneralHelpers.h"; path = "src/sdk-additions/NSData+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05EB58CE13DF226100436F13 /* NSData+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+GeneralHelpers.m"; path = "src/sdk-additions/NSData+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05EB58D513DF312800436F13 /* LokaliteAccount+KeychainAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteAccount+KeychainAdditions.h"; path = "src/accounts/LokaliteAccount+KeychainAdditions.h"; sourceTree = "<group>"; };
@@ -489,8 +495,8 @@
 				055286AC13F08A7D0072A662 /* LokaliteTrendingEventStream.m */,
 				05D0205013D4F80500FE0A6C /* LokaliteEventStream.h */,
 				05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */,
-				0548320B13F1B09B0099125B /* LokaliteCategoryEventStream.h */,
-				0548320C13F1B09B0099125B /* LokaliteCategoryEventStream.m */,
+				0548320B13F1B09B0099125B /* LokaliteCategoryStream.h */,
+				0548320C13F1B09B0099125B /* LokaliteCategoryStream.m */,
 				058962BD13DA299700556F6D /* LokalitePlacesStream.h */,
 				058962BE13DA299700556F6D /* LokalitePlacesStream.m */,
 				059B33FE13D4BC5A007AD11C /* LokaliteSearchStream.h */,
@@ -943,6 +949,10 @@
 				05770E7F13DDCD8500B841D4 /* PlaceTableViewCell.h */,
 				05770E8013DDCD8500B841D4 /* PlaceTableViewCell.m */,
 				05770E8313DDCD9800B841D4 /* PlaceTableViewCell.xib */,
+				05E5555813F42C9700DF0F31 /* PlaceStreamViewController.h */,
+				05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */,
+				05E5555B13F433AC00DF0F31 /* CategoryPlaceStreamViewController.h */,
+				05E5555C13F433AC00DF0F31 /* CategoryPlaceStreamViewController.m */,
 			);
 			name = businesses;
 			sourceTree = "<group>";
@@ -1206,8 +1216,10 @@
 				0548320413F0DEFE0099125B /* Location.m in Sources */,
 				0548320713F1AB070099125B /* EventStreamViewController.m in Sources */,
 				0548320A13F1AEA70099125B /* SimpleEventsViewController.m in Sources */,
-				0548320D13F1B09B0099125B /* LokaliteCategoryEventStream.m in Sources */,
+				0548320D13F1B09B0099125B /* LokaliteCategoryStream.m in Sources */,
 				0548321013F1CF6B0099125B /* RemoteSearchTableFooterView.m in Sources */,
+				05E5555A13F42C9800DF0F31 /* PlaceStreamViewController.m in Sources */,
+				05E5555D13F433AD00DF0F31 /* CategoryPlaceStreamViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

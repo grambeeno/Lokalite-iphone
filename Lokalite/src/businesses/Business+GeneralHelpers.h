@@ -49,3 +49,10 @@
 - (CLLocation *)locationInstance;
 
 @end
+
+
+@interface Business (TableViewHelpers)
+
++ (NSArray *)defaultTableViewSortDescriptors;
+
+@end

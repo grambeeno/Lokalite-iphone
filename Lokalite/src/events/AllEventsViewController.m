@@ -18,7 +18,7 @@
 #import "CategoryFilter.h"
 
 #import "LokaliteEventStream.h"
-#import "LokaliteCategoryEventStream.h"
+#import "LokaliteCategoryStream.h"
 #import "LokaliteSearchStream.h"
 
 #import "TableViewImageFetcher.h"
@@ -168,8 +168,8 @@
 
     NSString *serverFilter = [filter serverFilter];
     LokaliteStream *stream =
-        [LokaliteCategoryEventStream streamWithCategoryName:serverFilter
-                                                    context:context];
+        [LokaliteCategoryStream eventStreamWithCategoryName:serverFilter
+                                                         context:context];
     SimpleEventsViewController *controller =
         [[SimpleEventsViewController alloc] initWithCategoryName:[filter name]
                                                   lokaliteStream:stream
