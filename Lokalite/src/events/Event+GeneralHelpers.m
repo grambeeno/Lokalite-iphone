@@ -245,8 +245,6 @@
 @end
 
 
-#import "NSArray+GeneralHelpers.h"
-
 @implementation Event (GeoHelpers)
 
 - (CLLocation *)locationInstance

@@ -29,6 +29,10 @@
 
 @property (nonatomic, retain) TableViewImageFetcher *imageFetcher;
 
+#pragma mark - View initialization
+
+- (void)initializeNavigationItem;
+
 @end
 
 
@@ -49,6 +53,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self initializeNavigationItem];
 
     [self setShowsSearchBar:YES];
     [self setCanSearchServer:YES];
@@ -200,6 +206,13 @@
 - (LokaliteStream *)lokaliteStreamInstance
 {
     return [LokalitePlacesStream streamWithContext:[self context]];
+}
+
+#pragma mark - View initialization
+
+- (void)initializeNavigationItem
+{
+    [[self navigationItem] setRightBarButtonItem:[self mapViewButtonItem]];
 }
 
 #pragma mark - Account events

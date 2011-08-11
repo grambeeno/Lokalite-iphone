@@ -42,3 +42,10 @@
 - (NSURL *)phoneUrl;
 
 @end
+
+
+@interface Business (GeoHelpers)
+
+- (CLLocation *)locationInstance;
+
+@end

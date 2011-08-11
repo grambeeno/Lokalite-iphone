@@ -36,8 +36,7 @@
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain)
     IBOutlet MapDisplayController *mapViewController;
-@property (nonatomic, retain, readonly)
-    UIBarButtonItem *toggleMapViewButtonItem;
+@property (nonatomic, retain, readonly) UIBarButtonItem *mapViewButtonItem;
 
 #pragma mark - Refreshing data
 

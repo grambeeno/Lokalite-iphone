@@ -183,3 +183,20 @@
 }
 
 @end
+
+
+
+
+@implementation Business (GeoHelpers)
+
+- (CLLocation *)locationInstance
+{
+    Location *location = [self location];
+    NSNumber *lat = [location latitude], *lon = [location longitude];
+    CLLocation *loc = [[CLLocation alloc] initWithLatitude:[lat floatValue]
+                                                 longitude:[lon floatValue]];
+
+    return [loc autorelease];
+}
+
+@end

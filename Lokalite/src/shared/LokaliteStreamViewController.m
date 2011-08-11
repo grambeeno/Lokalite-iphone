@@ -140,7 +140,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 @synthesize showingMapView = showingMapView_;
 @synthesize mapView = mapView_;
 @synthesize mapViewController = mapViewController_;
-@synthesize toggleMapViewButtonItem = toggleMapViewButtonItem_;
+@synthesize mapViewButtonItem = mapViewButtonItem_;
 
 @synthesize refreshButtonItem = refreshButtonItem_;
 
@@ -171,7 +171,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
     [mapView_ release];
     [mapViewController_ release];
-    [toggleMapViewButtonItem_ release];
+    [mapViewButtonItem_ release];
 
     [context_ release];
     [dataController_ release];
@@ -1331,16 +1331,16 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     return refreshButtonItem_;
 }
 
-- (UIBarButtonItem *)toggleMapViewButtonItem
+- (UIBarButtonItem *)mapViewButtonItem
 {
-    if (!toggleMapViewButtonItem_) {
+    if (!mapViewButtonItem_) {
         SEL action = @selector(toggleMapView:);
-        toggleMapViewButtonItem_ =
+        mapViewButtonItem_ =
             [[UIBarButtonItem mapViewBarButtonItemWithTarget:self
                                                       action:action] retain];
     }
 
-    return toggleMapViewButtonItem_;
+    return mapViewButtonItem_;
 }
 
 - (LokaliteStream *)lokaliteStream
