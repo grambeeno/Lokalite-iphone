@@ -175,6 +175,8 @@
              handler(response, object, error);
          } else
              handler(response, nil, error);
+
+         [req release];
      }];
 }
 
@@ -224,6 +226,8 @@
              error = [NSError errorForHTTPStatusCode:[response statusCode]];
 
          handler(response, processedData, error);
+
+         [req release];
      }];
 }
 

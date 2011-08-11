@@ -57,8 +57,10 @@
         [NSURLConnection connectionWithRequest:req delegate:self];
     NSValue *value = [NSValue valueForConnection:connection];
 
+    DFResponseHandler heapHandler = [handler copy];
     [[self connectionData] setObject:[NSMutableData data] forKey:value];
-    [[self connectionHandlers] setObject:[handler copy] forKey:value];
+    [[self connectionHandlers] setObject:heapHandler forKey:value];
+    [heapHandler release], heapHandler = nil;
 }
 
 + (void)fetchDataAtUrl:(NSURL *)url responseHandler:(DFResponseHandler)handler

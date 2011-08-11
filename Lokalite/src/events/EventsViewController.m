@@ -633,6 +633,8 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
                                             managedObjectContext:context
                                               sectionNameKeyPath:nil
                                                        cacheName:nil];
+    [req release], req = nil;
+
     NSError *error = nil;
     if ([controller performFetch:&error]) {
         dataController_ = controller;

@@ -38,8 +38,9 @@ static const NSInteger ZOOM_LEVEL = 14;
     MKPinAnnotationView *view = (MKPinAnnotationView *)
         [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     if (!view) {
-        view = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-                                               reuseIdentifier:identifier];
+        view = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                reuseIdentifier:identifier]
+                autorelease];
         [view setAnimatesDrop:NO];
         [view setPinColor:MKPinAnnotationColorGreen];
         [view setCanShowCallout:NO];

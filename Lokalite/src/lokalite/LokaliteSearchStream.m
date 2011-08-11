@@ -61,8 +61,9 @@
 - (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
 {
     BOOL searchEvents = [self searchType] == LokaliteSearchStreamSearchEvents;
-    BOOL searchPlaces = [self searchType] == LokaliteSearchStreamSearchPlaces;
-    NSAssert(searchEvents || searchPlaces, @"Invalid search criteria");
+    NSAssert(searchEvents ||
+             [self searchType] == LokaliteSearchStreamSearchPlaces,
+             @"Invalid search criteria");
 
     LSResponseHandler responseHandler =
         ^(NSHTTPURLResponse *response, NSDictionary *objects, NSError *error) {
@@ -89,10 +90,18 @@
 
     if (searchEvents)
         [service searchEventsForKeywords:[self keywords]
-                         responseHandler:responseHandler];
+                         responseHandler:
+         ^(NSHTTPURLResponse *response, NSDictionary *d, NSError *error) {
+             responseHandler(response, d, error);
+             [service release];
+         }];
     else
         [service searchPlacesForKeywords:[self keywords]
-                         responseHandler:responseHandler];
+                         responseHandler:
+         ^(NSHTTPURLResponse *response, NSDictionary *d, NSError *error) {
+             responseHandler(response, d, error);
+             [service release];
+         }];
 }
 
 @end

@@ -43,8 +43,9 @@
     MKPinAnnotationView *view = (MKPinAnnotationView *)
         [mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationId];
     if (!view) {
-        view = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-                                               reuseIdentifier:AnnotationId];
+        view = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                reuseIdentifier:AnnotationId]
+                autorelease];
         [view setAnimatesDrop:YES];
         [view setPinColor:MKPinAnnotationColorPurple];
         [view setCanShowCallout:YES];

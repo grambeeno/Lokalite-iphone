@@ -246,7 +246,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
     // HACK: Setting here because in some cases the title isn't available
     // until the view loads. Consider refactoring in the future.
-    NSLog(@"Setting title to: %@", [self titleForView]);
     [self setTitle:[self titleForView]];
 
     [self subscribeForNotificationsForContext:[self context]];
@@ -913,6 +912,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
                                               sectionNameKeyPath:sectionKeyPath
                                                        cacheName:cacheName];
     [controller autorelease];
+    [req release], req = nil;
 
     NSError *error = nil;
     if ([controller performFetch:&error])
