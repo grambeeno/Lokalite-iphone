@@ -220,6 +220,10 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (void)refresh:(id)sender
 {
+    LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
+    [source unassociateAndDeleteDownloadedObjects];
+
+    [[self lokaliteStream] resetStream];
     [self fetchInitialSetOfObjectsIfNecessary];
 }
 
