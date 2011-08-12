@@ -17,6 +17,10 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 
 @property (nonatomic, copy, readonly) NSURL *baseUrl;
 
+@property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, retain) NSString *orderBy;
+@property (nonatomic, assign) NSInteger objectsPerPage;
+
 @property (nonatomic, copy, readonly) NSString *email;
 @property (nonatomic, copy, readonly) NSString *password;
 
@@ -34,9 +38,7 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 #pragma mark - Events
 
 - (void)fetchEventsWithCategory:(NSString *)category
-                   nearLocation:(CLLocationCoordinate2D)location
                        fromPage:(NSInteger)page
-                 objectsPerPage:(NSInteger)objectsPerPage
                 responseHandler:(LSResponseHandler)handler;
 
 #pragma mark - Trending events

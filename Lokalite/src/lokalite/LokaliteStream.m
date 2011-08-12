@@ -31,11 +31,10 @@
 @synthesize downloadSource = downloadSource_;
 @synthesize context = context_;
 
-@synthesize objectsPerPage = objectsPerPage_;
 @synthesize pagesFetched = pagesFetched_;
 @synthesize hasMorePages = hasMorePages_;
 
-@synthesize location = location_;
+@synthesize orderBy = orderBy_;
 
 @synthesize email = email_;
 @synthesize password = password_;
@@ -52,6 +51,8 @@
 
     [email_ release];
     [password_ release];
+
+    [orderBy_ release];
 
     [service_ release];
 
@@ -70,15 +71,56 @@
         downloadSource_ = [source retain];
         context_ = [context retain];
 
-        objectsPerPage_ = [[self class] defaultObjectsPerPage];
         pagesFetched_ = 0;
         hasMorePages_ = YES;
 
-        // invalid coordinate
-        location_ = CLLocationCoordinate2DMake(FLT_MAX, FLT_MAX);
+        [[self service] setObjectsPerPage:[[self class] defaultObjectsPerPage]];
+
+        [self clearLocation];
     }
 
     return self;
+}
+
+#pragma mark - Pagination
+
+- (void)setObjectsPerPage:(NSInteger)objectsPerPage
+{
+    [[self service] setObjectsPerPage:objectsPerPage];
+}
+
+- (NSInteger)objectsPerPage
+{
+    return [[self service] objectsPerPage];
+}
+
+#pragma mark - Location
+
+- (void)setLocation:(CLLocationCoordinate2D)location
+{
+    [[self service] setLocation:location];
+}
+
+- (CLLocationCoordinate2D)location
+{
+    return [[self service] location];
+}
+
+- (void)clearLocation
+{
+    [self setLocation:CLLocationCoordinate2DMake(FLT_MAX, FLT_MAX)];
+}
+
+#pragma mark - Ordering results
+
+- (void)setOrderBy:(NSString *)orderBy
+{
+    if (![orderBy_ isEqualToString:orderBy]) {
+        [orderBy_ release];
+        orderBy_ = [orderBy copy];
+
+        [[self service] setOrderBy:orderBy_];
+    }
 }
 
 #pragma mark - Making authenticated requests
@@ -130,8 +172,11 @@
 
 - (LokaliteService *)service
 {
-    if (!service_)
+    if (!service_) {
         service_ = [[LokaliteService alloc] initWithBaseUrl:[self baseUrl]];
+        [service_ setLocation:[self location]];
+        [service_ setObjectsPerPage:[self objectsPerPage]];
+    }
 
     return service_;
 }

@@ -977,8 +977,10 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
             DeviceLocator *locator = [DeviceLocator locator];
             [locator currentLocationWithCompletionHandler:
              ^(CLLocation *location, NSError *error) {
-                 if (location)
+                 if (location) {
                      [[self lokaliteStream] setLocation:[location coordinate]];
+                     [[self lokaliteStream] setOrderBy:@"distance"];
+                 }
                  NSLog(@"Have location: %@; error: %@", location, error);
                  fetch_objects();
              }];

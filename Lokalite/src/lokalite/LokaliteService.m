@@ -37,6 +37,10 @@
 
 @synthesize baseUrl = baseUrl_;
 
+@synthesize location = location_;
+@synthesize orderBy = orderBy_;
+@synthesize objectsPerPage = objectsPerPage_;
+
 @synthesize email = email_;
 @synthesize password = password_;
 
@@ -45,6 +49,8 @@
 - (void)dealloc
 {
     [baseUrl_ release];
+
+    [orderBy_ release];
 
     [email_ release];
     [password_ release];
@@ -57,8 +63,14 @@
 - (id)initWithBaseUrl:(NSURL *)url
 {
     self = [super init];
-    if (self)
+    if (self) {
         baseUrl_ = [url copy];
+
+        // reasonable defaults
+        location_ = CLLocationCoordinate2DMake(FLT_MAX, FLT_MAX);
+        orderBy_ = nil;  // default ordering; just to be explicit about it
+        objectsPerPage_ = 10;
+    }
 
     return self;
 }
@@ -87,9 +99,7 @@
 #pragma mark - Events
 
 - (void)fetchEventsWithCategory:(NSString *)category
-                   nearLocation:(CLLocationCoordinate2D)location
                        fromPage:(NSInteger)page
-                 objectsPerPage:(NSInteger)objectsPerPage
                 responseHandler:(LSResponseHandler)handler
 {
     NSURL *url = [self featuredEventUrl];
@@ -98,16 +108,21 @@
         [NSMutableDictionary
          dictionaryWithObjectsAndKeys:
          [NSString stringWithFormat:@"%d", page], @"page",
-         [NSString stringWithFormat:@"%d", objectsPerPage], @"per_page",
+         [NSString stringWithFormat:@"%d", [self objectsPerPage]], @"per_page",
          nil];
 
     if (!category)
         category = @"";
     [params setObject:category forKey:@"category"];
 
-    if (CLLocationCoordinate2DIsValid(location)) {
-        NSString *origin = [NSString stringWithFormat:@"%f,%f",
-                            location.latitude, location.longitude];
+    if ([self orderBy])
+        [params setObject:[self orderBy] forKey:@"order"];
+    
+
+    if (CLLocationCoordinate2DIsValid([self location])) {
+        NSString *origin =
+            [NSString stringWithFormat:@"%f,%f",
+             [self location].latitude, [self location].longitude];
         [params setObject:origin forKey:@"origin"];
     }
 

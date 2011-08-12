@@ -20,11 +20,10 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 @property (nonatomic, retain, readonly) LokaliteDownloadSource *downloadSource;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *context;
 
-@property (nonatomic, assign) NSUInteger objectsPerPage;
 @property (nonatomic, assign, readonly) NSUInteger pagesFetched;
 @property (nonatomic, assign, readonly) NSUInteger hasMorePages;
 
-@property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, copy) NSString *orderBy;
 
 @property (nonatomic, copy, readonly) NSString *email;
 @property (nonatomic, copy, readonly) NSString *password;
@@ -37,6 +36,17 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
        downloadSource:(LokaliteDownloadSource *)source
               context:(NSManagedObjectContext *)context;
 
+#pragma mark - Pagination
+
+- (void)setObjectsPerPage:(NSInteger)objectsPerPage;
+- (NSInteger)objectsPerPage;
+
+#pragma mark - Location
+
+- (void)setLocation:(CLLocationCoordinate2D)location;
+- (CLLocationCoordinate2D)location;
+- (void)clearLocation;
+
 #pragma mark - Making authenticated requests
 
 - (void)setEmail:(NSString *)email password:(NSString *)password;
@@ -46,6 +56,7 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 
 - (void)fetchNextBatchWithResponseHandler:(LKSResponseHandler)handler;
 - (void)resetStream;
+
 
 #pragma mark - Protected interface; do not call
 
