@@ -28,6 +28,6 @@
 - (void)deviceLocator:(DeviceLocator *)locator
      didUpateLocation:(CLLocation *)location;
 - (void)deviceLocator:(DeviceLocator *)locator
-    failedToUpdateLocation:(NSError *)error;
+     didFailWithError:(NSError *)error;
 
 @end

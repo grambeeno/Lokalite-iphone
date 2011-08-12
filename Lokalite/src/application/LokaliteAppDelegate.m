@@ -25,6 +25,7 @@
 #import "Business.h"
 #import "LokaliteDownloadSource.h"
 
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
 static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
@@ -225,10 +226,16 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)deviceLocator:(DeviceLocator *)locator
      didUpateLocation:(CLLocation *)location
 {
+    NSDictionary *userInfo =
+        [NSDictionary dictionaryWithObject:location forKey:DeviceLocationKey];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:DeviceLocationChangedNotification
+                      object:self
+                    userInfo:userInfo];
 }
 
 - (void)deviceLocator:(DeviceLocator *)locator
-    failedToUpdateLocation:(NSError *)error
+     didFailWithError:(NSError *)error
 {
 }
 

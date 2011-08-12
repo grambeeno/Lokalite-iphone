@@ -50,6 +50,7 @@
 		055286B113F095510072A662 /* CategoryFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286B013F095510072A662 /* CategoryFilterView.m */; };
 		055286B413F0A6370072A662 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286B313F0A6360072A662 /* Category.m */; };
 		055286C013F0B1700072A662 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286BF13F0B16F0072A662 /* Event.m */; };
+		0558768813F581CB00D04757 /* DeviceLocationNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 0558768713F581CB00D04757 /* DeviceLocationNotifications.m */; };
 		0568332F13CF65F700520C78 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568332D13CF65F700520C78 /* EventDetailsViewController.m */; };
 		0568333013CF65F700520C78 /* EventDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0568332E13CF65F700520C78 /* EventDetailsView.xib */; };
 		0568333413CF6A4400520C78 /* EventDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333313CF6A4400520C78 /* EventDetailsHeaderView.m */; };
@@ -250,6 +251,8 @@
 		055286B313F0A6360072A662 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = src/categories/Category.m; sourceTree = "<group>"; };
 		055286BE13F0B16F0072A662 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
 		055286BF13F0B16F0072A662 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
+		0558768613F581CB00D04757 /* DeviceLocationNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceLocationNotifications.h; path = src/geo/DeviceLocationNotifications.h; sourceTree = "<group>"; };
+		0558768713F581CB00D04757 /* DeviceLocationNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceLocationNotifications.m; path = src/geo/DeviceLocationNotifications.m; sourceTree = "<group>"; };
 		0568332C13CF65F700520C78 /* EventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsViewController.h; path = src/events/EventDetailsViewController.h; sourceTree = "<group>"; };
 		0568332D13CF65F700520C78 /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsViewController.m; path = src/events/EventDetailsViewController.m; sourceTree = "<group>"; };
 		0568332E13CF65F700520C78 /* EventDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventDetailsView.xib; path = src/events/EventDetailsView.xib; sourceTree = "<group>"; };
@@ -825,6 +828,8 @@
 				0589E4F313E7706F00149713 /* LokaliteObjectMapAnnotation.m */,
 				05E5556813F47C5300DF0F31 /* DeviceLocator.h */,
 				05E5556913F47C5300DF0F31 /* DeviceLocator.m */,
+				0558768613F581CB00D04757 /* DeviceLocationNotifications.h */,
+				0558768713F581CB00D04757 /* DeviceLocationNotifications.m */,
 			);
 			name = geo;
 			sourceTree = "<group>";
@@ -1226,6 +1231,7 @@
 				05E5555A13F42C9800DF0F31 /* PlaceStreamViewController.m in Sources */,
 				05E5555D13F433AD00DF0F31 /* CategoryPlaceStreamViewController.m in Sources */,
 				05E5556A13F47C5300DF0F31 /* DeviceLocator.m in Sources */,
+				0558768813F581CB00D04757 /* DeviceLocationNotifications.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -77,3 +77,10 @@
  * Log in
  */
 "log-in.failed" = "Log In Failed";
+
+
+/*
+ * DeviceLocator
+ */
+"devicelocator.purpose" = "Lokalite uses your location to find events close to you.";
+"devicelocator.timeout.message" = "The operation timed out";

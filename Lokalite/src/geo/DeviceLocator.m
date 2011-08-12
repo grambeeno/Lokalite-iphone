@@ -8,9 +8,22 @@
 
 #import "DeviceLocator.h"
 
+
+@interface NSError (DeviceLocatorHelpers)
++ (id)standardLocationTimeoutError;
+@end
+
+
 @interface DeviceLocator ()
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
+
+#pragma mark - Timeout
+
+@property (nonatomic, retain) NSTimer *timeoutTimer;
+
+- (void)startTimeoutTimer;
+- (void)cancelTimeoutTimer;
 
 #pragma mark - Determining accuracy
 
@@ -27,6 +40,7 @@
 
 @synthesize delegate = delegate_;
 @synthesize locationManager = locationManager_;
+@synthesize timeoutTimer = timeoutTimer_;
 
 - (void)dealloc
 {
@@ -34,6 +48,8 @@
 
     [self stop];
     [locationManager_ release];
+
+    [timeoutTimer_ release];
 
     [super dealloc];
 }
@@ -43,11 +59,13 @@
 - (void)start
 {
     [[self locationManager] startUpdatingLocation];
+    [self startTimeoutTimer];
 }
 
 - (void)stop
 {
     [[self locationManager] stopUpdatingLocation];
+    [self cancelTimeoutTimer];
 }
 
 #pragma mark - CLLocationManagerDelegate implementation
@@ -67,8 +85,26 @@
        didFailWithError:(NSError *)error
 {
     NSLog(@"Failed to update location: %@", error);
-    [[self delegate] deviceLocator:self failedToUpdateLocation:error];
+    [[self delegate] deviceLocator:self didFailWithError:error];
 }
+
+#pragma mark - Timeout
+
+- (void)startTimeoutTimer
+{
+}
+
+- (void)cancelTimeoutTimer
+{
+}
+
+- (void)timeoutTimerFired
+{
+    NSError * error = [NSError standardLocationTimeoutError];
+    [[self delegate] deviceLocator:self didFailWithError:error];
+}
+
+#pragma mark - Determining accuracy
 
 - (BOOL)isValidLocation:(CLLocation *)location
             oldLocation:(CLLocation *)oldLocation
@@ -129,6 +165,8 @@
     if (!locationManager_) {
         locationManager_ = [[CLLocationManager alloc] init];
         [locationManager_ setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+        [locationManager_
+         setPurpose:NSLocalizedString(@"devicelocator.purpose", nil)];
         [locationManager_ setDelegate:self];
     }
 
@@ -136,3 +174,22 @@
 }
 
 @end
+
+
+@implementation NSError (DeviceLocatorHelpers)
+
++ (id)standardLocationTimeoutError
+{
+    NSString *message =
+        NSLocalizedString(@"devicelocator.timeout.message", nil);
+    NSDictionary *userInfo =
+        [NSDictionary dictionaryWithObject:message
+                                    forKey:NSLocalizedDescriptionKey];
+
+    return [NSError errorWithDomain:@"Lokalite"
+                               code:100
+                           userInfo:userInfo];
+}
+
+@end
+

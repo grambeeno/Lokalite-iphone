@@ -29,3 +29,7 @@
 #import "LokaliteObjectBuilder.h"
 
 #import "LokaliteStream.h"
+
+
+#import "DeviceLocator.h"
+#import "DeviceLocationNotifications.h"
