@@ -977,8 +977,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
             DeviceLocator *locator = [DeviceLocator locator];
             [locator currentLocationWithCompletionHandler:
              ^(CLLocation *location, NSError *error) {
-                 //if (location)
-                 //    [[self lokaliteStream] setLocation:location];
+                 if (location)
+                     [[self lokaliteStream] setLocation:[location coordinate]];
                  NSLog(@"Have location: %@; error: %@", location, error);
                  fetch_objects();
              }];
@@ -1010,14 +1010,9 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)processNextBatchOfFetchedObjects:(NSArray *)objects
                               pageNumber:(NSInteger)pageNumber
 {
-    //if (pageNumber == 1 && ![self showsDataBeforeFirstFetch]) {
-    //    [self loadDataController];
-    //    [[self tableView] reloadData];
-    //}
-
     NSLog(@"Number of objects on page %d: %d", pageNumber, [objects count]);
     NSLog(@"Total number of objects: %d",
-          [[[self dataController] fetchedObjects] count]);
+          [[[self dataController] fetchedObjects] count] + [objects count]);
 
     if ([[self lokaliteStream] hasMorePages] && pageNumber == 1)
         [[self tableView] setTableFooterView:[self loadingMoreActivityView]];

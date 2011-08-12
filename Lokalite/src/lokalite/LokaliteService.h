@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
                                  NSDictionary *,
@@ -33,6 +34,7 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 #pragma mark - Events
 
 - (void)fetchEventsWithCategory:(NSString *)category
+                   nearLocation:(CLLocationCoordinate2D)location
                        fromPage:(NSInteger)page
                  objectsPerPage:(NSInteger)objectsPerPage
                 responseHandler:(LSResponseHandler)handler;

@@ -35,6 +35,8 @@
 @synthesize pagesFetched = pagesFetched_;
 @synthesize hasMorePages = hasMorePages_;
 
+@synthesize location = location_;
+
 @synthesize email = email_;
 @synthesize password = password_;
 
@@ -71,6 +73,9 @@
         objectsPerPage_ = [[self class] defaultObjectsPerPage];
         pagesFetched_ = 0;
         hasMorePages_ = YES;
+
+        // invalid coordinate
+        location_ = CLLocationCoordinate2DMake(FLT_MAX, FLT_MAX);
     }
 
     return self;

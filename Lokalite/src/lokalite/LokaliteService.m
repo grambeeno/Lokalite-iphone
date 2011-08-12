@@ -87,6 +87,7 @@
 #pragma mark - Events
 
 - (void)fetchEventsWithCategory:(NSString *)category
+                   nearLocation:(CLLocationCoordinate2D)location
                        fromPage:(NSInteger)page
                  objectsPerPage:(NSInteger)objectsPerPage
                 responseHandler:(LSResponseHandler)handler
@@ -96,14 +97,19 @@
     NSMutableDictionary *params =
         [NSMutableDictionary
          dictionaryWithObjectsAndKeys:
-         [[NSNumber numberWithInteger:page] description], @"page",
-         [[NSNumber numberWithInteger:objectsPerPage] description], @"per_page",
+         [NSString stringWithFormat:@"%d", page], @"page",
+         [NSString stringWithFormat:@"%d", objectsPerPage], @"per_page",
          nil];
 
     if (!category)
         category = @"";
-
     [params setObject:category forKey:@"category"];
+
+    if (CLLocationCoordinate2DIsValid(location)) {
+        NSString *origin = [NSString stringWithFormat:@"%f,%f",
+                            location.latitude, location.longitude];
+        [params setObject:origin forKey:@"origin"];
+    }
 
     [self sendRequestWithUrl:url
                   parameters:params

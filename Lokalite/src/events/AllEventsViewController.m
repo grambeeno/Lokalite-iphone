@@ -63,6 +63,7 @@
      setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
     [self setShowsCategoryFilter:YES];
+    [self setRequiresLocation:YES];
 }
 
 #pragma mark - LokaliteStreamViewController implementation

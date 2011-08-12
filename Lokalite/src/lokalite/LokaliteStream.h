@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <CoreLocation/CoreLocation.h>
 
 @class NSManagedObjectContext;
 @class LokaliteService, LokaliteDownloadSource;
@@ -23,6 +23,8 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 @property (nonatomic, assign) NSUInteger objectsPerPage;
 @property (nonatomic, assign, readonly) NSUInteger pagesFetched;
 @property (nonatomic, assign, readonly) NSUInteger hasMorePages;
+
+@property (nonatomic, assign) CLLocationCoordinate2D location;
 
 @property (nonatomic, copy, readonly) NSString *email;
 @property (nonatomic, copy, readonly) NSString *password;

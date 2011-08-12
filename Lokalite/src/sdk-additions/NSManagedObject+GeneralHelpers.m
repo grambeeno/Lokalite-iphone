@@ -118,7 +118,8 @@
         NSLog(@"Creating new %@: %@", NSStringFromClass(self), identifier);
         obj = [self createInstanceInContext:context];
         [obj setValue:identifier forKey:@"identifier"];
-    }
+    } else
+        NSLog(@"Found existing %@: %@", NSStringFromClass(self), identifier);
 
     return obj;
 }

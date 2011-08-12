@@ -19,6 +19,7 @@
 {
     LokaliteService *service = [self service];
     [service fetchEventsWithCategory:@"featured"
+                        nearLocation:[self location]
                             fromPage:[self pagesFetched] + 1
                       objectsPerPage:[self objectsPerPage]
                      responseHandler:
