@@ -137,6 +137,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 @synthesize categoryFilterView = categoryFilterView_;
 @synthesize categoryFilterCell = categoryFilterCell_;
 
+@synthesize requiresLocation = requiresLocation_;
+
 @synthesize showingMapView = showingMapView_;
 @synthesize mapView = mapView_;
 @synthesize mapViewController = mapViewController_;
@@ -191,6 +193,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     canSearchServer_ = NO;
     hasSearchedServer_ = NO;
     showsCategoryFilter_ = NO;
+    requiresLocation_ = NO;
 
     isFetchingData_ = NO;
 
@@ -965,20 +968,22 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (void)fetchInitialSetOfObjectsIfNecessary
 {
-    if (![self isFetchingData]) {
-        BOOL fetchNecessary = [[self lokaliteStream] pagesFetched] == 0;
-        //BOOL activityViewNecessary =
-        //    [[[self dataController] fetchedObjects] count] == 0;
+    if (![self isFetchingData] && [[self lokaliteStream] pagesFetched] == 0) {
+        void (^fetch_objects)(void) = ^{
+            [self fetchNextSetOfObjectsWithCompletion:nil];
+        };
 
-        if (fetchNecessary) {
-            //if (activityViewNecessary)
-            //    [self displayActivityView];
-            [self fetchNextSetOfObjectsWithCompletion:
-             ^(NSArray *a, NSError *e) {
-                 //if (activityViewNecessary)
-                 //    [self hideActivityView];
+        if ([self requiresLocation]) {
+            DeviceLocator *locator = [DeviceLocator locator];
+            [locator currentLocationWithCompletionHandler:
+             ^(CLLocation *location, NSError *error) {
+                 //if (location)
+                 //    [[self lokaliteStream] setLocation:location];
+                 NSLog(@"Have location: %@", location);
+                 fetch_objects();
              }];
-        }
+        } else
+             fetch_objects();
     }
 }
 

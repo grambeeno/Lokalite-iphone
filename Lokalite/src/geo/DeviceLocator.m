@@ -17,6 +17,8 @@
 @interface DeviceLocator ()
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic, retain) CLLocation *lastLocation;
+@property (nonatomic, retain) NSError *lastError;
 
 #pragma mark - Timeout
 
@@ -24,6 +26,19 @@
 
 - (void)startTimeoutTimer;
 - (void)cancelTimeoutTimer;
+
+#pragma mark - Location updates
+
+- (void)processLocationUpdate:(CLLocation *)location;
+- (void)processLocationUpdateFailure:(NSError *)error;
+
+- (void)notifyLocationUpdateHandlersOfLocationUpdate:(CLLocation *)location
+                                             orError:(NSError *)error;
+- (void)saveLocationUpdateHandler:(DLLocationUpdateHandler)handler;
+- (void)forgetLocationUpdateHandler:(DLLocationUpdateHandler)handler;
+- (void)forgetAllLocationUpdateHandlers;
+
+@property (nonatomic, retain) NSMutableSet *locationUpdateHandlers;
 
 #pragma mark - Determining accuracy
 
@@ -39,8 +54,16 @@
 @implementation DeviceLocator
 
 @synthesize delegate = delegate_;
+
 @synthesize locationManager = locationManager_;
+@synthesize lastLocation = lastLocation_;
+@synthesize lastError = lastError_;
+
 @synthesize timeoutTimer = timeoutTimer_;
+
+@synthesize locationUpdateHandlers = locationUpdateHandlers_;
+
+#pragma mark - Memory management
 
 - (void)dealloc
 {
@@ -48,10 +71,25 @@
 
     [self stop];
     [locationManager_ release];
+    [lastLocation_ release];
+    [lastError_ release];
 
     [timeoutTimer_ release];
 
+    [locationUpdateHandlers_ release];
+
     [super dealloc];
+}
+
+#pragma mark - Initialization
+
+- (id)init
+{
+    self = [super init];
+    if (self)
+        locationUpdateHandlers_ = [[NSMutableSet alloc] init];
+
+    return self;
 }
 
 #pragma mark - Locating
@@ -68,6 +106,17 @@
     [self cancelTimeoutTimer];
 }
 
+- (void)currentLocationWithCompletionHandler:(DLLocationUpdateHandler)handler
+{
+    CLLocation *location = [self lastLocation];
+    NSError *error = [self lastError];
+
+    if (location || error)
+        handler(location, error);
+    else
+        [self saveLocationUpdateHandler:handler];
+}
+
 #pragma mark - CLLocationManagerDelegate implementation
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -76,7 +125,7 @@
 {
     if ([self isValidLocation:newLocation oldLocation:oldLocation]) {
         NSLog(@"Current location: %@", newLocation);
-        [[self delegate] deviceLocator:self didUpateLocation:newLocation];
+        [self processLocationUpdate:newLocation];
     } else
         NSLog(@"Ignoring location: %@", newLocation);
 }
@@ -85,7 +134,7 @@
        didFailWithError:(NSError *)error
 {
     NSLog(@"Failed to update location: %@", error);
-    [[self delegate] deviceLocator:self didFailWithError:error];
+    [self processLocationUpdateFailure:error];
 }
 
 #pragma mark - Timeout
@@ -101,7 +150,56 @@
 - (void)timeoutTimerFired
 {
     NSError * error = [NSError standardLocationTimeoutError];
+    [self processLocationUpdateFailure:error];
+}
+
+#pragma mark - Location updates
+
+- (void)processLocationUpdate:(CLLocation *)location
+{
+    [self setLastLocation:location];
+    [self setLastError:nil];
+
+    [[self delegate] deviceLocator:self didUpateLocation:location];
+
+    [self notifyLocationUpdateHandlersOfLocationUpdate:location orError:nil];
+    [self forgetAllLocationUpdateHandlers];
+}
+
+- (void)processLocationUpdateFailure:(NSError *)error
+{
+    [self setLastLocation:nil];
+    [self setLastError:error];
+
     [[self delegate] deviceLocator:self didFailWithError:error];
+
+    [self notifyLocationUpdateHandlersOfLocationUpdate:nil orError:error];
+    [self forgetAllLocationUpdateHandlers];
+}
+
+- (void)notifyLocationUpdateHandlersOfLocationUpdate:(CLLocation *)location
+                                             orError:(NSError *)error
+{
+    [[self locationUpdateHandlers]
+     enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+         DLLocationUpdateHandler handler = (DLLocationUpdateHandler) obj;
+         handler(location, error);
+     }];
+}
+
+- (void)saveLocationUpdateHandler:(DLLocationUpdateHandler)handler
+{
+    [[self locationUpdateHandlers] addObject:[[handler copy] autorelease]];
+}
+
+- (void)forgetLocationUpdateHandler:(DLLocationUpdateHandler)handler
+{
+    [[self locationUpdateHandlers] removeObject:handler];
+}
+
+- (void)forgetAllLocationUpdateHandlers
+{
+    [[self locationUpdateHandlers] removeAllObjects];
 }
 
 #pragma mark - Determining accuracy
@@ -113,7 +211,8 @@
     BOOL current = abs(age) <= [[self class] maximumAcceptableLocationAge];
 
     BOOL sequential =
-        [location.timestamp timeIntervalSinceDate:oldLocation.timestamp] >= 0;
+        [[location timestamp]
+         timeIntervalSinceDate:[oldLocation timestamp]] >= 0;
 
     CLLocationAccuracy horizontalAccuracy = [location horizontalAccuracy];
     CLLocationAccuracy minAllowedHorizontalAccuracy =
@@ -171,6 +270,17 @@
     }
 
     return locationManager_;
+}
+
+#pragma mark - DeviceLocator is a singleton
+
++ (id)locator
+{
+    static DeviceLocator *locator = nil;
+    if (!locator)
+        locator = [[DeviceLocator alloc] init];
+
+    return locator;
 }
 
 @end

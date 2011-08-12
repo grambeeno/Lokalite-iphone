@@ -101,6 +101,10 @@
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
     (NSString *)keywords;
 
+#pragma mark - Location
+
+@property (nonatomic, assign) BOOL requiresLocation;
+
 #pragma mark Working with the map view
 
 - (void)presentMapViewAnimated:(BOOL)animated;

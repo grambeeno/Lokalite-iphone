@@ -40,7 +40,8 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
 #pragma mark - Location management
 
-- (void)startDeviceLocator;
+- (void)startLocatingDevice;
+- (void)stopLocatingDevice;
 
 #pragma mark - User interface management
 
@@ -139,7 +140,7 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     [self deleteStaleData];
 
     [self subscribeForNotificationsForContext:[self context]];
-    [self startDeviceLocator];
+    [self startLocatingDevice];
 
     [self initializeTabBarController:[self tabBarController]];
 
@@ -226,12 +227,16 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)deviceLocator:(DeviceLocator *)locator
      didUpateLocation:(CLLocation *)location
 {
+    /*
     NSDictionary *userInfo =
         [NSDictionary dictionaryWithObject:location forKey:DeviceLocationKey];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:DeviceLocationChangedNotification
                       object:self
                     userInfo:userInfo];
+     */
+
+    [[self deviceLocator] stop];
 }
 
 - (void)deviceLocator:(DeviceLocator *)locator
@@ -241,9 +246,14 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
 #pragma mark - Location management
 
-- (void)startDeviceLocator
+- (void)startLocatingDevice
 {
     [[self deviceLocator] start];
+}
+
+- (void)stopLocatingDevice
+{
+    [[self deviceLocator] stop];
 }
 
 #pragma mark - User interface management
@@ -587,7 +597,7 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (DeviceLocator *)deviceLocator
 {
     if (!deviceLocator_)
-        deviceLocator_ = [[DeviceLocator alloc] init];
+        deviceLocator_ = [[DeviceLocator locator] retain];
 
     return deviceLocator_;
 }

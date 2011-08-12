@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+typedef void(^DLLocationUpdateHandler)(CLLocation *location, NSError *error);
+
 @protocol DeviceLocatorDelegate;
 
 @interface DeviceLocator : NSObject <CLLocationManagerDelegate>
+
+#pragma mark - Delegate
 
 @property (nonatomic, assign) id<DeviceLocatorDelegate> delegate;
 
@@ -19,6 +23,18 @@
 
 - (void)start;
 - (void)stop;
+
+//
+// If the receiver knows the current location, it will call the completion
+// handler immediately with that value. Similar for errors. If, however, the
+// receiver has not yet determined the current location, it will call the
+// completion once the location has been determined.
+//
+- (void)currentLocationWithCompletionHandler:(DLLocationUpdateHandler)handler;
+
+#pragma mark - DeviceLocator is a singleton
+
++ (id)locator;
 
 @end
 

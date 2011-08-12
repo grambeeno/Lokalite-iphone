@@ -60,6 +60,8 @@
     [super viewDidLoad];
 
     [self initializeNavigationItem];
+
+    [self setRequiresLocation:YES];
 }
 
 #pragma mark Configuring the view
