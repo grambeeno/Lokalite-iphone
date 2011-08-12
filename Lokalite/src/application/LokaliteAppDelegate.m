@@ -242,6 +242,7 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)deviceLocator:(DeviceLocator *)locator
      didFailWithError:(NSError *)error
 {
+    [[self deviceLocator] stop];
 }
 
 #pragma mark - Location management
@@ -596,8 +597,10 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
 - (DeviceLocator *)deviceLocator
 {
-    if (!deviceLocator_)
+    if (!deviceLocator_) {
         deviceLocator_ = [[DeviceLocator locator] retain];
+        [deviceLocator_ setDelegate:self];
+    }
 
     return deviceLocator_;
 }

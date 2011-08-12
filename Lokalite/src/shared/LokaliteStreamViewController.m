@@ -979,7 +979,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
              ^(CLLocation *location, NSError *error) {
                  //if (location)
                  //    [[self lokaliteStream] setLocation:location];
-                 NSLog(@"Have location: %@", location);
+                 NSLog(@"Have location: %@; error: %@", location, error);
                  fetch_objects();
              }];
         } else

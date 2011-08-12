@@ -59,6 +59,7 @@
 @synthesize lastLocation = lastLocation_;
 @synthesize lastError = lastError_;
 
+@synthesize timeoutInterval = timeoutInterval_;
 @synthesize timeoutTimer = timeoutTimer_;
 
 @synthesize locationUpdateHandlers = locationUpdateHandlers_;
@@ -86,8 +87,10 @@
 - (id)init
 {
     self = [super init];
-    if (self)
+    if (self) {
         locationUpdateHandlers_ = [[NSMutableSet alloc] init];
+        timeoutInterval_ = [[self class] defaultTimeoutInterval];
+    }
 
     return self;
 }
@@ -104,6 +107,14 @@
 {
     [[self locationManager] stopUpdatingLocation];
     [self cancelTimeoutTimer];
+
+    // HACK: -stop can be called as the result of a CLLocationManagerDelegate
+    // method being fired, which causes a DeviceLocatorDelegate method to be
+    // fired. This causes the location manager to be released while in its
+    // own delegate method, which causes a crash. Avoid by autoreleasing and
+    // setting to nil.
+    [locationManager_ autorelease];
+    locationManager_ = nil;
 }
 
 - (void)currentLocationWithCompletionHandler:(DLLocationUpdateHandler)handler
@@ -115,6 +126,11 @@
         handler(location, error);
     else
         [self saveLocationUpdateHandler:handler];
+}
+
++ (NSTimeInterval)defaultTimeoutInterval
+{
+    return 3;
 }
 
 #pragma mark - CLLocationManagerDelegate implementation
@@ -141,16 +157,28 @@
 
 - (void)startTimeoutTimer
 {
+    NSTimer *timer =
+        [NSTimer scheduledTimerWithTimeInterval:[self timeoutInterval]
+                                         target:self
+                                       selector:@selector(timeoutTimerFired:)
+                                       userInfo:nil
+                                        repeats:NO];
+    [self setTimeoutTimer:timer];
 }
 
 - (void)cancelTimeoutTimer
 {
+    if ([self timeoutTimer]) {
+        [[self timeoutTimer] invalidate];
+        [self setTimeoutTimer:nil];
+    }
 }
 
-- (void)timeoutTimerFired
+- (void)timeoutTimerFired:(NSTimer *)timer
 {
     NSError * error = [NSError standardLocationTimeoutError];
     [self processLocationUpdateFailure:error];
+    [self setTimeoutTimer:nil];
 }
 
 #pragma mark - Location updates
@@ -164,6 +192,8 @@
 
     [self notifyLocationUpdateHandlersOfLocationUpdate:location orError:nil];
     [self forgetAllLocationUpdateHandlers];
+
+    [self cancelTimeoutTimer];
 }
 
 - (void)processLocationUpdateFailure:(NSError *)error
@@ -175,6 +205,8 @@
 
     [self notifyLocationUpdateHandlersOfLocationUpdate:nil orError:error];
     [self forgetAllLocationUpdateHandlers];
+
+    [self cancelTimeoutTimer];
 }
 
 - (void)notifyLocationUpdateHandlersOfLocationUpdate:(CLLocation *)location

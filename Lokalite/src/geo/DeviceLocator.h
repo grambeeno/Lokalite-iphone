@@ -32,6 +32,16 @@ typedef void(^DLLocationUpdateHandler)(CLLocation *location, NSError *error);
 //
 - (void)currentLocationWithCompletionHandler:(DLLocationUpdateHandler)handler;
 
+//
+// If the receiver can not determine the current location within the provided
+// timeout interval, an error is reported to the delegate and any completion
+// handlers. Time is measured from when the receiver was last started via
+// the -start method. The default value is the value of +defaultTimeoutInterval.
+//
+@property (nonatomic, assign) NSTimeInterval timeoutInterval;
+
++ (NSTimeInterval)defaultTimeoutInterval;
+
 #pragma mark - DeviceLocator is a singleton
 
 + (id)locator;
