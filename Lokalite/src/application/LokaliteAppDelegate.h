@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #import "AccountDetailsViewController.h"
+#import "DeviceLocator.h"
 
 @interface LokaliteAppDelegate : NSObject
     <UIApplicationDelegate, UITabBarControllerDelegate, UIActionSheetDelegate,
-     AccountDetailsViewControllerDelegate>
+     AccountDetailsViewControllerDelegate, DeviceLocatorDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 

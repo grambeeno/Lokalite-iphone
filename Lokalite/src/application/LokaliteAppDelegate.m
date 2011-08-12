@@ -35,6 +35,12 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 @property (nonatomic, retain) NSPersistentStoreCoordinator *coordinator;
 @property (nonatomic, retain) NSManagedObjectContext *context;
 
+@property (nonatomic, retain) DeviceLocator *deviceLocator;
+
+#pragma mark - Location management
+
+- (void)startDeviceLocator;
+
 #pragma mark - User interface management
 
 - (void)initializeTabBarController:(UITabBarController *)tabBarController;
@@ -79,6 +85,8 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 @synthesize coordinator = coordinator_;
 @synthesize context = context_;
 
+@synthesize deviceLocator = deviceLocator_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -89,6 +97,8 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     [model_ release];
     [coordinator_ release];
     [context_ release];
+
+    [deviceLocator_ release];
 
     [super dealloc];
 }
@@ -128,6 +138,7 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     [self deleteStaleData];
 
     [self subscribeForNotificationsForContext:[self context]];
+    [self startDeviceLocator];
 
     [self initializeTabBarController:[self tabBarController]];
 
@@ -209,6 +220,25 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     [sheet release], sheet = nil;
 }
 
+#pragma mark - DeviceLocatorDelegate implementation
+
+- (void)deviceLocator:(DeviceLocator *)locator
+     didUpateLocation:(CLLocation *)location
+{
+}
+
+- (void)deviceLocator:(DeviceLocator *)locator
+    failedToUpdateLocation:(NSError *)error
+{
+}
+
+#pragma mark - Location management
+
+- (void)startDeviceLocator
+{
+    [[self deviceLocator] start];
+}
+
 #pragma mark - User interface management
 
 - (void)initializeTabBarController:(UITabBarController *)tabBarController
@@ -270,13 +300,11 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)processAccountAddition:(LokaliteAccount *)account
 {
     [self updateInterfaceForAccount:account];
-    //[self deleteAllEventAndBusinessData];
 }
 
 - (void)processAccountDeletion:(LokaliteAccount *)account
 {
     [self updateInterfaceForNoAccount];
-    //[self deleteAllEventAndBusinessData];
 }
 
 #pragma mark - Persistence management
@@ -547,6 +575,14 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     }
 
     return coordinator_;
+}
+
+- (DeviceLocator *)deviceLocator
+{
+    if (!deviceLocator_)
+        deviceLocator_ = [[DeviceLocator alloc] init];
+
+    return deviceLocator_;
 }
 
 #pragma mark - Static accessors
