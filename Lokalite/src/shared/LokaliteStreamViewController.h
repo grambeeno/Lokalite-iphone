@@ -104,6 +104,7 @@
 #pragma mark - Location
 
 @property (nonatomic, assign) BOOL requiresLocation;
+@property (nonatomic, retain, readonly) CLLocation *currentLocation;
 
 #pragma mark Working with the map view
 

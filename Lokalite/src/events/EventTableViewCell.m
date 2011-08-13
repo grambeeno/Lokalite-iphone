@@ -17,6 +17,7 @@
 @synthesize businessNameLabel = businessNameLabel_;
 @synthesize summaryLabel = summaryLabel_;
 @synthesize timeLabel = timeLabel_;
+@synthesize distanceLabel = distanceLabel_;
 @synthesize trendedImageView = trendedImageView_;
 
 #pragma mark - Memory management
@@ -30,6 +31,7 @@
     [businessNameLabel_ release];
     [summaryLabel_ release];
     [timeLabel_ release];
+    [distanceLabel_ release];
     [trendedImageView_ release];
 
     [super dealloc];
@@ -49,10 +51,12 @@
 #import "Event+GeneralHelpers.h"
 #import "Business.h"
 #import "NSString+GeneralHelpers.h"
+#import <CoreLocation/CoreLocation.h>
 
 @implementation EventTableViewCell (UserInterfaceHelpers)
 
 - (void)configureCellForEvent:(Event *)event
+              currentLocation:(CLLocation *)location
 {
     [self setEventId:[event identifier]];
 
@@ -66,7 +70,15 @@
     [[self timeLabel] setText:timeRange];
 
     [[self trendedImageView] setHidden:![event isTrended]];
+
+    [[self distanceLabel] setHidden:!location];
+    NSString *distance = nil;
+    if (location) {
+        CLLocationDistance dist =
+            [[event locationInstance] distanceFromLocation:location];
+        distance = [NSString stringFromLocationDistance:dist];
+    }
+    [[self distanceLabel] setText:distance];
 }
 
 @end
-

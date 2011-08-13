@@ -138,6 +138,7 @@
 		059B340813D4F4BB007AD11C /* tab-bar-icon-places.png in Resources */ = {isa = PBXBuildFile; fileRef = 059B340613D4F4BB007AD11C /* tab-bar-icon-places.png */; };
 		059B340913D4F4BB007AD11C /* tab-bar-icon-places@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059B340713D4F4BB007AD11C /* tab-bar-icon-places@2x.png */; };
 		05A7B41D13D731F6008E737C /* Category+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A7B41C13D731F6008E737C /* Category+GeneralHelpers.m */; };
+		05AB961113F61BE6002FEA4E /* DistanceFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB961013F61BE6002FEA4E /* DistanceFormatter.m */; };
 		05B1577213E269CC00F20FF8 /* event-cell-trend-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B1577013E269CC00F20FF8 /* event-cell-trend-badge.png */; };
 		05B1577313E269CC00F20FF8 /* event-cell-trend-badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B1577113E269CC00F20FF8 /* event-cell-trend-badge@2x.png */; };
 		05B91DCD13EB4F5900E3A898 /* LokaliteApplicationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DCC13EB4F5900E3A898 /* LokaliteApplicationState.m */; };
@@ -370,6 +371,9 @@
 		059B340713D4F4BB007AD11C /* tab-bar-icon-places@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-places@2x.png"; path = "images/tab-bar-icons/tab-bar-icon-places@2x.png"; sourceTree = "<group>"; };
 		05A7B41B13D731F6008E737C /* Category+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Category+GeneralHelpers.h"; path = "src/categories/Category+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05A7B41C13D731F6008E737C /* Category+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Category+GeneralHelpers.m"; path = "src/categories/Category+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05AB960F13F61BE6002FEA4E /* DistanceFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistanceFormatter.h; path = src/shared/DistanceFormatter.h; sourceTree = "<group>"; };
+		05AB961013F61BE6002FEA4E /* DistanceFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DistanceFormatter.m; path = src/shared/DistanceFormatter.m; sourceTree = "<group>"; };
+		05AB961213F61D63002FEA4E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = src/shared/Constants.h; sourceTree = "<group>"; };
 		05B1577013E269CC00F20FF8 /* event-cell-trend-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-trend-badge.png"; path = "images/events/event-cell-trend-badge.png"; sourceTree = "<group>"; };
 		05B1577113E269CC00F20FF8 /* event-cell-trend-badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-trend-badge@2x.png"; path = "images/events/event-cell-trend-badge@2x.png"; sourceTree = "<group>"; };
 		05B91DCB13EB4F5900E3A898 /* LokaliteApplicationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteApplicationState.h; path = src/application/LokaliteApplicationState.h; sourceTree = "<group>"; };
@@ -514,6 +518,7 @@
 			isa = PBXGroup;
 			children = (
 				0514FBF513CE5FC700ACA464 /* LokaliteShared.h */,
+				05AB961213F61D63002FEA4E /* Constants.h */,
 				0514FBF213CE561D00ACA464 /* DataFetcher.h */,
 				0514FBF313CE561D00ACA464 /* DataFetcher.m */,
 				058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */,
@@ -522,6 +527,8 @@
 				05770E8613DDD75A00B841D4 /* TableViewImageFetcher.m */,
 				0548320E13F1CF6B0099125B /* RemoteSearchTableFooterView.h */,
 				0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */,
+				05AB960F13F61BE6002FEA4E /* DistanceFormatter.h */,
+				05AB961013F61BE6002FEA4E /* DistanceFormatter.m */,
 			);
 			name = shared;
 			sourceTree = "<group>";
@@ -1226,6 +1233,7 @@
 				05E5555A13F42C9800DF0F31 /* PlaceStreamViewController.m in Sources */,
 				05E5555D13F433AD00DF0F31 /* CategoryPlaceStreamViewController.m in Sources */,
 				05E5556A13F47C5300DF0F31 /* DeviceLocator.m in Sources */,
+				05AB961113F61BE6002FEA4E /* DistanceFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

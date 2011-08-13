@@ -7,6 +7,7 @@
 //
 
 #import "NSString+GeneralHelpers.h"
+#import "DistanceFormatter.h"
 
 @implementation NSString (GeneralHelpers)
 
@@ -23,6 +24,12 @@
     return [NSString stringWithFormat:@"%@ - %@",
             [formatter stringFromDate:startDate],
             [formatter stringFromDate:endDate]];
+}
+
++ (id)stringFromLocationDistance:(CLLocationDistance)distance
+{
+    DistanceFormatter * formatter = [DistanceFormatter formatter];
+    return [formatter distanceAsString:distance];
 }
 
 @end

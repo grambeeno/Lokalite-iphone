@@ -19,6 +19,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *businessNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *summaryLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timeLabel;
+@property (nonatomic, retain) IBOutlet UILabel *distanceLabel;
 @property (nonatomic, retain) IBOutlet UIImageView *trendedImageView;
 
 #pragma mark - Configuration helpers
@@ -29,10 +30,11 @@
 
 
 
-@class Event;
+@class CLLocation, Event;
 
 @interface EventTableViewCell (UserInterfaceHelpers)
 
-- (void)configureCellForEvent:(Event *)event;
+- (void)configureCellForEvent:(Event *)event
+              currentLocation:(CLLocation *)location;
 
 @end

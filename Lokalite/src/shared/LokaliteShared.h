@@ -6,6 +6,8 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
+#import "Constants.h"
+
 #import "DataFetcher.h"
 #import "TableViewImageFetcher.h"
 
@@ -30,6 +32,4 @@
 
 #import "LokaliteStream.h"
 
-
 #import "DeviceLocator.h"
-#import "DeviceLocationNotifications.h"

@@ -249,7 +249,7 @@ enum {
     } else if ([path section] == kSectionUpcomingEvents) {
         Event *event = [[self events] objectAtIndex:[path row]];
         EventTableViewCell *eventCell = (EventTableViewCell *) cell;
-        [eventCell configureCellForEvent:event];
+        [eventCell configureCellForEvent:event currentLocation:nil];
 
         NSData *imageData = [event imageData];
         if (imageData)

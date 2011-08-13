@@ -481,7 +481,7 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 
 - (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event
 {
-    [cell configureCellForEvent:event];
+    [cell configureCellForEvent:event currentLocation:nil];
 
     NSData *imageData = [event imageData];
     if (imageData)

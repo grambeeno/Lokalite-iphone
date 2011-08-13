@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface NSString (GeneralHelpers)
 
 + (id)textRangeWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
++ (id)stringFromLocationDistance:(CLLocationDistance)distance;
 
 @end
 

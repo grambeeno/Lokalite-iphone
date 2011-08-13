@@ -316,7 +316,7 @@
 
 - (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event
 {
-    [cell configureCellForEvent:event];
+    [cell configureCellForEvent:event currentLocation:nil];
 
     NSData *imageData = [event imageData];
     if (imageData)

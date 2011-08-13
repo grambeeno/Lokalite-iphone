@@ -54,6 +54,10 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (NSIndexPath *)tableViewIndexPathForDataIndexPath:(NSIndexPath *)ip
                                         inTableView:(UITableView *)tv;
 
+#pragma mark - Location
+
+@property (nonatomic, retain) CLLocation *currentLocation;
+
 #pragma mark - Working with the map view
 
 @property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
@@ -138,6 +142,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 @synthesize categoryFilterCell = categoryFilterCell_;
 
 @synthesize requiresLocation = requiresLocation_;
+@synthesize currentLocation = currentLocation_;
 
 @synthesize showingMapView = showingMapView_;
 @synthesize mapView = mapView_;
@@ -173,6 +178,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     [loadedCategoryFilters_ release];
     [categoryFilterView_ release];
     [categoryFilterCell_ release];
+
+    [currentLocation_ release];
 
     [mapView_ release];
     [mapViewController_ release];
@@ -978,6 +985,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
             [locator currentLocationWithCompletionHandler:
              ^(CLLocation *location, NSError *error) {
                  if (location) {
+                     [self setCurrentLocation:location];
                      [[self lokaliteStream] setLocation:[location coordinate]];
                      [[self lokaliteStream] setOrderBy:@"distance"];
                  }

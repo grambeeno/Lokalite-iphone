@@ -88,7 +88,7 @@
           inTableView:(UITableView *)tableView
             forObject:(Event *)event
 {
-    [cell configureCellForEvent:event];
+    [cell configureCellForEvent:event currentLocation:[self currentLocation]];
 
     UIImage *image = [event image];
     if (!image) {
