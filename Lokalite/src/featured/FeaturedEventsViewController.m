@@ -14,7 +14,7 @@
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 
-#import "LokaliteFeaturedEventStream.h"
+#import "LokaliteCategoryStream.h"
 
 #import "TableViewImageFetcher.h"
 
@@ -172,30 +172,12 @@
 
 #pragma mark Fetching data from the network
 
-- (void)processNextBatchOfFetchedObjects:(NSArray *)events
+- (void)processNextBatchOfFetchedObjects:(NSArray *)objects
                               pageNumber:(NSInteger)pageNumber
 {
-    [super processNextBatchOfFetchedObjects:events pageNumber:pageNumber];
-
-    CLLocationCoordinate2D coord = [[self lokaliteStream] location];
-    if (CLLocationCoordinate2DIsValid(coord)) {
-        CLLocation *location1 =
-            [[CLLocation alloc] initWithLatitude:coord.latitude
-                                       longitude:coord.longitude];
-
-        [events enumerateObjectsUsingBlock:
-         ^(Event *e, NSUInteger idx, BOOL *stop) {
-             CLLocation *location2 = [e locationInstance];
-             CLLocationDistance distance =
-                [location1 distanceFromLocation:location2];
-             NSNumber *d = [[NSNumber alloc] initWithDouble:distance];
-             NSLog(@"%@: %@", [e name], d);
-             [e setDistance:d];
-             [d release], d = nil;
-         }];
-
-        [location1 release], location1 = nil;
-    }
+    [super processNextBatchOfFetchedObjects:objects pageNumber:pageNumber];
+    [objects makeObjectsPerformSelector:@selector(setFeatured:)
+                             withObject:[NSNumber numberWithBool:YES]];
 }
 
 - (void)processObjectFetchError:(NSError *)error
@@ -219,7 +201,8 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [LokaliteFeaturedEventStream streamWithContext:[self context]];
+    return [LokaliteCategoryStream eventStreamWithCategoryName:@"featured"
+                                                       context:[self context]];
 }
 
 #pragma mark - View initialization

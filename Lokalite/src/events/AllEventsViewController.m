@@ -11,13 +11,15 @@
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 
+#import "LokaliteDownloadSource.h"
+
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 #import "CategoryEventStreamViewController.h"
 
 #import "CategoryFilter.h"
 
-#import "LokaliteEventStream.h"
+//#import "LokaliteEventStream.h"
 #import "LokaliteCategoryStream.h"
 #import "LokaliteSearchStream.h"
 
@@ -165,16 +167,17 @@
 
 - (void)didSelectCategoryFilter:(CategoryFilter *)filter
 {
-    NSManagedObjectContext *context = [self context];
+    NSManagedObjectContext *moc = [self context];
 
     NSString *serverFilter = [filter serverFilter];
+    NSString *name = [filter name];
     LokaliteStream *stream =
         [LokaliteCategoryStream eventStreamWithCategoryName:serverFilter
-                                                         context:context];
+                                                    context:moc];
     CategoryEventStreamViewController *controller =
-        [[CategoryEventStreamViewController alloc] initWithCategoryName:[filter name]
-                                                  lokaliteStream:stream
-                                                         context:context];
+        [[CategoryEventStreamViewController alloc] initWithCategoryName:name
+                                                         lokaliteStream:stream
+                                                                context:moc];
     [[self navigationController] pushViewController:controller animated:YES];
     [controller release], controller = nil;
 }
@@ -185,8 +188,6 @@
 {
     return @"Event";
 }
-
-#import "LokaliteDownloadSource.h"
 
 - (NSPredicate *)dataControllerPredicate
 {
@@ -235,7 +236,8 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [LokaliteEventStream streamWithContext:[self context]];
+    return [LokaliteCategoryStream eventStreamWithCategoryName:nil
+                                                       context:[self context]];
 }
 
 #pragma mark - View initialization

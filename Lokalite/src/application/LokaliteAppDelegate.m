@@ -10,10 +10,6 @@
 
 #import <CoreData/CoreData.h>
 
-#import "FeaturedEventsViewController.h"
-#import "TrendingViewController.h"
-#import "EventsViewController.h"
-#import "PlacesViewController.h"
 #import "ProfileViewController.h"
 
 #import "ActivityView.h"

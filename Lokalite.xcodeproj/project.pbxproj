@@ -133,7 +133,6 @@
 		059AEE0F13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */; };
 		059AEE1313E7667F00AA4DF7 /* MapDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059AEE1213E7667F00AA4DF7 /* MapDisplayController.m */; };
 		059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */; };
-		059B340413D4F291007AD11C /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B340213D4F291007AD11C /* EventsViewController.m */; };
 		059B340513D4F291007AD11C /* EventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059B340313D4F291007AD11C /* EventsView.xib */; };
 		059B340813D4F4BB007AD11C /* tab-bar-icon-places.png in Resources */ = {isa = PBXBuildFile; fileRef = 059B340613D4F4BB007AD11C /* tab-bar-icon-places.png */; };
 		059B340913D4F4BB007AD11C /* tab-bar-icon-places@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059B340713D4F4BB007AD11C /* tab-bar-icon-places@2x.png */; };
@@ -364,8 +363,6 @@
 		059AEE1213E7667F00AA4DF7 /* MapDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapDisplayController.m; path = src/geo/MapDisplayController.m; sourceTree = "<group>"; };
 		059B33FE13D4BC5A007AD11C /* LokaliteSearchStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteSearchStream.h; path = src/lokalite/LokaliteSearchStream.h; sourceTree = "<group>"; };
 		059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteSearchStream.m; path = src/lokalite/LokaliteSearchStream.m; sourceTree = "<group>"; };
-		059B340113D4F291007AD11C /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsViewController.h; path = src/events/EventsViewController.h; sourceTree = "<group>"; };
-		059B340213D4F291007AD11C /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsViewController.m; path = src/events/EventsViewController.m; sourceTree = "<group>"; };
 		059B340313D4F291007AD11C /* EventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventsView.xib; path = src/events/EventsView.xib; sourceTree = "<group>"; };
 		059B340613D4F4BB007AD11C /* tab-bar-icon-places.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-places.png"; path = "images/tab-bar-icons/tab-bar-icon-places.png"; sourceTree = "<group>"; };
 		059B340713D4F4BB007AD11C /* tab-bar-icon-places@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-places@2x.png"; path = "images/tab-bar-icons/tab-bar-icon-places@2x.png"; sourceTree = "<group>"; };
@@ -919,8 +916,6 @@
 				054ADD0D13F97ED40068C4F8 /* Event.m */,
 				056A92E913CCF3AB00C65DC0 /* Event+GeneralHelpers.h */,
 				056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */,
-				059B340113D4F291007AD11C /* EventsViewController.h */,
-				059B340213D4F291007AD11C /* EventsViewController.m */,
 				059B340313D4F291007AD11C /* EventsView.xib */,
 				05BC9C0013E9A41B00FBAD23 /* AllEventsViewController.h */,
 				05BC9C0113E9A41B00FBAD23 /* AllEventsViewController.m */,
@@ -1187,7 +1182,6 @@
 				05FA00E113D0E8AC001B7470 /* BusinessDetailsViewController.m in Sources */,
 				05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */,
 				059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */,
-				059B340413D4F291007AD11C /* EventsViewController.m in Sources */,
 				05D0205213D4F80500FE0A6C /* LokaliteEventStream.m in Sources */,
 				0569FCB513D6397B00146228 /* lokalite.xcdatamodeld in Sources */,
 				05DD68EB13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m in Sources */,
