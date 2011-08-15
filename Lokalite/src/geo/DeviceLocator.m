@@ -130,7 +130,11 @@
 
 + (NSTimeInterval)defaultTimeoutInterval
 {
-    return 3;
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSNumber *n =
+        [bundle objectForInfoDictionaryKey:@"LokaliteLocationTimeoutInterval"];
+
+    return [n doubleValue];
 }
 
 #pragma mark - CLLocationManagerDelegate implementation

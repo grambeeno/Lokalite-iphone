@@ -45,5 +45,7 @@
 	</array>
 	<key>LokaliteDefaultObjectsPerFetch</key>
 	<integer>10</integer>
+	<key>LokaliteLocationTimeoutInterval</key>
+	<integer>5</integer>
 </dict>
 </plist>
