@@ -35,6 +35,6 @@
 @interface EventTableViewCell (UserInterfaceHelpers)
 
 - (void)configureCellForEvent:(Event *)event
-              currentLocation:(CLLocation *)location;
+              displayDistance:(BOOL)displayDistance;
 
 @end

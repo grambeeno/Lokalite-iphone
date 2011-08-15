@@ -56,7 +56,7 @@
 @implementation EventTableViewCell (UserInterfaceHelpers)
 
 - (void)configureCellForEvent:(Event *)event
-              currentLocation:(CLLocation *)location
+              displayDistance:(BOOL)displayDistance
 {
     [self setEventId:[event identifier]];
 
@@ -71,21 +71,13 @@
 
     [[self trendedImageView] setHidden:![event isTrended]];
 
-    /*
-    [[self distanceLabel] setHidden:!location];
-    NSString *distance = nil;
-    if (location) {
-        CLLocationDistance dist =
-            [[event locationInstance] distanceFromLocation:location];
-        distance = [NSString stringFromLocationDistance:dist];
-    }
-     */
-
     NSString *distanceText = nil;
-    NSNumber *distance = [event distance];
-    if (distance)
-        distanceText =
-            [NSString stringFromLocationDistance:[distance doubleValue]];
+    if (displayDistance) {
+        NSNumber *distance = [event distance];
+        if (distance)
+            distanceText =
+                [NSString stringFromLocationDistance:[distance doubleValue]];
+    }
     [[self distanceLabel] setText:distanceText];
 }
 
