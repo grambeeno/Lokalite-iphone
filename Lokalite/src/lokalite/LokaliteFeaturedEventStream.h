@@ -6,9 +6,9 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "LokaliteStream.h"
+#import "LokaliteCategoryStream.h"
 
-@interface LokaliteFeaturedEventStream : LokaliteStream
+@interface LokaliteFeaturedEventStream : LokaliteCategoryStream
 
 @end
 

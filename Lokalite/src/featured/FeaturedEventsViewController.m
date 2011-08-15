@@ -14,7 +14,7 @@
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 
-#import "LokaliteCategoryStream.h"
+#import "LokaliteFeaturedEventStream.h"
 
 #import "TableViewImageFetcher.h"
 
@@ -201,8 +201,7 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [LokaliteCategoryStream eventStreamWithCategoryName:@"featured"
-                                                       context:[self context]];
+    return [LokaliteFeaturedEventStream streamWithContext:[self context]];
 }
 
 #pragma mark - View initialization

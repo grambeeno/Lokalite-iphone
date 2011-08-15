@@ -17,25 +17,16 @@
 
 - (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
 {
-    LokaliteService *service = [self service];
-
-    [service fetchEventsWithCategory:@"featured"
-                            fromPage:[self pagesFetched] + 1
-                     responseHandler:
-     ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
-         NSArray *parsedObjects = nil;
-         if (jsonObjects) {
-             parsedObjects =
-                [Event eventObjectsFromJsonObjects:jsonObjects
-                                    downloadSource:[self downloadSource]
-                                       withContext:[self context]];
-
-             NSNumber *yes = [NSNumber numberWithBool:YES];
-             [parsedObjects makeObjectsPerformSelector:@selector(setFeatured:)
-                                            withObject:yes];
+    [super fetchNextBatchOfObjectsWithResponseHandler:
+     ^(NSArray *events, NSError *error) {
+         if (events) {
+             NSNumber *yes = [[NSNumber alloc] initWithBool:YES];
+             [events makeObjectsPerformSelector:@selector(setFeatured:)
+                                     withObject:yes];
+             [yes release], yes = nil;
          }
 
-         handler(parsedObjects, error);
+         handler(events, error);
      }];
 }
 
@@ -46,8 +37,7 @@
 
 + (id)streamWithContext:(NSManagedObjectContext *)context
 {
-    NSString *name = @"events?category=featured";
-    return [self streamWithDownloadSourceName:name context:context];
+    return [self eventStreamWithCategoryName:@"featured" context:context];
 }
 
 @end
