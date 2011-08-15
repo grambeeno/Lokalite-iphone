@@ -45,6 +45,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 #pragma mark - Working with the category filters
 
+@property (nonatomic, assign, getter=isCategoryFilterLoaded)
+    BOOL categoryFilterLoaded;
 @property (nonatomic, copy) NSArray *loadedCategoryFilters;
 @property (nonatomic, retain) CategoryFilterView *categoryFilterView;
 @property (nonatomic, retain) UITableViewCell *categoryFilterCell;
@@ -114,6 +116,11 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)subscribeForNotificationsForContext:(NSManagedObjectContext *)context;
 - (void)unsubscribeForNotoficationsForContext:(NSManagedObjectContext *)context;
 
+#pragma mark - Category filter management
+
+- (void)loadCategoryFilter;
+- (void)unloadCategoryFilter;
+
 #pragma mark - Application notifications
 
 - (void)subscribeForApplicationLifecycleNotifications;
@@ -136,6 +143,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 @synthesize remoteSearchTableViewCell = remoteSearchTableViewCell_;
 @synthesize remoteSearchLokaliteStream = remoteSearchLokaliteStream_;
 
+@synthesize categoryFilterLoaded = categoryFilterLoaded_;
 @synthesize loadedCategoryFilters = loadedCategoryFilters_;
 @synthesize categoryFilterView = categoryFilterView_;
 @synthesize categoryFilterCell = categoryFilterCell_;
@@ -320,7 +328,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
         id <NSFetchedResultsSectionInfo> sectionInfo =
             [[[self dataController] sections] objectAtIndex:section];
         nrows = [sectionInfo numberOfObjects];
-        if ([self showsCategoryFilter])
+        if ([self isCategoryFilterLoaded])
             ++nrows;
     } else {
         nrows = [[self searchResults] count];
@@ -969,6 +977,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     if (![self isFetchingData] && [[self lokaliteStream] pagesFetched] == 0) {
         void (^fetch_objects)(void) = ^{
             [self loadDataController];
+            if ([self showsCategoryFilter] && ![self isCategoryFilterLoaded])
+                [self loadCategoryFilter];
             [self fetchNextSetOfObjectsWithCompletion:nil];
         };
 
@@ -1153,6 +1163,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 {
     NSArray *filters = [self categoryFilters];
     [self setLoadedCategoryFilters:filters];
+    [self setCategoryFilterLoaded:YES];
 
     if ([self isViewLoaded]) {
         [[self categoryFilterView] setCategoryFilters:filters];
@@ -1166,6 +1177,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)unloadCategoryFilter
 {
     [self setLoadedCategoryFilters:nil];
+    [self setCategoryFilterLoaded:NO];
 
     if ([self isViewLoaded]) {
         NSIndexPath *first = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -1265,10 +1277,12 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     if (showsCategoryFilter_ != showsCategoryFilter) {
         showsCategoryFilter_ = showsCategoryFilter;
 
+        /*
         if (showsCategoryFilter)
             [self loadCategoryFilter];
         else
             [self unloadCategoryFilter];
+         */
     }
 }
 
