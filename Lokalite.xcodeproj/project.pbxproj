@@ -36,6 +36,7 @@
 		0548320D13F1B09B0099125B /* LokaliteCategoryStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320C13F1B09B0099125B /* LokaliteCategoryStream.m */; };
 		0548321013F1CF6B0099125B /* RemoteSearchTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */; };
 		0549AB5513D77A6800F9C2C2 /* CategoryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */; };
+		054ADD0E13F97ED40068C4F8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 054ADD0D13F97ED40068C4F8 /* Event.m */; };
 		054E06B613CB82B6009B7373 /* tab-bar-icon-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */; };
 		054E06B713CB82B6009B7373 /* tab-bar-icon-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B513CB82B6009B7373 /* tab-bar-icon-profile@2x.png */; };
 		054E06BA13CB8309009B7373 /* tab-bar-icon-loyalty.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B813CB8309009B7373 /* tab-bar-icon-loyalty.png */; };
@@ -49,7 +50,6 @@
 		055286AD13F08A7D0072A662 /* LokaliteTrendingEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286AC13F08A7D0072A662 /* LokaliteTrendingEventStream.m */; };
 		055286B113F095510072A662 /* CategoryFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286B013F095510072A662 /* CategoryFilterView.m */; };
 		055286B413F0A6370072A662 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286B313F0A6360072A662 /* Category.m */; };
-		055286C013F0B1700072A662 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286BF13F0B16F0072A662 /* Event.m */; };
 		0568332F13CF65F700520C78 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568332D13CF65F700520C78 /* EventDetailsViewController.m */; };
 		0568333013CF65F700520C78 /* EventDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0568332E13CF65F700520C78 /* EventDetailsView.xib */; };
 		0568333413CF6A4400520C78 /* EventDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568333313CF6A4400520C78 /* EventDetailsHeaderView.m */; };
@@ -233,6 +233,8 @@
 		0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoteSearchTableFooterView.m; path = src/shared/RemoteSearchTableFooterView.m; sourceTree = "<group>"; };
 		0549AB5313D77A6800F9C2C2 /* CategoryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilter.h; path = src/categories/CategoryFilter.h; sourceTree = "<group>"; };
 		0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilter.m; path = src/categories/CategoryFilter.m; sourceTree = "<group>"; };
+		054ADD0C13F97ED40068C4F8 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
+		054ADD0D13F97ED40068C4F8 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
 		054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-profile.png"; path = "images/tab-bar-icons/tab-bar-icon-profile.png"; sourceTree = "<group>"; };
 		054E06B513CB82B6009B7373 /* tab-bar-icon-profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-profile@2x.png"; path = "images/tab-bar-icons/tab-bar-icon-profile@2x.png"; sourceTree = "<group>"; };
 		054E06B813CB8309009B7373 /* tab-bar-icon-loyalty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-loyalty.png"; path = "images/tab-bar-icons/tab-bar-icon-loyalty.png"; sourceTree = "<group>"; };
@@ -249,8 +251,6 @@
 		055286B013F095510072A662 /* CategoryFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilterView.m; path = src/categories/CategoryFilterView.m; sourceTree = "<group>"; };
 		055286B213F0A6360072A662 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = src/categories/Category.h; sourceTree = "<group>"; };
 		055286B313F0A6360072A662 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = src/categories/Category.m; sourceTree = "<group>"; };
-		055286BE13F0B16F0072A662 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
-		055286BF13F0B16F0072A662 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
 		0568332C13CF65F700520C78 /* EventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsViewController.h; path = src/events/EventDetailsViewController.h; sourceTree = "<group>"; };
 		0568332D13CF65F700520C78 /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsViewController.m; path = src/events/EventDetailsViewController.m; sourceTree = "<group>"; };
 		0568332E13CF65F700520C78 /* EventDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventDetailsView.xib; path = src/events/EventDetailsView.xib; sourceTree = "<group>"; };
@@ -915,8 +915,8 @@
 		05EC9A3913CB969700B7AD61 /* events */ = {
 			isa = PBXGroup;
 			children = (
-				055286BE13F0B16F0072A662 /* Event.h */,
-				055286BF13F0B16F0072A662 /* Event.m */,
+				054ADD0C13F97ED40068C4F8 /* Event.h */,
+				054ADD0D13F97ED40068C4F8 /* Event.m */,
 				056A92E913CCF3AB00C65DC0 /* Event+GeneralHelpers.h */,
 				056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */,
 				059B340113D4F291007AD11C /* EventsViewController.h */,
@@ -1223,7 +1223,6 @@
 				055286AD13F08A7D0072A662 /* LokaliteTrendingEventStream.m in Sources */,
 				055286B113F095510072A662 /* CategoryFilterView.m in Sources */,
 				055286B413F0A6370072A662 /* Category.m in Sources */,
-				055286C013F0B1700072A662 /* Event.m in Sources */,
 				0548320013F0DEDF0099125B /* Business.m in Sources */,
 				0548320413F0DEFE0099125B /* Location.m in Sources */,
 				0548320713F1AB070099125B /* EventStreamViewController.m in Sources */,
@@ -1234,6 +1233,7 @@
 				05E5555D13F433AD00DF0F31 /* CategoryPlaceStreamViewController.m in Sources */,
 				05E5556A13F47C5300DF0F31 /* DeviceLocator.m in Sources */,
 				05AB961113F61BE6002FEA4E /* DistanceFormatter.m in Sources */,
+				054ADD0E13F97ED40068C4F8 /* Event.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

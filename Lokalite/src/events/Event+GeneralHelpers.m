@@ -262,7 +262,7 @@
 
 @implementation Event (ViewControllerHelpers)
 
-+ (NSArray *)defaultTableViewSortDescriptors
++ (NSArray *)dateTableViewSortDescriptors
 {
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
                                                           ascending:YES];
@@ -270,6 +270,14 @@
                                                           ascending:YES];
 
     return [NSArray arrayWithObjects:sd1, sd2, nil];
+}
+
++ (NSArray *)locationTableViewSortDescriptors
+{
+    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"distance"
+                                                          ascending:YES];
+
+    return [NSArray arrayWithObject:sd1];
 }
 
 @end

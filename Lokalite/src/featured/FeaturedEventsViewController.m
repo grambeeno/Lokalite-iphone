@@ -161,7 +161,13 @@
 
 - (NSArray *)dataControllerSortDescriptors
 {
-    return [Event defaultTableViewSortDescriptors];
+    BOOL hasLocation =
+        CLLocationCoordinate2DIsValid([[self lokaliteStream] location]);
+
+    return
+        hasLocation ?
+        [Event locationTableViewSortDescriptors] :
+        [Event dateTableViewSortDescriptors];
 }
 
 #pragma mark Fetching data from the network
@@ -171,22 +177,24 @@
 {
     [super processNextBatchOfFetchedObjects:events pageNumber:pageNumber];
 
-    if (pageNumber == 1) {
-        NSManagedObjectContext *context = [self context];
+    CLLocationCoordinate2D coord = [[self lokaliteStream] location];
+    if (CLLocationCoordinate2DIsValid(coord)) {
+        CLLocation *location1 =
+            [[CLLocation alloc] initWithLatitude:coord.latitude
+                                       longitude:coord.longitude];
 
-        NSPredicate *pred = [self dataControllerPredicate];
-        NSArray *allEvents = [Event findAllWithPredicate:pred
-                                               inContext:context];
-
-        [LokaliteObjectBuilder replaceLokaliteObjects:allEvents
-                                          withObjects:events
-                                      usingValueOfKey:@"identifier"
-                                     remainingHandler:
-         ^(Event *event) {
-             NSLog(@"Deleting event: %@: %@", [event identifier], [event name]);
-             if ([[event featured] boolValue])
-                 [context deleteObject:event];
+        [events enumerateObjectsUsingBlock:
+         ^(Event *e, NSUInteger idx, BOOL *stop) {
+             CLLocation *location2 = [e locationInstance];
+             CLLocationDistance distance =
+                [location1 distanceFromLocation:location2];
+             NSNumber *d = [[NSNumber alloc] initWithDouble:distance];
+             NSLog(@"%@: %@", [e name], d);
+             [e setDistance:d];
+             [d release], d = nil;
          }];
+
+        [location1 release], location1 = nil;
     }
 }
 

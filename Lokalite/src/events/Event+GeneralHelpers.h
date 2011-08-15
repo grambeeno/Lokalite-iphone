@@ -74,6 +74,7 @@
 
 @interface Event (ViewControllerHelpers)
 
-+ (NSArray *)defaultTableViewSortDescriptors;
++ (NSArray *)dateTableViewSortDescriptors;
++ (NSArray *)locationTableViewSortDescriptors;
 
 @end

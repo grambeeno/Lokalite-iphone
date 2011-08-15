@@ -71,6 +71,7 @@
 
     [[self trendedImageView] setHidden:![event isTrended]];
 
+    /*
     [[self distanceLabel] setHidden:!location];
     NSString *distance = nil;
     if (location) {
@@ -78,7 +79,14 @@
             [[event locationInstance] distanceFromLocation:location];
         distance = [NSString stringFromLocationDistance:dist];
     }
-    [[self distanceLabel] setText:distance];
+     */
+
+    NSString *distanceText = nil;
+    NSNumber *distance = [event distance];
+    if (distance)
+        distanceText =
+            [NSString stringFromLocationDistance:[distance doubleValue]];
+    [[self distanceLabel] setText:distanceText];
 }
 
 @end

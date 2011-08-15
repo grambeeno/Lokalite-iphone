@@ -155,7 +155,14 @@
 
 - (NSArray *)dataControllerSortDescriptors
 {
-    return [Event defaultTableViewSortDescriptors];
+    BOOL hasLocation =
+        [self requiresLocation] &&
+        CLLocationCoordinate2DIsValid([[self lokaliteStream] location]);
+    
+    return
+        hasLocation ?
+        [Event locationTableViewSortDescriptors] :
+        [Event dateTableViewSortDescriptors];
 }
 
 #pragma mark Fetching data from the network

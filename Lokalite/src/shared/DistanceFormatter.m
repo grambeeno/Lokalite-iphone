@@ -59,7 +59,7 @@
      */
         obj = [[self alloc] initWithMajorUnit:@"mi"
                                     minorUnit:@"ft"
-                                    threshold:5280
+                                    threshold:/*5280*/ 0
                                     converter:^(double distance) {
                                         return distance * 3.280839895013;
                                     }];

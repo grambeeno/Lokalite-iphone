@@ -67,7 +67,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)initializeNavigationItem:(UINavigationItem *)navItem;
 - (void)initializeTableView:(UITableView *)tableView;
 - (void)initializeMapView:(MKMapView *)mapView;
-- (void)initializeDataController;
 
 #pragma mark - View configuration
 
@@ -261,12 +260,9 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     [self subscribeForNotificationsForContext:[self context]];
     [self subscribeForApplicationLifecycleNotifications];
 
-    [self loadDataController];
-
     [self initializeNavigationItem:[self navigationItem]];
     [self initializeTableView:[self tableView]];
     [self initializeMapView:[self mapView]];
-    [self initializeDataController];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -558,12 +554,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (void)initializeMapView:(MKMapView *)mapView
 {
-}
-
-- (void)initializeDataController
-{
-    //if ([self showsDataBeforeFirstFetch])
-    //    [self loadDataController];
 }
 
 #pragma mark - Protected interface
@@ -969,6 +959,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)loadDataController
 {
     [self setDataController:[self configuredFetchedResultsController]];
+    [[self tableView] reloadData];
 }
 
 #pragma mark Fetching data from the network
@@ -977,6 +968,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 {
     if (![self isFetchingData] && [[self lokaliteStream] pagesFetched] == 0) {
         void (^fetch_objects)(void) = ^{
+            [self loadDataController];
             [self fetchNextSetOfObjectsWithCompletion:nil];
         };
 

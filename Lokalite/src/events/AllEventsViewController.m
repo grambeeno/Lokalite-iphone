@@ -203,7 +203,7 @@
 
 - (NSArray *)dataControllerSortDescriptors
 {
-    return [Event defaultTableViewSortDescriptors];
+    return [Event dateTableViewSortDescriptors];
 }
 
 #pragma mark Fetching data from the network

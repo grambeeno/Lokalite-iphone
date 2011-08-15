@@ -145,7 +145,7 @@
 
 - (NSArray *)dataControllerSortDescriptors
 {
-    return [Event defaultTableViewSortDescriptors];
+    return [Event dateTableViewSortDescriptors];
 }
 
 - (LokaliteStream *)lokaliteStreamInstance

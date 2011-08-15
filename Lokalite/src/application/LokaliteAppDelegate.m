@@ -227,12 +227,15 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)deviceLocator:(DeviceLocator *)locator
      didUpateLocation:(CLLocation *)location
 {
+    NSLog(@"Found location: %@", location);
+    NSLog(@"Stopping the device locator.");
     [[self deviceLocator] stop];
 }
 
 - (void)deviceLocator:(DeviceLocator *)locator
      didFailWithError:(NSError *)error
 {
+    NSLog(@"Failed to determine location with error: %@", error);
     [[self deviceLocator] stop];
 }
 
