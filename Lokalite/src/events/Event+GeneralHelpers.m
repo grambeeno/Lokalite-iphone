@@ -238,10 +238,6 @@
     return [baseUrl URLByAppendingPathComponent:urlPath];
 }
 
-- (void)setLastUpdatedDate:(NSDate *)date forDownloadSource:(NSString *)source
-{
-}
-
 @end
 
 

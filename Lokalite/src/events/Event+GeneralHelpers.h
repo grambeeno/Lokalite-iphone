@@ -55,8 +55,6 @@
 - (UIImage *)image;
 - (NSURL *)fullImageUrl;
 
-- (void)setLastUpdatedDate:(NSDate *)date forDownloadSource:(NSString *)source;
-
 @end
 
 
