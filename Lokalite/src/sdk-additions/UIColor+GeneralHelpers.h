@@ -18,5 +18,6 @@
 @interface UIColor (ApplicationColors)
 
 + (id)navigationBarTintColor;
++ (id)tableViewBackgroundColor;
 
 @end

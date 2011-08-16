@@ -566,6 +566,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
         [tableView setTableFooterView:
          hasFooter ? [self loadingMoreActivityView] : nil];
     }
+
+    [tableView setBackgroundColor:[UIColor tableViewBackgroundColor]];
 }
 
 - (void)initializeMapView:(MKMapView *)mapView

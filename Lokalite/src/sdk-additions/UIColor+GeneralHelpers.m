@@ -31,11 +31,13 @@
 
 + (id)navigationBarTintColor
 {
-    return [self colorWithRGBValue:0x3C3C3C];
-    //return nil;
-    //return [self colorWithRGBValue:0x1a1a1a];
-    //return [self colorWithRGBValue:0x494848];
-    //return [self colorWithRGBValue:0x252525];
+    return [self colorWithRGBValue:0x606060];
+    //return [self colorWithRGBValue:0x3C3C3C];
+}
+
++ (id)tableViewBackgroundColor
+{
+    return [UIColor colorWithRGBValue:0xe4e4e4];
 }
 
 @end
