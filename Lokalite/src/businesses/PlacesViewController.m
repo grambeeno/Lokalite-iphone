@@ -29,8 +29,6 @@
 
 @interface PlacesViewController ()
 
-@property (nonatomic, retain) TableViewImageFetcher *imageFetcher;
-
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem;
@@ -40,16 +38,6 @@
 
 @implementation PlacesViewController
 
-@synthesize imageFetcher = imageFetcher_;
-
-#pragma mark - Memory management
-
-- (void)dealloc
-{
-    [imageFetcher_ release];
-    [super dealloc];
-}
-
 #pragma mark - UIViewController implementation
 
 - (void)viewDidLoad
@@ -58,7 +46,6 @@
 
     [self initializeNavigationItem];
 
-    [self setShowsSearchBar:YES];
     [self setCanSearchServer:YES];
     [self setShowsCategoryFilter:YES];
 }
@@ -72,75 +59,7 @@
     return NSLocalizedString(@"global.places", nil);
 }
 
-#pragma mark - Configuring the table view
-
-- (void)initializeTableView:(UITableView *)tableView
-{
-    [super initializeTableView:tableView];
-
-    [tableView setRowHeight:[PlaceTableViewCell cellHeight]];
-}
-
-- (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
-                              inTableView:(UITableView *)tableView
-{
-    return [PlaceTableViewCell defaultReuseIdentifier];
-}
-
-- (UITableViewCell *)tableViewCellInstanceAtIndexPath:(NSIndexPath *)indexPath
-                                         forTableView:(UITableView *)tableView
-                                      reuseIdentifier:(NSString *)identifier
-{
-    return [PlaceTableViewCell instanceFromNib];
-}
-
-- (void)configureCell:(PlaceTableViewCell *)cell
-          inTableView:(UITableView *)tableView
-            forObject:(Business *)place
-{
-    [cell configureCellForPlace:place];
-
-    UIImage *image = [place standardImage];
-    if (image)
-        [[cell placeImageView] setImage:image];
-    else {
-        NSURL *url = [NSURL URLWithString:[place standardImageUrl]];
-
-        [[self imageFetcher] fetchImageDataAtUrl:url
-                                       tableView:tableView
-                             dataReceivedHandler:
-         ^(NSData *data) {
-             [place setStandardImageData:data];
-         }
-                            tableViewCellHandler:
-         ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {
-             if ([tvc isKindOfClass:[PlaceTableViewCell class]]) {
-                 PlaceTableViewCell *cell = (PlaceTableViewCell *) tvc;
-                 if ([[cell placeId] isEqualToNumber:[place identifier]])
-                     [[cell placeImageView] setImage:image];
-             }
-         }
-                                    errorHandler:
-         ^(NSError *error) {
-             NSLog(@"WARNING: Failed to fetch place image at: %@", url);
-         }];
-    }
-}
-
-- (void)displayDetailsForObject:(Business *)place
-{
-    BusinessDetailsViewController *controller =
-        [[BusinessDetailsViewController alloc] initWithBusiness:place];
-    [[self navigationController] pushViewController:controller animated:YES];
-    [controller release], controller = nil;
-}
-
 #pragma mark - Search - remote
-
-- (NSPredicate *)predicateForQueryString:(NSString *)queryString
-{
-    return [Business predicateForSearchString:queryString];
-}
 
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
     (NSString *)keywords
@@ -173,30 +92,7 @@
     [controller release], controller = nil;
 }
 
-#pragma mark Working with the local data store
-
-- (NSString *)lokaliteObjectEntityName
-{
-    return @"Business";
-}
-
-- (NSPredicate *)dataControllerPredicate
-{
-    NSManagedObjectContext *context = [self context];
-    NSDate *date =
-        [[LokaliteApplicationState currentState:context] dataFreshnessDate];
-
-    LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
-    NSString *sourceName = [source name];
-
-    return [NSPredicate predicateForDownloadSourceName:sourceName
-                                       lastUpdatedDate:date];
-}
-
-- (NSArray *)dataControllerSortDescriptors
-{
-    return [Business defaultTableViewSortDescriptors];
-}
+#pragma mark Fetching data from the network
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
@@ -209,23 +105,6 @@
 {
     [[self navigationItem] setLeftBarButtonItem:[self refreshButtonItem]];
     [[self navigationItem] setRightBarButtonItem:[self mapViewButtonItem]];
-}
-
-#pragma mark - Account events
-
-- (BOOL)shouldResetForAccountAddition:(LokaliteAccount *)account
-{
-    return NO;
-}
-
-#pragma mark - Accessors
-
-- (TableViewImageFetcher *)imageFetcher
-{
-    if (!imageFetcher_)
-        imageFetcher_ = [[TableViewImageFetcher alloc] init];
-
-    return imageFetcher_;
 }
 
 @end
