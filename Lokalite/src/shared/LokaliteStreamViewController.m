@@ -243,7 +243,14 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     [self setLokaliteStream:[self lokaliteStreamInstance]];
     //[[self lokaliteStream] resetStream];
 
-    [self fetchInitialSetOfObjectsIfNecessary];
+    if ([self showsCategoryFilter])
+        // doing this after a slight delay fixes an animation glitch while
+        // removing old data and replacing it with the new data
+        [self performSelector:@selector(fetchInitialSetOfObjectsIfNecessary)
+                   withObject:nil
+                   afterDelay:0.5];
+    else
+        [self fetchInitialSetOfObjectsIfNecessary];
 }
 
 - (void)toggleMapView:(id)sender
