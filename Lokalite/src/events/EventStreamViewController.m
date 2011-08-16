@@ -88,7 +88,7 @@
           inTableView:(UITableView *)tableView
             forObject:(Event *)event
 {
-    [cell configureCellForEvent:event displayDistance:!![self currentLocation]];
+    [cell configureCellForEvent:event displayDistance:[self hasValidLocation]];
 
     UIImage *image = [event standardImage];
     if (!image) {
@@ -155,12 +155,8 @@
 
 - (NSArray *)dataControllerSortDescriptors
 {
-    BOOL hasLocation =
-        [self requiresLocation] &&
-        CLLocationCoordinate2DIsValid([[self lokaliteStream] location]);
-    
     return
-        hasLocation ?
+        [self hasValidLocation] ?
         [Event locationTableViewSortDescriptors] :
         [Event dateTableViewSortDescriptors];
 }

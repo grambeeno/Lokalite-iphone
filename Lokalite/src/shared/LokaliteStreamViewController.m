@@ -240,7 +240,9 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
     [source unassociateAndDeleteDownloadedObjects];
 
-    [[self lokaliteStream] resetStream];
+    [self setLokaliteStream:[self lokaliteStreamInstance]];
+    //[[self lokaliteStream] resetStream];
+
     [self fetchInitialSetOfObjectsIfNecessary];
 }
 
@@ -553,8 +555,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 {
     if (tableView == [self tableView]) {
         BOOL hasFooter =
-            /*[self showsDataBeforeFirstFetch] &&*/
-            [[self lokaliteStream] hasMorePages];
+            lokaliteStream_ == nil || [[self lokaliteStream] hasMorePages];
         [tableView setTableFooterView:
          hasFooter ? [self loadingMoreActivityView] : nil];
     }
@@ -803,6 +804,13 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     [source unassociateAndDeleteDownloadedObjects];
 }
 
+#pragma mark Location
+
+- (BOOL)hasValidLocation
+{
+    return [self requiresLocation] && [self currentLocation];
+}
+
 #pragma mark Working with the map view
 
 - (void)transitionFromView:(UIView *)fromView
@@ -974,7 +982,10 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (void)fetchInitialSetOfObjectsIfNecessary
 {
-    if (![self isFetchingData] && [[self lokaliteStream] pagesFetched] == 0) {
+    // HACK: assigning to the member var here to avoid lazy loading the stream
+    // before the location is fetched as subclasses depend on this (wonderful)
+    LokaliteStream *stream = lokaliteStream_;
+    if (![self isFetchingData] && [stream pagesFetched] == 0) {
         void (^fetch_objects)(void) = ^{
             [self loadDataController];
             if ([self showsCategoryFilter] && ![self isCategoryFilterLoaded])
@@ -989,7 +1000,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
                  if (location) {
                      [self setCurrentLocation:location];
                      [[self lokaliteStream] setLocation:[location coordinate]];
-                     [[self lokaliteStream] setOrderBy:@"distance"];
                  }
                  NSLog(@"Have location: %@; error: %@", location, error);
                  fetch_objects();

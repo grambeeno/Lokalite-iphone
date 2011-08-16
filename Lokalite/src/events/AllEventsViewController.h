@@ -10,4 +10,10 @@
 
 @interface AllEventsViewController : EventStreamViewController
 
+@property (nonatomic, retain) IBOutlet UISegmentedControl *eventSelector;
+
+#pragma mark - UI events
+
+- (IBAction)eventSelectorValueChanged:(id)sender;
+
 @end

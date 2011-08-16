@@ -18,6 +18,13 @@
 #import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
+
+enum {
+    EventFilterStartTime,
+    EventFilterDistance
+};
+
+
 @interface AllEventsViewController ()
 
 #pragma mark - View initialization
@@ -28,6 +35,23 @@
 
 
 @implementation AllEventsViewController
+
+@synthesize eventSelector = eventSelector_;
+
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    [eventSelector_ release];
+    [super dealloc];
+}
+
+#pragma mark - UI events
+
+- (IBAction)eventSelectorValueChanged:(id)sender
+{
+    [self refresh:nil];
+}
 
 #pragma mark - UIViewController implementation
 
@@ -49,6 +73,23 @@
 - (NSString *)titleForView
 {
     return NSLocalizedString(@"global.events", nil);
+}
+
+#pragma mark - Working with the local data store
+
+- (NSArray *)dataControllerSortDescriptors
+{
+    BOOL distanceSelected =
+        [[self eventSelector] selectedSegmentIndex] == EventFilterDistance;
+    BOOL hasLocation =
+        distanceSelected &&
+        [self requiresLocation] &&
+        CLLocationCoordinate2DIsValid([[self lokaliteStream] location]);
+
+    return
+        hasLocation ?
+        [Event locationTableViewSortDescriptors] :
+        [Event dateTableViewSortDescriptors];
 }
 
 #pragma mark - Search - remote
@@ -93,8 +134,17 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [LokaliteCategoryStream eventStreamWithCategoryName:nil
-                                                       context:[self context]];
+    NSManagedObjectContext *context = [self context];
+    NSInteger idx = [[self eventSelector] selectedSegmentIndex];
+
+    NSString *orderBy =
+        idx == EventFilterStartTime ? @"starts_at" : @"distance";
+    LokaliteStream *stream =
+        [LokaliteCategoryStream eventStreamWithCategoryName:nil
+                                                    context:context];
+    [stream setOrderBy:orderBy];
+
+    return stream;
 }
 
 #pragma mark - View initialization

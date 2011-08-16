@@ -111,19 +111,21 @@
          [NSString stringWithFormat:@"%d", [self objectsPerPage]], @"per_page",
          nil];
 
-    if (!category)
-        category = @"";
-    [params setObject:category forKey:@"category"];
+    if (category)
+        [params setObject:category forKey:@"category"];
 
-    if ([self orderBy])
+    if ([self orderBy]) {
         [params setObject:[self orderBy] forKey:@"order"];
-    
 
-    if (CLLocationCoordinate2DIsValid([self location])) {
-        NSString *origin =
-            [NSString stringWithFormat:@"%f,%f",
-             [self location].latitude, [self location].longitude];
-        [params setObject:origin forKey:@"origin"];
+        // HACK: only set the origin if we're ordering by distance
+        BOOL orderByDistance = [[self orderBy] isEqualToString:@"distance"];
+        CLLocationCoordinate2D coord = [self location];
+        if (orderByDistance && CLLocationCoordinate2DIsValid(coord)) {
+            NSString *origin =
+                [NSString stringWithFormat:@"%f,%f",
+                 coord.latitude, coord.longitude];
+            [params setObject:origin forKey:@"origin"];
+        }
     }
 
     [self sendRequestWithUrl:url
@@ -158,7 +160,6 @@
                   parameters:params
                requestMethod:LKRequestMethodPOST
              responseHandler:handler];
-
 }
 
 #pragma mark - Places

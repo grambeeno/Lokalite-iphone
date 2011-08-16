@@ -75,7 +75,12 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [LokaliteFeaturedEventStream streamWithContext:[self context]];
+    LokaliteStream *stream =
+        [LokaliteFeaturedEventStream streamWithContext:[self context]];
+    if ([self hasValidLocation])
+        [stream setOrderBy:@"distance"];
+
+    return stream;
 }
 
 #pragma mark - View initialization

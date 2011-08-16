@@ -54,7 +54,7 @@
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView"/>
+				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -82,6 +82,7 @@
 							<string key="NSResourceName">tab-bar-icon-events.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<reference key="IBUITabBar" ref="795333663"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="1034742383"/>
 					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -104,12 +105,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="IBUIViewController" id="268481961">
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="744541061">
+								<reference key="IBUINavigationBar"/>
 								<object class="IBUISegmentedControl" key="IBUITitleView" id="916462639">
 									<reference key="NSNextResponder"/>
 									<int key="NSvFlags">292</int>
 									<string key="NSFrame">{{60, 7}, {200, 30}}</string>
 									<reference key="NSSuperview"/>
-									<reference key="NSNextKeyView"/>
+									<reference key="NSWindow"/>
 									<string key="NSReuseIdentifierKey">_NS:262</string>
 									<bool key="IBUIOpaque">NO</bool>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -160,6 +162,7 @@
 					<object class="IBUINavigationController" id="1019853438">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="318340058">
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="795333663"/>
 							<int key="IBUISystemItemIdentifier">2</int>
 						</object>
 						<reference key="IBUIParentViewController" ref="1034742383"/>
@@ -205,6 +208,7 @@
 								<string key="NSResourceName">tab-bar-icon-trending.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="795333663"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="1034742383"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -250,6 +254,7 @@
 								<string key="NSResourceName">tab-bar-icon-places.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="795333663"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="1034742383"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -329,6 +334,7 @@
 								<string key="NSResourceName">tab-bar-icon-profile.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="795333663"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="1034742383"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -371,13 +377,22 @@
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSNextKeyView"/>
+					<reference key="NSWindow"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
 					</object>
 					<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					<object class="NSMutableArray" key="IBUIItems">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<reference ref="318340058"/>
+						<reference ref="226891341"/>
+						<reference ref="1057420901"/>
+						<reference ref="400078048"/>
+						<reference ref="282759938"/>
+					</object>
+					<reference key="IBUISelectedItem" ref="1057420901"/>
 				</object>
 			</object>
 		</object>
@@ -415,6 +430,23 @@
 						<reference key="destination" ref="664661524"/>
 					</object>
 					<int key="connectionID">165</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">eventSelectorValueChanged:</string>
+						<reference key="source" ref="916462639"/>
+						<reference key="destination" ref="268481961"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">168</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">eventSelector</string>
+						<reference key="source" ref="268481961"/>
+						<reference key="destination" ref="916462639"/>
+					</object>
+					<int key="connectionID">169</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -776,14 +808,52 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">167</int>
+			<int key="maxID">169</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">FeaturedEventsViewController</string>
+					<string key="className">AllEventsViewController</string>
+					<string key="superclassName">EventStreamViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">eventSelectorValueChanged:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">eventSelectorValueChanged:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">eventSelectorValueChanged:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">eventSelector</string>
+						<string key="NS.object.0">UISegmentedControl</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">eventSelector</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">eventSelector</string>
+							<string key="candidateClassName">UISegmentedControl</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AllEventsViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">EventStreamViewController</string>
 					<string key="superclassName">LokaliteStreamViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/EventStreamViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">FeaturedEventsViewController</string>
+					<string key="superclassName">EventStreamViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/FeaturedEventsViewController.h</string>
@@ -910,8 +980,16 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">PlacesViewController</string>
+					<string key="className">PlaceStreamViewController</string>
 					<string key="superclassName">LokaliteStreamViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PlaceStreamViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PlacesViewController</string>
+					<string key="superclassName">PlaceStreamViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/PlacesViewController.h</string>
@@ -938,7 +1016,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">TrendingViewController</string>
-					<string key="superclassName">LokaliteStreamViewController</string>
+					<string key="superclassName">EventStreamViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/TrendingViewController.h</string>
