@@ -6,8 +6,8 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "LokaliteStreamViewController.h"
+#import "EventStreamViewController.h"
 
-@interface TrendingViewController : LokaliteStreamViewController
+@interface TrendingViewController : EventStreamViewController
 
 @end
