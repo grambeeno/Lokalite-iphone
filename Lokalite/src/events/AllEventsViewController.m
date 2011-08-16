@@ -8,18 +8,8 @@
 
 #import "AllEventsViewController.h"
 
-#import "Event.h"
-#import "Event+GeneralHelpers.h"
-
-#import "LokaliteDownloadSource.h"
-
-#import "EventTableViewCell.h"
-#import "EventDetailsViewController.h"
 #import "CategoryEventStreamViewController.h"
 
-#import "CategoryFilter.h"
-
-//#import "LokaliteEventStream.h"
 #import "LokaliteCategoryStream.h"
 #import "LokaliteSearchStream.h"
 

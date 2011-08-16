@@ -8,17 +8,7 @@
 
 #import "FeaturedEventsViewController.h"
 
-#import "Event.h"
-#import "Event+GeneralHelpers.h"
-
-#import "EventTableViewCell.h"
-#import "EventDetailsViewController.h"
-
 #import "LokaliteFeaturedEventStream.h"
-
-#import "TableViewImageFetcher.h"
-
-#import "MapDisplayController.h"
 
 #import "LokaliteShared.h"
 #import "SDKAdditions.h"
