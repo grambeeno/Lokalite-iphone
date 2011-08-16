@@ -55,11 +55,6 @@
 
 #pragma mark Working with the local data store
 
-- (NSString *)lokaliteObjectEntityName
-{
-    return @"Event";
-}
-
 - (NSPredicate *)dataControllerPredicate
 {
     NSManagedObjectContext *context = [self context];
