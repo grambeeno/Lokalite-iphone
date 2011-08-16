@@ -16,6 +16,7 @@
 #import "Location.h"
 
 #import "Event.h"
+#import "Event+GeneralHelpers.h"
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 
@@ -217,7 +218,8 @@ enum {
         UIApplication *app = [UIApplication sharedApplication];
 
         if ([path row] == kInfoRowAddress) {
-            [[cell textLabel] setText:[[[self business] location] formattedAddress]];
+            [[cell textLabel]
+             setText:[[[self business] location] formattedAddress]];
 
             if ([app canOpenURL:[[self business] addressUrl]]) {
                 [cell setAccessoryType:
@@ -251,14 +253,10 @@ enum {
         EventTableViewCell *eventCell = (EventTableViewCell *) cell;
         [eventCell configureCellForEvent:event displayDistance:NO];
 
-        NSData *imageData = [event imageData];
-        if (imageData)
-            [[eventCell eventImageView] setImage:
-             [UIImage imageWithData:imageData]];
-        else {
-            [[eventCell eventImageView] setImage:nil];
+        UIImage *image = [event standardImage];
+        [[eventCell eventImageView] setImage:image];
+        if (!image)
             [self fetchImageForEvent:event];
-        }
     }
 }
 
@@ -268,12 +266,11 @@ enum {
 {
     Business *business = [self business];
     BusinessDetailsHeaderView *headerView = [self headerView];
-    NSData *imageData = [business imageData];
+    UIImage *image = [business standardImage];
 
     BOOL fetched = NO;
-    if (!imageData) {
-        NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
-        NSURL *url = [baseUrl URLByAppendingPathComponent:[business imageUrl]];
+    if (!image) {
+        NSURL *url = [NSURL URLWithString:[business standardImageUrl]];
 
         [DataFetcher fetchDataAtUrl:url responseHandler:
          ^(NSData *data, NSError *error) {
@@ -281,7 +278,7 @@ enum {
                  NSLog(@"Failed to download image for business at URL: %@: %@",
                        url, [error detailedDescription]);
              } else {
-                 [business setImageData:data];
+                 [business setStandardImageData:data];
                  [headerView configureForBusiness:business];
              }
         }];
@@ -296,9 +293,7 @@ enum {
 {
     [[UIApplication sharedApplication] networkActivityIsStarting];
 
-    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
-    NSString *urlPath = [event imageUrl];
-    NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
+    NSURL *url = [NSURL URLWithString:[event standardImageUrl]];
 
     UITableView *tableView = [self tableView];
     NSArray *events = [self events];
@@ -313,11 +308,11 @@ enum {
               ^(EventTableViewCell *cell, NSUInteger idx, BOOL *stop) {
                   NSIndexPath *path = [tableView indexPathForCell:cell];
                   Event *e = [events objectAtIndex:[path row]];
-                  if ([[e imageUrl] isEqualToString:urlPath]) {
+                  if ([[e standardImageUrl] isEqual:url]) {
                       if (!image)
                           image = [UIImage imageWithData:data];
                       [[cell eventImageView] setImage:image];
-                      [e setImageData:data];
+                      [e setStandardImageData:data];
                   }
              }];
          } else

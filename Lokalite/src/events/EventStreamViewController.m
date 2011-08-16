@@ -90,15 +90,15 @@
 {
     [cell configureCellForEvent:event displayDistance:!![self currentLocation]];
 
-    UIImage *image = [event image];
+    UIImage *image = [event standardImage];
     if (!image) {
-        NSURL *url = [event fullImageUrl];
+        NSURL *url = [NSURL URLWithString:[event standardImageUrl]];
 
         [[self imageFetcher] fetchImageDataAtUrl:url
                                        tableView:tableView
                              dataReceivedHandler:
          ^(NSData *data) {
-             [event setImageData:data];
+             [event setStandardImageData:data];
          }
                             tableViewCellHandler:
          ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {

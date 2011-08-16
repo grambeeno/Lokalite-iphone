@@ -26,13 +26,13 @@
 
 
 #import "Business.h"
+#import "Business+GeneralHelpers.h"
 
 @implementation BusinessDetailsHeaderView (UserInterfaceHelpers)
 
 - (void)configureForBusiness:(Business *)business
 {
-    UIImage *image = [UIImage imageWithData:[business imageData]];
-    [[self imageView] setImage:image];
+    [[self imageView] setImage:[business standardImage]];
 
     [[self titleLabel] setText:[business name]];
 }

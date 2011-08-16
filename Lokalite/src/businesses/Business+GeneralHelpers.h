@@ -35,8 +35,9 @@
 
 @interface Business (ConvenienceMethods)
 
-- (UIImage *)image;
-- (NSURL *)fullImageUrl;
+- (void)setStandardImageData:(NSData *)data;
+- (UIImage *)standardImage;
+- (NSString *)standardImageUrl;
 
 - (NSURL *)addressUrl;
 - (NSURL *)phoneUrl;

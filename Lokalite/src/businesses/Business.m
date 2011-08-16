@@ -2,7 +2,7 @@
 //  Business.m
 //  Lokalite
 //
-//  Created by John Debay on 8/8/11.
+//  Created by John Debay on 8/15/11.
 //  Copyright (c) 2011 Lokalite. All rights reserved.
 //
 
@@ -15,23 +15,31 @@
 #import "LokaliteObjectMapAnnotation.h"
 
 @implementation Business
-@dynamic status;
 @dynamic phone;
 @dynamic summary;
-@dynamic imageUrl;
+@dynamic status;
+@dynamic fullImageUrl;
 @dynamic email;
-@dynamic name;
-@dynamic imageData;
 @dynamic url;
-@dynamic categories;
+@dynamic name;
+@dynamic fullImageData;
+@dynamic largeImageUrl;
+@dynamic largeImageData;
+@dynamic mediumImageUrl;
+@dynamic mediumImageData;
+@dynamic smallImageUrl;
+@dynamic smallImageData;
+@dynamic thumbnailImageUrl;
+@dynamic thumbnailImageData;
 @dynamic events;
+@dynamic categories;
 @dynamic location;
 
 #pragma mark - LokaliteObject implementation
 
 - (UIImage *)mapAnnotationViewImage
 {
-    return [self image];
+    return [self standardImage];
 }
 
 - (id<MKAnnotation>)mapAnnotation

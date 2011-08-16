@@ -30,6 +30,7 @@
 
 
 #import "Event.h"
+#import "Event+GeneralHelpers.h"
 #import "Business.h"
 #import "NSString+GeneralHelpers.h"
 
@@ -37,9 +38,7 @@
 
 - (void)configureForEvent:(Event *)event
 {
-    UIImage *image = [UIImage imageWithData:[event imageData]];
-    [[self imageView] setImage:image];
-
+    [[self imageView] setImage:[event standardImage]];
     [[self titleLabel] setText:[event name]];
 
     NSString *timeRange =

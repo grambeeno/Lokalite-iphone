@@ -22,9 +22,17 @@
 #import "LokaliteDownloadSource.h"
 #import "LokaliteDownloadSource+GeneralHelpers.h"
 
-#import "NSPredicate+GeneralHelpers.h"
-
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
+
+@interface Event ()
+
+#pragma mark - Parsing helpers
+
+- (void)setImageUrlsFromJsonData:(NSDictionary *)json;
+
+@end
+
 
 @implementation Event (GeneralHelpers)
 
@@ -100,19 +108,13 @@
     NSString *summary = [eventData objectForKey:@"description"];
     [event setValueIfNecessary:summary forKey:@"summary"];
 
-    NSDictionary *imageData =
-        [[eventData objectForKey:@"image"] objectForKey:@"image"];
-    if (imageData) {
-        NSString *url = [imageData objectForKey:@"url"];
-        if ([event setValueIfNecessary:url forKey:@"imageUrl"])
-            [event setImageData:nil];
-    }
-
     NSNumber *featured = [eventData objectForKey:@"featured?"];
     [event setValueIfNecessary:featured forKey:@"featured"];
 
     NSNumber *trended = [eventData objectForKey:@"trended?"];
     [event setValueIfNecessary:trended forKey:@"trended"];
+
+    [event setImageUrlsFromJsonData:eventData];
 
     NSDictionary *locationData = [eventData objectForKey:@"location"];
     Location *location =
@@ -176,6 +178,36 @@
                                              attributeKeyPaths:attributes];
 }
 
+#pragma mark - Parsing helpers
+
+- (void)setImageUrlsFromJsonData:(NSDictionary *)json
+{
+    static NSDictionary *mappings = nil;
+    if (!mappings) {
+        mappings =
+            [[NSDictionary alloc] initWithObjectsAndKeys:
+             @"fullImage", @"image_full",
+             @"largeImage", @"image_large",
+             @"mediumImage", @"image_medium",
+             @"smallImage", @"image_small",
+             @"thumbnailImage", @"image_thumb", nil];
+    }
+
+    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
+    [mappings enumerateKeysAndObjectsUsingBlock:
+     ^(NSString *jsonKey, NSString *eventKey, BOOL *stop) {
+         NSString *urlKey = [eventKey stringByAppendingString:@"Url"];
+
+         NSString *urlFragment = [json objectForKey:jsonKey];
+         NSString *url =
+            [[baseUrl URLByAppendingPathComponent:urlFragment] absoluteString];
+         if ([self setValueIfNecessary:url forKey:urlKey]) {
+             NSString *dataKey = [eventKey stringByAppendingString:@"Data"];
+             [self setValue:nil forKey:dataKey];
+         }
+    }];
+}
+
 #pragma mark - Object lifecycle
 
 - (void)prepareForDeletion
@@ -225,17 +257,25 @@
     return [featured boolValue];
 }
 
-- (UIImage *)image
+- (NSData *)standardImageData
 {
-    NSData *data = [self imageData];
+    return [self fullImageData];
+}
+
+- (void)setStandardImageData:(NSData *)data
+{
+    [self setFullImageData:data];
+}
+
+- (UIImage *)standardImage
+{
+    NSData *data = [self fullImageData];
     return data ? [UIImage imageWithData:data] : nil;
 }
 
-- (NSURL *)fullImageUrl
+- (NSString *)standardImageUrl
 {
-    NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
-    NSString *urlPath = [self imageUrl];
-    return [baseUrl URLByAppendingPathComponent:urlPath];
+    return [self fullImageUrl];
 }
 
 @end

@@ -52,8 +52,10 @@
 - (BOOL)isTrended;
 - (BOOL)isFeatured;
 
-- (UIImage *)image;
-- (NSURL *)fullImageUrl;
+- (NSData *)standardImageData;
+- (void)setStandardImageData:(NSData *)data;
+- (UIImage *)standardImage;
+- (NSString *)standardImageUrl;
 
 @end
 
@@ -61,8 +63,7 @@
 @interface Event (GeoHelpers)
 
 //
-// Convenience method that reaches through the Venue and the Location instance
-// to get a CLLocation object.
+// Convenience method for obtaining a CLLocation instance.
 //
 - (CLLocation *)locationInstance;
 

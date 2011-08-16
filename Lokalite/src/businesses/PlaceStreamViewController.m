@@ -86,15 +86,15 @@
 {
     [cell configureCellForPlace:place];
 
-    UIImage *image = [place image];
+    UIImage *image = [place standardImage];
     if (!image) {
-        NSURL *url = [place fullImageUrl];
+        NSURL *url = [NSURL URLWithString:[place standardImageUrl]];
 
         [[self imageFetcher] fetchImageDataAtUrl:url
                                        tableView:tableView
                              dataReceivedHandler:
          ^(NSData *data) {
-             [place setImageData:data];
+             [place setStandardImageData:data];
          }
                             tableViewCellHandler:
          ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {

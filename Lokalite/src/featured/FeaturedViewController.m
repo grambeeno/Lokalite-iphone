@@ -318,7 +318,7 @@
 {
     [cell configureCellForEvent:event displayDistance:NO];
 
-    NSData *imageData = [event imageData];
+    NSData *imageData = [event standardImageData];
     if (imageData)
         [[cell eventImageView] setImage:[UIImage imageWithData:imageData]];
     else {
@@ -366,9 +366,7 @@
 {
     [[UIApplication sharedApplication] networkActivityIsStarting];
 
-    NSURL *baseUrl = [[self stream] baseUrl];
-    NSString *urlPath = [event imageUrl];
-    NSURL *url = [baseUrl URLByAppendingPathComponent:urlPath];
+    NSURL *url = [NSURL URLWithString:[event standardImageUrl]];
 
     UITableView *tableView = [self tableView];
     NSArray *events = [[self resultsController] fetchedObjects];
@@ -383,11 +381,11 @@
               ^(EventTableViewCell *cell, NSUInteger idx, BOOL *stop) {
                   NSIndexPath *path = [tableView indexPathForCell:cell];
                   Event *e = [events objectAtIndex:[path row]];
-                  if ([[e imageUrl] isEqualToString:urlPath]) {
+                  if ([[e standardImageUrl] isEqual:url]) {
                       if (!image)
                           image = [UIImage imageWithData:data];
                       [[cell eventImageView] setImage:image];
-                      [e setImageData:data];
+                      [e setStandardImageData:data];
                   }
              }];
          } else

@@ -20,20 +20,27 @@
 @dynamic startDate;
 @dynamic trended;
 @dynamic featured;
-@dynamic imageUrl;
-@dynamic imageData;
+@dynamic fullImageUrl;
+@dynamic fullImageData;
 @dynamic name;
 @dynamic distance;
+@dynamic largeImageUrl;
+@dynamic thumbnailImageUrl;
+@dynamic mediumImageUrl;
+@dynamic smallImageUrl;
+@dynamic thumbnailImageData;
+@dynamic largeImageData;
+@dynamic mediumImageData;
+@dynamic smallImageData;
 @dynamic location;
 @dynamic categories;
 @dynamic business;
-
 
 #pragma mark - LokaliteObject implementation
 
 - (UIImage *)mapAnnotationViewImage
 {
-    return [self image];
+    return [self standardImage];
 }
 
 - (id<MKAnnotation>)mapAnnotation
@@ -45,6 +52,7 @@
                          object:self]
             autorelease];
 }
+
 
 
 @end
