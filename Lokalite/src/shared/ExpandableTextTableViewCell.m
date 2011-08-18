@@ -37,7 +37,7 @@
                    constrainedToSize:CGSizeMake(280, FLT_MAX)
                        lineBreakMode:UILineBreakModeWordWrap];
 
-    return expanded ? size.height : MIN(size.height, 62);
+    return expanded ? (size.height + 20) : MIN(size.height, 62);
 }
 
 @end
