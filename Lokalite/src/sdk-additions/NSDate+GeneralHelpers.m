@@ -20,8 +20,7 @@
              autorelease];
 
         [formatter setLocale:enUSPOSIXLocale];
-        //[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
-        [formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss ZZZ"];
+        [formatter setDateFormat:@"yyyy'/'MM'/'dd HH':'mm':'ss ZZZZ"];
         [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     }
 
