@@ -12,7 +12,11 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) IBOutlet UILabel *titleLabel;
+@property (nonatomic, retain) IBOutlet UILabel *businessNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *dateRangeLabel;
+@property (nonatomic, retain) IBOutlet UILabel *startDateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *endDateLabel;
+
 
 @end
 

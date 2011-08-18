@@ -28,7 +28,12 @@
 		05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1113C770FF00CA6A2D /* LoyaltyViewController.m */; };
 		05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */; };
 		05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05209F1613C7710F00CA6A2D /* MainWindow.xib */; };
+		0522547213FD6EFB002DC909 /* DetailViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0522547113FD6EFB002DC909 /* DetailViewTableViewCell.m */; };
+		0522547513FD6F18002DC909 /* DetailViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0522547413FD6F18002DC909 /* DetailViewTableViewCell.xib */; };
+		0522547713FD6FDF002DC909 /* detail-cell-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0522547613FD6FDF002DC909 /* detail-cell-background@2x.png */; };
 		0530CEEC13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */; };
+		0534084313FC218800CE3B45 /* trend-button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0534084213FC218800CE3B45 /* trend-button-background@2x.png */; };
+		0534084513FC3DBE00CE3B45 /* event-details-image-well@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0534084413FC3DBE00CE3B45 /* event-details-image-well@2x.png */; };
 		0548320413F0DEFE0099125B /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320313F0DEFE0099125B /* Location.m */; };
 		0548320713F1AB070099125B /* EventStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320613F1AB070099125B /* EventStreamViewController.m */; };
 		0548320A13F1AEA70099125B /* CategoryEventStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320913F1AEA70099125B /* CategoryEventStreamViewController.m */; };
@@ -96,6 +101,8 @@
 		058962BF13DA299700556F6D /* LokalitePlacesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962BE13DA299700556F6D /* LokalitePlacesStream.m */; };
 		058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */; };
 		0589E4F413E7706F00149713 /* LokaliteObjectMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589E4F313E7706F00149713 /* LokaliteObjectMapAnnotation.m */; };
+		058D74C713FB3D00005B48BC /* TrendButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 058D74C613FB3D00005B48BC /* TrendButton.m */; };
+		058D74C913FB4036005B48BC /* trend-view-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 058D74C813FB4036005B48BC /* trend-view-background@2x.png */; };
 		0590FF5413D8BAD4006A2254 /* all-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3813D8BAD4006A2254 /* all-selected@2x.png */; };
 		0590FF5513D8BAD4006A2254 /* all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3913D8BAD4006A2254 /* all@2x.png */; };
 		0590FF5713D8BAD4006A2254 /* arts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3B13D8BAD4006A2254 /* arts@2x.png */; };
@@ -215,9 +222,15 @@
 		05209F1413C7710F00CA6A2D /* LokaliteAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteAppDelegate.h; path = src/application/LokaliteAppDelegate.h; sourceTree = "<group>"; };
 		05209F1513C7710F00CA6A2D /* LokaliteAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteAppDelegate.m; path = src/application/LokaliteAppDelegate.m; sourceTree = "<group>"; };
 		05209F1613C7710F00CA6A2D /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = src/application/MainWindow.xib; sourceTree = "<group>"; };
+		0522547013FD6EFB002DC909 /* DetailViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewTableViewCell.h; path = src/shared/DetailViewTableViewCell.h; sourceTree = "<group>"; };
+		0522547113FD6EFB002DC909 /* DetailViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewTableViewCell.m; path = src/shared/DetailViewTableViewCell.m; sourceTree = "<group>"; };
+		0522547413FD6F18002DC909 /* DetailViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewTableViewCell.xib; path = src/shared/DetailViewTableViewCell.xib; sourceTree = "<group>"; };
+		0522547613FD6FDF002DC909 /* detail-cell-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "detail-cell-background@2x.png"; path = "images/shared/detail-cell-background@2x.png"; sourceTree = "<group>"; };
 		0530CEE813E8C20700601BFB /* MappableLokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MappableLokaliteObject.h; path = src/lokalite/MappableLokaliteObject.h; sourceTree = "<group>"; };
 		0530CEEA13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+GeneralHelpers.h"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+GeneralHelpers.m"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.m"; sourceTree = "<group>"; };
+		0534084213FC218800CE3B45 /* trend-button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trend-button-background@2x.png"; path = "images/event-details/trend-button-background@2x.png"; sourceTree = "<group>"; };
+		0534084413FC3DBE00CE3B45 /* event-details-image-well@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-details-image-well@2x.png"; path = "images/event-details/event-details-image-well@2x.png"; sourceTree = "<group>"; };
 		0548320213F0DEFE0099125B /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = src/locations/Location.h; sourceTree = "<group>"; };
 		0548320313F0DEFE0099125B /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = src/locations/Location.m; sourceTree = "<group>"; };
 		0548320513F1AB070099125B /* EventStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventStreamViewController.h; path = src/events/EventStreamViewController.h; sourceTree = "<group>"; };
@@ -322,6 +335,9 @@
 		058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteStreamViewController.m; path = src/shared/LokaliteStreamViewController.m; sourceTree = "<group>"; };
 		0589E4F213E7706F00149713 /* LokaliteObjectMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObjectMapAnnotation.h; path = src/geo/LokaliteObjectMapAnnotation.h; sourceTree = "<group>"; };
 		0589E4F313E7706F00149713 /* LokaliteObjectMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteObjectMapAnnotation.m; path = src/geo/LokaliteObjectMapAnnotation.m; sourceTree = "<group>"; };
+		058D74C513FB3D00005B48BC /* TrendButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrendButton.h; path = src/shared/TrendButton.h; sourceTree = "<group>"; };
+		058D74C613FB3D00005B48BC /* TrendButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrendButton.m; path = src/shared/TrendButton.m; sourceTree = "<group>"; };
+		058D74C813FB4036005B48BC /* trend-view-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trend-view-background@2x.png"; path = "images/event-details/trend-view-background@2x.png"; sourceTree = "<group>"; };
 		0590FF3813D8BAD4006A2254 /* all-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all-selected@2x.png"; path = "images/buttons/category-filter-images/all-selected@2x.png"; sourceTree = "<group>"; };
 		0590FF3913D8BAD4006A2254 /* all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all@2x.png"; path = "images/buttons/category-filter-images/all@2x.png"; sourceTree = "<group>"; };
 		0590FF3B13D8BAD4006A2254 /* arts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arts@2x.png"; path = "images/buttons/category-filter-images/arts@2x.png"; sourceTree = "<group>"; };
@@ -526,6 +542,9 @@
 				0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */,
 				05AB960F13F61BE6002FEA4E /* DistanceFormatter.h */,
 				05AB961013F61BE6002FEA4E /* DistanceFormatter.m */,
+				0522547013FD6EFB002DC909 /* DetailViewTableViewCell.h */,
+				0522547113FD6EFB002DC909 /* DetailViewTableViewCell.m */,
+				0522547413FD6F18002DC909 /* DetailViewTableViewCell.xib */,
 			);
 			name = shared;
 			sourceTree = "<group>";
@@ -815,6 +834,9 @@
 		059AEE0C13E74BE300AA4DF7 /* event-details */ = {
 			isa = PBXGroup;
 			children = (
+				0534084413FC3DBE00CE3B45 /* event-details-image-well@2x.png */,
+				0534084213FC218800CE3B45 /* trend-button-background@2x.png */,
+				058D74C813FB4036005B48BC /* trend-view-background@2x.png */,
 				059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */,
 			);
 			name = "event-details";
@@ -851,6 +873,7 @@
 		05BC9C0A13E9BFBB00FBAD23 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				0522547613FD6FDF002DC909 /* detail-cell-background@2x.png */,
 				05BC9C0B13E9BFD700FBAD23 /* standard-button-background@2x.png */,
 				05BC9C0C13E9BFD700FBAD23 /* standard-button-pressed-background@2x.png */,
 			);
@@ -1000,6 +1023,8 @@
 				05770E9313DE33E100B841D4 /* UIViewController+GeneralHelpers.m */,
 				0530CEEA13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.h */,
 				0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */,
+				058D74C513FB3D00005B48BC /* TrendButton.h */,
+				058D74C613FB3D00005B48BC /* TrendButton.m */,
 			);
 			name = "sdk-additions";
 			sourceTree = "<group>";
@@ -1138,6 +1163,11 @@
 				05BC9C0D13E9BFD700FBAD23 /* standard-button-background@2x.png in Resources */,
 				05BC9C0E13E9BFD700FBAD23 /* standard-button-pressed-background@2x.png in Resources */,
 				05E5555713F340C900DF0F31 /* category-filters-places.plist in Resources */,
+				058D74C913FB4036005B48BC /* trend-view-background@2x.png in Resources */,
+				0534084313FC218800CE3B45 /* trend-button-background@2x.png in Resources */,
+				0534084513FC3DBE00CE3B45 /* event-details-image-well@2x.png in Resources */,
+				0522547513FD6F18002DC909 /* DetailViewTableViewCell.xib in Resources */,
+				0522547713FD6FDF002DC909 /* detail-cell-background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1228,6 +1258,8 @@
 				05AB961113F61BE6002FEA4E /* DistanceFormatter.m in Sources */,
 				054ADD1213F9DDB40068C4F8 /* Event.m in Sources */,
 				054ADD1513F9EAEF0068C4F8 /* Business.m in Sources */,
+				058D74C713FB3D00005B48BC /* TrendButton.m in Sources */,
+				0522547213FD6EFB002DC909 /* DetailViewTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

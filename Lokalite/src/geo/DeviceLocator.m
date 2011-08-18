@@ -130,11 +130,19 @@
 
 + (NSTimeInterval)defaultTimeoutInterval
 {
+#if TARGET_IPHONE_SIMULATOR
+
+    return 0.1;
+
+#else
+
     NSBundle *bundle = [NSBundle mainBundle];
     NSNumber *n =
         [bundle objectForInfoDictionaryKey:@"LokaliteLocationTimeoutInterval"];
 
     return [n doubleValue];
+
+#endif
 }
 
 #pragma mark - CLLocationManagerDelegate implementation

@@ -12,4 +12,6 @@
 
 + (id)dateFromLokaliteServerString:(NSString *)string;
 
+- (NSString *)timeString;
+
 @end

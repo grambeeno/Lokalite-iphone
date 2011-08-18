@@ -15,6 +15,7 @@
 
 #import "EventDetailsHeaderView.h"
 #import "EventDetailsFooterView.h"
+#import "DetailViewTableViewCell.h"
 #import "LocationTableViewCell.h"
 
 #import "BusinessDetailsViewController.h"
@@ -27,16 +28,17 @@
 
 enum {
     kSectionInfo,
-    kSectionLocation
+    //kSectionTrending,
+    kSectionLocation,
+    kSectionTrending
 };
 static const NSInteger NUM_SECTIONS = kSectionLocation + 1;
 
 
 enum {
-    
-    kInfoRowHours,
     //kInfoRowPhone,
     //kInfoRowBusinessName,
+    kInfoRowEventTime,
     kInfoRowEventDescription
 };
 static const NSInteger NUM_INFO_ROWS = kInfoRowEventDescription + 1;
@@ -56,6 +58,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem;
+- (void)initializeTableView;
 - (void)initializeHeaderView;
 - (void)initializeMapView;
 - (void)initializeFooterView;
@@ -86,6 +89,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 @synthesize headerView = headerView_;
 @synthesize locationMapCell = locationMapCell_;
 @synthesize footerView = footerView_;
+@synthesize trendTableViewCell = trendTableViewCell_;
 
 @synthesize service = service_;
 
@@ -99,6 +103,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [headerView_ release];
     [locationMapCell_ release];
     [footerView_ release];
+    [trendTableViewCell_ release];
 
     [service_ release];
 
@@ -186,9 +191,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [super viewDidLoad];
 
     [self initializeNavigationItem];
-    [self initializeHeaderView];
+    [self initializeTableView];
     [self initializeMapView];
-    [self initializeFooterView];
 
     [self observeChangesForEvent:[self event]];
 }
@@ -213,6 +217,9 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     switch (section) {
         case kSectionInfo:
             nrows = NUM_INFO_ROWS;
+            break;
+        case kSectionTrending:
+            nrows = 1;
             break;
         case kSectionLocation:
             nrows = NUM_LOCATION_ROWS;
@@ -245,11 +252,22 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     CGFloat height = 44;
 
-    if ([indexPath section] == kSectionLocation) {
+    if ([indexPath section] == kSectionInfo) {
+        if ([indexPath row] == kInfoRowEventDescription) {
+            NSString *info = [[self event] summary];
+            CGSize size = [info sizeWithFont:[UIFont boldSystemFontOfSize:18]
+                           constrainedToSize:CGSizeMake(280, FLT_MAX)
+                               lineBreakMode:UILineBreakModeWordWrap];
+            height = MIN(size.height, 62);
+        }
+    } else if ([indexPath section] == kSectionTrending) {
+        height = 80;
+    } else if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowMap)
             height = 120;
     }
 
+    NSLog(@"%@: %@: %.2f", NSStringFromSelector(_cmd), indexPath, height);
     return height;
 }
 
@@ -292,6 +310,12 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [shareButtonItem release], shareButtonItem = nil;
 }
 
+- (void)initializeTableView
+{
+    [self initializeHeaderView];
+    [self initializeFooterView];
+}
+
 - (void)initializeHeaderView
 {
     Event *event = [self event];
@@ -321,9 +345,13 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
     if ([path section] == kSectionInfo) {
         /*if ([path row] == kInfoRowBusinessName)
-            cellIdentifier = @"InfoRowBusinessName";
-        else*/ if ([path row] == kInfoRowEventDescription)
+            cellIdentifier = @"InfoRowBusinessName";*/
+        if ([path row] == kInfoRowEventTime)
+            cellIdentifier = @"InfoRowEventTime";
+        else if ([path row] == kInfoRowEventDescription)
             cellIdentifier = @"InfoRowEventDescription";
+    } else if ([path section] == kSectionTrending) {
+        cellIdentifier = @"TrendingCell";
     } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowAddress)
             cellIdentifier = @"LocationRowAddressTableViewCell";
@@ -346,6 +374,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
             [[[UITableViewCell alloc]
               initWithStyle:UITableViewCellStyleValue1
               reuseIdentifier:reuseIdentifier] autorelease];
+        [[cell textLabel] setNumberOfLines:2];
+        //cell = [DetailViewTableViewCell instanceFromNib];
+    } else if ([path section] == kSectionTrending) {
+        cell = [self trendTableViewCell];
     } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowMap)
             cell = [self locationMapCell];
@@ -363,12 +395,12 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
           atIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == kSectionInfo) {
-        if ([indexPath row] == kInfoRowHours) {
+        if ([indexPath row] == kInfoRowEventTime) {
             [[cell detailTextLabel] setText:
              [[self event] dateStringDescription]];
-            [[cell textLabel] setText:NSLocalizedString(@"global.hours", nil)];
+            [[cell textLabel] setText:NSLocalizedString(@"global.time", nil)];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         } /*else if ([indexPath row] == kInfoRowPhone) {
             [[cell textLabel] setText:[[[self event] business] phone]];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
@@ -399,7 +431,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (void)configureFooterForEvent:(Event *)event
 {
-    [[self footerView] configureForEvent:event];
+    //[[self footerView] configureForEvent:event];
+    [[self tableView] setTableFooterView:[self footerView]];
 }
 
 #pragma mark - Updating for event states

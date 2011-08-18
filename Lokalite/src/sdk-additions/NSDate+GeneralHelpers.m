@@ -27,4 +27,17 @@
     return [formatter dateFromString:string];
 }
 
+- (NSString *)timeString
+{
+    static NSDateFormatter *formatter = nil;
+    if (!formatter) {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setLocale:[NSLocale currentLocale]];
+        [formatter setDateStyle:NSDateFormatterNoStyle];
+        [formatter setTimeStyle:NSDateFormatterShortStyle];
+    }
+
+    return [formatter stringFromDate:self];
+}
+
 @end

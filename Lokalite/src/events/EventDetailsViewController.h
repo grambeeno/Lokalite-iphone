@@ -12,13 +12,18 @@
 @class LocationTableViewCell;
 
 @interface EventDetailsViewController : UITableViewController
-    <UIActionSheetDelegate>
+<UIActionSheetDelegate> {
+    UIView *newFooterView;
+}
+
 
 @property (nonatomic, retain, readonly) Event *event;
 
 @property (nonatomic, retain) IBOutlet EventDetailsHeaderView *headerView;
 @property (nonatomic, retain) LocationTableViewCell *locationMapCell;
-@property (nonatomic, retain) IBOutlet EventDetailsFooterView *footerView;
+//@property (nonatomic, retain) IBOutlet EventDetailsFooterView *footerView;
+@property (nonatomic, retain) IBOutlet UIView *footerView;
+@property (nonatomic, retain) IBOutlet UITableViewCell *trendTableViewCell;
 
 #pragma mark - Initialization
 
