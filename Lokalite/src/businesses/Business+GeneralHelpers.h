@@ -39,7 +39,6 @@
 - (UIImage *)standardImage;
 - (NSString *)standardImageUrl;
 
-- (NSURL *)addressUrl;
 - (NSURL *)phoneUrl;
 
 @end

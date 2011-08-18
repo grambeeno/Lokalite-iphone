@@ -40,6 +40,9 @@
 "global.learn-more" = "Learn More";
 "global.help" = "Help";
 
+"global.open-in-maps" = "Open in Maps";
+"global.directions-in-maps" = "Get Directions";
+
 "global.send-email" = "Send in Email";
 "global.send-text-message" = "Send in Text Message";
 "global.post-to-facebook" = "Send to Facebook";

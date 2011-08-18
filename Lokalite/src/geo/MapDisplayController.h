@@ -19,6 +19,12 @@
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, copy) NSArray *annotations;
 
+@property (nonatomic, assign) BOOL annotationsShowRightAccessoryView;
+
+#pragma mark - Initialization
+
+- (id)initWithMapView:(MKMapView *)mapView;
+
 #pragma mark - Map geometry
 
 + (MKCoordinateRegion)coordinateRegionForMapAnnotations:(NSArray *)annotations;

@@ -12,6 +12,7 @@
 #import "Location.h"
 
 #import "Business+GeneralHelpers.h"
+#import "Location+GeneralHelpers.h"
 #import "LokaliteObjectMapAnnotation.h"
 
 @implementation Business
@@ -50,6 +51,27 @@
              subtitle:[self summary]
              object:self]
             autorelease];
+}
+
+- (NSURL *)addressUrl
+{
+    return [[self location] addressUrl];
+}
+
+- (NSURL *)directionsUrlFromLocation:(CLLocation *)location
+{
+    CLLocationCoordinate2D coord = [[self locationInstance] coordinate];
+    NSString *destString =
+        location ?
+        [NSString stringWithFormat:@"%f,%f", [location coordinate].latitude,
+         [location coordinate].longitude] :
+        @"";
+    NSString *s =
+        [NSString stringWithFormat:
+         @"http://maps.google.com/maps?saddr=%@&daddr=%@",
+         coord.latitude, coord.longitude, destString];
+
+    return [NSURL URLWithString:s];
 }
 
 @end

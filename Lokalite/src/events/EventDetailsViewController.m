@@ -17,6 +17,7 @@
 #import "EventDetailsFooterView.h"
 #import "DetailViewTableViewCell.h"
 #import "LocationTableViewCell.h"
+#import "LocationViewController.h"
 
 #import "BusinessDetailsViewController.h"
 
@@ -267,7 +268,6 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
             height = 120;
     }
 
-    NSLog(@"%@: %@: %.2f", NSStringFromSelector(_cmd), indexPath, height);
     return height;
 }
 
@@ -291,6 +291,13 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
             [controller release], controller = nil;
         }
          */
+    } else if ([indexPath section] == kSectionLocation) {
+        LocationViewController *controller =
+            [[LocationViewController alloc]
+             initWithMappableLokaliteObject:[self event]];
+        [[self navigationController] pushViewController:controller
+                                               animated:YES];
+        [controller release], controller = nil;
     }
 
     if (deselect)

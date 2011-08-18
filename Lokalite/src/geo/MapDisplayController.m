@@ -19,6 +19,9 @@
 @synthesize mapView = mapView_;
 @synthesize annotations = annotations_;
 
+@synthesize annotationsShowRightAccessoryView =
+    annotationsShowRightAccessoryView_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -29,6 +32,21 @@
     [annotations_ release];
 
     [super dealloc];
+}
+
+#pragma mark - Initialization
+
+- (id)initWithMapView:(MKMapView *)mapView
+{
+    self = [super init];
+    if (self) {
+        mapView_ = [mapView retain];
+        [mapView_ setDelegate:self];
+
+        annotationsShowRightAccessoryView_ = YES;
+    }
+
+    return self;
 }
 
 #pragma mark - MKMapViewDelegate implmeentation
@@ -62,8 +80,12 @@
     [view setLeftCalloutAccessoryView:imageView];
     [imageView release], imageView = nil;
 
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [view setRightCalloutAccessoryView:button];
+    UIButton *rightAccessoryView = nil;
+    if ([self annotationsShowRightAccessoryView])
+        rightAccessoryView =
+            [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
+    [view setRightCalloutAccessoryView:rightAccessoryView];
 
     return view;
 }
@@ -91,11 +113,11 @@
         annotations_ = [annotations copy];
 
         if (annotations_) {
+            [[self mapView] addAnnotations:annotations_];
+
             MKCoordinateRegion region =
                 [[self class] coordinateRegionForMapAnnotations:annotations_];
             [[self mapView] setRegion:region];
-
-            [[self mapView] addAnnotations:annotations_];
         }
     }
 }
@@ -120,7 +142,7 @@
         CLLocationCoordinate2DMake((maxLat + minLat) / 2,
                                    (maxLon + minLon) / 2);
     MKCoordinateSpan span =
-        MKCoordinateSpanMake((maxLat - minLat), (maxLon - minLon));
+        MKCoordinateSpanMake(maxLat - minLat, maxLon - minLon);
 
     return MKCoordinateRegionMake(center, span);
 }

@@ -18,9 +18,10 @@
         NSLocale *enUSPOSIXLocale =
             [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]
              autorelease];
-        
+
         [formatter setLocale:enUSPOSIXLocale];
-        [formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+        //[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+        [formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss ZZZ"];
         [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     }
 

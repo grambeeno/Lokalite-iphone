@@ -200,11 +200,6 @@
     return [self fullImageUrl];
 }
 
-- (NSURL *)addressUrl
-{
-    return [[self location] addressUrl];
-}
-
 - (NSURL *)phoneUrl
 {
     NSString *s = [NSString stringWithFormat:@"tel://%@", [self phone]];

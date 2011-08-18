@@ -15,4 +15,7 @@
 
 - (id<MKAnnotation>)mapAnnotation;
 
+- (NSURL *)addressUrl;
+- (NSURL *)directionsUrlFromLocation:(CLLocation *)location;
+
 @end
