@@ -16,7 +16,7 @@
 		<string>Icon.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.highorderbit.ios.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.lokalite.lokalite</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -24,15 +24,19 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.8</string>
+	<string>0.0.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.0.8</string>
+	<string>0.0.9</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LokaliteAPIServer</key>
 	<string>http://72.249.171.49</string>
+	<key>LokaliteDefaultObjectsPerFetch</key>
+	<integer>10</integer>
+	<key>LokaliteLocationTimeoutInterval</key>
+	<integer>5</integer>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>UIPrerenderedIcon</key>
@@ -43,9 +47,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>LokaliteDefaultObjectsPerFetch</key>
-	<integer>10</integer>
-	<key>LokaliteLocationTimeoutInterval</key>
-	<integer>5</integer>
 </dict>
 </plist>

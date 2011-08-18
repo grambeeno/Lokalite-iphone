@@ -27,8 +27,6 @@
 @property (nonatomic, assign) BOOL shouldFetchedData;
 @property (nonatomic, retain) LokaliteFeaturedEventStream *stream;
 
-//@property (nonatomic, copy) NSArray *otherEvents;
-
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem;
@@ -69,8 +67,6 @@
 @synthesize shouldFetchedData = shouldFetchedData_;
 @synthesize stream = stream_;
 
-//@synthesize otherEvents = otherEvents_;
-
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -84,8 +80,6 @@
     [resultsController_ release];
 
     [stream_ release];
-
-    //[otherEvents_ release];
 
     [super dealloc];
 }
