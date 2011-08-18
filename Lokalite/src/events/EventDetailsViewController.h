@@ -12,10 +12,7 @@
 @class LocationTableViewCell;
 
 @interface EventDetailsViewController : UITableViewController
-<UIActionSheetDelegate> {
-    UIView *newFooterView;
-}
-
+    <UIActionSheetDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, retain, readonly) Event *event;
 

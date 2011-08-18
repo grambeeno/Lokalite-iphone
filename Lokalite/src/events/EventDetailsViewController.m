@@ -75,6 +75,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (void)configureFooterForEvent:(Event *)event;
 
+#pragma mark - Location
+
+- (void)displayLocationDetailsForEvent:(Event *)event;
+
 #pragma mark - Updating for event states
 
 - (void)observeChangesForEvent:(Event *)event;
@@ -124,7 +128,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     return self;
 }
 
-#pragma mark - Button actions
+#pragma mark - UI events
 
 - (IBAction)presentSharingOptions:(id)sender
 {
@@ -154,6 +158,11 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     UITabBar *tabBar = [[appDelegate tabBarController] tabBar];
     [sheet showFromTabBar:tabBar];
     [sheet release], sheet = nil;
+}
+
+- (void)mapViewTapped:(UIGestureRecognizer *)recognizer
+{
+    [self displayLocationDetailsForEvent:[self event]];
 }
 
 - (IBAction)toggleTrendStatus:(id)sender
@@ -292,12 +301,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         }
          */
     } else if ([indexPath section] == kSectionLocation) {
-        LocationViewController *controller =
-            [[LocationViewController alloc]
-             initWithMappableLokaliteObject:[self event]];
-        [[self navigationController] pushViewController:controller
-                                               animated:YES];
-        [controller release], controller = nil;
+        if ([indexPath row] == kLocationRowAddress)
+            [self displayLocationDetailsForEvent:[self event]];
     }
 
     if (deselect)
@@ -336,6 +341,14 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     LocationTableViewCell *cell = [self locationMapCell];
     CLLocation *location = [[self event] locationInstance];
     [cell setLocation:location];
+
+    SEL action = @selector(mapViewTapped:);
+    UIGestureRecognizer *gr =
+        [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                action:action];
+    [gr setDelegate:self];
+    [[cell mapView] addGestureRecognizer:gr];
+    [gr release], gr = nil;
 }
 
 - (void)initializeFooterView
@@ -440,6 +453,17 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     //[[self footerView] configureForEvent:event];
     [[self tableView] setTableFooterView:[self footerView]];
+}
+
+#pragma mark - Location
+
+- (void)displayLocationDetailsForEvent:(Event *)event
+{
+    LocationViewController *controller =
+        [[LocationViewController alloc] initWithMappableLokaliteObject:event];
+    [[self navigationController] pushViewController:controller
+                                           animated:YES];
+    [controller release], controller = nil;
 }
 
 #pragma mark - Updating for event states

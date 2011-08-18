@@ -45,13 +45,6 @@
                           downloadSource:(LokaliteDownloadSource *)source
                              withContext:(NSManagedObjectContext *)context
 {
-    /*
-    NSDictionary *apiParams = [jsonObjects objectForKey:@"params"];
-    LokaliteDownloadSource *source =
-        [LokaliteDownloadSource downloadSourceFromAPIParams:apiParams
-                                                  inContext:context];
-     */
-
     NSArray *objs = [[jsonObjects objectForKey:@"data"] objectForKey:@"list"];
     NSArray *events = [self createOrUpdateEventsFromJsonArray:objs
                                                downloadSource:source
