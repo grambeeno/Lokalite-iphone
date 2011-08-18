@@ -15,6 +15,7 @@
 
 #import "EventDetailsHeaderView.h"
 #import "EventDetailsFooterView.h"
+#import "ExpandableTextTableViewCell.h"
 #import "DetailViewTableViewCell.h"
 #import "LocationTableViewCell.h"
 #import "LocationViewController.h"
@@ -29,9 +30,7 @@
 
 enum {
     kSectionInfo,
-    //kSectionTrending,
-    kSectionLocation,
-    kSectionTrending
+    kSectionLocation
 };
 static const NSInteger NUM_SECTIONS = kSectionLocation + 1;
 
@@ -53,6 +52,9 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 
 @interface EventDetailsViewController ()
+
+@property (nonatomic, assign, getter=isDescriptionExpanded)
+    BOOL descriptionExpanded;
 
 @property (nonatomic, retain) LokaliteService *service;
 
@@ -78,6 +80,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 #pragma mark - Location
 
 - (void)displayLocationDetailsForEvent:(Event *)event;
+- (void)displayBusinessDetails:(Business *)business;
 
 #pragma mark - Updating for event states
 
@@ -95,6 +98,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 @synthesize locationMapCell = locationMapCell_;
 @synthesize footerView = footerView_;
 @synthesize trendTableViewCell = trendTableViewCell_;
+
+@synthesize descriptionExpanded = descriptionExpanded_;
 
 @synthesize service = service_;
 
@@ -122,6 +127,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     self = [super initWithNibName:@"EventDetailsView" bundle:nil];
     if (self) {
         event_ = [event retain];
+        descriptionExpanded_ = NO;
         [self setTitle:NSLocalizedString(@"global.event", nil)];
     }
 
@@ -228,9 +234,6 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         case kSectionInfo:
             nrows = NUM_INFO_ROWS;
             break;
-        case kSectionTrending:
-            nrows = 1;
-            break;
         case kSectionLocation:
             nrows = NUM_LOCATION_ROWS;
             break;
@@ -265,13 +268,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     if ([indexPath section] == kSectionInfo) {
         if ([indexPath row] == kInfoRowEventDescription) {
             NSString *info = [[self event] summary];
-            CGSize size = [info sizeWithFont:[UIFont boldSystemFontOfSize:18]
-                           constrainedToSize:CGSizeMake(280, FLT_MAX)
-                               lineBreakMode:UILineBreakModeWordWrap];
-            height = MIN(size.height, 62);
+            BOOL expanded = [self isDescriptionExpanded];
+            height = [ExpandableTextTableViewCell cellHeightForText:info
+                                                           expanded:expanded];
         }
-    } else if ([indexPath section] == kSectionTrending) {
-        height = 80;
     } else if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowMap)
             height = 120;
@@ -285,28 +285,23 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     NSLog(@"%@: %@", NSStringFromSelector(_cmd), indexPath);
 
-    BOOL deselect = YES;
     if ([indexPath section] == kSectionInfo) {
-        /*
-        if ([indexPath row] == kInfoRowBusinessName) {
-            deselect = NO;
+        if ([indexPath row] == kInfoRowEventDescription) {
+            ExpandableTextTableViewCell *cell = (ExpandableTextTableViewCell *)
+                [tableView cellForRowAtIndexPath:indexPath];
+            [cell setExpanded:![cell isExpanded]];
+            [self setDescriptionExpanded:[cell isExpanded]];
+            [tableView beginUpdates];
+            [tableView endUpdates];
 
-            Business *business = [[self event] business];
-            BusinessDetailsViewController *controller =
-                [[BusinessDetailsViewController alloc]
-                 initWithBusiness:business];
-            [[self navigationController] pushViewController:controller
-                                                   animated:YES];
-            [controller release], controller = nil;
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
-         */
     } else if ([indexPath section] == kSectionLocation) {
-        if ([indexPath row] == kLocationRowAddress)
+        if ([indexPath row] == kLocationRowTitle)
+            [self displayBusinessDetails:[[self event] business]];
+        else if ([indexPath row] == kLocationRowAddress)
             [self displayLocationDetailsForEvent:[self event]];
     }
-
-    if (deselect)
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - View initialization
@@ -370,8 +365,6 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
             cellIdentifier = @"InfoRowEventTime";
         else if ([path row] == kInfoRowEventDescription)
             cellIdentifier = @"InfoRowEventDescription";
-    } else if ([path section] == kSectionTrending) {
-        cellIdentifier = @"TrendingCell";
     } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowAddress)
             cellIdentifier = @"LocationRowAddressTableViewCell";
@@ -390,14 +383,16 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     UITableViewCell *cell = nil;
 
     if ([path section] == kSectionInfo) {
-        cell =
-            [[[UITableViewCell alloc]
-              initWithStyle:UITableViewCellStyleValue1
-              reuseIdentifier:reuseIdentifier] autorelease];
-        [[cell textLabel] setNumberOfLines:2];
-        //cell = [DetailViewTableViewCell instanceFromNib];
-    } else if ([path section] == kSectionTrending) {
-        cell = [self trendTableViewCell];
+        if ([path row] == kInfoRowEventDescription)
+            cell =
+                [[[ExpandableTextTableViewCell alloc]
+                  initWithStyle:UITableViewCellStyleDefault
+                  reuseIdentifier:reuseIdentifier] autorelease];
+        else
+            cell =
+                [[[UITableViewCell alloc]
+                  initWithStyle:UITableViewCellStyleValue1
+                  reuseIdentifier:reuseIdentifier] autorelease];
     } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowMap)
             cell = [self locationMapCell];
@@ -432,14 +427,13 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         }*/ else if ([indexPath row] == kInfoRowEventDescription) {
             [[cell textLabel] setText:[[self event] summary]];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
         }
     } else if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowTitle) {
             [[cell textLabel] setText:[[[self event] business] name]];
-             //setText:NSLocalizedString(@"global.location", nil)];
-            [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
         } else if ([indexPath row] == kLocationRowAddress) {
             Location *location = [[self event] location];
             [[cell textLabel] setText:[location formattedAddress]];
@@ -461,6 +455,15 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     LocationViewController *controller =
         [[LocationViewController alloc] initWithMappableLokaliteObject:event];
+    [[self navigationController] pushViewController:controller
+                                           animated:YES];
+    [controller release], controller = nil;
+}
+
+- (void)displayBusinessDetails:(Business *)business
+{
+    BusinessDetailsViewController *controller =
+        [[BusinessDetailsViewController alloc] initWithBusiness:business];
     [[self navigationController] pushViewController:controller
                                            animated:YES];
     [controller release], controller = nil;

@@ -148,6 +148,7 @@
 		05B1577213E269CC00F20FF8 /* event-cell-trend-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B1577013E269CC00F20FF8 /* event-cell-trend-badge.png */; };
 		05B1577313E269CC00F20FF8 /* event-cell-trend-badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B1577113E269CC00F20FF8 /* event-cell-trend-badge@2x.png */; };
 		05B1671913FDA50600C44577 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B1671813FDA50600C44577 /* LocationViewController.m */; };
+		05B1671D13FDCD9500C44577 /* ExpandableTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B1671C13FDCD9500C44577 /* ExpandableTextTableViewCell.m */; };
 		05B91DCD13EB4F5900E3A898 /* LokaliteApplicationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DCC13EB4F5900E3A898 /* LokaliteApplicationState.m */; };
 		05B91DD913EC475800E3A898 /* LokaliteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DD813EC475800E3A898 /* LokaliteObject.m */; };
 		05B91DDC13EC478000E3A898 /* LokaliteDownloadSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DDB13EC478000E3A898 /* LokaliteDownloadSource.m */; };
@@ -392,6 +393,8 @@
 		05B1577113E269CC00F20FF8 /* event-cell-trend-badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-trend-badge@2x.png"; path = "images/events/event-cell-trend-badge@2x.png"; sourceTree = "<group>"; };
 		05B1671713FDA50600C44577 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationViewController.h; path = src/geo/LocationViewController.h; sourceTree = "<group>"; };
 		05B1671813FDA50600C44577 /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationViewController.m; path = src/geo/LocationViewController.m; sourceTree = "<group>"; };
+		05B1671B13FDCD9500C44577 /* ExpandableTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpandableTextTableViewCell.h; path = src/shared/ExpandableTextTableViewCell.h; sourceTree = "<group>"; };
+		05B1671C13FDCD9500C44577 /* ExpandableTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpandableTextTableViewCell.m; path = src/shared/ExpandableTextTableViewCell.m; sourceTree = "<group>"; };
 		05B91DCB13EB4F5900E3A898 /* LokaliteApplicationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteApplicationState.h; path = src/application/LokaliteApplicationState.h; sourceTree = "<group>"; };
 		05B91DCC13EB4F5900E3A898 /* LokaliteApplicationState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteApplicationState.m; path = src/application/LokaliteApplicationState.m; sourceTree = "<group>"; };
 		05B91DD713EC475800E3A898 /* LokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObject.h; path = src/lokalite/LokaliteObject.h; sourceTree = "<group>"; };
@@ -548,6 +551,8 @@
 				0522547013FD6EFB002DC909 /* DetailViewTableViewCell.h */,
 				0522547113FD6EFB002DC909 /* DetailViewTableViewCell.m */,
 				0522547413FD6F18002DC909 /* DetailViewTableViewCell.xib */,
+				05B1671B13FDCD9500C44577 /* ExpandableTextTableViewCell.h */,
+				05B1671C13FDCD9500C44577 /* ExpandableTextTableViewCell.m */,
 			);
 			name = shared;
 			sourceTree = "<group>";
@@ -1266,6 +1271,7 @@
 				058D74C713FB3D00005B48BC /* TrendButton.m in Sources */,
 				0522547213FD6EFB002DC909 /* DetailViewTableViewCell.m in Sources */,
 				05B1671913FDA50600C44577 /* LocationViewController.m in Sources */,
+				05B1671D13FDCD9500C44577 /* ExpandableTextTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
