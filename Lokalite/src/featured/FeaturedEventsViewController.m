@@ -89,6 +89,15 @@
 {
     [[self navigationItem] setLeftBarButtonItem:[self refreshButtonItem]];
     [[self navigationItem] setRightBarButtonItem:[self mapViewButtonItem]];
+
+    UIBarButtonItem *backButtonItem =
+        [[UIBarButtonItem alloc]
+         initWithTitle:NSLocalizedString(@"global.featured", nil)
+                 style:UIBarButtonItemStyleBordered
+                target:nil
+                action:nil];
+    [[self navigationItem] setBackBarButtonItem:backButtonItem];
+    [backButtonItem release], backButtonItem = nil;
 }
 
 @end
