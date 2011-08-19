@@ -12,6 +12,8 @@
 
 @property (nonatomic, assign, getter=isExpanded) BOOL expanded;
 
-+ (CGFloat)cellHeightForText:(NSString *)text expanded:(BOOL)expanded;
++ (CGFloat)cellHeightForText:(NSString *)text
+                    withFont:(UIFont *)font
+                    expanded:(BOOL)expanded;
 
 @end

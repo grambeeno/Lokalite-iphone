@@ -53,6 +53,13 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 @interface EventDetailsViewController ()
 
+//
+// Controls whether the event description field will only show a couple lines of
+// text and expand if necessary. This has been disabled for now as descriptions
+// are limited to 140 characters and it's not a problem to show the full length
+// of the description. I've left most of the code in place and just set this
+// value to false during initialization.
+//
 @property (nonatomic, assign, getter=isDescriptionExpanded)
     BOOL descriptionExpanded;
 
@@ -86,6 +93,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (void)observeChangesForEvent:(Event *)event;
 - (void)stopObservingChangesForEvent:(Event *)event;
+
+#pragma mark - Constants
+
++ (UIFont *)eventDescriptionFont;
 
 @end
 
@@ -127,7 +138,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     self = [super initWithNibName:@"EventDetailsView" bundle:nil];
     if (self) {
         event_ = [event retain];
-        descriptionExpanded_ = NO;
+        descriptionExpanded_ = YES;
         [self setTitle:NSLocalizedString(@"global.event", nil)];
     }
 
@@ -269,7 +280,9 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         if ([indexPath row] == kInfoRowEventDescription) {
             NSString *info = [[self event] summary];
             BOOL expanded = [self isDescriptionExpanded];
+            UIFont *font = [[self class] eventDescriptionFont];
             height = [ExpandableTextTableViewCell cellHeightForText:info
+                                                           withFont:font
                                                            expanded:expanded];
         }
     } else if ([indexPath section] == kSectionLocation) {
@@ -286,6 +299,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     NSLog(@"%@: %@", NSStringFromSelector(_cmd), indexPath);
 
     if ([indexPath section] == kSectionInfo) {
+        /*
         if ([indexPath row] == kInfoRowEventDescription) {
             ExpandableTextTableViewCell *cell = (ExpandableTextTableViewCell *)
                 [tableView cellForRowAtIndexPath:indexPath];
@@ -296,6 +310,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
+         */
     } else if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowTitle)
             [self displayBusinessDetails:[[self event] business]];
@@ -383,12 +398,16 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     UITableViewCell *cell = nil;
 
     if ([path section] == kSectionInfo) {
-        if ([path row] == kInfoRowEventDescription)
-            cell =
+        if ([path row] == kInfoRowEventDescription) {
+            ExpandableTextTableViewCell *expandableCell =
                 [[[ExpandableTextTableViewCell alloc]
                   initWithStyle:UITableViewCellStyleDefault
                   reuseIdentifier:reuseIdentifier] autorelease];
-        else
+            [expandableCell setExpanded:YES];
+            [[expandableCell textLabel]
+             setFont:[[self class] eventDescriptionFont]];
+            cell = expandableCell;
+        } else
             cell =
                 [[[UITableViewCell alloc]
                   initWithStyle:UITableViewCellStyleValue1
@@ -427,7 +446,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         }*/ else if ([indexPath row] == kInfoRowEventDescription) {
             [[cell textLabel] setText:[[self event] summary]];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         }
     } else if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowTitle) {
@@ -523,6 +542,13 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     }
 
     return service_;
+}
+
+#pragma mark - Constants
+
++ (UIFont *)eventDescriptionFont
+{
+    return [UIFont systemFontOfSize:18];
 }
 
 @end

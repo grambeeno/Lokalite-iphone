@@ -31,9 +31,11 @@
     [[self textLabel] setNumberOfLines:[self isExpanded] ? 0 : 2];
 }
 
-+ (CGFloat)cellHeightForText:(NSString *)text expanded:(BOOL)expanded
++ (CGFloat)cellHeightForText:(NSString *)text
+                    withFont:(UIFont *)font
+                    expanded:(BOOL)expanded
 {
-    CGSize size = [text sizeWithFont:[UIFont boldSystemFontOfSize:18]
+    CGSize size = [text sizeWithFont:font
                    constrainedToSize:CGSizeMake(280, FLT_MAX)
                        lineBreakMode:UILineBreakModeWordWrap];
 
