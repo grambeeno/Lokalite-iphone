@@ -102,7 +102,7 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
                        buttonFrame.size.width + LABEL_MARGIN * 2,
                        14);
          UILabel *nameLabel = [[UILabel alloc] initWithFrame:labelFrame];
-         [nameLabel setBackgroundColor:[UIColor whiteColor]];
+         [nameLabel setBackgroundColor:[UIColor clearColor]];
          [nameLabel setFont:[UIFont systemFontOfSize:12]];
          [nameLabel setText:[filter shortName]];
          [nameLabel setTextAlignment:UITextAlignmentCenter];
