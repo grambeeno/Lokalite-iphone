@@ -14,6 +14,7 @@
 "global.dismiss" = "Dismiss";
 "global.details" = "Details";
 "global.featured" = "Featured";
+"global.featured-events" = "Featured Events";
 "global.location" = "Location";
 "global.hours" = "Hours";
 "global.time" = "Time";

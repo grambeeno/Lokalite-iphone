@@ -40,7 +40,7 @@
 
 - (NSString *)titleForView
 {
-    return NSLocalizedString(@"global.featured", nil);
+    return NSLocalizedString(@"global.featured-events", nil);
 }
 
 #pragma mark Working with the local data store
