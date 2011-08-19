@@ -179,8 +179,6 @@
 		05EB58EB13DF648800436F13 /* AccountDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EB58E913DF648800436F13 /* AccountDetailsView.xib */; };
 		05EB58EE13E0755400436F13 /* FeaturedEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58ED13E0755400436F13 /* FeaturedEventsViewController.m */; };
 		05EB58F013E0757800436F13 /* FeaturedEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EB58EF13E0757800436F13 /* FeaturedEventsView.xib */; };
-		05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */; };
-		05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */; };
 		05EC9A4213CB971400B7AD61 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EC9A4113CB971400B7AD61 /* CoreData.framework */; };
 		05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */; };
 		05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */; };
@@ -445,9 +443,6 @@
 		05EB58EC13E0755400436F13 /* FeaturedEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedEventsViewController.h; path = src/featured/FeaturedEventsViewController.h; sourceTree = "<group>"; };
 		05EB58ED13E0755400436F13 /* FeaturedEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedEventsViewController.m; path = src/featured/FeaturedEventsViewController.m; sourceTree = "<group>"; };
 		05EB58EF13E0757800436F13 /* FeaturedEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedEventsView.xib; path = src/featured/FeaturedEventsView.xib; sourceTree = "<group>"; };
-		05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedViewController.h; path = src/featured/FeaturedViewController.h; sourceTree = "<group>"; };
-		05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedViewController.m; path = src/featured/FeaturedViewController.m; sourceTree = "<group>"; };
-		05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturedView.xib; path = src/featured/FeaturedView.xib; sourceTree = "<group>"; };
 		05EC9A4113CB971400B7AD61 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		05EC9A4813CB993A00B7AD61 /* UIApplication+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+GeneralHelpers.h"; path = "src/sdk-additions/UIApplication+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+GeneralHelpers.m"; path = "src/sdk-additions/UIApplication+GeneralHelpers.m"; sourceTree = "<group>"; };
@@ -657,9 +652,6 @@
 		05209F0D13C7705D00CA6A2D /* featured */ = {
 			isa = PBXGroup;
 			children = (
-				05EC9A2F13CB8FBD00B7AD61 /* FeaturedViewController.h */,
-				05EC9A3013CB8FBD00B7AD61 /* FeaturedViewController.m */,
-				05EC9A3113CB8FBD00B7AD61 /* FeaturedView.xib */,
 				05EB58EC13E0755400436F13 /* FeaturedEventsViewController.h */,
 				05EB58ED13E0755400436F13 /* FeaturedEventsViewController.m */,
 				05EB58EF13E0757800436F13 /* FeaturedEventsView.xib */,
@@ -1106,7 +1098,6 @@
 				054E06C613CB8990009B7373 /* featured-image-01@2x.png in Resources */,
 				054E06C713CB8990009B7373 /* featured-image-02.png in Resources */,
 				054E06C813CB8990009B7373 /* featured-image-02@2x.png in Resources */,
-				05EC9A3313CB8FBD00B7AD61 /* FeaturedView.xib in Resources */,
 				056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */,
 				056A92F513CD0E0D00C65DC0 /* Localizable.strings in Resources */,
 				0514FBE513CE000D00ACA464 /* EventTableViewCell.xib in Resources */,
@@ -1191,7 +1182,6 @@
 				05209EE913C76F9200CA6A2D /* main.m in Sources */,
 				05209F1313C770FF00CA6A2D /* LoyaltyViewController.m in Sources */,
 				05209F1713C7710F00CA6A2D /* LokaliteAppDelegate.m in Sources */,
-				05EC9A3213CB8FBD00B7AD61 /* FeaturedViewController.m in Sources */,
 				05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */,
 				05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */,
 				0505ECD413CBC2ED009874A7 /* LokaliteServiceRequest.m in Sources */,
