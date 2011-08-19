@@ -28,6 +28,9 @@
     [super viewDidLoad];
 
     [self initializeNavigationItem];
+
+    [self setShowsSearchBar:NO];
+    [self setShowsCategoryFilter:NO];
 }
 
 #pragma mark - LokaliteStreamViewController implementation
