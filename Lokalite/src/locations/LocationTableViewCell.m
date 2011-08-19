@@ -26,7 +26,9 @@ static const NSInteger ZOOM_LEVEL = 14;
     CLLocationCoordinate2D coordinate = [location coordinate];
     const NSInteger zoom = ZOOM_LEVEL;
 
-    [[self mapView] setCenterCoordinate:coordinate zoomLevel:zoom animated:NO];
+    [[self mapView] setCenterCoordinate:coordinate
+                              zoomLevel:zoom
+                               animated:animated];
 }
 
 #pragma mark - MKMapViewDelegate implementation
@@ -57,13 +59,18 @@ static const NSInteger ZOOM_LEVEL = 14;
         [location_ release];
         location_ = [location retain];
 
-        [self centerMapViewOnLocation:location_ animated:YES];
+        [self centerMapViewOnLocation:location_ animated:NO];
 
         MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
         [annotation setCoordinate:[location coordinate]];
         [[self mapView] addAnnotation:annotation];
         [annotation release], annotation = nil;
     }
+}
+
++ (CGFloat)cellHeight
+{
+    return 120;
 }
 
 @end

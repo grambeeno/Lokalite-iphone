@@ -17,4 +17,6 @@
 
 @property (nonatomic, retain) CLLocation *location;
 
++ (CGFloat)cellHeight;
+
 @end

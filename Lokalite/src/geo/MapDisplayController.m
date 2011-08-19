@@ -65,13 +65,14 @@
                                                 reuseIdentifier:AnnotationId]
                 autorelease];
         [view setAnimatesDrop:YES];
-        [view setPinColor:MKPinAnnotationColorPurple];
+        [view setPinColor:MKPinAnnotationColorGreen];
         [view setCanShowCallout:YES];
     }
 
     LokaliteObjectMapAnnotation *lokaliteAnnotation =
         (LokaliteObjectMapAnnotation *) annotation;
-    id<MappableLokaliteObject> lokaliteObject = [lokaliteAnnotation lokaliteObject];
+    id<MappableLokaliteObject> lokaliteObject =
+        [lokaliteAnnotation lokaliteObject];
     UIImage *image = [lokaliteObject mapAnnotationViewImage];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     CGRect imageViewFrame = [imageView frame];

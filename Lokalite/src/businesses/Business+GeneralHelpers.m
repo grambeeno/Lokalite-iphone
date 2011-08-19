@@ -85,19 +85,6 @@
     NSString *url = [businessData objectForKey:@"url"];
     [business setValueIfNecessary:url forKey:@"url"];
 
-    NSString *email = [businessData objectForKey:@"email"];
-    [business setValueIfNecessary:email forKey:@"email"];
-
-    id status = [businessData objectForKey:@"status"];
-    NSString *statusString = nil;
-    if ([status isKindOfClass:[NSString class]])
-        statusString = status;
-    else if ([status isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *d = (NSDictionary *) status;
-        statusString = [d objectForKey:@"content"];
-    }
-    [business setValueIfNecessary:statusString forKey:@"status"];
-
     [business setImageUrlsFromJsonData:businessData];
 
     NSDictionary *locationData = [businessData objectForKey:@"location"];

@@ -287,7 +287,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         }
     } else if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowMap)
-            height = 120;
+            height = [LocationTableViewCell cellHeight];
     }
 
     return height;

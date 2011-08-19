@@ -14,11 +14,11 @@
 #import "Business+GeneralHelpers.h"
 
 #import "Location.h"
+#import "LocationViewController.h"
+#import "LocationTableViewCell.h"
 
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
-#import "EventTableViewCell.h"
-#import "EventDetailsViewController.h"
 
 #import "DataFetcher.h"
 
@@ -27,46 +27,70 @@
 
 enum {
     kSectionInfo,
-    kSectionUpcomingEvents
+    kSectionLocation,
+    kSectionMore
 };
-static const NSUInteger NUM_SECTIONS = kSectionUpcomingEvents + 1;
+static const NSUInteger NUM_SECTIONS = kSectionMore + 1;
 
 enum {
-    kInfoRowAddress,
     kInfoRowPhoneNumber,
-    kInfoRowSummary
+    kInfoRowUrl
 };
-static const NSUInteger NUM_INFO_ROWS = kInfoRowSummary + 1;
+static const NSUInteger NUM_INFO_ROWS = kInfoRowUrl + 1;
 
 enum {
-    kUpcomingRow
+    kLocationRowTitle,
+    kLocationRowMap,
+    kLocationRowAddress
 };
+static const NSUInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
+
+enum {
+    kMoreRowMoreEvents,
+    kMoreRowDescription
+};
+static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
 
 
 @interface BusinessDetailsViewController ()
 
-@property (nonatomic, copy) NSArray *events;
+@property (nonatomic, retain) LocationTableViewCell *locationMapCell;
 
 #pragma mark - View initialization
 
 - (void)initializeHeaderView;
+- (void)initializeMapView;
 
 #pragma mark - View configuration
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path;
 
+#pragma mark - Table view management
+
+- (NSInteger)effectiveSectionForSection:(NSInteger)section;
+- (NSIndexPath *)effectiveIndexPathForIndexPath:(NSIndexPath *)indexPath;
+
+#pragma mark - Business validation
+
+- (BOOL)businessHasInfo;
+- (NSInteger)numberOfBusinessInfoFields;
+
+#pragma mark - Business locations
+
+- (void)displayLocationDetailsForBusiness:(Business *)business;
+
 #pragma mark - Fetching business images
 
 - (BOOL)fetchBusinessImageIfNecessary;
-- (void)fetchImageForEvent:(Event *)event;
 
 @end
+
 
 @implementation BusinessDetailsViewController
 
 @synthesize business = business_;
-@synthesize events = events_;
 
+@synthesize locationMapCell = locationMapCell_;
 @synthesize headerView = headerView_;
 
 #pragma mark - Memory management
@@ -76,7 +100,8 @@ enum {
     [headerView_ release];
 
     [business_ release];
-    [events_ release];
+
+    [locationMapCell_ release];
 
     [super dealloc];
 }
@@ -88,15 +113,17 @@ enum {
     self = [super initWithNibName:@"BusinessDetailsView" bundle:nil];
     if (self) {
         business_ = [business retain];
-        [self setTitle:NSLocalizedString(@"global.business", nil)];
+        [self setTitle:NSLocalizedString(@"global.place", nil)];
     }
 
     return self;
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - UI events
+
+- (void)mapViewTapped:(UIGestureRecognizer *)recognizer
 {
-    [super didReceiveMemoryWarning];
+    [self displayLocationDetailsForBusiness:[self business]];
 }
 
 #pragma mark - View lifecycle
@@ -105,33 +132,30 @@ enum {
 {
     [super viewDidLoad];
 
-    [self setEvents:[[[self business] events] allObjects]];
-
     [self initializeHeaderView];
+    [self initializeMapView];
     [self fetchBusinessImageIfNecessary];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
-{
-    return io == UIInterfaceOrientationPortrait;
 }
 
 #pragma mark - UITableViewDataSource implementation
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return NUM_SECTIONS;
+    return [self businessHasInfo] ? NUM_SECTIONS : NUM_SECTIONS - 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
+    section = [self effectiveSectionForSection:section];
     NSInteger nrows = 0;
 
     if (section == kSectionInfo)
-        nrows = NUM_INFO_ROWS;
-    else if (section == kSectionUpcomingEvents)
-        nrows = [[self events] count];
+        nrows = [self numberOfBusinessInfoFields];
+    else if (section == kSectionLocation)
+        nrows = NUM_LOCATION_ROWS;
+    else if (section == kSectionMore)
+        nrows = NUM_MORE_ROWS;
 
     return nrows;
 }
@@ -139,11 +163,11 @@ enum {
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    indexPath = [self effectiveIndexPathForIndexPath:indexPath];
     UITableViewCell *cell = nil;
+    static NSString *CellIdentifier = @"DefaultTableViewCell";
 
     if ([indexPath section] == kSectionInfo) {
-        static NSString *CellIdentifier = @"Cell";
-
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell =
@@ -151,14 +175,28 @@ enum {
                   initWithStyle:UITableViewCellStyleDefault
                   reuseIdentifier:CellIdentifier] autorelease];
         }
-    } else if ([indexPath section] == kSectionUpcomingEvents) {
-        static NSString *CellIdentifier = nil;
-        if (!CellIdentifier)
-            CellIdentifier = [[EventTableViewCell defaultReuseIdentifier] copy];
+    } else if ([indexPath section] == kSectionLocation) {
+        NSString *identifier =
+            [indexPath row] == kLocationRowMap ?
+            [LocationTableViewCell defaultReuseIdentifier] : CellIdentifier;
 
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            if ([indexPath row] == kLocationRowMap)
+                cell = [self locationMapCell];
+            else
+                cell =
+                    [[[UITableViewCell alloc]
+                      initWithStyle:UITableViewCellStyleDefault
+                      reuseIdentifier:identifier] autorelease];
+        }
+    } else if ([indexPath section] == kSectionMore) {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil)
-            cell = [EventTableViewCell instanceFromNib];
+            cell =
+                 [[[UITableViewCell alloc]
+                   initWithStyle:UITableViewCellStyleDefault
+                   reuseIdentifier:CellIdentifier] autorelease];
     }
 
     [self configureCell:cell atIndexPath:indexPath];
@@ -171,9 +209,26 @@ enum {
 - (CGFloat)tableView:(UITableView *)tableView
     heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    indexPath = [self effectiveIndexPathForIndexPath:indexPath];
+
     CGFloat height = 44;
-    if ([indexPath section] == kSectionUpcomingEvents)
-        height = [EventTableViewCell cellHeight];
+    if ([indexPath section] == kSectionLocation) {
+        if ([indexPath row] == kLocationRowMap)
+            height = [LocationTableViewCell cellHeight];
+    } else if ([indexPath section] == kSectionMore) {
+        if ([indexPath row] == kMoreRowDescription) {
+            // HACK: hardcoding to the standard table view cell font
+            UIFont *font = [UIFont boldSystemFontOfSize:18];
+            CGSize maxSize = CGSizeMake(280, FLT_MAX);
+            NSString *summary = [[self business] summary];
+            CGSize size = [summary sizeWithFont:font
+                              constrainedToSize:maxSize
+                                  lineBreakMode:UILineBreakModeWordWrap];
+
+            // 20 points provides sufficient vertical padding
+            height = size.height + 20;
+        }
+    }
 
     return height;
 }
@@ -181,24 +236,11 @@ enum {
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)path
 {
-    if ([path section] == kSectionInfo) {
-        NSURL *url = nil;
+    path = [self effectiveIndexPathForIndexPath:path];
 
-        if ([path row] == kInfoRowAddress)
-            url = [[self business] addressUrl];
-        else if ([path row] == kInfoRowPhoneNumber)
-            url = [[self business] phoneUrl];
-
-        UIApplication *app = [UIApplication sharedApplication];
-        if (url && [app canOpenURL:url])
-            [app openURL:url];
-    } else if ([path section] == kSectionUpcomingEvents) {
-        Event *event = [[self events] objectAtIndex:[path row]];
-        EventDetailsViewController *controller =
-            [[EventDetailsViewController alloc] initWithEvent:event];
-        [[self navigationController] pushViewController:controller
-                                               animated:YES];
-        [controller release], controller = nil;
+    if ([path section] == kSectionLocation) {
+        if ([path row] == kLocationRowAddress)
+            [self displayLocationDetailsForBusiness:[self business]];
     }
 }
 
@@ -210,54 +252,128 @@ enum {
     [[self tableView] setTableHeaderView:[self headerView]];
 }
 
+- (void)initializeMapView
+{
+    LocationTableViewCell *cell = [self locationMapCell];
+    CLLocation *location = [[self business] locationInstance];
+    [cell setLocation:location];
+
+    SEL action = @selector(mapViewTapped:);
+    UIGestureRecognizer *gr =
+        [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                action:action];
+    [gr setDelegate:self];
+    [[cell mapView] addGestureRecognizer:gr];
+    [gr release], gr = nil;
+}
+
 #pragma mark - View configuration
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path
 {
+    Business *business = [self business];
+
+    NSInteger numberOfLines = 1;
+    UITableViewCellAccessoryType accessoryType = UITableViewCellAccessoryNone;
+    UITableViewCellSelectionStyle selectionStyle =
+        UITableViewCellSelectionStyleNone;
+
     if ([path section] == kSectionInfo) {
         UIApplication *app = [UIApplication sharedApplication];
 
-        if ([path row] == kInfoRowAddress) {
-            [[cell textLabel]
-             setText:[[[self business] location] formattedAddress]];
+        if ([path row] == kInfoRowPhoneNumber) {
+            [[cell textLabel] setText:[business phone]];
 
-            if ([app canOpenURL:[[self business] addressUrl]]) {
-                [cell setAccessoryType:
-                 UITableViewCellAccessoryDisclosureIndicator];
-                [cell setSelectionStyle:
-                 UITableViewCellSelectionStyleBlue];
+            if ([app canOpenURL:[business phoneUrl]]) {
+                accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                selectionStyle = UITableViewCellSelectionStyleBlue;
             } else {
-                [cell setAccessoryType:UITableViewCellAccessoryNone];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                accessoryType = UITableViewCellAccessoryNone;
+                selectionStyle = UITableViewCellSelectionStyleNone;
             }
-        } else if ([path row] == kInfoRowPhoneNumber) {
-            [[cell textLabel] setText:[[self business] phone]];
+        } else if ([path row] == kInfoRowUrl) {
+            [[cell textLabel] setText:[business url]];
 
-            if ([app canOpenURL:[[self business] phoneUrl]]) {
-                [cell setAccessoryType:
-                 UITableViewCellAccessoryDisclosureIndicator];
-                [cell setSelectionStyle:
-                 UITableViewCellSelectionStyleBlue];
-            } else {
-                [cell setAccessoryType:UITableViewCellAccessoryNone];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            }
-        } else if ([path row] == kInfoRowSummary) {
-            [[cell textLabel] setText:[[self business] summary]];
-
-            [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            accessoryType = UITableViewCellAccessoryNone;
+            selectionStyle = UITableViewCellSelectionStyleNone;
         }
-    } else if ([path section] == kSectionUpcomingEvents) {
-        Event *event = [[self events] objectAtIndex:[path row]];
-        EventTableViewCell *eventCell = (EventTableViewCell *) cell;
-        [eventCell configureCellForEvent:event displayDistance:NO];
-
-        UIImage *image = [event standardImage];
-        [[eventCell eventImageView] setImage:image];
-        if (!image)
-            [self fetchImageForEvent:event];
+    } else if ([path section] == kSectionLocation) {
+        if ([path row] == kLocationRowTitle) {
+            [[cell textLabel]
+             setText:NSLocalizedString(@"global.location", nil)];
+            accessoryType = UITableViewCellAccessoryNone;
+            selectionStyle = UITableViewCellSelectionStyleNone;
+        } else if ([path row] == kLocationRowAddress) {
+            [[cell textLabel] setText:[[business location] formattedAddress]];
+            accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            selectionStyle = UITableViewCellSelectionStyleBlue;
+        }
+    } else if ([path section] == kSectionMore) {
+        if ([path row] == kMoreRowMoreEvents) {
+            [[cell textLabel]
+             setText:NSLocalizedString(@"business-details.more-events", nil)];
+            accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            selectionStyle = UITableViewCellSelectionStyleBlue;
+        } else if ([path row] == kMoreRowDescription) {
+            [[cell textLabel] setText:[business summary]];
+            accessoryType = UITableViewCellAccessoryNone;
+            selectionStyle = UITableViewCellSelectionStyleNone;
+            numberOfLines = 0;
+        }
     }
+
+    [cell setAccessoryType:accessoryType];
+    [cell setSelectionStyle:selectionStyle];
+    [[cell textLabel] setNumberOfLines:numberOfLines];
+}
+
+#pragma mark - Table view management
+
+- (NSInteger)effectiveSectionForSection:(NSInteger)section
+{
+    NSInteger effectiveSection = section;
+
+    if (![self businessHasInfo])
+        effectiveSection = section + 1;
+
+    return effectiveSection;
+}
+
+- (NSIndexPath *)effectiveIndexPathForIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger section = [self effectiveSectionForSection:[indexPath section]];
+    return [NSIndexPath indexPathForRow:[indexPath row] inSection:section];
+}
+
+#pragma mark - Business validation
+
+- (BOOL)businessHasInfo
+{
+    return [self numberOfBusinessInfoFields] > 0;
+}
+
+- (NSInteger)numberOfBusinessInfoFields
+{
+    Business *business = [self business];
+    NSInteger nrows = 0;
+
+    if ([business phone])
+        ++nrows;
+    if ([business url])
+        ++nrows;
+
+    return nrows;
+}
+
+#pragma mark - Business locations
+
+- (void)displayLocationDetailsForBusiness:(Business *)business
+{
+    LocationViewController *controller =
+        [[LocationViewController alloc]
+         initWithMappableLokaliteObject:[self business]];
+    [[self navigationController] pushViewController:controller animated:YES];
+    [controller release], controller = nil;
 }
 
 #pragma mark - Fetching data
@@ -289,36 +405,14 @@ enum {
     return fetched;
 }
 
-- (void)fetchImageForEvent:(Event *)event
+#pragma mark - Accessors
+
+- (LocationTableViewCell *)locationMapCell
 {
-    [[UIApplication sharedApplication] networkActivityIsStarting];
+    if (!locationMapCell_)
+        locationMapCell_ = [[LocationTableViewCell instanceFromNib] retain];
 
-    NSURL *url = [NSURL URLWithString:[event standardImageUrl]];
-
-    UITableView *tableView = [self tableView];
-    NSArray *events = [self events];
-    [DataFetcher fetchDataAtUrl:url responseHandler:
-     ^(NSData *data, NSError *error) {
-         [[UIApplication sharedApplication] networkActivityDidFinish];
-
-         if (data) {
-             __block UIImage *image = nil;
-             NSArray *visibleCells = [tableView visibleCells];
-             [visibleCells enumerateObjectsUsingBlock:
-              ^(EventTableViewCell *cell, NSUInteger idx, BOOL *stop) {
-                  NSIndexPath *path = [tableView indexPathForCell:cell];
-                  Event *e = [events objectAtIndex:[path row]];
-                  if ([[e standardImageUrl] isEqual:url]) {
-                      if (!image)
-                          image = [UIImage imageWithData:data];
-                      [[cell eventImageView] setImage:image];
-                      [e setStandardImageData:data];
-                  }
-             }];
-         } else
-             NSLog(@"WARNING: Failed to download image data for event: %@: %@",
-                   [event identifier], [error detailedDescription]);
-    }];
+    return locationMapCell_;
 }
 
 @end

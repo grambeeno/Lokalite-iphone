@@ -18,9 +18,7 @@
 @implementation Business
 @dynamic phone;
 @dynamic summary;
-@dynamic status;
 @dynamic fullImageUrl;
-@dynamic email;
 @dynamic url;
 @dynamic name;
 @dynamic fullImageData;

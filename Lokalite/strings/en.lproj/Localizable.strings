@@ -77,6 +77,10 @@
  */
 "featured.fetch.failed" = "Failed to Fetch Featured Events";
 
+/*
+ * Business details
+ */
+"business-details.more-events" = "More Events from this Place";
 
 /*
  * Log in
