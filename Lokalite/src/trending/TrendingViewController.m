@@ -37,6 +37,18 @@
     return NSLocalizedString(@"global.trending", nil);
 }
 
+#pragma mark - Persistence management
+
+- (NSArray *)dataControllerSortDescriptors
+{
+    NSSortDescriptor *sd1 =
+        [NSSortDescriptor sortDescriptorWithKey:@"usersCount" ascending:NO];
+    NSSortDescriptor *sd2 =
+        [NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:YES];
+
+    return [NSArray arrayWithObjects:sd1, sd2, nil];
+}
+
 #pragma mark Fetching data from the network
 
 - (LokaliteStream *)lokaliteStreamInstance

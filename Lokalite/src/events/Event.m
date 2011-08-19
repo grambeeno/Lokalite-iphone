@@ -21,6 +21,7 @@
 @dynamic startDate;
 @dynamic trended;
 @dynamic featured;
+@dynamic usersCount;
 @dynamic fullImageUrl;
 @dynamic fullImageData;
 @dynamic name;

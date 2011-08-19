@@ -107,6 +107,9 @@
     NSNumber *trended = [eventData objectForKey:@"trended?"];
     [event setValueIfNecessary:trended forKey:@"trended"];
 
+    NSNumber *usersCount = [eventData objectForKey:@"users_count"];
+    [event setValueIfNecessary:usersCount forKey:@"usersCount"];
+
     [event setImageUrlsFromJsonData:eventData];
 
     NSDictionary *locationData = [eventData objectForKey:@"location"];

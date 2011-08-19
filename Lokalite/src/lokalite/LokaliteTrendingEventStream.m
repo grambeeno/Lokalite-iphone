@@ -18,6 +18,7 @@
 - (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
 {
     LokaliteService *service = [self service];
+    [service setOrderBy:@"trending"];
     [service fetchEventsWithCategory:nil
                             fromPage:[self pagesFetched] + 1
                      responseHandler:
@@ -41,7 +42,7 @@
 
 + (id)streamWithContext:(NSManagedObjectContext *)context
 {
-    NSString *name = @"events?category=trending";
+    NSString *name = @"events?order=trending";
     return [self streamWithDownloadSourceName:name context:context];
 }
 
