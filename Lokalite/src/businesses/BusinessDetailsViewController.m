@@ -20,6 +20,8 @@
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 
+#import "PlaceEventStreamViewController.h"
+
 #import "DataFetcher.h"
 
 #import "SDKAdditions.h"
@@ -81,9 +83,10 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 - (BOOL)businessHasInfo;
 - (NSInteger)numberOfBusinessInfoFields;
 
-#pragma mark - Business locations
+#pragma mark - Showing business data
 
 - (void)displayLocationDetailsForBusiness:(Business *)business;
+- (void)displayMoreEventsForBusiness:(Business *)business;
 
 #pragma mark - Fetching business images
 
@@ -251,6 +254,9 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
     if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowAddress)
             [self displayLocationDetailsForBusiness:[self business]];
+    } else if ([path section] == kSectionMore) {
+        if ([path row] == kMoreRowMoreEvents)
+            [self displayMoreEventsForBusiness:[self business]];
     }
 }
 
@@ -392,13 +398,21 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
     return nrows;
 }
 
-#pragma mark - Business locations
+#pragma mark - Showing business data
 
 - (void)displayLocationDetailsForBusiness:(Business *)business
 {
     LocationViewController *controller =
         [[LocationViewController alloc]
          initWithMappableLokaliteObject:[self business]];
+    [[self navigationController] pushViewController:controller animated:YES];
+    [controller release], controller = nil;
+}
+
+- (void)displayMoreEventsForBusiness:(Business *)business
+{
+    PlaceEventStreamViewController *controller =
+        [[PlaceEventStreamViewController alloc] initWithPlace:[self business]];
     [[self navigationController] pushViewController:controller animated:YES];
     [controller release], controller = nil;
 }

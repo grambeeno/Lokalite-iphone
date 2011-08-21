@@ -31,5 +31,6 @@
 #import "LokaliteObjectBuilder.h"
 
 #import "LokaliteStream.h"
+#import "PlaceEventLokaliteStream.h"
 
 #import "DeviceLocator.h"

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+
 typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
                                  NSDictionary *,
                                  NSError *);
@@ -40,6 +41,9 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 - (void)fetchEventsWithCategory:(NSString *)category
                        fromPage:(NSInteger)page
                 responseHandler:(LSResponseHandler)handler;
+- (void)fetchEventsForPlaceId:(NSNumber *)placeId
+                     fromPage:(NSInteger)page
+              responseHandler:(LSResponseHandler)handler;
 
 #pragma mark - Trending events
 

@@ -27,6 +27,10 @@
              requestMethod:(LKRequestMethod)requestMethod
            responseHandler:(LSResponseHandler)handler;
 
+#pragma mark - Parameter helpers
+
+- (NSMutableDictionary *)queryParametersForPage:(NSInteger)page;
+
 #pragma mark - Processing JSON data
 
 - (id)processJsonData:(NSData *)data error:(NSError **)error;
@@ -104,29 +108,24 @@
 {
     NSURL *url = [self featuredEventUrl];
 
-    NSMutableDictionary *params =
-        [NSMutableDictionary
-         dictionaryWithObjectsAndKeys:
-         [NSString stringWithFormat:@"%d", page], @"page",
-         [NSString stringWithFormat:@"%d", [self objectsPerPage]], @"per_page",
-         nil];
-
+    NSMutableDictionary *params = [self queryParametersForPage:page];
     if (category)
         [params setObject:category forKey:@"category"];
 
-    if ([self orderBy]) {
-        [params setObject:[self orderBy] forKey:@"order"];
+    [self sendRequestWithUrl:url
+                  parameters:params
+               requestMethod:LKRequestMethodGET
+             responseHandler:handler];
+}
 
-        // HACK: only set the origin if we're ordering by distance
-        BOOL orderByDistance = [[self orderBy] isEqualToString:@"distance"];
-        CLLocationCoordinate2D coord = [self location];
-        if (orderByDistance && CLLocationCoordinate2DIsValid(coord)) {
-            NSString *origin =
-                [NSString stringWithFormat:@"%f,%f",
-                 coord.latitude, coord.longitude];
-            [params setObject:origin forKey:@"origin"];
-        }
-    }
+- (void)fetchEventsForPlaceId:(NSNumber *)placeId
+                     fromPage:(NSInteger)page
+              responseHandler:(LSResponseHandler)handler
+{
+    NSURL *url = [self featuredEventUrl];
+
+    NSMutableDictionary *params = [self queryParametersForPage:page];
+    [params setObject:[placeId description] forKey:@"place_id"];
 
     [self sendRequestWithUrl:url
                   parameters:params
@@ -251,6 +250,34 @@
 
          [req release];
      }];
+}
+
+#pragma mark - Parameter helpers
+
+- (NSMutableDictionary *)queryParametersForPage:(NSInteger)page
+{
+    NSMutableDictionary *params =
+        [NSMutableDictionary
+         dictionaryWithObjectsAndKeys:
+         [NSString stringWithFormat:@"%d", page], @"page",
+         [NSString stringWithFormat:@"%d", [self objectsPerPage]], @"per_page",
+         nil];
+
+    if ([self orderBy]) {
+        [params setObject:[self orderBy] forKey:@"order"];
+
+        // HACK: only set the origin if we're ordering by distance
+        BOOL orderByDistance = [[self orderBy] isEqualToString:@"distance"];
+        CLLocationCoordinate2D coord = [self location];
+        if (orderByDistance && CLLocationCoordinate2DIsValid(coord)) {
+            NSString *origin =
+                [NSString stringWithFormat:@"%f,%f",
+                 coord.latitude, coord.longitude];
+            [params setObject:origin forKey:@"origin"];
+        }
+    }
+
+    return params;
 }
 
 #pragma mark - Processing response data

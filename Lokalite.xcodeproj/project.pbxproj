@@ -169,6 +169,8 @@
 		05E5555A13F42C9800DF0F31 /* PlaceStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */; };
 		05E5555D13F433AD00DF0F31 /* CategoryPlaceStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5555C13F433AC00DF0F31 /* CategoryPlaceStreamViewController.m */; };
 		05E5556A13F47C5300DF0F31 /* DeviceLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5556913F47C5300DF0F31 /* DeviceLocator.m */; };
+		05EA465914019DB700AA579B /* PlaceEventStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA465814019DB700AA579B /* PlaceEventStreamViewController.m */; };
+		05EA465C14019E7200AA579B /* PlaceEventLokaliteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA465B14019E7200AA579B /* PlaceEventLokaliteStream.m */; };
 		05EB58CF13DF226100436F13 /* NSData+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58CE13DF226100436F13 /* NSData+GeneralHelpers.m */; };
 		05EB58D713DF312800436F13 /* LokaliteAccount+KeychainAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58D613DF312800436F13 /* LokaliteAccount+KeychainAdditions.m */; };
 		05EB58DB13DF326900436F13 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EB58DA13DF326900436F13 /* SFHFKeychainUtils.m */; };
@@ -426,6 +428,10 @@
 		05E5555C13F433AC00DF0F31 /* CategoryPlaceStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryPlaceStreamViewController.m; path = src/businesses/CategoryPlaceStreamViewController.m; sourceTree = "<group>"; };
 		05E5556813F47C5300DF0F31 /* DeviceLocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceLocator.h; path = src/geo/DeviceLocator.h; sourceTree = "<group>"; };
 		05E5556913F47C5300DF0F31 /* DeviceLocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceLocator.m; path = src/geo/DeviceLocator.m; sourceTree = "<group>"; };
+		05EA465714019DB700AA579B /* PlaceEventStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceEventStreamViewController.h; path = src/events/PlaceEventStreamViewController.h; sourceTree = "<group>"; };
+		05EA465814019DB700AA579B /* PlaceEventStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceEventStreamViewController.m; path = src/events/PlaceEventStreamViewController.m; sourceTree = "<group>"; };
+		05EA465A14019E7200AA579B /* PlaceEventLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceEventLokaliteStream.h; path = src/lokalite/PlaceEventLokaliteStream.h; sourceTree = "<group>"; };
+		05EA465B14019E7200AA579B /* PlaceEventLokaliteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceEventLokaliteStream.m; path = src/lokalite/PlaceEventLokaliteStream.m; sourceTree = "<group>"; };
 		05EB58CD13DF226100436F13 /* NSData+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+GeneralHelpers.h"; path = "src/sdk-additions/NSData+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05EB58CE13DF226100436F13 /* NSData+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+GeneralHelpers.m"; path = "src/sdk-additions/NSData+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05EB58D513DF312800436F13 /* LokaliteAccount+KeychainAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteAccount+KeychainAdditions.h"; path = "src/accounts/LokaliteAccount+KeychainAdditions.h"; sourceTree = "<group>"; };
@@ -524,6 +530,8 @@
 				059B33FF13D4BC5A007AD11C /* LokaliteSearchStream.m */,
 				056A92EF13CCFB0600C65DC0 /* LokaliteObjectBuilder.h */,
 				056A92F013CCFB0600C65DC0 /* LokaliteObjectBuilder.m */,
+				05EA465A14019E7200AA579B /* PlaceEventLokaliteStream.h */,
+				05EA465B14019E7200AA579B /* PlaceEventLokaliteStream.m */,
 			);
 			name = lokalite;
 			sourceTree = "<group>";
@@ -959,6 +967,8 @@
 				0548320613F1AB070099125B /* EventStreamViewController.m */,
 				0548320813F1AEA60099125B /* CategoryEventStreamViewController.h */,
 				0548320913F1AEA70099125B /* CategoryEventStreamViewController.m */,
+				05EA465714019DB700AA579B /* PlaceEventStreamViewController.h */,
+				05EA465814019DB700AA579B /* PlaceEventStreamViewController.m */,
 			);
 			name = events;
 			sourceTree = "<group>";
@@ -1262,6 +1272,8 @@
 				0522547213FD6EFB002DC909 /* DetailViewTableViewCell.m in Sources */,
 				05B1671913FDA50600C44577 /* LocationViewController.m in Sources */,
 				05B1671D13FDCD9500C44577 /* ExpandableTextTableViewCell.m in Sources */,
+				05EA465914019DB700AA579B /* PlaceEventStreamViewController.m in Sources */,
+				05EA465C14019E7200AA579B /* PlaceEventLokaliteStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
