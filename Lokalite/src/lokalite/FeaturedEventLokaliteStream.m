@@ -6,14 +6,14 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "LokaliteFeaturedEventStream.h"
+#import "FeaturedEventLokaliteStream.h"
 
 #import "LokaliteService.h"
 
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 
-@implementation LokaliteFeaturedEventStream
+@implementation FeaturedEventLokaliteStream
 
 - (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
 {
@@ -33,7 +33,7 @@
 @end
 
 
-@implementation LokaliteFeaturedEventStream (InstantiationHelpers)
+@implementation FeaturedEventLokaliteStream (InstantiationHelpers)
 
 + (id)streamWithContext:(NSManagedObjectContext *)context
 {

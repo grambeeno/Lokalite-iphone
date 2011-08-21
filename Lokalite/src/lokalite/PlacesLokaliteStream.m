@@ -6,13 +6,13 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "LokalitePlacesStream.h"
+#import "PlacesLokaliteStream.h"
 #import "LokaliteService.h"
 
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
 
-@implementation LokalitePlacesStream
+@implementation PlacesLokaliteStream
 
 #pragma mark - LokaliteStream implementation
 
@@ -42,7 +42,7 @@
 
 
 
-@implementation LokalitePlacesStream (InstantiationHelpers)
+@implementation PlacesLokaliteStream (InstantiationHelpers)
 
 + (id)streamWithContext:(NSManagedObjectContext *)context
 {

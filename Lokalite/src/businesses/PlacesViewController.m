@@ -18,9 +18,9 @@
 #import "PlaceTableViewCell.h"
 
 #import "LokaliteStream.h"
-#import "LokaliteSearchStream.h"
-#import "LokalitePlacesStream.h"
-#import "LokaliteCategoryStream.h"
+#import "SearchLokaliteStream.h"
+#import "PlacesLokaliteStream.h"
+#import "CategoryLokaliteStream.h"
 
 #import "TableViewImageFetcher.h"
 
@@ -64,7 +64,7 @@
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
     (NSString *)keywords
 {
-    return [LokaliteSearchStream placesSearchStreamWithKeywords:keywords
+    return [SearchLokaliteStream placesSearchStreamWithKeywords:keywords
                                                         context:[self context]];
 }
 
@@ -81,7 +81,7 @@
 
     NSString *serverFilter = [filter serverFilter];
     LokaliteStream *stream =
-        [LokaliteCategoryStream placeStreamWithCategoryName:serverFilter
+        [CategoryLokaliteStream placeStreamWithCategoryName:serverFilter
                                                     context:context];
     CategoryPlaceStreamViewController *controller =
         [[CategoryPlaceStreamViewController alloc]
@@ -96,7 +96,7 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [LokalitePlacesStream streamWithContext:[self context]];
+    return [PlacesLokaliteStream streamWithContext:[self context]];
 }
 
 #pragma mark - View initialization

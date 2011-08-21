@@ -13,7 +13,7 @@ typedef enum {
     LokaliteSearchStreamSearchPlaces
 } LokaliteSearchStreamSearchType;
 
-@interface LokaliteSearchStream : LokaliteStream
+@interface SearchLokaliteStream : LokaliteStream
 
 @property (nonatomic, assign, readonly)
     LokaliteSearchStreamSearchType searchType;
@@ -29,7 +29,7 @@ typedef enum {
 @end
 
 
-@interface LokaliteSearchStream (InstantiationHelpers)
+@interface SearchLokaliteStream (InstantiationHelpers)
 
 + (id)eventSearchStreamWithKeywords:(NSString *)keywords
                             context:(NSManagedObjectContext *)context;

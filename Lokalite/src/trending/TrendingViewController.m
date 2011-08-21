@@ -8,7 +8,7 @@
 
 #import "TrendingViewController.h"
 
-#import "LokaliteTrendingEventStream.h"
+#import "TrendingEventLokaliteStream.h"
 
 @interface TrendingViewController ()
 
@@ -56,7 +56,7 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [LokaliteTrendingEventStream streamWithContext:[self context]];
+    return [TrendingEventLokaliteStream streamWithContext:[self context]];
 }
 
 #pragma mark - View initialization

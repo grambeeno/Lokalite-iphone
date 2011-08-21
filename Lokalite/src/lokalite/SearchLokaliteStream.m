@@ -6,7 +6,7 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "LokaliteSearchStream.h"
+#import "SearchLokaliteStream.h"
 
 #import "LokaliteService.h"
 #import "LokaliteDownloadSource.h"
@@ -18,7 +18,7 @@
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
 
-@implementation LokaliteSearchStream
+@implementation SearchLokaliteStream
 
 @synthesize searchType = searchType_;
 @synthesize keywords = keywords_;
@@ -109,7 +109,7 @@
 
 #import "UIApplication+GeneralHelpers.h"
 
-@implementation LokaliteSearchStream (InstantiationHelpers)
+@implementation SearchLokaliteStream (InstantiationHelpers)
 
 + (id)eventSearchStreamWithKeywords:(NSString *)keywords
                             context:(NSManagedObjectContext *)context

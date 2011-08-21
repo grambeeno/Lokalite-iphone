@@ -6,14 +6,14 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "LokaliteCategoryStream.h"
+#import "CategoryLokaliteStream.h"
 
-@interface LokaliteFeaturedEventStream : LokaliteCategoryStream
+@interface FeaturedEventLokaliteStream : CategoryLokaliteStream
 
 @end
 
 
-@interface LokaliteFeaturedEventStream (InstantiationHelpers)
+@interface FeaturedEventLokaliteStream (InstantiationHelpers)
 
 + (id)streamWithContext:(NSManagedObjectContext *)context;
 

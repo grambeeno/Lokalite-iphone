@@ -8,12 +8,12 @@
 
 #import "LokaliteStream.h"
 
-@interface LokalitePlacesStream : LokaliteStream
+@interface PlacesLokaliteStream : LokaliteStream
 
 @end
 
 
-@interface LokalitePlacesStream (InstantiationHelpers)
+@interface PlacesLokaliteStream (InstantiationHelpers)
 
 + (id)streamWithContext:(NSManagedObjectContext *)context;
 

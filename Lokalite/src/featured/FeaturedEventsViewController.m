@@ -8,7 +8,7 @@
 
 #import "FeaturedEventsViewController.h"
 
-#import "LokaliteFeaturedEventStream.h"
+#import "FeaturedEventLokaliteStream.h"
 
 #import "LokaliteShared.h"
 #import "SDKAdditions.h"
@@ -76,7 +76,7 @@
 - (LokaliteStream *)lokaliteStreamInstance
 {
     LokaliteStream *stream =
-        [LokaliteFeaturedEventStream streamWithContext:[self context]];
+        [FeaturedEventLokaliteStream streamWithContext:[self context]];
     if ([self hasValidLocation])
         [stream setOrderBy:@"distance"];
 

@@ -6,7 +6,7 @@
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "LokaliteCategoryStream.h"
+#import "CategoryLokaliteStream.h"
 
 #import "LokaliteService.h"
 #import "LokaliteDownloadSource+GeneralHelpers.h"
@@ -14,7 +14,7 @@
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 
-@implementation LokaliteCategoryStream
+@implementation CategoryLokaliteStream
 
 @synthesize categoryName = categoryName_;
 @synthesize streamType = streamType_;
@@ -103,13 +103,13 @@
 
 #import "UIApplication+GeneralHelpers.h"
 
-@implementation LokaliteCategoryStream (InstantiationHelpers)
+@implementation CategoryLokaliteStream (InstantiationHelpers)
 
 + (id)eventStreamWithCategoryName:(NSString *)categoryName
                           context:(NSManagedObjectContext *)context
 {
     NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
-    LokaliteCategoryStream *stream =
+    CategoryLokaliteStream *stream =
         [[self alloc] initWithCategoryName:categoryName
                                 streamType:LokaliteCategoryStreamEvents
                                    baseUrl:baseUrl
@@ -127,7 +127,7 @@
                           context:(NSManagedObjectContext *)context
 {
     NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
-    LokaliteCategoryStream *stream =
+    CategoryLokaliteStream *stream =
         [[self alloc] initWithCategoryName:categoryName
                                 streamType:LokaliteCategoryStreamPlaces
                                    baseUrl:baseUrl

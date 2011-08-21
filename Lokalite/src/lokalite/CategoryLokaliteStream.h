@@ -13,7 +13,7 @@ typedef enum {
     LokaliteCategoryStreamPlaces
 } LokaliteCategoryStreamType;
 
-@interface LokaliteCategoryStream : LokaliteStream
+@interface CategoryLokaliteStream : LokaliteStream
 
 @property (nonatomic, copy, readonly) NSString *categoryName;
 @property (nonatomic, assign, readonly) LokaliteCategoryStreamType streamType;
@@ -29,7 +29,7 @@ typedef enum {
 @end
 
 
-@interface  LokaliteCategoryStream (InstantiationHelpers)
+@interface  CategoryLokaliteStream (InstantiationHelpers)
 
 + (id)eventStreamWithCategoryName:(NSString *)categoryName
                           context:(NSManagedObjectContext *)context;

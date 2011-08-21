@@ -10,8 +10,8 @@
 
 #import "CategoryEventStreamViewController.h"
 
-#import "LokaliteCategoryStream.h"
-#import "LokaliteSearchStream.h"
+#import "CategoryLokaliteStream.h"
+#import "SearchLokaliteStream.h"
 
 #import "TableViewImageFetcher.h"
 
@@ -104,7 +104,7 @@ enum {
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
     (NSString *)keywords
 {
-    return [LokaliteSearchStream eventSearchStreamWithKeywords:keywords
+    return [SearchLokaliteStream eventSearchStreamWithKeywords:keywords
                                                        context:[self context]];
 }
 
@@ -122,7 +122,7 @@ enum {
     NSString *serverFilter = [filter serverFilter];
     NSString *name = [filter name];
     LokaliteStream *stream =
-        [LokaliteCategoryStream eventStreamWithCategoryName:serverFilter
+        [CategoryLokaliteStream eventStreamWithCategoryName:serverFilter
                                                     context:moc];
     CategoryEventStreamViewController *controller =
         [[CategoryEventStreamViewController alloc] initWithCategoryName:name
@@ -140,7 +140,7 @@ enum {
     NSString *orderBy =
         idx == EventFilterStartTime ? @"starts_at" : @"distance";
     LokaliteStream *stream =
-        [LokaliteCategoryStream eventStreamWithCategoryName:nil
+        [CategoryLokaliteStream eventStreamWithCategoryName:nil
                                                     context:context];
     [stream setOrderBy:orderBy];
 
