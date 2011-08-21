@@ -158,7 +158,6 @@
 		05BC9C0513E9A43000FBAD23 /* AllEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BC9C0413E9A43000FBAD23 /* AllEventsView.xib */; };
 		05BC9C0D13E9BFD700FBAD23 /* standard-button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BC9C0B13E9BFD700FBAD23 /* standard-button-background@2x.png */; };
 		05BC9C0E13E9BFD700FBAD23 /* standard-button-pressed-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BC9C0C13E9BFD700FBAD23 /* standard-button-pressed-background@2x.png */; };
-		05D0205213D4F80500FE0A6C /* LokaliteEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */; };
 		05D06E6D13D75FDE00878AD6 /* category-filters-events.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05D06E6C13D75FDE00878AD6 /* category-filters-events.plist */; };
 		05D06E7113D76B4900878AD6 /* category-button-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D06E6F13D76B4900878AD6 /* category-button-pressed@2x.png */; };
 		05D06E7213D76B4900878AD6 /* category-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D06E7013D76B4900878AD6 /* category-button@2x.png */; };
@@ -410,8 +409,6 @@
 		05BC9C0413E9A43000FBAD23 /* AllEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AllEventsView.xib; path = src/events/AllEventsView.xib; sourceTree = "<group>"; };
 		05BC9C0B13E9BFD700FBAD23 /* standard-button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "standard-button-background@2x.png"; path = "images/shared/standard-button-background@2x.png"; sourceTree = "<group>"; };
 		05BC9C0C13E9BFD700FBAD23 /* standard-button-pressed-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "standard-button-pressed-background@2x.png"; path = "images/shared/standard-button-pressed-background@2x.png"; sourceTree = "<group>"; };
-		05D0205013D4F80500FE0A6C /* LokaliteEventStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteEventStream.h; path = src/lokalite/LokaliteEventStream.h; sourceTree = "<group>"; };
-		05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteEventStream.m; path = src/lokalite/LokaliteEventStream.m; sourceTree = "<group>"; };
 		05D06E6C13D75FDE00878AD6 /* category-filters-events.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "category-filters-events.plist"; path = "data/category-filters-events.plist"; sourceTree = "<group>"; };
 		05D06E6F13D76B4900878AD6 /* category-button-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "category-button-pressed@2x.png"; path = "images/buttons/category-button-pressed@2x.png"; sourceTree = "<group>"; };
 		05D06E7013D76B4900878AD6 /* category-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "category-button@2x.png"; path = "images/buttons/category-button@2x.png"; sourceTree = "<group>"; };
@@ -520,8 +517,6 @@
 				056A92E713CCF13000C65DC0 /* LokaliteFeaturedEventStream.m */,
 				055286AB13F08A7D0072A662 /* LokaliteTrendingEventStream.h */,
 				055286AC13F08A7D0072A662 /* LokaliteTrendingEventStream.m */,
-				05D0205013D4F80500FE0A6C /* LokaliteEventStream.h */,
-				05D0205113D4F80500FE0A6C /* LokaliteEventStream.m */,
 				0548320B13F1B09B0099125B /* LokaliteCategoryStream.h */,
 				0548320C13F1B09B0099125B /* LokaliteCategoryStream.m */,
 				058962BD13DA299700556F6D /* LokalitePlacesStream.h */,
@@ -1222,7 +1217,6 @@
 				05FA00E113D0E8AC001B7470 /* BusinessDetailsViewController.m in Sources */,
 				05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */,
 				059B340013D4BC5A007AD11C /* LokaliteSearchStream.m in Sources */,
-				05D0205213D4F80500FE0A6C /* LokaliteEventStream.m in Sources */,
 				0569FCB513D6397B00146228 /* lokalite.xcdatamodeld in Sources */,
 				05DD68EB13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m in Sources */,
 				05A7B41D13D731F6008E737C /* Category+GeneralHelpers.m in Sources */,
