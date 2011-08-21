@@ -28,9 +28,10 @@
 enum {
     kSectionInfo,
     kSectionLocation,
-    kSectionMore
+    kSectionMore,
+    kSectionDescription
 };
-static const NSUInteger NUM_SECTIONS = kSectionMore + 1;
+static const NSUInteger NUM_SECTIONS = kSectionDescription + 1;
 
 enum {
     kInfoRowPhoneNumber,
@@ -46,10 +47,14 @@ enum {
 static const NSUInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 enum {
-    kMoreRowMoreEvents,
-    kMoreRowDescription
+    kMoreRowMoreEvents
 };
-static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
+static const NSUInteger NUM_MORE_ROWS = kMoreRowMoreEvents + 1;
+
+enum {
+    kDescriptionRowDescription
+};
+static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 
 
 @interface BusinessDetailsViewController ()
@@ -58,6 +63,7 @@ static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
 
 #pragma mark - View initialization
 
+- (void)initializeNavigationItem;
 - (void)initializeHeaderView;
 - (void)initializeMapView;
 
@@ -121,6 +127,11 @@ static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
 
 #pragma mark - UI events
 
+- (void)presentSharingOptions:(id)sender
+{
+    [self presentSharingOptionsWithDelegate:self];
+}
+
 - (void)mapViewTapped:(UIGestureRecognizer *)recognizer
 {
     [self displayLocationDetailsForBusiness:[self business]];
@@ -132,6 +143,7 @@ static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
 {
     [super viewDidLoad];
 
+    [self initializeNavigationItem];
     [self initializeHeaderView];
     [self initializeMapView];
     [self fetchBusinessImageIfNecessary];
@@ -156,6 +168,8 @@ static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
         nrows = NUM_LOCATION_ROWS;
     else if (section == kSectionMore)
         nrows = NUM_MORE_ROWS;
+    else if (section == kSectionDescription)
+        nrows = NUM_DESCRIPTION_ROWS;
 
     return nrows;
 }
@@ -167,7 +181,10 @@ static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
     UITableViewCell *cell = nil;
     static NSString *CellIdentifier = @"DefaultTableViewCell";
 
-    if ([indexPath section] == kSectionInfo) {
+    if ([indexPath section] == kSectionInfo ||
+        [indexPath section] == kSectionMore ||
+        [indexPath section] == kSectionDescription)
+    {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell =
@@ -190,13 +207,6 @@ static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
                       initWithStyle:UITableViewCellStyleDefault
                       reuseIdentifier:identifier] autorelease];
         }
-    } else if ([indexPath section] == kSectionMore) {
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil)
-            cell =
-                 [[[UITableViewCell alloc]
-                   initWithStyle:UITableViewCellStyleDefault
-                   reuseIdentifier:CellIdentifier] autorelease];
     }
 
     [self configureCell:cell atIndexPath:indexPath];
@@ -215,8 +225,8 @@ static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
     if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowMap)
             height = [LocationTableViewCell cellHeight];
-    } else if ([indexPath section] == kSectionMore) {
-        if ([indexPath row] == kMoreRowDescription) {
+    } else if ([indexPath section] == kSectionDescription) {
+        if ([indexPath row] == kDescriptionRowDescription) {
             // HACK: hardcoding to the standard table view cell font
             UIFont *font = [UIFont boldSystemFontOfSize:18];
             CGSize maxSize = CGSizeMake(280, FLT_MAX);
@@ -245,6 +255,17 @@ static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
 }
 
 #pragma mark - View initialization
+
+- (void)initializeNavigationItem
+{
+    UIBarButtonItem *actionButtonItem =
+        [[UIBarButtonItem alloc]
+         initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                              target:self
+                              action:@selector(presentSharingOptions:)];
+    [[self navigationItem] setRightBarButtonItem:actionButtonItem];
+    [actionButtonItem release], actionButtonItem = nil;
+}
 
 - (void)initializeHeaderView
 {
@@ -310,11 +331,17 @@ static const NSUInteger NUM_MORE_ROWS = kMoreRowDescription + 1;
         }
     } else if ([path section] == kSectionMore) {
         if ([path row] == kMoreRowMoreEvents) {
-            [[cell textLabel]
-             setText:NSLocalizedString(@"business-details.more-events", nil)];
+            NSString *format =
+                NSLocalizedString(@"business-details.more-events.formatstring",
+                                  nil);
+            NSString *text =
+                [NSString stringWithFormat:format, [business name]];
+            [[cell textLabel] setText:text];
             accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             selectionStyle = UITableViewCellSelectionStyleBlue;
-        } else if ([path row] == kMoreRowDescription) {
+        }
+    } else if ([path section] == kSectionDescription) {
+         if ([path row] == kDescriptionRowDescription) {
             [[cell textLabel] setText:[business summary]];
             accessoryType = UITableViewCellAccessoryNone;
             selectionStyle = UITableViewCellSelectionStyleNone;

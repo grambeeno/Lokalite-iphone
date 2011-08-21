@@ -40,3 +40,38 @@
 
 
 @end
+
+
+@implementation UIViewController (LokaliteHelpers)
+
+- (void)presentSharingOptionsWithDelegate:(id<UIActionSheetDelegate>)delegate
+{
+    NSString *title = nil;
+    NSString *cancelButtonTitle = NSLocalizedString(@"global.cancel", nil);
+    NSString *sendEmailButtonTitle =
+        NSLocalizedString(@"global.send-email", nil);
+    NSString *sendTextMessageButtonTitle =
+        NSLocalizedString(@"global.send-text-message", nil);
+    NSString *postToFacebookButtonTitle =
+        NSLocalizedString(@"global.post-to-facebook", nil);
+    NSString *postToTwitterButtonTitle =
+        NSLocalizedString(@"global.post-to-twitter", nil);
+
+    UIActionSheet *sheet =
+        [[UIActionSheet alloc] initWithTitle:title
+                                    delegate:delegate
+                           cancelButtonTitle:cancelButtonTitle
+                      destructiveButtonTitle:nil
+                           otherButtonTitles:sendEmailButtonTitle,
+                                             sendTextMessageButtonTitle,
+                                             postToFacebookButtonTitle,
+                                             postToTwitterButtonTitle, nil];
+
+    LokaliteAppDelegate *appDelegate =
+        (LokaliteAppDelegate *) [[UIApplication sharedApplication] delegate];
+    UITabBar *tabBar = [[appDelegate tabBarController] tabBar];
+    [sheet showFromTabBar:tabBar];
+    [sheet release], sheet = nil;
+}    
+
+@end

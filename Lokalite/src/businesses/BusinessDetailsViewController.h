@@ -11,7 +11,7 @@
 @class Business, BusinessDetailsHeaderView;
 
 @interface BusinessDetailsViewController : UITableViewController
-    <UIGestureRecognizerDelegate>
+    <UIGestureRecognizerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, retain, readonly) Business *business;
 

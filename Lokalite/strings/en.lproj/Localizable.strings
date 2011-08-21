@@ -80,7 +80,7 @@
 /*
  * Business details
  */
-"business-details.more-events" = "More Events from this Place";
+"business-details.more-events.formatstring" = "More from %@";
 
 /*
  * Log in

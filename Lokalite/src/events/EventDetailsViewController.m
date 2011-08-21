@@ -149,32 +149,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (IBAction)presentSharingOptions:(id)sender
 {
-    NSString *title = nil;
-    NSString *cancelButtonTitle = NSLocalizedString(@"global.cancel", nil);
-    NSString *sendEmailButtonTitle =
-        NSLocalizedString(@"global.send-email", nil);
-    NSString *sendTextMessageButtonTitle =
-        NSLocalizedString(@"global.send-text-message", nil);
-    NSString *postToFacebookButtonTitle =
-        NSLocalizedString(@"global.post-to-facebook", nil);
-    NSString *postToTwitterButtonTitle =
-        NSLocalizedString(@"global.post-to-twitter", nil);
-
-    UIActionSheet *sheet =
-        [[UIActionSheet alloc] initWithTitle:title
-                                    delegate:self
-                           cancelButtonTitle:cancelButtonTitle
-                      destructiveButtonTitle:nil
-                           otherButtonTitles:sendEmailButtonTitle,
-                                             sendTextMessageButtonTitle,
-                                             postToFacebookButtonTitle,
-                                             postToTwitterButtonTitle, nil];
-
-    LokaliteAppDelegate *appDelegate =
-        (LokaliteAppDelegate *) [[UIApplication sharedApplication] delegate];
-    UITabBar *tabBar = [[appDelegate tabBarController] tabBar];
-    [sheet showFromTabBar:tabBar];
-    [sheet release], sheet = nil;
+    [self presentSharingOptionsWithDelegate:self];
 }
 
 - (void)mapViewTapped:(UIGestureRecognizer *)recognizer
