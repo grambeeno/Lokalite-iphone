@@ -142,6 +142,7 @@
 
 - (void)initializeTableView:(UITableView *)tableView
 {
+    [tableView setBackgroundColor:[UIColor tableViewBackgroundColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [tableView setRowHeight:[EventTableViewCell cellHeight]];
 }
