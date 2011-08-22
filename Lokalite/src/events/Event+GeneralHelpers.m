@@ -298,8 +298,6 @@
             // safe to delete the download source
             [context deleteObject:source];
     }
-    NSLog(@"%d sources: %@", [[self downloadSources] count],
-          [self downloadSources]);
 
     [self setTrended:[NSNumber numberWithBool:trend]];
     NSLog(@"Event %@ has been %@ by the user", [self identifier],

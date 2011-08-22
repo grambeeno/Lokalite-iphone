@@ -57,6 +57,11 @@
 - (UIImage *)standardImage;
 - (NSString *)standardImageUrl;
 
+//
+// Call this method to set trend status rather than using the accessor directly
+// so it can do some awesome hacking to prevent LokaliteObjects from getting
+// deleted when the app launches.
+//
 - (void)trendEvent:(BOOL)trend;
 
 @end

@@ -11,6 +11,7 @@
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 #import "EventTableViewCell.h"
+#import "EventDetailsViewController.h"
 
 #import "SDKAdditions.h"
 
@@ -89,6 +90,11 @@
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Event *event = [[self dataController] objectAtIndexPath:indexPath];
+    EventDetailsViewController *controller =
+        [[EventDetailsViewController alloc] initWithEvent:event];
+    [[self navigationController] pushViewController:controller animated:YES];
+    [controller release], controller = nil;
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate implementation
