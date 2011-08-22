@@ -16,6 +16,7 @@
 @synthesize dateRangeLabel = dateRangeLabel_;
 @synthesize startDateLabel = startDateLabel_;
 @synthesize endDateLabel = endDateLabel_;
+@synthesize trendButton = trendButton_;
 
 #pragma mark - Memory management
 
@@ -27,6 +28,7 @@
     [dateRangeLabel_ release];
     [startDateLabel_ release];
     [endDateLabel_ release];
+    [trendButton_ release];
 
     [super dealloc];
 }
@@ -59,6 +61,13 @@
         [NSString textRangeWithStartDate:[event startDate]
                                  endDate:[event endDate]];
     [[self dateRangeLabel] setText:timeRange];
+
+    BOOL isTrending = [[event trended] boolValue];
+    NSString *title =
+        isTrending ?
+        NSLocalizedString(@"event.untrend-event", nil) :
+        NSLocalizedString(@"event.trend-event", nil);
+    [[self trendButton] setTitle:title forState:UIControlStateNormal];
 }
 
 @end

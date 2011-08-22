@@ -78,6 +78,12 @@
 "featured.fetch.failed" = "Failed to Fetch Featured Events";
 
 /*
+ * Event details
+ */
+"event.trend-event" = "Trend This Event";
+"event.untrend-event" = "Untrend This Event";
+
+/*
  * Business details
  */
 "business-details.more-events.formatstring" = "More from %@";

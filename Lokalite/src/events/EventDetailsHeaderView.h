@@ -16,7 +16,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *dateRangeLabel;
 @property (nonatomic, retain) IBOutlet UILabel *startDateLabel;
 @property (nonatomic, retain) IBOutlet UILabel *endDateLabel;
-
+@property (nonatomic, retain) IBOutlet UIButton *trendButton;
 
 @end
 

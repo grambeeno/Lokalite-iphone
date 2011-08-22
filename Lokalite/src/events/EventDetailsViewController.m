@@ -82,6 +82,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)configureCell:(UITableViewCell *)cell
           atIndexPath:(NSIndexPath *)indexPath;
 
+- (void)configureHeaderForEvent:(Event *)event;
 - (void)configureFooterForEvent:(Event *)event;
 
 #pragma mark - Location
@@ -161,22 +162,14 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     Event *event = [self event];
     NSNumber *eventId = [event identifier];
-    BOOL isTrended = [[ event trended] boolValue];
+    BOOL isTrended = [[event trended] boolValue];
 
     LSResponseHandler handler =
         ^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
-            NSInteger statusCode = [response statusCode];
-            if (statusCode == 200) {
-                json = [json objectForKey:@"data"];
-                NSManagedObjectContext *context = [event managedObjectContext];
-                [Event createOrUpdateEventFromJsonData:json
-                                        downloadSource:nil
-                                             inContext:context];
-            } else {
-                if (!error)
-                    error = [NSError errorForHTTPStatusCode:statusCode];
-                NSLog(@"Failed: %@", error);
-            }
+            NSString *label = isTrended ? @"Untrend" : @"Trend";
+            NSLog(@"%@ status: %d", label, [response statusCode]);
+            if (error)
+                NSLog(@"%@ error: %@", label, [error detailedDescription]);
         };
 
     if (isTrended)
@@ -184,6 +177,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
                                 responseHandler:handler];
     else
         [[self service] trendEventWithEventId:eventId responseHandler:handler];
+
+    [event setTrended:[NSNumber numberWithBool:!isTrended]];
 }
 
 #pragma mark - UITableViewController implementation
@@ -315,10 +310,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (void)initializeHeaderView
 {
-    Event *event = [self event];
-    EventDetailsHeaderView *headerView = [self headerView];
-    [headerView configureForEvent:event];
-    [[self tableView] setTableHeaderView:headerView];
+    [self configureHeaderForEvent:[self event]];
+    [[self tableView] setTableHeaderView:[self headerView]];
 }
 
 - (void)initializeMapView
@@ -437,6 +430,11 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     }
 }
 
+- (void)configureHeaderForEvent:(Event *)event
+{
+    [[self headerView] configureForEvent:event];
+}
+
 - (void)configureFooterForEvent:(Event *)event
 {
     //[[self footerView] configureForEvent:event];
@@ -485,7 +483,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
                        context:(void *)context
 {
     if ([keyPath isEqualToString:@"trended"])
-        [self configureFooterForEvent:[self event]];
+        [self configureHeaderForEvent:[self event]];
 }
 
 #pragma mark - UIActionSheetDelegate implementation
