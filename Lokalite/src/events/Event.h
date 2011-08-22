@@ -10,10 +10,11 @@
 #import <CoreData/CoreData.h>
 #import "LokaliteObject.h"
 #import "MappableLokaliteObject.h"
+#import "ShareableObject.h"
 
 @class Business, Category, Location;
 
-@interface Event : LokaliteObject <MappableLokaliteObject> {
+@interface Event : LokaliteObject <MappableLokaliteObject, ShareableObject> {
 @private
 }
 @property (nonatomic, retain) NSString * summary;

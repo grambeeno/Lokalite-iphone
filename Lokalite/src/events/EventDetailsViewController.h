@@ -12,7 +12,7 @@
 @class LocationTableViewCell;
 
 @interface EventDetailsViewController : UITableViewController
-    <UIActionSheetDelegate, UIGestureRecognizerDelegate>
+    <UIGestureRecognizerDelegate>
 
 @property (nonatomic, retain, readonly) Event *event;
 

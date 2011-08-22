@@ -89,6 +89,12 @@
 "business-details.more-events.formatstring" = "More from %@";
 
 /*
+ * Sharing
+ */
+"event.share.email.subject" = "Check out this event I found on Lokalite.com";
+"event.share.email.link-text" = "More on Lokalite.com";
+
+/*
  * Log in
  */
 "log-in.failed" = "Log In Failed";

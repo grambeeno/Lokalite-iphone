@@ -22,6 +22,8 @@
 
 #import "BusinessDetailsViewController.h"
 
+#import "SharingController.h"
+
 #import "LokaliteAppDelegate.h"
 
 #import "LokaliteService.h"
@@ -150,7 +152,9 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (IBAction)presentSharingOptions:(id)sender
 {
-    [self presentSharingOptionsWithDelegate:self];
+    SharingController *controller =
+        [[SharingController alloc] initWithShareableObject:[self event]];
+    [controller share];
 }
 
 - (void)mapViewTapped:(UIGestureRecognizer *)recognizer

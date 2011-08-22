@@ -18,10 +18,3 @@
 - (void)hideActivityViewWithCompletion:(void (^)(void))completion;
 
 @end
-
-
-@interface UIViewController (LokaliteHelpers)
-
-- (void)presentSharingOptionsWithDelegate:(id<UIActionSheetDelegate>)delegate;
-
-@end

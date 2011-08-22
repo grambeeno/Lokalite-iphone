@@ -76,4 +76,27 @@
     return [NSURL URLWithString:s];
 }
 
+#pragma mark - ShareableObject implementation
+
+#pragma mark Email
+
+- (NSString *)emailSubject
+{
+    return NSLocalizedString(@"event.share.email.subject", nil);
+}
+
+- (NSString *)emailHTMLBody
+{
+    NSMutableString *s =
+        [NSMutableString stringWithFormat:@"<p>%@ @ %@</p>", [self name],
+         [[self business] name]];
+
+    NSString *link = [[self lokaliteUrl] absoluteString];
+    NSString *linkTitle =
+        NSLocalizedString(@"event.share.email.link-text", nil);
+    [s appendFormat:@"<p><a href=\"%@\">%@</a></p>", link, linkTitle];
+
+    return s;
+}
+
 @end

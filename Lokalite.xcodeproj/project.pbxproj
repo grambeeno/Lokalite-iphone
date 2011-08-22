@@ -101,6 +101,8 @@
 		058962BF13DA299700556F6D /* PlacesLokaliteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962BE13DA299700556F6D /* PlacesLokaliteStream.m */; };
 		058962C313DA6ABE00556F6D /* LokaliteStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */; };
 		0589E4F413E7706F00149713 /* LokaliteObjectMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589E4F313E7706F00149713 /* LokaliteObjectMapAnnotation.m */; };
+		058C8BAA1403080900AFDF95 /* SharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058C8BA91403080900AFDF95 /* SharingController.m */; };
+		058C8BAD14030B0F00AFDF95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 058C8BAC14030B0F00AFDF95 /* MessageUI.framework */; };
 		058D74C713FB3D00005B48BC /* TrendButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 058D74C613FB3D00005B48BC /* TrendButton.m */; };
 		058D74C913FB4036005B48BC /* trend-view-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 058D74C813FB4036005B48BC /* trend-view-background@2x.png */; };
 		0590FF5413D8BAD4006A2254 /* all-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF3813D8BAD4006A2254 /* all-selected@2x.png */; };
@@ -338,6 +340,10 @@
 		058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteStreamViewController.m; path = src/shared/LokaliteStreamViewController.m; sourceTree = "<group>"; };
 		0589E4F213E7706F00149713 /* LokaliteObjectMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteObjectMapAnnotation.h; path = src/geo/LokaliteObjectMapAnnotation.h; sourceTree = "<group>"; };
 		0589E4F313E7706F00149713 /* LokaliteObjectMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteObjectMapAnnotation.m; path = src/geo/LokaliteObjectMapAnnotation.m; sourceTree = "<group>"; };
+		058C8BA81403080900AFDF95 /* SharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharingController.h; path = src/sharing/SharingController.h; sourceTree = "<group>"; };
+		058C8BA91403080900AFDF95 /* SharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SharingController.m; path = src/sharing/SharingController.m; sourceTree = "<group>"; };
+		058C8BAB1403082000AFDF95 /* ShareableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareableObject.h; path = src/sharing/ShareableObject.h; sourceTree = "<group>"; };
+		058C8BAC14030B0F00AFDF95 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		058D74C513FB3D00005B48BC /* TrendButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrendButton.h; path = src/shared/TrendButton.h; sourceTree = "<group>"; };
 		058D74C613FB3D00005B48BC /* TrendButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrendButton.m; path = src/shared/TrendButton.m; sourceTree = "<group>"; };
 		058D74C813FB4036005B48BC /* trend-view-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trend-view-background@2x.png"; path = "images/event-details/trend-view-background@2x.png"; sourceTree = "<group>"; };
@@ -474,6 +480,7 @@
 				0568334513CFB9B300520C78 /* MapKit.framework in Frameworks */,
 				0568336F13D0AAED00520C78 /* CoreLocation.framework in Frameworks */,
 				05EB58E613DF37FE00436F13 /* Security.framework in Frameworks */,
+				058C8BAD14030B0F00AFDF95 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +570,7 @@
 		05209ECD13C76F9200CA6A2D = {
 			isa = PBXGroup;
 			children = (
+				058C8BAC14030B0F00AFDF95 /* MessageUI.framework */,
 				05209EE213C76F9200CA6A2D /* Lokalite */,
 				05209EDB13C76F9200CA6A2D /* Frameworks */,
 				05209ED913C76F9200CA6A2D /* Products */,
@@ -635,6 +643,7 @@
 				0590FF7B13D8E15D006A2254 /* profile */,
 				05A7B41713D73111008E737C /* categories */,
 				0568334713D09C5200520C78 /* locations */,
+				058C8BA6140307DB00AFDF95 /* sharing */,
 				0505ECCD13CBC13E009874A7 /* lokalite */,
 				0514FBF113CE55F200ACA464 /* shared */,
 				05EC9A4713CB990F00B7AD61 /* sdk-additions */,
@@ -792,6 +801,16 @@
 				05B1577113E269CC00F20FF8 /* event-cell-trend-badge@2x.png */,
 			);
 			name = events;
+			sourceTree = "<group>";
+		};
+		058C8BA6140307DB00AFDF95 /* sharing */ = {
+			isa = PBXGroup;
+			children = (
+				058C8BAB1403082000AFDF95 /* ShareableObject.h */,
+				058C8BA81403080900AFDF95 /* SharingController.h */,
+				058C8BA91403080900AFDF95 /* SharingController.m */,
+			);
+			name = sharing;
 			sourceTree = "<group>";
 		};
 		0590FF1B13D8B229006A2254 /* category-filter-images */ = {
@@ -1278,6 +1297,7 @@
 				05EA465914019DB700AA579B /* PlaceEventStreamViewController.m in Sources */,
 				05EA465C14019E7200AA579B /* PlaceEventLokaliteStream.m in Sources */,
 				05977D481402CE65003C8C24 /* TrendedEventsViewController.m in Sources */,
+				058C8BAA1403080900AFDF95 /* SharingController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
