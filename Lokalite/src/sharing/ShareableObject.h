@@ -10,9 +10,17 @@
 
 @protocol ShareableObject <NSObject>
 
+#pragma mark - Web
+
+- (NSURL *)lokaliteUrl;
+
 #pragma mark - Email
 
 - (NSString *)emailSubject;
 - (NSString *)emailHTMLBody;
+
+#pragma mark - SMS
+
+- (NSString *)smsBody;
 
 @end

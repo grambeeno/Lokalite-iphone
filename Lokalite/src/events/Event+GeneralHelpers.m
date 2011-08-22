@@ -259,14 +259,6 @@
     return [featured boolValue];
 }
 
-- (NSURL *)lokaliteUrl
-{
-    NSURL *url = [[UIApplication sharedApplication] baseLokaliteUrl];
-    url = [url URLByAppendingPathComponent:@"event"];
-
-    return [url URLByAppendingPathComponent:[[self identifier] description]];
-}
-
 - (NSData *)standardImageData
 {
     return [self fullImageData];

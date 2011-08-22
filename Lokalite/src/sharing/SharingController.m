@@ -81,11 +81,8 @@
 
     NSInteger index = 0;
 
-    [options addObject:NSLocalizedString(@"global.post-to-facebook", nil)];
-    [self mapOptionIndex:index++ toAction:@selector(shareWithFacebook)];
-
-    [options addObject:NSLocalizedString(@"global.post-to-twitter", nil)];
-    [self mapOptionIndex:index++ toAction:@selector(shareWithTwitter)];
+    [options addObject:NSLocalizedString(@"global.open-in-safari", nil)];
+    [self mapOptionIndex:index++ toAction:@selector(shareWithSafari)];
 
     if ([MFMailComposeViewController canSendMail]) {
         [options addObject:NSLocalizedString(@"global.send-email", nil)];
@@ -96,6 +93,12 @@
         [options addObject:NSLocalizedString(@"global.send-text-message", nil)];
         [self mapOptionIndex:index++ toAction:@selector(shareWithSMS)];
     }
+
+    [options addObject:NSLocalizedString(@"global.post-to-facebook", nil)];
+    [self mapOptionIndex:index++ toAction:@selector(shareWithFacebook)];
+
+    [options addObject:NSLocalizedString(@"global.post-to-twitter", nil)];
+    [self mapOptionIndex:index++ toAction:@selector(shareWithTwitter)];
 
     [options addObject:cancelButtonTitle];
 
@@ -124,12 +127,18 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
     clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"%d", buttonIndex);
-
     if (buttonIndex != [actionSheet cancelButtonIndex]) {
         SEL action = [self actionAtIndex:buttonIndex];
         [self performSelector:action];
     }
+}
+
+#pragma mark - Sharing via Safari
+
+- (void)shareWithSafari
+{
+    NSURL *url = [[self shareableObject] lokaliteUrl];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 #pragma mark - Sharing via email
@@ -153,6 +162,29 @@
 - (void)mailComposeController:(MFMailComposeViewController*)controller
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error
+{
+    [[self hostViewController] dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - Sharing via SMS
+
+- (void)shareWithSMS
+{
+    MFMessageComposeViewController *controller =
+        [[MFMessageComposeViewController alloc] init];
+    [controller setMessageComposeDelegate:self];
+    [controller setBody:[[self shareableObject] smsBody]];
+
+    [[self hostViewController] presentModalViewController:controller
+                                                 animated:YES];
+
+    [controller release], controller = nil;
+}
+
+#pragma mark - MFMessageComposeViewControllerDelegate implementation
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)ctlr
+                 didFinishWithResult:(MessageComposeResult)result
 {
     [[self hostViewController] dismissModalViewControllerAnimated:YES];
 }

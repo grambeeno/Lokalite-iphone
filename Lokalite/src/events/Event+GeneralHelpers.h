@@ -52,8 +52,6 @@
 - (BOOL)isTrended;
 - (BOOL)isFeatured;
 
-- (NSURL *)lokaliteUrl;
-
 - (NSData *)standardImageData;
 - (void)setStandardImageData:(NSData *)data;
 - (UIImage *)standardImage;

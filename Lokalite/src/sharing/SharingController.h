@@ -12,8 +12,9 @@
 #import <MessageUI/MessageUI.h>
 
 @interface SharingController : NSObject
-    <UIActionSheetDelegate, MFMailComposeViewControllerDelegate,
-     UINavigationControllerDelegate>
+    <UIActionSheetDelegate, UINavigationControllerDelegate,
+     MFMailComposeViewControllerDelegate,
+     MFMessageComposeViewControllerDelegate>
 
 @property (nonatomic, retain, readonly) id<ShareableObject> shareableObject;
 

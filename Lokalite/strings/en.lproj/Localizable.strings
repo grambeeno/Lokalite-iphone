@@ -44,11 +44,6 @@
 "global.open-in-maps" = "Open in Maps";
 "global.directions-in-maps" = "Get Directions";
 
-"global.send-email" = "Send in Email";
-"global.send-text-message" = "Send in Text Message";
-"global.post-to-facebook" = "Send to Facebook";
-"global.post-to-twitter" = "Send to Twitter";
-
 /*
  * Search
  */
@@ -91,8 +86,15 @@
 /*
  * Sharing
  */
+"global.open-in-safari" = "Open in Safari";
+"global.send-email" = "Send in Email";
+"global.send-text-message" = "Send in Text Message";
+"global.post-to-facebook" = "Send to Facebook";
+"global.post-to-twitter" = "Send to Twitter";
+
 "event.share.email.subject" = "Check out this event I found on Lokalite.com";
 "event.share.email.link-text" = "More on Lokalite.com";
+"event.share.sms.body.prefix" = "Check out this event I found on Lokalite.com";
 
 /*
  * Log in

@@ -14,6 +14,7 @@
 #import "Event+GeneralHelpers.h"
 #import "Location+GeneralHelpers.h"
 #import "LokaliteObjectMapAnnotation.h"
+#import "UIApplication+GeneralHelpers.h"
 
 @implementation Event
 @dynamic summary;
@@ -78,6 +79,16 @@
 
 #pragma mark - ShareableObject implementation
 
+#pragma mark Web
+
+- (NSURL *)lokaliteUrl
+{
+    NSURL *url = [[UIApplication sharedApplication] baseLokaliteUrl];
+    url = [url URLByAppendingPathComponent:@"event"];
+
+    return [url URLByAppendingPathComponent:[[self identifier] description]];
+}
+
 #pragma mark Email
 
 - (NSString *)emailSubject
@@ -95,6 +106,18 @@
     NSString *linkTitle =
         NSLocalizedString(@"event.share.email.link-text", nil);
     [s appendFormat:@"<p><a href=\"%@\">%@</a></p>", link, linkTitle];
+
+    return s;
+}
+
+#pragma mark SMS
+
+- (NSString *)smsBody
+{
+    NSMutableString *s =
+        [NSMutableString stringWithString:
+         NSLocalizedString(@"event.share.sms.body.prefix", nil)];
+    [s appendFormat:@" %@ @ %@", [self name], [[self business] name]];
 
     return s;
 }
