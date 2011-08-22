@@ -125,7 +125,7 @@
     NSURL *url = [self featuredEventUrl];
 
     NSMutableDictionary *params = [self queryParametersForPage:page];
-    [params setObject:[placeId description] forKey:@"place_id"];
+    [params setObject:[placeId description] forKey:@"organization_id"];
 
     [self sendRequestWithUrl:url
                   parameters:params

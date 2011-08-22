@@ -111,8 +111,7 @@
 {
     NSArray *objs = [[jsonObjects objectForKey:@"data"] objectForKey:@"list"];
 
-    NSMutableArray *places =
-        [NSMutableArray arrayWithCapacity:[jsonObjects count]];
+    NSMutableArray *places = [NSMutableArray arrayWithCapacity:[objs count]];
     [objs enumerateObjectsUsingBlock:
      ^(NSDictionary *placeData, NSUInteger idx, BOOL *stop) {
          Business *business =

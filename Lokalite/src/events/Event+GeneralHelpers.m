@@ -289,6 +289,18 @@
     return [loc autorelease];
 }
 
+- (void)updateWithDistanceFromLocation:(CLLocation *)location
+{
+    NSNumber *distance = nil;
+    if (location) {
+        CLLocation *myLocation = [self locationInstance];
+        CLLocationDistance d = [location distanceFromLocation:myLocation];
+        distance = [NSNumber numberWithDouble:d];
+    }
+
+    [self setDistance:distance];
+}
+
 @end
 
 

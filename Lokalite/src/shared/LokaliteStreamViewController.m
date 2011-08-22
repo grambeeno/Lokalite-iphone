@@ -162,7 +162,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 @synthesize dataController = dataController_;
 
 @synthesize lokaliteStream = lokaliteStream_;
-//@synthesize showsDataBeforeFirstFetch = showsDataBeforeFirstFetch_;
 @synthesize isFetchingData = isFetchingData_;
 
 #pragma mark - Memory management

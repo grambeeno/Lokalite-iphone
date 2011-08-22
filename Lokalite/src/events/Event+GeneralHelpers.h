@@ -67,6 +67,8 @@
 //
 - (CLLocation *)locationInstance;
 
+- (void)updateWithDistanceFromLocation:(CLLocation *)location;
+
 @end
 
 

@@ -72,23 +72,16 @@
              parsedObjects = [self parseBlock](jsonObjects);
 
          CLLocationCoordinate2D coord = [self location];
-         if (CLLocationCoordinate2DIsValid(coord)) {
-             CLLocation *location1 =
-                [[CLLocation alloc] initWithLatitude:coord.latitude
-                                           longitude:coord.longitude];
+         CLLocation *location = nil;
+         if (CLLocationCoordinate2DIsValid(coord))
+             location =
+                [[[CLLocation alloc] initWithLatitude:coord.latitude
+                                            longitude:coord.longitude]
+                 autorelease];
 
-             [parsedObjects enumerateObjectsUsingBlock:
-              ^(Event *e, NSUInteger idx, BOOL *stop) {
-                  CLLocation *location2 = [e locationInstance];
-                  CLLocationDistance distance =
-                      [location1 distanceFromLocation:location2];
-                  NSNumber *d = [[NSNumber alloc] initWithDouble:distance];
-                  [e setDistance:d];
-                  [d release], d = nil;
-              }];
-
-             [location1 release], location1 = nil;
-         }
+         SEL selector = @selector(updateWithDistanceFromLocation:);
+         [parsedObjects makeObjectsPerformSelector:selector
+                                        withObject:location];
 
          handler(parsedObjects, error);
      }];

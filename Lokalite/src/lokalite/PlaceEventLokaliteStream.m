@@ -11,6 +11,9 @@
 #import "Business.h"
 #import "Business+GeneralHelpers.h"
 
+#import "Event.h"
+#import "Event+GeneralHelpers.h"
+
 #import "LokaliteService.h"
 
 @implementation PlaceEventLokaliteStream
@@ -51,11 +54,23 @@
                    responseHandler:
      ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;
-         if (jsonObjects)
+         if (jsonObjects) {
              parsedObjects =
-                [Business businessObjectsFromJsonObjects:jsonObjects
-                                          downloadSource:[self downloadSource]
-                                             withContext:[self context]];
+                [Event eventObjectsFromJsonObjects:jsonObjects
+                                    downloadSource:[self downloadSource]
+                                       withContext:[self context]];
+
+             CLLocationCoordinate2D coord = [self location];
+             CLLocation *location = nil;
+             if (CLLocationCoordinate2DIsValid(coord))
+                 location =
+                    [[[CLLocation alloc] initWithLatitude:coord.latitude
+                                                longitude:coord.longitude]
+                     autorelease];
+             SEL selector = @selector(updateWithDistanceFromLocation:);
+             [parsedObjects makeObjectsPerformSelector:selector
+                                            withObject:location];
+         }
 
          handler(parsedObjects, error);
      }];
