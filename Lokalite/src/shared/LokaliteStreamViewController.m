@@ -172,7 +172,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     [self unsubscribeForNotoficationsForContext:context_];
 
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
-    [source unassociateAndDeleteDownloadedObjects];
+    [source unassociateAndDeleteDownloadedObjectsDeletingIfEmpty:YES];
 
     [loadingMoreActivityView_ release];
 
@@ -237,7 +237,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)refresh:(id)sender
 {
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
-    [source unassociateAndDeleteDownloadedObjects];
+    [source unassociateAndDeleteDownloadedObjectsDeletingIfEmpty:YES];
 
     [self setLokaliteStream:[self lokaliteStreamInstance]];
     //[[self lokaliteStream] resetStream];
@@ -809,7 +809,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (void)cleanupRemoteSearchResults:(LokaliteDownloadSource *)source
 {
-    [source unassociateAndDeleteDownloadedObjects];
+    [source unassociateAndDeleteDownloadedObjectsDeletingIfEmpty:YES];
 }
 
 #pragma mark Location

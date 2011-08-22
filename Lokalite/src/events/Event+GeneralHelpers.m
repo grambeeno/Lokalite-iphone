@@ -104,8 +104,14 @@
     NSNumber *featured = [eventData objectForKey:@"featured?"];
     [event setValueIfNecessary:featured forKey:@"featured"];
 
+    /*
+     * Removing until we are loading trending status for events from the server.
+     * Right now we're managing it entirely on the device.
+     */
+    /*
     NSNumber *trended = [eventData objectForKey:@"trended?"];
     [event setValueIfNecessary:trended forKey:@"trended"];
+     */
 
     NSNumber *usersCount = [eventData objectForKey:@"users_count"];
     [event setValueIfNecessary:usersCount forKey:@"usersCount"];
@@ -272,6 +278,32 @@
 - (NSString *)standardImageUrl
 {
     return [self fullImageUrl];
+}
+
+- (void)trendEvent:(BOOL)trend
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSString *sourceName = @"trended";
+    LokaliteDownloadSource *source =
+        [LokaliteDownloadSource downloadSourceWithName:sourceName
+                                             inContext:context
+                                     createIfNecessary:YES];
+
+    if (trend) {
+        [source setLastUpdated:[NSDate distantFuture]];
+        [self addDownloadSourcesObject:source];
+    } else {
+        [self removeDownloadSourcesObject:source];
+        if ([[source lokaliteObjects] count] == 0)
+            // safe to delete the download source
+            [context deleteObject:source];
+    }
+    NSLog(@"%d sources: %@", [[self downloadSources] count],
+          [self downloadSources]);
+
+    [self setTrended:[NSNumber numberWithBool:trend]];
+    NSLog(@"Event %@ has been %@ by the user", [self identifier],
+          trend ? @"trended" : @"untrended");
 }
 
 @end

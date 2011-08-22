@@ -178,7 +178,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     else
         [[self service] trendEventWithEventId:eventId responseHandler:handler];
 
-    [event setTrended:[NSNumber numberWithBool:!isTrended]];
+    [event trendEvent:!isTrended];
 }
 
 #pragma mark - UITableViewController implementation

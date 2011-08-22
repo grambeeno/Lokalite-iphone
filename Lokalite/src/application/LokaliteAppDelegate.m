@@ -58,7 +58,6 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (NSDate *)currentFreshnessDate;
 - (void)setDataFreshnessRequirementToDate:(NSDate *)date;
 
-- (void)deleteAllEventAndBusinessData;
 - (void)deleteAllEventAndBusinessDataLessFreshThanDate:(NSDate *)date;
 - (void)deleteStaleData;
 
@@ -370,13 +369,24 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
         [LokaliteApplicationState currentState:[self context]];
     [appState setDataFreshnessDate:date];
 }
-     
-- (void)deleteAllEventAndBusinessData
+
+- (void)deleteAllEventAndBusinessDataLessFreshThanDate
+:(NSDate *)date
 {
-    [self deleteAllEventAndBusinessDataLessFreshThanDate:nil];
+    NSManagedObjectContext *context = [self context];
+
+    NSPredicate *pred = nil;
+    if (date)
+        pred = [NSPredicate predicateWithFormat:@"lastUpdated < %@", date];
+
+    NSArray *sources = [LokaliteDownloadSource findAllWithPredicate:pred
+                                                          inContext:context];
+
+    SEL selector = @selector(unassociateAndDeleteDownloadedObjects);
+    [sources makeObjectsPerformSelector:selector];
 }
 
-- (void)deleteAllEventAndBusinessDataLessFreshThanDate:(NSDate *)date
+- (void)deleteAllEventAndBusinessDataLessFreshThanDateOld:(NSDate *)date
 {
     NSManagedObjectContext *context = [self context];
 
@@ -389,9 +399,10 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
     NSPredicate *pred = nil;
     if (date)
-        [NSPredicate predicateWithFormat:
-         @"(SUBQUERY(downloadSources, $source, "
-           "$source.lastUpdated < %@).@count != 0)", date];
+        pred =
+            [NSPredicate predicateWithFormat:
+             @"(SUBQUERY(downloadSources, $source, "
+              "$source.lastUpdated < %@).@count != 0)", date];
 
     NSArray *events = [Event findAllWithPredicate:pred inContext:context];
     [events enumerateObjectsUsingBlock:deleteObject];

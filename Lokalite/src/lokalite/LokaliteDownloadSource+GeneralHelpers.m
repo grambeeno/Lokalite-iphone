@@ -13,23 +13,27 @@
 
 @implementation LokaliteDownloadSource (GeneralHelpers)
 
-- (void)prepareForDeletion
+- (void)unassociateAndDeleteDownloadedObjects
 {
-    NSLog(@"%@: %@", NSStringFromClass([self class]),
-          NSStringFromSelector(_cmd));
-    [super prepareForDeletion];
+    [self unassociateAndDeleteDownloadedObjectsDeletingIfEmpty:YES];
 }
 
-- (void)unassociateAndDeleteDownloadedObjects
+- (void)unassociateAndDeleteDownloadedObjectsDeletingIfEmpty:(BOOL)deleteIfEmpty
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     NSSet *objects = [[self lokaliteObjects] mutableCopy];
     [objects enumerateObjectsUsingBlock:^(LokaliteObject *obj, BOOL *stop) {
         [obj removeDownloadSourcesObject:self];
-        if ([[obj downloadSources] count] == 0)
+        if ([[obj downloadSources] count] == 0) {
+            NSLog(@"Deleting %@ %@", NSStringFromClass([obj class]),
+                  [obj identifier]);
             [context deleteObject:obj];
+        }
     }];
     [objects release], objects = nil;
+
+    if (deleteIfEmpty && [[self lokaliteObjects] count] == 0)
+        [context deleteObject:self];
 }
 
 #pragma mark - Creating and finding

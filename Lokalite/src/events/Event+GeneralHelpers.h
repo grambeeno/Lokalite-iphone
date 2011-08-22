@@ -57,6 +57,8 @@
 - (UIImage *)standardImage;
 - (NSString *)standardImageUrl;
 
+- (void)trendEvent:(BOOL)trend;
+
 @end
 
 
