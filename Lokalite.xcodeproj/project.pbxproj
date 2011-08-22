@@ -137,6 +137,8 @@
 		0590FF7A13D8E045006A2254 /* tab-bar-icon-events@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7813D8E045006A2254 /* tab-bar-icon-events@2x.png */; };
 		0590FF7F13D8E17F006A2254 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590FF7D13D8E17F006A2254 /* ProfileViewController.m */; };
 		0590FF8013D8E17F006A2254 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7E13D8E17F006A2254 /* ProfileView.xib */; };
+		05977D481402CE65003C8C24 /* TrendedEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05977D461402CE65003C8C24 /* TrendedEventsViewController.m */; };
+		05977D491402CE65003C8C24 /* TrendedEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05977D471402CE65003C8C24 /* TrendedEventsView.xib */; };
 		059AEE0F13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */; };
 		059AEE1313E7667F00AA4DF7 /* MapDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059AEE1213E7667F00AA4DF7 /* MapDisplayController.m */; };
 		059B340013D4BC5A007AD11C /* SearchLokaliteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B33FF13D4BC5A007AD11C /* SearchLokaliteStream.m */; };
@@ -238,7 +240,7 @@
 		0548320613F1AB070099125B /* EventStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventStreamViewController.m; path = src/events/EventStreamViewController.m; sourceTree = "<group>"; };
 		0548320813F1AEA60099125B /* CategoryEventStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryEventStreamViewController.h; path = src/events/CategoryEventStreamViewController.h; sourceTree = "<group>"; };
 		0548320913F1AEA70099125B /* CategoryEventStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryEventStreamViewController.m; path = src/events/CategoryEventStreamViewController.m; sourceTree = "<group>"; };
-		0548320B13F1B09B0099125B /* CategoryLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; name = CategoryLokaliteStream.h; path = src/lokalite/CategoryLokaliteStream.h; sourceTree = "<group>"; };
+		0548320B13F1B09B0099125B /* CategoryLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryLokaliteStream.h; path = src/lokalite/CategoryLokaliteStream.h; sourceTree = "<group>"; };
 		0548320C13F1B09B0099125B /* CategoryLokaliteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryLokaliteStream.m; path = src/lokalite/CategoryLokaliteStream.m; sourceTree = "<group>"; };
 		0548320E13F1CF6B0099125B /* RemoteSearchTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoteSearchTableFooterView.h; path = src/shared/RemoteSearchTableFooterView.h; sourceTree = "<group>"; };
 		0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoteSearchTableFooterView.m; path = src/shared/RemoteSearchTableFooterView.m; sourceTree = "<group>"; };
@@ -258,7 +260,7 @@
 		054E06C213CB8990009B7373 /* featured-image-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-01@2x.png"; path = "images/mock-images/featured-image-01@2x.png"; sourceTree = "<group>"; };
 		054E06C313CB8990009B7373 /* featured-image-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02.png"; path = "images/mock-images/featured-image-02.png"; sourceTree = "<group>"; };
 		054E06C413CB8990009B7373 /* featured-image-02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "featured-image-02@2x.png"; path = "images/mock-images/featured-image-02@2x.png"; sourceTree = "<group>"; };
-		055286AB13F08A7D0072A662 /* TrendingEventLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; name = TrendingEventLokaliteStream.h; path = src/lokalite/TrendingEventLokaliteStream.h; sourceTree = "<group>"; };
+		055286AB13F08A7D0072A662 /* TrendingEventLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrendingEventLokaliteStream.h; path = src/lokalite/TrendingEventLokaliteStream.h; sourceTree = "<group>"; };
 		055286AC13F08A7D0072A662 /* TrendingEventLokaliteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrendingEventLokaliteStream.m; path = src/lokalite/TrendingEventLokaliteStream.m; sourceTree = "<group>"; };
 		055286AF13F095510072A662 /* CategoryFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilterView.h; path = src/categories/CategoryFilterView.h; sourceTree = "<group>"; };
 		055286B013F095510072A662 /* CategoryFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilterView.m; path = src/categories/CategoryFilterView.m; sourceTree = "<group>"; };
@@ -298,7 +300,7 @@
 		056A92E113CCE81B00C65DC0 /* LokaliteDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteDataParser.m; path = src/lokalite/LokaliteDataParser.m; sourceTree = "<group>"; };
 		056A92E313CCF07900C65DC0 /* LokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteStream.h; path = src/lokalite/LokaliteStream.h; sourceTree = "<group>"; };
 		056A92E413CCF07900C65DC0 /* LokaliteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteStream.m; path = src/lokalite/LokaliteStream.m; sourceTree = "<group>"; };
-		056A92E613CCF13000C65DC0 /* FeaturedEventLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; name = FeaturedEventLokaliteStream.h; path = src/lokalite/FeaturedEventLokaliteStream.h; sourceTree = "<group>"; };
+		056A92E613CCF13000C65DC0 /* FeaturedEventLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeaturedEventLokaliteStream.h; path = src/lokalite/FeaturedEventLokaliteStream.h; sourceTree = "<group>"; };
 		056A92E713CCF13000C65DC0 /* FeaturedEventLokaliteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeaturedEventLokaliteStream.m; path = src/lokalite/FeaturedEventLokaliteStream.m; sourceTree = "<group>"; };
 		056A92E913CCF3AB00C65DC0 /* Event+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Event+GeneralHelpers.h"; path = "src/events/Event+GeneralHelpers.h"; sourceTree = "<group>"; };
 		056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Event+GeneralHelpers.m"; path = "src/events/Event+GeneralHelpers.m"; sourceTree = "<group>"; };
@@ -330,7 +332,7 @@
 		057DC63A13E0D262004107C4 /* EventDetailsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsFooterView.m; path = src/events/EventDetailsFooterView.m; sourceTree = "<group>"; };
 		057DC63D13E11B42004107C4 /* event-cell-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-background@2x.png"; path = "images/events/event-cell-background@2x.png"; sourceTree = "<group>"; };
 		057DC63F13E11B58004107C4 /* event-cell-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-background.png"; path = "images/events/event-cell-background.png"; sourceTree = "<group>"; };
-		058962BD13DA299700556F6D /* PlacesLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; name = PlacesLokaliteStream.h; path = src/lokalite/PlacesLokaliteStream.h; sourceTree = "<group>"; };
+		058962BD13DA299700556F6D /* PlacesLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlacesLokaliteStream.h; path = src/lokalite/PlacesLokaliteStream.h; sourceTree = "<group>"; };
 		058962BE13DA299700556F6D /* PlacesLokaliteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlacesLokaliteStream.m; path = src/lokalite/PlacesLokaliteStream.m; sourceTree = "<group>"; };
 		058962C113DA6ABE00556F6D /* LokaliteStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteStreamViewController.h; path = src/shared/LokaliteStreamViewController.h; sourceTree = "<group>"; };
 		058962C213DA6ABE00556F6D /* LokaliteStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteStreamViewController.m; path = src/shared/LokaliteStreamViewController.m; sourceTree = "<group>"; };
@@ -375,10 +377,13 @@
 		0590FF7C13D8E17F006A2254 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = src/profile/ProfileViewController.h; sourceTree = "<group>"; };
 		0590FF7D13D8E17F006A2254 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = src/profile/ProfileViewController.m; sourceTree = "<group>"; };
 		0590FF7E13D8E17F006A2254 /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileView.xib; path = src/profile/ProfileView.xib; sourceTree = "<group>"; };
+		05977D451402CE65003C8C24 /* TrendedEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrendedEventsViewController.h; path = src/trending/TrendedEventsViewController.h; sourceTree = "<group>"; };
+		05977D461402CE65003C8C24 /* TrendedEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrendedEventsViewController.m; path = src/trending/TrendedEventsViewController.m; sourceTree = "<group>"; };
+		05977D471402CE65003C8C24 /* TrendedEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TrendedEventsView.xib; path = src/trending/TrendedEventsView.xib; sourceTree = "<group>"; };
 		059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-details-header-image-frame@2x.png"; path = "images/event-details/event-details-header-image-frame@2x.png"; sourceTree = "<group>"; };
 		059AEE1113E7667F00AA4DF7 /* MapDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapDisplayController.h; path = src/geo/MapDisplayController.h; sourceTree = "<group>"; };
 		059AEE1213E7667F00AA4DF7 /* MapDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapDisplayController.m; path = src/geo/MapDisplayController.m; sourceTree = "<group>"; };
-		059B33FE13D4BC5A007AD11C /* SearchLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; name = SearchLokaliteStream.h; path = src/lokalite/SearchLokaliteStream.h; sourceTree = "<group>"; };
+		059B33FE13D4BC5A007AD11C /* SearchLokaliteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchLokaliteStream.h; path = src/lokalite/SearchLokaliteStream.h; sourceTree = "<group>"; };
 		059B33FF13D4BC5A007AD11C /* SearchLokaliteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchLokaliteStream.m; path = src/lokalite/SearchLokaliteStream.m; sourceTree = "<group>"; };
 		059B340313D4F291007AD11C /* EventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventsView.xib; path = src/events/EventsView.xib; sourceTree = "<group>"; };
 		059B340613D4F4BB007AD11C /* tab-bar-icon-places.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-places.png"; path = "images/tab-bar-icons/tab-bar-icon-places.png"; sourceTree = "<group>"; };
@@ -830,6 +835,9 @@
 				0590FF7C13D8E17F006A2254 /* ProfileViewController.h */,
 				0590FF7D13D8E17F006A2254 /* ProfileViewController.m */,
 				0590FF7E13D8E17F006A2254 /* ProfileView.xib */,
+				05977D451402CE65003C8C24 /* TrendedEventsViewController.h */,
+				05977D461402CE65003C8C24 /* TrendedEventsViewController.m */,
+				05977D471402CE65003C8C24 /* TrendedEventsView.xib */,
 			);
 			name = profile;
 			sourceTree = "<group>";
@@ -1174,6 +1182,7 @@
 				0534084513FC3DBE00CE3B45 /* event-details-image-well@2x.png in Resources */,
 				0522547513FD6F18002DC909 /* DetailViewTableViewCell.xib in Resources */,
 				0522547713FD6FDF002DC909 /* detail-cell-background@2x.png in Resources */,
+				05977D491402CE65003C8C24 /* TrendedEventsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1268,6 +1277,7 @@
 				05B1671D13FDCD9500C44577 /* ExpandableTextTableViewCell.m in Sources */,
 				05EA465914019DB700AA579B /* PlaceEventStreamViewController.m in Sources */,
 				05EA465C14019E7200AA579B /* PlaceEventLokaliteStream.m in Sources */,
+				05977D481402CE65003C8C24 /* TrendedEventsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

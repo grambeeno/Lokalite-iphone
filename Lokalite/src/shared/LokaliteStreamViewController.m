@@ -918,7 +918,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     NSString *entityName = [self lokaliteObjectEntityName];
     NSEntityDescription *entity =
         [NSEntityDescription entityForName:entityName
-                    inManagedObjectContext:[self context]];
+                    inManagedObjectContext:context];
 
     NSPredicate *pred = [self dataControllerPredicate];
     NSArray *sortDescriptors = [self dataControllerSortDescriptors];

@@ -79,6 +79,8 @@
                 [NSString stringFromLocationDistance:[distance doubleValue]];
     }
     [[self distanceLabel] setText:distanceText];
+
+    [[self eventImageView] setImage:[event standardImage]];
 }
 
 @end
