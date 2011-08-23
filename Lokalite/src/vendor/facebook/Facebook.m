@@ -266,10 +266,16 @@ static NSString* kSDKVersion = @"2";
  */
 - (void)authorize:(NSArray *)permissions
        localAppId:(NSString *)localAppId {
+    [self authorize:permissions localAppId:localAppId safariAuth:YES];
+}
+
+- (void)authorize:(NSArray *)permissions
+       localAppId:(NSString *)localAppId
+       safariAuth:(BOOL)safariAuth {
   self.localAppId = localAppId;
   self.permissions = permissions;
 
-  [self authorizeWithFBAppAuth:YES safariAuth:YES];
+  [self authorizeWithFBAppAuth:YES safariAuth:safariAuth];
 }
 
 /**

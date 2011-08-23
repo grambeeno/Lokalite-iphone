@@ -23,4 +23,10 @@
 
 - (NSString *)smsBody;
 
+#pragma mark - Facebook
+
+- (NSURL *)facebookImageUrl;
+- (NSString *)facebookCaption;
+- (NSString *)facebookDescription;
+
 @end

@@ -50,6 +50,10 @@
 - (void)authorize:(NSArray *)permissions
        localAppId:(NSString *)localAppId;
 
+- (void)authorize:(NSArray *)permissions
+       localAppId:(NSString *)localAppId
+       safariAuth:(BOOL)safariAuth;
+
 - (BOOL)handleOpenURL:(NSURL *)url;
 
 - (void)logout:(id<FBSessionDelegate>)delegate;

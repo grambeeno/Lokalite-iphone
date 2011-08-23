@@ -9,12 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "ShareableObject.h"
 
+#import "Facebook.h"
+
 #import <MessageUI/MessageUI.h>
 
 @interface SharingController : NSObject
     <UIActionSheetDelegate, UINavigationControllerDelegate,
      MFMailComposeViewControllerDelegate,
-     MFMessageComposeViewControllerDelegate>
+     MFMessageComposeViewControllerDelegate, FBSessionDelegate,
+     FBDialogDelegate>
 
 @property (nonatomic, retain, readonly) id<ShareableObject> shareableObject;
 

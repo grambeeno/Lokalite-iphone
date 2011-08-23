@@ -10,12 +10,21 @@
 
 #import "LokaliteAppDelegate.h"
 
+#import "SBJSON.h"
+
 @interface SharingController ()
 
 @property (nonatomic, retain) NSMutableDictionary *actions;
 
+@property (nonatomic, retain) Facebook *facebook;
+
 - (void)mapOptionIndex:(NSInteger)index toAction:(SEL)action;
 - (void)presentSharingOptions;
+
+#pragma mark - Facebook
+
+- (void)logInToFacebook;
+- (void)sendObjectToFacebook;
 
 #pragma mark - Accessors
 
@@ -28,6 +37,7 @@
 
 @synthesize shareableObject = shareableObject_;
 @synthesize actions = actions_;
+@synthesize facebook = facebook_;
 
 #pragma mark - Memory management
 
@@ -35,6 +45,7 @@
 {
     [shareableObject_ release];
     [actions_ release];
+    [facebook_ release];
 
     [super dealloc];
 }
@@ -189,6 +200,98 @@
     [[self hostViewController] dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark - Sharing via Facebook
+
+- (void)shareWithFacebook
+{
+    if ([[self facebook] accessToken])
+        [self sendObjectToFacebook];
+    else
+        [self logInToFacebook];
+}
+
+- (void)logInToFacebook
+{
+    NSArray *permissions = [NSArray arrayWithObject:@"publish_stream"];
+    [[self facebook] authorize:permissions localAppId:nil safariAuth:NO];
+    NSLog(@"Token before logging in: %@", [[self facebook] accessToken]);
+}
+
+- (void)sendObjectToFacebook
+{
+    /*
+    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+
+  NSDictionary* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
+                               @"Always Running",@"text",@"http://itsti.me/",@"href", nil], nil];
+
+  NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
+  NSDictionary* attachment = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"a long run", @"name",
+                               @"The Facebook Running app", @"caption",
+                               @"it is fun", @"description",
+                               @"http://itsti.me/", @"href", nil];
+  NSString *attachmentStr = [jsonWriter stringWithObject:attachment];
+  NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 @"Share on Facebook",  @"user_message_prompt",
+                                 actionLinksStr, @"action_links",
+                                 attachmentStr, @"attachment",
+                                 nil];
+     */
+
+
+    NSMutableDictionary *params =
+        [NSMutableDictionary dictionaryWithObjectsAndKeys:
+         [[[self shareableObject] lokaliteUrl] absoluteString], @"link",
+         [[[self shareableObject] facebookImageUrl] absoluteString], @"picture",
+         [[self shareableObject] facebookCaption], @"caption",
+         [[self shareableObject] facebookDescription], @"description",
+         nil];
+    [[self facebook] dialog:@"feed" andParams:params andDelegate:self];
+}
+
+#pragma mark - FBSessionDelegate implementation
+
+/**
+ * Called when the user successfully logged in.
+ */
+- (void)fbDidLogin
+{
+    [self sendObjectToFacebook];
+}
+
+#pragma mark - FBDialogDelegate implementation
+
+- (void)dialogDidComplete:(FBDialog *)dialog
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)dialogCompleteWithUrl:(NSURL *)url
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)dialogDidNotCompleteWithUrl:(NSURL *)url
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)dialogDidNotComplete:(FBDialog *)dialog
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (BOOL)dialog:(FBDialog*)dialog shouldOpenURLInExternalBrowser:(NSURL *)url
+{
+    return YES;
+}
+
 #pragma mark - Accessors
 
 - (UIViewController *)hostViewController
@@ -196,6 +299,15 @@
     LokaliteAppDelegate *appDelegate =
         (LokaliteAppDelegate *) [[UIApplication sharedApplication] delegate];
     return [appDelegate tabBarController];
+}
+
+- (Facebook *)facebook
+{
+    if (!facebook_)
+        facebook_ = [[Facebook alloc] initWithAppId:@"206217952760561"
+                                        andDelegate:self];
+
+    return facebook_;
 }
 
 @end
