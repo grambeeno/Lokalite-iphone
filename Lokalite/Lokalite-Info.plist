@@ -32,7 +32,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LokaliteAPIServer</key>
-	<string>http://72.249.171.49</string>
+	<string>http://lokalite.com</string>
 	<key>LokaliteDefaultObjectsPerFetch</key>
 	<integer>10</integer>
 	<key>LokaliteLocationTimeoutInterval</key>
