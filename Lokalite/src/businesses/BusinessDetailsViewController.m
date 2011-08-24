@@ -132,7 +132,7 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 
 - (void)presentSharingOptions:(id)sender
 {
-    [self presentSharingOptionsWithDelegate:self];
+    //[self presentSharingOptionsWithDelegate:self];
 }
 
 - (void)mapViewTapped:(UIGestureRecognizer *)recognizer
