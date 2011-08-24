@@ -102,6 +102,12 @@
  * Twitter sharing
  */
 "twitter.log-in.title" = "Log In to Twitter";
+"twitter.oauth.authorize.button.title" = "Authorize with Twitter";
+"twitter.oauth.authorize.explanation" = "Lokalite posts links to events and busiensses to Twitter.";
+"twitter.authorize" = "Authorize";
+"twitter.oauth.failed.title" = "Failed to Authorize with Twitter";
+
+
 "twitter.send-tweet" = "Send Tweet";
 "twitter.send-failed.error.title" = "Failed to Send Tweet";
 

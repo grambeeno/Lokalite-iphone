@@ -106,7 +106,7 @@
 
     CGFloat pointSize = [[[[self authorizeCell] textLabel] font] pointSize];
     [[[self authorizeCell] textLabel]
-     setText:NSLocalizedString(@"oauth.authorize.button", nil)];
+     setText:NSLocalizedString(@"twitter.oauth.authorize.button.title", nil)];
     [[[self authorizeCell] textLabel] setTextAlignment:UITextAlignmentCenter];
     [[[self authorizeCell] textLabel] setFont:
      [UIFont boldSystemFontOfSize:pointSize]];
@@ -150,7 +150,7 @@
 - (NSString *)tableView:(UITableView *)tableView
 titleForFooterInSection:(NSInteger)section
 {
-    return NSLocalizedString(@"oauth.authorize.explanation", nil);
+    return NSLocalizedString(@"twitter.oauth.authorize.explanation", nil);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -283,7 +283,7 @@ titleForFooterInSection:(NSInteger)section
 
 - (void)presentError:(NSError *)error
 {
-    NSString *title = NSLocalizedString(@"xauth.auth.failed", nil);
+    NSString *title = NSLocalizedString(@"twitter.oauth.failed.title", nil);
     NSString *message = [error localizedDescription];
     NSString *cancelButtonTitle = NSLocalizedString(@"global.dismiss", nil);
 
@@ -325,7 +325,7 @@ titleForFooterInSection:(NSInteger)section
     UINavigationController *nc =
         [[UINavigationController alloc] initWithRootViewController:webView];
 
-    [webView setTitle:NSLocalizedString(@"oauth.authorize", nil)];
+    [webView setTitle:NSLocalizedString(@"twitter.authorize", nil)];
 
     UIBarButtonItem *cancelButtonItem =
         [[UIBarButtonItem alloc]
