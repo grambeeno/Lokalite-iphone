@@ -10,21 +10,37 @@
 
 #import "LokaliteAppDelegate.h"
 
+#import "TwitterAccount.h"
+#import "TwitterAccount+GeneralHelpers.h"
+#import "TwitterOAuthLogInViewController.h"
+#import "ComposeTweetViewController.h"
+
+#import "UIApplication+GeneralHelpers.h"
+
 #import "SBJSON.h"
 
 @interface SharingController ()
 
 @property (nonatomic, retain) NSMutableDictionary *actions;
 
-@property (nonatomic, retain) Facebook *facebook;
-
 - (void)mapOptionIndex:(NSInteger)index toAction:(SEL)action;
 - (void)presentSharingOptions;
 
 #pragma mark - Facebook
 
+@property (nonatomic, retain) Facebook *facebook;
+
 - (void)logInToFacebook;
 - (void)sendObjectToFacebook;
+
+#pragma mark - Twitter
+
+@property (nonatomic, retain) TwitterService *twitter;
+
+- (void)presentTweetComposeViewWithAccount:(TwitterAccount *)account
+                            hostController:(UIViewController *)hostController
+                                  animated:(BOOL)animated;
+- (void)sendTweetText:(NSString *)text account:(TwitterAccount *)account;
 
 #pragma mark - Accessors
 
@@ -36,16 +52,22 @@
 @implementation SharingController
 
 @synthesize shareableObject = shareableObject_;
+@synthesize context = context_;
+
 @synthesize actions = actions_;
 @synthesize facebook = facebook_;
+@synthesize twitter = twitter_;
 
 #pragma mark - Memory management
 
 - (void)dealloc
 {
     [shareableObject_ release];
+    [context_ release];
+
     [actions_ release];
     [facebook_ release];
+    [twitter_ release];
 
     [super dealloc];
 }
@@ -53,10 +75,13 @@
 #pragma mark - Initialization
 
 - (id)initWithShareableObject:(id<ShareableObject>)object
+                      context:(NSManagedObjectContext *)context
 {
     self = [super init];
-    if (self)
+    if (self) {
         shareableObject_ = [object retain];
+        context_ = [context retain];
+    }
 
     return self;
 }
@@ -247,15 +272,108 @@
 
 - (void)shareWithTwitter
 {
-    TwitterLogInViewController *controller =
-        [[TwitterLogInViewController alloc] init];
+    NSManagedObjectContext *context = [self context];
+
+    TwitterAccount *account = [TwitterAccount accountInContext:context];
+    if (!account) {
+        TwitterOAuthLogInViewController *controller =
+            [[TwitterOAuthLogInViewController alloc] init];
+        UINavigationController *nc =
+            [[UINavigationController alloc]
+             initWithRootViewController:controller];
+
+        [controller setLogInDidSucceedHandler:
+         ^(NSNumber *uid, NSString *user, NSString *token, NSString *secret) {
+             TwitterAccount *account =
+                [TwitterAccount setAccountWithUserId:uid
+                                            username:user
+                                               token:token
+                                              secret:secret
+                                             context:context];
+
+             //UIViewController *hostController =
+             //   [nc modalViewController] ? [nc modalViewController] : nc;
+             [self presentTweetComposeViewWithAccount:account
+                                       hostController:nc
+                                             animated:YES];
+         }];
+
+        [[self hostViewController] presentModalViewController:nc animated:YES];
+
+        [nc release];
+        [controller release];
+    } else
+        [self presentTweetComposeViewWithAccount:account
+                                  hostController:[self hostViewController]
+                                        animated:YES];
+}
+
+- (void)presentTweetComposeViewWithAccount:(TwitterAccount *)account
+                            hostController:(UIViewController *)hostController
+                                  animated:(BOOL)animated
+{
+    UIViewController *rootController = [self hostViewController];
+    ComposeTweetViewController *controller =
+        [[ComposeTweetViewController alloc]
+         initWithTwitterAccount:account shareableObject:[self shareableObject]];
+    [controller setDidCancelHandler:^{
+        [rootController dismissModalViewControllerAnimated:YES];
+    }];
+    [controller setShouldSendHandler:^(NSString *text) {
+        NSLog(@"Sending tweet text: %@", text);
+        [self sendTweetText:text account:account];
+    }];
+
     UINavigationController *nc =
         [[UINavigationController alloc] initWithRootViewController:controller];
 
-    [[self hostViewController] presentModalViewController:nc animated:YES];
+    [hostController presentModalViewController:nc animated:YES];
 
     [nc release], nc = nil;
     [controller release], controller = nil;
+}
+
+- (void)sendTweetText:(NSString *)text account:(TwitterAccount *)account
+{
+    [[UIApplication sharedApplication] networkActivityIsStarting];
+
+    TwitterService *twitter =
+        [[TwitterService alloc] initWithTwitterAccount:account];
+    [twitter setDelegate:self];
+
+    [twitter sendTweetWithText:text];
+
+    [self setTwitter:twitter];
+    [twitter release], twitter = nil;
+}
+
+#pragma mark - TwitterServiceDelegate implementation
+
+- (void)twitterService:(TwitterService *)service
+          didSendTweet:(NSDictionary *)tweetData
+{
+    [[UIApplication sharedApplication] networkActivityDidFinish];
+    [[self hostViewController] dismissModalViewControllerAnimated:YES];
+}
+
+- (void)twitterService:(TwitterService *)service
+    didFailToSendTweet:(NSError *)error
+{
+    [[UIApplication sharedApplication] networkActivityDidFinish];
+
+    NSString *title =
+        NSLocalizedString(@"twitter.send-failed.error.title", nil);
+    NSString *message = [error localizedDescription];
+    NSString *cancelButtonTitle = NSLocalizedString(@"global.dismiss", nil);
+
+    UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle:title
+                                   message:message
+                                  delegate:nil
+                         cancelButtonTitle:cancelButtonTitle
+                         otherButtonTitles:nil];
+    [alert show];
+    [alert release], alert = nil;
 }
 
 #pragma mark - Accessors

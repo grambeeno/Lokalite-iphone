@@ -41,6 +41,8 @@
 "global.learn-more" = "Learn More";
 "global.help" = "Help";
 
+"global.send" = "Send";
+
 "global.open-in-maps" = "Open in Maps";
 "global.directions-in-maps" = "Get Directions";
 
@@ -100,6 +102,8 @@
  * Twitter sharing
  */
 "twitter.log-in.title" = "Log In to Twitter";
+"twitter.send-tweet" = "Send Tweet";
+"twitter.send-failed.error.title" = "Failed to Send Tweet";
 
 /*
  * Log in

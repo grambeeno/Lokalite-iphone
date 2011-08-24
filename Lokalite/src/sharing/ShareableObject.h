@@ -29,4 +29,8 @@
 - (NSString *)facebookCaption;
 - (NSString *)facebookDescription;
 
+#pragma mark - Twitter
+
+- (NSString *)twitterText;
+
 @end

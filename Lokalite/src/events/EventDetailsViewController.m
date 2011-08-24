@@ -152,8 +152,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (IBAction)presentSharingOptions:(id)sender
 {
+    NSManagedObjectContext *context = [[self event] managedObjectContext];
     SharingController *controller =
-        [[SharingController alloc] initWithShareableObject:[self event]];
+        [[SharingController alloc] initWithShareableObject:[self event]
+                                                   context:context];
     [controller share];
 }
 

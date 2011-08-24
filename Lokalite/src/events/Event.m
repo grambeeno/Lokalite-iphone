@@ -139,4 +139,16 @@
     return [self summary];
 }
 
+#pragma mark - Twitter
+
+- (NSString *)twitterText
+{
+    NSURL *url = [self lokaliteUrl];
+    NSString *s =
+        [NSString stringWithFormat:@"%@ @ %@\n\n%@", [self name],
+         [[self business] name], [url absoluteString]];
+
+    return s;
+}
+
 @end

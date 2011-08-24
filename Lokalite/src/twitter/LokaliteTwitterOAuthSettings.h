@@ -10,3 +10,5 @@
 
 extern NSString *LokaliteTwitterOAuthConsumerKey;
 extern NSString *LokaliteTwitterOAuthConsumerSecret;
+
+extern NSString *LokaliteTwitterOAuthTokenCallbackUrl;

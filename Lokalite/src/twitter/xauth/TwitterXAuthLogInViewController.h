@@ -1,5 +1,5 @@
 //
-//  TwitterLogInViewController.h
+//  TwitterXAuthLogInViewController.h
 //  Lokalite
 //
 //  Created by John Debay on 8/23/11.
@@ -10,12 +10,13 @@
 
 #import "TwitterXauthenticator.h"
 
-@protocol TwitterLogInViewControllerDelegate;
+@protocol TwitterXAuthLogInViewControllerDelegate;
 
-@interface TwitterLogInViewController : UITableViewController
+@interface TwitterXAuthLogInViewController : UITableViewController
     <UITextFieldDelegate, TwitterXauthenticatorDelegate>
 
-@property (nonatomic, assign) id<TwitterLogInViewControllerDelegate> delegate;
+@property (nonatomic, assign)
+    id<TwitterXAuthLogInViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell *usernameCell;
 @property (nonatomic, retain) IBOutlet UITextField *usernameTextField;
@@ -25,14 +26,15 @@
 @end
 
 
-@protocol TwitterLogInViewControllerDelegate <NSObject>
+@protocol TwitterXAuthLogInViewControllerDelegate <NSObject>
 
-- (void)twitterLogInViewController:(TwitterLogInViewController *)controller
+- (void)twitterLogInViewController:(TwitterXAuthLogInViewController *)controller
                   didLogInUsername:(NSString *)username
                             userId:(NSNumber *)userId
                              token:(NSString *)token
                             secret:(NSString *)secret;
 
-- (void)twitterLogInViewControllerDidCancel:(TwitterLogInViewController *)ctlr;
+- (void)twitterLogInViewControllerDidCancel:
+    (TwitterXAuthLogInViewController *)controller;
 
 @end

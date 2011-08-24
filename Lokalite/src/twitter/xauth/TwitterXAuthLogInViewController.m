@@ -1,16 +1,16 @@
 //
-//  TwitterLogInViewController.m
+//  TwitterXAuthLogInViewController.m
 //  Lokalite
 //
 //  Created by John Debay on 8/23/11.
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
-#import "TwitterLogInViewController.h"
+#import "TwitterXAuthLogInViewController.h"
 
 #import "LokaliteTwitterOAuthSettings.h"
 
-@interface TwitterLogInViewController ()
+@interface TwitterXAuthLogInViewController ()
 
 #pragma mark - View initialization
 
@@ -28,7 +28,7 @@
 @end
 
 
-@implementation TwitterLogInViewController
+@implementation TwitterXAuthLogInViewController
 
 @synthesize delegate = delegate_;
 
@@ -55,7 +55,7 @@
 
 - (id)init
 {
-    self = [super initWithNibName:@"TwitterLogInView" bundle:nil];
+    self = [super initWithNibName:@"TwitterXAuthLogInView" bundle:nil];
     if (self)
         [self setTitle:NSLocalizedString(@"twitter.log-in.title", nil)];
     return self;

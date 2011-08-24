@@ -10,3 +10,5 @@
 
 NSString *LokaliteTwitterOAuthConsumerKey = @"m0QcrM8aWL2CZSP3QJzuQA";
 NSString *LokaliteTwitterOAuthConsumerSecret = @"aedYwMoAwpD72q4RVVf4qz1sUtZjaQLHlx7NFVFImQ";
+
+NSString *LokaliteTwitterOAuthTokenCallbackUrl = @"lokalite://twitter_oauth_token_received";

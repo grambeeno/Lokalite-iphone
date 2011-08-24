@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "ShareableObject.h"
 
-#import "TwitterLogInViewController.h"
+#import "TwitterOAuthLogInViewController.h"
 
 #import "Facebook.h"
+#import "TwitterService.h"
 
 #import <MessageUI/MessageUI.h>
 
@@ -19,13 +20,15 @@
     <UIActionSheetDelegate, UINavigationControllerDelegate,
      MFMailComposeViewControllerDelegate,
      MFMessageComposeViewControllerDelegate, FBSessionDelegate,
-     FBDialogDelegate>
+     FBDialogDelegate, TwitterServiceDelegate>
 
 @property (nonatomic, retain, readonly) id<ShareableObject> shareableObject;
+@property (nonatomic, retain, readonly) NSManagedObjectContext *context;
 
 #pragma mark - Initialization
 
-- (id)initWithShareableObject:(id<ShareableObject>)object;
+- (id)initWithShareableObject:(id<ShareableObject>)object
+                      context:(NSManagedObjectContext *)context;
 
 #pragma mark - Sharing
 
