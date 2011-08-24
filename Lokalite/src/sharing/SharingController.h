@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "ShareableObject.h"
 
+#import "TwitterLogInViewController.h"
+
 #import "Facebook.h"
 
 #import <MessageUI/MessageUI.h>

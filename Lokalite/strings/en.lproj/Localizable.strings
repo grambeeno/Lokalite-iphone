@@ -97,6 +97,11 @@
 "event.share.sms.body.prefix" = "Check out this event I found on Lokalite.com";
 
 /*
+ * Twitter sharing
+ */
+"twitter.log-in.title" = "Log In to Twitter";
+
+/*
  * Log in
  */
 "log-in.failed" = "Log In Failed";

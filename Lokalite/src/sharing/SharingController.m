@@ -219,27 +219,10 @@
 
 - (void)sendObjectToFacebook
 {
-    /*
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
-
-  NSDictionary* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-                               @"Always Running",@"text",@"http://itsti.me/",@"href", nil], nil];
-
-  NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
-  NSDictionary* attachment = [NSDictionary dictionaryWithObjectsAndKeys:
-                               @"a long run", @"name",
-                               @"The Facebook Running app", @"caption",
-                               @"it is fun", @"description",
-                               @"http://itsti.me/", @"href", nil];
-  NSString *attachmentStr = [jsonWriter stringWithObject:attachment];
-  NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                 @"Share on Facebook",  @"user_message_prompt",
-                                 actionLinksStr, @"action_links",
-                                 attachmentStr, @"attachment",
-                                 nil];
-     */
-
-
+    //
+    // for a list of supported arguments, see:
+    //   http://developers.facebook.com/docs/reference/dialogs/feed/
+    //
     NSMutableDictionary *params =
         [NSMutableDictionary dictionaryWithObjectsAndKeys:
          [[[self shareableObject] lokaliteUrl] absoluteString], @"link",
@@ -260,36 +243,19 @@
     [self sendObjectToFacebook];
 }
 
-#pragma mark - FBDialogDelegate implementation
+#pragma mark - Twitter
 
-- (void)dialogDidComplete:(FBDialog *)dialog
+- (void)shareWithTwitter
 {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
+    TwitterLogInViewController *controller =
+        [[TwitterLogInViewController alloc] init];
+    UINavigationController *nc =
+        [[UINavigationController alloc] initWithRootViewController:controller];
 
-- (void)dialogCompleteWithUrl:(NSURL *)url
-{
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
+    [[self hostViewController] presentModalViewController:nc animated:YES];
 
-- (void)dialogDidNotCompleteWithUrl:(NSURL *)url
-{
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-- (void)dialogDidNotComplete:(FBDialog *)dialog
-{
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error
-{
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
-
-- (BOOL)dialog:(FBDialog*)dialog shouldOpenURLInExternalBrowser:(NSURL *)url
-{
-    return YES;
+    [nc release], nc = nil;
+    [controller release], controller = nil;
 }
 
 #pragma mark - Accessors
