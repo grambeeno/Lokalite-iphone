@@ -77,12 +77,14 @@
     [business setValueIfNecessary:name forKey:@"name"];
 
     NSString *phone = [businessData objectForKey:@"phone"];
+    phone = [phone length] ? phone : nil;  // HACK
     [business setValueIfNecessary:phone forKey:@"phone"];
 
     NSString *summary = [businessData objectForKey:@"description"];
     [business setValueIfNecessary:summary forKey:@"summary"];
 
     NSString *url = [businessData objectForKey:@"url"];
+    url = [url length] ? url : nil;  // HACK
     [business setValueIfNecessary:url forKey:@"url"];
 
     [business setImageUrlsFromJsonData:businessData];

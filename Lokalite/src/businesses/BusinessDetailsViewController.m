@@ -257,7 +257,20 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 {
     path = [self effectiveIndexPathForIndexPath:path];
 
-    if ([path section] == kSectionLocation) {
+    if ([path section] == kSectionInfo) {
+        NSURL *url = nil;
+        if ([path row] == kInfoRowPhoneNumber)
+            url = [[self business] phoneUrl];
+        else if ([path row] == kInfoRowUrl)
+            url = [NSURL URLWithString:[[self business] url]];
+
+        BOOL opened = [[UIApplication sharedApplication] openURL:url];
+        if (!opened) {
+            // malformatted phone number or URL received from the server
+            NSLog(@"WARNING: Failed to open URL: '%@'", url);
+            [tableView deselectRowAtIndexPath:path animated:YES];
+        }
+    } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowAddress)
             [self displayLocationDetailsForBusiness:[self business]];
     } else if ([path section] == kSectionMore) {
@@ -317,18 +330,16 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
         if ([path row] == kInfoRowPhoneNumber) {
             [[cell textLabel] setText:[business phone]];
 
-            if ([app canOpenURL:[business phoneUrl]]) {
-                accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            accessoryType = UITableViewCellAccessoryNone;
+            if ([app canOpenURL:[business phoneUrl]])
                 selectionStyle = UITableViewCellSelectionStyleBlue;
-            } else {
-                accessoryType = UITableViewCellAccessoryNone;
+            else
                 selectionStyle = UITableViewCellSelectionStyleNone;
-            }
         } else if ([path row] == kInfoRowUrl) {
             [[cell textLabel] setText:[business url]];
 
             accessoryType = UITableViewCellAccessoryNone;
-            selectionStyle = UITableViewCellSelectionStyleNone;
+            selectionStyle = UITableViewCellSelectionStyleBlue;
         }
     } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowTitle) {
@@ -381,7 +392,13 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 - (NSIndexPath *)effectiveIndexPathForIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger section = [self effectiveSectionForSection:[indexPath section]];
-    return [NSIndexPath indexPathForRow:[indexPath row] inSection:section];
+    NSInteger row = [indexPath row];
+    if (section == kSectionInfo) {
+        if (![[self business] phone])
+            ++row;
+    }
+
+    return [NSIndexPath indexPathForRow:row inSection:section];
 }
 
 #pragma mark - Business validation
@@ -395,6 +412,7 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 {
     Business *business = [self business];
     NSInteger nrows = 0;
+
 
     if ([business phone])
         ++nrows;
