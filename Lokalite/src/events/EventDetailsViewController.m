@@ -92,6 +92,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)displayLocationDetailsForEvent:(Event *)event;
 - (void)displayBusinessDetails:(Business *)business;
 
+#pragma mark - Sharing
+
+@property (nonatomic, retain) SharingController *sharingController;
+
 #pragma mark - Updating for event states
 
 - (void)observeChangesForEvent:(Event *)event;
@@ -115,6 +119,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 @synthesize descriptionExpanded = descriptionExpanded_;
 
+@synthesize sharingController = sharingController_;
+
 @synthesize service = service_;
 
 #pragma mark - Memory management
@@ -128,6 +134,8 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [locationMapCell_ release];
     [footerView_ release];
     [trendTableViewCell_ release];
+
+    [sharingController_ release];
 
     [service_ release];
 
@@ -152,11 +160,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (IBAction)presentSharingOptions:(id)sender
 {
-    NSManagedObjectContext *context = [[self event] managedObjectContext];
-    SharingController *controller =
-        [[SharingController alloc] initWithShareableObject:[self event]
-                                                   context:context];
-    [controller share];
+    [[self sharingController] share];
 }
 
 - (void)mapViewTapped:(UIGestureRecognizer *)recognizer
@@ -508,6 +512,18 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         locationMapCell_ = [[LocationTableViewCell instanceFromNib] retain];
 
     return locationMapCell_;
+}
+
+- (SharingController *)sharingController
+{
+    if (!sharingController_) {
+        NSManagedObjectContext *context = [[self event] managedObjectContext];
+        sharingController_ =
+            [[SharingController alloc] initWithShareableObject:[self event]
+                                                       context:context];
+    }
+
+    return sharingController_;
 }
 
 - (LokaliteService *)service

@@ -24,6 +24,8 @@
 
 #import "DataFetcher.h"
 
+#import "SharingController.h"
+
 #import "SDKAdditions.h"
 
 
@@ -92,6 +94,10 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 
 - (BOOL)fetchBusinessImageIfNecessary;
 
+#pragma mark - Sharing
+
+@property (nonatomic, retain) SharingController *sharingController;
+
 @end
 
 
@@ -101,16 +107,16 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 
 @synthesize locationMapCell = locationMapCell_;
 @synthesize headerView = headerView_;
+@synthesize sharingController = sharingController_;
 
 #pragma mark - Memory management
 
 - (void)dealloc
 {
     [headerView_ release];
-
     [business_ release];
-
     [locationMapCell_ release];
+    [sharingController_ release];
 
     [super dealloc];
 }
@@ -132,7 +138,7 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 
 - (void)presentSharingOptions:(id)sender
 {
-    //[self presentSharingOptionsWithDelegate:self];
+    [[self sharingController] share];
 }
 
 - (void)mapViewTapped:(UIGestureRecognizer *)recognizer
@@ -454,6 +460,19 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
         locationMapCell_ = [[LocationTableViewCell instanceFromNib] retain];
 
     return locationMapCell_;
+}
+
+- (SharingController *)sharingController
+{
+    if (!sharingController_) {
+        Business *business = [self business];
+        NSManagedObjectContext *context = [business managedObjectContext];
+        sharingController_ =
+            [[SharingController alloc] initWithShareableObject:business
+                                                       context:context];
+    }
+
+    return sharingController_;
 }
 
 @end

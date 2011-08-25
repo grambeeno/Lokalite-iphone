@@ -10,6 +10,8 @@
 
 #import "TwitterAccount.h"
 
+#import "LokaliteAppDelegate.h"
+
 @interface ComposeTweetViewController ()
 
 #pragma mark - View initialization
@@ -71,8 +73,21 @@
 
 - (void)cancel:(id)sender
 {
-    if ([self didCancelHandler])
-        [self didCancelHandler]();
+    NSString *cancelButtonTitle = NSLocalizedString(@"global.cancel", nil);
+    NSString *destructiveButtonTitle =
+        NSLocalizedString(@"twitter.compose-tweet.destroy-draft", nil);
+
+    UIActionSheet *sheet =
+        [[UIActionSheet alloc] initWithTitle:nil
+                                    delegate:self
+                           cancelButtonTitle:cancelButtonTitle
+                      destructiveButtonTitle:destructiveButtonTitle
+                           otherButtonTitles:nil];
+
+    LokaliteAppDelegate *delegate = (LokaliteAppDelegate *)
+        [[UIApplication sharedApplication] delegate];
+    [sheet showFromTabBar:[[delegate tabBarController] tabBar]];
+    [sheet release], sheet = nil;
 }
 
 - (void)send:(id)sender
@@ -96,6 +111,15 @@
     [self updateInterfaceForText:text];
 
     [[self textView] becomeFirstResponder];
+}
+
+#pragma mark - UIActionSheetDelegate implementation
+
+- (void)actionSheet:(UIActionSheet *)actionSheet
+    clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+     if (buttonIndex == 0 && [self didCancelHandler])
+        [self didCancelHandler]();
 }
 
 #pragma mark - View initialization

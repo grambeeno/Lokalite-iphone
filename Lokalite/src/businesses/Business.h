@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "LokaliteObject.h"
+#import "ShareableObject.h"
 
 #import "MappableLokaliteObject.h"
 
 @class Category, Event, Location;
 
-@interface Business : LokaliteObject <MappableLokaliteObject> {
+@interface Business : LokaliteObject <MappableLokaliteObject, ShareableObject> {
 @private
 }
 @property (nonatomic, retain) NSString * phone;

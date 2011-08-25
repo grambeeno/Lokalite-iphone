@@ -106,6 +106,7 @@
 "twitter.oauth.authorize.explanation" = "Lokalite posts links to events and busiensses to Twitter.";
 "twitter.authorize" = "Authorize";
 "twitter.oauth.failed.title" = "Failed to Authorize with Twitter";
+"twitter.compose-tweet.destroy-draft" = "Destroy Tweet";
 
 
 "twitter.send-tweet" = "Send Tweet";

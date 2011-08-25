@@ -84,7 +84,7 @@
 - (NSURL *)lokaliteUrl
 {
     NSURL *url = [[UIApplication sharedApplication] baseLokaliteUrl];
-    url = [url URLByAppendingPathComponent:@"event"];
+    url = [url URLByAppendingPathComponent:@"events"];
 
     return [url URLByAppendingPathComponent:[[self identifier] description]];
 }
