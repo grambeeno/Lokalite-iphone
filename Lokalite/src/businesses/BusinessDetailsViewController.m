@@ -183,6 +183,21 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
     return nrows;
 }
 
+- (NSString *)tableView:(UITableView *)tableView
+    titleForHeaderInSection:(NSInteger)section
+{
+    section = [self effectiveSectionForSection:section];
+
+    NSString *title = nil;
+    if (section == kSectionDescription) {
+        NSString *format =
+            NSLocalizedString(@"business-details.about.formatstring", nil);
+        title = [NSString stringWithFormat:format, [[self business] name]];
+    }
+
+    return title;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
