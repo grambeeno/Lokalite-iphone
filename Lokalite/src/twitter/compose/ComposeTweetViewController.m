@@ -113,6 +113,13 @@
     [[self textView] becomeFirstResponder];
 }
 
+#pragma mark - UITextViewDelegate implementation
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    [self updateInterfaceForText:[textView text]];
+}
+
 #pragma mark - UIActionSheetDelegate implementation
 
 - (void)actionSheet:(UIActionSheet *)actionSheet

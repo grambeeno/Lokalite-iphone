@@ -15,7 +15,8 @@ typedef void(^CTVCDidCancel)(void);
 
 @class TwitterAccount;
 
-@interface ComposeTweetViewController : UIViewController <UIActionSheetDelegate>
+@interface ComposeTweetViewController : UIViewController
+    <UITextViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, retain, readonly) TwitterAccount *twitterAccount;
 @property (nonatomic, retain, readonly) id<ShareableObject> shareableObject;
