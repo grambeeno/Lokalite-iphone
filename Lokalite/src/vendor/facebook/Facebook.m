@@ -275,7 +275,7 @@ static NSString* kSDKVersion = @"2";
   self.localAppId = localAppId;
   self.permissions = permissions;
 
-  [self authorizeWithFBAppAuth:YES safariAuth:safariAuth];
+  [self authorizeWithFBAppAuth:NO safariAuth:safariAuth];
 }
 
 /**
