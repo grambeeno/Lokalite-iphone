@@ -98,6 +98,11 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 
 @property (nonatomic, retain) SharingController *sharingController;
 
+#pragma mark - Constants
+
++ (UIFont *)defaultCellTextLabelFont;
++ (UIFont *)descriptionCellTextLabelFont;
+
 @end
 
 
@@ -252,15 +257,15 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
     } else if ([indexPath section] == kSectionDescription) {
         if ([indexPath row] == kDescriptionRowDescription) {
             // HACK: hardcoding to the standard table view cell font
-            UIFont *font = [UIFont boldSystemFontOfSize:18];
+            UIFont *font = [[self class] descriptionCellTextLabelFont];
             CGSize maxSize = CGSizeMake(280, FLT_MAX);
             NSString *summary = [[self business] summary];
             CGSize size = [summary sizeWithFont:font
                               constrainedToSize:maxSize
                                   lineBreakMode:UILineBreakModeWordWrap];
 
-            // 20 points provides sufficient vertical padding
-            height = size.height + 20;
+            // provide sufficient vertical padding
+            height = size.height + 16;
         }
     }
 
@@ -334,6 +339,7 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 {
     Business *business = [self business];
 
+    UIFont *textLabelFont = [[self class] defaultCellTextLabelFont];
     NSInteger numberOfLines = 1;
     UITableViewCellAccessoryType accessoryType = UITableViewCellAccessoryNone;
     UITableViewCellSelectionStyle selectionStyle =
@@ -380,16 +386,18 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
         }
     } else if ([path section] == kSectionDescription) {
          if ([path row] == kDescriptionRowDescription) {
-            [[cell textLabel] setText:[business summary]];
-            accessoryType = UITableViewCellAccessoryNone;
-            selectionStyle = UITableViewCellSelectionStyleNone;
-            numberOfLines = 0;
+             [[cell textLabel] setText:[business summary]];
+             accessoryType = UITableViewCellAccessoryNone;
+             selectionStyle = UITableViewCellSelectionStyleNone;
+             numberOfLines = 0;
+             textLabelFont = [[self class] descriptionCellTextLabelFont];
         }
     }
 
     [cell setAccessoryType:accessoryType];
     [cell setSelectionStyle:selectionStyle];
     [[cell textLabel] setNumberOfLines:numberOfLines];
+    [[cell textLabel] setFont:textLabelFont];
 }
 
 #pragma mark - Table view management
@@ -506,6 +514,18 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
     }
 
     return sharingController_;
+}
+
+#pragma mark - Constants
+
++ (UIFont *)defaultCellTextLabelFont
+{
+    return [UIFont boldSystemFontOfSize:18];
+}
+
++ (UIFont *)descriptionCellTextLabelFont
+{
+    return [UIFont systemFontOfSize:16];
 }
 
 @end
