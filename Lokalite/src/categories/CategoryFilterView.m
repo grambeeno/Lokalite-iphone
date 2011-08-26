@@ -103,7 +103,8 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
          [self addSubview:nameLabel];
          [nameLabel release], nameLabel = nil;
 
-         point.x += buttonWidth + margin;
+         if (idx < [filters count] - 1)
+             point.x += buttonWidth + margin;
      }];
 
     // set the content size to an even number of pages
