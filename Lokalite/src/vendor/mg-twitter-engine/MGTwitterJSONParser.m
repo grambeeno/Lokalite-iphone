@@ -21,7 +21,7 @@
 @implementation MGTwitterJSONParser
 
 + (id)parserWithJSON:(NSData *)theJSON
-            delegate:(NSObject *)theDelegate 
+            delegate:(NSObject<MGTwitterParserDelegate> *)theDelegate 
 connectionIdentifier:(NSString *)identifier
          requestType:(MGTwitterRequestType)reqType
         responseType:(MGTwitterResponseType)respType URL:(NSURL *)URL
@@ -48,7 +48,7 @@ connectionIdentifier:(NSString *)identifier
 }
 
 - (id)initWithJSON:(NSData *)theJSON
-          delegate:(NSObject *)theDelegate 
+          delegate:(NSObject<MGTwitterParserDelegate> *)theDelegate 
     connectionIdentifier:(NSString *)theIdentifier
              requestType:(MGTwitterRequestType)reqType 
             responseType:(MGTwitterResponseType)respType

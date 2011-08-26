@@ -9,7 +9,7 @@
 
 @interface MGTwitterJSONParser : NSObject
 {
-    __weak NSObject <MGTwitterParserDelegate> * delegate; // weak ref
+    NSObject <MGTwitterParserDelegate> * delegate;
     NSString * identifier;
     MGTwitterRequestType requestType;
     MGTwitterResponseType responseType;
@@ -17,13 +17,13 @@
 }
 
 + (id)parserWithJSON:(NSData *)theJSON
-            delegate:(NSObject *)theDelegate
+            delegate:(NSObject<MGTwitterParserDelegate> *)theDelegate
 connectionIdentifier:(NSString *)identifier
          requestType:(MGTwitterRequestType)reqType
         responseType:(MGTwitterResponseType)respType
                  URL:(NSURL *)URL;
 - (id)initWithJSON:(NSData *)theJSON
-          delegate:(NSObject *)theDelegate 
+          delegate:(NSObject<MGTwitterParserDelegate> *)theDelegate 
     connectionIdentifier:(NSString *)identifier
              requestType:(MGTwitterRequestType)reqType 
             responseType:(MGTwitterResponseType)respType

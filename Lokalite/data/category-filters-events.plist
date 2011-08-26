@@ -4,16 +4,6 @@
 <array>
 	<dict>
 		<key>name</key>
-		<string>All Events</string>
-		<key>short-name</key>
-		<string>All</string>
-		<key>image</key>
-		<string>all</string>
-		<key>image-selected</key>
-		<string>all-selected</string>
-	</dict>
-	<dict>
-		<key>name</key>
 		<string>Happy Hour</string>
 		<key>short-name</key>
 		<string>Happy Hour</string>

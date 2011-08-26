@@ -4,16 +4,6 @@
 <array>
 	<dict>
 		<key>name</key>
-		<string>All Events</string>
-		<key>short-name</key>
-		<string>All</string>
-		<key>image</key>
-		<string>all</string>
-		<key>image-selected</key>
-		<string>all-selected</string>
-	</dict>
-	<dict>
-		<key>name</key>
 		<string>Shopping</string>
 		<key>short-name</key>
 		<string>Shopping</string>
@@ -74,6 +64,16 @@
 	</dict>
 	<dict>
 		<key>name</key>
+		<string>Beer, Wine and Spirits</string>
+		<key>short-name</key>
+		<string>Beer &amp; Wine</string>
+		<key>image</key>
+		<string>happy-hour</string>
+		<key>image-selected</key>
+		<string>happy-hour-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
 		<string>Sports and Fitness</string>
 		<key>short-name</key>
 		<string>Sports</string>
@@ -84,19 +84,9 @@
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Beer, Wine and Spirits</string>
-		<key>short-name</key>
-		<string>Booze</string>
-		<key>image</key>
-		<string>happy-hour</string>
-		<key>image-selected</key>
-		<string>happy-hour-selected</string>
-	</dict>
-	<dict>
-		<key>name</key>
 		<string>Health and Beauty</string>
 		<key>short-name</key>
-		<string>Bitches</string>
+		<string>Health</string>
 		<key>image</key>
 		<string>health</string>
 		<key>image-selected</key>
@@ -104,9 +94,19 @@
 	</dict>
 	<dict>
 		<key>name</key>
+		<string>Non-Profit</string>
+		<key>short-name</key>
+		<string>Non-Profit</string>
+		<key>image</key>
+		<string>non-profit</string>
+		<key>image-selected</key>
+		<string>non-profit-selected</string>
+	</dict>
+	<dict>
+		<key>name</key>
 		<string>MMJ</string>
 		<key>short-name</key>
-		<string>Weed</string>
+		<string>MMJ</string>
 		<key>image</key>
 		<string>non-profit</string>
 		<key>image-selected</key>

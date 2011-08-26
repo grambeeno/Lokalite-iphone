@@ -62,8 +62,6 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 
 - (void)configureForCategoryFilters:(NSArray *)filters
 {
-    NSInteger selectedFilterIndex = 0;
-
     static const CGFloat buttonHeight = 50, buttonWidth = 50;
     CGRect frame = [self frame];
     CGFloat margin = round((frame.size.height - buttonHeight) / 2);
@@ -75,16 +73,12 @@ static const NSInteger CATEGORY_FILTER_TAG_INDEX_OFFSET = 100;
 
     [filters enumerateObjectsUsingBlock:
      ^(CategoryFilter *filter, NSUInteger idx, BOOL *stop) {
-         BOOL isSelectedFilter = selectedFilterIndex == idx;
-
          CGRect buttonFrame =
             CGRectMake(point.x, point.y, buttonWidth, buttonHeight);
          UIButton *button =
             [UIButton lokaliteCategoryButtonWithFrame:buttonFrame];
 
-         UIImage *buttonImage =
-            isSelectedFilter ?
-            [filter selectedButtonImage] : [filter buttonImage];
+         UIImage *buttonImage = [filter buttonImage];
          [button setImage:buttonImage forState:UIControlStateNormal];
 
          [button addTarget:self
