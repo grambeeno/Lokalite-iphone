@@ -25,6 +25,7 @@
 
 #pragma mark - Facebook
 
+- (NSString *)facebookName;
 - (NSURL *)facebookImageUrl;
 - (NSString *)facebookCaption;
 - (NSString *)facebookDescription;

@@ -10,6 +10,8 @@
 
 #import "LokaliteAppDelegate.h"
 
+#import "Facebook+GeneralHelpers.h"
+
 #import "TwitterAccount.h"
 #import "TwitterAccount+GeneralHelpers.h"
 #import "TwitterOAuthLogInViewController.h"
@@ -229,7 +231,11 @@
 
 - (void)shareWithFacebook
 {
-    if ([[self facebook] accessToken])
+    NSLog(@"Is session valid: %@", [[self facebook] isSessionValid] ? @"YES" : @"NO");
+    NSLog(@"access token: '%@'", [[self facebook] accessToken]);
+    NSLog(@"Expiration date: '%@'", [[self facebook] expirationDate]);
+
+    if ([[self facebook] isSessionValid])
         [self sendObjectToFacebook];
     else
         [self logInToFacebook];
@@ -250,6 +256,7 @@
     //
     NSMutableDictionary *params =
         [NSMutableDictionary dictionaryWithObjectsAndKeys:
+         [[self shareableObject] facebookName], @"name",
          [[[self shareableObject] lokaliteUrl] absoluteString], @"link",
          [[[self shareableObject] facebookImageUrl] absoluteString], @"picture",
          [[self shareableObject] facebookCaption], @"caption",
@@ -265,7 +272,13 @@
  */
 - (void)fbDidLogin
 {
+    [[self facebook] saveSession];
     [self sendObjectToFacebook];
+}
+
+- (void)fbDidLogout
+{
+    [[self facebook] saveSession];
 }
 
 #pragma mark - Twitter
@@ -387,9 +400,11 @@
 
 - (Facebook *)facebook
 {
-    if (!facebook_)
+    if (!facebook_) {
         facebook_ = [[Facebook alloc] initWithAppId:@"206217952760561"
                                         andDelegate:self];
+        [facebook_ restoreSession];
+    }
 
     return facebook_;
 }

@@ -108,6 +108,11 @@
 
 #pragma mark Facebook
 
+- (NSString *)facebookName
+{
+    return [self name];
+}
+
 - (NSURL *)facebookImageUrl
 {
     return [NSURL URLWithString:[self standardImageUrl]];
@@ -115,7 +120,7 @@
 
 - (NSString *)facebookCaption
 {
-    return [NSString stringWithFormat:@"%@", [self name]];
+    return @"";
 }
 
 - (NSString *)facebookDescription

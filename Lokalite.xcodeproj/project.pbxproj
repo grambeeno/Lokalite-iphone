@@ -274,6 +274,7 @@
 		05EC9A4A13CB993A00B7AD61 /* UIApplication+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4913CB993A00B7AD61 /* UIApplication+GeneralHelpers.m */; };
 		05EC9A4E13CB99E800B7AD61 /* NSError+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */; };
 		05F2E0ED14081FC7000D3A87 /* UILabel+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2E0EC14081FC7000D3A87 /* UILabel+GeneralHelpers.m */; };
+		05F2E0F214084C15000D3A87 /* Facebook+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2E0F114084C15000D3A87 /* Facebook+GeneralHelpers.m */; };
 		05FA00E113D0E8AC001B7470 /* BusinessDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FA00DF13D0E8AC001B7470 /* BusinessDetailsViewController.m */; };
 		05FA00E213D0E8AC001B7470 /* BusinessDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05FA00E013D0E8AC001B7470 /* BusinessDetailsView.xib */; };
 /* End PBXBuildFile section */
@@ -732,6 +733,8 @@
 		05EC9A4D13CB99E800B7AD61 /* NSError+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = "NSError+GeneralHelpers.m"; path = "src/sdk-additions/NSError+GeneralHelpers.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		05F2E0EB14081FC7000D3A87 /* UILabel+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+GeneralHelpers.h"; path = "src/sdk-additions/UILabel+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05F2E0EC14081FC7000D3A87 /* UILabel+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+GeneralHelpers.m"; path = "src/sdk-additions/UILabel+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05F2E0F014084C15000D3A87 /* Facebook+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Facebook+GeneralHelpers.h"; path = "src/facebook/Facebook+GeneralHelpers.h"; sourceTree = "<group>"; };
+		05F2E0F114084C15000D3A87 /* Facebook+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Facebook+GeneralHelpers.m"; path = "src/facebook/Facebook+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05FA00DE13D0E8AC001B7470 /* BusinessDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessDetailsViewController.h; path = src/businesses/BusinessDetailsViewController.h; sourceTree = "<group>"; };
 		05FA00DF13D0E8AC001B7470 /* BusinessDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessDetailsViewController.m; path = src/businesses/BusinessDetailsViewController.m; sourceTree = "<group>"; };
 		05FA00E013D0E8AC001B7470 /* BusinessDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BusinessDetailsView.xib; path = src/businesses/BusinessDetailsView.xib; sourceTree = "<group>"; };
@@ -1064,6 +1067,7 @@
 				0568334713D09C5200520C78 /* locations */,
 				058C8BA6140307DB00AFDF95 /* sharing */,
 				0505ECCD13CBC13E009874A7 /* lokalite */,
+				05F2E0EF14084BF8000D3A87 /* facebook */,
 				051D55F5140436C000A615B1 /* twitter */,
 				0514FBF113CE55F200ACA464 /* shared */,
 				05EC9A4713CB990F00B7AD61 /* sdk-additions */,
@@ -1655,6 +1659,15 @@
 			name = "sdk-additions";
 			sourceTree = "<group>";
 		};
+		05F2E0EF14084BF8000D3A87 /* facebook */ = {
+			isa = PBXGroup;
+			children = (
+				05F2E0F014084C15000D3A87 /* Facebook+GeneralHelpers.h */,
+				05F2E0F114084C15000D3A87 /* Facebook+GeneralHelpers.m */,
+			);
+			name = facebook;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1972,6 +1985,7 @@
 				05A6588C1405975700568D12 /* TwitterService.m in Sources */,
 				05A6589014059AB100568D12 /* YHOAuthTwitterEngine.m in Sources */,
 				05F2E0ED14081FC7000D3A87 /* UILabel+GeneralHelpers.m in Sources */,
+				05F2E0F214084C15000D3A87 /* Facebook+GeneralHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
