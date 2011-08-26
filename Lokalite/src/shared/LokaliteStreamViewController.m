@@ -571,6 +571,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (void)initializeMapView:(MKMapView *)mapView
 {
+    [[self mapViewController] setAnnotationsShowRightAccessoryView:YES];
 }
 
 #pragma mark - Protected interface
