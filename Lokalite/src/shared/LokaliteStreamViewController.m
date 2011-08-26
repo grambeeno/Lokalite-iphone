@@ -1044,7 +1044,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     NSLog(@"Total number of objects: %d",
           [[[self dataController] fetchedObjects] count] + [objects count]);
 
-    if ([[self lokaliteStream] hasMorePages] && pageNumber == 1)
+    if ([[self lokaliteStream] hasMorePages])
         [[self tableView] setTableFooterView:[self loadingMoreActivityView]];
     else
         [[self tableView] setTableFooterView:nil];
