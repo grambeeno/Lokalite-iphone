@@ -13,6 +13,8 @@
 #import "NSObject+GeneralHelpers.h"
 #import "NSManagedObject+GeneralHelpers.h"
 
+#import <CoreLocation/CoreLocation.h>
+
 @implementation Location (GeneralHelpers)
 
 #pragma mark - Lifecycle
@@ -40,6 +42,26 @@
 
     return [NSURL URLWithString:s];
 }
+
+- (NSURL *)urlForDirectionsFromLocation:(CLLocation *)location
+{
+    NSString *srcString =
+        location ?
+        [NSString stringWithFormat:@"%f,%f", [location coordinate].latitude,
+         [location coordinate].longitude] :
+        @"";
+
+    NSString *destString =
+        [[self formattedAddress]
+         stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *s =
+        [NSString stringWithFormat:
+         @"http://maps.google.com/maps?saddr=%@&daddr=%@", srcString,
+         destString];
+
+    return [NSURL URLWithString:s];
+}
+
 
 #pragma mark - Creating and finding instances
 

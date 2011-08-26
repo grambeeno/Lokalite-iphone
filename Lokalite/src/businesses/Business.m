@@ -59,18 +59,7 @@
 
 - (NSURL *)directionsUrlFromLocation:(CLLocation *)location
 {
-    CLLocationCoordinate2D coord = [[self locationInstance] coordinate];
-    NSString *destString =
-        location ?
-        [NSString stringWithFormat:@"%f,%f", [location coordinate].latitude,
-         [location coordinate].longitude] :
-        @"";
-    NSString *s =
-        [NSString stringWithFormat:
-         @"http://maps.google.com/maps?saddr=%@&daddr=%@",
-         coord.latitude, coord.longitude, destString];
-
-    return [NSURL URLWithString:s];
+    return [[self location] urlForDirectionsFromLocation:location];
 }
 
 #pragma mark - ShareableObject implementation

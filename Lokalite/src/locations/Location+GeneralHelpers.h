@@ -8,6 +8,7 @@
 
 #import "Location.h"
 
+@class CLLocation;
 @class LokaliteDownloadSource;
 
 @interface Location (GeneralHelpers)
@@ -23,6 +24,7 @@
 #pragma mark - Convenience methods
 
 - (NSURL *)addressUrl;
+- (NSURL *)urlForDirectionsFromLocation:(CLLocation *)location;
 
 #pragma mark - Creating and finding instances
 
