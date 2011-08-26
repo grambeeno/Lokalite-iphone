@@ -543,7 +543,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 + (UIFont *)eventDescriptionFont
 {
-    return [UIFont systemFontOfSize:18];
+    return [UIFont systemFontOfSize:16];
 }
 
 @end
