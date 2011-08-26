@@ -42,7 +42,7 @@
     CLLocationDistance distanceInMiles = distanceInFeet / FEET_PER_MILE;
     NSNumber *distance = [NSNumber numberWithDouble:distanceInMiles];
 
-    [[self formatter] setMaximumFractionDigits:1];
+    [[self formatter] setMaximumFractionDigits:2];
     NSString *distanceString = [[self formatter] stringFromNumber:distance];
 
     return [NSString stringWithFormat:@"%@ mi", distanceString];
