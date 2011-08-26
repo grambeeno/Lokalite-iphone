@@ -243,7 +243,7 @@
 
 - (NSString *)dateStringDescription
 {
-    return [NSString textRangeWithStartDate:[self startDate]
+    return [NSDate textRangeWithStartDate:[self startDate]
                                     endDate:[self endDate]];
 }
 

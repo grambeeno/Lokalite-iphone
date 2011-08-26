@@ -14,4 +14,13 @@
 
 - (NSString *)timeString;
 
+- (BOOL)isToday;
+- (BOOL)isTomorrow;
+- (BOOL)isMoreThanWeekInTheFuture;
+
+- (BOOL)isOnSameDayAsDate:(NSDate *)date;
+
++ (NSString *)textRangeWithStartDate:(NSDate *)startDate
+                             endDate:(NSDate *)endDate;
+
 @end

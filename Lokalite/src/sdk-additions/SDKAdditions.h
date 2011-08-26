@@ -34,6 +34,7 @@
 
 #import "UIColor+GeneralHelpers.h"
 #import "UIButton+GeneralHelpers.h"
+#import "UILabel+GeneralHelpers.h"
 #import "UIBarButtonItem+GeneralHelpers.h"
 #import "UITableViewCell+GeneralHelpers.h"
 #import "UIApplication+GeneralHelpers.h"

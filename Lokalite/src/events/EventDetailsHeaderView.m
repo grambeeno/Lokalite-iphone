@@ -40,7 +40,6 @@
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 #import "Business.h"
-#import "NSString+GeneralHelpers.h"
 #import "NSDate+GeneralHelpers.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -57,9 +56,8 @@
     [[self startDateLabel] setText:[[event startDate] timeString]];
     [[self endDateLabel] setText:[[event endDate] timeString]];
 
-    NSString *timeRange =
-        [NSString textRangeWithStartDate:[event startDate]
-                                 endDate:[event endDate]];
+    NSString *timeRange = [NSDate textRangeWithStartDate:[event startDate]
+                                                 endDate:[event endDate]];
     [[self dateRangeLabel] setText:timeRange];
 
     BOOL isTrending = [[event trended] boolValue];

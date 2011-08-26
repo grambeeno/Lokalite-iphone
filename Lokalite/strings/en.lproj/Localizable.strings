@@ -24,6 +24,8 @@
 "global.places" = "Places";
 "global.place" = "Place";
 "global.profile" = "Profile";
+"global.today" = "Today";
+"global.tomorrow" = "Tomorrow";
 
 "global.load-more" = "Load More";
 

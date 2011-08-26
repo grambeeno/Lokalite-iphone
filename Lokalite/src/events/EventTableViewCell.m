@@ -8,6 +8,8 @@
 
 #import "EventTableViewCell.h"
 
+#import "UILabel+GeneralHelpers.h"
+
 @implementation EventTableViewCell
 
 @synthesize eventId = eventId_;
@@ -37,6 +39,23 @@
     [super dealloc];
 }
 
+#pragma mark - UITableViewCell implementation
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+
+    [[self distanceLabel] sizeToFit:UILabelSizeToFitAlignmentRight];
+
+    CGRect frame = [[self contentView] frame];
+    CGRect timeLabelFrame = [[self timeLabel] frame];
+    CGRect distanceLabelFrame = [[self distanceLabel] frame];
+
+    timeLabelFrame.size.width =
+        frame.size.width - distanceLabelFrame.size.width - 5;
+    [[self timeLabel] setFrame:timeLabelFrame];
+}
+
 #pragma mark - Configuration helpers
 
 + (CGFloat)cellHeight
@@ -63,11 +82,7 @@
     [[self eventNameLabel] setText:[event name]];
     [[self businessNameLabel] setText:[[event business] name]];
     [[self summaryLabel] setText:[event summary]];
-
-    NSString *timeRange =
-        [NSString textRangeWithStartDate:[event startDate]
-                                 endDate:[event endDate]];
-    [[self timeLabel] setText:timeRange];
+    [[self timeLabel] setText:[event dateStringDescription]];
 
     [[self trendedImageView] setHidden:![event isTrended]];
 
