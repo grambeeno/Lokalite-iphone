@@ -11,6 +11,8 @@
 #import "TwitterAccount.h"
 #import "TwitterAccount+GeneralHelpers.h"
 
+#import "TwitterOAuthLogInViewController.h"
+
 #import "LokaliteAppDelegate.h"
 
 #import <CoreData/CoreData.h>
@@ -36,7 +38,9 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 
 #pragma mark - Twitter methods
 
+- (void)logInToTwitter;
 - (void)promptToLogOutOfTwitter;
+- (void)logOutOfTwitter;
 
 #pragma mark - View initialization
 
@@ -185,6 +189,11 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
                 [self promptToLogOutOfTwitter];
                 [tableView deselectRowAtIndexPath:indexPath animated:YES];
             }
+        } else {
+            if ([indexPath row] == kTwitterLogIn) {
+                [self logInToTwitter];
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            }
         }
     }
 }
@@ -195,9 +204,7 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
     clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {  // log out confirmed
-        NSLog(@"Logging out of Twitter account: '%@'",
-              [[self twitterAccount] username]);
-        [[self context] deleteObject:[self twitterAccount]];
+        [self logOutOfTwitter];
         NSIndexSet *sections = [NSIndexSet indexSetWithIndex:kSectionTwitter];
         [[self tableView] reloadSections:sections
                         withRowAnimation:UITableViewRowAnimationFade];
@@ -205,6 +212,39 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 }
 
 #pragma mark - Twitter methods
+
+- (void)logInToTwitter
+{
+    NSManagedObjectContext *context = [self context];
+    UITableView *tableView = [self tableView];
+
+    TwitterOAuthLogInViewController *controller =
+        [[TwitterOAuthLogInViewController alloc] init];
+    UINavigationController *nc =
+        [[UINavigationController alloc] initWithRootViewController:controller];
+    [[nc navigationBar]
+     setTintColor:[[[self navigationController] navigationBar] tintColor]];
+    
+    [controller setLogInDidSucceedHandler:
+     ^(NSNumber *uid, NSString *user, NSString *token, NSString *secret) {
+         [TwitterAccount setAccountWithUserId:uid
+                                     username:user
+                                        token:token
+                                       secret:secret
+                                      context:context];
+
+         NSIndexSet *sections = [NSIndexSet indexSetWithIndex:kSectionTwitter];
+         [tableView reloadSections:sections
+                  withRowAnimation:UITableViewRowAnimationFade];
+
+         [self dismissModalViewControllerAnimated:YES];
+     }];
+
+    [self presentModalViewController:nc animated:YES];
+
+    [nc release], nc = nil;
+    [controller release], controller = nil;
+}
 
 - (void)promptToLogOutOfTwitter
 {
@@ -223,6 +263,13 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
         [[UIApplication sharedApplication] delegate];
     [sheet showFromTabBar:[[delegate tabBarController] tabBar]];
     [sheet release], sheet = nil;
+}
+
+- (void)logOutOfTwitter
+{
+    NSLog(@"Logging out of Twitter account '%@'",
+          [[self twitterAccount] username]);
+    [[self context] deleteObject:[self twitterAccount]];
 }
 
 #pragma mark - View initialization
