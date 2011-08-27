@@ -241,7 +241,7 @@
 
 - (void)logInToFacebook
 {
-    NSArray *permissions = [NSArray arrayWithObject:@"publish_stream"];
+    NSArray *permissions = [Facebook defaultPermissions];
     [[self facebook] authorize:permissions localAppId:nil safariAuth:NO];
 }
 
@@ -394,7 +394,7 @@
     UIApplication *app = [UIApplication sharedApplication];
     
     [app networkActivityDidFinish];
-    
+
     LokaliteAppDelegate *delegate = (LokaliteAppDelegate *) [app delegate];
     [delegate hideActivityViewAnimated:YES completion:^{
         NSString *title =
@@ -425,7 +425,7 @@
 - (Facebook *)facebook
 {
     if (!facebook_) {
-        facebook_ = [[Facebook alloc] initWithAppId:@"206217952760561"
+        facebook_ = [[Facebook alloc] initWithAppId:LokaliteFacebookAppId
                                         andDelegate:self];
         [facebook_ restoreSession];
     }

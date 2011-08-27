@@ -8,9 +8,13 @@
 
 #import "Facebook.h"
 
+extern NSString *LokaliteFacebookAppId;
+
 @interface Facebook (GeneralHelpers)
 
 - (void)saveSession;
 - (void)restoreSession;
+
++ (NSArray *)defaultPermissions;
 
 @end

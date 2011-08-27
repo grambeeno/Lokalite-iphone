@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Facebook.h"
 
 @class NSManagedObjectContext;
 @protocol SettingsViewControllerDelegate;
 
 @interface SettingsViewController : UITableViewController
-    <UIActionSheetDelegate>
+    <UIActionSheetDelegate, FBSessionDelegate>
 
 @property (nonatomic, assign) id<SettingsViewControllerDelegate> delegate;
 

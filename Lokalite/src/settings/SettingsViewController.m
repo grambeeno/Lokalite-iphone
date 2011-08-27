@@ -8,6 +8,9 @@
 
 #import "SettingsViewController.h"
 
+#import "Facebook.h"
+#import "Facebook+GeneralHelpers.h"
+
 #import "TwitterAccount.h"
 #import "TwitterAccount+GeneralHelpers.h"
 
@@ -25,6 +28,17 @@ static const NSInteger NUM_SECTIONS = kSectionTwitter + 1;
 
 enum {
     // logged out
+    kFacebookLogIn,
+
+    // logged in
+    kFacebookUsername = kFacebookLogIn,
+    kFacebookLogOut
+};
+static const NSInteger NUM_FACEBOOK_LOGGED_OUT_ROWS = kFacebookLogIn + 1;
+static const NSInteger NUM_FACEBOOK_LOGGED_IN_ROWS = kFacebookLogOut + 1;
+
+enum {
+    // logged out
     kTwitterLogIn,
 
     // logged in
@@ -36,7 +50,18 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 
 @interface SettingsViewController ()
 
+#pragma mark - Facebook methods
+
+@property (nonatomic, retain) Facebook *facebook;
+@property (nonatomic, retain) UIActionSheet *facebookActionSheet;
+
+- (void)logInToFacebook;
+- (void)promptToLogOutOfFacebook;
+- (void)logOutOfFacebook;
+
 #pragma mark - Twitter methods
+
+@property (nonatomic, retain) UIActionSheet *twitterActionSheet;
 
 - (void)logInToTwitter;
 - (void)promptToLogOutOfTwitter;
@@ -58,6 +83,11 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 @synthesize delegate = delegate_;
 @synthesize context = context_;
 
+@synthesize facebook = facebook_;
+@synthesize facebookActionSheet = facebookActionSheet_;
+
+@synthesize twitterActionSheet = twitterActionSheet_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -65,6 +95,10 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
     delegate_ = nil;
 
     [context_ release];
+
+    [facebook_ release];
+    [facebookActionSheet_ release];
+    [twitterActionSheet_ release];
 
     [super dealloc];
 }
@@ -110,7 +144,10 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
     NSInteger nrows = 0;
 
     if (section == kSectionFacebook) {
-        nrows = 0;
+        if ([[self facebook] isSessionValid])
+            nrows = NUM_FACEBOOK_LOGGED_IN_ROWS;
+        else
+            nrows = NUM_FACEBOOK_LOGGED_OUT_ROWS;
     } else if (section == kSectionTwitter) {
         if ([self twitterAccount])
             nrows = NUM_TWITTER_LOGGED_IN_ROWS;
@@ -148,7 +185,39 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
               reuseIdentifier:CellIdentifier] autorelease];
     }
 
-    if ([indexPath section] == kSectionTwitter) {
+    if ([indexPath section] == kSectionFacebook) {
+        Facebook *facebook = [self facebook];
+        if ([facebook isSessionValid]) {
+            if ([indexPath row] == kFacebookUsername) {
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
+                [[cell textLabel] setTextAlignment:UITextAlignmentLeft];
+
+                [[cell textLabel]
+                 setText:NSLocalizedString(@"facebook.status", nil)];
+                [[cell detailTextLabel]
+                 setText:NSLocalizedString(@"facebook.connected", nil)];
+            } else if ([indexPath row] == kFacebookLogOut) {
+                [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
+                [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
+
+                [[cell textLabel]
+                 setText:NSLocalizedString(@"facebook.log-out.title", nil)];
+                [[cell detailTextLabel] setText:nil];
+            }
+        } else {
+            if ([indexPath row] == kFacebookLogIn) {
+                [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
+                [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
+
+                [[cell textLabel]
+                 setText:NSLocalizedString(@"facebook.log-in.title", nil )];
+                [[cell detailTextLabel] setText:nil];
+            }
+        }
+    } else if ([indexPath section] == kSectionTwitter) {
         TwitterAccount *account = [self twitterAccount];
         if (account) {
             if ([indexPath row] == kTwitterUsername) {
@@ -169,9 +238,15 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
                 [[cell detailTextLabel] setText:nil];
             }
         } else {
-            if ([indexPath row] == kTwitterLogIn)
+            if ([indexPath row] == kTwitterLogIn) {
+                [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
+                [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
+
                 [[cell textLabel]
                  setText:NSLocalizedString(@"twitter.log-in.title", nil)];
+                [[cell detailTextLabel] setText:nil];
+            }
         }
     }
 
@@ -183,7 +258,19 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 - (void)tableView:(UITableView *)tableView
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath section] == kSectionTwitter) {
+    if ([indexPath section] == kSectionFacebook) {
+        if ([[self facebook] isSessionValid]) {
+            if ([indexPath row] == kFacebookLogOut) {
+                [self promptToLogOutOfFacebook];
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            }
+        } else {
+            if ([indexPath row] == kFacebookLogIn) {
+                [self logInToFacebook];
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            }
+        }
+    } else if ([indexPath section] == kSectionTwitter) {
         if ([self twitterAccount]) {
             if ([indexPath row] == kTwitterLogOut) {
                 [self promptToLogOutOfTwitter];
@@ -203,12 +290,78 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 - (void)actionSheet:(UIActionSheet *)actionSheet
     clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0) {  // log out confirmed
+    if ([self facebookActionSheet] == actionSheet && buttonIndex == 0) {
+        // facebook log out confirmed
+        [self logOutOfFacebook];
+
+        NSIndexSet *sections = [NSIndexSet indexSetWithIndex:kSectionFacebook];
+        [[self tableView] reloadSections:sections
+                        withRowAnimation:UITableViewRowAnimationFade];
+
+        [self setFacebookActionSheet:nil];
+    }
+    if ([self twitterActionSheet] == actionSheet &&  buttonIndex == 0) {
+        // twitter log out confirmed
         [self logOutOfTwitter];
+
         NSIndexSet *sections = [NSIndexSet indexSetWithIndex:kSectionTwitter];
         [[self tableView] reloadSections:sections
                         withRowAnimation:UITableViewRowAnimationFade];
+
+        [self setTwitterActionSheet:nil];
     }
+}
+
+#pragma mark - Facebook methods
+
+- (void)logInToFacebook
+{
+    NSArray *permissions = [Facebook defaultPermissions];
+    [[self facebook] authorize:permissions localAppId:nil safariAuth:NO];
+}
+
+- (void)promptToLogOutOfFacebook
+{
+    NSString *cancelButtonTitle = NSLocalizedString(@"global.cancel", nil);
+    NSString *destructiveButtonTitle =
+        NSLocalizedString(@"facebook.log-out.title", nil);
+
+    UIActionSheet *sheet =
+        [[UIActionSheet alloc] initWithTitle:nil
+                                    delegate:self
+                           cancelButtonTitle:cancelButtonTitle
+                      destructiveButtonTitle:destructiveButtonTitle
+                           otherButtonTitles:nil];
+
+    LokaliteAppDelegate *delegate = (LokaliteAppDelegate *)
+        [[UIApplication sharedApplication] delegate];
+    [sheet showFromTabBar:[[delegate tabBarController] tabBar]];
+
+    [self setFacebookActionSheet:sheet];
+    [sheet release], sheet = nil;
+}
+
+- (void)logOutOfFacebook
+{
+    [[self facebook] logout:self];
+}
+
+#pragma mark - FBSessionDelegate implementation
+
+- (void)fbDidLogin
+{
+    [[self facebook] saveSession];
+
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndex:kSectionFacebook];
+    [[self tableView] reloadSections:sections
+                    withRowAnimation:UITableViewRowAnimationFade];
+
+    [self setFacebookActionSheet:nil];
+}
+
+- (void)fbDidLogout
+{
+    [[self facebook] saveSession];
 }
 
 #pragma mark - Twitter methods
@@ -262,6 +415,8 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
     LokaliteAppDelegate *delegate = (LokaliteAppDelegate *)
         [[UIApplication sharedApplication] delegate];
     [sheet showFromTabBar:[[delegate tabBarController] tabBar]];
+
+    [self setTwitterActionSheet:sheet];
     [sheet release], sheet = nil;
 }
 
@@ -285,6 +440,17 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 }
 
 #pragma mark - Accessors
+
+- (Facebook *)facebook
+{
+    if (!facebook_) {
+        facebook_ = [[Facebook alloc] initWithAppId:LokaliteFacebookAppId
+                                        andDelegate:self];
+        [facebook_ restoreSession];
+    }
+
+    return facebook_;
+}
 
 - (TwitterAccount *)twitterAccount
 {

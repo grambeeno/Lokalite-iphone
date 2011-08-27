@@ -8,6 +8,8 @@
 
 #import "Facebook+GeneralHelpers.h"
 
+NSString *LokaliteFacebookAppId = @"206217952760561";
+
 @implementation Facebook (GeneralHelpers)
 
 - (void)saveSession
@@ -16,9 +18,6 @@
 
     [defaults setObject:[self accessToken] forKey:@"FacebookAccessToken"];
     [defaults setObject:[self expirationDate] forKey:@"FacebookExpirationDate"];
-
-    NSLog(@"Access token: %@", [self accessToken]);
-    NSLog(@"Expiration date: %@", [self expirationDate]);
 }
 
 - (void)restoreSession
@@ -27,9 +26,11 @@
 
     [self setAccessToken:[defaults objectForKey:@"FacebookAccessToken"]];
     [self setExpirationDate:[defaults objectForKey:@"FacebookExpirationDate"]];
+}
 
-    NSLog(@"Access token: '%@'", [self accessToken]);
-    NSLog(@"Expiration date: '%@'", [self expirationDate]);
++ (NSArray *)defaultPermissions
+{
+    return [NSArray arrayWithObject:@"publish_stream"];
 }
 
 @end

@@ -107,6 +107,16 @@
 "global.twitter" = "Twitter";
 
 /*
+ * Facebook sharing
+ */
+"facebook.username" = "Username";
+"facebook.username.placeholder" = "Connected to Facebook";
+"facebook.status" = "Status";
+"facebook.connected" = "Connected";
+"facebook.log-in.title" = "Log In to Facebook";
+"facebook.log-out.title" = "Log Out of Facebook";
+
+/*
  * Twitter sharing
  */
 "twitter.log-in.title" = "Log In to Twitter";
