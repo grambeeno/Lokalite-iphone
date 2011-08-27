@@ -465,6 +465,7 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     [view showActivityIndicatorWithAnimationDuration:duration];
 
     [[self window] addSubview:view];
+    [[self window] bringSubviewToFront:view];
     [view release], view = nil;
 }
 

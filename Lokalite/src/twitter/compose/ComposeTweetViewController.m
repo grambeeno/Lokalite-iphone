@@ -14,6 +14,8 @@
 
 @interface ComposeTweetViewController ()
 
+@property (nonatomic, copy) NSString *tweetText;
+
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem;
@@ -29,7 +31,7 @@
 @implementation ComposeTweetViewController
 
 @synthesize twitterAccount = twitterAccount_;
-@synthesize shareableObject = shareableObject_;
+@synthesize tweetText = tweetText_;
 
 @synthesize textView = textView_;
 @synthesize characterCountButton = characterCountButton_;
@@ -42,7 +44,7 @@
 - (void)dealloc
 {
     [twitterAccount_ release];
-    [shareableObject_ release];
+    [tweetText_ release];
 
     [textView_ release];
     [characterCountButton_ release];
@@ -56,12 +58,12 @@
 #pragma mark - Initialization
 
 - (id)initWithTwitterAccount:(TwitterAccount *)twitterAccount
-             shareableObject:(id<ShareableObject>)shareableObject
+                   tweetText:(NSString *)tweetText
 {
     self = [super initWithNibName:@"ComposeTweetView" bundle:nil];
     if (self) {
         twitterAccount_ = [twitterAccount retain];
-        shareableObject_ = [shareableObject retain];
+        tweetText_ = [tweetText copy];
 
         [self setTitle:NSLocalizedString(@"twitter.send-tweet", nil)];
     }
@@ -106,7 +108,7 @@
 
     [self initializeNavigationItem];
 
-    NSString *text = [[self shareableObject] twitterText];
+    NSString *text = [self tweetText];
     [[self textView] setText:text];
     [self updateInterfaceForText:text];
 

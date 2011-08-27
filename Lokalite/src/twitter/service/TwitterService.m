@@ -15,6 +15,7 @@
 
 @interface TwitterService ()
 @property (nonatomic, retain) YHOAuthTwitterEngine *twitterEngine;
+@property (nonatomic, retain) NSMutableDictionary *requestData;
 @end
 
 
@@ -26,6 +27,8 @@
 
 @synthesize twitterEngine = twitterEngine_;
 
+@synthesize requestData = requestData_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -34,6 +37,7 @@
 
     [twitterAccount_ release];
     [twitterEngine_ release];
+    [requestData_ release];
 
     [super dealloc];
 }
@@ -43,8 +47,10 @@
 - (id)initWithTwitterAccount:(TwitterAccount *)account
 {
     self = [super init];
-    if (self)
+    if (self) {
         twitterAccount_ = [account retain];
+        requestData_ = [[NSMutableDictionary alloc] init];
+    }
 
     return self;
 }
@@ -53,7 +59,8 @@
 
 - (void)sendTweetWithText:(NSString *)text
 {
-    [[self twitterEngine] sendUpdate:text];
+    NSString *requestId = [[self twitterEngine] sendUpdate:text];
+    [[self requestData] setObject:text forKey:requestId];
 }
 
 #pragma mark - MGTwitterEngineDelegate implementation
@@ -64,7 +71,13 @@
 
 - (void)requestFailed:(NSString *)identifier withError:(NSError *)error
 {
-    [[self delegate] twitterService:self didFailToSendTweet:error];
+    NSString *text = [[self requestData] objectForKey:identifier];
+
+    [[self delegate] twitterService:self
+                 didFailToSendTweet:text
+                              error:error];
+
+    [[self requestData] removeObjectForKey:identifier];
 }
 
 - (void)receivedObject:(NSDictionary *)object forRequest:(NSString *)identifier

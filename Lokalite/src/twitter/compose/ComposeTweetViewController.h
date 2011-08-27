@@ -19,7 +19,7 @@ typedef void(^CTVCDidCancel)(void);
     <UITextViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, retain, readonly) TwitterAccount *twitterAccount;
-@property (nonatomic, retain, readonly) id<ShareableObject> shareableObject;
+@property (nonatomic, copy, readonly) NSString *tweetText;
 
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *characterCountButton;
@@ -30,6 +30,6 @@ typedef void(^CTVCDidCancel)(void);
 #pragma mark - Initialization
 
 - (id)initWithTwitterAccount:(TwitterAccount *)twitterAccount
-             shareableObject:(id<ShareableObject>)shareableObject;
+                   tweetText:(NSString *)tweetText;
 
 @end

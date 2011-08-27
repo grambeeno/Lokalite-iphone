@@ -35,6 +35,7 @@
 - (void)twitterService:(TwitterService *)service
           didSendTweet:(NSDictionary *)tweetData;
 - (void)twitterService:(TwitterService *)service
-    didFailToSendTweet:(NSError *)error;
+    didFailToSendTweet:(NSString *)tweetText
+                 error:(NSError *)error;
 
 @end

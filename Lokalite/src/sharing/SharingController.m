@@ -17,6 +17,7 @@
 #import "TwitterOAuthLogInViewController.h"
 #import "ComposeTweetViewController.h"
 
+#import "LokaliteAppDelegate.h"
 #import "UIApplication+GeneralHelpers.h"
 
 #import "SBJSON.h"
@@ -40,6 +41,7 @@
 @property (nonatomic, retain) TwitterService *twitter;
 
 - (void)presentTweetComposeViewWithAccount:(TwitterAccount *)account
+                                 tweetText:(NSString *)tweetText
                             hostController:(UIViewController *)hostController
                                   animated:(BOOL)animated;
 - (void)sendTweetText:(NSString *)text account:(TwitterAccount *)account;
@@ -231,10 +233,6 @@
 
 - (void)shareWithFacebook
 {
-    NSLog(@"Is session valid: %@", [[self facebook] isSessionValid] ? @"YES" : @"NO");
-    NSLog(@"access token: '%@'", [[self facebook] accessToken]);
-    NSLog(@"Expiration date: '%@'", [[self facebook] expirationDate]);
-
     if ([[self facebook] isSessionValid])
         [self sendObjectToFacebook];
     else
@@ -245,7 +243,6 @@
 {
     NSArray *permissions = [NSArray arrayWithObject:@"publish_stream"];
     [[self facebook] authorize:permissions localAppId:nil safariAuth:NO];
-    NSLog(@"Token before logging in: %@", [[self facebook] accessToken]);
 }
 
 - (void)sendObjectToFacebook
@@ -287,6 +284,8 @@
 {
     NSManagedObjectContext *context = [self context];
 
+    NSString *tweetText = [[self shareableObject] twitterText];
+
     TwitterAccount *account = [TwitterAccount accountInContext:context];
     if (!account) {
         TwitterOAuthLogInViewController *controller =
@@ -304,9 +303,8 @@
                                               secret:secret
                                              context:context];
 
-             //UIViewController *hostController =
-             //   [nc modalViewController] ? [nc modalViewController] : nc;
              [self presentTweetComposeViewWithAccount:account
+                                            tweetText:tweetText
                                        hostController:nc
                                              animated:YES];
          }];
@@ -317,18 +315,20 @@
         [controller release];
     } else
         [self presentTweetComposeViewWithAccount:account
+                                       tweetText:tweetText
                                   hostController:[self hostViewController]
                                         animated:YES];
 }
 
 - (void)presentTweetComposeViewWithAccount:(TwitterAccount *)account
+                                 tweetText:(NSString *)tweetText
                             hostController:(UIViewController *)hostController
                                   animated:(BOOL)animated
 {
     UIViewController *rootController = [self hostViewController];
     ComposeTweetViewController *controller =
-        [[ComposeTweetViewController alloc]
-         initWithTwitterAccount:account shareableObject:[self shareableObject]];
+        [[ComposeTweetViewController alloc] initWithTwitterAccount:account
+                                                         tweetText:tweetText];
     [controller setDidCancelHandler:^{
         [rootController dismissModalViewControllerAnimated:YES];
     }];
@@ -348,13 +348,20 @@
 
 - (void)sendTweetText:(NSString *)text account:(TwitterAccount *)account
 {
-    [[UIApplication sharedApplication] networkActivityIsStarting];
+    [[self hostViewController] dismissModalViewControllerAnimated:YES];
+
+    UIApplication *app = [UIApplication sharedApplication];
+
+    [app networkActivityIsStarting];
 
     TwitterService *twitter =
         [[TwitterService alloc] initWithTwitterAccount:account];
     [twitter setDelegate:self];
 
-    [twitter sendTweetWithText:text];
+    LokaliteAppDelegate *delegate = (LokaliteAppDelegate *) [app delegate];
+    [delegate displayActivityViewAnimated:YES completion:^{
+        [twitter sendTweetWithText:text];
+    }];
 
     [self setTwitter:twitter];
     [twitter release], twitter = nil;
@@ -365,28 +372,45 @@
 - (void)twitterService:(TwitterService *)service
           didSendTweet:(NSDictionary *)tweetData
 {
-    [[UIApplication sharedApplication] networkActivityDidFinish];
-    [[self hostViewController] dismissModalViewControllerAnimated:YES];
+    UIApplication *app = [UIApplication sharedApplication];
+
+    [app networkActivityDidFinish];
+
+    LokaliteAppDelegate *delegate = (LokaliteAppDelegate *) [app delegate];
+    [delegate hideActivityViewAnimated:YES];
 }
 
 - (void)twitterService:(TwitterService *)service
-    didFailToSendTweet:(NSError *)error
+    didFailToSendTweet:(NSString *)tweetText
+                 error:(NSError *)error
 {
+    [self presentTweetComposeViewWithAccount:[service twitterAccount]
+                                   tweetText:tweetText
+                              hostController:[self hostViewController]
+                                    animated:YES];
+
     [[UIApplication sharedApplication] networkActivityDidFinish];
 
-    NSString *title =
-        NSLocalizedString(@"twitter.send-failed.error.title", nil);
-    NSString *message = [error localizedDescription];
-    NSString *cancelButtonTitle = NSLocalizedString(@"global.dismiss", nil);
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    [app networkActivityDidFinish];
+    
+    LokaliteAppDelegate *delegate = (LokaliteAppDelegate *) [app delegate];
+    [delegate hideActivityViewAnimated:YES completion:^{
+        NSString *title =
+            NSLocalizedString(@"twitter.send-failed.error.title", nil);
+        NSString *message = [error localizedDescription];
+        NSString *cancelButtonTitle = NSLocalizedString(@"global.dismiss", nil);
 
-    UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle:title
-                                   message:message
-                                  delegate:nil
-                         cancelButtonTitle:cancelButtonTitle
-                         otherButtonTitles:nil];
-    [alert show];
-    [alert release], alert = nil;
+        UIAlertView *alert =
+            [[UIAlertView alloc] initWithTitle:title
+                                       message:message
+                                      delegate:nil
+                             cancelButtonTitle:cancelButtonTitle
+                             otherButtonTitles:nil];
+        [alert show];
+        [alert release], alert = nil;
+    }];
 }
 
 #pragma mark - Accessors
