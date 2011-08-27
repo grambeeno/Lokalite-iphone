@@ -21,6 +21,7 @@
 
 #pragma mark - View initialization
 
+- (void)initializeNavigationItem:(UINavigationItem *)navigationItem;
 - (void)initializeTableView:(UITableView *)tableView;
 
 #pragma mark - View configuration
@@ -45,12 +46,32 @@
     [super dealloc];
 }
 
+#pragma mark - UI events
+
+- (void)presentSettings:(id)sender
+{
+    SettingsViewController *controller =
+        [[SettingsViewController alloc] initWithContext:[self context]];
+    [controller setDelegate:self];
+
+    UINavigationController *nc =
+        [[UINavigationController alloc] initWithRootViewController:controller];
+    [[nc navigationBar] setTintColor:
+     [[[self navigationController] navigationBar] tintColor]];
+
+    [self presentModalViewController:nc animated:YES];
+
+    [nc release], nc = nil;
+    [controller release], controller = nil;
+}
+
 #pragma mark - UITableViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    [self initializeNavigationItem:[self navigationItem]];
     [self initializeTableView:[self tableView]];
 }
 
@@ -144,7 +165,26 @@
     [[self tableView] endUpdates];
 }
 
+#pragma mark - SettingsViewControllerDelegate implementation
+
+- (void)settingsViewControllerIsDone:(SettingsViewController *)controller
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 #pragma mark - View initialization
+
+- (void)initializeNavigationItem:(UINavigationItem *)navigationItem
+{
+    UIBarButtonItem *settingsButton =
+        [[UIBarButtonItem alloc]
+         initWithTitle:@"Settings"
+                 style:UIBarButtonItemStyleBordered
+                target:self
+                action:@selector(presentSettings:)];
+    [navigationItem setRightBarButtonItem:settingsButton];
+    [settingsButton release], settingsButton = nil;
+}
 
 - (void)initializeTableView:(UITableView *)tableView
 {

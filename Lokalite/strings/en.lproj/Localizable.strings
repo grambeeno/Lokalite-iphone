@@ -27,6 +27,8 @@
 "global.today" = "Today";
 "global.tomorrow" = "Tomorrow";
 
+"global.settings" = "Settings";
+
 "global.load-more" = "Load More";
 
 "global.trend" = "Trend";
@@ -101,17 +103,22 @@
 "event.share.email.link-text" = "More on Lokalite.com";
 "event.share.sms.body.prefix" = "Check out this event I found on Lokalite.com";
 
+"global.facebook" = "Facebook";
+"global.twitter" = "Twitter";
+
 /*
  * Twitter sharing
  */
 "twitter.log-in.title" = "Log In to Twitter";
+"twitter.log-out.title" = "Log Out of Twitter";
 "twitter.oauth.authorize.button.title" = "Authorize with Twitter";
 "twitter.oauth.authorize.explanation" = "Lokalite posts links to events and busiensses to Twitter.";
 "twitter.authorize" = "Authorize";
 "twitter.oauth.failed.title" = "Failed to Authorize with Twitter";
-"twitter.compose-tweet.destroy-draft" = "Destroy Tweet";
 
+"twitter.username" = "Username";
 
+"twitter.compose-tweet.destroy-draft" = "Destroy Draft";
 "twitter.send-tweet" = "Send Tweet";
 "twitter.send-failed.error.title" = "Failed to Send Tweet";
 

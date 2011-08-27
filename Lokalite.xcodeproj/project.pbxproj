@@ -68,6 +68,8 @@
 		0522547213FD6EFB002DC909 /* DetailViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0522547113FD6EFB002DC909 /* DetailViewTableViewCell.m */; };
 		0522547513FD6F18002DC909 /* DetailViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0522547413FD6F18002DC909 /* DetailViewTableViewCell.xib */; };
 		0522547713FD6FDF002DC909 /* detail-cell-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0522547613FD6FDF002DC909 /* detail-cell-background@2x.png */; };
+		05273931140973A300BBB37B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527392F140973A300BBB37B /* SettingsViewController.m */; };
+		05273932140973A300BBB37B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05273930140973A300BBB37B /* SettingsView.xib */; };
 		0530CEEC13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */; };
 		0534084313FC218800CE3B45 /* trend-button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0534084213FC218800CE3B45 /* trend-button-background@2x.png */; };
 		0534084513FC3DBE00CE3B45 /* event-details-image-well@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0534084413FC3DBE00CE3B45 /* event-details-image-well@2x.png */; };
@@ -401,6 +403,9 @@
 		0522547113FD6EFB002DC909 /* DetailViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewTableViewCell.m; path = src/shared/DetailViewTableViewCell.m; sourceTree = "<group>"; };
 		0522547413FD6F18002DC909 /* DetailViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewTableViewCell.xib; path = src/shared/DetailViewTableViewCell.xib; sourceTree = "<group>"; };
 		0522547613FD6FDF002DC909 /* detail-cell-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "detail-cell-background@2x.png"; path = "images/shared/detail-cell-background@2x.png"; sourceTree = "<group>"; };
+		0527392E140973A300BBB37B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = src/settings/SettingsViewController.h; sourceTree = "<group>"; };
+		0527392F140973A300BBB37B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = src/settings/SettingsViewController.m; sourceTree = "<group>"; };
+		05273930140973A300BBB37B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView.xib; path = src/settings/SettingsView.xib; sourceTree = "<group>"; };
 		0530CEE813E8C20700601BFB /* MappableLokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MappableLokaliteObject.h; path = src/lokalite/MappableLokaliteObject.h; sourceTree = "<group>"; };
 		0530CEEA13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+GeneralHelpers.h"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+GeneralHelpers.m"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.m"; sourceTree = "<group>"; };
@@ -1066,6 +1071,7 @@
 				05A7B41713D73111008E737C /* categories */,
 				0568334713D09C5200520C78 /* locations */,
 				058C8BA6140307DB00AFDF95 /* sharing */,
+				0527392C140968C500BBB37B /* settings */,
 				0505ECCD13CBC13E009874A7 /* lokalite */,
 				05F2E0EF14084BF8000D3A87 /* facebook */,
 				051D55F5140436C000A615B1 /* twitter */,
@@ -1108,6 +1114,16 @@
 				05209F0F13C770FF00CA6A2D /* LoyaltyView.xib */,
 			);
 			name = loyalty;
+			sourceTree = "<group>";
+		};
+		0527392C140968C500BBB37B /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				0527392E140973A300BBB37B /* SettingsViewController.h */,
+				0527392F140973A300BBB37B /* SettingsViewController.m */,
+				05273930140973A300BBB37B /* SettingsView.xib */,
+			);
+			name = settings;
 			sourceTree = "<group>";
 		};
 		054E06B213CB8293009B7373 /* tab-bar-icons */ = {
@@ -1811,6 +1827,7 @@
 				055FB0F21404AA6F001E5A54 /* TwitterXAuthLogInView.xib in Resources */,
 				05A6583F140544D600568D12 /* TwitterOAuthLogInView.xib in Resources */,
 				05A6588814056F3500568D12 /* ComposeTweetView.xib in Resources */,
+				05273932140973A300BBB37B /* SettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1986,6 +2003,7 @@
 				05A6589014059AB100568D12 /* YHOAuthTwitterEngine.m in Sources */,
 				05F2E0ED14081FC7000D3A87 /* UILabel+GeneralHelpers.m in Sources */,
 				05F2E0F214084C15000D3A87 /* Facebook+GeneralHelpers.m in Sources */,
+				05273931140973A300BBB37B /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

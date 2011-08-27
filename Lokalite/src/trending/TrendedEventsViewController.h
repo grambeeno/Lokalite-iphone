@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#import "SettingsViewController.h"
+
 //
 // Shows events trended by the user.
 //
 
 @interface TrendedEventsViewController : UITableViewController
-    <NSFetchedResultsControllerDelegate>
+    <NSFetchedResultsControllerDelegate,
+     SettingsViewControllerDelegate>
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 
