@@ -11,4 +11,10 @@
 
 @interface PlacesViewController : PlaceStreamViewController
 
+@property (nonatomic, retain) IBOutlet UISegmentedControl *placeSelector;
+
+#pragma mark - UI events
+
+- (IBAction)placeSelectorValueChanged:(id)sender;
+
 @end

@@ -27,6 +27,13 @@
 #import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
+
+enum {
+    PlaceFilterStartTime,
+    PlaceFilterDistance
+};
+
+
 @interface PlacesViewController ()
 
 #pragma mark - View initialization
@@ -37,6 +44,23 @@
 
 
 @implementation PlacesViewController
+
+@synthesize placeSelector = placeSelector_;
+
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    [placeSelector_ release];
+    [super dealloc];
+}
+
+#pragma mark - UI events
+
+- (IBAction)placeSelectorValueChanged:(id)sender
+{
+    [self refresh:nil];
+}
 
 #pragma mark - UIViewController implementation
 
@@ -96,7 +120,19 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [PlacesLokaliteStream streamWithContext:[self context]];
+    //return [PlacesLokaliteStream streamWithContext:[self context]];
+    NSManagedObjectContext *context = [self context];
+    NSInteger idx = [[self placeSelector] selectedSegmentIndex];
+
+    NSString *orderBy =
+        idx == PlaceFilterStartTime ? @"starts_at" : @"distance";
+    LokaliteStream *stream =
+        [CategoryLokaliteStream placeStreamWithCategoryName:nil
+                                                    context:context];
+    [stream setOrderBy:orderBy];
+
+    return stream;
+
 }
 
 #pragma mark - View initialization

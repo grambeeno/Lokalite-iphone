@@ -22,6 +22,7 @@
 @dynamic fullImageUrl;
 @dynamic url;
 @dynamic name;
+@dynamic distance;
 @dynamic fullImageData;
 @dynamic largeImageUrl;
 @dynamic largeImageData;

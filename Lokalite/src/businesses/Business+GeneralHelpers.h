@@ -47,6 +47,7 @@
 @interface Business (GeoHelpers)
 
 - (CLLocation *)locationInstance;
+- (void)updateWithDistanceFromLocation:(CLLocation *)location;
 
 @end
 

@@ -55,6 +55,7 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 #pragma mark - Places
 
 - (void)fetchPlacesWithCategory:(NSString *)category
+                       fromPage:(NSInteger)page
                 responseHandler:(LSResponseHandler)handler;
 
 #pragma mark - Search

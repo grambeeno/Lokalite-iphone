@@ -164,10 +164,15 @@
 #pragma mark - Places
 
 - (void)fetchPlacesWithCategory:(NSString *)category
+                       fromPage:(NSInteger)page
                 responseHandler:(LSResponseHandler)handler
 {
+    NSMutableDictionary *params = [self queryParametersForPage:page];
+    if (category)
+        [params setObject:category forKey:@"category"];
+
     [self sendRequestWithUrl:[self placesUrl]
-                  parameters:nil
+                  parameters:params
                requestMethod:LKRequestMethodGET
              responseHandler:handler];
 }
