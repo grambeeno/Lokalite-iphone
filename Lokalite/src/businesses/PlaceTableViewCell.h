@@ -2,7 +2,7 @@
 //  PlaceTableViewCell.h
 //  Lokalite
 //
-//  Created by John Debay on 7/25/11.
+//  Created by John Debay on 7/13/11.
 //  Copyright 2011 Lokalite. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *placeImageView;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *summaryLabel;
+@property (nonatomic, retain) IBOutlet UILabel *distanceLabel;
 
 #pragma mark - Configuration helpers
 
@@ -24,10 +25,11 @@
 
 
 
-@class Business;
+@class CLLocation, Business;
 
 @interface PlaceTableViewCell (UserInterfaceHelpers)
 
-- (void)configureCellForPlace:(Business *)place;
+- (void)configureCellForPlace:(Business *)place
+              displayDistance:(BOOL)displayDistance;
 
 @end

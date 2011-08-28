@@ -84,7 +84,8 @@
           inTableView:(UITableView *)tableView
             forObject:(Business *)place
 {
-    [cell configureCellForPlace:place];
+    [cell configureCellForPlace:place
+                displayDistance:[self hasValidLocation]];
 
     UIImage *image = [place standardImage];
     if (!image) {
