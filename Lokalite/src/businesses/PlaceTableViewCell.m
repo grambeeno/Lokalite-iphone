@@ -48,7 +48,7 @@
 
     summaryLabelFrame.size.width =
         frame.size.width - distanceLabelFrame.size.width -
-        (imageViewFrame.origin.x + imageViewFrame.size.width) - 10;
+        (imageViewFrame.origin.x + imageViewFrame.size.width) - 12;
     [[self summaryLabel] setFrame:summaryLabelFrame];
 }
 
