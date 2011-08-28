@@ -79,7 +79,6 @@
 		0548320D13F1B09B0099125B /* CategoryLokaliteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320C13F1B09B0099125B /* CategoryLokaliteStream.m */; };
 		0548321013F1CF6B0099125B /* RemoteSearchTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */; };
 		0549AB5513D77A6800F9C2C2 /* CategoryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */; };
-		054ADD1213F9DDB40068C4F8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 054ADD1113F9DDB30068C4F8 /* Event.m */; };
 		054ADD1513F9EAEF0068C4F8 /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 054ADD1413F9EAEF0068C4F8 /* Business.m */; };
 		054E06B613CB82B6009B7373 /* tab-bar-icon-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */; };
 		054E06B713CB82B6009B7373 /* tab-bar-icon-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054E06B513CB82B6009B7373 /* tab-bar-icon-profile@2x.png */; };
@@ -246,6 +245,7 @@
 		05B91DDC13EC478000E3A898 /* LokaliteDownloadSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DDB13EC478000E3A898 /* LokaliteDownloadSource.m */; };
 		05B91DDF13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DDE13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m */; };
 		05B91DE213EC51AB00E3A898 /* LokaliteDownloadSource+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B91DE113EC51AA00E3A898 /* LokaliteDownloadSource+GeneralHelpers.m */; };
+		05BC17DB140AE17E00CF9AF4 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BC17DA140AE17E00CF9AF4 /* Event.m */; };
 		05BC9C0213E9A41B00FBAD23 /* AllEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BC9C0113E9A41B00FBAD23 /* AllEventsViewController.m */; };
 		05BC9C0513E9A43000FBAD23 /* AllEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05BC9C0413E9A43000FBAD23 /* AllEventsView.xib */; };
 		05BC9C0D13E9BFD700FBAD23 /* standard-button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BC9C0B13E9BFD700FBAD23 /* standard-button-background@2x.png */; };
@@ -423,8 +423,6 @@
 		0548320F13F1CF6B0099125B /* RemoteSearchTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoteSearchTableFooterView.m; path = src/shared/RemoteSearchTableFooterView.m; sourceTree = "<group>"; };
 		0549AB5313D77A6800F9C2C2 /* CategoryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryFilter.h; path = src/categories/CategoryFilter.h; sourceTree = "<group>"; };
 		0549AB5413D77A6800F9C2C2 /* CategoryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilter.m; path = src/categories/CategoryFilter.m; sourceTree = "<group>"; };
-		054ADD1013F9DDB30068C4F8 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
-		054ADD1113F9DDB30068C4F8 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
 		054ADD1313F9EAEF0068C4F8 /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Business.h; path = src/businesses/Business.h; sourceTree = "<group>"; };
 		054ADD1413F9EAEF0068C4F8 /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Business.m; path = src/businesses/Business.m; sourceTree = "<group>"; };
 		054E06B413CB82B6009B7373 /* tab-bar-icon-profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-bar-icon-profile.png"; path = "images/tab-bar-icons/tab-bar-icon-profile.png"; sourceTree = "<group>"; };
@@ -688,6 +686,8 @@
 		05B91DDE13EC4CDF00E3A898 /* LokaliteObject+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LokaliteObject+GeneralHelpers.m"; path = "src/lokalite/LokaliteObject+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05B91DE013EC51AA00E3A898 /* LokaliteDownloadSource+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LokaliteDownloadSource+GeneralHelpers.h"; path = "src/lokalite/LokaliteDownloadSource+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05B91DE113EC51AA00E3A898 /* LokaliteDownloadSource+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LokaliteDownloadSource+GeneralHelpers.m"; path = "src/lokalite/LokaliteDownloadSource+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05BC17D9140AE17E00CF9AF4 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = src/events/Event.h; sourceTree = "<group>"; };
+		05BC17DA140AE17E00CF9AF4 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = src/events/Event.m; sourceTree = "<group>"; };
 		05BC9C0013E9A41B00FBAD23 /* AllEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllEventsViewController.h; path = src/events/AllEventsViewController.h; sourceTree = "<group>"; };
 		05BC9C0113E9A41B00FBAD23 /* AllEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllEventsViewController.m; path = src/events/AllEventsViewController.m; sourceTree = "<group>"; };
 		05BC9C0413E9A43000FBAD23 /* AllEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AllEventsView.xib; path = src/events/AllEventsView.xib; sourceTree = "<group>"; };
@@ -1577,8 +1577,8 @@
 		05EC9A3913CB969700B7AD61 /* events */ = {
 			isa = PBXGroup;
 			children = (
-				054ADD1013F9DDB30068C4F8 /* Event.h */,
-				054ADD1113F9DDB30068C4F8 /* Event.m */,
+				05BC17D9140AE17E00CF9AF4 /* Event.h */,
+				05BC17DA140AE17E00CF9AF4 /* Event.m */,
 				056A92E913CCF3AB00C65DC0 /* Event+GeneralHelpers.h */,
 				056A92EA13CCF3AB00C65DC0 /* Event+GeneralHelpers.m */,
 				059B340313D4F291007AD11C /* EventsView.xib */,
@@ -1914,7 +1914,6 @@
 				05E5555D13F433AD00DF0F31 /* CategoryPlaceStreamViewController.m in Sources */,
 				05E5556A13F47C5300DF0F31 /* DeviceLocator.m in Sources */,
 				05AB961113F61BE6002FEA4E /* DistanceFormatter.m in Sources */,
-				054ADD1213F9DDB40068C4F8 /* Event.m in Sources */,
 				054ADD1513F9EAEF0068C4F8 /* Business.m in Sources */,
 				058D74C713FB3D00005B48BC /* TrendButton.m in Sources */,
 				0522547213FD6EFB002DC909 /* DetailViewTableViewCell.m in Sources */,
@@ -2004,6 +2003,7 @@
 				05F2E0ED14081FC7000D3A87 /* UILabel+GeneralHelpers.m in Sources */,
 				05F2E0F214084C15000D3A87 /* Facebook+GeneralHelpers.m in Sources */,
 				05273931140973A300BBB37B /* SettingsViewController.m in Sources */,
+				05BC17DB140AE17E00CF9AF4 /* Event.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

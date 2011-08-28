@@ -19,6 +19,7 @@
 @implementation Event
 @dynamic summary;
 @dynamic endDate;
+@dynamic dateDescription;
 @dynamic startDate;
 @dynamic trended;
 @dynamic featured;

@@ -52,6 +52,11 @@
     return [NSArray arrayWithObjects:sd1, sd2, nil];
 }
 
+- (NSString *)dataControllerSectionNameKeyPath
+{
+    return @"dateDescription";
+}
+
 #pragma mark Fetching data from the network
 
 - (LokaliteStream *)lokaliteStreamInstance

@@ -42,48 +42,21 @@
 
 - (BOOL)isToday
 {
-    static NSCalendar * calendar = nil;
-    if (!calendar)
-        calendar = [[NSCalendar currentCalendar] retain];
+    NSDate *today = [[NSDate alloc] init];
+    BOOL isToday = [self isOnSameDayAsDate:today];
+    [today release], today = nil;
 
-    static NSDate * startOfToday = nil;
-    if (!startOfToday) {
-        startOfToday = [[NSDate alloc] init];
-        NSCalendarUnit units =
-            NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-        NSDateComponents * components = [calendar components:units 
-                                                    fromDate:startOfToday];
-
-        [components setHour:components.hour * -1];
-        [components setMinute:components.minute * -1];
-        [components setSecond:components.second * -1];
-
-        startOfToday = [[calendar dateByAddingComponents:components
-                                                  toDate:startOfToday
-                                                 options:0] retain];
-    }
-
-    return [self compare:startOfToday] == NSOrderedDescending;
+    return isToday;
 }
 
 - (BOOL)isTomorrow
 {
-    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
-    
-    unsigned unitFlags =
-        NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSDate *tomorrow =
+        [[NSDate alloc] initWithTimeIntervalSinceNow:60 * 60 * 24];
+    BOOL isTomorrow = [self isOnSameDayAsDate:tomorrow];
+    [tomorrow release], tomorrow = nil;
 
-    NSDateComponents * selfComps =
-        [currentCalendar components:unitFlags fromDate:self];
-    
-    NSDate * now = [NSDate date];
-
-    NSDateComponents * nowComps =
-        [currentCalendar components:unitFlags fromDate:now];
-    
-    return [nowComps day] + 1 == [selfComps day] &&
-        [nowComps month] == [selfComps month] &&
-        [nowComps year] == [selfComps year];
+    return isTomorrow;
 }
 
 - (BOOL)isMoreThanWeekInTheFuture
@@ -123,7 +96,7 @@
         [comps1 era] == [comps2 era] &&
         [comps1 year] == [comps2 year] &&
         [comps1 month] == [comps2 month] &&
-        [comps1 day] == [comps1 day];
+        [comps1 day] == [comps2 day];
 }
 
 - (NSString *)descriptionWithFormat:(NSString *)format

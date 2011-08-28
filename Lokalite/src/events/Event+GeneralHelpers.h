@@ -58,6 +58,11 @@
 - (NSString *)standardImageUrl;
 
 //
+// Calculates the appropriate description to be used for the current time
+//
+- (void)updateDateDescriptionFromDate:(NSDate *)date;
+
+//
 // Call this method to set trend status rather than using the accessor directly
 // so it can do some awesome hacking to prevent LokaliteObjects from getting
 // deleted when the app launches.

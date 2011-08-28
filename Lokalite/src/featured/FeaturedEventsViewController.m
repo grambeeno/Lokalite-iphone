@@ -63,6 +63,11 @@
     return [NSCompoundPredicate andPredicateWithSubpredicates:subpredicates];
 }
 
+- (NSString *)dataControllerSectionNameKeyPath
+{
+    return @"dateDescription";
+}
+
 #pragma mark Fetching data from the network
 
 - (void)processNextBatchOfFetchedObjects:(NSArray *)objects

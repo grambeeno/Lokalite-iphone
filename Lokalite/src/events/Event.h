@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSString * summary;
 @property (nonatomic, retain) NSDate * endDate;
 @property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSString * dateDescription;
 @property (nonatomic, retain) NSNumber * trended;
 @property (nonatomic, retain) NSNumber * featured;
 @property (nonatomic, retain) NSNumber * usersCount;

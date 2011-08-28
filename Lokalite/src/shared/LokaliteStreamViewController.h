@@ -132,7 +132,6 @@
 - (NSString *)lokaliteObjectEntityName;
 - (NSPredicate *)dataControllerPredicate;
 - (NSArray *)dataControllerSortDescriptors;
-
 - (NSString *)dataControllerSectionNameKeyPath;
 - (NSString *)dataControllerCacheName;
 

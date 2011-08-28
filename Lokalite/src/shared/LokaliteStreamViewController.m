@@ -321,10 +321,19 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    NSInteger nsections = 0;
     if ([self tableView] == tableView)
-        return [[[self dataController] sections] count];
+        nsections = [[[self dataController] sections] count];
     else
-        return 1;
+        nsections = 1;
+
+    return nsections;
+}
+
+- (NSString *)tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section
+{
+    return [[[[self dataController] sections] objectAtIndex:section] name];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -333,10 +342,12 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     NSInteger nrows = 0;
 
     if ([self tableView] == tableView) {
+        NSArray *sections = [[self dataController] sections];
         id <NSFetchedResultsSectionInfo> sectionInfo =
-            [[[self dataController] sections] objectAtIndex:section];
+            [sections objectAtIndex:section];
+
         nrows = [sectionInfo numberOfObjects];
-        if ([self isCategoryFilterLoaded])
+        if ([self isCategoryFilterLoaded] && section == 0)
             ++nrows;
     } else {
         nrows = [[self searchResults] count];
@@ -462,6 +473,26 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     [[self tableView] beginUpdates];
 }
 
+
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type
+{
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndex:sectionIndex];
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertSections:sections
+                            withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+ 
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteSections:sections
+                            withRowAnimation:UITableViewRowAnimationTop];
+            break;
+    }
+}
+
 - (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath
@@ -488,7 +519,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
                        withRowAnimation:UITableViewRowAnimationTop];
         }
             break;
- 
+
         case NSFetchedResultsChangeUpdate: {
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             // HACK: The data controller cannot be accessed with the
