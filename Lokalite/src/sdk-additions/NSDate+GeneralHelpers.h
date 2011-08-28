@@ -16,8 +16,10 @@
 
 - (BOOL)isToday;
 - (BOOL)isTomorrow;
+- (BOOL)isThisWeek;
 - (BOOL)isMoreThanWeekInTheFuture;
 
+- (NSInteger)daysUntilDate:(NSDate *)date;
 - (BOOL)isOnSameDayAsDate:(NSDate *)date;
 
 + (NSString *)textRangeWithStartDate:(NSDate *)startDate

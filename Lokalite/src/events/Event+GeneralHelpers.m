@@ -286,25 +286,26 @@
 
 - (void)updateDateDescriptionFromDate:(NSDate *)date
 {
-    NSString *description = @"!!!!Unknown!!!!!";
+    NSString *description = nil;
     NSDate *startDate = [self startDate];
-    /*
-    if ([startDate isOnSameDayAsDate:date]) {
-        if ([startDate isToday])
-            description = NSLocalizedString(@"global.today", nil);
-        else if ([startDate isTomorrow])
-            description = NSLocalizedString(@"global.tomorrow", nil);
-        else
-            description = @"Later";
-    }
-     */
+    NSDate *endDate = [self endDate];
 
-    if ([startDate isToday])
+    NSComparisonResult order = [startDate compare:date];
+    BOOL isAfterStartDate =
+        order == NSOrderedSame || order == NSOrderedAscending;
+    order = [endDate compare:date];
+    BOOL isBeforeEndDate =
+        order == NSOrderedSame || order == NSOrderedDescending;
+    BOOL isGoingOnNow = isAfterStartDate && isBeforeEndDate;
+
+    if (isGoingOnNow || [startDate isToday])
         description = NSLocalizedString(@"global.today", nil);
     else if ([startDate isTomorrow])
         description = NSLocalizedString(@"global.tomorrow", nil);
+    else if ([startDate isThisWeek])
+        description = NSLocalizedString(@"global.this-week", nil);
     else
-        description = @"Later";
+        description = NSLocalizedString(@"global.later", nil);
 
     NSLog(@"%@: date description: '%@'", [self name], description);
     [self setDateDescription:description];

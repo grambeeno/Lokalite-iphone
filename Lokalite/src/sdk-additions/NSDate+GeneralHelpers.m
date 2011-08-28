@@ -59,13 +59,54 @@
     return isTomorrow;
 }
 
+- (BOOL)isThisWeek
+{
+    NSDate *today = [[NSDate alloc] init];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+
+    // Get the weekday component of the current date
+    NSDateComponents *weekdayComponents =
+        [calendar components:NSWeekdayCalendarUnit fromDate:today];
+
+    NSDateComponents *componentsToSubtract = [[NSDateComponents alloc] init];
+    [componentsToSubtract setDay:0 - ([weekdayComponents weekday] - 1)];
+ 
+    NSDate *beginningOfWeek =
+        [calendar dateByAddingComponents:componentsToSubtract
+                                  toDate:today
+                                 options:0];
+
+    // set beginningOfWeek to midnigth
+    NSDateComponents *components =
+        [calendar components:(NSYearCalendarUnit |
+                              NSMonthCalendarUnit |
+                              NSDayCalendarUnit)
+                    fromDate:beginningOfWeek];
+    beginningOfWeek = [calendar dateFromComponents:components];
+
+    NSDate *endOfWeek =
+        [beginningOfWeek dateByAddingTimeInterval:60 * 60 * 24 * 7];
+
+    NSComparisonResult result = [beginningOfWeek compare:self];
+    BOOL isAfterBeginningOfWeek =
+        result == NSOrderedAscending || result == NSOrderedSame;
+    result = [endOfWeek compare:self];
+    BOOL isBeforeEndOfWeek =
+        result == NSOrderedDescending || result == NSOrderedSame;
+
+    [today release], today = nil;
+    [componentsToSubtract release], componentsToSubtract = nil;
+ 
+    return isAfterBeginningOfWeek && isBeforeEndOfWeek;
+}
+
 - (BOOL)isMoreThanWeekInTheFuture
 {
     NSCalendar * currentCalendar = [NSCalendar currentCalendar];
 
     unsigned unitFlags =
         NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-    
+
     NSDateComponents * selfComps =
         [currentCalendar components:unitFlags fromDate:self];
 
@@ -80,23 +121,23 @@
     return [beginningOfToday timeIntervalSinceNow] < 60 * 60 * 24 * 7;
 }
 
-- (BOOL)isOnSameDayAsDate:(NSDate *)date
+- (NSInteger)daysUntilDate:(NSDate *)date
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
 
-    NSUInteger unitFlags = NSEraCalendarUnit |
-                           NSYearCalendarUnit |
-                           NSMonthCalendarUnit |
-                           NSDayCalendarUnit;
+    NSInteger startDay = [calendar ordinalityOfUnit:NSDayCalendarUnit
+                                             inUnit:NSEraCalendarUnit
+                                            forDate:self];
+    NSInteger endDay = [calendar ordinalityOfUnit:NSDayCalendarUnit
+                                           inUnit:NSEraCalendarUnit
+                                          forDate:date];
 
-    NSDateComponents *comps1 = [calendar components:unitFlags fromDate:self];
-    NSDateComponents *comps2 = [calendar components:unitFlags fromDate:date];
+    return endDay - startDay;
+}
 
-    return
-        [comps1 era] == [comps2 era] &&
-        [comps1 year] == [comps2 year] &&
-        [comps1 month] == [comps2 month] &&
-        [comps1 day] == [comps2 day];
+- (BOOL)isOnSameDayAsDate:(NSDate *)date
+{
+    return [self daysUntilDate:date] == 0;
 }
 
 - (NSString *)descriptionWithFormat:(NSString *)format

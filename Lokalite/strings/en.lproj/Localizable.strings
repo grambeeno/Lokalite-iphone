@@ -26,6 +26,8 @@
 "global.profile" = "Profile";
 "global.today" = "Today";
 "global.tomorrow" = "Tomorrow";
+"global.this-week" = "This Week";
+"global.later" = "Later";
 
 "global.settings" = "Settings";
 
