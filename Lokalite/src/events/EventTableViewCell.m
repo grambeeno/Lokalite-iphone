@@ -50,9 +50,11 @@
     CGRect frame = [[self contentView] frame];
     CGRect timeLabelFrame = [[self timeLabel] frame];
     CGRect distanceLabelFrame = [[self distanceLabel] frame];
+    CGRect imageViewFrame = [[self eventImageView] frame];
 
     timeLabelFrame.size.width =
-        frame.size.width - distanceLabelFrame.size.width - 5;
+        frame.size.width - distanceLabelFrame.size.width -
+        (imageViewFrame.origin.x + imageViewFrame.size.width) - 12;
     [[self timeLabel] setFrame:timeLabelFrame];
 }
 
