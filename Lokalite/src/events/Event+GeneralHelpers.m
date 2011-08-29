@@ -284,32 +284,10 @@
 
 - (void)updateDateDescription
 {
-    NSDate *now = [[NSDate alloc] init];
-
-    NSString *description = nil;
-    NSDate *startDate = [self startDate];
-    NSDate *endDate = [self endDate];
-
-    NSComparisonResult order = [startDate compare:now];
-    BOOL isAfterStartDate =
-        order == NSOrderedSame || order == NSOrderedAscending;
-    order = [endDate compare:now];
-    BOOL isBeforeEndDate =
-        order == NSOrderedSame || order == NSOrderedDescending;
-    BOOL isGoingOnNow = isAfterStartDate && isBeforeEndDate;
-
-    if (isGoingOnNow || [startDate isToday])
-        description = NSLocalizedString(@"global.today", nil);
-    else if ([startDate isTomorrow])
-        description = NSLocalizedString(@"global.tomorrow", nil);
-    else if ([startDate isThisWeek])
-        description = NSLocalizedString(@"global.this-week", nil);
-    else
-        description = NSLocalizedString(@"global.later", nil);
-
+    NSString *description =
+        [[self class] sectionDescriptionForStartDate:[self startDate]
+                                             endDate:[self endDate]];
     [self setDateDescription:description];
-
-    [now release], now = nil;
 }
 
 - (void)trendEvent:(BOOL)trend
@@ -336,6 +314,34 @@
           trend ? @"trended" : @"untrended");
 }
 
++ (NSString *)sectionDescriptionForStartDate:(NSDate *)startDate
+                                     endDate:(NSDate *)endDate
+{
+    NSDate *now = [[NSDate alloc] init];
+    NSString *description = nil;
+
+    NSComparisonResult order = [startDate compare:now];
+    BOOL isAfterStartDate =
+        order == NSOrderedSame || order == NSOrderedAscending;
+    order = [endDate compare:now];
+    BOOL isBeforeEndDate =
+        order == NSOrderedSame || order == NSOrderedDescending;
+    BOOL isGoingOnNow = isAfterStartDate && isBeforeEndDate;
+
+    if (isGoingOnNow || [startDate isToday])
+        description = NSLocalizedString(@"global.today", nil);
+    else if ([startDate isTomorrow])
+        description = NSLocalizedString(@"global.tomorrow", nil);
+    else if ([startDate isThisWeek])
+        description = NSLocalizedString(@"global.this-week", nil);
+    else
+        description = NSLocalizedString(@"global.later", nil);
+
+    [now release], now = nil;
+
+    return description;
+}
+
 @end
 
 
@@ -354,13 +360,23 @@
 - (void)updateWithDistanceFromLocation:(CLLocation *)location
 {
     NSNumber *distance = nil;
+    NSString *description = nil;
+
+    /*
+    if (!location)
+        location = [[[CLLocation alloc] initWithLatitude:40 longitude:100] autorelease];
+     */
+
     if (location) {
         CLLocation *myLocation = [self locationInstance];
         CLLocationDistance d = [location distanceFromLocation:myLocation];
         distance = [NSNumber numberWithDouble:d];
+
+        description = [DistanceFormatter sectionDescriptionForDistance:d];
     }
 
     [self setDistance:distance];
+    [self setDistanceDescription:description];
 }
 
 @end

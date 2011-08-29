@@ -69,6 +69,13 @@
 //
 - (void)trendEvent:(BOOL)trend;
 
+//
+// Free function to generate a date section description that can be used in
+// the user interface.
+//
++ (NSString *)sectionDescriptionForStartDate:(NSDate *)startDate
+                                     endDate:(NSDate *)endDate;
+
 @end
 
 
@@ -79,6 +86,9 @@
 //
 - (CLLocation *)locationInstance;
 
+//
+// Updates botht the distance and the distanceDescription.
+//
 - (void)updateWithDistanceFromLocation:(CLLocation *)location;
 
 @end

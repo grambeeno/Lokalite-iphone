@@ -62,7 +62,7 @@ enum {
     [self initializeNavigationItem];
 
     [self setCanSearchServer:YES];
-    [self setShowsCategoryFilter:YES];
+    [self setShowsCategoryFilter:/*YES*/ NO];
     [self setRequiresLocation:YES];
 }
 
@@ -90,6 +90,18 @@ enum {
         hasLocation ?
         [Event locationTableViewSortDescriptors] :
         [Event dateTableViewSortDescriptors];
+}
+
+- (NSString *)dataControllerSectionNameKeyPath
+{
+    BOOL distanceSelected =
+        [[self eventSelector] selectedSegmentIndex] == EventFilterDistance;
+    BOOL hasLocation =
+        distanceSelected &&
+        [self requiresLocation] &&
+        CLLocationCoordinate2DIsValid([[self lokaliteStream] location]);
+
+    return hasLocation ? @"distanceDescription" : @"dateDescription";
 }
 
 #pragma mark - Search - remote

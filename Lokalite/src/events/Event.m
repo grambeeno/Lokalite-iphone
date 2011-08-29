@@ -28,6 +28,7 @@
 @dynamic fullImageData;
 @dynamic name;
 @dynamic distance;
+@dynamic distanceDescription;
 @dynamic largeImageUrl;
 @dynamic thumbnailImageUrl;
 @dynamic mediumImageUrl;

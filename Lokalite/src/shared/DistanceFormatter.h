@@ -21,3 +21,10 @@
 
 @end
 
+
+@interface DistanceFormatter (LokaliteHelpers)
+
++ (NSString *)sectionDescriptionForDistance:(CLLocationDistance)distance;
+
+@end
+

@@ -34,3 +34,4 @@
 #import "PlaceEventLokaliteStream.h"
 
 #import "DeviceLocator.h"
+#import "DistanceFormatter.h"

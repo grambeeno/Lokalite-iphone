@@ -63,3 +63,28 @@
 }
 
 @end
+
+
+
+@implementation DistanceFormatter (LokaliteHelpers)
+
++ (NSString *)sectionDescriptionForDistance:(CLLocationDistance)distance
+{
+    static const CLLocationDistance WALKING_DISTANCE = 1609.344;  // 1 mile
+    static const CLLocationDistance BIKING_DISTANCE = 1609.344 * 5;
+    static const CLLocationDistance DRIVING_DISTANCE = 1609.344 * 150;
+
+    NSString *description = nil;
+    if (distance < WALKING_DISTANCE)
+        description = NSLocalizedString(@"distance.walking-distance", nil);
+    else if (distance < BIKING_DISTANCE)
+        description = NSLocalizedString(@"distance.driving-distance", nil);
+    else if (distance < DRIVING_DISTANCE)
+        description = NSLocalizedString(@"distance.driving-distance", nil);
+    else
+        description = NSLocalizedString(@"distance.flying-distance", nil);
+
+    return description;
+}
+
+@end
