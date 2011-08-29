@@ -69,7 +69,7 @@
         [calendar components:NSWeekdayCalendarUnit fromDate:today];
 
     NSDateComponents *componentsToSubtract = [[NSDateComponents alloc] init];
-    [componentsToSubtract setDay:0 - ([weekdayComponents weekday] - 1)];
+    [componentsToSubtract setDay:0 - ([weekdayComponents weekday])];
  
     NSDate *beginningOfWeek =
         [calendar dateByAddingComponents:componentsToSubtract
@@ -84,15 +84,16 @@
                     fromDate:beginningOfWeek];
     beginningOfWeek = [calendar dateFromComponents:components];
 
+    // fast forward 8 days, then check that the date is before endOfWeek to
+    // determine if the receiver happens before the end of the week
     NSDate *endOfWeek =
-        [beginningOfWeek dateByAddingTimeInterval:60 * 60 * 24 * 7];
+        [beginningOfWeek dateByAddingTimeInterval:60 * 60 * 24 * 8];
 
     NSComparisonResult result = [beginningOfWeek compare:self];
     BOOL isAfterBeginningOfWeek =
         result == NSOrderedAscending || result == NSOrderedSame;
     result = [endOfWeek compare:self];
-    BOOL isBeforeEndOfWeek =
-        result == NSOrderedDescending || result == NSOrderedSame;
+    BOOL isBeforeEndOfWeek = result == NSOrderedDescending;
 
     [today release], today = nil;
     [componentsToSubtract release], componentsToSubtract = nil;
