@@ -296,27 +296,27 @@
 
 - (NSURL *)profileUrl
 {
-    return [[self baseUrl] URLByAppendingPathComponent:@"api/profile"];
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/1/profile"];
 }
 
 - (NSURL *)featuredEventUrl
 {
-    return [[self baseUrl] URLByAppendingPathComponent:@"api/events"];
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/1/events"];
 }
 
 - (NSURL *)trendUrl
 {
-    return [[self baseUrl] URLByAppendingPathComponent:@"api/events/trend"];
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/1/events/trend"];
 }
 
 - (NSURL *)untrendUrl
 {
-    return [[self baseUrl] URLByAppendingPathComponent:@"api/events/untrend"];
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/1/events/untrend"];
 }
 
 - (NSURL *)placesUrl
 {
-    return [[self baseUrl] URLByAppendingPathComponent:@"api/places"];
+    return [[self baseUrl] URLByAppendingPathComponent:@"api/1/places"];
 }
 
 @end
