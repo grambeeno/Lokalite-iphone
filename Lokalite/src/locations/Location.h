@@ -15,6 +15,7 @@
 @interface Location : LokaliteObject {
 @private
 }
+@property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSString * formattedAddress;
 @property (nonatomic, retain) NSNumber * longitude;

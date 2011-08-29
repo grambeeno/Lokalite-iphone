@@ -12,6 +12,7 @@
 
 
 @implementation Location
+@dynamic name;
 @dynamic latitude;
 @dynamic formattedAddress;
 @dynamic longitude;

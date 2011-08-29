@@ -428,7 +428,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         }
     } else if ([indexPath section] == kSectionLocation) {
         if ([indexPath row] == kLocationRowTitle) {
-            [[cell textLabel] setText:[[[self event] business] name]];
+            [[cell textLabel] setText:[[[self event] location] name]];
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
         } else if ([indexPath row] == kLocationRowAddress) {

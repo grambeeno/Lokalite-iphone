@@ -136,8 +136,6 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     [[self data] appendData:data];
-    NSLog(@"'%@': received %d bytes (%d bytes total)", [self url],
-          [data length], [[self data] length]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection

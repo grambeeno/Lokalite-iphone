@@ -115,11 +115,9 @@
     NSManagedObject *obj = [self instanceWithIdentifier:identifier
                                               inContext:context];
     if (!obj) {
-        NSLog(@"Creating new %@: %@", NSStringFromClass(self), identifier);
         obj = [self createInstanceInContext:context];
         [obj setValue:identifier forKey:@"identifier"];
-    } else
-        NSLog(@"Found existing %@: %@", NSStringFromClass(self), identifier);
+    }
 
     return obj;
 }

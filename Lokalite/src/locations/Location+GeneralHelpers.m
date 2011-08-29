@@ -74,6 +74,9 @@
                                                          inContext:context];
     [location addDownloadSourcesObject:source];
 
+    NSString *name = [jsonData objectForKey:@"name"];
+    [location setValueIfNecessary:name forKey:@"name"];
+
     [location setValueIfNecessary:[jsonData objectForKey:@"formatted_address"]
                                                   forKey:@"formattedAddress"];
 
