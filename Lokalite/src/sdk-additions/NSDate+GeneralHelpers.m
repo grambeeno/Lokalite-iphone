@@ -179,7 +179,7 @@
         dayDescription = NSLocalizedString(@"global.today", nil);
     } else if ([self isTomorrow]) {
         dayDescription = NSLocalizedString(@"global.tomorrow", nil);
-    } else if (![self isMoreThanWeekInTheFuture]) {
+    } else if ([self isThisWeek]) {
         dayDescription = [self descriptionWithFormat:@"EEE"];
     } else {
         static NSDateFormatter *formatter = nil;
