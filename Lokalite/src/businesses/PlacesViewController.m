@@ -83,6 +83,35 @@ enum {
     return NSLocalizedString(@"global.places", nil);
 }
 
+#pragma mark - Working with the local data store
+
+- (NSArray *)dataControllerSortDescriptors
+{
+    BOOL distanceSelected =
+        [[self placeSelector] selectedSegmentIndex] == PlaceFilterDistance;
+    BOOL hasLocation =
+        distanceSelected &&
+        [self requiresLocation] &&
+        CLLocationCoordinate2DIsValid([[self lokaliteStream] location]);
+
+    return
+        hasLocation ?
+        [Business locationTableViewSortDescriptors] :
+        [Business nameTableViewSortDescriptors];
+}
+
+- (NSString *)dataControllerSectionNameKeyPath
+{
+    BOOL distanceSelected =
+        [[self placeSelector] selectedSegmentIndex] == PlaceFilterDistance;
+    BOOL hasLocation =
+        distanceSelected &&
+        [self requiresLocation] &&
+        CLLocationCoordinate2DIsValid([[self lokaliteStream] location]);
+
+    return hasLocation ? @"distanceDescription" : nil;
+}
+
 #pragma mark - Search - remote
 
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
