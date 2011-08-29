@@ -155,16 +155,12 @@
 
 - (NSArray *)dataControllerSortDescriptors
 {
-    return
-        [self hasValidLocation] ?
-        [Event locationTableViewSortDescriptors] :
-        [Event dateTableViewSortDescriptors];
+    return [Event dateTableViewSortDescriptors];
 }
 
 - (NSString *)dataControllerSectionNameKeyPath
 {
-    return
-        [self hasValidLocation] ? @"distanceDescription" : @"dateDescription";
+    return @"dateDescription";
 }
 
 #pragma mark Fetching data from the network
