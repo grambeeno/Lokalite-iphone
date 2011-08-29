@@ -60,7 +60,7 @@
 //
 // Calculates the appropriate description to be used for the current time
 //
-- (void)updateDateDescriptionFromDate:(NSDate *)date;
+- (void)updateDateDescription;
 
 //
 // Call this method to set trend status rather than using the accessor directly

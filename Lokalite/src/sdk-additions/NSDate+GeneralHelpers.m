@@ -42,9 +42,9 @@
 
 - (BOOL)isToday
 {
-    NSDate *today = [[NSDate alloc] init];
-    BOOL isToday = [self isOnSameDayAsDate:today];
-    [today release], today = nil;
+    NSDate *now = [[NSDate alloc] init];
+    BOOL isToday = [self isOnSameDayAsDate:now];
+    [now release], now = nil;
 
     return isToday;
 }
@@ -122,9 +122,16 @@
     return [beginningOfToday timeIntervalSinceNow] < 60 * 60 * 24 * 7;
 }
 
+/*
+ * Removing implementation because ordinaliteyOfDate: does not account for time
+ * zone. Therefore two dates that are not on the same day in local time but that
+ * are on the smae day in GMT will get an incorect value from this method.
+ */
+/*
 - (NSInteger)daysUntilDate:(NSDate *)date
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone systemTimeZone]];
 
     NSInteger startDay = [calendar ordinalityOfUnit:NSDayCalendarUnit
                                              inUnit:NSEraCalendarUnit
@@ -135,10 +142,23 @@
 
     return endDay - startDay;
 }
+ */
 
 - (BOOL)isOnSameDayAsDate:(NSDate *)date
 {
-    return [self daysUntilDate:date] == 0;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSEraCalendarUnit |
+                           NSYearCalendarUnit |
+                           NSMonthCalendarUnit |
+                           NSDayCalendarUnit;
+
+    NSDateComponents *comps1 = [calendar components:unitFlags fromDate:self];
+    NSDateComponents *comps2 = [calendar components:unitFlags fromDate:date];
+    return
+        [comps1 era] == [comps2 era] &&
+        [comps1 year] == [comps2 year] &&
+        [comps1 month] == [comps2 month] &&
+        [comps1 day] == [comps2 day];
 }
 
 - (NSString *)descriptionWithFormat:(NSString *)format

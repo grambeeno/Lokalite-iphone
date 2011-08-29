@@ -98,9 +98,7 @@
     NSDate *endDate = [NSDate dateFromLokaliteServerString:endString];
     [event setValueIfNecessary:endDate forKey:@"endDate"];
 
-    NSDate *now = [[NSDate alloc] init];
-    [event updateDateDescriptionFromDate:now];
-    [now release], now = nil;
+    [event updateDateDescription];
 
     NSString *summary = [eventData objectForKey:@"description"];
     [event setValueIfNecessary:summary forKey:@"summary"];
@@ -284,16 +282,18 @@
     return [self fullImageUrl];
 }
 
-- (void)updateDateDescriptionFromDate:(NSDate *)date
+- (void)updateDateDescription
 {
+    NSDate *now = [[NSDate alloc] init];
+
     NSString *description = nil;
     NSDate *startDate = [self startDate];
     NSDate *endDate = [self endDate];
 
-    NSComparisonResult order = [startDate compare:date];
+    NSComparisonResult order = [startDate compare:now];
     BOOL isAfterStartDate =
         order == NSOrderedSame || order == NSOrderedAscending;
-    order = [endDate compare:date];
+    order = [endDate compare:now];
     BOOL isBeforeEndDate =
         order == NSOrderedSame || order == NSOrderedDescending;
     BOOL isGoingOnNow = isAfterStartDate && isBeforeEndDate;
@@ -307,8 +307,9 @@
     else
         description = NSLocalizedString(@"global.later", nil);
 
-    NSLog(@"%@: date description: '%@'", [self name], description);
     [self setDateDescription:description];
+
+    [now release], now = nil;
 }
 
 - (void)trendEvent:(BOOL)trend
