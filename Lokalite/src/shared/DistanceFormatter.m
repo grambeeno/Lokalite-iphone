@@ -78,7 +78,7 @@
     if (distance < WALKING_DISTANCE)
         description = NSLocalizedString(@"distance.walking-distance", nil);
     else if (distance < BIKING_DISTANCE)
-        description = NSLocalizedString(@"distance.driving-distance", nil);
+        description = NSLocalizedString(@"distance.biking-distance", nil);
     else if (distance < DRIVING_DISTANCE)
         description = NSLocalizedString(@"distance.driving-distance", nil);
     else
