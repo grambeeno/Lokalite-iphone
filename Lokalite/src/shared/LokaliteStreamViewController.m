@@ -55,6 +55,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
                                 inTableView:(UITableView *)tableView;
 - (NSIndexPath *)dataIndexPathForTableViewIndexPath:(NSIndexPath *)ip
                                         inTableView:(UITableView *)tv;
+- (NSInteger)tableViewSectionForDataSection:(NSInteger)section
+                                inTableView:(UITableView *)tableView;
 - (NSIndexPath *)tableViewIndexPathForDataIndexPath:(NSIndexPath *)ip
                                         inTableView:(UITableView *)tv;
 
@@ -355,12 +357,13 @@ titleForHeaderInSection:(NSInteger)section
         if ([self isCategoryFilterLoaded] && section == 0)
             nrows = 1;
         else {
-            section = [self dataSectionForTableViewSection:section
-                                               inTableView:tableView];
+            NSInteger dataSection =
+                [self dataSectionForTableViewSection:section
+                                         inTableView:tableView];
 
             NSArray *sections = [[self dataController] sections];
             id <NSFetchedResultsSectionInfo> sectionInfo =
-                [sections objectAtIndex:section];
+                [sections objectAtIndex:dataSection];
 
             nrows = [sectionInfo numberOfObjects];
         }
@@ -488,12 +491,13 @@ titleForHeaderInSection:(NSInteger)section
     [[self tableView] beginUpdates];
 }
 
-
 - (void)controller:(NSFetchedResultsController *)controller
   didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex
      forChangeType:(NSFetchedResultsChangeType)type
 {
+    sectionIndex = [self tableViewSectionForDataSection:sectionIndex
+                                            inTableView:[self tableView]];
     NSIndexSet *sections = [NSIndexSet indexSetWithIndex:sectionIndex];
     switch(type) {
         case NSFetchedResultsChangeInsert:
@@ -951,18 +955,29 @@ titleForHeaderInSection:(NSInteger)section
     if ([self showsCategoryFilter] && tableView == [self tableView]) {
         NSInteger section = [self dataSectionForTableViewSection:[path section]
                                                      inTableView:tableView];
-         return [NSIndexPath indexPathForRow:[path row] - 1 inSection:section];
+         return [NSIndexPath indexPathForRow:[path row] inSection:section];
     } else
         return path;
+}
+
+
+- (NSInteger)tableViewSectionForDataSection:(NSInteger)section
+                                inTableView:(UITableView *)tableView
+{
+    BOOL categoryFilterIsLoaded = [self isCategoryFilterLoaded];
+    if (tableView == [self tableView] && categoryFilterIsLoaded)
+        return section + 1;
+    else
+        return section;
 }
 
 - (NSIndexPath *)tableViewIndexPathForDataIndexPath:(NSIndexPath *)path
                                         inTableView:(UITableView *)tableView
 {
     if ([self showsCategoryFilter] && tableView == [self tableView]) {
-        NSInteger section = [self dataSectionForTableViewSection:[path section]
+        NSInteger section = [self tableViewSectionForDataSection:[path section]
                                                      inTableView:tableView];
-        return [NSIndexPath indexPathForRow:[path row] + 1 inSection:section];
+        return [NSIndexPath indexPathForRow:[path row] inSection:section];
     } else
         return path;
 }
@@ -1243,10 +1258,8 @@ titleForHeaderInSection:(NSInteger)section
 
     if ([self isViewLoaded]) {
         [[self categoryFilterView] setCategoryFilters:filters];
-        NSIndexPath *first = [NSIndexPath indexPathForRow:0 inSection:0];
-        NSArray *paths = [NSArray arrayWithObject:first];
-        [[self tableView] insertRowsAtIndexPaths:paths
-                                withRowAnimation:UITableViewRowAnimationFade];
+        NSIndexSet *sections = [NSIndexSet indexSetWithIndex:0];
+        [[self tableView] insertSections:sections withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
