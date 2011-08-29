@@ -94,6 +94,11 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 
 - (BOOL)fetchBusinessImageIfNecessary;
 
+#pragma mark - Updating for business states
+
+- (void)observeChangesForBusiness:(Business *)business;
+- (void)stopObservingChangesForBusiness:(Business *)business;
+
 #pragma mark - Sharing
 
 @property (nonatomic, retain) SharingController *sharingController;
@@ -118,6 +123,8 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 
 - (void)dealloc
 {
+    [self stopObservingChangesForBusiness:[self business]];
+
     [headerView_ release];
     [business_ release];
     [locationMapCell_ release];
@@ -161,6 +168,8 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
     [self initializeHeaderView];
     [self initializeMapView];
     [self fetchBusinessImageIfNecessary];
+
+    [self observeChangesForBusiness:[self business]];
 }
 
 #pragma mark - UITableViewDataSource implementation
@@ -491,6 +500,31 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
     }
 
     return fetched;
+}
+
+#pragma mark - Updating for business states
+
+- (void)observeChangesForBusiness:(Business *)business
+{
+    [business addObserver:self
+               forKeyPath:@"mediumImageData"
+                  options:NSKeyValueObservingOptionNew |
+                          NSKeyValueObservingOptionOld
+                  context:NULL];
+}
+
+- (void)stopObservingChangesForBusiness:(Business *)business
+{
+    [business removeObserver:self forKeyPath:@"mediumImageData"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([keyPath isEqualToString:@"mediumImageData"])
+        [[self headerView] configureForBusiness:[self business]];
 }
 
 #pragma mark - Accessors
