@@ -53,6 +53,14 @@
 "global.directions-in-maps" = "Get Directions";
 
 /*
+ * Distance
+ */
+"distance.walking-distance" = "Walk";
+"distance.biking-distance" = "Bike";
+"distance.driving-distance" = "Drive";
+"distance.flying-distance" = "Fly";
+
+/*
  * Search
  */
 
