@@ -54,6 +54,7 @@
 
 @interface Business (TableViewHelpers)
 
-+ (NSArray *)defaultTableViewSortDescriptors;
++ (NSArray *)nameTableViewSortDescriptors;
++ (NSArray *)locationTableViewSortDescriptors;
 
 @end

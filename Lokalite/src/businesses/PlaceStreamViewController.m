@@ -150,7 +150,15 @@
 
 - (NSArray *)dataControllerSortDescriptors
 {
-    return [Business defaultTableViewSortDescriptors];
+    return
+        [self hasValidLocation] ?
+        [Business locationTableViewSortDescriptors] :
+        [Business nameTableViewSortDescriptors];
+}
+
+- (NSString *)dataControllerSectionNameKeyPath
+{
+    return [self hasValidLocation] ? @"distanceDescription" : nil;
 }
 
 #pragma mark Fetching data from the network

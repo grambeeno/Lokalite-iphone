@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * distance;
+@property (nonatomic, retain) NSString * distanceDescription;
 @property (nonatomic, retain) NSData * fullImageData;
 @property (nonatomic, retain) NSString * largeImageUrl;
 @property (nonatomic, retain) NSData * largeImageData;

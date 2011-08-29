@@ -77,6 +77,7 @@ enum {
 
 #pragma mark - Working with the local data store
 
+/*
 - (NSArray *)dataControllerSortDescriptors
 {
     BOOL distanceSelected =
@@ -103,6 +104,7 @@ enum {
 
     return hasLocation ? @"distanceDescription" : @"dateDescription";
 }
+ */
 
 #pragma mark - Search - remote
 

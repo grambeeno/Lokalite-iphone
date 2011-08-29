@@ -16,8 +16,7 @@
 
 #import "LokaliteDownloadSource.h"
 
-#import "LokaliteObjectBuilder.h"
-
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
 @interface Business ()
@@ -214,13 +213,17 @@
 - (void)updateWithDistanceFromLocation:(CLLocation *)location
 {
     NSNumber *distance = nil;
+    NSString *description = nil;
     if (location) {
         CLLocation *myLocation = [self locationInstance];
         CLLocationDistance d = [location distanceFromLocation:myLocation];
         distance = [NSNumber numberWithDouble:d];
+
+        description = [DistanceFormatter sectionDescriptionForDistance:d];
     }
 
     [self setDistance:distance];
+    [self setDistanceDescription:description];
 }
 
 @end
@@ -228,11 +231,19 @@
 
 @implementation Business (TableViewHelpers)
 
-+ (NSArray *)defaultTableViewSortDescriptors
++ (NSArray *)nameTableViewSortDescriptors
 {
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
                                                          ascending:YES];
     return [NSArray arrayWithObject:sd];
+}
+
++ (NSArray *)locationTableViewSortDescriptors
+{
+    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"distance"
+                                                          ascending:YES];
+
+    return [NSArray arrayWithObject:sd1];
 }
 
 @end

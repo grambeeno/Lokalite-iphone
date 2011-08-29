@@ -71,7 +71,7 @@ enum {
     [self initializeNavigationItem];
 
     [self setCanSearchServer:YES];
-    [self setShowsCategoryFilter:YES];
+    [self setShowsCategoryFilter:/*YES*/ NO];
 }
 
 #pragma mark - LokaliteStreamViewController implementation

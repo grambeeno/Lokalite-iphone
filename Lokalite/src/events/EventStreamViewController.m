@@ -161,6 +161,12 @@
         [Event dateTableViewSortDescriptors];
 }
 
+- (NSString *)dataControllerSectionNameKeyPath
+{
+    return
+        [self hasValidLocation] ? @"distanceDescription" : @"dateDescription";
+}
+
 #pragma mark Fetching data from the network
 
 - (void)processNextBatchOfFetchedObjects:(NSArray *)events
