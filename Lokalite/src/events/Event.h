@@ -23,7 +23,7 @@
 @property (nonatomic, retain) NSString * dateDescription;
 @property (nonatomic, retain) NSNumber * trended;
 @property (nonatomic, retain) NSNumber * featured;
-@property (nonatomic, retain) NSNumber * usersCount;
+@property (nonatomic, retain) NSNumber * trendWeight;
 @property (nonatomic, retain) NSString * fullImageUrl;
 @property (nonatomic, retain) NSData * fullImageData;
 @property (nonatomic, retain) NSString * name;

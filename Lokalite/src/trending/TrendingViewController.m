@@ -45,7 +45,7 @@
 - (NSArray *)dataControllerSortDescriptors
 {
     NSSortDescriptor *sd1 =
-        [NSSortDescriptor sortDescriptorWithKey:@"usersCount" ascending:NO];
+        [NSSortDescriptor sortDescriptorWithKey:@"trendWeight" ascending:NO];
     NSSortDescriptor *sd2 =
         [NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:YES];
 

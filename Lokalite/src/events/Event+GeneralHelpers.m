@@ -115,8 +115,8 @@
     [event setValueIfNecessary:trended forKey:@"trended"];
      */
 
-    NSNumber *usersCount = [eventData objectForKey:@"users_count"];
-    [event setValueIfNecessary:usersCount forKey:@"usersCount"];
+    NSNumber *trendWeight = [eventData objectForKey:@"trend_weight"];
+    [event setValueIfNecessary:trendWeight forKey:@"trendWeight"];
 
     [event setImageUrlsFromJsonData:eventData];
 

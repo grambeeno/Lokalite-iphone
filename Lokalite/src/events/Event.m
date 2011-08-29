@@ -23,7 +23,7 @@
 @dynamic startDate;
 @dynamic trended;
 @dynamic featured;
-@dynamic usersCount;
+@dynamic trendWeight;
 @dynamic fullImageUrl;
 @dynamic fullImageData;
 @dynamic name;
