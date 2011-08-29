@@ -476,6 +476,12 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)observeChangesForEvent:(Event *)event
 {
     [event addObserver:self
+            forKeyPath:@"mediumImageData"
+               options:NSKeyValueObservingOptionNew |
+                       NSKeyValueObservingOptionOld
+               context:NULL];
+
+    [event addObserver:self
             forKeyPath:@"trended"
                options:NSKeyValueObservingOptionNew |
                        NSKeyValueObservingOptionOld
@@ -484,6 +490,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (void)stopObservingChangesForEvent:(Event *)event
 {
+    [event removeObserver:self forKeyPath:@"mediumImageData"];
     [event removeObserver:self forKeyPath:@"trended"];
 }
 
@@ -492,6 +499,9 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
                         change:(NSDictionary *)change
                        context:(void *)context
 {
+    if ([keyPath isEqualToString:@"mediumImageData"])
+        [self configureHeaderForEvent:[self event]];
+
     if ([keyPath isEqualToString:@"trended"])
         [self configureHeaderForEvent:[self event]];
 }
