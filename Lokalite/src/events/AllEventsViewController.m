@@ -62,7 +62,7 @@ enum {
     [self initializeNavigationItem];
 
     [self setCanSearchServer:YES];
-    [self setShowsCategoryFilter:/*YES*/ NO];
+    [self setShowsCategoryFilter:YES];
     [self setRequiresLocation:YES];
 }
 

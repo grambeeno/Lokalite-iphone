@@ -51,6 +51,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 @property (nonatomic, retain) CategoryFilterView *categoryFilterView;
 @property (nonatomic, retain) UITableViewCell *categoryFilterCell;
 
+- (NSInteger)dataSectionForTableViewSection:(NSInteger)section
+                                inTableView:(UITableView *)tableView;
 - (NSIndexPath *)dataIndexPathForTableViewIndexPath:(NSIndexPath *)ip
                                         inTableView:(UITableView *)tv;
 - (NSIndexPath *)tableViewIndexPathForDataIndexPath:(NSIndexPath *)ip
@@ -322,9 +324,11 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger nsections = 0;
-    if ([self tableView] == tableView)
+    if ([self tableView] == tableView) {
         nsections = [[[self dataController] sections] count];
-    else
+        if ([self isCategoryFilterLoaded])
+            ++nsections;
+    } else
         nsections = 1;
 
     return nsections;
@@ -333,7 +337,13 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section
 {
-    return [[[[self dataController] sections] objectAtIndex:section] name];
+    if ([self isCategoryFilterLoaded] && section == 0)
+        return nil;
+    else {
+        section =
+            [self dataSectionForTableViewSection:section inTableView:tableView];
+        return [[[[self dataController] sections] objectAtIndex:section] name];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -342,13 +352,18 @@ titleForHeaderInSection:(NSInteger)section
     NSInteger nrows = 0;
 
     if ([self tableView] == tableView) {
-        NSArray *sections = [[self dataController] sections];
-        id <NSFetchedResultsSectionInfo> sectionInfo =
-            [sections objectAtIndex:section];
-
-        nrows = [sectionInfo numberOfObjects];
         if ([self isCategoryFilterLoaded] && section == 0)
-            ++nrows;
+            nrows = 1;
+        else {
+            section = [self dataSectionForTableViewSection:section
+                                               inTableView:tableView];
+
+            NSArray *sections = [[self dataController] sections];
+            id <NSFetchedResultsSectionInfo> sectionInfo =
+                [sections objectAtIndex:section];
+
+            nrows = [sectionInfo numberOfObjects];
+        }
     } else {
         nrows = [[self searchResults] count];
         if ([self canSearchServer] && ![self hasSearchedServer])
@@ -921,23 +936,34 @@ titleForHeaderInSection:(NSInteger)section
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
 
+- (NSInteger)dataSectionForTableViewSection:(NSInteger)section
+                                inTableView:(UITableView *)tableView
+{
+    BOOL categoryFilterIsLoaded = [self isCategoryFilterLoaded];
+    if (tableView == [self tableView] && categoryFilterIsLoaded && section > 0)
+        return section - 1;
+    return section;
+}
+
 - (NSIndexPath *)dataIndexPathForTableViewIndexPath:(NSIndexPath *)path
                                         inTableView:(UITableView *)tableView
 {
-    if ([self showsCategoryFilter] && tableView == [self tableView])
-         return [NSIndexPath indexPathForRow:[path row] - 1
-                                   inSection:[path section]];
-    else
+    if ([self showsCategoryFilter] && tableView == [self tableView]) {
+        NSInteger section = [self dataSectionForTableViewSection:[path section]
+                                                     inTableView:tableView];
+         return [NSIndexPath indexPathForRow:[path row] - 1 inSection:section];
+    } else
         return path;
 }
 
 - (NSIndexPath *)tableViewIndexPathForDataIndexPath:(NSIndexPath *)path
                                         inTableView:(UITableView *)tableView
 {
-    if ([self showsCategoryFilter] && tableView == [self tableView])
-        return [NSIndexPath indexPathForRow:[path row] + 1
-                                  inSection:[path section]];
-    else
+    if ([self showsCategoryFilter] && tableView == [self tableView]) {
+        NSInteger section = [self dataSectionForTableViewSection:[path section]
+                                                     inTableView:tableView];
+        return [NSIndexPath indexPathForRow:[path row] + 1 inSection:section];
+    } else
         return path;
 }
 

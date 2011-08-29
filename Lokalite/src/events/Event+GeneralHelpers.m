@@ -115,8 +115,11 @@
     [event setValueIfNecessary:trended forKey:@"trended"];
      */
 
-    NSNumber *trendWeight = [eventData objectForKey:@"trend_weight"];
+    NSString *trendWeightString = [eventData objectForKey:@"trend_weight"];
+    NSNumber *trendWeight =
+        [[NSNumber alloc] initWithFloat:[trendWeightString floatValue]];
     [event setValueIfNecessary:trendWeight forKey:@"trendWeight"];
+    [trendWeight release], trendWeight = nil;
 
     [event setImageUrlsFromJsonData:eventData];
 
