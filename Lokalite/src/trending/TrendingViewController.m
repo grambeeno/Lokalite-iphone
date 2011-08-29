@@ -61,7 +61,13 @@
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    return [TrendingEventLokaliteStream streamWithContext:[self context]];
+    TrendingEventLokaliteStream *stream =
+        [TrendingEventLokaliteStream streamWithContext:[self context]];
+    // objects per page needs to be high enough so that only one page loads;
+    // current expected number of objects from the server is 12
+    [stream setObjectsPerPage:15];
+
+    return stream;
 }
 
 #pragma mark - View initialization
