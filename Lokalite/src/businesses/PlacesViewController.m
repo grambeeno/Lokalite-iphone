@@ -120,12 +120,10 @@ enum {
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
-    //return [PlacesLokaliteStream streamWithContext:[self context]];
     NSManagedObjectContext *context = [self context];
     NSInteger idx = [[self placeSelector] selectedSegmentIndex];
 
-    NSString *orderBy =
-        idx == PlaceFilterStartTime ? @"starts_at" : @"distance";
+    NSString *orderBy = idx == PlaceFilterStartTime ? @"name" : @"distance";
     LokaliteStream *stream =
         [CategoryLokaliteStream placeStreamWithCategoryName:nil
                                                     context:context];
