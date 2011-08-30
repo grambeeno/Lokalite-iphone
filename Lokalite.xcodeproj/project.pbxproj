@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		050436A013C77F220077F03D /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0504369E13C77F220077F03D /* radar.png */; };
-		050436A113C77F220077F03D /* radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0504369F13C77F220077F03D /* radar@2x.png */; };
 		050436A313C786BA0077F03D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050436A213C786BA0077F03D /* Icon@2x.png */; };
 		0505ECD413CBC2ED009874A7 /* LokaliteServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0505ECD313CBC2ED009874A7 /* LokaliteServiceRequest.m */; };
 		0505ECD713CBC659009874A7 /* NSURL+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0505ECD613CBC659009874A7 /* NSURL+GeneralHelpers.m */; };
@@ -70,9 +68,11 @@
 		0522547713FD6FDF002DC909 /* detail-cell-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0522547613FD6FDF002DC909 /* detail-cell-background@2x.png */; };
 		05273931140973A300BBB37B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527392F140973A300BBB37B /* SettingsViewController.m */; };
 		05273932140973A300BBB37B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05273930140973A300BBB37B /* SettingsView.xib */; };
+		052F2B7E140D3DE8000C8E60 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 052F2B7C140D3DE8000C8E60 /* radar.png */; };
+		052F2B7F140D3DE8000C8E60 /* radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052F2B7D140D3DE8000C8E60 /* radar@2x.png */; };
+		052F2B83140D4D12000C8E60 /* detail-view-image-well@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052F2B82140D4D12000C8E60 /* detail-view-image-well@2x.png */; };
 		0530CEEC13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */; };
 		0534084313FC218800CE3B45 /* trend-button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0534084213FC218800CE3B45 /* trend-button-background@2x.png */; };
-		0534084513FC3DBE00CE3B45 /* event-details-image-well@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0534084413FC3DBE00CE3B45 /* event-details-image-well@2x.png */; };
 		0548320413F0DEFE0099125B /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320313F0DEFE0099125B /* Location.m */; };
 		0548320713F1AB070099125B /* EventStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320613F1AB070099125B /* EventStreamViewController.m */; };
 		0548320A13F1AEA70099125B /* CategoryEventStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0548320913F1AEA70099125B /* CategoryEventStreamViewController.m */; };
@@ -282,8 +282,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0504369E13C77F220077F03D /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = radar.png; path = images/radar.png; sourceTree = "<group>"; };
-		0504369F13C77F220077F03D /* radar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "radar@2x.png"; path = "images/radar@2x.png"; sourceTree = "<group>"; };
 		050436A213C786BA0077F03D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		0505ECD213CBC2ED009874A7 /* LokaliteServiceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LokaliteServiceRequest.h; path = src/lokalite/LokaliteServiceRequest.h; sourceTree = "<group>"; };
 		0505ECD313CBC2ED009874A7 /* LokaliteServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LokaliteServiceRequest.m; path = src/lokalite/LokaliteServiceRequest.m; sourceTree = "<group>"; };
@@ -406,11 +404,13 @@
 		0527392E140973A300BBB37B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = src/settings/SettingsViewController.h; sourceTree = "<group>"; };
 		0527392F140973A300BBB37B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = src/settings/SettingsViewController.m; sourceTree = "<group>"; };
 		05273930140973A300BBB37B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView.xib; path = src/settings/SettingsView.xib; sourceTree = "<group>"; };
+		052F2B7C140D3DE8000C8E60 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = radar.png; path = "images/navigation-bar-icons/radar.png"; sourceTree = "<group>"; };
+		052F2B7D140D3DE8000C8E60 /* radar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "radar@2x.png"; path = "images/navigation-bar-icons/radar@2x.png"; sourceTree = "<group>"; };
+		052F2B82140D4D12000C8E60 /* detail-view-image-well@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "detail-view-image-well@2x.png"; path = "images/shared/detail-view-image-well@2x.png"; sourceTree = "<group>"; };
 		0530CEE813E8C20700601BFB /* MappableLokaliteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MappableLokaliteObject.h; path = src/lokalite/MappableLokaliteObject.h; sourceTree = "<group>"; };
 		0530CEEA13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+GeneralHelpers.h"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.h"; sourceTree = "<group>"; };
 		0530CEEB13E8D56900601BFB /* UIBarButtonItem+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+GeneralHelpers.m"; path = "src/sdk-additions/UIBarButtonItem+GeneralHelpers.m"; sourceTree = "<group>"; };
 		0534084213FC218800CE3B45 /* trend-button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trend-button-background@2x.png"; path = "images/event-details/trend-button-background@2x.png"; sourceTree = "<group>"; };
-		0534084413FC3DBE00CE3B45 /* event-details-image-well@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-details-image-well@2x.png"; path = "images/event-details/event-details-image-well@2x.png"; sourceTree = "<group>"; };
 		0548320213F0DEFE0099125B /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = src/locations/Location.h; sourceTree = "<group>"; };
 		0548320313F0DEFE0099125B /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = src/locations/Location.m; sourceTree = "<group>"; };
 		0548320513F1AB070099125B /* EventStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventStreamViewController.h; path = src/events/EventStreamViewController.h; sourceTree = "<group>"; };
@@ -772,6 +772,7 @@
 		0504369C13C77F0C0077F03D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				052F2B7A140D3DCC000C8E60 /* navigation-bar-icons */,
 				054E06B213CB8293009B7373 /* tab-bar-icons */,
 				05D06E6E13D76B3300878AD6 /* buttons */,
 				054E06C013CB8978009B7373 /* mock-images */,
@@ -780,8 +781,6 @@
 				05BC9C0A13E9BFBB00FBAD23 /* shared */,
 				05770E8813DE1B8D00B841D4 /* lokalite-logo.png */,
 				05770E8913DE1B8D00B841D4 /* lokalite-logo@2x.png */,
-				0504369E13C77F220077F03D /* radar.png */,
-				0504369F13C77F220077F03D /* radar@2x.png */,
 				0568334213CFAAC900520C78 /* detail-view-header-background@2x.png */,
 			);
 			name = images;
@@ -1126,6 +1125,15 @@
 			name = settings;
 			sourceTree = "<group>";
 		};
+		052F2B7A140D3DCC000C8E60 /* navigation-bar-icons */ = {
+			isa = PBXGroup;
+			children = (
+				052F2B7C140D3DE8000C8E60 /* radar.png */,
+				052F2B7D140D3DE8000C8E60 /* radar@2x.png */,
+			);
+			name = "navigation-bar-icons";
+			sourceTree = "<group>";
+		};
 		054E06B213CB8293009B7373 /* tab-bar-icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1372,7 +1380,6 @@
 		059AEE0C13E74BE300AA4DF7 /* event-details */ = {
 			isa = PBXGroup;
 			children = (
-				0534084413FC3DBE00CE3B45 /* event-details-image-well@2x.png */,
 				0534084213FC218800CE3B45 /* trend-button-background@2x.png */,
 				058D74C813FB4036005B48BC /* trend-view-background@2x.png */,
 				059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */,
@@ -1515,6 +1522,7 @@
 		05BC9C0A13E9BFBB00FBAD23 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				052F2B82140D4D12000C8E60 /* detail-view-image-well@2x.png */,
 				0522547613FD6FDF002DC909 /* detail-cell-background@2x.png */,
 				05BC9C0B13E9BFD700FBAD23 /* standard-button-background@2x.png */,
 				05BC9C0C13E9BFD700FBAD23 /* standard-button-pressed-background@2x.png */,
@@ -1738,8 +1746,6 @@
 				05209EE713C76F9200CA6A2D /* InfoPlist.strings in Resources */,
 				05209F1213C770FF00CA6A2D /* LoyaltyView.xib in Resources */,
 				05209F1813C7710F00CA6A2D /* MainWindow.xib in Resources */,
-				050436A013C77F220077F03D /* radar.png in Resources */,
-				050436A113C77F220077F03D /* radar@2x.png in Resources */,
 				050436A313C786BA0077F03D /* Icon@2x.png in Resources */,
 				054E06B613CB82B6009B7373 /* tab-bar-icon-profile.png in Resources */,
 				054E06B713CB82B6009B7373 /* tab-bar-icon-profile@2x.png in Resources */,
@@ -1819,7 +1825,6 @@
 				05E5555713F340C900DF0F31 /* category-filters-places.plist in Resources */,
 				058D74C913FB4036005B48BC /* trend-view-background@2x.png in Resources */,
 				0534084313FC218800CE3B45 /* trend-button-background@2x.png in Resources */,
-				0534084513FC3DBE00CE3B45 /* event-details-image-well@2x.png in Resources */,
 				0522547513FD6F18002DC909 /* DetailViewTableViewCell.xib in Resources */,
 				0522547713FD6FDF002DC909 /* detail-cell-background@2x.png in Resources */,
 				05977D491402CE65003C8C24 /* TrendedEventsView.xib in Resources */,
@@ -1828,6 +1833,9 @@
 				05A6583F140544D600568D12 /* TwitterOAuthLogInView.xib in Resources */,
 				05A6588814056F3500568D12 /* ComposeTweetView.xib in Resources */,
 				05273932140973A300BBB37B /* SettingsView.xib in Resources */,
+				052F2B7E140D3DE8000C8E60 /* radar.png in Resources */,
+				052F2B7F140D3DE8000C8E60 /* radar@2x.png in Resources */,
+				052F2B83140D4D12000C8E60 /* detail-view-image-well@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

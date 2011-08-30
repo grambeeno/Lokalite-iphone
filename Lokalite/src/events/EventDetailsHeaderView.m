@@ -8,6 +8,8 @@
 
 #import "EventDetailsHeaderView.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @implementation EventDetailsHeaderView
 
 @synthesize imageView = imageView_;
@@ -31,6 +33,13 @@
     [trendButton_ release];
 
     [super dealloc];
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+
+    [[[self imageView] layer] setCornerRadius:5];
 }
 
 @end

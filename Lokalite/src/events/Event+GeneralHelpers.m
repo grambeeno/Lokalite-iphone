@@ -375,11 +375,6 @@
     NSNumber *distance = nil;
     NSString *description = nil;
 
-    /*
-    if (!location)
-        location = [[[CLLocation alloc] initWithLatitude:40 longitude:100] autorelease];
-     */
-
     if (location) {
         CLLocation *myLocation = [self locationInstance];
         CLLocationDistance d = [location distanceFromLocation:myLocation];

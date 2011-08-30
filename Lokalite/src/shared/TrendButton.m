@@ -16,10 +16,10 @@
 - (void)initialize
 {
     //UIColor *buttonTextColor = [UIColor colorWithRGBValue:0x262935];
-    UIColor *buttonTextColor = [UIColor whiteColor];
-    UIColor *buttonShadowColor = //[[UIColor whiteColor] colorWithAlphaComponent:1];
-        [UIColor darkGrayColor];
-    CGSize buttonShadowOffset = CGSizeMake(0, -1);
+    //UIColor *buttonTextColor = [UIColor whiteColor];
+    //UIColor *buttonShadowColor = //[[UIColor whiteColor] colorWithAlphaComponent:1];
+    //    [UIColor darkGrayColor];
+    //CGSize buttonShadowOffset = CGSizeMake(0, -1);
 
     UIImage *bgImage = [UIImage imageNamed:@"trend-button-background"];
     UIImage *bgImagePressed =
@@ -35,11 +35,11 @@
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 
     [[self titleLabel] setFont:[UIFont boldSystemFontOfSize:19]];
-    [[self titleLabel] setShadowOffset:buttonShadowOffset];
+    //[[self titleLabel] setShadowOffset:buttonShadowOffset];
 
     [self setBackgroundImage:bgImage forState:UIControlStateNormal];
-    [self setTitleColor:buttonTextColor forState:UIControlStateNormal];
-    [self setTitleShadowColor:buttonShadowColor forState:UIControlStateNormal];
+    //[self setTitleColor:buttonTextColor forState:UIControlStateNormal];
+    //[self setTitleShadowColor:buttonShadowColor forState:UIControlStateNormal];
 
     [self setBackgroundImage:bgImagePressed
                       forState:UIControlStateHighlighted];
