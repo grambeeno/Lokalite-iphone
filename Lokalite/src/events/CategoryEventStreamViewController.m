@@ -99,7 +99,9 @@
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
     (NSString *)keywords
 {
+    NSString *category = [self categoryName];
     return [SearchLokaliteStream eventSearchStreamWithKeywords:keywords
+                                                      category:category
                                                        context:[self context]];
 }
 

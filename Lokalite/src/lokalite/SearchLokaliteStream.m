@@ -22,12 +22,14 @@
 
 @synthesize searchType = searchType_;
 @synthesize keywords = keywords_;
+@synthesize category = category_;
 
 #pragma mark - Memory management
 
 - (void)dealloc
 {
     [keywords_ release];
+    [category_ release];
     [super dealloc];
 }
 
@@ -35,11 +37,15 @@
 
 - (id)initWithSearchStreamType:(LokaliteSearchStreamSearchType)type
                       keywords:(NSString *)keywords
+                      category:(NSString *)category
                        baseUrl:(NSURL *)baseUrl
                        context:(NSManagedObjectContext *)context
 {
-    NSString *sourceName =
-        [NSString stringWithFormat:@"search/events?keywords=%@", keywords];
+    NSMutableString *sourceName =
+        [NSMutableString stringWithFormat:@"search/events?keywords=%@",
+         keywords];
+    if (category)
+        [sourceName appendFormat:@"&category=%@", category];
     LokaliteDownloadSource *source =
         [LokaliteDownloadSource downloadSourceWithName:sourceName
                                              inContext:context
@@ -51,6 +57,7 @@
     if (self) {
         searchType_ = type;
         keywords_ = [keywords copy];
+        category_ = [category copy];
     }
 
     return self;
@@ -90,6 +97,7 @@
 
     if (searchEvents)
         [service searchEventsForKeywords:[self keywords]
+                                category:[self category]
                          responseHandler:
          ^(NSHTTPURLResponse *response, NSDictionary *d, NSError *error) {
              responseHandler(response, d, error);
@@ -97,6 +105,7 @@
          }];
     else
         [service searchPlacesForKeywords:[self keywords]
+                                category:[self category]
                          responseHandler:
          ^(NSHTTPURLResponse *response, NSDictionary *d, NSError *error) {
              responseHandler(response, d, error);
@@ -112,12 +121,14 @@
 @implementation SearchLokaliteStream (InstantiationHelpers)
 
 + (id)eventSearchStreamWithKeywords:(NSString *)keywords
+                           category:(NSString *)category
                             context:(NSManagedObjectContext *)context
 {
     NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
     LokaliteSearchStreamSearchType type = LokaliteSearchStreamSearchEvents;
     id obj = [[self alloc] initWithSearchStreamType:type
                                            keywords:keywords
+                                           category:category
                                             baseUrl:baseUrl
                                             context:context];
 
@@ -125,12 +136,14 @@
 }
 
 + (id)placesSearchStreamWithKeywords:(NSString *)keywords
+                            category:(NSString *)category
                              context:(NSManagedObjectContext *)context
 {
     NSURL *baseUrl = [[UIApplication sharedApplication] baseLokaliteUrl];
     LokaliteSearchStreamSearchType type = LokaliteSearchStreamSearchPlaces;
     id obj = [[self alloc] initWithSearchStreamType:type
                                            keywords:keywords
+                                           category:category
                                             baseUrl:baseUrl
                                             context:context];
 

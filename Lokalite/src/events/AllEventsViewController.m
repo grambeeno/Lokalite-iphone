@@ -117,6 +117,7 @@ enum {
     (NSString *)keywords
 {
     return [SearchLokaliteStream eventSearchStreamWithKeywords:keywords
+                                                      category:nil
                                                        context:[self context]];
 }
 

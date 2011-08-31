@@ -180,15 +180,19 @@
 #pragma mark - Search
 
 - (void)performSearchForKeywords:(NSString *)keywords
+                        category:(NSString *)category
                              url:(NSURL *)url
                  responseHandler:(LSResponseHandler)handler
 {
     NSString *encodedKeywords =
         [keywords
          stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *parameters =
-        [NSDictionary dictionaryWithObject:encodedKeywords
-                                    forKey:@"keywords"];
+    NSMutableDictionary *parameters =
+        [NSMutableDictionary dictionaryWithObject:encodedKeywords
+                                           forKey:@"keywords"];
+    if (category)
+        [parameters setObject:category forKey:@"category"];
+    
     LokaliteServiceRequest *req =
         [[LokaliteServiceRequest alloc] initWithUrl:url
                                          parameters:parameters
@@ -207,19 +211,23 @@
 }
 
 - (void)searchEventsForKeywords:(NSString *)keywords
+                       category:(NSString *)category
                 responseHandler:(LSResponseHandler)handler
 {
     NSLog(@"Searching events for keywords: '%@'", keywords);
     [self performSearchForKeywords:keywords
+                          category:category
                                url:[self featuredEventUrl]
                    responseHandler:handler];
 }
 
 - (void)searchPlacesForKeywords:(NSString *)keywords
+                       category:(NSString *)category
                 responseHandler:(LSResponseHandler)handler
 {
     NSLog(@"Searching places for keywords: '%@'", keywords);
     [self performSearchForKeywords:keywords
+                          category:category
                                url:[self placesUrl]
                    responseHandler:handler];
 }

@@ -18,11 +18,13 @@ typedef enum {
 @property (nonatomic, assign, readonly)
     LokaliteSearchStreamSearchType searchType;
 @property (nonatomic, copy, readonly) NSString *keywords;
+@property (nonatomic, copy, readonly) NSString *category;
 
 #pragma mark - Initialization
 
 - (id)initWithSearchStreamType:(LokaliteSearchStreamSearchType)type
                       keywords:(NSString *)keywords
+                      category:(NSString *)category
                        baseUrl:(NSURL *)baseUrl
                        context:(NSManagedObjectContext *)context;
 
@@ -32,8 +34,10 @@ typedef enum {
 @interface SearchLokaliteStream (InstantiationHelpers)
 
 + (id)eventSearchStreamWithKeywords:(NSString *)keywords
+                           category:(NSString *)category
                             context:(NSManagedObjectContext *)context;
 + (id)placesSearchStreamWithKeywords:(NSString *)keywords
+                            category:(NSString *)category
                              context:(NSManagedObjectContext *)context;
 
 @end
