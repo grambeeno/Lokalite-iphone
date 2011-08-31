@@ -133,13 +133,16 @@ enum {
 
     NSString *serverFilter = [filter serverFilter];
     NSString *name = [filter name];
+    NSString *shortName = [filter shortName];
     LokaliteStream *stream =
         [CategoryLokaliteStream eventStreamWithCategoryName:serverFilter
                                                     context:moc];
     CategoryEventStreamViewController *controller =
-        [[CategoryEventStreamViewController alloc] initWithCategoryName:name
-                                                         lokaliteStream:stream
-                                                                context:moc];
+        [[CategoryEventStreamViewController alloc]
+         initWithCategoryName:name
+                    shortName:shortName
+               lokaliteStream:stream
+                      context:moc];
     [[self navigationController] pushViewController:controller animated:YES];
     [controller release], controller = nil;
 }

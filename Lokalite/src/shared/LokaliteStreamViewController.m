@@ -770,6 +770,11 @@ titleForHeaderInSection:(NSInteger)section
     return nil;
 }
 
+- (NSString *)titleForRemoteSearchFooterView
+{
+    return NSLocalizedString(@"search.search-server", nil);
+}
+
 - (void)processRemoteSearchResults:(NSArray *)results
 {
     if ([results count]) {
@@ -1338,6 +1343,8 @@ titleForHeaderInSection:(NSInteger)section
         [searchButton addTarget:self
                          action:@selector(performRemoteSearchTapped:)
                forControlEvents:UIControlEventTouchUpInside];
+        [searchButton setTitle:[self titleForRemoteSearchFooterView]
+                      forState:UIControlStateNormal];
     }
 
     return remoteSearchFooterView_;

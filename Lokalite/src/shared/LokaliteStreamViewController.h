@@ -101,6 +101,8 @@
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
     (NSString *)keywords;
 
+- (NSString *)titleForRemoteSearchFooterView;
+
 #pragma mark - Location
 
 @property (nonatomic, assign) BOOL requiresLocation;

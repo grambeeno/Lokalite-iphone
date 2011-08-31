@@ -111,6 +111,7 @@
         UIFont *font = [[searchButton_ titleLabel] font];
         font = [UIFont boldSystemFontOfSize:[font pointSize]];
         [[searchButton_ titleLabel] setFont:font];
+        [[searchButton_ titleLabel] setBackgroundColor:[UIColor clearColor]];
 
         [searchButton_ setTitleColor:[UIColor colorWithRGBValue:0x1058d2]
                             forState:UIControlStateNormal];
@@ -159,6 +160,7 @@
         [activityLabel_ setText:text];
         [activityLabel_ setFont:font];
         [activityLabel_ setTextColor:[UIColor colorWithRGBValue:0x6c6c6c]];
+        [activityLabel_ setBackgroundColor:[UIColor clearColor]];
     }
 
     return activityLabel_;

@@ -69,6 +69,7 @@
 "search.no-results" = "No Results Found on Server";
 
 "search.error.title" = "Failed to Search Server";
+"search.events.category.title.format" = "Search %@ on Server...";
 
 /*
  * General error messages
