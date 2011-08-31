@@ -128,6 +128,7 @@
 		0568337A13D0DFEE00520C78 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0568337913D0DFED00520C78 /* Icon.png */; };
 		0569FCB513D6397B00146228 /* lokalite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0569FCB313D6397B00146228 /* lokalite.xcdatamodeld */; };
 		056A8690140DEA6400D67727 /* CategoryEventStreamView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 056A868F140DEA6400D67727 /* CategoryEventStreamView.xib */; };
+		056A8693140DEBB200D67727 /* CategoryPlaceStreamView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 056A8692140DEBB200D67727 /* CategoryPlaceStreamView.xib */; };
 		056A92A813CCBE1E00C65DC0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92A713CCBE1E00C65DC0 /* JSONKit.m */; };
 		056A92AC13CCC61200C65DC0 /* mock-featured-events.json in Resources */ = {isa = PBXBuildFile; fileRef = 056A92AB13CCC61200C65DC0 /* mock-featured-events.json */; };
 		056A92D813CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 056A92D713CCD72D00C65DC0 /* NSManagedObject+GeneralHelpers.m */; };
@@ -504,6 +505,7 @@
 		0568337913D0DFED00520C78 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		0569FCB413D6397B00146228 /* lokalite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lokalite.xcdatamodel; sourceTree = "<group>"; };
 		056A868F140DEA6400D67727 /* CategoryEventStreamView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoryEventStreamView.xib; path = src/events/CategoryEventStreamView.xib; sourceTree = "<group>"; };
+		056A8692140DEBB200D67727 /* CategoryPlaceStreamView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoryPlaceStreamView.xib; path = src/businesses/CategoryPlaceStreamView.xib; sourceTree = "<group>"; };
 		056A92A613CCBE1E00C65DC0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = src/vendor/jsonkit/JSONKit.h; sourceTree = "<group>"; };
 		056A92A713CCBE1E00C65DC0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = src/vendor/jsonkit/JSONKit.m; sourceTree = "<group>"; };
 		056A92AB13CCC61200C65DC0 /* mock-featured-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "mock-featured-events.json"; path = "mock/server-data/mock-featured-events.json"; sourceTree = "<group>"; wrapsLines = 0; };
@@ -1638,6 +1640,7 @@
 				05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */,
 				05E5555B13F433AC00DF0F31 /* CategoryPlaceStreamViewController.h */,
 				05E5555C13F433AC00DF0F31 /* CategoryPlaceStreamViewController.m */,
+				056A8692140DEBB200D67727 /* CategoryPlaceStreamView.xib */,
 			);
 			name = businesses;
 			sourceTree = "<group>";
@@ -1840,6 +1843,7 @@
 				052F2B7F140D3DE8000C8E60 /* radar@2x.png in Resources */,
 				052F2B83140D4D12000C8E60 /* detail-view-image-well@2x.png in Resources */,
 				056A8690140DEA6400D67727 /* CategoryEventStreamView.xib in Resources */,
+				056A8693140DEBB200D67727 /* CategoryPlaceStreamView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

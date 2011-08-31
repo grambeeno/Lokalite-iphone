@@ -31,7 +31,7 @@
             lokaliteStream:(LokaliteStream *)stream
                    context:(NSManagedObjectContext *)context
 {
-    self = [super initWithStyle:UITableViewStylePlain];
+    self = [super initWithNibName:@"CategoryPlaceStreamView" bundle:nil];
     if (self) {
         categoryName_ = [categoryName copy];
         providedLokaliteStream_ = [stream retain];
@@ -39,6 +39,15 @@
     }
 
     return self;
+}
+
+#pragma mark - UIViewController implementation
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [[self navigationItem] setRightBarButtonItem:[self mapViewButtonItem]];
 }
 
 #pragma mark - PlaceStreamViewController implementation
