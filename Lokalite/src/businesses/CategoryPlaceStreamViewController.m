@@ -9,10 +9,12 @@
 #import "CategoryPlaceStreamViewController.h"
 
 #import "LokaliteStream.h"
+#import "SearchLokaliteStream.h"
 
 @implementation CategoryPlaceStreamViewController
 
 @synthesize categoryName = categoryName_;
+@synthesize categoryShortName = categoryShortName_;
 @synthesize providedLokaliteStream = providedLokaliteStream_;
 
 #pragma mark - Memory management
@@ -20,6 +22,7 @@
 - (void)dealloc
 {
     [categoryName_ release];
+    [categoryShortName_ release];
     [providedLokaliteStream_ release];
 
     [super dealloc];
@@ -28,12 +31,14 @@
 #pragma mark - Initialization
 
 - (id)initWithCategoryName:(NSString *)categoryName
+                 shortName:(NSString *)categoryShortName
             lokaliteStream:(LokaliteStream *)stream
                    context:(NSManagedObjectContext *)context
 {
     self = [super initWithNibName:@"CategoryPlaceStreamView" bundle:nil];
     if (self) {
         categoryName_ = [categoryName copy];
+        categoryShortName_ = [categoryShortName copy];
         providedLokaliteStream_ = [stream retain];
         [self setContext:context];
     }
@@ -48,18 +53,46 @@
     [super viewDidLoad];
 
     [[self navigationItem] setRightBarButtonItem:[self mapViewButtonItem]];
+
+    UIBarButtonItem *backButton =
+        [[UIBarButtonItem alloc] initWithTitle:[self categoryShortName]
+                                         style:UIBarButtonItemStyleBordered
+                                        target:nil
+                                        action:nil];
+    [[self navigationItem] setBackBarButtonItem:backButton];
+    [backButton release], backButton = nil;
+
+    [self setCanSearchServer:YES];
 }
 
 #pragma mark - PlaceStreamViewController implementation
+
+- (NSString *)titleForView
+{
+    return [self categoryName];
+}
 
 - (LokaliteStream *)lokaliteStreamInstance
 {
     return [self providedLokaliteStream];
 }
 
-- (NSString *)titleForView
+#pragma mark Search - remote
+
+#pragma mark Search - remote
+
+- (NSString *)titleForRemoteSearchFooterView
 {
-    return [self categoryName];
+    NSString *format =
+        NSLocalizedString(@"search.places.category.title.format", nil);
+    return [NSString stringWithFormat:format, [self categoryShortName]];
+}
+
+- (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
+    (NSString *)keywords
+{
+    return [SearchLokaliteStream placesSearchStreamWithKeywords:keywords
+                                                        context:[self context]];
 }
 
 @end

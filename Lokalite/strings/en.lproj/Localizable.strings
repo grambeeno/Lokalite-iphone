@@ -70,6 +70,7 @@
 
 "search.error.title" = "Failed to Search Server";
 "search.events.category.title.format" = "Search %@ on Server...";
+"search.places.category.title.format" = "Search %@ on Server...";
 
 /*
  * General error messages

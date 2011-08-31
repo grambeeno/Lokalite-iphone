@@ -139,6 +139,7 @@ enum {
     CategoryPlaceStreamViewController *controller =
         [[CategoryPlaceStreamViewController alloc]
          initWithCategoryName:[filter name]
+                    shortName:[filter shortName]
                lokaliteStream:stream
                       context:context];
     [[self navigationController] pushViewController:controller animated:YES];
