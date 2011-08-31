@@ -13,11 +13,21 @@
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 
+
+@interface MapDisplayController ()
+
+#pragma mark - Managing the map view
+
+- (void)zoomMapViewForAnnotations:(NSArray *)annotations;
+
+@end
+
+
+
 @implementation MapDisplayController
 
 @synthesize delegate = delegate_;
 @synthesize mapView = mapView_;
-@synthesize annotations = annotations_;
 
 @synthesize annotationsShowRightAccessoryView =
     annotationsShowRightAccessoryView_;
@@ -29,12 +39,16 @@
     delegate_ = nil;
 
     [mapView_ release];
-    [annotations_ release];
 
     [super dealloc];
 }
 
 #pragma mark - Initialization
+
+- (void)initialize
+{
+    annotationsShowRightAccessoryView_ = YES;
+}
 
 - (id)initWithMapView:(MKMapView *)mapView
 {
@@ -43,10 +57,56 @@
         mapView_ = [mapView retain];
         [mapView_ setDelegate:self];
 
-        annotationsShowRightAccessoryView_ = YES;
+        [self initialize];
     }
 
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self initialize];
+}
+
+#pragma mark - Modifying annotations
+
+- (NSArray *)annotations
+{
+    return [[self mapView] annotations];
+}
+
+- (void)setAnnotations:(NSArray *)annotations
+{
+    [self removeAllAnnotations];
+
+    if (annotations) {
+        [self addAnnotations:annotations];
+        [self zoomMapViewForAnnotations:annotations];
+    }
+}
+
+- (void)addAnnotations:(NSArray *)annotations
+{
+    [[self mapView] addAnnotations:annotations];
+}
+
+- (void)removeAnnotations:(NSArray *)annotations
+{
+    [[self mapView] removeAnnotations:annotations];
+}
+
+- (void)removeAllAnnotations
+{
+    [self removeAnnotations:[self annotations]];
+}
+
+#pragma mark - Managing the map view
+
+- (void)zoomMapViewForAnnotations:(NSArray *)annotations
+{
+    MKCoordinateRegion region =
+        [[self class] coordinateRegionForMapAnnotations:annotations];
+    [[self mapView] setRegion:region];
 }
 
 #pragma mark - MKMapViewDelegate implmeentation
@@ -104,6 +164,7 @@
 
 #pragma mark - Accessors
 
+/*
 - (void)setAnnotations:(NSArray *)annotations
 {
     if (annotations_ != annotations) {
@@ -122,6 +183,7 @@
         }
     }
 }
+ */
 
 #pragma mark - Map geometry
 

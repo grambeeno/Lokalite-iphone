@@ -17,13 +17,22 @@
     IBOutlet id<MapDisplayControllerDelegate> delegate;
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (nonatomic, copy) NSArray *annotations;
 
 @property (nonatomic, assign) BOOL annotationsShowRightAccessoryView;
 
 #pragma mark - Initialization
 
 - (id)initWithMapView:(MKMapView *)mapView;
+
+#pragma mark - Modifying annotations
+
+//@property (nonatomic, copy) NSArray *annotations;
+
+- (NSArray *)annotations;
+- (void)setAnnotations:(NSArray *)annotations;
+- (void)addAnnotations:(NSArray *)annotations;
+- (void)removeAnnotations:(NSArray *)annotations;
+- (void)removeAllAnnotations;
 
 #pragma mark - Map geometry
 
