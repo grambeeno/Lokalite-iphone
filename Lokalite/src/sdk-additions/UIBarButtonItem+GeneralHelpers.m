@@ -13,7 +13,7 @@
 + (UIBarButtonItem *)mapViewBarButtonItemWithTarget:(id)target
                                              action:(SEL)action
 {
-    UIImage *mapViewImage = [UIImage imageNamed:@"radar"];
+    UIImage *mapViewImage = [UIImage imageNamed:@"map"];
     UIBarButtonItem *toggleMapViewButton =
         [[UIBarButtonItem alloc]
          initWithImage:mapViewImage
