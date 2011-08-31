@@ -167,8 +167,7 @@
     [[self imageView] setImage:[event standardImage]];
 
     [[self titleLabel] setText:[event name]];
-    [[self businessNameLabel] setText:
-     [NSString stringWithFormat:@"@ %@", [[event business] name]]];
+    [[self businessNameLabel] setText:[[event business] name]];
 
     [[self startDateLabel] setText:[[event startDate] timeString]];
     [[self endDateLabel] setText:[[event endDate] timeString]];
