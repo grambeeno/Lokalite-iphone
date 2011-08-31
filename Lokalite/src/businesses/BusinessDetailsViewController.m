@@ -294,11 +294,11 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
             url = [NSURL URLWithString:[[self business] url]];
 
         BOOL opened = [[UIApplication sharedApplication] openURL:url];
-        if (!opened) {
+        if (!opened)
             // malformatted phone number or URL received from the server
             NSLog(@"WARNING: Failed to open URL: '%@'", url);
-            [tableView deselectRowAtIndexPath:path animated:YES];
-        }
+
+        [tableView deselectRowAtIndexPath:path animated:YES];
     } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowAddress)
             [self displayLocationDetailsForBusiness:[self business]];
