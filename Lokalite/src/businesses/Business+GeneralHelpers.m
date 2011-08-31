@@ -171,20 +171,30 @@
 
 @implementation Business (ConvenienceMethods)
 
++ (NSString *)standardImageUrlKey
+{
+    return @"mediumImageUrl";
+}
+
++ (NSString *)standardImageDataKey
+{
+    return @"mediumImageData";
+}
+
 - (void)setStandardImageData:(NSData *)data
 {
-    [self setFullImageData:data];
+    [self setValue:data forKey:[[self class] standardImageDataKey]];
 }
 
 - (UIImage *)standardImage
 {
-    NSData *data = [self fullImageData];
+    NSData *data = [self valueForKey:[[self class] standardImageDataKey]];
     return data ? [UIImage imageWithData:data] : nil;
 }
 
 - (NSString *)standardImageUrl
 {
-    return [self fullImageUrl];
+    return [self valueForKey:[[self class] standardImageUrlKey]];
 }
 
 - (NSURL *)phoneUrl
