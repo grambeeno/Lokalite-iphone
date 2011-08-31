@@ -8,6 +8,8 @@
 
 #import "BusinessDetailsHeaderView.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @implementation BusinessDetailsHeaderView
 
 @synthesize imageView = imageView_;
@@ -20,6 +22,15 @@
     [imageView_ release];
     [titleLabel_ release];
     [super dealloc];
+}
+
+#pragma mark - UITableViewCell implementation
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+
+    [[[self imageView] layer] setCornerRadius:7];
 }
 
 @end
