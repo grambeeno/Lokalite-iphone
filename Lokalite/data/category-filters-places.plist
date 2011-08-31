@@ -8,9 +8,9 @@
 		<key>short-name</key>
 		<string>Shopping</string>
 		<key>image</key>
-		<string>retail</string>
+		<string>place-shopping</string>
 		<key>image-selected</key>
-		<string>retail-selected</string>
+		<string>place-shopping-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -18,9 +18,9 @@
 		<key>short-name</key>
 		<string>Food</string>
 		<key>image</key>
-		<string>food</string>
+		<string>place-restaurants</string>
 		<key>image-selected</key>
-		<string>food-selected</string>
+		<string>place-restaurants-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -28,9 +28,9 @@
 		<key>short-name</key>
 		<string>Coffee</string>
 		<key>image</key>
-		<string>business</string>
+		<string>place-coffee</string>
 		<key>image-selected</key>
-		<string>business-selected</string>
+		<string>place-coffee-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -38,9 +38,9 @@
 		<key>short-name</key>
 		<string>Entertainment</string>
 		<key>image</key>
-		<string>music</string>
+		<string>place-arts</string>
 		<key>image-selected</key>
-		<string>music-selected</string>
+		<string>place-arts-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -48,9 +48,9 @@
 		<key>short-name</key>
 		<string>Services</string>
 		<key>image</key>
-		<string>beauty</string>
+		<string>place-services</string>
 		<key>image-selected</key>
-		<string>beauty-selected</string>
+		<string>place-services-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -58,9 +58,9 @@
 		<key>short-name</key>
 		<string>Campus</string>
 		<key>image</key>
-		<string>campus</string>
+		<string>place-campus</string>
 		<key>image-selected</key>
-		<string>campus-selected</string>
+		<string>place-campus-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -68,9 +68,9 @@
 		<key>short-name</key>
 		<string>Beer &amp; Wine</string>
 		<key>image</key>
-		<string>happy-hour</string>
+		<string>place-beer</string>
 		<key>image-selected</key>
-		<string>happy-hour-selected</string>
+		<string>place-beer-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -78,9 +78,9 @@
 		<key>short-name</key>
 		<string>Sports</string>
 		<key>image</key>
-		<string>sports</string>
+		<string>place-sports</string>
 		<key>image-selected</key>
-		<string>sports-selected</string>
+		<string>place-sports-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -88,9 +88,9 @@
 		<key>short-name</key>
 		<string>Health</string>
 		<key>image</key>
-		<string>health</string>
+		<string>place-health</string>
 		<key>image-selected</key>
-		<string>health-selected</string>
+		<string>place-health-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -98,9 +98,9 @@
 		<key>short-name</key>
 		<string>Non-Profit</string>
 		<key>image</key>
-		<string>non-profit</string>
+		<string>place-non-profit</string>
 		<key>image-selected</key>
-		<string>non-profit-selected</string>
+		<string>place-non-profit-selected</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -108,9 +108,9 @@
 		<key>short-name</key>
 		<string>MMJ</string>
 		<key>image</key>
-		<string>non-profit</string>
+		<string>place-mmj</string>
 		<key>image-selected</key>
-		<string>non-profit-selected</string>
+		<string>place-mmj-selected</string>
 	</dict>
 </array>
 </plist>
