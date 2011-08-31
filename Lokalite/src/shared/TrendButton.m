@@ -34,7 +34,7 @@
                                             topCapHeight:topCapHeight];
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 
-    [[self titleLabel] setFont:[UIFont boldSystemFontOfSize:19]];
+    //[[self titleLabel] setFont:[UIFont boldSystemFontOfSize:19]];
     //[[self titleLabel] setShadowOffset:buttonShadowOffset];
 
     [self setBackgroundImage:bgImage forState:UIControlStateNormal];
