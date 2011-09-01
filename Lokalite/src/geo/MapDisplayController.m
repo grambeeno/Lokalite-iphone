@@ -23,7 +23,6 @@
 @end
 
 
-
 @implementation MapDisplayController
 
 @synthesize delegate = delegate_;
@@ -48,6 +47,7 @@
 - (void)initialize
 {
     annotationsShowRightAccessoryView_ = YES;
+    [[self mapView] setRegion:[[self class] boulderCoordinateRegion]];
 }
 
 - (id)initWithMapView:(MKMapView *)mapView
@@ -79,7 +79,7 @@
 {
     [self removeAllAnnotations];
 
-    if (annotations) {
+    if ([annotations count]) {
         [self addAnnotations:annotations];
         [self zoomMapViewForAnnotations:annotations];
     }
@@ -162,29 +162,6 @@
     [[self delegate] mapDisplayController:self didSelectObject:object];
 }
 
-#pragma mark - Accessors
-
-/*
-- (void)setAnnotations:(NSArray *)annotations
-{
-    if (annotations_ != annotations) {
-        if (annotations_) {
-            [[self mapView] removeAnnotations:annotations_];
-            [annotations_ release];
-        }
-        annotations_ = [annotations copy];
-
-        if (annotations_) {
-            [[self mapView] addAnnotations:annotations_];
-
-            MKCoordinateRegion region =
-                [[self class] coordinateRegionForMapAnnotations:annotations_];
-            [[self mapView] setRegion:region];
-        }
-    }
-}
- */
-
 #pragma mark - Map geometry
 
 + (MKCoordinateRegion)coordinateRegionForMapAnnotations:(NSArray *)annotations
@@ -206,6 +183,16 @@
                                    (maxLon + minLon) / 2);
     MKCoordinateSpan span =
         MKCoordinateSpanMake(maxLat - minLat, maxLon - minLon);
+
+    return MKCoordinateRegionMake(center, span);
+}
+
++ (MKCoordinateRegion)boulderCoordinateRegion
+{
+    CLLocationCoordinate2D center =
+        CLLocationCoordinate2DMake(40.014785766601562, -105.26535034179688);
+    MKCoordinateSpan span =
+        MKCoordinateSpanMake(0.01428985595703125, 0.0293731689453125);
 
     return MKCoordinateRegionMake(center, span);
 }

@@ -37,6 +37,7 @@
 #pragma mark - Map geometry
 
 + (MKCoordinateRegion)coordinateRegionForMapAnnotations:(NSArray *)annotations;
++ (MKCoordinateRegion)boulderCoordinateRegion;
 
 @end
 

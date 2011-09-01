@@ -513,7 +513,7 @@ titleForHeaderInSection:(NSInteger)section
 }
 
 - (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
+   didChangeObject:(id)object
        atIndexPath:(NSIndexPath *)indexPath
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
@@ -530,12 +530,35 @@ titleForHeaderInSection:(NSInteger)section
             [tableView
              insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
                    withRowAnimation:UITableViewRowAnimationBottom];
+
+            if ([self isShowingMapView] &&
+                [object conformsToProtocol:@protocol(MappableLokaliteObject)]) {
+                id<MappableLokaliteObject> mappableObject =
+                    (id<MappableLokaliteObject>) object;
+                id<MKAnnotation> annotation = [mappableObject mapAnnotation];
+                NSArray *annotations =
+                    [[NSArray alloc] initWithObjects:annotation, nil];
+                [[self mapViewController] addAnnotations:annotations];
+                [annotations release], annotations = nil;
+            }
+
             break;
  
         case NSFetchedResultsChangeDelete: {
             NSArray *paths = [NSArray arrayWithObject:indexPath];
             [tableView deleteRowsAtIndexPaths:paths
                        withRowAnimation:UITableViewRowAnimationTop];
+
+            if ([self isShowingMapView] &&
+                [object conformsToProtocol:@protocol(MappableLokaliteObject)]) {
+                id<MappableLokaliteObject> mappableObject =
+                    (id<MappableLokaliteObject>) object;
+                id<MKAnnotation> annotation = [mappableObject mapAnnotation];
+                NSArray *annotations =
+                    [[NSArray alloc] initWithObjects:annotation, nil];
+                [[self mapViewController] removeAnnotations:annotations];
+                [annotations release], annotations = nil;
+            }
         }
             break;
 
@@ -545,7 +568,7 @@ titleForHeaderInSection:(NSInteger)section
             // provided index path; doing so causes a crash. I don't know
             // why. Accessing the cell via the provided anObject parameter
             // works fine, though.
-            [self configureCell:cell inTableView:tableView forObject:anObject];
+            [self configureCell:cell inTableView:tableView forObject:object];
         }
             break;
  
