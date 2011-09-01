@@ -305,6 +305,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 #pragma mark - UIScrollViewDelegate implementation
 
+/*
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     UITableView *tableView = [self tableView];
@@ -320,6 +321,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
             [self loadMoreButtonTapped:self];
     }
 }
+ */
 
 #pragma mark - UITableViewDataSource implementation
 

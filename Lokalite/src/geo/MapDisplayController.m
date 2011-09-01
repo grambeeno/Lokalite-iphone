@@ -16,6 +16,8 @@
 
 @interface MapDisplayController ()
 
+@property (nonatomic, retain) NSMutableDictionary *allAnnotations;
+
 #pragma mark - Managing the map view
 
 - (void)zoomMapViewForAnnotations:(NSArray *)annotations;
@@ -31,6 +33,8 @@
 @synthesize annotationsShowRightAccessoryView =
     annotationsShowRightAccessoryView_;
 
+@synthesize allAnnotations = allAnnotations_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -38,6 +42,7 @@
     delegate_ = nil;
 
     [mapView_ release];
+    [allAnnotations_ release];
 
     [super dealloc];
 }
@@ -47,6 +52,8 @@
 - (void)initialize
 {
     annotationsShowRightAccessoryView_ = YES;
+    allAnnotations_ = [[NSMutableDictionary alloc] init];
+
     [[self mapView] setRegion:[[self class] boulderCoordinateRegion]];
 }
 
@@ -85,19 +92,74 @@
     }
 }
 
++ (NSString *)keyForCoordinate:(CLLocationCoordinate2D)coord
+{
+    return [NSString
+            stringWithFormat:@"%f %f", coord.latitude, coord.longitude];
+}
+
+- (NSArray *)addNewAnnotationsToExistingAnnotations:(NSArray *)annotations
+{
+    NSMutableArray *newAnnotations =
+        [NSMutableArray arrayWithCapacity:[annotations count]];
+
+    NSMutableDictionary *allAnnotations = [self allAnnotations];
+    [annotations enumerateObjectsUsingBlock:
+     ^(id<MKAnnotation> annotation, NSUInteger idx, BOOL *stop) {
+         CLLocationCoordinate2D coord = [annotation coordinate];
+         NSString *coordKey = [[self class] keyForCoordinate:coord];
+         NSMutableArray *existing = [allAnnotations objectForKey:coordKey];
+         if (!existing) {
+             existing = [NSMutableArray array];
+             [allAnnotations setObject:existing forKey:coordKey];
+             [newAnnotations addObject:annotation];
+         }
+         [existing addObject:annotation];
+    }];
+
+    return newAnnotations;
+}
+
+- (NSArray *)removeAnnotationsFromExistingAnnotations:(NSArray *)annotations
+{
+    NSMutableArray *oldAnnotations =
+        [NSMutableArray arrayWithCapacity:[annotations count]];
+
+    NSMutableDictionary *allAnnotations = [self allAnnotations];
+    [annotations enumerateObjectsUsingBlock:
+     ^(id<MKAnnotation> annotation, NSUInteger idx, BOOL *stop) {
+         CLLocationCoordinate2D coord = [annotation coordinate];
+         NSString *coordKey = [[self class] keyForCoordinate:coord];
+         NSMutableArray *existing = [allAnnotations objectForKey:coordKey];
+         [existing removeObject:annotation];
+         if ([existing count] == 0) {
+             [allAnnotations removeObjectForKey:coordKey];
+             [oldAnnotations addObject:annotation];
+         }
+    }];
+
+    return oldAnnotations;
+}
+
 - (void)addAnnotations:(NSArray *)annotations
 {
-    [[self mapView] addAnnotations:annotations];
+    NSArray *newAnnotations =
+        [self addNewAnnotationsToExistingAnnotations:annotations];
+    [[self mapView] addAnnotations:newAnnotations];
+
 }
 
 - (void)removeAnnotations:(NSArray *)annotations
 {
-    [[self mapView] removeAnnotations:annotations];
+    NSArray *oldAnnotations =
+        [self removeAnnotationsFromExistingAnnotations:annotations];
+    [[self mapView] removeAnnotations:oldAnnotations];
 }
 
 - (void)removeAllAnnotations
 {
     [self removeAnnotations:[self annotations]];
+    [[self allAnnotations] removeAllObjects];
 }
 
 #pragma mark - Managing the map view
