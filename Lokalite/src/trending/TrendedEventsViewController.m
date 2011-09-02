@@ -155,7 +155,7 @@
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                        withRowAnimation:UITableViewRowAnimationFade];
             break;
- 
+
         case NSFetchedResultsChangeUpdate: {
             EventTableViewCell *eventCell = (EventTableViewCell *)
                 [tableView cellForRowAtIndexPath:indexPath];

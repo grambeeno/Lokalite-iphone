@@ -189,6 +189,14 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         [[self service] trendEventWithEventId:eventId responseHandler:handler];
 
     [event trendEvent:!isTrended];
+
+    UIButton *trendButton = [[self headerView] trendButton];
+    if ([event isTrended])
+        [trendButton setTitle:NSLocalizedString(@"event.untrend-event", nil)
+                     forState:UIControlStateNormal];
+    else
+        [trendButton setTitle:NSLocalizedString(@"event.trend-event", nil)
+                     forState:UIControlStateNormal];
 }
 
 #pragma mark - UITableViewController implementation
@@ -322,6 +330,14 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     [self configureHeaderForEvent:[self event]];
     [[self tableView] setTableHeaderView:[self headerView]];
+
+    UIButton *trendButton = [[self headerView] trendButton];
+    if ([[self event] isTrended])
+        [trendButton setTitle:NSLocalizedString(@"event.untrend-event", nil)
+                     forState:UIControlStateNormal];
+    else
+        [trendButton setTitle:NSLocalizedString(@"event.trend-event", nil)
+                     forState:UIControlStateNormal];
 }
 
 - (void)initializeMapView
