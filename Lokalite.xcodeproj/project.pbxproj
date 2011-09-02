@@ -191,6 +191,7 @@
 		0590FF7A13D8E045006A2254 /* tab-bar-icon-events@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7813D8E045006A2254 /* tab-bar-icon-events@2x.png */; };
 		0590FF7F13D8E17F006A2254 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590FF7D13D8E17F006A2254 /* ProfileViewController.m */; };
 		0590FF8013D8E17F006A2254 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7E13D8E17F006A2254 /* ProfileView.xib */; };
+		0594F47A14105A9D007E6874 /* GroupedMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0594F47914105A9D007E6874 /* GroupedMapAnnotation.m */; };
 		05977D481402CE65003C8C24 /* TrendedEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05977D461402CE65003C8C24 /* TrendedEventsViewController.m */; };
 		05977D491402CE65003C8C24 /* TrendedEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05977D471402CE65003C8C24 /* TrendedEventsView.xib */; };
 		059AEE0F13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */; };
@@ -586,6 +587,8 @@
 		0590FF7C13D8E17F006A2254 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = src/profile/ProfileViewController.h; sourceTree = "<group>"; };
 		0590FF7D13D8E17F006A2254 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = src/profile/ProfileViewController.m; sourceTree = "<group>"; };
 		0590FF7E13D8E17F006A2254 /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileView.xib; path = src/profile/ProfileView.xib; sourceTree = "<group>"; };
+		0594F47814105A9D007E6874 /* GroupedMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupedMapAnnotation.h; path = src/geo/GroupedMapAnnotation.h; sourceTree = "<group>"; };
+		0594F47914105A9D007E6874 /* GroupedMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupedMapAnnotation.m; path = src/geo/GroupedMapAnnotation.m; sourceTree = "<group>"; };
 		05977D451402CE65003C8C24 /* TrendedEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrendedEventsViewController.h; path = src/trending/TrendedEventsViewController.h; sourceTree = "<group>"; };
 		05977D461402CE65003C8C24 /* TrendedEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrendedEventsViewController.m; path = src/trending/TrendedEventsViewController.m; sourceTree = "<group>"; };
 		05977D471402CE65003C8C24 /* TrendedEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TrendedEventsView.xib; path = src/trending/TrendedEventsView.xib; sourceTree = "<group>"; };
@@ -1397,6 +1400,8 @@
 			children = (
 				059AEE1113E7667F00AA4DF7 /* MapDisplayController.h */,
 				059AEE1213E7667F00AA4DF7 /* MapDisplayController.m */,
+				0594F47814105A9D007E6874 /* GroupedMapAnnotation.h */,
+				0594F47914105A9D007E6874 /* GroupedMapAnnotation.m */,
 				0589E4F213E7706F00149713 /* LokaliteObjectMapAnnotation.h */,
 				0589E4F313E7706F00149713 /* LokaliteObjectMapAnnotation.m */,
 				05E5556813F47C5300DF0F31 /* DeviceLocator.h */,
@@ -2016,6 +2021,7 @@
 				05F2E0F214084C15000D3A87 /* Facebook+GeneralHelpers.m in Sources */,
 				05273931140973A300BBB37B /* SettingsViewController.m in Sources */,
 				05BC17DB140AE17E00CF9AF4 /* Event.m in Sources */,
+				0594F47A14105A9D007E6874 /* GroupedMapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

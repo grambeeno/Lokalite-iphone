@@ -61,6 +61,11 @@
 "distance.flying-distance" = "Fly";
 
 /*
+ * Geo
+ */
+"annotation.grouped.subtitle.format" = "And %d more";
+
+/*
  * Search
  */
 

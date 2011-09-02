@@ -9,6 +9,7 @@
 #import "MapDisplayController.h"
 
 #import "LokaliteObjectMapAnnotation.h"
+#import "GroupedMapAnnotation.h"
 
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
@@ -148,8 +149,18 @@
         [view setCanShowCallout:YES];
     }
 
+    /*
     LokaliteObjectMapAnnotation *lokaliteAnnotation =
         (LokaliteObjectMapAnnotation *) annotation;
+    id<MappableLokaliteObject> lokaliteObject =
+        [lokaliteAnnotation lokaliteObject];
+    UIImage *image = [lokaliteObject mapAnnotationViewImage];
+     */
+
+    GroupedMapAnnotation *groupedAnnotation =
+        (GroupedMapAnnotation *) annotation;
+    LokaliteObjectMapAnnotation *lokaliteAnnotation =
+        [[groupedAnnotation annotations] objectAtIndex:0];
     id<MappableLokaliteObject> lokaliteObject =
         [lokaliteAnnotation lokaliteObject];
     UIImage *image = [lokaliteObject mapAnnotationViewImage];
@@ -194,13 +205,18 @@
      ^(id<MKAnnotation> annotation, NSUInteger idx, BOOL *stop) {
          CLLocationCoordinate2D coord = [annotation coordinate];
          NSString *coordKey = [[self class] keyForCoordinate:coord];
-         NSMutableArray *existing = [allAnnotations objectForKey:coordKey];
-         if (!existing) {
-             existing = [NSMutableArray array];
-             [allAnnotations setObject:existing forKey:coordKey];
-             [newAnnotations addObject:annotation];
+
+         GroupedMapAnnotation *groupedAnnotation =
+            [allAnnotations objectForKey:coordKey];
+         if (groupedAnnotation)
+             [groupedAnnotation addAnnotation:annotation];
+         else {
+             groupedAnnotation =
+                 [[GroupedMapAnnotation alloc] initWithAnnotation:annotation];
+             [allAnnotations setObject:groupedAnnotation forKey:coordKey];
+             [newAnnotations addObject:groupedAnnotation];
+             [groupedAnnotation release], groupedAnnotation = nil;
          }
-         [existing addObject:annotation];
     }];
 
     return newAnnotations;
@@ -216,11 +232,13 @@
      ^(id<MKAnnotation> annotation, NSUInteger idx, BOOL *stop) {
          CLLocationCoordinate2D coord = [annotation coordinate];
          NSString *coordKey = [[self class] keyForCoordinate:coord];
-         NSMutableArray *existing = [allAnnotations objectForKey:coordKey];
-         [existing removeObject:annotation];
-         if ([existing count] == 0) {
+
+         GroupedMapAnnotation *groupedAnnotation =
+            [allAnnotations objectForKey:coordKey];
+         [groupedAnnotation removeAnnotation:annotation];
+         if ([[groupedAnnotation annotations] count] == 0) {
+             [oldAnnotations addObject:groupedAnnotation];
              [allAnnotations removeObjectForKey:coordKey];
-             [oldAnnotations addObject:annotation];
          }
     }];
 
