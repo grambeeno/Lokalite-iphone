@@ -84,7 +84,7 @@
     else {
         NSString *format =
             NSLocalizedString(@"annotation.grouped.subtitle.format", nil);
-        subtitle = [NSString stringWithFormat:format, count];
+        subtitle = [NSString stringWithFormat:format, count - 1];
     }
 
     return subtitle;

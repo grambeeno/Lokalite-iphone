@@ -192,6 +192,8 @@
 		0590FF7F13D8E17F006A2254 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590FF7D13D8E17F006A2254 /* ProfileViewController.m */; };
 		0590FF8013D8E17F006A2254 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0590FF7E13D8E17F006A2254 /* ProfileView.xib */; };
 		0594F47A14105A9D007E6874 /* GroupedMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0594F47914105A9D007E6874 /* GroupedMapAnnotation.m */; };
+		0594F48414114585007E6874 /* StaticEventListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0594F48314114585007E6874 /* StaticEventListViewController.m */; };
+		0594F48714114FDF007E6874 /* StaticPlaceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0594F48614114FDF007E6874 /* StaticPlaceListViewController.m */; };
 		05977D481402CE65003C8C24 /* TrendedEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05977D461402CE65003C8C24 /* TrendedEventsViewController.m */; };
 		05977D491402CE65003C8C24 /* TrendedEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05977D471402CE65003C8C24 /* TrendedEventsView.xib */; };
 		059AEE0F13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AEE0E13E74BF300AA4DF7 /* event-details-header-image-frame@2x.png */; };
@@ -589,6 +591,10 @@
 		0590FF7E13D8E17F006A2254 /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileView.xib; path = src/profile/ProfileView.xib; sourceTree = "<group>"; };
 		0594F47814105A9D007E6874 /* GroupedMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupedMapAnnotation.h; path = src/geo/GroupedMapAnnotation.h; sourceTree = "<group>"; };
 		0594F47914105A9D007E6874 /* GroupedMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupedMapAnnotation.m; path = src/geo/GroupedMapAnnotation.m; sourceTree = "<group>"; };
+		0594F48214114585007E6874 /* StaticEventListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticEventListViewController.h; path = src/events/StaticEventListViewController.h; sourceTree = "<group>"; };
+		0594F48314114585007E6874 /* StaticEventListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaticEventListViewController.m; path = src/events/StaticEventListViewController.m; sourceTree = "<group>"; };
+		0594F48514114FDE007E6874 /* StaticPlaceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticPlaceListViewController.h; path = src/businesses/StaticPlaceListViewController.h; sourceTree = "<group>"; };
+		0594F48614114FDF007E6874 /* StaticPlaceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaticPlaceListViewController.m; path = src/businesses/StaticPlaceListViewController.m; sourceTree = "<group>"; };
 		05977D451402CE65003C8C24 /* TrendedEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrendedEventsViewController.h; path = src/trending/TrendedEventsViewController.h; sourceTree = "<group>"; };
 		05977D461402CE65003C8C24 /* TrendedEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrendedEventsViewController.m; path = src/trending/TrendedEventsViewController.m; sourceTree = "<group>"; };
 		05977D471402CE65003C8C24 /* TrendedEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TrendedEventsView.xib; path = src/trending/TrendedEventsView.xib; sourceTree = "<group>"; };
@@ -1620,6 +1626,8 @@
 				056A868F140DEA6400D67727 /* CategoryEventStreamView.xib */,
 				05EA465714019DB700AA579B /* PlaceEventStreamViewController.h */,
 				05EA465814019DB700AA579B /* PlaceEventStreamViewController.m */,
+				0594F48214114585007E6874 /* StaticEventListViewController.h */,
+				0594F48314114585007E6874 /* StaticEventListViewController.m */,
 			);
 			name = events;
 			sourceTree = "<group>";
@@ -1647,6 +1655,8 @@
 				05E5555B13F433AC00DF0F31 /* CategoryPlaceStreamViewController.h */,
 				05E5555C13F433AC00DF0F31 /* CategoryPlaceStreamViewController.m */,
 				056A8692140DEBB200D67727 /* CategoryPlaceStreamView.xib */,
+				0594F48514114FDE007E6874 /* StaticPlaceListViewController.h */,
+				0594F48614114FDF007E6874 /* StaticPlaceListViewController.m */,
 			);
 			name = businesses;
 			sourceTree = "<group>";
@@ -2022,6 +2032,8 @@
 				05273931140973A300BBB37B /* SettingsViewController.m in Sources */,
 				05BC17DB140AE17E00CF9AF4 /* Event.m in Sources */,
 				0594F47A14105A9D007E6874 /* GroupedMapAnnotation.m in Sources */,
+				0594F48414114585007E6874 /* StaticEventListViewController.m in Sources */,
+				0594F48714114FDF007E6874 /* StaticPlaceListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

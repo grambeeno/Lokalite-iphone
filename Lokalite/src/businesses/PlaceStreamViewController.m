@@ -54,7 +54,7 @@
 
 - (NSString *)titleForView
 {
-    return NSLocalizedString(@"global.events", nil);
+    return NSLocalizedString(@"global.places", nil);
 }
 
 #pragma mark Configuring the table view
@@ -63,6 +63,7 @@
 {
     [super initializeTableView:tableView];
 
+    [tableView setBackgroundColor:[UIColor tableViewBackgroundColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [tableView setRowHeight:[PlaceTableViewCell cellHeight]];
 }
@@ -121,6 +122,10 @@
         [[BusinessDetailsViewController alloc] initWithBusiness:place];
     [[self navigationController] pushViewController:controller animated:YES];
     [controller release], controller = nil;
+}
+
+- (void)displayDetailsForObjectGroup:(NSArray *)group
+{
 }
 
 - (NSPredicate *)predicateForQueryString:(NSString *)queryString

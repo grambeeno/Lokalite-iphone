@@ -14,6 +14,8 @@
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 
+#import "StaticEventListViewController.h"
+
 #import "TableViewImageFetcher.h"
 #import "LokaliteApplicationState.h"
 
@@ -69,6 +71,7 @@
 
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [tableView setRowHeight:[EventTableViewCell cellHeight]];
+    [tableView setBackgroundColor:[UIColor tableViewBackgroundColor]];
 }
 
 - (NSString *)reuseIdentifierForIndexPath:(NSIndexPath *)indexPath
@@ -122,6 +125,14 @@
 {
     EventDetailsViewController *controller =
         [[EventDetailsViewController alloc] initWithEvent:event];
+    [[self navigationController] pushViewController:controller animated:YES];
+    [controller release], controller = nil;
+}
+
+- (void)displayDetailsForObjectGroup:(NSArray *)group
+{
+    StaticEventListViewController *controller =
+        [[StaticEventListViewController alloc] initWithEvents:group];
     [[self navigationController] pushViewController:controller animated:YES];
     [controller release], controller = nil;
 }

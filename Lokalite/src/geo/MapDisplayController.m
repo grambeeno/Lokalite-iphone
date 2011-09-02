@@ -14,6 +14,7 @@
 #import "Event.h"
 #import "Event+GeneralHelpers.h"
 
+#import "NSArray+GeneralHelpers.h"
 
 @interface MapDisplayController ()
 
@@ -186,11 +187,21 @@
  annotationView:(MKAnnotationView *)view
     calloutAccessoryControlTapped:(UIControl *)control
 {
-    LokaliteObjectMapAnnotation *annotation =
-        (LokaliteObjectMapAnnotation *) [view annotation];
-    id<MappableLokaliteObject> object = [annotation lokaliteObject];
-
-    [[self delegate] mapDisplayController:self didSelectObject:object];
+    GroupedMapAnnotation *groupedAnnotation =
+        (GroupedMapAnnotation *) [view annotation];
+    NSArray *annotations = [groupedAnnotation annotations];
+    if ([annotations count] == 1) {
+        LokaliteObjectMapAnnotation *annotation = [annotations lastObject];
+        [[self delegate] mapDisplayController:self
+                              didSelectObject:[annotation lokaliteObject]];
+    } else {
+        NSArray *objects =
+        [annotations arrayByMappingArray:
+         ^(LokaliteObjectMapAnnotation *a, NSUInteger idx, BOOL *stop) {
+            return [a lokaliteObject];
+         }];
+        [[self delegate] mapDisplayController:self didSelectGroup:objects];
+    }
 }
 
 #pragma mark - Map annotation helpers

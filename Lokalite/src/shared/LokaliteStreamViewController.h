@@ -88,6 +88,7 @@
             forObject:(id<MappableLokaliteObject>)obj;
 
 - (void)displayDetailsForObject:(id<MappableLokaliteObject>)object;
+- (void)displayDetailsForObjectGroup:(NSArray *)group;
 
 
 #pragma mark - Searching - local

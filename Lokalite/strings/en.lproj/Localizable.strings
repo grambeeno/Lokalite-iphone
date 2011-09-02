@@ -63,7 +63,7 @@
 /*
  * Geo
  */
-"annotation.grouped.subtitle.format" = "And %d more";
+"annotation.grouped.subtitle.format" = "And %d more at this location";
 
 /*
  * Search

@@ -605,6 +605,12 @@ titleForHeaderInSection:(NSInteger)section
     [self displayDetailsForObject:object];
 }
 
+- (void)mapDisplayController:(MapDisplayController *)controller
+              didSelectGroup:(NSArray *)group
+{
+    [self displayDetailsForObjectGroup:group];
+}
+
 #pragma mark - Displaying the activity view
 
 /*
@@ -647,8 +653,6 @@ titleForHeaderInSection:(NSInteger)section
         [tableView setTableFooterView:
          hasFooter ? [self loadingMoreActivityView] : nil];
     }
-
-    [tableView setBackgroundColor:[UIColor tableViewBackgroundColor]];
 }
 
 - (void)initializeMapView:(MKMapView *)mapView
@@ -723,6 +727,12 @@ titleForHeaderInSection:(NSInteger)section
 }
 
 - (void)displayDetailsForObject:(id<MappableLokaliteObject>)object
+{
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+}
+
+- (void)displayDetailsForObjectGroup:(NSArray *)group
 {
     NSAssert2(NO, @"%@: %@ - Must be implemented by subclsases",
               NSStringFromClass([self class]), NSStringFromSelector(_cmd));

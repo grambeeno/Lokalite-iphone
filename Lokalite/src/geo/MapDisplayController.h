@@ -49,5 +49,7 @@
 
 - (void)mapDisplayController:(MapDisplayController *)controller
              didSelectObject:(id<MappableLokaliteObject>)object;
+- (void)mapDisplayController:(MapDisplayController *)controller
+              didSelectGroup:(NSArray *)group;
 
 @end
