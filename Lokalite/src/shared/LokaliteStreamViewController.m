@@ -243,6 +243,13 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
     [source unassociateAndDeleteDownloadedObjectsDeletingIfEmpty:YES];
 
+    // HACK: need to remove objects from the map manually if it's visible.
+    // This is because we rely on MOC notifications, but when the delete
+    // notification is set, the object is already invalidated, so we can't
+    // find it on the map
+    if ([self isShowingMapView])
+        [[self mapViewController] removeAllAnnotations];
+
     [self setLokaliteStream:[self lokaliteStreamInstance]];
     //[[self lokaliteStream] resetStream];
 

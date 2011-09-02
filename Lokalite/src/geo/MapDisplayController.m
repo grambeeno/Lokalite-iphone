@@ -22,6 +22,12 @@
 
 - (void)zoomMapViewForAnnotations:(NSArray *)annotations;
 
+#pragma mark - Map annotation helpers
+
+- (NSArray *)addNewAnnotationsToExistingAnnotations:(NSArray *)annotations;
+- (NSArray *)removeAnnotationsFromExistingAnnotations:(NSArray *)annotations;
++ (NSString *)keyForCoordinate:(CLLocationCoordinate2D)coord;
+
 @end
 
 
@@ -92,11 +98,91 @@
     }
 }
 
-+ (NSString *)keyForCoordinate:(CLLocationCoordinate2D)coord
+- (void)addAnnotations:(NSArray *)annotations
 {
-    return [NSString
-            stringWithFormat:@"%f %f", coord.latitude, coord.longitude];
+    NSArray *newAnnotations =
+        [self addNewAnnotationsToExistingAnnotations:annotations];
+    [[self mapView] addAnnotations:newAnnotations];
+
 }
+
+- (void)removeAnnotations:(NSArray *)annotations
+{
+    NSArray *oldAnnotations =
+        [self removeAnnotationsFromExistingAnnotations:annotations];
+    [[self mapView] removeAnnotations:oldAnnotations];
+}
+
+- (void)removeAllAnnotations
+{
+    [[self mapView] removeAnnotations:[[self mapView] annotations]];
+    [[self allAnnotations] removeAllObjects];
+}
+
+#pragma mark - Managing the map view
+
+- (void)zoomMapViewForAnnotations:(NSArray *)annotations
+{
+    MKCoordinateRegion region =
+        [[self class] coordinateRegionForMapAnnotations:annotations];
+    [[self mapView] setRegion:region];
+}
+
+#pragma mark - MKMapViewDelegate implmeentation
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView
+            viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    if ([mapView userLocation] == annotation)
+        return nil;
+
+    static NSString *AnnotationId = @"MapAnnotation";
+    MKPinAnnotationView *view = (MKPinAnnotationView *)
+        [mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationId];
+    if (!view) {
+        view = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                reuseIdentifier:AnnotationId]
+                autorelease];
+        [view setAnimatesDrop:YES];
+        [view setPinColor:MKPinAnnotationColorGreen];
+        [view setCanShowCallout:YES];
+    }
+
+    LokaliteObjectMapAnnotation *lokaliteAnnotation =
+        (LokaliteObjectMapAnnotation *) annotation;
+    id<MappableLokaliteObject> lokaliteObject =
+        [lokaliteAnnotation lokaliteObject];
+    UIImage *image = [lokaliteObject mapAnnotationViewImage];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    [imageView setContentMode:UIViewContentModeScaleAspectFill];
+    CGRect imageViewFrame = [imageView frame];
+    imageViewFrame.size = CGSizeMake(32, 32);
+    [imageView setFrame:imageViewFrame];
+    [view setLeftCalloutAccessoryView:imageView];
+    [imageView release], imageView = nil;
+
+    UIButton *rightAccessoryView = nil;
+    if ([self annotationsShowRightAccessoryView])
+        rightAccessoryView =
+            [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
+    [view setRightCalloutAccessoryView:rightAccessoryView];
+
+    return view;
+}
+
+- (void)mapView:(MKMapView *)mapView
+ annotationView:(MKAnnotationView *)view
+    calloutAccessoryControlTapped:(UIControl *)control
+{
+    LokaliteObjectMapAnnotation *annotation =
+        (LokaliteObjectMapAnnotation *) [view annotation];
+    id<MappableLokaliteObject> object = [annotation lokaliteObject];
+
+    [[self delegate] mapDisplayController:self didSelectObject:object];
+}
+
+#pragma mark - Map annotation helpers
 
 - (NSArray *)addNewAnnotationsToExistingAnnotations:(NSArray *)annotations
 {
@@ -141,87 +227,10 @@
     return oldAnnotations;
 }
 
-- (void)addAnnotations:(NSArray *)annotations
++ (NSString *)keyForCoordinate:(CLLocationCoordinate2D)coord
 {
-    NSArray *newAnnotations =
-        [self addNewAnnotationsToExistingAnnotations:annotations];
-    [[self mapView] addAnnotations:newAnnotations];
-
-}
-
-- (void)removeAnnotations:(NSArray *)annotations
-{
-    NSArray *oldAnnotations =
-        [self removeAnnotationsFromExistingAnnotations:annotations];
-    [[self mapView] removeAnnotations:oldAnnotations];
-}
-
-- (void)removeAllAnnotations
-{
-    [self removeAnnotations:[self annotations]];
-    [[self allAnnotations] removeAllObjects];
-}
-
-#pragma mark - Managing the map view
-
-- (void)zoomMapViewForAnnotations:(NSArray *)annotations
-{
-    MKCoordinateRegion region =
-        [[self class] coordinateRegionForMapAnnotations:annotations];
-    [[self mapView] setRegion:region];
-}
-
-#pragma mark - MKMapViewDelegate implmeentation
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView
-            viewForAnnotation:(id<MKAnnotation>)annotation
-{
-    if ([mapView userLocation] == annotation)
-        return nil;
-
-    static NSString *AnnotationId = @"MapAnnotation";
-    MKPinAnnotationView *view = (MKPinAnnotationView *)
-        [mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationId];
-    if (!view) {
-        view = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation
-                                                reuseIdentifier:AnnotationId]
-                autorelease];
-        [view setAnimatesDrop:YES];
-        [view setPinColor:MKPinAnnotationColorGreen];
-        [view setCanShowCallout:YES];
-    }
-
-    LokaliteObjectMapAnnotation *lokaliteAnnotation =
-        (LokaliteObjectMapAnnotation *) annotation;
-    id<MappableLokaliteObject> lokaliteObject =
-        [lokaliteAnnotation lokaliteObject];
-    UIImage *image = [lokaliteObject mapAnnotationViewImage];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    CGRect imageViewFrame = [imageView frame];
-    imageViewFrame.size = CGSizeMake(32, 32);
-    [imageView setFrame:imageViewFrame];
-    [view setLeftCalloutAccessoryView:imageView];
-    [imageView release], imageView = nil;
-
-    UIButton *rightAccessoryView = nil;
-    if ([self annotationsShowRightAccessoryView])
-        rightAccessoryView =
-            [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-
-    [view setRightCalloutAccessoryView:rightAccessoryView];
-
-    return view;
-}
-
-- (void)mapView:(MKMapView *)mapView
- annotationView:(MKAnnotationView *)view
-    calloutAccessoryControlTapped:(UIControl *)control
-{
-    LokaliteObjectMapAnnotation *annotation =
-        (LokaliteObjectMapAnnotation *) [view annotation];
-    id<MappableLokaliteObject> object = [annotation lokaliteObject];
-
-    [[self delegate] mapDisplayController:self didSelectObject:object];
+    CLLocationDegrees latitutde = coord.latitude, longitude = coord.longitude;
+    return [NSString stringWithFormat:@"%f %f", latitutde, longitude];
 }
 
 #pragma mark - Map geometry
