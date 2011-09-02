@@ -39,7 +39,8 @@
 
 + (id)tableViewBackgroundColor
 {
-    return [UIColor colorWithRGBValue:0xe4e4e4];
+    //return [UIColor colorWithRGBValue:0xe4e4e4];
+    return [UIColor colorWithRGBValue:0xE2E2E2];
 }
 
 @end

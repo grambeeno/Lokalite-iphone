@@ -13,11 +13,14 @@
 #import "EventTableViewCell.h"
 #import "EventDetailsViewController.h"
 
+#import "NoDataView.h"
+
 #import "SDKAdditions.h"
 
 @interface TrendedEventsViewController ()
 
 @property (nonatomic, retain) NSFetchedResultsController *dataController;
+@property (nonatomic, retain) NoDataView *noDataView;
 
 #pragma mark - View initialization
 
@@ -28,6 +31,9 @@
 
 - (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event;
 
+- (void)presentNoDataView;
+- (void)dismissNoDataView;
+
 @end
 
 
@@ -35,6 +41,7 @@
 
 @synthesize context = context_;
 @synthesize dataController = dataController_;
+@synthesize noDataView = noDataView_;
 
 #pragma mark - Memory management
 
@@ -42,6 +49,7 @@
 {
     [context_ release];
     [dataController_ release];
+    [noDataView_ release];
 
     [super dealloc];
 }
@@ -73,6 +81,9 @@
 
     [self initializeNavigationItem:[self navigationItem]];
     [self initializeTableView:[self tableView]];
+
+    if ([[[self dataController] fetchedObjects] count] == 0)
+        [self presentNoDataView];
 }
 
 #pragma mark - UITableViewDataSource implementation
@@ -137,6 +148,7 @@
         case NSFetchedResultsChangeInsert:
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
                        withRowAnimation:UITableViewRowAnimationFade];
+            [self dismissNoDataView];
             break;
  
         case NSFetchedResultsChangeDelete:
@@ -163,6 +175,9 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
+
+    if ([[[self dataController] fetchedObjects] count] == 0)
+        [self presentNoDataView];
 }
 
 #pragma mark - SettingsViewControllerDelegate implementation
@@ -198,6 +213,16 @@
 - (void)configureCell:(EventTableViewCell *)cell forEvent:(Event *)event
 {
     [cell configureCellForEvent:event displayDistance:NO];
+}
+
+- (void)presentNoDataView
+{
+    [[self view] addSubview:[self noDataView]];
+}
+
+- (void)dismissNoDataView
+{
+    [[self noDataView] removeFromSuperview];
 }
 
 #pragma mark - Accessors
@@ -243,6 +268,19 @@
     }
 
     return dataController_;
+}
+
+- (NoDataView *)noDataView
+{
+    if (!noDataView_) {
+        noDataView_ = [[NoDataView instanceFromNib] retain];
+        [[noDataView_ titleLabel]
+         setText:NSLocalizedString(@"trended-events.no-data.title", nil)];
+        [[noDataView_ descriptionLabel]
+         setText:NSLocalizedString(@"trended-events.no-data.description", nil)];
+    }
+
+    return noDataView_;
 }
 
 @end

@@ -255,6 +255,10 @@
 		05D06E7213D76B4900878AD6 /* category-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D06E7013D76B4900878AD6 /* category-button@2x.png */; };
 		05D06E7513D76B7900878AD6 /* UIButton+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D06E7413D76B7900878AD6 /* UIButton+GeneralHelpers.m */; };
 		05D2CDE813D0ED0D00043FB6 /* BusinessDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */; };
+		05DCC9F81411731D00FB81AA /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCC9F71411731D00FB81AA /* NoDataView.m */; };
+		05DCC9FB1411743E00FB81AA /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DCC9FA1411743E00FB81AA /* NoDataView.xib */; };
+		05DCC9FE1411748400FB81AA /* lokalite-square.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DCC9FC1411748400FB81AA /* lokalite-square.png */; };
+		05DCC9FF1411748400FB81AA /* lokalite-square@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DCC9FD1411748400FB81AA /* lokalite-square@2x.png */; };
 		05DD68EB13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */; };
 		05E5555713F340C900DF0F31 /* category-filters-places.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05E5555613F340C900DF0F31 /* category-filters-places.plist */; };
 		05E5555A13F42C9800DF0F31 /* PlaceStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */; };
@@ -703,6 +707,11 @@
 		05D06E7413D76B7900878AD6 /* UIButton+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+GeneralHelpers.m"; path = "src/sdk-additions/UIButton+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05D2CDE613D0ED0D00043FB6 /* BusinessDetailsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessDetailsHeaderView.h; path = src/businesses/BusinessDetailsHeaderView.h; sourceTree = "<group>"; };
 		05D2CDE713D0ED0D00043FB6 /* BusinessDetailsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessDetailsHeaderView.m; path = src/businesses/BusinessDetailsHeaderView.m; sourceTree = "<group>"; };
+		05DCC9F61411731D00FB81AA /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoDataView.h; path = src/shared/NoDataView.h; sourceTree = "<group>"; };
+		05DCC9F71411731D00FB81AA /* NoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoDataView.m; path = src/shared/NoDataView.m; sourceTree = "<group>"; };
+		05DCC9FA1411743E00FB81AA /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoDataView.xib; path = src/shared/NoDataView.xib; sourceTree = "<group>"; };
+		05DCC9FC1411748400FB81AA /* lokalite-square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lokalite-square.png"; path = "images/shared/lokalite-square.png"; sourceTree = "<group>"; };
+		05DCC9FD1411748400FB81AA /* lokalite-square@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lokalite-square@2x.png"; path = "images/shared/lokalite-square@2x.png"; sourceTree = "<group>"; };
 		05DD68E913D64ED300A196B6 /* NSPredicate+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPredicate+GeneralHelpers.h"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPredicate+GeneralHelpers.m"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.m"; sourceTree = "<group>"; };
 		05E5555613F340C900DF0F31 /* category-filters-places.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "category-filters-places.plist"; path = "data/category-filters-places.plist"; sourceTree = "<group>"; };
@@ -885,6 +894,9 @@
 				0522547413FD6F18002DC909 /* DetailViewTableViewCell.xib */,
 				05B1671B13FDCD9500C44577 /* ExpandableTextTableViewCell.h */,
 				05B1671C13FDCD9500C44577 /* ExpandableTextTableViewCell.m */,
+				05DCC9F61411731D00FB81AA /* NoDataView.h */,
+				05DCC9F71411731D00FB81AA /* NoDataView.m */,
+				05DCC9FA1411743E00FB81AA /* NoDataView.xib */,
 			);
 			name = shared;
 			sourceTree = "<group>";
@@ -1538,6 +1550,8 @@
 		05BC9C0A13E9BFBB00FBAD23 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				05DCC9FC1411748400FB81AA /* lokalite-square.png */,
+				05DCC9FD1411748400FB81AA /* lokalite-square@2x.png */,
 				052F2B82140D4D12000C8E60 /* detail-view-image-well@2x.png */,
 				0522547613FD6FDF002DC909 /* detail-cell-background@2x.png */,
 				05BC9C0B13E9BFD700FBAD23 /* standard-button-background@2x.png */,
@@ -1855,6 +1869,9 @@
 				050874A1140EE285006A0066 /* place-shopping@2x.png in Resources */,
 				050874A2140EE285006A0066 /* place-sports@2x.png in Resources */,
 				050874A6140EEC21006A0066 /* map@2x.png in Resources */,
+				05DCC9FB1411743E00FB81AA /* NoDataView.xib in Resources */,
+				05DCC9FE1411748400FB81AA /* lokalite-square.png in Resources */,
+				05DCC9FF1411748400FB81AA /* lokalite-square@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2034,6 +2051,7 @@
 				0594F47A14105A9D007E6874 /* GroupedMapAnnotation.m in Sources */,
 				0594F48414114585007E6874 /* StaticEventListViewController.m in Sources */,
 				0594F48714114FDF007E6874 /* StaticPlaceListViewController.m in Sources */,
+				05DCC9F81411731D00FB81AA /* NoDataView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

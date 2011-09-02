@@ -160,3 +160,10 @@
  */
 "devicelocator.purpose" = "Lokalite uses your location to find events close to you.";
 "devicelocator.timeout.message" = "The operation timed out";
+
+
+/*
+ * Trended events
+ */
+"trended-events.no-data.title" = "Need Copy";
+"trended-events.no-data.description" = "Need copy";

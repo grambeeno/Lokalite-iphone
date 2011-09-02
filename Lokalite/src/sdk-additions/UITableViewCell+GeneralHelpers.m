@@ -17,7 +17,7 @@
 
 + (id)instanceFromNib
 {
-    NSString *nibName = NSStringFromClass([self class]);
+    NSString *nibName = NSStringFromClass(self);
     return [self instanceFromNibNamed:nibName bundle:nil];
 }
 
