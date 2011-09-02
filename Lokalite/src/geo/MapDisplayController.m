@@ -150,14 +150,6 @@
         [view setCanShowCallout:YES];
     }
 
-    /*
-    LokaliteObjectMapAnnotation *lokaliteAnnotation =
-        (LokaliteObjectMapAnnotation *) annotation;
-    id<MappableLokaliteObject> lokaliteObject =
-        [lokaliteAnnotation lokaliteObject];
-    UIImage *image = [lokaliteObject mapAnnotationViewImage];
-     */
-
     GroupedMapAnnotation *groupedAnnotation =
         (GroupedMapAnnotation *) annotation;
     LokaliteObjectMapAnnotation *lokaliteAnnotation =
