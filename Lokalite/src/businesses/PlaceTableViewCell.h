@@ -11,6 +11,7 @@
 @interface PlaceTableViewCell : UITableViewCell
 
 @property (nonatomic, copy) NSNumber *placeId;
+@property (nonatomic, copy) NSString *placeImageUrl;
 
 @property (nonatomic, retain) IBOutlet UIImageView *placeImageView;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;

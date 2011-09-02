@@ -8,9 +8,12 @@
 
 #import "NSDate+GeneralHelpers.h"
 
-@implementation NSDate (GeneralHelpers)
+@interface NSDateFormatter (PrivateLokaliteHelpers)
++ (id)lokaliteServerFormatter;
+@end
 
-+ (id)dateFromLokaliteServerString:(NSString *)string
+@implementation NSDateFormatter (PrivateLokaliteHelpers)
++ (id)lokaliteServerFormatter
 {
     static NSDateFormatter *formatter = nil;
     if (!formatter) {
@@ -24,7 +27,21 @@
         [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     }
 
-    return [formatter dateFromString:string];
+    return formatter;
+}
+@end
+
+
+@implementation NSDate (GeneralHelpers)
+
++ (id)dateFromLokaliteServerString:(NSString *)string
+{
+    return [[NSDateFormatter lokaliteServerFormatter] dateFromString:string];
+}
+
+- (NSString *)toLokaliteServerString
+{
+    return [[NSDateFormatter lokaliteServerFormatter] stringFromDate:self];
 }
 
 - (NSString *)timeString

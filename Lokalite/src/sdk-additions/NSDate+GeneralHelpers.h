@@ -11,6 +11,7 @@
 @interface NSDate (GeneralHelpers)
 
 + (id)dateFromLokaliteServerString:(NSString *)string;
+- (NSString *)toLokaliteServerString;
 
 - (NSString *)timeString;
 

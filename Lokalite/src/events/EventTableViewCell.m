@@ -13,6 +13,7 @@
 @implementation EventTableViewCell
 
 @synthesize eventId = eventId_;
+@synthesize eventImageUrl = eventImageUrl_;
 
 @synthesize eventImageView = eventImageView_;
 @synthesize eventNameLabel = eventNameLabel_;
@@ -27,6 +28,7 @@
 - (void)dealloc
 {
     [eventId_ release];
+    [eventImageUrl_ release];
 
     [eventImageView_ release];
     [eventNameLabel_ release];
@@ -80,6 +82,7 @@
               displayDistance:(BOOL)displayDistance
 {
     [self setEventId:[event identifier]];
+    [self setEventImageUrl:[event standardImageUrl]];
 
     [[self eventNameLabel] setText:[event name]];
     [[self businessNameLabel] setText:[[event business] name]];

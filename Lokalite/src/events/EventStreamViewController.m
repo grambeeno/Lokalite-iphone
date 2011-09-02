@@ -95,19 +95,25 @@
 
     UIImage *image = [event standardImage];
     if (!image) {
+        NSFetchedResultsController *dataController = [self dataController];
         NSURL *url = [NSURL URLWithString:[event standardImageUrl]];
 
         [[self imageFetcher] fetchImageDataAtUrl:url
                                        tableView:tableView
                              dataReceivedHandler:
          ^(NSData *data) {
-             [event setStandardImageData:data];
+             NSArray *allEvents = [dataController fetchedObjects];
+             NSString *urlString = [url absoluteString];
+             for (Event *event in allEvents)
+                 if ([[event standardImageUrl] isEqualToString:urlString])
+                     [event setStandardImageData:data];
          }
                             tableViewCellHandler:
          ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {
              if ([tvc isKindOfClass:[EventTableViewCell class]]) {
                  EventTableViewCell *cell = (EventTableViewCell *) tvc;
-                 if ([[cell eventId] isEqualToNumber:[event identifier]])
+                 NSString *imageUrl = [cell eventImageUrl];
+                 if ([imageUrl isEqualToString:[event standardImageUrl]])
                      [[cell eventImageView] setImage:image];
              }
          }

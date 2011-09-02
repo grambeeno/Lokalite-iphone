@@ -13,6 +13,7 @@
 @implementation PlaceTableViewCell
 
 @synthesize placeId = placeId_;
+@synthesize placeImageUrl = placeImageUrl_;
 
 @synthesize placeImageView = placeImageView_;
 @synthesize nameLabel = nameLabel_;
@@ -24,6 +25,7 @@
 - (void)dealloc
 {
     [placeId_ release];
+    [placeImageUrl_ release];
 
     [placeImageView_ release];
     [nameLabel_ release];
@@ -73,6 +75,7 @@
               displayDistance:(BOOL)displayDistance
 {
     [self setPlaceId:[place identifier]];
+    [self setPlaceImageUrl:[place standardImageUrl]];
 
     [[self nameLabel] setText:[place name]];
     [[self summaryLabel] setText:[place summary]];

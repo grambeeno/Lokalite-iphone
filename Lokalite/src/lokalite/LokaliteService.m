@@ -287,6 +287,11 @@
                 [NSString stringWithFormat:@"%f,%f",
                  coord.latitude, coord.longitude];
             [params setObject:origin forKey:@"origin"];
+
+            // HACK #2: If we are ordering by distance, set the "start"
+            // parameter to be today so we get valid results
+            NSString *start = [[NSDate date] toLokaliteServerString];
+            [params setObject:start forKey:@"start"];
         }
     }
 

@@ -90,19 +90,25 @@
 
     UIImage *image = [place standardImage];
     if (!image) {
+        NSFetchedResultsController *dataController = [self dataController];
         NSURL *url = [NSURL URLWithString:[place standardImageUrl]];
 
         [[self imageFetcher] fetchImageDataAtUrl:url
                                        tableView:tableView
                              dataReceivedHandler:
          ^(NSData *data) {
-             [place setStandardImageData:data];
+             NSArray *places = [dataController fetchedObjects];
+             NSString *urlString = [url absoluteString];
+             for (Business *place in places)
+                 if ([[place standardImageUrl] isEqualToString:urlString])
+                     [place setStandardImageData:data];
          }
                             tableViewCellHandler:
          ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {
              if ([tvc isKindOfClass:[PlaceTableViewCell class]]) {
                  PlaceTableViewCell *cell = (PlaceTableViewCell *) tvc;
-                 if ([[cell placeId] isEqualToNumber:[place identifier]])
+                 NSString *imageUrl = [cell placeImageUrl];
+                 if ([imageUrl isEqualToString:[place standardImageUrl]])
                      [[cell placeImageView] setImage:image];
              }
          }
