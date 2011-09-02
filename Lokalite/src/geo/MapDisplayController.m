@@ -238,10 +238,12 @@
 
          GroupedMapAnnotation *groupedAnnotation =
             [allAnnotations objectForKey:coordKey];
-         [groupedAnnotation removeAnnotation:annotation];
-         if ([[groupedAnnotation annotations] count] == 0) {
-             [oldAnnotations addObject:groupedAnnotation];
-             [allAnnotations removeObjectForKey:coordKey];
+         if (groupedAnnotation) {
+             [groupedAnnotation removeAnnotation:annotation];
+             if ([[groupedAnnotation annotations] count] == 0) {
+                 [oldAnnotations addObject:groupedAnnotation];
+                 [allAnnotations removeObjectForKey:coordKey];
+             }
          }
     }];
 
