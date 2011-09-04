@@ -66,20 +66,39 @@
                             NSDictionary *jsonObjects,
                             NSError *error) =
     ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
+
         NSArray *parsedObjects = nil;
-        if (jsonObjects)
+
+        /* Un-comment out to test error handling */
+        /*
+        static NSInteger i = 0;
+        if (++i % 2 == 0) {
+            // jad: forced error handling
+            NSDictionary *userInfo =
+                [NSDictionary dictionaryWithObject:@"Failed fetch"
+                                            forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"Lokalite"
+                                        code:-1
+                                    userInfo:userInfo];
+        } else
+         */
+
+        if (jsonObjects) {
             parsedObjects = [self parseBlock](jsonObjects);
 
-        CLLocationCoordinate2D coord = [self location];
-        CLLocation *location = nil;
-        if (CLLocationCoordinate2DIsValid(coord))
-            location =
-                [[[CLLocation alloc] initWithLatitude:coord.latitude
-                                            longitude:coord.longitude]
-                 autorelease];
+            CLLocationCoordinate2D coord = [self location];
+            CLLocation *location = nil;
+            if (CLLocationCoordinate2DIsValid(coord))
+                location =
+                    [[[CLLocation alloc] initWithLatitude:coord.latitude
+                                                longitude:coord.longitude]
+                     autorelease];
 
-        SEL selector = @selector(updateWithDistanceFromLocation:);
-        [parsedObjects makeObjectsPerformSelector:selector withObject:location];
+            SEL selector = @selector(updateWithDistanceFromLocation:);
+            [parsedObjects makeObjectsPerformSelector:selector
+                                           withObject:location];
+
+        }
 
         handler(parsedObjects, error);
     };
@@ -93,31 +112,6 @@
         [service fetchPlacesWithCategory:[self categoryName]
                                 fromPage:[self pagesFetched] + 1
                          responseHandler:responseHandler];
-
-    /*
-    [service fetchEventsWithCategory:[self categoryName]
-                            fromPage:[self pagesFetched] + 1
-                     responseHandler:
-     ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
-         NSArray *parsedObjects = nil;
-         if (jsonObjects)
-             parsedObjects = [self parseBlock](jsonObjects);
-
-         CLLocationCoordinate2D coord = [self location];
-         CLLocation *location = nil;
-         if (CLLocationCoordinate2DIsValid(coord))
-             location =
-                [[[CLLocation alloc] initWithLatitude:coord.latitude
-                                            longitude:coord.longitude]
-                 autorelease];
-
-         SEL selector = @selector(updateWithDistanceFromLocation:);
-         [parsedObjects makeObjectsPerformSelector:selector
-                                        withObject:location];
-
-         handler(parsedObjects, error);
-     }];
-     */
 }
 
 @end

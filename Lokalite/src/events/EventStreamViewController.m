@@ -21,6 +21,7 @@
 
 #import "LokaliteStream.h"
 
+#import "LokaliteShared.h"
 #import "SDKAdditions.h"
 
 @interface EventStreamViewController ()
@@ -150,6 +151,29 @@
                          includeBusinesses:YES];
 }
 
+#pragma mark Working with the error view
+
+- (UIView *)errorViewInstanceForError:(NSError *)error
+{
+    NoDataView *view = [NoDataView instanceFromNib];
+    [[view titleLabel] setText:[self alertViewTitleForError:error]];
+    [[view descriptionLabel] setText:[error localizedDescription]];
+
+    return view;
+}
+
+- (NSString *)alertViewTitleForError:(NSError *)error
+{
+    return NSLocalizedString(@"events.error-view.title", nil);
+}
+
+#pragma mark Working with the no data view
+
+- (UIView *)noDataViewInstance
+{
+    return [NoDataView instanceFromNib];
+}
+
 #pragma mark Working with the local data store
 
 - (NSString *)lokaliteObjectEntityName
@@ -178,33 +202,6 @@
 - (NSString *)dataControllerSectionNameKeyPath
 {
     return @"dateDescription";
-}
-
-#pragma mark Fetching data from the network
-
-- (void)processNextBatchOfFetchedObjects:(NSArray *)events
-                              pageNumber:(NSInteger)pageNumber
-{
-    [super processNextBatchOfFetchedObjects:events pageNumber:pageNumber];
-}
-
-- (void)processObjectFetchError:(NSError *)error
-                     pageNumber:(NSInteger)pageNumber
-{
-    [super processObjectFetchError:error pageNumber:pageNumber];
-
-    NSLog(@"%@: processing fetch error for page %d: %@",
-          NSStringFromClass([self class]), pageNumber, error);
-    NSString *title = NSLocalizedString(@"featured.fetch.failed", nil);
-    NSString *message = [error localizedDescription];
-    NSString *dismiss = NSLocalizedString(@"global.dismiss", nil);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:dismiss
-                                          otherButtonTitles:nil];
-    [alert show];
-    [alert release], alert = nil;
 }
 
 #pragma mark - Accessors

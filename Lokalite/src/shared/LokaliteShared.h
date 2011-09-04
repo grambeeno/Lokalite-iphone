@@ -35,3 +35,5 @@
 
 #import "DeviceLocator.h"
 #import "DistanceFormatter.h"
+
+#import "NoDataView.h"

@@ -89,6 +89,11 @@
 "http.404.message" = "The resource could not be found.";
 "http.unknown.message" = "An unknown error occurred.";
 
+/*
+ * Error view strings
+ */
+"events.error-view.title" = "Failed to Fetch Events";
+"places.error-view.title" = "Failed to Fetch Places";
 
 /*
  * Featured

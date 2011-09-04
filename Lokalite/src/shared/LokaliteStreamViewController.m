@@ -25,6 +25,12 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     @"SearchResultsLoadMoreTableViewCell";
 
 
+enum {
+    VIEW_TAG_ERROR = 1000,
+    VIEW_TAG_NO_DATA
+};
+
+
 @interface LokaliteStreamViewController ()
 
 #pragma mark - Working with the table view
@@ -68,6 +74,16 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 
 @property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
 
+#pragma mark - Error view
+
+- (void)presentErrorViewForError:(NSError *)error;
+- (void)dismissErrorView;
+
+#pragma mark - No data view
+
+- (void)presentNoDataView;
+- (void)dismissNoDataView;
+
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem:(UINavigationItem *)navItem;
@@ -109,6 +125,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 #pragma mark - Fetching data from the network
 
 @property (nonatomic, assign) BOOL isFetchingData;
+
+- (void)fetchNextSetOfObjects;
 
 - (void)fetchInitialSetOfObjectsIfNecessary;
 
@@ -195,8 +213,11 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     [mapViewController_ release];
     [mapViewButtonItem_ release];
 
+    [refreshButtonItem_ release];
+
     [context_ release];
     [dataController_ release];
+
     [lokaliteStream_ release];
 
     [super dealloc];
@@ -243,6 +264,8 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
     [source unassociateAndDeleteDownloadedObjectsDeletingIfEmpty:YES];
 
+    [self dismissErrorView];
+
     // HACK: need to remove objects from the map manually if it's visible.
     // This is because we rely on MOC notifications, but when the delete
     // notification is set, the object is already invalidated, so we can't
@@ -251,7 +274,6 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
         [[self mapViewController] removeAllAnnotations];
 
     [self setLokaliteStream:[self lokaliteStreamInstance]];
-    //[[self lokaliteStream] resetStream];
 
     if ([self showsCategoryFilter])
         // doing this after a slight delay fixes an animation glitch while
@@ -271,7 +293,7 @@ static NSString *RemoteSearchTableViewCellReuseIdentifier =
 - (void)loadMoreButtonTapped:(id)sender
 {
     if (![self isFetchingData])
-        [self fetchNextSetOfObjectsWithCompletion:nil];
+        [self fetchNextSetOfObjects];
 }
 
 #pragma mark - UITableViewController implementation
@@ -970,6 +992,57 @@ titleForHeaderInSection:(NSInteger)section
         [self presentMapViewAnimated:animated];
 }
 
+#pragma mark Working with the error view
+
+- (UIView *)errorViewInstanceForError:(NSError *)error
+{
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclasses",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    return nil;
+}
+
+- (NSString *)alertViewTitleForError:(NSError *)error
+{
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclasses",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    return nil;
+}
+
+- (void)presentErrorViewForError:(NSError *)error
+{
+    UIView *noDataView = [self errorViewInstanceForError:error];
+    [noDataView setTag:VIEW_TAG_ERROR];
+    [[self view] addSubview:noDataView];
+}
+
+- (void)dismissErrorView
+{
+    UIView *noDataView = [[self view] viewWithTag:VIEW_TAG_ERROR];
+    [noDataView removeFromSuperview];
+}
+
+#pragma mark Working with the no data view
+
+- (UIView *)noDataViewInstance
+{
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclasses",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    return nil;
+}
+
+- (void)presentNoDataView
+{
+    UIView *noDataView = [self noDataViewInstance];
+    [noDataView setTag:VIEW_TAG_NO_DATA];
+    [[self view] addSubview:noDataView];
+}
+
+- (void)dismissNoDataView
+{
+    UIView *noDataView = [[self view] viewWithTag:VIEW_TAG_NO_DATA];
+    [noDataView removeFromSuperview];
+}
+
 #pragma mark - Working with category filters
 
 - (NSArray *)categoryFilters
@@ -1116,7 +1189,7 @@ titleForHeaderInSection:(NSInteger)section
             [self loadDataController];
             if ([self showsCategoryFilter] && ![self isCategoryFilterLoaded])
                 [self loadCategoryFilter];
-            [self fetchNextSetOfObjectsWithCompletion:nil];
+            [self fetchNextSetOfObjects];
         };
 
         if ([self requiresLocation]) {
@@ -1135,7 +1208,7 @@ titleForHeaderInSection:(NSInteger)section
     }
 }
 
-- (void)fetchNextSetOfObjectsWithCompletion:(void (^)(NSArray *, NSError *))fun
+- (void)fetchNextSetOfObjects
 {
     [self setIsFetchingData:YES];
 
@@ -1149,9 +1222,6 @@ titleForHeaderInSection:(NSInteger)section
                                          pageNumber:pageNumber];
          else if (error)
              [self processObjectFetchError:error pageNumber:pageNumber];
-
-         if (fun)
-             fun(objects, error);
      }];
 }
 
@@ -1162,15 +1232,39 @@ titleForHeaderInSection:(NSInteger)section
     NSLog(@"Total number of objects: %d",
           [[[self dataController] fetchedObjects] count] + [objects count]);
 
-    if ([[self lokaliteStream] hasMorePages])
-        [[self tableView] setTableFooterView:[self loadingMoreActivityView]];
-    else
-        [[self tableView] setTableFooterView:nil];
+    if ([objects count] == 0 && pageNumber == 1)
+        [self presentNoDataView];
+    else {
+        UITableView *tableView = [self tableView];
+        if ([[self lokaliteStream] hasMorePages])
+            [tableView setTableFooterView:[self loadingMoreActivityView]];
+        else
+            [tableView setTableFooterView:nil];
+    }
 }
 
 - (void)processObjectFetchError:(NSError *)error
                      pageNumber:(NSInteger)pageNumber
 {
+    NSLog(@"Handling error: '%@'", error);
+    if (pageNumber == 1)
+        [self presentErrorViewForError:error];
+    else {
+        NSLog(@"%@: processing fetch error for page %d: %@",
+              NSStringFromClass([self class]), pageNumber, error);
+        NSString *title = NSLocalizedString(@"featured.fetch.failed", nil);
+        NSString *message = [self alertViewTitleForError:error];
+        NSString *dismiss = NSLocalizedString(@"global.dismiss", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:dismiss
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release], alert = nil;
+
+        [[self tableView] setTableFooterView:nil];
+    }
 }
 
 - (LokaliteStream *)lokaliteStreamInstance

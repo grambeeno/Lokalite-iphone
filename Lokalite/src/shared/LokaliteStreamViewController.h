@@ -91,11 +91,11 @@
 - (void)displayDetailsForObjectGroup:(NSArray *)group;
 
 
-#pragma mark - Searching - local
+#pragma mark Searching - local
 
 - (NSPredicate *)predicateForQueryString:(NSString *)queryString;
 
-#pragma mark - Searching - remote
+#pragma mark Searching - remote
 
 @property (nonatomic, assign) BOOL canSearchServer;
 
@@ -104,11 +104,9 @@
 
 - (NSString *)titleForRemoteSearchFooterView;
 
-#pragma mark - Location
+#pragma mark Location
 
 @property (nonatomic, assign) BOOL requiresLocation;
-//@property (nonatomic, retain, readonly) CLLocation *currentLocation;
-
 - (BOOL)hasValidLocation;
 
 #pragma mark Working with the map view
@@ -117,8 +115,16 @@
 - (void)dismissMapViewAnimated:(BOOL)animated;
 - (void)toggleMapViewAnimated:(BOOL)animated;
 
+#pragma mark Working with the error view
 
-#pragma mark - Working with category filters
+- (UIView *)errorViewInstanceForError:(NSError *)error;
+- (NSString *)alertViewTitleForError:(NSError *)error;
+
+#pragma mark Working with the no data view
+
+- (UIView *)noDataViewInstance;
+
+#pragma mark Working with category filters
 
 - (NSArray *)categoryFilters;
 - (void)didSelectCategoryFilter:(CategoryFilter *)filter;
@@ -138,14 +144,17 @@
 - (NSString *)dataControllerSectionNameKeyPath;
 - (NSString *)dataControllerCacheName;
 
+
 #pragma mark Account events
 
+//
+// Note that since it was decided that user log in wouldn't make it until
+// the next version, these are no longer used.
+//
 - (BOOL)shouldResetForAccountAddition:(LokaliteAccount *)account;
 - (BOOL)shouldResetForAccountDeletion:(LokaliteAccount *)account;
 
 #pragma mark Fetching data from the network
-
-- (void)fetchNextSetOfObjectsWithCompletion:(void (^)(NSArray *, NSError *))fun;
 
 - (void)processNextBatchOfFetchedObjects:(NSArray *)objects
                               pageNumber:(NSInteger)pageNumber;

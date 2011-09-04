@@ -223,6 +223,7 @@
 - (void)dismissNoDataView
 {
     [[self noDataView] removeFromSuperview];
+    [self setNoDataView:nil];
 }
 
 #pragma mark - Accessors
