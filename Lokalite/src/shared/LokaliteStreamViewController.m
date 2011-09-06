@@ -1051,6 +1051,7 @@ titleForHeaderInSection:(NSInteger)section
     NSLog(@"%@: processing location update: %@",
           NSStringFromClass([self class]), location);
 
+    /*
     UITableView *tableView = [self tableView];
     [[tableView visibleCells] enumerateObjectsUsingBlock:
      ^(UITableViewCell *cell, NSUInteger idx, BOOL *stop) {
@@ -1066,6 +1067,7 @@ titleForHeaderInSection:(NSInteger)section
              }
          }
      }];
+     */
 }
 
 #pragma mark Working with the error view

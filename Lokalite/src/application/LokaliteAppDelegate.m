@@ -222,6 +222,17 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
      didUpateLocation:(CLLocation *)location
 {
     NSLog(@"Found location: %@", location);
+
+    SEL selector = @selector(updateWithDistanceFromLocation:);
+
+    NSArray *events = [Event findAllInContext:[self context]];
+    NSLog(@"Updating %d event(s).", [events count]);
+    [events makeObjectsPerformSelector:selector withObject:location];
+
+    NSArray *places = [Business findAllInContext:[self context]];
+    NSLog(@"Updating %d place(s).", [places count]);
+    [places makeObjectsPerformSelector:selector withObject:location];
+
     NSLog(@"Stopping the device locator.");
     [[self deviceLocator] stop];
 }
