@@ -445,7 +445,6 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
     Business *business = [self business];
     NSInteger nrows = 0;
 
-
     if ([business phone])
         ++nrows;
     if ([business url])
