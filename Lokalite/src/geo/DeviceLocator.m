@@ -13,6 +13,10 @@ NSString *DeviceLocatorDidUpdateLocationNotificationName =
     @"DeviceLocatorDidUpdateLocationNotificationName";
 NSString *DeviceLocatorLocationKey = @"DeviceLocatorLocationKey";
 
+NSString *DeviceLocatorDidUpdateLocationErrorNotificationName =
+    @"DeviceLocatorDidUpdateLocationErrorNotificationName";
+NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
+
 
 @interface NSError (DeviceLocatorHelpers)
 + (id)standardLocationTimeoutError;
@@ -43,6 +47,7 @@ NSString *DeviceLocatorLocationKey = @"DeviceLocatorLocationKey";
 - (void)forgetLocationUpdateHandler:(DLLocationUpdateHandler)handler;
 - (void)forgetAllLocationUpdateHandlers;
 - (void)broadcastNotificationForLocationUpdate:(CLLocation *)location;
+- (void)broadcastNotificationForLocationUpdateError:(NSError *)error;
 
 @property (nonatomic, retain) NSMutableSet *locationUpdateHandlers;
 
@@ -233,6 +238,8 @@ NSString *DeviceLocatorLocationKey = @"DeviceLocatorLocationKey";
     [self forgetAllLocationUpdateHandlers];
 
     [self cancelTimeoutTimer];
+
+    [self broadcastNotificationForLocationUpdateError:error];
 }
 
 - (void)notifyLocationUpdateHandlersOfLocationUpdate:(CLLocation *)location
@@ -269,6 +276,19 @@ NSString *DeviceLocatorLocationKey = @"DeviceLocatorLocationKey";
                                     forKey:DeviceLocatorLocationKey];
 
     [nc postNotificationName:DeviceLocatorDidUpdateLocationNotificationName
+                      object:self
+                    userInfo:userInfo];
+}
+
+- (void)broadcastNotificationForLocationUpdateError:(NSError *)error
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+
+    NSDictionary *userInfo =
+        [NSDictionary dictionaryWithObject:error
+                                    forKey:DeviceLocatorLocationErrorKey];
+
+    [nc postNotificationName:DeviceLocatorDidUpdateLocationErrorNotificationName
                       object:self
                     userInfo:userInfo];
 }

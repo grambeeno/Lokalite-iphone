@@ -13,6 +13,9 @@
 extern NSString *DeviceLocatorDidUpdateLocationNotificationName;
 extern NSString *DeviceLocatorLocationKey;
 
+extern NSString *DeviceLocatorDidUpdateLocationErrorNotificationName;
+extern NSString *DeviceLocatorLocationErrorKey;
+
 typedef void(^DLLocationUpdateHandler)(CLLocation *location, NSError *error);
 
 @protocol DeviceLocatorDelegate;
@@ -22,6 +25,11 @@ typedef void(^DLLocationUpdateHandler)(CLLocation *location, NSError *error);
 #pragma mark - Delegate
 
 @property (nonatomic, assign) id<DeviceLocatorDelegate> delegate;
+
+#pragma mark - Current state
+
+@property (nonatomic, retain, readonly) CLLocation *lastLocation;
+@property (nonatomic, retain, readonly) NSError *lastError;
 
 #pragma mark - Locating
 
