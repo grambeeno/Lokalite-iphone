@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+
+extern NSString *DeviceLocatorDidUpdateLocationNotificationName;
+extern NSString *DeviceLocatorLocationKey;
+
 typedef void(^DLLocationUpdateHandler)(CLLocation *location, NSError *error);
 
 @protocol DeviceLocatorDelegate;
@@ -53,6 +57,7 @@ typedef void(^DLLocationUpdateHandler)(CLLocation *location, NSError *error);
 
 - (void)deviceLocator:(DeviceLocator *)locator
      didUpateLocation:(CLLocation *)location;
+- (void)deviceLocatorDidTimeout:(DeviceLocator *)locator;
 - (void)deviceLocator:(DeviceLocator *)locator
      didFailWithError:(NSError *)error;
 

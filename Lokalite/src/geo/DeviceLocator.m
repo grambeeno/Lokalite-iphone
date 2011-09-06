@@ -9,6 +9,11 @@
 #import "DeviceLocator.h"
 
 
+NSString *DeviceLocatorDidUpdateLocationNotificationName =
+    @"DeviceLocatorDidUpdateLocationNotificationName";
+NSString *DeviceLocatorLocationKey = @"DeviceLocatorLocationKey";
+
+
 @interface NSError (DeviceLocatorHelpers)
 + (id)standardLocationTimeoutError;
 @end
@@ -37,6 +42,7 @@
 - (void)saveLocationUpdateHandler:(DLLocationUpdateHandler)handler;
 - (void)forgetLocationUpdateHandler:(DLLocationUpdateHandler)handler;
 - (void)forgetAllLocationUpdateHandlers;
+- (void)broadcastNotificationForLocationUpdate:(CLLocation *)location;
 
 @property (nonatomic, retain) NSMutableSet *locationUpdateHandlers;
 
@@ -71,6 +77,7 @@
     delegate_ = nil;
 
     [self stop];
+
     [locationManager_ release];
     [lastLocation_ release];
     [lastError_ release];
@@ -130,6 +137,7 @@
 
 + (NSTimeInterval)defaultTimeoutInterval
 {
+
 #if TARGET_IPHONE_SIMULATOR
 
     return 0.1;
@@ -189,8 +197,12 @@
 - (void)timeoutTimerFired:(NSTimer *)timer
 {
     NSError * error = [NSError standardLocationTimeoutError];
-    [self processLocationUpdateFailure:error];
-    [self setTimeoutTimer:nil];
+    [self notifyLocationUpdateHandlersOfLocationUpdate:nil orError:error];
+    [self forgetAllLocationUpdateHandlers];
+
+    [[self delegate] deviceLocatorDidTimeout:self];
+
+    [self cancelTimeoutTimer];
 }
 
 #pragma mark - Location updates
@@ -206,6 +218,8 @@
     [self forgetAllLocationUpdateHandlers];
 
     [self cancelTimeoutTimer];
+
+    [self broadcastNotificationForLocationUpdate:location];
 }
 
 - (void)processLocationUpdateFailure:(NSError *)error
@@ -244,6 +258,19 @@
 - (void)forgetAllLocationUpdateHandlers
 {
     [[self locationUpdateHandlers] removeAllObjects];
+}
+
+- (void)broadcastNotificationForLocationUpdate:(CLLocation *)location
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+
+    NSDictionary *userInfo =
+        [NSDictionary dictionaryWithObject:location
+                                    forKey:DeviceLocatorLocationKey];
+
+    [nc postNotificationName:DeviceLocatorDidUpdateLocationNotificationName
+                      object:self
+                    userInfo:userInfo];
 }
 
 #pragma mark - Determining accuracy

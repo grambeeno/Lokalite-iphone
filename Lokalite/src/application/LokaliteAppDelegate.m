@@ -173,10 +173,9 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    /*
-     Called as part of the transition from the background to the inactive state;
-     here you can undo many of the changes made on entering the background.
-     */
+    // fire up the device locator
+    DeviceLocator *locator = [DeviceLocator locator];
+    [locator start];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -225,6 +224,11 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
     NSLog(@"Found location: %@", location);
     NSLog(@"Stopping the device locator.");
     [[self deviceLocator] stop];
+}
+
+- (void)deviceLocatorDidTimeout:(DeviceLocator *)locator
+{
+    NSLog(@"Device locator timed out. Still waiting for an update.");
 }
 
 - (void)deviceLocator:(DeviceLocator *)locator
@@ -392,8 +396,6 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
     void (^deleteObject)(id, NSUInteger, BOOL *) =
         ^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
-            NSLog(@"Deleting %@ with ID %@: %@", NSStringFromClass([obj class]),
-                  [obj valueForKey:@"identifier"], [obj valueForKey:@"name"]);
             [context deleteObject:obj];
         };
 

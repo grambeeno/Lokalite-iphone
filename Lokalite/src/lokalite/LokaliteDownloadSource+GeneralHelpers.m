@@ -24,11 +24,8 @@
     NSSet *objects = [[self lokaliteObjects] mutableCopy];
     [objects enumerateObjectsUsingBlock:^(LokaliteObject *obj, BOOL *stop) {
         [obj removeDownloadSourcesObject:self];
-        if ([[obj downloadSources] count] == 0) {
-            NSLog(@"Deleting %@ %@", NSStringFromClass([obj class]),
-                  [obj identifier]);
+        if ([[obj downloadSources] count] == 0)
             [context deleteObject:obj];
-        }
     }];
     [objects release], objects = nil;
 

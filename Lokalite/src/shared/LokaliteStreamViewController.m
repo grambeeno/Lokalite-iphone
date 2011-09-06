@@ -70,6 +70,10 @@ enum {
 
 @property (nonatomic, retain) CLLocation *currentLocation;
 
+- (void)subscribeForLocationNotifications;
+- (void)unsubscribeForLocationNotifications;
+- (void)processLocationUpdate:(CLLocation *)location;
+
 #pragma mark - Working with the map view
 
 @property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
@@ -193,6 +197,7 @@ enum {
 
 - (void)dealloc
 {
+    [self unsubscribeForLocationNotifications];
     [self unsubscribeForApplicationLifecycleNotifications];
     [self unsubscribeForNotoficationsForContext:context_];
 
@@ -312,6 +317,7 @@ enum {
     // until the view loads. Consider refactoring in the future.
     [self setTitle:[self titleForView]];
 
+    [self subscribeForLocationNotifications];
     [self subscribeForNotificationsForContext:[self context]];
     [self subscribeForApplicationLifecycleNotifications];
 
@@ -1014,6 +1020,54 @@ titleForHeaderInSection:(NSInteger)section
         [self presentMapViewAnimated:animated];
 }
 
+#pragma mark - Location
+
+- (void)subscribeForLocationNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(processLocationUpdateNotification:)
+               name:DeviceLocatorDidUpdateLocationNotificationName
+             object:[DeviceLocator locator]];
+}
+
+- (void)unsubscribeForLocationNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self
+                  name:DeviceLocatorDidUpdateLocationNotificationName
+                object:[DeviceLocator locator]];
+}
+
+- (void)processLocationUpdateNotification:(NSNotification *)notification
+{
+    CLLocation *location =
+        [[notification userInfo] objectForKey:DeviceLocatorLocationKey];
+    [self processLocationUpdate:location];
+}
+
+- (void)processLocationUpdate:(CLLocation *)location
+{
+    NSLog(@"%@: processing location update: %@",
+          NSStringFromClass([self class]), location);
+
+    UITableView *tableView = [self tableView];
+    [[tableView visibleCells] enumerateObjectsUsingBlock:
+     ^(UITableViewCell *cell, NSUInteger idx, BOOL *stop) {
+         NSIndexPath *originalPath = [tableView indexPathForCell:cell];
+         if (originalPath) {
+             NSIndexPath *path =
+                [self dataIndexPathForTableViewIndexPath:originalPath
+                                             inTableView:tableView];
+             if (path) {
+                 id<MappableLokaliteObject> obj =
+                    [[self dataController] objectAtIndexPath:path];
+                 [self configureCell:cell inTableView:tableView forObject:obj];
+             }
+         }
+     }];
+}
+
 #pragma mark Working with the error view
 
 - (UIView *)errorViewInstanceForError:(NSError *)error
@@ -1084,8 +1138,13 @@ titleForHeaderInSection:(NSInteger)section
                                 inTableView:(UITableView *)tableView
 {
     BOOL categoryFilterIsLoaded = [self isCategoryFilterLoaded];
-    if (tableView == [self tableView] && categoryFilterIsLoaded && section > 0)
-        return section - 1;
+    if (tableView == [self tableView] && categoryFilterIsLoaded) {
+        if (section > 0)
+            return section - 1;
+        else
+            return NSNotFound;
+    }
+
     return section;
 }
 
@@ -1095,7 +1154,10 @@ titleForHeaderInSection:(NSInteger)section
     if ([self showsCategoryFilter] && tableView == [self tableView]) {
         NSInteger section = [self dataSectionForTableViewSection:[path section]
                                                      inTableView:tableView];
-         return [NSIndexPath indexPathForRow:[path row] inSection:section];
+        return
+            section == NSNotFound ?
+            nil :
+            [NSIndexPath indexPathForRow:[path row] inSection:section];
     } else
         return path;
 }
@@ -1469,9 +1531,9 @@ titleForHeaderInSection:(NSInteger)section
 {
     NSLog(@"%@: %@ - Reloading data.", NSStringFromClass([self class]),
           NSStringFromSelector(_cmd));
+
     [[self tableView] reloadData];
 
-    [self setIsFetchingData:YES];
     [[self lokaliteStream] fetchMostRecentBatchWithResponseHandler:
      ^(NSArray *objects, NSError *error) {
          [self setIsFetchingData:NO];
