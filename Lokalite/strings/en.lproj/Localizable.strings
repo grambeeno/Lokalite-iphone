@@ -96,6 +96,14 @@
 "places.error-view.title" = "Failed to Fetch Places";
 
 /*
+ * No data view strings
+ */
+"events.no-data-view.title" = "No Events";
+"events.no-data-view.description" = "Try again in a few minutes, or try looking for a specific category.";
+"places.no-data-view.title" = "No Places";
+"places.no-data-view.description" = "Try again in a few minutes, or try looking for a specific category.";
+
+/*
  * Featured
  */
 "featured.fetch.failed" = "Failed to Fetch Featured Events";

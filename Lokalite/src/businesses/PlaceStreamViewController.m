@@ -139,6 +139,35 @@
     return [Business predicateForSearchString:queryString];
 }
 
+#pragma mark Working with the error view
+
+- (UIView *)errorViewInstanceForError:(NSError *)error
+{
+    NoDataView *view = [NoDataView instanceFromNib];
+    [[view titleLabel] setText:[self alertViewTitleForError:error]];
+    [[view descriptionLabel] setText:[error localizedDescription]];
+
+    return view;
+}
+
+- (NSString *)alertViewTitleForError:(NSError *)error
+{
+    return NSLocalizedString(@"places.error-view.title", nil);
+}
+
+#pragma mark Working with the no data view
+
+- (UIView *)noDataViewInstance
+{
+    NoDataView *view = [NoDataView instanceFromNib];
+    [[view titleLabel]
+     setText:NSLocalizedString(@"places.no-data-view.title", nil)];
+    [[view descriptionLabel]
+     setText:NSLocalizedString(@"places.no-data-view.description", nil)];
+
+    return view;
+}
+
 #pragma mark Working with the local data store
 
 - (NSString *)lokaliteObjectEntityName

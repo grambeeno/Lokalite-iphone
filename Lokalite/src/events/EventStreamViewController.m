@@ -171,7 +171,13 @@
 
 - (UIView *)noDataViewInstance
 {
-    return [NoDataView instanceFromNib];
+    NoDataView *view = [NoDataView instanceFromNib];
+    [[view titleLabel]
+     setText:NSLocalizedString(@"events.no-data-view.title", nil)];
+    [[view descriptionLabel]
+     setText:NSLocalizedString(@"events.no-data-view.description", nil)];
+
+    return view;
 }
 
 #pragma mark Working with the local data store

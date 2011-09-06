@@ -264,6 +264,7 @@ enum {
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
     [source unassociateAndDeleteDownloadedObjectsDeletingIfEmpty:YES];
 
+    [self dismissNoDataView];
     [self dismissErrorView];
 
     // HACK: need to remove objects from the map manually if it's visible.
