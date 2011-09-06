@@ -478,7 +478,6 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 - (BOOL)fetchBusinessImageIfNecessary
 {
     Business *business = [self business];
-    BusinessDetailsHeaderView *headerView = [self headerView];
     UIImage *image = [business standardImage];
 
     BOOL fetched = NO;
@@ -492,7 +491,7 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
                        url, [error detailedDescription]);
              } else {
                  [business setStandardImageData:data];
-                 [headerView configureForBusiness:business];
+                 [[self headerView] configureForBusiness:business];
              }
         }];
 
