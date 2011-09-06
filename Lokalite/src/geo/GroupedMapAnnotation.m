@@ -8,6 +8,9 @@
 
 #import "GroupedMapAnnotation.h"
 
+#import "LokaliteObjectMapAnnotation.h"
+#import "MappableLokaliteObject.h"
+
 @interface GroupedMapAnnotation ()
 @property (nonatomic, copy) NSArray *annotations;
 @end
@@ -72,20 +75,37 @@
 
 - (NSString *)title
 {
-    return [[[self annotations] objectAtIndex:0] title];
+    //return [[[self annotations] objectAtIndex:0] title];
+    NSString *title = nil;
+    NSInteger count = [[self annotations] count];
+    if (count == 1)
+        title = [[[self annotations] objectAtIndex:0] title];
+    else {
+        NSString *format =
+            NSLocalizedString(@"annotation.grouped.title.format", nil);
+
+        //
+        //
+        // TODO: make it say "2 events at boulder theater"
+        //
+        //
+
+        LokaliteObjectMapAnnotation *annotation =
+            [[self annotations] lastObject];
+        id<MappableLokaliteObject> obj = [annotation lokaliteObject];
+        NSString *type = [obj pluralTypeName];
+
+        title = [NSString stringWithFormat:format, count, type];
+    }
+
+    return title;
 }
 
 - (NSString *)subtitle
 {
     NSString *subtitle = nil;
-    NSInteger count = [[self annotations] count];
-    if (count == 1)
+    if ([[self annotations] count] == 1)
         subtitle = [[[self annotations] objectAtIndex:0] subtitle];
-    else {
-        NSString *format =
-            NSLocalizedString(@"annotation.grouped.subtitle.format", nil);
-        subtitle = [NSString stringWithFormat:format, count - 1];
-    }
 
     return subtitle;
 }

@@ -30,9 +30,9 @@
 
 
 enum {
+    kSectionMore,
     kSectionInfo,
     kSectionLocation,
-    kSectionMore,
     kSectionDescription
 };
 static const NSUInteger NUM_SECTIONS = kSectionDescription + 1;

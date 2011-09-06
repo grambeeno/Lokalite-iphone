@@ -63,6 +63,7 @@
 /*
  * Geo
  */
+"annotation.grouped.title.format" = "%d %@";
 "annotation.grouped.subtitle.format" = "And %d more at this location";
 
 /*

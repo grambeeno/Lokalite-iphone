@@ -68,6 +68,16 @@
     return [[self location] urlForDirectionsFromLocation:location];
 }
 
+- (NSString *)singularTypeName
+{
+    return @"Event";
+}
+
+- (NSString *)pluralTypeName
+{
+    return @"Events";
+}
+
 #pragma mark - ShareableObject implementation
 
 #pragma mark Web
