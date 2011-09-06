@@ -116,6 +116,8 @@
 		055286AD13F08A7D0072A662 /* TrendingEventLokaliteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286AC13F08A7D0072A662 /* TrendingEventLokaliteStream.m */; };
 		055286B113F095510072A662 /* CategoryFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286B013F095510072A662 /* CategoryFilterView.m */; };
 		055286B413F0A6370072A662 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 055286B313F0A6360072A662 /* Category.m */; };
+		05540023141672FD00DC8C49 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05540022141672FD00DC8C49 /* settings@2x.png */; };
+		055400261416783F00DC8C49 /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 055400251416783F00DC8C49 /* list@2x.png */; };
 		055FB0C414044793001E5A54 /* yajl_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 055FB0B514044793001E5A54 /* yajl_alloc.c */; };
 		055FB0C514044793001E5A54 /* yajl_buf.c in Sources */ = {isa = PBXBuildFile; fileRef = 055FB0B714044793001E5A54 /* yajl_buf.c */; };
 		055FB0C614044793001E5A54 /* yajl_encode.c in Sources */ = {isa = PBXBuildFile; fileRef = 055FB0BA14044793001E5A54 /* yajl_encode.c */; };
@@ -468,6 +470,8 @@
 		055286B013F095510072A662 /* CategoryFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryFilterView.m; path = src/categories/CategoryFilterView.m; sourceTree = "<group>"; };
 		055286B213F0A6360072A662 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = src/categories/Category.h; sourceTree = "<group>"; };
 		055286B313F0A6360072A662 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = src/categories/Category.m; sourceTree = "<group>"; };
+		05540022141672FD00DC8C49 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "images/navigation-bar-icons/settings@2x.png"; sourceTree = "<group>"; };
+		055400251416783F00DC8C49 /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list@2x.png"; path = "images/navigation-bar-icons/list@2x.png"; sourceTree = "<group>"; };
 		055FB0B514044793001E5A54 /* yajl_alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yajl_alloc.c; path = src/vendor/yajl/yajl_alloc.c; sourceTree = "<group>"; };
 		055FB0B614044793001E5A54 /* yajl_alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yajl_alloc.h; path = src/vendor/yajl/yajl_alloc.h; sourceTree = "<group>"; };
 		055FB0B714044793001E5A54 /* yajl_buf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yajl_buf.c; path = src/vendor/yajl/yajl_buf.c; sourceTree = "<group>"; };
@@ -1181,6 +1185,8 @@
 		052F2B7A140D3DCC000C8E60 /* navigation-bar-icons */ = {
 			isa = PBXGroup;
 			children = (
+				055400251416783F00DC8C49 /* list@2x.png */,
+				05540022141672FD00DC8C49 /* settings@2x.png */,
 				050874A5140EEC21006A0066 /* map@2x.png */,
 			);
 			name = "navigation-bar-icons";
@@ -1872,6 +1878,8 @@
 				05DCC9FB1411743E00FB81AA /* NoDataView.xib in Resources */,
 				05DCC9FE1411748400FB81AA /* lokalite-square.png in Resources */,
 				05DCC9FF1411748400FB81AA /* lokalite-square@2x.png in Resources */,
+				05540023141672FD00DC8C49 /* settings@2x.png in Resources */,
+				055400261416783F00DC8C49 /* list@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

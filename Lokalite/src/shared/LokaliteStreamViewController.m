@@ -73,6 +73,7 @@ enum {
 #pragma mark - Working with the map view
 
 @property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
+@property (nonatomic, retain) UIBarButtonItem *listViewButtonItem;
 
 #pragma mark - Error view
 
@@ -178,6 +179,8 @@ enum {
 @synthesize mapViewController = mapViewController_;
 @synthesize mapViewButtonItem = mapViewButtonItem_;
 
+@synthesize listViewButtonItem = listViewButtonItem_;
+
 @synthesize refreshButtonItem = refreshButtonItem_;
 
 @synthesize context = context_;
@@ -212,6 +215,8 @@ enum {
     [mapView_ release];
     [mapViewController_ release];
     [mapViewButtonItem_ release];
+
+    [listViewButtonItem_ release];
 
     [refreshButtonItem_ release];
 
@@ -971,6 +976,14 @@ titleForHeaderInSection:(NSInteger)section
              [[[self mapViewController] mapView] setShowsUserLocation:YES];
          }];
     [self setShowingMapView:YES];
+
+    UINavigationItem *navItem = [self navigationItem];
+    if ([navItem rightBarButtonItem] == [self mapViewButtonItem])
+        [navItem setRightBarButtonItem:[self listViewButtonItem]
+                              animated:animated];
+    else if ([navItem leftBarButtonItem] == [self mapViewButtonItem])
+        [navItem setLeftBarButtonItem:[self listViewButtonItem]
+                             animated:animated];
 }
 
 - (void)dismissMapViewAnimated:(BOOL)animated
@@ -983,6 +996,14 @@ titleForHeaderInSection:(NSInteger)section
                       [[self mapViewController] setAnnotations:nil];
                   }];
     [self setShowingMapView:NO];
+
+    UINavigationItem *navItem = [self navigationItem];
+    if ([navItem rightBarButtonItem] == [self listViewButtonItem])
+        [navItem setRightBarButtonItem:[self mapViewButtonItem]
+                              animated:animated];
+    else if ([navItem leftBarButtonItem] == [self listViewButtonItem])
+        [navItem setLeftBarButtonItem:[self mapViewButtonItem]
+                             animated:animated];
 }
 
 - (void)toggleMapViewAnimated:(BOOL)animated
@@ -1594,6 +1615,19 @@ titleForHeaderInSection:(NSInteger)section
     }
 
     return mapViewButtonItem_;
+}
+
+- (UIBarButtonItem *)listViewButtonItem
+{
+    if (!listViewButtonItem_) {
+        listViewButtonItem_ =
+            [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"list"]
+                                             style:UIBarButtonItemStyleBordered
+                                            target:self
+                                            action:@selector(toggleMapView:)];
+    }
+
+    return listViewButtonItem_;
 }
 
 - (LokaliteStream *)lokaliteStream

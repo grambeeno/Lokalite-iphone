@@ -21,10 +21,12 @@
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *settingsButtonItem;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *timeSelector;
 
 #pragma mark - UI events
 
 - (IBAction)timeSelectorValueChanged:(id)sender;
+- (IBAction)presentSettings:(id)sender;
 
 @end

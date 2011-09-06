@@ -40,6 +40,7 @@
 @implementation TrendedEventsViewController
 
 @synthesize context = context_;
+@synthesize settingsButtonItem = settingsButtonItem_;
 @synthesize timeSelector = timeSelector_;
 @synthesize dataController = dataController_;
 @synthesize noDataView = noDataView_;
@@ -49,6 +50,7 @@
 - (void)dealloc
 {
     [context_ release];
+    [settingsButtonItem_ release];
     [timeSelector_ release];
     [dataController_ release];
     [noDataView_ release];
@@ -69,7 +71,7 @@
 
 #pragma mark - UI events
 
-- (void)timeSelectorValueChanged:(id)sender
+- (IBAction)timeSelectorValueChanged:(id)sender
 {
     [self setDataController:nil];
     [[self tableView] reloadData];
@@ -80,7 +82,7 @@
         [self dismissNoDataView];
 }
 
-- (void)presentSettings:(id)sender
+- (IBAction)presentSettings:(id)sender
 {
     SettingsViewController *controller =
         [[SettingsViewController alloc] initWithContext:[self context]];
@@ -240,6 +242,7 @@ titleForHeaderInSection:(NSInteger)section
 
 - (void)initializeNavigationItem:(UINavigationItem *)navigationItem
 {
+    /*
     UIBarButtonItem *settingsButton =
         [[UIBarButtonItem alloc]
          initWithTitle:@"Settings"
@@ -248,6 +251,9 @@ titleForHeaderInSection:(NSInteger)section
                 action:@selector(presentSettings:)];
     [navigationItem setRightBarButtonItem:settingsButton];
     [settingsButton release], settingsButton = nil;
+     */
+
+    [navigationItem setRightBarButtonItem:[self settingsButtonItem]];
 }
 
 - (void)initializeTableView:(UITableView *)tableView
