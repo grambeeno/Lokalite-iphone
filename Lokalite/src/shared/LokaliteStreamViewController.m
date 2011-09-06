@@ -70,10 +70,6 @@ enum {
 
 @property (nonatomic, retain) CLLocation *currentLocation;
 
-- (void)subscribeForLocationNotifications;
-- (void)unsubscribeForLocationNotifications;
-- (void)processLocationUpdate:(CLLocation *)location;
-
 #pragma mark - Working with the map view
 
 @property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
@@ -197,7 +193,6 @@ enum {
 
 - (void)dealloc
 {
-    [self unsubscribeForLocationNotifications];
     [self unsubscribeForApplicationLifecycleNotifications];
     [self unsubscribeForNotoficationsForContext:context_];
 
@@ -317,7 +312,6 @@ enum {
     // until the view loads. Consider refactoring in the future.
     [self setTitle:[self titleForView]];
 
-    [self subscribeForLocationNotifications];
     [self subscribeForNotificationsForContext:[self context]];
     [self subscribeForApplicationLifecycleNotifications];
 
@@ -1018,56 +1012,6 @@ titleForHeaderInSection:(NSInteger)section
         [self dismissMapViewAnimated:animated];
     else
         [self presentMapViewAnimated:animated];
-}
-
-#pragma mark - Location
-
-- (void)subscribeForLocationNotifications
-{
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-           selector:@selector(processLocationUpdateNotification:)
-               name:DeviceLocatorDidUpdateLocationNotificationName
-             object:[DeviceLocator locator]];
-}
-
-- (void)unsubscribeForLocationNotifications
-{
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc removeObserver:self
-                  name:DeviceLocatorDidUpdateLocationNotificationName
-                object:[DeviceLocator locator]];
-}
-
-- (void)processLocationUpdateNotification:(NSNotification *)notification
-{
-    CLLocation *location =
-        [[notification userInfo] objectForKey:DeviceLocatorLocationKey];
-    [self processLocationUpdate:location];
-}
-
-- (void)processLocationUpdate:(CLLocation *)location
-{
-    NSLog(@"%@: processing location update: %@",
-          NSStringFromClass([self class]), location);
-
-    /*
-    UITableView *tableView = [self tableView];
-    [[tableView visibleCells] enumerateObjectsUsingBlock:
-     ^(UITableViewCell *cell, NSUInteger idx, BOOL *stop) {
-         NSIndexPath *originalPath = [tableView indexPathForCell:cell];
-         if (originalPath) {
-             NSIndexPath *path =
-                [self dataIndexPathForTableViewIndexPath:originalPath
-                                             inTableView:tableView];
-             if (path) {
-                 id<MappableLokaliteObject> obj =
-                    [[self dataController] objectAtIndexPath:path];
-                 [self configureCell:cell inTableView:tableView forObject:obj];
-             }
-         }
-     }];
-     */
 }
 
 #pragma mark Working with the error view
