@@ -48,8 +48,10 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 #pragma mark - Trending events
 
 - (void)trendEventWithEventId:(NSNumber *)eventId
+              anonymousUserId:(NSString *)anonymouseUserId
               responseHandler:(LSResponseHandler)handler;
 - (void)untrendEventWithEventId:(NSNumber *)eventId
+                anonymousUserId:(NSString *)anonymouseUserId
                 responseHandler:(LSResponseHandler)handler;
 
 #pragma mark - Places

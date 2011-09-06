@@ -136,12 +136,15 @@
 #pragma mark - Trending events
 
 - (void)trendEventWithEventId:(NSNumber *)eventId
+              anonymousUserId:(NSString *)anonymouseUserId
               responseHandler:(LSResponseHandler)handler
 {
     NSURL *url = [self trendUrl];
     NSDictionary *params =
-        [NSDictionary dictionaryWithObject:[eventId description]
-                                    forKey:@"event_id"];
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         [eventId description], @"event_id",
+         anonymouseUserId, @"uid", nil];
+
     [self sendRequestWithUrl:url
                   parameters:params
                requestMethod:LKRequestMethodPOST
@@ -149,12 +152,15 @@
 }
 
 - (void)untrendEventWithEventId:(NSNumber *)eventId
+                anonymousUserId:(NSString *)anonymouseUserId
                 responseHandler:(LSResponseHandler)handler
 {
     NSURL *url = [self untrendUrl];
     NSDictionary *params =
-        [NSDictionary dictionaryWithObject:[eventId description]
-                                    forKey:@"event_id"];
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         [eventId description], @"event_id",
+         anonymouseUserId, @"uid", nil];
+
     [self sendRequestWithUrl:url
                   parameters:params
                requestMethod:LKRequestMethodPOST

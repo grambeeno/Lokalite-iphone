@@ -182,11 +182,15 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
                 NSLog(@"%@ error: %@", label, [error detailedDescription]);
         };
 
+    UIDevice *device = [UIDevice currentDevice];
     if (isTrended)
         [[self service] untrendEventWithEventId:eventId
+                                anonymousUserId:[device uniqueIdentifier]
                                 responseHandler:handler];
     else
-        [[self service] trendEventWithEventId:eventId responseHandler:handler];
+        [[self service] trendEventWithEventId:eventId
+                              anonymousUserId:[device uniqueIdentifier]
+                              responseHandler:handler];
 
     [event trendEvent:!isTrended];
 

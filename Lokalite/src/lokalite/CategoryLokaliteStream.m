@@ -69,7 +69,8 @@
 
         NSArray *parsedObjects = nil;
 
-        /* Un-comment out to test error handling */
+        /* jad: Un-comment out to test error handling */
+        /*
         static NSInteger i = 0;
         if (++i % 2 == 0) {
             // jad: forced error handling
@@ -79,7 +80,10 @@
             error = [NSError errorWithDomain:@"Lokalite"
                                         code:-1
                                     userInfo:userInfo];
-        } else        if (jsonObjects) {
+        } else
+         */
+
+        if (jsonObjects) {
             parsedObjects = [self parseBlock](jsonObjects);
 
             CLLocationCoordinate2D coord = [self location];
