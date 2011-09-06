@@ -93,9 +93,9 @@
         LokaliteObjectMapAnnotation *annotation =
             [[self annotations] lastObject];
         id<MappableLokaliteObject> obj = [annotation lokaliteObject];
-        NSString *type = [obj pluralTypeName];
+        NSString *pluralTitle = [obj pluralTitle];
 
-        title = [NSString stringWithFormat:format, count, type];
+        title = [NSString stringWithFormat:format, count, pluralTitle];
     }
 
     return title;

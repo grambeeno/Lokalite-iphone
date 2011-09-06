@@ -64,14 +64,9 @@
     return [[self location] urlForDirectionsFromLocation:location];
 }
 
-- (NSString *)singularTypeName
+- (NSString *)pluralTitle
 {
-    return @"Place";
-}
-
-- (NSString *)pluralTypeName
-{
-    return @"Places";
+    return NSLocalizedString(@"annotation.grouped.places.title.format", nil);
 }
 
 #pragma mark - ShareableObject implementation

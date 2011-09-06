@@ -66,6 +66,9 @@
 "annotation.grouped.title.format" = "%d %@";
 "annotation.grouped.subtitle.format" = "And %d more at this location";
 
+"annotation.grouped.events.title.format" = "Events at %@";
+"annotation.grouped.places.title.format" = "Places Here";
+
 /*
  * Search
  */

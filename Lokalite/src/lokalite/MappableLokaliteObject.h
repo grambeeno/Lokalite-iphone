@@ -18,7 +18,6 @@
 - (NSURL *)addressUrl;
 - (NSURL *)directionsUrlFromLocation:(CLLocation *)location;
 
-- (NSString *)singularTypeName;
-- (NSString *)pluralTypeName;
+- (NSString *)pluralTitle;
 
 @end
