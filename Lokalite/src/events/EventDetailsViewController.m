@@ -27,6 +27,7 @@
 #import "LokaliteAppDelegate.h"
 
 #import "LokaliteService.h"
+#import "DataFetcher.h"
 
 #import "SDKAdditions.h"
 
@@ -95,6 +96,11 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 #pragma mark - Sharing
 
 @property (nonatomic, retain) SharingController *sharingController;
+
+#pragma mark - Fetching image data
+
+- (void)fetchDataAtUrl:(NSURL *)url
+       responseHandler:(void (^)(NSData *data, NSError *error))handler;
 
 #pragma mark - Updating for event states
 
@@ -463,6 +469,16 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)configureHeaderForEvent:(Event *)event
 {
     [[self headerView] configureForEvent:event];
+
+    if (![event standardImageData]) {
+        NSURL *url = [NSURL URLWithString:[event standardImageUrl]];
+        [self fetchDataAtUrl:url
+             responseHandler:
+         ^(NSData *data, NSError *error) {
+             if (data)
+                 [event setStandardImageData:data];
+         }];
+    }
 }
 
 - (void)configureFooterForEvent:(Event *)event
@@ -489,6 +505,26 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [[self navigationController] pushViewController:controller
                                            animated:YES];
     [controller release], controller = nil;
+}
+
+#pragma mark - Fetching image data
+
+- (void)fetchDataAtUrl:(NSURL *)url
+       responseHandler:(void (^)(NSData *data, NSError *error))handler
+{
+    [[UIApplication sharedApplication] networkActivityIsStarting];
+
+    DataFetcher *fetcher = [[DataFetcher alloc] init];
+    [fetcher fetchDataAtUrl:url
+            responseHandler:
+     ^(NSData *data, NSError *error) {
+         [[UIApplication sharedApplication] networkActivityDidFinish];
+
+         if (handler)
+             handler(data, error);
+
+         [fetcher autorelease];
+     }];
 }
 
 #pragma mark - Updating for event states
