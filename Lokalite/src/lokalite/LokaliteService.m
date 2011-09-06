@@ -294,10 +294,21 @@
                  coord.latitude, coord.longitude];
             [params setObject:origin forKey:@"origin"];
 
-            // HACK #2: If we are ordering by distance, set the "start"
-            // parameter to be today so we get valid results
-            NSString *start = [[NSDate date] toLokaliteServerString];
-            [params setObject:start forKey:@"start"];
+            // HACK #2: If we are ordering by distance, set the "before"
+            // parameter to be per configured time so we get valid results
+            //
+            // Note: should the 'before' variable have its time components set
+            // to midnight?
+            NSBundle *bundle = [NSBundle mainBundle];
+            NSInteger ndays =
+                [[bundle
+                 objectForInfoDictionaryKey:
+                 @"LokaliteByDistanceTimeThresholdInDays"] integerValue];
+            NSDate *before =
+                [[NSDate date] dateByAddingTimeInterval:
+                 60 * 60 * 24 * (ndays ? ndays : 7)];  // default to a week
+            NSString *beforeString = [before toLokaliteServerString];
+            [params setObject:beforeString forKey:@"before"];
         }
     }
 
