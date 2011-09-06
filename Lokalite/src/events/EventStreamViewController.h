@@ -8,6 +8,10 @@
 
 #import "LokaliteStreamViewController.h"
 
+@class Event;
+
 @interface EventStreamViewController : LokaliteStreamViewController
+
+- (void)fetchImageForEvent:(Event *)event tableView:(UITableView *)tableView;
 
 @end

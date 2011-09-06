@@ -81,10 +81,22 @@
 - (void)configureCellForEvent:(Event *)event
               displayDistance:(BOOL)displayDistance
 {
+    [self configureCellForEvent:event rank:nil displayDistance:displayDistance];
+}
+
+- (void)configureCellForEvent:(Event *)event
+                         rank:(NSNumber *)rank
+              displayDistance:(BOOL)displayDistance
+{
     [self setEventId:[event identifier]];
     [self setEventImageUrl:[event standardImageUrl]];
 
-    [[self eventNameLabel] setText:[event name]];
+    NSString *name =
+        rank ?
+        [NSString stringWithFormat:@"%@. %@", rank, [event name]] :
+        [event name];
+
+    [[self eventNameLabel] setText:name];
     [[self businessNameLabel] setText:[[event business] name]];
     [[self summaryLabel] setText:[event summary]];
     [[self timeLabel] setText:[event dateStringDescription]];

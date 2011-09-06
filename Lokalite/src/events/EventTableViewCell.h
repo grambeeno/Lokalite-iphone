@@ -38,4 +38,8 @@
 - (void)configureCellForEvent:(Event *)event
               displayDistance:(BOOL)displayDistance;
 
+- (void)configureCellForEvent:(Event *)event
+                         rank:(NSNumber *)rank
+              displayDistance:(BOOL)displayDistance;
+
 @end

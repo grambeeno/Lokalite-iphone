@@ -95,36 +95,8 @@
     [cell configureCellForEvent:event displayDistance:[self hasValidLocation]];
 
     UIImage *image = [event standardImage];
-    if (!image) {
-        NSFetchedResultsController *dataController = [self dataController];
-        NSURL *url = [NSURL URLWithString:[event standardImageUrl]];
-
-        [[self imageFetcher] fetchImageDataAtUrl:url
-                                       tableView:tableView
-                             dataReceivedHandler:
-         ^(NSData *data) {
-             NSArray *allEvents = [dataController fetchedObjects];
-             NSString *urlString = [url absoluteString];
-             for (Event *event in allEvents)
-                 if ([[event standardImageUrl] isEqualToString:urlString])
-                     [event setStandardImageData:data];
-         }
-                            tableViewCellHandler:
-         ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {
-             if ([tvc isKindOfClass:[EventTableViewCell class]]) {
-                 EventTableViewCell *cell = (EventTableViewCell *) tvc;
-                 NSString *imageUrl = [cell eventImageUrl];
-                 if ([imageUrl isEqualToString:[event standardImageUrl]])
-                     [[cell eventImageView] setImage:image];
-             }
-         }
-                                    errorHandler:
-         ^(NSError *error) {
-             NSLog(@"WARNING: Failed to fetch place image at: %@: %@", url,
-                   error);
-         }];
-    }
-
+    if (!image)
+        [self fetchImageForEvent:event tableView:tableView];
     [[cell eventImageView] setImage:image];
 }
 
@@ -213,6 +185,39 @@
 - (NSString *)dataControllerSectionNameKeyPath
 {
     return @"dateDescription";
+}
+
+#pragma mark - Working with event images
+
+- (void)fetchImageForEvent:(Event *)event tableView:(UITableView *)tableView
+{
+    NSFetchedResultsController *dataController = [self dataController];
+    NSURL *url = [NSURL URLWithString:[event standardImageUrl]];
+
+    [[self imageFetcher] fetchImageDataAtUrl:url
+                                   tableView:tableView
+                         dataReceivedHandler:
+     ^(NSData *data) {
+         NSArray *allEvents = [dataController fetchedObjects];
+         NSString *urlString = [url absoluteString];
+         for (Event *event in allEvents)
+             if ([[event standardImageUrl] isEqualToString:urlString])
+                 [event setStandardImageData:data];
+     }
+                        tableViewCellHandler:
+     ^(UIImage *image, UITableViewCell *tvc, NSIndexPath *path) {
+         if ([tvc isKindOfClass:[EventTableViewCell class]]) {
+             EventTableViewCell *cell = (EventTableViewCell *) tvc;
+             NSString *imageUrl = [cell eventImageUrl];
+             if ([imageUrl isEqualToString:[event standardImageUrl]])
+                 [[cell eventImageView] setImage:image];
+         }
+     }
+                                errorHandler:
+     ^(NSError *error) {
+         NSLog(@"WARNING: Failed to fetch place image at: %@: %@", url,
+               error);
+     }];
 }
 
 #pragma mark - Accessors

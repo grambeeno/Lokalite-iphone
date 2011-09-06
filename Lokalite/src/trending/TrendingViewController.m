@@ -8,6 +8,9 @@
 
 #import "TrendingViewController.h"
 
+#import "Event+GeneralHelpers.h"
+
+#import "EventTableViewCell.h"
 #import "TrendingEventLokaliteStream.h"
 
 @interface TrendingViewController ()
@@ -40,7 +43,30 @@
     return NSLocalizedString(@"global.trending", nil);
 }
 
-#pragma mark - Persistence management
+#pragma mark Configuring the table view
+
+- (void)configureCell:(EventTableViewCell *)cell
+          inTableView:(UITableView *)tableView
+            forObject:(Event *)event
+{
+    NSIndexPath *path = [[self dataController] indexPathForObject:event];
+    NSNumber *rank = nil;
+    if (path)
+        rank = [[NSNumber alloc] initWithInteger:[path row] + 1];
+
+    [cell configureCellForEvent:event
+                           rank:rank
+                displayDistance:[self hasValidLocation]];
+
+    [rank release], rank = nil;
+
+    UIImage *image = [event standardImage];
+    if (!image)
+        [self fetchImageForEvent:event tableView:tableView];
+    [[cell eventImageView] setImage:image];
+}
+
+#pragma mark Persistence management
 
 - (NSArray *)dataControllerSortDescriptors
 {
@@ -54,7 +80,12 @@
 
 - (NSString *)dataControllerSectionNameKeyPath
 {
-    return @"dateDescription";
+    //
+    // Don't provide a key path because we get data back in the order they're
+    // trending (per the server). Other ordering, like distance or time, don't
+    // make sense in that context.
+    //
+    return nil;
 }
 
 #pragma mark Fetching data from the network
