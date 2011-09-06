@@ -17,6 +17,7 @@
 
 @synthesize infoWrapperView = infoWrapperView_;
 @synthesize infoWrapperBackgroundImageView = infoWrapperBackgroundImageView_;
+@synthesize trendedBadgeView = trendedBadgeView_;
 @synthesize titleLabel = titleLabel_;
 @synthesize businessNameLabel = businessNameLabel_;
 @synthesize dateRangeLabel = dateRangeLabel_;
@@ -34,6 +35,7 @@
 
     [infoWrapperView_ release];
     [infoWrapperBackgroundImageView_ release];
+    [trendedBadgeView_ release];
     [titleLabel_ release];
     [businessNameLabel_ release];
     [dateRangeLabel_ release];
@@ -164,6 +166,8 @@
 
 - (void)configureForEvent:(Event *)event
 {
+    [[self trendedBadgeView] setHidden:![event isTrended]];
+
     [[self imageView] setImage:[event standardImage]];
 
     [[self titleLabel] setText:[event name]];

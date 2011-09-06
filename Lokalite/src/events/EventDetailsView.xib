@@ -176,11 +176,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="NSFrame">{{111, 10}, {189, 57}}</string>
 								<reference key="NSSuperview" ref="1053241546"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="115550637"/>
+								<reference key="NSNextKeyView" ref="646174681"/>
 								<string key="NSReuseIdentifierKey">_NS:311</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4yIDAuMjExNzY0NzA1OSAwLjI3MDU4ODIzNTMAA</bytes>
+									<bytes key="NSRGB">MC4yIDAuMjExNzY0NzA1OSAwLjI3MDU4ODIzNTMgMAA</bytes>
 								</object>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -240,6 +240,21 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUINumberOfLines">0</int>
+							</object>
+							<object class="IBUIImageView" id="646174681">
+								<reference key="NSNextResponder" ref="1053241546"/>
+								<int key="NSvFlags">289</int>
+								<string key="NSFrame">{{300, 0}, {20, 20}}</string>
+								<reference key="NSSuperview" ref="1053241546"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="115550637"/>
+								<string key="NSReuseIdentifierKey">_NS:541</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">event-cell-trend-badge.png</string>
+								</object>
 							</object>
 						</object>
 						<string key="NSFrameSize">{320, 112}</string>
@@ -326,6 +341,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="NSFrame">{{0, 79}, {320, 1}}</string>
 								<reference key="NSSuperview" ref="1012266069"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:180</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -526,6 +542,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<int key="connectionID">244</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">trendedBadgeView</string>
+						<reference key="source" ref="331844807"/>
+						<reference key="destination" ref="646174681"/>
+					</object>
+					<int key="connectionID">248</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -602,6 +626,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="115550637"/>
 							<reference ref="450687555"/>
 							<reference ref="202664069"/>
+							<reference ref="646174681"/>
 						</object>
 						<reference key="parent" ref="331844807"/>
 						<string key="objectName">Info Wrapper View</string>
@@ -671,6 +696,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="parent" ref="1053241546"/>
 						<string key="objectName">Background Image View</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">245</int>
+						<reference key="object" ref="646174681"/>
+						<reference key="parent" ref="1053241546"/>
+						<string key="objectName">Trended Badge View</string>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -696,6 +727,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>211.IBPluginDependency</string>
 					<string>213.IBPluginDependency</string>
 					<string>220.IBPluginDependency</string>
+					<string>245.IBPluginDependency</string>
 					<string>28.CustomClassName</string>
 					<string>28.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
@@ -722,6 +754,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>EventDetailsFooterView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -740,7 +773,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">244</int>
+			<int key="maxID">248</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -782,6 +815,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>titleLabel</string>
 							<string>trendButton</string>
 							<string>trendView</string>
+							<string>trendedBadgeView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -795,6 +829,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UIButton</string>
+							<string>UIView</string>
 							<string>UIView</string>
 						</object>
 					</object>
@@ -813,6 +848,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>titleLabel</string>
 							<string>trendButton</string>
 							<string>trendView</string>
+							<string>trendedBadgeView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -858,6 +894,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">trendView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">trendedBadgeView</string>
 								<string key="candidateClassName">UIView</string>
 							</object>
 						</object>
@@ -949,12 +989,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>detail-cell-background</string>
 				<string>detail-view-image-well</string>
+				<string>event-cell-trend-badge.png</string>
 				<string>trend-view-background@2x</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{16, 16}</string>
 				<string>{16, 16}</string>
+				<string>{20, 20}</string>
 				<string>{16, 16}</string>
 			</object>
 		</object>

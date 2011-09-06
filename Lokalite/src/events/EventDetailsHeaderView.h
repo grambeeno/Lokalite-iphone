@@ -16,6 +16,7 @@
 @property (nonatomic, retain) IBOutlet UIView *infoWrapperView;
 @property (nonatomic, retain) IBOutlet
     UIImageView *infoWrapperBackgroundImageView;
+@property (nonatomic, retain) IBOutlet UIView *trendedBadgeView;
 @property (nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property (nonatomic, retain) IBOutlet UILabel *businessNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *dateRangeLabel;
