@@ -93,7 +93,9 @@
  * Error view strings
  */
 "events.error-view.title" = "Failed to Fetch Events";
+"events.error-view.description.format" = "Please check your Internet connection and try again in a few minutes. %@";
 "places.error-view.title" = "Failed to Fetch Places";
+"places.error-view.description.format" = "Please check your Internet connection and try again in a few minutes. %@";
 
 /*
  * No data view strings

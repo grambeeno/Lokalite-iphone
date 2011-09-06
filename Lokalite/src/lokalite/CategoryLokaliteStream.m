@@ -70,20 +70,16 @@
         NSArray *parsedObjects = nil;
 
         /* Un-comment out to test error handling */
-        /*
         static NSInteger i = 0;
         if (++i % 2 == 0) {
             // jad: forced error handling
             NSDictionary *userInfo =
-                [NSDictionary dictionaryWithObject:@"Failed fetch"
+                [NSDictionary dictionaryWithObject:@"This is not a real error."
                                             forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"Lokalite"
                                         code:-1
                                     userInfo:userInfo];
-        } else
-         */
-
-        if (jsonObjects) {
+        } else        if (jsonObjects) {
             parsedObjects = [self parseBlock](jsonObjects);
 
             CLLocationCoordinate2D coord = [self location];

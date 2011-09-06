@@ -157,7 +157,13 @@
 {
     NoDataView *view = [NoDataView instanceFromNib];
     [[view titleLabel] setText:[self alertViewTitleForError:error]];
-    [[view descriptionLabel] setText:[error localizedDescription]];
+
+    NSString *format =
+        NSLocalizedString(@"events.error-view.description.format", nil);
+    NSString *description =
+        [NSString stringWithFormat:format, [error localizedDescription]];
+    NSLog(@"Description: %@", description);
+    [[view descriptionLabel] setText:description];
 
     return view;
 }

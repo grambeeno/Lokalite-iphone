@@ -45,8 +45,8 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIImageView" id="258480334">
 						<reference key="NSNextResponder" ref="925126451"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{98, 36}, {124, 125}}</string>
+						<int key="NSvFlags">288</int>
+						<string key="NSFrame">{{98, 26}, {124, 125}}</string>
 						<reference key="NSSuperview" ref="925126451"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="494742204"/>
@@ -60,8 +60,8 @@
 					</object>
 					<object class="IBUILabel" id="494742204">
 						<reference key="NSNextResponder" ref="925126451"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 199}, {280, 29}}</string>
+						<int key="NSvFlags">266</int>
+						<string key="NSFrame">{{20, 177}, {280, 29}}</string>
 						<reference key="NSSuperview" ref="925126451"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="835571872"/>
@@ -93,8 +93,8 @@
 					</object>
 					<object class="IBUILabel" id="835571872">
 						<reference key="NSNextResponder" ref="925126451"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 236}, {280, 111}}</string>
+						<int key="NSvFlags">266</int>
+						<string key="NSFrame">{{20, 214}, {280, 133}}</string>
 						<reference key="NSSuperview" ref="925126451"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -104,7 +104,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Try refreshing in a few minutes.</string>
+						<string key="IBUIText">Please check your Internet connection and try again in a few minutes. The Internet connection appears to be offline, or perhaps you are in a weak cellular zone.</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">18</double>
