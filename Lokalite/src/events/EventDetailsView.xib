@@ -180,7 +180,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="NSReuseIdentifierKey">_NS:311</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAxIDAgMAA</bytes>
+									<bytes key="NSRGB">MC4yIDAuMjExNzY0NzA1OSAwLjI3MDU4ODIzNTMAA</bytes>
 								</object>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -190,7 +190,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="IBUIText">Happy Hour</string>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">22</double>
+									<double key="NSSize">19</double>
 									<int key="NSfFlags">16</int>
 								</object>
 								<object class="NSColor" key="IBUITextColor">
@@ -326,7 +326,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="NSFrame">{{0, 79}, {320, 1}}</string>
 								<reference key="NSSuperview" ref="1012266069"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:180</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>

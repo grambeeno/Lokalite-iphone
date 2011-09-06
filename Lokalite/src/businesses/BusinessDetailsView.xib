@@ -167,6 +167,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:311</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4yIDAuMjExNzY0NzA1OSAwLjI3MDU4ODIzNTMgMAA</bytes>
+						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -175,12 +179,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="IBUIText">Centro</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">22</double>
+							<double key="NSSize">19</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
+							<bytes key="NSRGB">MC4yIDAuMjExNzY0NzA1OSAwLjI3MDU4ODIzNTMAA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<object class="NSColor" key="IBUIShadowColor">
