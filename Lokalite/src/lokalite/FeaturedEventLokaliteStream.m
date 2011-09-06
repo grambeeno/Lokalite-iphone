@@ -15,9 +15,10 @@
 
 @implementation FeaturedEventLokaliteStream
 
-- (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
+- (void)fetchNextBatchOfObjectsFromPage:(NSInteger)page
+                        responseHandler:(LKSResponseHandler)handler
 {
-    [super fetchNextBatchOfObjectsWithResponseHandler:
+    [super fetchNextBatchOfObjectsFromPage:page responseHandler:
      ^(NSArray *events, NSError *error) {
          if (events) {
              NSNumber *yes = [[NSNumber alloc] initWithBool:YES];

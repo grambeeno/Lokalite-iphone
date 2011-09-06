@@ -46,11 +46,12 @@
 
 #pragma mark - LokaliteStream implementation
 
-- (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
+- (void)fetchNextBatchOfObjectsFromPage:(NSInteger)page
+                        responseHandler:(LKSResponseHandler)handler
 {
     LokaliteService *service = [self service];
     [service fetchEventsForPlaceId:[[self place] identifier]
-                          fromPage:[self pagesFetched] + 1
+                          fromPage:page
                    responseHandler:
      ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
          NSArray *parsedObjects = nil;

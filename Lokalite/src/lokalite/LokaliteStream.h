@@ -54,13 +54,15 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 
 #pragma mark - Walking through the objects
 
+- (void)fetchMostRecentBatchWithResponseHandler:(LKSResponseHandler)handler;
 - (void)fetchNextBatchWithResponseHandler:(LKSResponseHandler)handler;
 - (void)resetStream;
 
 
 #pragma mark - Protected interface; do not call
 
-- (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler;
+- (void)fetchNextBatchOfObjectsFromPage:(NSInteger)page
+                        responseHandler:(LKSResponseHandler)handler;
 
 #pragma mark - Default configuration
 

@@ -65,7 +65,8 @@
 
 #pragma mark - LokaliteStream implementation
 
-- (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
+- (void)fetchNextBatchOfObjectsFromPage:(NSInteger)page
+                        responseHandler:(LKSResponseHandler)handler
 {
     BOOL searchEvents = [self searchType] == LokaliteSearchStreamSearchEvents;
     NSAssert(searchEvents ||

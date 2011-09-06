@@ -1467,6 +1467,22 @@ titleForHeaderInSection:(NSInteger)section
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
+    NSLog(@"%@: %@ - Reloading data.", NSStringFromClass([self class]),
+          NSStringFromSelector(_cmd));
+    [[self tableView] reloadData];
+
+    [self setIsFetchingData:YES];
+    [[self lokaliteStream] fetchMostRecentBatchWithResponseHandler:
+     ^(NSArray *objects, NSError *error) {
+         [self setIsFetchingData:NO];
+
+         if (objects)
+             [self processNextBatchOfFetchedObjects:objects pageNumber:1];
+         else if (error)
+             // just log it
+             NSLog(@"Failed to fetch events after entering foreground: %@",
+                   [error detailedDescription]);
+     }];
 }
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification

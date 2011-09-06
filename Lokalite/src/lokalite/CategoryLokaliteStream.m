@@ -60,7 +60,8 @@
 
 #pragma mark - LokaliteStream implementation
 
-- (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
+- (void)fetchNextBatchOfObjectsFromPage:(NSInteger)page
+                        responseHandler:(LKSResponseHandler)handler
 {
     void (^responseHandler)(NSHTTPURLResponse *response,
                             NSDictionary *jsonObjects,
@@ -106,11 +107,11 @@
     LokaliteService *service = [self service];
     if ([self streamType] == LokaliteCategoryStreamEvents)
         [service fetchEventsWithCategory:[self categoryName]
-                                fromPage:[self pagesFetched] + 1
+                                fromPage:page
                          responseHandler:responseHandler];
     else if ([self streamType] == LokaliteCategoryStreamPlaces)
         [service fetchPlacesWithCategory:[self categoryName]
-                                fromPage:[self pagesFetched] + 1
+                                fromPage:page
                          responseHandler:responseHandler];
 }
 

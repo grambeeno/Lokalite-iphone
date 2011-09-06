@@ -140,9 +140,22 @@
 
 #pragma mark - Walking through the objects
 
+- (void)fetchMostRecentBatchWithResponseHandler:(LKSResponseHandler)handler
+{
+    [self fetchNextBatchOfObjectsFromPage:1
+                          responseHandler:
+     ^(NSArray *objects, NSError *error) {
+         LokaliteDownloadSource *source = [self downloadSource];
+         [source setLastUpdated:[NSDate date]];
+
+         handler(objects, error);
+     }];
+}
+
 - (void)fetchNextBatchWithResponseHandler:(LKSResponseHandler)handler
 {
-    [self fetchNextBatchOfObjectsWithResponseHandler:
+    [self fetchNextBatchOfObjectsFromPage:[self pagesFetched] + 1
+                          responseHandler:
      ^(NSArray *objects, NSError *error) {
          ++pagesFetched_;
          hasMorePages_ = [objects count] == [self objectsPerPage];
@@ -162,10 +175,11 @@
 
 #pragma mark - Protected interface
 
-- (void)fetchNextBatchOfObjectsWithResponseHandler:(LKSResponseHandler)handler
+- (void)fetchNextBatchOfObjectsFromPage:(NSInteger)page
+                        responseHandler:(LKSResponseHandler)handler
 {
-    NSAssert1(NO, @"Must be implemented by subclasses.",
-              NSStringFromSelector(_cmd));
+    NSAssert2(NO, @"%@: %@ - Must be implemented by subclasses.",
+              NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
 
 #pragma mark - Accessors
