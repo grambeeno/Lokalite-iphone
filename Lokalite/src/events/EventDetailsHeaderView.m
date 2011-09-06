@@ -10,6 +10,11 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+
+// HACK: need to change if nib changes
+static const CGFloat IMAGE_WRAPPER_VIEW_DEFAULT_Y = 10;
+
+
 @implementation EventDetailsHeaderView
 
 @synthesize imageWrapperView = imageWrapperView_;
@@ -104,6 +109,7 @@
                 round((imageWrapperFrame.size.height - labelHeight) / 2));
         businessFrame.origin.y =
             titleFrame.origin.y + titleFrame.size.height + 4;
+        imageWrapperFrame.origin.y = IMAGE_WRAPPER_VIEW_DEFAULT_Y;
     } else {
         // center the title view with respect to the image view
         titleFrame.origin.y =
@@ -111,6 +117,12 @@
                 imageWrapperFrame.origin.y +
                 round((imageWrapperFrame.size.height - titleFrame.size.height)
                       / 2));
+
+        // vertically center the image view with respect to the title labe
+        imageWrapperFrame.origin.y =
+            IMAGE_WRAPPER_VIEW_DEFAULT_Y +
+            round((titleFrame.size.height - imageWrapperFrame.size.height) / 2);
+
         businessFrame.origin.y =
             MAX(titleFrame.origin.y + titleFrame.size.height,
                 imageWrapperFrame.origin.y +
@@ -150,6 +162,7 @@
     [self setFrame:viewFrame];
     [[self titleLabel] setFrame:titleFrame];
     [[self businessNameLabel] setFrame:businessFrame];
+    [[self imageWrapperView] setFrame:imageWrapperFrame];
 }
 
 @end
