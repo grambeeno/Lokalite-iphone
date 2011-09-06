@@ -539,7 +539,7 @@ titleForHeaderInSection:(NSInteger)section
             [[self tableView] insertSections:sections
                             withRowAnimation:UITableViewRowAnimationBottom];
             break;
- 
+
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteSections:sections
                             withRowAnimation:UITableViewRowAnimationTop];
