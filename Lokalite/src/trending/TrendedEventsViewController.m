@@ -40,6 +40,7 @@
 @implementation TrendedEventsViewController
 
 @synthesize context = context_;
+@synthesize timeSelector = timeSelector_;
 @synthesize dataController = dataController_;
 @synthesize noDataView = noDataView_;
 
@@ -48,13 +49,36 @@
 - (void)dealloc
 {
     [context_ release];
+    [timeSelector_ release];
     [dataController_ release];
     [noDataView_ release];
 
     [super dealloc];
 }
 
+#pragma mark - Initialization
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+        [self setTitle:NSLocalizedString(@"trended-events.title", nil)];
+
+    return self;
+}
+
 #pragma mark - UI events
+
+- (void)timeSelectorValueChanged:(id)sender
+{
+    [self setDataController:nil];
+    [[self tableView] reloadData];
+
+    if ([[[self dataController] sections] count] == 0)
+        [self presentNoDataView];
+    else
+        [self dismissNoDataView];
+}
 
 - (void)presentSettings:(id)sender
 {
@@ -91,6 +115,12 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[[self dataController] sections] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section
+{
+    return [[[[self dataController] sections] objectAtIndex:section] name];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -134,6 +164,25 @@
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type
+{
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndex:sectionIndex];
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertSections:sections
+                            withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+ 
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteSections:sections
+                            withRowAnimation:UITableViewRowAnimationTop];
+            break;
+    }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller
@@ -240,8 +289,14 @@
             [NSEntityDescription entityForName:entityName
                         inManagedObjectContext:context];
 
+        NSInteger selectedIndex = [[self timeSelector] selectedSegmentIndex];
+        NSDate *endDate = [NSDate date];
         NSPredicate *pred =
-            [NSPredicate predicateWithFormat:@"trended == YES"];
+            selectedIndex == 0 ?
+            [NSPredicate
+             predicateWithFormat:@"trended == YES && endDate >= %@", endDate] :
+            [NSPredicate
+             predicateWithFormat:@"trended == YES && endDate < %@", endDate];
         NSArray *sortDescriptors = [Event dateTableViewSortDescriptors];
 
         NSFetchRequest *req = [[NSFetchRequest alloc] init];
@@ -250,10 +305,11 @@
         [req setSortDescriptors:sortDescriptors];
 
         NSFetchedResultsController *controller =
-            [[NSFetchedResultsController alloc] initWithFetchRequest:req
-                                                managedObjectContext:context
-                                                  sectionNameKeyPath:nil
-                                                           cacheName:nil];
+            [[NSFetchedResultsController alloc]
+             initWithFetchRequest:req
+             managedObjectContext:context
+               sectionNameKeyPath:@"dateDescription"
+                        cacheName:nil];
         [req release], req = nil;
 
         NSError *error = nil;

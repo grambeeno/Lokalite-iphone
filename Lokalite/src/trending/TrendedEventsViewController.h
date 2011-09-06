@@ -21,4 +21,10 @@
 
 @property (nonatomic, retain) NSManagedObjectContext *context;
 
+@property (nonatomic, retain) IBOutlet UISegmentedControl *timeSelector;
+
+#pragma mark - UI events
+
+- (IBAction)timeSelectorValueChanged:(id)sender;
+
 @end
