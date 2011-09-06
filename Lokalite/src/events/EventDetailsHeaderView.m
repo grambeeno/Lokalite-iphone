@@ -118,10 +118,13 @@ static const CGFloat IMAGE_WRAPPER_VIEW_DEFAULT_Y = 10;
                 round((imageWrapperFrame.size.height - titleFrame.size.height)
                       / 2));
 
-        // vertically center the image view with respect to the title labe
-        imageWrapperFrame.origin.y =
-            IMAGE_WRAPPER_VIEW_DEFAULT_Y +
-            round((titleFrame.size.height - imageWrapperFrame.size.height) / 2);
+        if (titleFrame.size.height > imageWrapperFrame.size.height) {
+            // vertically center the image view with respect to the title label
+            imageWrapperFrame.origin.y =
+                IMAGE_WRAPPER_VIEW_DEFAULT_Y +
+                round((titleFrame.size.height - imageWrapperFrame.size.height)
+                      / 2);
+        }
 
         businessFrame.origin.y =
             MAX(titleFrame.origin.y + titleFrame.size.height,
