@@ -19,8 +19,7 @@
                         responseHandler:(LKSResponseHandler)handler
 {
     LokaliteService *service = [self service];
-    [service setOrderBy:@"trending"];
-    [service fetchEventsWithCategory:nil
+    [service fetchEventsWithCategory:@"trending"
                             fromPage:page
                      responseHandler:
      ^(NSHTTPURLResponse *response, NSDictionary *jsonObjects, NSError *error) {
