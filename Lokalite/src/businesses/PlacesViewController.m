@@ -29,7 +29,7 @@
 
 
 enum {
-    PlaceFilterStartTime,
+    PlaceFilterName,
     PlaceFilterDistance
 };
 
@@ -39,6 +39,13 @@ enum {
 #pragma mark - View initialization
 
 - (void)initializeNavigationItem;
+
+#pragma mark - Location updates
+
+- (void)subscribeForLocationNotifications;
+- (void)unsubscribeForLocationNotifications;
+- (void)processLocationUpdate:(CLLocation *)location;
+- (void)processLocationUpdateFailure:(NSError *)error;
 
 @end
 
@@ -51,6 +58,8 @@ enum {
 
 - (void)dealloc
 {
+    [self unsubscribeForLocationNotifications];
+
     [placeSelector_ release];
     [super dealloc];
 }
@@ -72,6 +81,8 @@ enum {
 
     [self setCanSearchServer:YES];
     [self setShowsCategoryFilter:YES];
+
+    [self subscribeForLocationNotifications];
 }
 
 #pragma mark - LokaliteStreamViewController implementation
@@ -154,7 +165,7 @@ enum {
     NSManagedObjectContext *context = [self context];
     NSInteger idx = [[self placeSelector] selectedSegmentIndex];
 
-    NSString *orderBy = idx == PlaceFilterStartTime ? @"name" : @"distance";
+    NSString *orderBy = idx == PlaceFilterName ? @"name" : @"distance";
     LokaliteStream *stream =
         [CategoryLokaliteStream placeStreamWithCategoryName:nil
                                                     context:context];
@@ -170,6 +181,72 @@ enum {
 {
     [[self navigationItem] setLeftBarButtonItem:[self refreshButtonItem]];
     [[self navigationItem] setRightBarButtonItem:[self mapViewButtonItem]];
+}
+
+#pragma mark - Location updates
+
+- (void)subscribeForLocationNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(processLocationUpdateNotification:)
+               name:DeviceLocatorDidUpdateLocationNotificationName
+             object:[DeviceLocator locator]];
+    [nc addObserver:self
+           selector:@selector(processLocationUpdateFailureNotification:)
+               name:DeviceLocatorDidUpdateLocationErrorNotificationName
+             object:[DeviceLocator locator]];
+}
+
+- (void)unsubscribeForLocationNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self
+                  name:DeviceLocatorDidUpdateLocationNotificationName
+                object:[DeviceLocator locator]];
+    [nc removeObserver:self
+                  name:DeviceLocatorDidUpdateLocationErrorNotificationName
+                object:[DeviceLocator locator]];
+}
+
+- (void)processLocationUpdateNotification:(NSNotification *)notification
+{
+    CLLocation *location =
+        [[notification userInfo] objectForKey:DeviceLocatorLocationKey];
+    [self processLocationUpdate:location];
+}
+
+- (void)processLocationUpdateFailureNotification:(NSNotification *)notification
+{
+    DeviceLocator *locator = [notification object];
+    if (![locator lastLocation]) {
+        NSError *error =
+            [[notification userInfo]
+             objectForKey:DeviceLocatorLocationErrorKey];
+        [self processLocationUpdateFailure:error];
+    }
+}
+
+- (void)processLocationUpdate:(CLLocation *)location
+{
+    NSLog(@"%@: processing location update: %@",
+          NSStringFromClass([self class]), location);
+
+    UINavigationItem *navItem = [self navigationItem];
+    if (![navItem titleView]) {
+        [[self placeSelector] setSelectedSegmentIndex:PlaceFilterName];
+        [navItem setTitleView:[self placeSelector]];
+    }
+}
+
+- (void)processLocationUpdateFailure:(NSError *)error
+{
+    if ([[self placeSelector] selectedSegmentIndex] == PlaceFilterDistance) {
+        [[self placeSelector] setSelectedSegmentIndex:PlaceFilterName];
+        [self placeSelectorValueChanged:[self placeSelector]];
+    }
+
+    [[self navigationItem] setTitleView:nil];
 }
 
 @end
