@@ -90,14 +90,13 @@
 
     UIImage *image = [place standardImage];
     if (!image) {
-        NSFetchedResultsController *dataController = [self dataController];
         NSURL *url = [NSURL URLWithString:[place standardImageUrl]];
 
         [[self imageFetcher] fetchImageDataAtUrl:url
                                        tableView:tableView
                              dataReceivedHandler:
          ^(NSData *data) {
-             NSArray *places = [dataController fetchedObjects];
+             NSArray *places = [[self dataController] fetchedObjects];
              NSString *urlString = [url absoluteString];
              for (Business *place in places)
                  if ([[place standardImageUrl] isEqualToString:urlString])

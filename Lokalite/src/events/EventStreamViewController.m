@@ -191,14 +191,13 @@
 
 - (void)fetchImageForEvent:(Event *)event tableView:(UITableView *)tableView
 {
-    NSFetchedResultsController *dataController = [self dataController];
     NSURL *url = [NSURL URLWithString:[event standardImageUrl]];
 
     [[self imageFetcher] fetchImageDataAtUrl:url
                                    tableView:tableView
                          dataReceivedHandler:
      ^(NSData *data) {
-         NSArray *allEvents = [dataController fetchedObjects];
+         NSArray *allEvents = [[self dataController] fetchedObjects];
          NSString *urlString = [url absoluteString];
          for (Event *event in allEvents)
              if ([[event standardImageUrl] isEqualToString:urlString])
