@@ -31,6 +31,8 @@
 	<string>0.7.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 	<key>LokaliteAPIServer</key>
 	<string>http://lokalite.com</string>
 	<key>LokaliteDefaultObjectsPerFetch</key>
