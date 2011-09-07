@@ -74,8 +74,8 @@ enum {
     [self setShowsCategoryFilter:YES];
     [self setRequiresLocation:YES];
 
-    DeviceLocator *locator = [DeviceLocator locator];
-    if ([locator lastError] && ![locator lastLocation])
+    DeviceLocator *dl = [DeviceLocator locator];
+    if (([dl lastError] || [dl didTimeout]) && ![dl lastLocation])
         [[self navigationItem] setTitleView:nil];
 
     [self subscribeForLocationNotifications];

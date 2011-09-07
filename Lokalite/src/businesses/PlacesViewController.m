@@ -82,6 +82,10 @@ enum {
     [self setCanSearchServer:YES];
     [self setShowsCategoryFilter:YES];
 
+    DeviceLocator *dl = [DeviceLocator locator];
+    if (([dl lastError] || [dl didTimeout]) && ![dl lastLocation])
+        [[self navigationItem] setTitleView:nil];
+
     [self subscribeForLocationNotifications];
 }
 
