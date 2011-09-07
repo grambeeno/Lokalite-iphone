@@ -43,4 +43,19 @@
     return [UIColor colorWithRGBValue:0xE2E2E2];
 }
 
++ (id)cellTitleColor
+{
+    return [UIColor colorWithRGBValue:0x262935];
+}
+
++ (id)cellSubtitleColor
+{
+    return [UIColor colorWithRGBValue:0x333333];
+}
+
++ (id)cellDescriptionColor
+{
+    return [UIColor colorWithRGBValue:0x333333];
+}
+
 @end

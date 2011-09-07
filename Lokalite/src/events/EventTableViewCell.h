@@ -15,10 +15,10 @@
 @property (nonatomic, copy) NSNumber *eventId;
 @property (nonatomic, copy) NSString *eventImageUrl;
 
+@property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, retain) IBOutlet UIImageView *eventImageView;
 @property (nonatomic, retain) IBOutlet UILabel *eventNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *businessNameLabel;
-@property (nonatomic, retain) IBOutlet UILabel *summaryLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timeLabel;
 @property (nonatomic, retain) IBOutlet UILabel *distanceLabel;
 @property (nonatomic, retain) IBOutlet UIImageView *trendedImageView;

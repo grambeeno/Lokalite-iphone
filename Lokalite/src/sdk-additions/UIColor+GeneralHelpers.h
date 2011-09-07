@@ -20,4 +20,9 @@
 + (id)navigationBarTintColor;
 + (id)tableViewBackgroundColor;
 
++ (id)cellTitleColor;
++ (id)cellSubtitleColor;
++ (id)cellDescriptionColor;
++ (id)cellDescriptionColor;
+
 @end

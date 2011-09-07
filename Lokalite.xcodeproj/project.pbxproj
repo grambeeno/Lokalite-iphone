@@ -265,6 +265,7 @@
 		05DF87131417304700DC7FF2 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DF87101417304700DC7FF2 /* list.png */; };
 		05DF87141417304700DC7FF2 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DF87111417304700DC7FF2 /* map.png */; };
 		05DF87151417304700DC7FF2 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DF87121417304700DC7FF2 /* settings.png */; };
+		05DF87181417377600DC7FF2 /* event-cell-background-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DF87171417377600DC7FF2 /* event-cell-background-selected@2x.png */; };
 		05E5555713F340C900DF0F31 /* category-filters-places.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05E5555613F340C900DF0F31 /* category-filters-places.plist */; };
 		05E5555A13F42C9800DF0F31 /* PlaceStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */; };
 		05E5555D13F433AD00DF0F31 /* CategoryPlaceStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5555C13F433AC00DF0F31 /* CategoryPlaceStreamViewController.m */; };
@@ -724,6 +725,7 @@
 		05DF87101417304700DC7FF2 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = list.png; path = "images/navigation-bar-icons/list.png"; sourceTree = "<group>"; };
 		05DF87111417304700DC7FF2 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = "images/navigation-bar-icons/map.png"; sourceTree = "<group>"; };
 		05DF87121417304700DC7FF2 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = "images/navigation-bar-icons/settings.png"; sourceTree = "<group>"; };
+		05DF87171417377600DC7FF2 /* event-cell-background-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-cell-background-selected@2x.png"; path = "images/events/event-cell-background-selected@2x.png"; sourceTree = "<group>"; };
 		05E5555613F340C900DF0F31 /* category-filters-places.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "category-filters-places.plist"; path = "data/category-filters-places.plist"; sourceTree = "<group>"; };
 		05E5555813F42C9700DF0F31 /* PlaceStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceStreamViewController.h; path = src/businesses/PlaceStreamViewController.h; sourceTree = "<group>"; };
 		05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceStreamViewController.m; path = src/businesses/PlaceStreamViewController.m; sourceTree = "<group>"; };
@@ -1378,6 +1380,7 @@
 		057DC63C13E11B2D004107C4 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				05DF87171417377600DC7FF2 /* event-cell-background-selected@2x.png */,
 				057DC63F13E11B58004107C4 /* event-cell-background.png */,
 				057DC63D13E11B42004107C4 /* event-cell-background@2x.png */,
 				05B1577013E269CC00F20FF8 /* event-cell-trend-badge.png */,
@@ -1892,6 +1895,7 @@
 				05DF87131417304700DC7FF2 /* list.png in Resources */,
 				05DF87141417304700DC7FF2 /* map.png in Resources */,
 				05DF87151417304700DC7FF2 /* settings.png in Resources */,
+				05DF87181417377600DC7FF2 /* event-cell-background-selected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
