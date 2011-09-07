@@ -282,9 +282,10 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
 }
 
 - (void)tableView:(UITableView *)tableView
-    didSelectRowAtIndexPath:(NSIndexPath *)path
+    didSelectRowAtIndexPath:(NSIndexPath *)originalIndexPath
 {
-    path = [self effectiveIndexPathForIndexPath:path];
+    NSIndexPath *path =
+        [self effectiveIndexPathForIndexPath:originalIndexPath];
 
     if ([path section] == kSectionInfo) {
         NSURL *url = nil;
@@ -298,7 +299,7 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
             // malformatted phone number or URL received from the server
             NSLog(@"WARNING: Failed to open URL: '%@'", url);
 
-        [tableView deselectRowAtIndexPath:path animated:YES];
+        [tableView deselectRowAtIndexPath:originalIndexPath animated:YES];
     } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowAddress)
             [self displayLocationDetailsForBusiness:[self business]];
