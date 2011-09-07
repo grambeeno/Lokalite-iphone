@@ -97,13 +97,10 @@
 - (NSString *)emailHTMLBody
 {
     NSMutableString *s =
-        [NSMutableString stringWithFormat:@"<p>%@ at %@</p>", [self name],
+        [NSMutableString stringWithFormat:@"<p>%@</p><p><a href=\"%@\">%@</a> "
+         "at %@</p>", NSLocalizedString(@"event.share.email.body.prefix", nil),
+         [[self lokaliteUrl] absoluteString], [self name],
          [[self business] name]];
-
-    NSString *link = [[self lokaliteUrl] absoluteString];
-    NSString *linkTitle =
-        NSLocalizedString(@"event.share.email.link-text", nil);
-    [s appendFormat:@"<p><a href=\"%@\">%@</a></p>", link, linkTitle];
 
     return s;
 }

@@ -136,15 +136,15 @@
 "global.post-to-facebook" = "Send to Facebook";
 "global.post-to-twitter" = "Send to Twitter";
 
-"event.share.email.subject" = "Check out this event I found on Lokalite.com";
-"event.share.email.link-text" = "More on Lokalite.com";
-"event.share.sms.body.prefix" = "Check out this event I found on Lokalite.com:";
-"event.share.twitter.body.prefix" = "Check out this event I found on Lokalite.com:";
+"event.share.email.subject" = "Check out this event";
+"event.share.email.body.prefix" = "Hey, check this out, thought you might be interested in this event:";
+"event.share.sms.body.prefix" = "Hey, check this out:";
+"event.share.twitter.body.prefix" = "Hey, check this out:";
 
-"place.share.email.subject" = "Check out this place I found on Lokalite.com";
-"place.share.email.link-text" = "More on Lokalite.com";
-"place.share.sms.body.prefix" = "Check out this place I found on Lokalite.com:";
-"place.share.twitter.body.prefix" = "Check out this place I found on Lokalite.com:";
+"place.share.email.subject" = "Check out this place";
+"place.share.email.body.prefix" = "Hey, check this out, thought you might be interested in this place:";
+"place.share.sms.body.prefix" = "Hey, check this out:";
+"place.share.twitter.body.prefix" = "Hey, check this out:";
 
 "global.facebook" = "Facebook";
 "global.twitter" = "Twitter";
