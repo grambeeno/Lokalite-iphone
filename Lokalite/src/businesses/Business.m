@@ -85,7 +85,7 @@
 
 - (NSString *)emailSubject
 {
-    return NSLocalizedString(@"event.share.email.subject", nil);
+    return NSLocalizedString(@"place.share.email.subject", nil);
 }
 
 - (NSString *)emailHTMLBody
@@ -95,7 +95,7 @@
 
     NSString *link = [[self lokaliteUrl] absoluteString];
     NSString *linkTitle =
-        NSLocalizedString(@"event.share.email.link-text", nil);
+        NSLocalizedString(@"place.share.email.link-text", nil);
     [s appendFormat:@"<p><a href=\"%@\">%@</a></p>", link, linkTitle];
 
     return s;
@@ -107,8 +107,9 @@
 {
     NSMutableString *s =
         [NSMutableString stringWithString:
-         NSLocalizedString(@"event.share.sms.body.prefix", nil)];
-    [s appendFormat:@" %@", [self name]];
+         NSLocalizedString(@"place.share.sms.body.prefix", nil)];
+    [s appendFormat:@"\n\n%@\n\n%@", [self name],
+     [[self lokaliteUrl] absoluteString]];
 
     return s;
 }
@@ -140,8 +141,10 @@
 - (NSString *)twitterText
 {
     NSURL *url = [self lokaliteUrl];
-    NSString *s =
-        [NSString stringWithFormat:@"%@\n\n%@",
+    NSMutableString *s =
+        [NSMutableString stringWithString:
+         NSLocalizedString(@"place.share.twitter.body.prefix", nil)];
+    [s appendFormat:@"\n\n%@\n\n%@",
          [self name], [url absoluteString]];
 
     return s;

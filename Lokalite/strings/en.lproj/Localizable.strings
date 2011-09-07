@@ -138,7 +138,13 @@
 
 "event.share.email.subject" = "Check out this event I found on Lokalite.com";
 "event.share.email.link-text" = "More on Lokalite.com";
-"event.share.sms.body.prefix" = "Check out this event I found on Lokalite.com";
+"event.share.sms.body.prefix" = "Check out this event I found on Lokalite.com:";
+"event.share.twitter.body.prefix" = "Check out this event I found on Lokalite.com:";
+
+"place.share.email.subject" = "Check out this place I found on Lokalite.com";
+"place.share.email.link-text" = "More on Lokalite.com";
+"place.share.sms.body.prefix" = "Check out this place I found on Lokalite.com:";
+"place.share.twitter.body.prefix" = "Check out this place I found on Lokalite.com:";
 
 "global.facebook" = "Facebook";
 "global.twitter" = "Twitter";

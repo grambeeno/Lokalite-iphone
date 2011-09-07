@@ -97,7 +97,7 @@
 - (NSString *)emailHTMLBody
 {
     NSMutableString *s =
-        [NSMutableString stringWithFormat:@"<p>%@ @ %@</p>", [self name],
+        [NSMutableString stringWithFormat:@"<p>%@ at %@</p>", [self name],
          [[self business] name]];
 
     NSString *link = [[self lokaliteUrl] absoluteString];
@@ -115,7 +115,8 @@
     NSMutableString *s =
         [NSMutableString stringWithString:
          NSLocalizedString(@"event.share.sms.body.prefix", nil)];
-    [s appendFormat:@" %@ @ %@", [self name], [[self business] name]];
+    [s appendFormat:@"\n\n%@ at %@\n\n%@", [self name], [[self business] name],
+     [[self lokaliteUrl] absoluteString]];
 
     return s;
 }
@@ -148,7 +149,7 @@
 {
     NSURL *url = [self lokaliteUrl];
     NSString *s =
-        [NSString stringWithFormat:@"%@ @ %@\n\n%@", [self name],
+        [NSString stringWithFormat:@"%@ at %@\n\n%@", [self name],
          [[self business] name], [url absoluteString]];
 
     return s;
