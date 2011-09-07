@@ -272,6 +272,26 @@ titleForHeaderInSection:(NSInteger)section
 
 - (void)presentNoDataView
 {
+    NoDataView *noDataView = [self noDataView];
+    NSInteger idx = [[self timeSelector] selectedSegmentIndex];
+
+    NSString *title = nil, *description = nil;
+    if (idx == 1) {
+        title = NSLocalizedString(@"trended-events.history.no-data.title", nil);
+        description =
+            NSLocalizedString(@"trended-events.history.no-data.description",
+                              nil);
+    } else {
+        title =
+            NSLocalizedString(@"trended-events.upcoming.no-data.title", nil);
+        description =
+            NSLocalizedString(@"trended-events.upcoming.no-data.description",
+                              nil);
+    }
+
+    [[noDataView titleLabel] setText:title];
+    [[noDataView descriptionLabel] setText:description];
+
     [[self view] addSubview:[self noDataView]];
 }
 
@@ -335,13 +355,8 @@ titleForHeaderInSection:(NSInteger)section
 
 - (NoDataView *)noDataView
 {
-    if (!noDataView_) {
+    if (!noDataView_)
         noDataView_ = [[NoDataView instanceFromNib] retain];
-        [[noDataView_ titleLabel]
-         setText:NSLocalizedString(@"trended-events.no-data.title", nil)];
-        [[noDataView_ descriptionLabel]
-         setText:NSLocalizedString(@"trended-events.no-data.description", nil)];
-    }
 
     return noDataView_;
 }

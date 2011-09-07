@@ -192,5 +192,7 @@
  * Trended events
  */
 "trended-events.title" = "My Lokalite";
-"trended-events.no-data.title" = "My Trending Events";
-"trended-events.no-data.description" = "Trend your favorite events to have them show up here.";
+"trended-events.history.no-data.title" = "Trended Event History";
+"trended-events.history.no-data.description" = "Trended events appear here after they're completed.";
+"trended-events.upcoming.no-data.title" = "My Trending Events";
+"trended-events.upcoming.no-data.description" = "Trend your favorite events to have them show up here.";
