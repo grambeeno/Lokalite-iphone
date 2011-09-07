@@ -175,6 +175,9 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 {
     // fire up the device locator
     [[self deviceLocator] start];
+
+    NSArray *events = [Event findAllInContext:[self context]];
+    [events makeObjectsPerformSelector:@selector(updateDateDescription)];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
