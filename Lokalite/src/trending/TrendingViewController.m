@@ -33,6 +33,7 @@
     [self initializeNavigationItem];
 
     [self setShowsSearchBar:NO];
+    [self setRequiresLocation:YES];
     [self setShowsCategoryFilter:NO];
 }
 
