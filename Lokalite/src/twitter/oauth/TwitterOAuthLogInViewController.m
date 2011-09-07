@@ -14,6 +14,7 @@
 
 #import "UIApplication+GeneralHelpers.h"
 #import "NSError+GeneralHelpers.h"
+#import "UIColor+GeneralHelpers.h"
 
 @interface TwitterOAuthLogInViewController ()
 @property (nonatomic, retain) UITableViewCell *activeCell;
@@ -94,6 +95,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [[[self navigationController] navigationBar]
+     setTintColor:[UIColor navigationBarTintColor]];
 
     if ([self canCancel]) {
         UIBarButtonItem *cancelButton =
@@ -324,6 +328,8 @@ titleForFooterInSection:(NSInteger)section
 
     UINavigationController *nc =
         [[UINavigationController alloc] initWithRootViewController:webView];
+    [[nc navigationBar]
+     setTintColor:[[[self navigationController] navigationBar] tintColor]];
 
     [webView setTitle:NSLocalizedString(@"twitter.authorize", nil)];
 
