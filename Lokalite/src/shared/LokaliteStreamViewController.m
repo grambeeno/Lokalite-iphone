@@ -70,6 +70,9 @@ enum {
 
 @property (nonatomic, retain) CLLocation *currentLocation;
 
+- (void)_subscribeForLocationNotifications;
+- (void)_unsubscribeForLocationNotifications;
+
 #pragma mark - Working with the map view
 
 @property (nonatomic, assign, getter=isShowingMapView) BOOL showingMapView;
@@ -193,6 +196,7 @@ enum {
 
 - (void)dealloc
 {
+    [self _unsubscribeForLocationNotifications];
     [self unsubscribeForApplicationLifecycleNotifications];
     [self unsubscribeForNotoficationsForContext:context_];
 
@@ -312,6 +316,7 @@ enum {
     // until the view loads. Consider refactoring in the future.
     [self setTitle:[self titleForView]];
 
+    [self _subscribeForLocationNotifications];
     [self subscribeForNotificationsForContext:[self context]];
     [self subscribeForApplicationLifecycleNotifications];
 
@@ -1014,6 +1019,66 @@ titleForHeaderInSection:(NSInteger)section
         [self presentMapViewAnimated:animated];
 }
 
+#pragma mark - Location updates
+
+- (void)_subscribeForLocationNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(_processLocationUpdateNotification:)
+               name:DeviceLocatorDidUpdateLocationNotificationName
+             object:[DeviceLocator locator]];
+    [nc addObserver:self
+           selector:@selector(_processLocationUpdateFailureNotification:)
+               name:DeviceLocatorDidUpdateLocationErrorNotificationName
+             object:[DeviceLocator locator]];
+}
+
+- (void)_unsubscribeForLocationNotifications
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self
+                  name:DeviceLocatorDidUpdateLocationNotificationName
+                object:[DeviceLocator locator]];
+    [nc removeObserver:self
+                  name:DeviceLocatorDidUpdateLocationErrorNotificationName
+                object:[DeviceLocator locator]];
+}
+
+- (void)_processLocationUpdateNotification:(NSNotification *)notification
+{
+    CLLocation *location =
+        [[notification userInfo] objectForKey:DeviceLocatorLocationKey];
+    [self setCurrentLocation:location];
+
+    if (location) {
+        UITableView *tableView = [self tableView];
+        [[tableView visibleCells] enumerateObjectsUsingBlock:
+         ^(UITableViewCell *cell, NSUInteger idx, BOOL *stop) {
+             NSIndexPath *originalPath = [tableView indexPathForCell:cell];
+             if (originalPath) {
+                 NSIndexPath *path =
+                    [self dataIndexPathForTableViewIndexPath:originalPath
+                                                 inTableView:tableView];
+                 if (path) {
+                     id<MappableLokaliteObject> obj =
+                        [[self dataController] objectAtIndexPath:path];
+                     [self configureCell:cell
+                             inTableView:tableView
+                               forObject:obj];
+                 }
+             }
+         }];
+    }
+}
+
+- (void)_processLocationUpdateFailureNotification:(NSNotification *)notification
+{
+    DeviceLocator *locator = [notification object];
+    if (![locator lastLocation])
+        [self setCurrentLocation:nil];
+}
+
 #pragma mark Working with the error view
 
 - (UIView *)errorViewInstanceForError:(NSError *)error
@@ -1226,10 +1291,9 @@ titleForHeaderInSection:(NSInteger)section
             DeviceLocator *locator = [DeviceLocator locator];
             [locator currentLocationWithCompletionHandler:
              ^(CLLocation *location, NSError *error) {
-                 if (location) {
+                 if (location)
                      [self setCurrentLocation:location];
-                     [[self lokaliteStream] setLocation:[location coordinate]];
-                 }
+
                  NSLog(@"Have location: %@; error: %@", location, error);
                  fetch_objects();
              }];
@@ -1666,6 +1730,20 @@ titleForHeaderInSection:(NSInteger)section
     }
 
     return lokaliteStream_;
+}
+
+- (void)setCurrentLocation:(CLLocation *)currentLocation
+{
+    if (currentLocation != currentLocation_) {
+        [currentLocation_ release];
+        currentLocation_ = [currentLocation retain];
+    }
+
+    CLLocationCoordinate2D coord =
+        currentLocation_ ?
+        [currentLocation_ coordinate] :
+        CLLocationCoordinate2DMake(FLT_MAX, FLT_MAX);
+    [[self lokaliteStream] setLocation:coord];
 }
 
 @end

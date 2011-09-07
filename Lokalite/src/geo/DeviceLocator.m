@@ -217,14 +217,14 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
     [self setLastLocation:location];
     [self setLastError:nil];
 
+    [self broadcastNotificationForLocationUpdate:location];
+
     [[self delegate] deviceLocator:self didUpateLocation:location];
 
     [self notifyLocationUpdateHandlersOfLocationUpdate:location orError:nil];
     [self forgetAllLocationUpdateHandlers];
 
     [self cancelTimeoutTimer];
-
-    [self broadcastNotificationForLocationUpdate:location];
 }
 
 - (void)processLocationUpdateFailure:(NSError *)error
@@ -232,14 +232,14 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
     [self setLastLocation:nil];
     [self setLastError:error];
 
+    [self broadcastNotificationForLocationUpdateError:error];
+
     [[self delegate] deviceLocator:self didFailWithError:error];
 
     [self notifyLocationUpdateHandlersOfLocationUpdate:nil orError:error];
     [self forgetAllLocationUpdateHandlers];
 
     [self cancelTimeoutTimer];
-
-    [self broadcastNotificationForLocationUpdateError:error];
 }
 
 - (void)notifyLocationUpdateHandlersOfLocationUpdate:(CLLocation *)location

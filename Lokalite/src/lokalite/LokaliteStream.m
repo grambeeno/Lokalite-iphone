@@ -98,6 +98,8 @@
 
 - (void)setLocation:(CLLocationCoordinate2D)location
 {
+    NSLog(@"%@: setting location: %f, %f", NSStringFromClass([self class]),
+          location.latitude, location.longitude);
     [[self service] setLocation:location];
 }
 
