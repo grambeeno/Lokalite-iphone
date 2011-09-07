@@ -1095,6 +1095,11 @@ titleForHeaderInSection:(NSInteger)section
     return nil;
 }
 
+- (NSString *)alertViewMessageForError:(NSError *)error
+{
+    return [error localizedDescription];
+}
+
 - (void)presentErrorViewForError:(NSError *)error
 {
     UIView *noDataView = [self errorViewInstanceForError:error];
@@ -1346,8 +1351,8 @@ titleForHeaderInSection:(NSInteger)section
     else {
         NSLog(@"%@: processing fetch error for page %d: %@",
               NSStringFromClass([self class]), pageNumber, error);
-        NSString *title = NSLocalizedString(@"featured.fetch.failed", nil);
-        NSString *message = [self alertViewTitleForError:error];
+        NSString *title = [self alertViewTitleForError:error];
+        NSString *message = [self alertViewMessageForError:error];
         NSString *dismiss = NSLocalizedString(@"global.dismiss", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                         message:message

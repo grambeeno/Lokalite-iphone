@@ -119,6 +119,7 @@
 
 - (UIView *)errorViewInstanceForError:(NSError *)error;
 - (NSString *)alertViewTitleForError:(NSError *)error;
+- (NSString *)alertViewMessageForError:(NSError *)error;
 
 #pragma mark Working with the no data view
 
