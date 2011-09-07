@@ -38,6 +38,10 @@ enum {
 - (void)processLocationUpdate:(CLLocation *)location;
 - (void)processLocationUpdateFailure:(NSError *)error;
 
+#pragma mark - Accessors
+
+- (BOOL)distanceSelectedAndHasLocation;
+
 @end
 
 
@@ -109,13 +113,7 @@ enum {
 
 - (NSString *)dataControllerSectionNameKeyPath
 {
-    BOOL distanceSelected =
-        [[self eventSelector] selectedSegmentIndex] == EventFilterDistance;
-    BOOL hasLocation =
-        distanceSelected &&
-        [self requiresLocation] &&
-        CLLocationCoordinate2DIsValid([[self lokaliteStream] location]);
-
+    BOOL hasLocation = [self distanceSelectedAndHasLocation];
     return hasLocation ? @"distanceDescription" : @"dateDescription";
 }
 
@@ -174,6 +172,14 @@ enum {
         [CategoryLokaliteStream eventStreamWithCategoryName:nil
                                                     context:context];
     [stream setOrderBy:orderBy];
+    if ([self distanceSelectedAndHasLocation]) {
+        NSBundle *bundle = [NSBundle mainBundle];
+        NSNumber * n =
+            [bundle objectForInfoDictionaryKey:
+             @"LokaliteByDistanceTimeThresholdInDays"];
+        [stream setNumberOfDaysBefore:n];
+    } else
+        [stream setNumberOfDaysBefore:nil];
 
     return stream;
 }
@@ -250,6 +256,20 @@ enum {
     }
 
     [[self navigationItem] setTitleView:nil];
+}
+
+#pragma mark - Accessors
+
+- (BOOL)distanceSelectedAndHasLocation
+{
+    BOOL distanceSelected =
+        [[self eventSelector] selectedSegmentIndex] == EventFilterDistance;
+    BOOL hasLocation =
+        distanceSelected &&
+        [self requiresLocation] &&
+        CLLocationCoordinate2DIsValid([[self lokaliteStream] location]);
+
+    return hasLocation;
 }
 
 @end

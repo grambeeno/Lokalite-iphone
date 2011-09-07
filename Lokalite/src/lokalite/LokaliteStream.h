@@ -47,6 +47,11 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 - (CLLocationCoordinate2D)location;
 - (void)clearLocation;
 
+#pragma mark - "Before" parameters
+
+- (void)setNumberOfDaysBefore:(NSNumber *)numDaysBefore;
+- (NSNumber *)numberOfDaysBefore;
+
 #pragma mark - Making authenticated requests
 
 - (void)setEmail:(NSString *)email password:(NSString *)password;
@@ -57,7 +62,6 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
 - (void)fetchMostRecentBatchWithResponseHandler:(LKSResponseHandler)handler;
 - (void)fetchNextBatchWithResponseHandler:(LKSResponseHandler)handler;
 - (void)resetStream;
-
 
 #pragma mark - Protected interface; do not call
 

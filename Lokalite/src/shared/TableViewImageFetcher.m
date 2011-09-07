@@ -57,6 +57,8 @@
 
         [DataFetcher fetchDataAtUrl:url responseHandler:
          ^(NSData *data, NSError *error) {
+             NSLog(@"Fetched image at URL: '%@'", url);
+
              [[UIApplication sharedApplication] networkActivityDidFinish];
 
              // HACK: if the image is not found, we get a 404 HTML page that

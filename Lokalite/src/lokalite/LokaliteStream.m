@@ -113,6 +113,18 @@
     [self setLocation:CLLocationCoordinate2DMake(FLT_MAX, FLT_MAX)];
 }
 
+#pragma mark - "Before" parameters
+
+- (void)setNumberOfDaysBefore:(NSNumber *)numDaysBefore
+{
+    [[self service] setNumberOfDaysBefore:numDaysBefore];
+}
+
+- (NSNumber *)numberOfDaysBefore
+{
+    return [[self service] numberOfDaysBefore];
+}
+
 #pragma mark - Ordering results
 
 - (void)setOrderBy:(NSString *)orderBy

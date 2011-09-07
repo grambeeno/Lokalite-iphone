@@ -42,6 +42,7 @@
 @synthesize baseUrl = baseUrl_;
 
 @synthesize location = location_;
+@synthesize numberOfDaysBefore = numberOfDaysBefore_;
 @synthesize orderBy = orderBy_;
 @synthesize objectsPerPage = objectsPerPage_;
 
@@ -54,6 +55,7 @@
 {
     [baseUrl_ release];
 
+    [numberOfDaysBefore_ release];
     [orderBy_ release];
 
     [email_ release];
@@ -293,21 +295,14 @@
                  coord.latitude, coord.longitude];
             [params setObject:origin forKey:@"origin"];
 
-            // HACK #2: If we are ordering by distance, set the "before"
-            // parameter to be per configured time so we get valid results
-            //
-            // Note: should the 'before' variable have its time components set
-            // to midnight?
-            NSBundle *bundle = [NSBundle mainBundle];
-            NSInteger ndays =
-                [[bundle
-                 objectForInfoDictionaryKey:
-                 @"LokaliteByDistanceTimeThresholdInDays"] integerValue];
-            NSDate *before =
-                [[NSDate date] dateByAddingTimeInterval:
-                 60 * 60 * 24 * (ndays ? ndays : 7)];  // default to a week
-            NSString *beforeString = [before toLokaliteServerString];
-            [params setObject:beforeString forKey:@"before"];
+            if ([self numberOfDaysBefore]) {
+                NSInteger ndays = [[self numberOfDaysBefore] integerValue];
+                NSDate *before =
+                    [[NSDate date] dateByAddingTimeInterval:
+                     60 * 60 * 24 * ndays];
+                NSString *beforeString = [before toLokaliteServerString];
+                [params setObject:beforeString forKey:@"before"];
+            }
         }
     }
 

@@ -19,6 +19,7 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 @property (nonatomic, copy, readonly) NSURL *baseUrl;
 
 @property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, copy) NSNumber *numberOfDaysBefore;
 @property (nonatomic, retain) NSString *orderBy;
 @property (nonatomic, assign) NSInteger objectsPerPage;
 

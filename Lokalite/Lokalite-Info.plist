@@ -40,7 +40,7 @@
 	<key>LokaliteLocationTimeoutInterval</key>
 	<integer>5</integer>
 	<key>LokaliteByDistanceTimeThresholdInDays</key>
-	<integer>7</integer>
+	<integer>1</integer>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>UIPrerenderedIcon</key>
