@@ -320,11 +320,7 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
          timeIntervalSinceDate:[oldLocation timestamp]] >= 0;
 
     CLLocationAccuracy horizontalAccuracy = [location horizontalAccuracy];
-    CLLocationAccuracy minAllowedHorizontalAccuracy =
-        [self  minimumAcceptableHorizontalAccuracy];
-    BOOL accurate =
-        horizontalAccuracy >= 0 &&
-        horizontalAccuracy <= minAllowedHorizontalAccuracy;
+    BOOL accurate = horizontalAccuracy >= 0;
 
     NSLog(@"New location is current: %@, sequential: %@, accurate: %@",
         current ? @"YES" : @"NO", sequential ? @"YES" : @"NO",
