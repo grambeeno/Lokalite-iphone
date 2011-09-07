@@ -406,8 +406,12 @@
 {
     NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"distance"
                                                           ascending:YES];
+    NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
+                                                          ascending:YES];
+    NSSortDescriptor *sd3 = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                          ascending:YES];
 
-    return [NSArray arrayWithObject:sd1];
+    return [NSArray arrayWithObjects:sd1, sd2, sd3, nil];
 }
 
 @end
