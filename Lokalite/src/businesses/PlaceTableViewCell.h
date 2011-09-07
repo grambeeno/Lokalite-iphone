@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSNumber *placeId;
 @property (nonatomic, copy) NSString *placeImageUrl;
 
+@property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, retain) IBOutlet UIImageView *placeImageView;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *summaryLabel;

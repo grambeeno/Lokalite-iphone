@@ -90,14 +90,11 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4yMDM5MjE1Njg2IDAuMjE1Njg2Mjc0NSAwLjI3MDU4ODIzNTMAA</bytes>
 								</object>
-								<object class="NSColor" key="IBUIHighlightedColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4yMDM5MjE1Njg2IDAuMjE1Njg2Mjc0NSAwLjI3MDU4ODIzNTMAA</bytes>
-								</object>
-								<object class="NSColor" key="IBUIShadowColor" id="1002208266">
+								<object class="NSColor" key="IBUIHighlightedColor" id="1002208266">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
 								</object>
+								<reference key="IBUIShadowColor" ref="1002208266"/>
 								<string key="IBUIShadowOffset">{0, 1}</string>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -130,10 +127,7 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4yNjI3NDUwOTggMC4yNjI3NDUwOTggMC4yNjI3NDUwOTgAA</bytes>
 								</object>
-								<object class="NSColor" key="IBUIHighlightedColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4yNjI3NDUwOTggMC4yNjI3NDUwOTggMC4yNjI3NDUwOTgAA</bytes>
-								</object>
+								<reference key="IBUIHighlightedColor" ref="1002208266"/>
 								<reference key="IBUIShadowColor" ref="1002208266"/>
 								<string key="IBUIShadowOffset">{0, 1}</string>
 								<int key="IBUIBaselineAdjustment">1</int>
@@ -180,10 +174,7 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4yNjI3NDUwOTggMC4yNjI3NDUwOTggMC4yNjI3NDUwOTgAA</bytes>
 								</object>
-								<object class="NSColor" key="IBUIHighlightedColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4yNjI3NDUwOTggMC4yNjI3NDUwOTggMC4yNjI3NDUwOTgAA</bytes>
-								</object>
+								<reference key="IBUIHighlightedColor" ref="1002208266"/>
 								<object class="NSColor" key="IBUIShadowColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEgMAA</bytes>
@@ -221,7 +212,7 @@
 				<int key="IBUISeparatorStyle">1</int>
 				<int key="IBUIAccessoryType">1</int>
 				<reference key="IBUIContentView" ref="49790276"/>
-				<string key="IBUIReuseIdentifier">EventTableViewCell</string>
+				<string key="IBUIReuseIdentifier">PlaceTableViewCell</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -258,6 +249,14 @@
 						<reference key="destination" ref="384594697"/>
 					</object>
 					<int key="connectionID">26</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">backgroundImageView</string>
+						<reference key="source" ref="425600432"/>
+						<reference key="destination" ref="421310557"/>
+					</object>
+					<int key="connectionID">27</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -366,7 +365,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">26</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -378,6 +377,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backgroundImageView</string>
 							<string>distanceLabel</string>
 							<string>nameLabel</string>
 							<string>placeImageView</string>
@@ -385,6 +385,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UIImageView</string>
@@ -395,6 +396,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backgroundImageView</string>
 							<string>distanceLabel</string>
 							<string>nameLabel</string>
 							<string>placeImageView</string>
@@ -402,6 +404,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">backgroundImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">distanceLabel</string>
 								<string key="candidateClassName">UILabel</string>
