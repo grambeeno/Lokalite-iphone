@@ -262,8 +262,7 @@
                  NSError *error = nil;
                  processedData = [self processJsonData:data error:&error];
              }
-         } else
-             error = [NSError errorForHTTPStatusCode:[response statusCode]];
+         }
 
          handler(response, processedData, error);
 

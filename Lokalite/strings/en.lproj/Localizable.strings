@@ -89,6 +89,7 @@
 /*
  * HTTP error messages
  */
+"http.400.message" = "Bad request.";
 "http.401.message" = "Invalid username/password combination.";
 "http.404.message" = "The resource could not be found.";
 "http.unknown.message" = "An unknown error occurred.";

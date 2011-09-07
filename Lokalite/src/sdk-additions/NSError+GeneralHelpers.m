@@ -51,6 +51,9 @@
     NSString *message = nil;
 
     switch (statusCode) {
+        case 400:
+            message = NSLocalizedString(@"http.400.message", nil);
+            break;
         case 401:
             message = NSLocalizedString(@"http.401.message", nil);
             break;
