@@ -28,6 +28,7 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CLLocation *lastLocation;
 @property (nonatomic, retain) NSError *lastError;
+@property (nonatomic, assign) BOOL didTimeout;
 
 #pragma mark - Timeout
 
@@ -42,7 +43,8 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
 - (void)processLocationUpdateFailure:(NSError *)error;
 
 - (void)notifyLocationUpdateHandlersOfLocationUpdate:(CLLocation *)location
-                                             orError:(NSError *)error;
+                                             orError:(NSError *)error
+                                           orTimeout:(BOOL)didTimeout;
 - (void)saveLocationUpdateHandler:(DLLocationUpdateHandler)handler;
 - (void)forgetLocationUpdateHandler:(DLLocationUpdateHandler)handler;
 - (void)forgetAllLocationUpdateHandlers;
@@ -69,6 +71,7 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
 @synthesize locationManager = locationManager_;
 @synthesize lastLocation = lastLocation_;
 @synthesize lastError = lastError_;
+@synthesize didTimeout = didTimeout_;
 
 @synthesize timeoutInterval = timeoutInterval_;
 @synthesize timeoutTimer = timeoutTimer_;
@@ -102,6 +105,7 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
     if (self) {
         locationUpdateHandlers_ = [[NSMutableSet alloc] init];
         timeoutInterval_ = [[self class] defaultTimeoutInterval];
+        didTimeout_ = NO;
     }
 
     return self;
@@ -133,9 +137,10 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
 {
     CLLocation *location = [self lastLocation];
     NSError *error = [self lastError];
+    BOOL didTimeout = [self didTimeout];
 
-    if (location || error)
-        handler(location, error);
+    if (location || error || didTimeout)
+        handler(location, error, didTimeout);
     else
         [self saveLocationUpdateHandler:handler];
 }
@@ -189,6 +194,7 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
                                        userInfo:nil
                                         repeats:NO];
     [self setTimeoutTimer:timer];
+    [self setDidTimeout:NO];
 }
 
 - (void)cancelTimeoutTimer
@@ -201,8 +207,11 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
 
 - (void)timeoutTimerFired:(NSTimer *)timer
 {
-    NSError * error = [NSError standardLocationTimeoutError];
-    [self notifyLocationUpdateHandlersOfLocationUpdate:nil orError:error];
+    [self setDidTimeout:YES];
+
+    [self notifyLocationUpdateHandlersOfLocationUpdate:nil
+                                               orError:nil
+                                             orTimeout:[self didTimeout]];
     [self forgetAllLocationUpdateHandlers];
 
     [[self delegate] deviceLocatorDidTimeout:self];
@@ -221,7 +230,9 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
 
     [[self delegate] deviceLocator:self didUpateLocation:location];
 
-    [self notifyLocationUpdateHandlersOfLocationUpdate:location orError:nil];
+    [self notifyLocationUpdateHandlersOfLocationUpdate:location
+                                               orError:nil
+                                             orTimeout:NO];
     [self forgetAllLocationUpdateHandlers];
 
     [self cancelTimeoutTimer];
@@ -236,7 +247,9 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
 
     [[self delegate] deviceLocator:self didFailWithError:error];
 
-    [self notifyLocationUpdateHandlersOfLocationUpdate:nil orError:error];
+    [self notifyLocationUpdateHandlersOfLocationUpdate:nil
+                                               orError:error
+                                             orTimeout:NO];
     [self forgetAllLocationUpdateHandlers];
 
     [self cancelTimeoutTimer];
@@ -244,11 +257,12 @@ NSString *DeviceLocatorLocationErrorKey = @"DeviceLocatorLocationErrorKey";
 
 - (void)notifyLocationUpdateHandlersOfLocationUpdate:(CLLocation *)location
                                              orError:(NSError *)error
+                                           orTimeout:(BOOL)didTimeout
 {
     [[self locationUpdateHandlers]
      enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
          DLLocationUpdateHandler handler = (DLLocationUpdateHandler) obj;
-         handler(location, error);
+         handler(location, error, didTimeout);
      }];
 }
 

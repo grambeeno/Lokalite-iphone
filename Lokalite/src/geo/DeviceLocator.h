@@ -16,7 +16,9 @@ extern NSString *DeviceLocatorLocationKey;
 extern NSString *DeviceLocatorDidUpdateLocationErrorNotificationName;
 extern NSString *DeviceLocatorLocationErrorKey;
 
-typedef void(^DLLocationUpdateHandler)(CLLocation *location, NSError *error);
+typedef void(^DLLocationUpdateHandler)(CLLocation *location,
+                                       NSError *error,
+                                       BOOL didTimeout);
 
 @protocol DeviceLocatorDelegate;
 
@@ -30,6 +32,7 @@ typedef void(^DLLocationUpdateHandler)(CLLocation *location, NSError *error);
 
 @property (nonatomic, retain, readonly) CLLocation *lastLocation;
 @property (nonatomic, retain, readonly) NSError *lastError;
+@property (nonatomic, assign, readonly) BOOL didTimeout;
 
 #pragma mark - Locating
 

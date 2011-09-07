@@ -1295,7 +1295,7 @@ titleForHeaderInSection:(NSInteger)section
         if ([self requiresLocation]) {
             DeviceLocator *locator = [DeviceLocator locator];
             [locator currentLocationWithCompletionHandler:
-             ^(CLLocation *location, NSError *error) {
+             ^(CLLocation *location, NSError *error, BOOL didTimeout) {
                  if (location)
                      [self setCurrentLocation:location];
 
@@ -1548,6 +1548,8 @@ titleForHeaderInSection:(NSInteger)section
           NSStringFromSelector(_cmd));
 
     [[self tableView] reloadData];
+
+    [self setIsFetchingData:YES];
 
     [[self lokaliteStream] fetchMostRecentBatchWithResponseHandler:
      ^(NSArray *objects, NSError *error) {
