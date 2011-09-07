@@ -43,6 +43,7 @@
         categoryName_ = [categoryName copy];
         categoryShortName_ = [categoryShortName copy];
         providedLokaliteStream_ = [stream retain];
+        [providedLokaliteStream_ setOrderBy:@"starts_at"];
         [self setContext:context];
     }
 
