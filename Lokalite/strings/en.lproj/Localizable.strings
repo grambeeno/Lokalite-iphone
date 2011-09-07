@@ -185,5 +185,5 @@
  * Trended events
  */
 "trended-events.title" = "My Lokalite";
-"trended-events.no-data.title" = "Need Copy";
-"trended-events.no-data.description" = "Need copy";
+"trended-events.no-data.title" = "My Trending Events";
+"trended-events.no-data.description" = "Trend your favorite events to have them show up here.";

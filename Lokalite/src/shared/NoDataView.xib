@@ -46,7 +46,7 @@
 					<object class="IBUIImageView" id="258480334">
 						<reference key="NSNextResponder" ref="925126451"/>
 						<int key="NSvFlags">288</int>
-						<string key="NSFrame">{{98, 26}, {124, 125}}</string>
+						<string key="NSFrame">{{98, 29}, {124, 125}}</string>
 						<reference key="NSSuperview" ref="925126451"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="494742204"/>
@@ -104,7 +104,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Please check your Internet connection and try again in a few minutes. The Internet connection appears to be offline, or perhaps you are in a weak cellular zone.</string>
+						<string key="IBUIText">Please check your Internet connection and try again in a few minutes.</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">18</double>
