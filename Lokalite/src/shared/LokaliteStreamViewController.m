@@ -956,7 +956,7 @@ titleForHeaderInSection:(NSInteger)section
                   animated:(BOOL)animated
                 completion:(void (^)(BOOL completed))completion
 {
-    NSTimeInterval duration = animated ? 1 : 0;
+    NSTimeInterval duration = animated ? 0.6 : 0;
     [toView setFrame:[fromView frame]];
 
     [UIView transitionFromView:fromView
