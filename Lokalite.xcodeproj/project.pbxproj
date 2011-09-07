@@ -262,6 +262,9 @@
 		05DCC9FE1411748400FB81AA /* lokalite-square.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DCC9FC1411748400FB81AA /* lokalite-square.png */; };
 		05DCC9FF1411748400FB81AA /* lokalite-square@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DCC9FD1411748400FB81AA /* lokalite-square@2x.png */; };
 		05DD68EB13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */; };
+		05DF87131417304700DC7FF2 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DF87101417304700DC7FF2 /* list.png */; };
+		05DF87141417304700DC7FF2 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DF87111417304700DC7FF2 /* map.png */; };
+		05DF87151417304700DC7FF2 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DF87121417304700DC7FF2 /* settings.png */; };
 		05E5555713F340C900DF0F31 /* category-filters-places.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05E5555613F340C900DF0F31 /* category-filters-places.plist */; };
 		05E5555A13F42C9800DF0F31 /* PlaceStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */; };
 		05E5555D13F433AD00DF0F31 /* CategoryPlaceStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5555C13F433AC00DF0F31 /* CategoryPlaceStreamViewController.m */; };
@@ -718,6 +721,9 @@
 		05DCC9FD1411748400FB81AA /* lokalite-square@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lokalite-square@2x.png"; path = "images/shared/lokalite-square@2x.png"; sourceTree = "<group>"; };
 		05DD68E913D64ED300A196B6 /* NSPredicate+GeneralHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPredicate+GeneralHelpers.h"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.h"; sourceTree = "<group>"; };
 		05DD68EA13D64ED300A196B6 /* NSPredicate+GeneralHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPredicate+GeneralHelpers.m"; path = "src/sdk-additions/NSPredicate+GeneralHelpers.m"; sourceTree = "<group>"; };
+		05DF87101417304700DC7FF2 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = list.png; path = "images/navigation-bar-icons/list.png"; sourceTree = "<group>"; };
+		05DF87111417304700DC7FF2 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = "images/navigation-bar-icons/map.png"; sourceTree = "<group>"; };
+		05DF87121417304700DC7FF2 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = "images/navigation-bar-icons/settings.png"; sourceTree = "<group>"; };
 		05E5555613F340C900DF0F31 /* category-filters-places.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "category-filters-places.plist"; path = "data/category-filters-places.plist"; sourceTree = "<group>"; };
 		05E5555813F42C9700DF0F31 /* PlaceStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceStreamViewController.h; path = src/businesses/PlaceStreamViewController.h; sourceTree = "<group>"; };
 		05E5555913F42C9800DF0F31 /* PlaceStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceStreamViewController.m; path = src/businesses/PlaceStreamViewController.m; sourceTree = "<group>"; };
@@ -1186,8 +1192,11 @@
 			isa = PBXGroup;
 			children = (
 				055400251416783F00DC8C49 /* list@2x.png */,
+				05DF87101417304700DC7FF2 /* list.png */,
 				05540022141672FD00DC8C49 /* settings@2x.png */,
+				05DF87121417304700DC7FF2 /* settings.png */,
 				050874A5140EEC21006A0066 /* map@2x.png */,
+				05DF87111417304700DC7FF2 /* map.png */,
 			);
 			name = "navigation-bar-icons";
 			sourceTree = "<group>";
@@ -1880,6 +1889,9 @@
 				05DCC9FF1411748400FB81AA /* lokalite-square@2x.png in Resources */,
 				05540023141672FD00DC8C49 /* settings@2x.png in Resources */,
 				055400261416783F00DC8C49 /* list@2x.png in Resources */,
+				05DF87131417304700DC7FF2 /* list.png in Resources */,
+				05DF87141417304700DC7FF2 /* map.png in Resources */,
+				05DF87151417304700DC7FF2 /* settings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
