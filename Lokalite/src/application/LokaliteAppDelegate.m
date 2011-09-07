@@ -174,8 +174,7 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // fire up the device locator
-    DeviceLocator *locator = [DeviceLocator locator];
-    [locator start];
+    [[self deviceLocator] start];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
