@@ -340,8 +340,11 @@
     BOOL isBeforeEndDate =
         order == NSOrderedSame || order == NSOrderedDescending;
     BOOL isGoingOnNow = isAfterStartDate && isBeforeEndDate;
+    BOOL isInThePast = isAfterStartDate && !isBeforeEndDate;
 
-    if (isGoingOnNow || [startDate isToday])
+    if (isInThePast)
+        description = NSLocalizedString(@"global.previous", nil);
+    else if (isGoingOnNow || [startDate isToday])
         description = NSLocalizedString(@"global.today", nil);
     else if ([startDate isTomorrow])
         description = NSLocalizedString(@"global.tomorrow", nil);

@@ -330,11 +330,15 @@ titleForHeaderInSection:(NSInteger)section
         [req setPredicate:pred];
         [req setSortDescriptors:sortDescriptors];
 
+        NSString *sectionKeyPath =
+            [[self timeSelector] selectedSegmentIndex] == 0 ?
+             @"dateDescription" : nil;
+
         NSFetchedResultsController *controller =
             [[NSFetchedResultsController alloc]
              initWithFetchRequest:req
              managedObjectContext:context
-               sectionNameKeyPath:@"dateDescription"
+               sectionNameKeyPath:sectionKeyPath
                         cacheName:nil];
         [req release], req = nil;
 
