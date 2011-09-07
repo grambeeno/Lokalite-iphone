@@ -82,8 +82,7 @@
 {
     LokaliteStream *stream =
         [FeaturedEventLokaliteStream streamWithContext:[self context]];
-    if ([self hasValidLocation])
-        [stream setOrderBy:@"distance"];
+    [stream setOrderBy:@"starts_at"];
 
     return stream;
 }

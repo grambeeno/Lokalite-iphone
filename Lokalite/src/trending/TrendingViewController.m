@@ -94,6 +94,7 @@
 {
     TrendingEventLokaliteStream *stream =
         [TrendingEventLokaliteStream streamWithContext:[self context]];
+    [stream setOrderBy:@"starts_at"];
     // objects per page needs to be high enough so that only one page loads;
     // current expected number of objects from the server is 12
     [stream setObjectsPerPage:15];
