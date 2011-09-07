@@ -51,7 +51,9 @@
 
 - (BOOL)deleteIfAppropriate
 {
-    if ([[self events] count] == 0) {
+    // I think the event count check here can be removed, but not going to do it
+    // now because it's too late in the development cycle
+    if ([[self events] count] == 0 && [[self downloadSources] count] == 0) {
         [[self managedObjectContext] deleteObject:self];
         return YES;
     }
