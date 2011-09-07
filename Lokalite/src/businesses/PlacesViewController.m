@@ -80,6 +80,7 @@ enum {
     [self initializeNavigationItem];
 
     [self setCanSearchServer:YES];
+    [self setRequiresLocation:YES];
     [self setShowsCategoryFilter:YES];
 
     DeviceLocator *dl = [DeviceLocator locator];
