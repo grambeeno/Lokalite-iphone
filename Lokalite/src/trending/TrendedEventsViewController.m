@@ -76,7 +76,7 @@
     [self setDataController:nil];
     [[self tableView] reloadData];
 
-    if ([[[self dataController] sections] count] == 0)
+    if ([[[self dataController] fetchedObjects] count] == 0)
         [self presentNoDataView];
     else
         [self dismissNoDataView];
