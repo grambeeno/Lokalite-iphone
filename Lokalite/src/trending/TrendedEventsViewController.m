@@ -34,6 +34,10 @@
 - (void)presentNoDataView;
 - (void)dismissNoDataView;
 
+#pragma mark - Viewing events
+
+- (void)presentDetailsForEvent:(Event *)event animated:(BOOL)animated;
+
 @end
 
 
@@ -99,6 +103,13 @@
     [controller release], controller = nil;
 }
 
+#pragma mark - Load details for a specific event
+
+- (void)showDetailsForEvent:(Event *)event animated:(BOOL)animated
+{
+    [self presentDetailsForEvent:event animated:animated];
+}
+
 #pragma mark - UITableViewController
 
 - (void)viewDidLoad
@@ -155,10 +166,7 @@ titleForHeaderInSection:(NSInteger)section
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Event *event = [[self dataController] objectAtIndexPath:indexPath];
-    EventDetailsViewController *controller =
-        [[EventDetailsViewController alloc] initWithEvent:event];
-    [[self navigationController] pushViewController:controller animated:YES];
-    [controller release], controller = nil;
+    [self presentDetailsForEvent:event animated:YES];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate implementation
@@ -299,6 +307,17 @@ titleForHeaderInSection:(NSInteger)section
 {
     [[self noDataView] removeFromSuperview];
     [self setNoDataView:nil];
+}
+
+#pragma mark - Viewing events
+
+- (void)presentDetailsForEvent:(Event *)event animated:(BOOL)animated
+{
+    EventDetailsViewController *controller =
+        [[EventDetailsViewController alloc] initWithEvent:event];
+    [[self navigationController] pushViewController:controller
+                                           animated:animated];
+    [controller release], controller = nil;
 }
 
 #pragma mark - Accessors

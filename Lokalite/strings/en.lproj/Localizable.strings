@@ -126,6 +126,16 @@
 "event.untrend-event" = "Untrend This Event";
 
 /*
+ * Event local notifications
+ */
+"event.local-notification.confirm.title" = "Event Alert";
+"event.local-notification.confirm.message" = "Would you like to be alerted 2 hours before this event starts?";
+"event.local-notification.confirm.cancel" = "Cancel";
+"event.local-notification.confirm.schedule" = "Alert Me";
+
+"event.local-notification.alert.body.format" = "%@ starts at %@";
+
+/*
  * Business details
  */
 "business-details.more-events.formatstring" = "Events from %@";

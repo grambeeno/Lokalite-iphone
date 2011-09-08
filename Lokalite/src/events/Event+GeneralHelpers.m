@@ -419,3 +419,74 @@
 
 @end
 
+
+
+@implementation Event (LocalNotificationHelpers)
+
++ (NSString *)localNotificationEventIdKey
+{
+    return @"event-id";
+}
+
+- (NSString *)localNotificationAlertBody
+{
+    NSString *format =
+        NSLocalizedString(@"event.local-notification.alert.body.format", nil);
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateStyle:NSDateFormatterNoStyle];
+    NSString *dateString = [formatter stringFromDate:[self startDate]];
+    [formatter release], formatter = nil;
+
+    return [NSString stringWithFormat:format, [self name], dateString];
+}
+
+- (NSDate *)localNotificationFireDate
+{
+    //NSDate *startDate = [self startDate];
+
+    // 2 hours
+    //return [startDate dateByAddingTimeInterval:60 * 60 * 2 * -1];
+    return [NSDate dateWithTimeIntervalSinceNow:20];
+}
+
+- (NSString *)localNotificationSoundName
+{
+    return UILocalNotificationDefaultSoundName;
+}
+
+- (UILocalNotification *)localNotification
+{
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+
+    [notification setFireDate:[self localNotificationFireDate]];
+    [notification setAlertBody:[self localNotificationAlertBody]];
+    [notification setSoundName:[self localNotificationSoundName]];
+
+    NSString *key = [[self class] localNotificationEventIdKey];
+     NSDictionary *userInfo =
+        [NSDictionary dictionaryWithObject:[self identifier]
+                                    forKey:key];
+     [notification setUserInfo:userInfo];
+
+     return [notification autorelease];
+}
+     
+- (UILocalNotification *)scheduledLocalNotification
+{
+    NSString *key = [[self class] localNotificationEventIdKey];
+
+    NSArray *notifications =
+        [[UIApplication sharedApplication] scheduledLocalNotifications];
+    for (UILocalNotification *notification in notifications) {
+        NSDictionary *d = [notification userInfo];
+        if ([[d objectForKey:key] isEqualToNumber:[self identifier]])
+            return notification;
+    }
+
+    return nil;
+}
+
+@end

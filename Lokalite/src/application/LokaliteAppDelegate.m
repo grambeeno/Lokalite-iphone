@@ -11,6 +11,7 @@
 #import <CoreData/CoreData.h>
 
 #import "ProfileViewController.h"
+#import "TrendedEventsViewController.h"
 
 #import "ActivityView.h"
 
@@ -141,6 +142,29 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 
     [[self window] setRootViewController:[self tabBarController]];
     [[self window] makeKeyAndVisible];
+
+    if (launchOptions) {
+        UILocalNotification *notification =
+            [launchOptions
+             objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+        if (notification) {
+            NSString *key = [Event localNotificationEventIdKey];
+            NSNumber *eventId = [[notification userInfo] objectForKey:key];
+            Event *event = [Event eventWithId:eventId inContext:[self context]];
+            if (event) {
+                const NSInteger myLokaliteIndex = 4;
+
+                UINavigationController *nc =
+                    [[[self tabBarController] viewControllers]
+                     objectAtIndex:myLokaliteIndex];
+                TrendedEventsViewController *vc =
+                    (TrendedEventsViewController *) [nc topViewController];
+                [vc showDetailsForEvent:event animated:NO];
+
+                [[self tabBarController] setSelectedIndex:myLokaliteIndex];
+            }
+        }
+    }
 
     return YES;
 }

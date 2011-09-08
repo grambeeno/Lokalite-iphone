@@ -11,9 +11,7 @@
 
 #import "SettingsViewController.h"
 
-//
-// Shows events trended by the user.
-//
+@class Event;
 
 @interface TrendedEventsViewController : UITableViewController
     <NSFetchedResultsControllerDelegate,
@@ -28,5 +26,9 @@
 
 - (IBAction)timeSelectorValueChanged:(id)sender;
 - (IBAction)presentSettings:(id)sender;
+
+#pragma mark - Load details for a specific event
+
+- (void)showDetailsForEvent:(Event *)event animated:(BOOL)animated;
 
 @end

@@ -101,3 +101,17 @@
 + (NSArray *)locationTableViewSortDescriptors;
 
 @end
+
+
+@interface Event (LocalNotificationHelpers)
+
++ (NSString *)localNotificationEventIdKey;
+
+- (NSString *)localNotificationAlertBody;
+- (NSDate *)localNotificationFireDate;
+- (NSString *)localNotificationSoundName;
+
+- (UILocalNotification *)localNotification;
+- (UILocalNotification *)scheduledLocalNotification;
+
+@end
