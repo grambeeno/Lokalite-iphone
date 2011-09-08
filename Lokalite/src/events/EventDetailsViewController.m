@@ -93,6 +93,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)displayLocationDetailsForEvent:(Event *)event;
 - (void)displayBusinessDetails:(Business *)business;
 
+#pragma mark - Local notifications
+
+- (void)promptToSetLocalNotification;
+
 #pragma mark - Sharing
 
 @property (nonatomic, retain) SharingController *sharingController;
@@ -193,10 +197,13 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         [[self service] untrendEventWithEventId:eventId
                                 anonymousUserId:[device uniqueIdentifier]
                                 responseHandler:handler];
-    else
+    else {
         [[self service] trendEventWithEventId:eventId
                               anonymousUserId:[device uniqueIdentifier]
                               responseHandler:handler];
+
+        [self promptToSetLocalNotification];
+    }
 
     [event trendEvent:!isTrended];
 
@@ -506,6 +513,21 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     [[self navigationController] pushViewController:controller
                                            animated:YES];
     [controller release], controller = nil;
+}
+
+#pragma mark - Local notifications
+
+- (void)promptToSetLocalNotification
+{
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+
+    NSDate *startDate = [[self event] startDate];
+    NSDate *fireDate = [startDate dateByAddingTimeInterval:60 * 60 * 2 * -1];
+    [notification setFireDate:fireDate];
+    [notification setTimeZone:[[NSLocale currentLocale] timeZone]];
+    [notification setAlertBody:@"Hello world"];
+    [notification setApplicationIconBadgeNumber:0];
+    [notification setSoundName:UILocalNotificationDefaultSoundName];
 }
 
 #pragma mark - Fetching image data
