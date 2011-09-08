@@ -81,6 +81,13 @@
 
 #pragma mark Search - remote
 
+- (NSString *)placeholderTextForRemoteSearchBar
+{
+    NSString *format =
+        NSLocalizedString(@"search.places.category.placeholder.format", nil);
+    return [NSString stringWithFormat:format, [self categoryName]];
+}
+
 - (NSString *)titleForRemoteSearchFooterView
 {
     NSString *format =

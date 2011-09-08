@@ -96,7 +96,10 @@
                                        tableView:tableView
                              dataReceivedHandler:
          ^(NSData *data) {
-             NSArray *places = [[self dataController] fetchedObjects];
+             NSArray *places =
+                [self tableView] == tableView ?
+                [[self dataController] fetchedObjects] :
+                [self searchResults];
              NSString *urlString = [url absoluteString];
              for (Business *place in places)
                  if ([[place standardImageUrl] isEqualToString:urlString])
