@@ -359,7 +359,8 @@ static const NSUInteger NUM_DESCRIPTION_ROWS = kDescriptionRowDescription + 1;
         UIApplication *app = [UIApplication sharedApplication];
 
         if ([path row] == kInfoRowPhoneNumber) {
-            [[cell textLabel] setText:[business phone]];
+            NSString *phone = [[business phone] formattedPhoneNumberString];
+            [[cell textLabel] setText:phone];
 
             accessoryType = UITableViewCellAccessoryNone;
             if ([app canOpenURL:[business phoneUrl]])

@@ -13,6 +13,8 @@
 
 + (id)stringFromLocationDistance:(CLLocationDistance)distance;
 
+- (NSString *)formattedPhoneNumberString;
+
 @end
 
 
