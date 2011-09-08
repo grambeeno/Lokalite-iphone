@@ -31,6 +31,7 @@
 "global.later" = "Later";
 
 "global.settings" = "Settings";
+"global.alerts" = "Alerts";
 
 "global.load-more" = "Load More";
 
@@ -130,7 +131,7 @@
  */
 "event.local-notification.confirm.title" = "Event Alert";
 "event.local-notification.confirm.message" = "Would you like to be alerted 2 hours before this event starts?";
-"event.local-notification.confirm.cancel" = "Cancel";
+"event.local-notification.confirm.cancel" = "No Reminder";
 "event.local-notification.confirm.1-hour" = "Alert 1 Hour Before";
 "event.local-notification.confirm.1-day" = "Alert 1 Day Before";
 

@@ -18,13 +18,22 @@
 
 #import "LokaliteAppDelegate.h"
 
+#import "NSUserDefaults+GeneralHelpers.h"
+
 #import <CoreData/CoreData.h>
 
 enum {
+    kSectionLocalNotifications,
     kSectionFacebook,
     kSectionTwitter
 };
 static const NSInteger NUM_SECTIONS = kSectionTwitter + 1;
+
+enum {
+    kLocalNotificationRowPromptWhenTrending
+};
+static const NSInteger NUM_LOCAL_NOTIFICATION_ROWS =
+    kLocalNotificationRowPromptWhenTrending + 1;
 
 enum {
     // logged out
@@ -88,6 +97,9 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 
 @synthesize twitterActionSheet = twitterActionSheet_;
 
+@synthesize promptWhenTrendingCell = promptWhenTrendingCell_;
+@synthesize promptWhenTrendingSwitch = promptWhenTrendingSwitch_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -99,6 +111,9 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
     [facebook_ release];
     [facebookActionSheet_ release];
     [twitterActionSheet_ release];
+
+    [promptWhenTrendingCell_ release];
+    [promptWhenTrendingSwitch_ release];
 
     [super dealloc];
 }
@@ -123,12 +138,26 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
     [[self delegate] settingsViewControllerIsDone:self];
 }
 
+- (IBAction)promptWhenTrendingValueChanged:(UISwitch *)sender
+{
+    BOOL on = [[self promptWhenTrendingSwitch] isOn];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setPromptForLocalNotificationWhenTrending:on];
+
+    if (!on)
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+}
+
 #pragma mark - UITableViewController implementation
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initializeNavigationItem:[self navigationItem]];
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL prompt = [defaults promptForLocalNotificationWhenTrending];
+    [[self promptWhenTrendingSwitch] setOn:prompt];
 }
 
 #pragma mark - UITableViewDataSource implementation
@@ -143,7 +172,9 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 {
     NSInteger nrows = 0;
 
-    if (section == kSectionFacebook) {
+    if (section == kSectionLocalNotifications)
+        nrows = NUM_LOCAL_NOTIFICATION_ROWS;
+    else if (section == kSectionFacebook) {
         if ([[self facebook] isSessionValid])
             nrows = NUM_FACEBOOK_LOGGED_IN_ROWS;
         else
@@ -163,6 +194,8 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 {
     NSString *title = nil;
 
+    if (section == kSectionLocalNotifications)
+        title = NSLocalizedString(@"global.alerts", nil);
     if (section == kSectionFacebook)
         title = NSLocalizedString(@"global.facebook", nil);
     else if (section == kSectionTwitter)
@@ -174,78 +207,84 @@ static const NSInteger NUM_TWITTER_LOGGED_IN_ROWS = kTwitterLogOut + 1;
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = nil;
 
-    UITableViewCell *cell =
-        [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell =
-            [[[UITableViewCell alloc]
-              initWithStyle:UITableViewCellStyleValue1
-              reuseIdentifier:CellIdentifier] autorelease];
-    }
+    if ([indexPath section] == kSectionLocalNotifications &&
+        [indexPath row] == kLocalNotificationRowPromptWhenTrending) {
+        cell = [self promptWhenTrendingCell];
+    } else {
+        static NSString *CellIdentifier = @"Cell";
 
-    if ([indexPath section] == kSectionFacebook) {
-        Facebook *facebook = [self facebook];
-        if ([facebook isSessionValid]) {
-            if ([indexPath row] == kFacebookUsername) {
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                [cell setAccessoryType:UITableViewCellAccessoryNone];
-                [[cell textLabel] setTextAlignment:UITextAlignmentLeft];
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell =
+                [[[UITableViewCell alloc]
+                  initWithStyle:UITableViewCellStyleValue1
+                  reuseIdentifier:CellIdentifier] autorelease];
+        }
 
-                [[cell textLabel]
-                 setText:NSLocalizedString(@"facebook.status", nil)];
+        if ([indexPath section] == kSectionFacebook) {
+            Facebook *facebook = [self facebook];
+            if ([facebook isSessionValid]) {
+                if ([indexPath row] == kFacebookUsername) {
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    [cell setAccessoryType:UITableViewCellAccessoryNone];
+                    [[cell textLabel] setTextAlignment:UITextAlignmentLeft];
+
+                    [[cell textLabel]
+                     setText:NSLocalizedString(@"facebook.status", nil)];
                 [[cell detailTextLabel]
                  setText:NSLocalizedString(@"facebook.connected", nil)];
-            } else if ([indexPath row] == kFacebookLogOut) {
-                [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
-                [cell setAccessoryType:UITableViewCellAccessoryNone];
-                [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
+                } else if ([indexPath row] == kFacebookLogOut) {
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+                    [cell setAccessoryType:UITableViewCellAccessoryNone];
+                    [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
 
-                [[cell textLabel]
-                 setText:NSLocalizedString(@"facebook.log-out.title", nil)];
-                [[cell detailTextLabel] setText:nil];
+                    [[cell textLabel]
+                     setText:NSLocalizedString(@"facebook.log-out.title", nil)];
+                    [[cell detailTextLabel] setText:nil];
+                }
+            } else {
+                if ([indexPath row] == kFacebookLogIn) {
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+                    [cell setAccessoryType:UITableViewCellAccessoryNone];
+                    [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
+
+                    [[cell textLabel]
+                     setText:NSLocalizedString(@"facebook.log-in.title", nil )];
+                    [[cell detailTextLabel] setText:nil];
+                }
             }
-        } else {
-            if ([indexPath row] == kFacebookLogIn) {
-                [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
-                [cell setAccessoryType:UITableViewCellAccessoryNone];
-                [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
+        } else if ([indexPath section] == kSectionTwitter) {
+            TwitterAccount *account = [self twitterAccount];
+            if (account) {
+                if ([indexPath row] == kTwitterUsername) {
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    [cell setAccessoryType:UITableViewCellAccessoryNone];
+                    [[cell textLabel] setTextAlignment:UITextAlignmentLeft];
 
-                [[cell textLabel]
-                 setText:NSLocalizedString(@"facebook.log-in.title", nil )];
-                [[cell detailTextLabel] setText:nil];
-            }
-        }
-    } else if ([indexPath section] == kSectionTwitter) {
-        TwitterAccount *account = [self twitterAccount];
-        if (account) {
-            if ([indexPath row] == kTwitterUsername) {
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                [cell setAccessoryType:UITableViewCellAccessoryNone];
-                [[cell textLabel] setTextAlignment:UITextAlignmentLeft];
+                    [[cell textLabel]
+                     setText:NSLocalizedString(@"twitter.username", nil)];
+                    [[cell detailTextLabel] setText:[account username]];
+                } else if ([indexPath row] == kTwitterLogOut) {
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+                    [cell setAccessoryType:UITableViewCellAccessoryNone];
+                    [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
 
-                [[cell textLabel]
-                 setText:NSLocalizedString(@"twitter.username", nil)];
-                [[cell detailTextLabel] setText:[account username]];
-            } else if ([indexPath row] == kTwitterLogOut) {
-                [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
-                [cell setAccessoryType:UITableViewCellAccessoryNone];
-                [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
+                    [[cell textLabel]
+                     setText:NSLocalizedString(@"twitter.log-out.title", nil)];
+                    [[cell detailTextLabel] setText:nil];
+                }
+            } else {
+                if ([indexPath row] == kTwitterLogIn) {
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+                    [cell setAccessoryType:UITableViewCellAccessoryNone];
+                    [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
 
-                [[cell textLabel]
-                 setText:NSLocalizedString(@"twitter.log-out.title", nil)];
-                [[cell detailTextLabel] setText:nil];
-            }
-        } else {
-            if ([indexPath row] == kTwitterLogIn) {
-                [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
-                [cell setAccessoryType:UITableViewCellAccessoryNone];
-                [[cell textLabel] setTextAlignment:UITextAlignmentCenter];
-
-                [[cell textLabel]
-                 setText:NSLocalizedString(@"twitter.log-in.title", nil)];
-                [[cell detailTextLabel] setText:nil];
+                    [[cell textLabel]
+                     setText:NSLocalizedString(@"twitter.log-in.title", nil)];
+                    [[cell detailTextLabel] setText:nil];
+                }
             }
         }
     }

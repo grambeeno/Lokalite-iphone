@@ -19,6 +19,7 @@
 #import "NSError+GeneralHelpers.h"
 #import "NSArray+GeneralHelpers.h"
 #import "NSPredicate+GeneralHelpers.h"
+#import "NSUserDefaults+GeneralHelpers.h"
 
 
 //

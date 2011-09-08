@@ -205,7 +205,10 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
                               anonymousUserId:[device uniqueIdentifier]
                               responseHandler:handler];
 
-        [self promptToSetLocalNotification];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        BOOL prompt = [defaults promptForLocalNotificationWhenTrending];
+        if (prompt)
+            [self promptToSetLocalNotification];
     }
 
     [event trendEvent:!isTrended];

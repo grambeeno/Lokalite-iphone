@@ -19,9 +19,16 @@
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *context;
 
+@property (nonatomic, retain) IBOutlet UITableViewCell *promptWhenTrendingCell;
+@property (nonatomic, retain) IBOutlet UISwitch *promptWhenTrendingSwitch;
+
 #pragma mark - Initialization
 
 - (id)initWithContext:(NSManagedObjectContext *)context;
+
+#pragma mark - UI events
+
+- (IBAction)promptWhenTrendingValueChanged:(UISwitch *)sender;
 
 @end
 
