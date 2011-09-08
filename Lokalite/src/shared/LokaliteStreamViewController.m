@@ -379,13 +379,23 @@ enum {
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section
 {
-    if ([self isCategoryFilterLoaded] && section == 0)
-        return nil;
-    else {
-        section =
-            [self dataSectionForTableViewSection:section inTableView:tableView];
-        return [[[[self dataController] sections] objectAtIndex:section] name];
+    NSString *title = nil;
+
+    // HACK: Checking if the view is loaded here prevents a crash if the user
+    // performs a remote search, then pops the view off the navigation stack
+    // before the search completes.
+    if ([self isViewLoaded]) {
+        if ([self isCategoryFilterLoaded] && section == 0)
+            title = nil;
+        else {
+            section = [self dataSectionForTableViewSection:section
+                                               inTableView:tableView];
+            title =
+                [[[[self dataController] sections] objectAtIndex:section] name];
+        }
     }
+
+    return title;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -816,12 +826,17 @@ titleForHeaderInSection:(NSInteger)section
              if ([uniqueResults count]) {
                  UITableView *tv =
                     [[self searchDisplayController] searchResultsTableView];
-                 NSIndexPath *lastRow =
-                    [tv indexPathForCell:[self remoteSearchTableViewCell]];
+
                  [tv beginUpdates];
                  [self processRemoteSearchResults:uniqueResults];
-                 [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:lastRow]
-                           withRowAnimation:UITableViewRowAnimationBottom];
+
+                 NSIndexPath *lastRow =
+                    [tv indexPathForCell:[self remoteSearchTableViewCell]];
+                 if (lastRow) {
+                     NSArray *paths = [NSArray arrayWithObject:lastRow];
+                     [tv deleteRowsAtIndexPaths:paths
+                               withRowAnimation:UITableViewRowAnimationBottom];
+                 }
                  [tv endUpdates];
              } else
                  [[self remoteSearchFooterView] displayNoResults];
@@ -861,19 +876,24 @@ titleForHeaderInSection:(NSInteger)section
             [[self searchResults] arrayByAddingObjectsFromArray:results];
         [self setSearchResults:searchResults];
 
-        UITableView *tv =
-            [[self searchDisplayController] searchResultsTableView];
-        NSMutableArray *paths =
-            [NSMutableArray arrayWithCapacity:[searchResults count]];
-        [results enumerateObjectsUsingBlock:
-         ^(LokaliteObject *obj, NSUInteger idx, BOOL *stop) {
-             NSIndexPath *path = [NSIndexPath indexPathForRow:idx + offset
-                                                    inSection:0];
-             [paths addObject:path];
-        }];
+        // HACK: Checking if the view is loaded here prevents a crash if the user
+        // performs a remote search, then pops the view off the navigation stack
+        // before the search completes.
+        if ([self isViewLoaded]) {
+            UITableView *tv =
+                [[self searchDisplayController] searchResultsTableView];
+            NSMutableArray *paths =
+                [NSMutableArray arrayWithCapacity:[searchResults count]];
+            [results enumerateObjectsUsingBlock:
+             ^(LokaliteObject *obj, NSUInteger idx, BOOL *stop) {
+                 NSIndexPath *path = [NSIndexPath indexPathForRow:idx + offset
+                                                        inSection:0];
+                 [paths addObject:path];
+             }];
 
-        [tv insertRowsAtIndexPaths:paths
-                  withRowAnimation:UITableViewRowAnimationTop];
+            [tv insertRowsAtIndexPaths:paths
+                      withRowAnimation:UITableViewRowAnimationTop];
+        }
     }
 }
 
