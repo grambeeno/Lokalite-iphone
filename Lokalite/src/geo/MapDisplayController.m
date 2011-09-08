@@ -96,7 +96,9 @@
 
     if ([annotations count]) {
         [self addAnnotations:annotations];
-        [self zoomMapViewForAnnotations:annotations];
+        [self performSelector:@selector(zoomMapViewForAnnotations:)
+                   withObject:annotations
+                   afterDelay:0];
     }
 }
 
@@ -127,6 +129,15 @@
 {
     MKCoordinateRegion region =
         [[self class] coordinateRegionForMapAnnotations:annotations];
+
+    // HACK: Only let the map zoom in so much
+    MKCoordinateRegion boulderRegion = [[self class] boulderCoordinateRegion];
+
+    region.span.latitudeDelta =
+        MAX(region.span.latitudeDelta, boulderRegion.span.latitudeDelta / 3);
+    region.span.longitudeDelta =
+        MAX(region.span.longitudeDelta, boulderRegion.span.longitudeDelta / 3);
+
     [[self mapView] setRegion:region];
 }
 
@@ -276,7 +287,7 @@
         CLLocationCoordinate2DMake((maxLat + minLat) / 2,
                                    (maxLon + minLon) / 2);
     MKCoordinateSpan span =
-        MKCoordinateSpanMake(maxLat - minLat, maxLon - minLon);
+        MKCoordinateSpanMake((maxLat - minLat) * 1.2, (maxLon - minLon) * 1.2);
 
     return MKCoordinateRegionMake(center, span);
 }
