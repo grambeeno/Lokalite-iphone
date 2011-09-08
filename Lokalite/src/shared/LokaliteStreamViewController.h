@@ -91,6 +91,10 @@
 - (void)displayDetailsForObjectGroup:(NSArray *)group;
 
 
+#pragma mark - Search - general
+
+@property (nonatomic, copy, readonly) NSArray *searchResults;
+
 #pragma mark Searching - local
 
 - (NSPredicate *)predicateForQueryString:(NSString *)queryString;
@@ -102,6 +106,7 @@
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:
     (NSString *)keywords;
 
+- (NSString *)placeholderTextForRemoteSearchBar;
 - (NSString *)titleForRemoteSearchFooterView;
 
 #pragma mark Location

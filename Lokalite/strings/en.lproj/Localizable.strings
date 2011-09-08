@@ -76,10 +76,13 @@
 
 "search.search-server" = "Continue Search on Server...";
 "global.searching-server" = "Searching Server...";
+"global.search" = "Search";
 "search.no-results" = "No Results Found on Server";
 
 "search.error.title" = "Failed to Search Server";
+"search.events.category.placeholder.format" = "Search %@";
 "search.events.category.title.format" = "Search %@ on Server...";
+"search.places.category.placeholder.format" = "Search %@";
 "search.places.category.title.format" = "Search %@ on Server...";
 
 /*

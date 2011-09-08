@@ -197,9 +197,12 @@
                                    tableView:tableView
                          dataReceivedHandler:
      ^(NSData *data) {
-         NSArray *allEvents = [[self dataController] fetchedObjects];
+         NSArray *events =
+            [self tableView] == tableView ?
+            [[self dataController] fetchedObjects] :
+            [self searchResults];
          NSString *urlString = [url absoluteString];
-         for (Event *event in allEvents)
+         for (Event *event in events)
              if ([[event standardImageUrl] isEqualToString:urlString])
                  [event setStandardImageData:data];
      }

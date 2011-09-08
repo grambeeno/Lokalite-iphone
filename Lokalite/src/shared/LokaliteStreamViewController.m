@@ -843,6 +843,11 @@ titleForHeaderInSection:(NSInteger)section
     return nil;
 }
 
+- (NSString *)placeholderTextForRemoteSearchBar
+{
+    return NSLocalizedString(@"global.search", nil);
+}
+
 - (NSString *)titleForRemoteSearchFooterView
 {
     return NSLocalizedString(@"search.search-server", nil);
@@ -1466,6 +1471,7 @@ titleForHeaderInSection:(NSInteger)section
 - (void)loadSearchBar
 {
     UISearchBar *searchBar = [[UISearchBar alloc] init];
+    [searchBar setPlaceholder:[self placeholderTextForRemoteSearchBar]];
     [searchBar setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     [searchBar setAutocorrectionType:UITextAutocorrectionTypeNo];
     UISearchDisplayController *searchDisplayController =
