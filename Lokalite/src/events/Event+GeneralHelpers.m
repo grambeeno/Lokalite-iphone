@@ -457,11 +457,11 @@
     return UILocalNotificationDefaultSoundName;
 }
 
-- (UILocalNotification *)localNotification
+- (UILocalNotification *)localNotificationWithFireDate:(NSDate *)fireDate
 {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
 
-    [notification setFireDate:[self localNotificationFireDate]];
+    [notification setFireDate:fireDate];
     [notification setAlertBody:[self localNotificationAlertBody]];
     [notification setSoundName:[self localNotificationSoundName]];
 

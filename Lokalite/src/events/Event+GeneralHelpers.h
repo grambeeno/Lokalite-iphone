@@ -108,10 +108,9 @@
 + (NSString *)localNotificationEventIdKey;
 
 - (NSString *)localNotificationAlertBody;
-- (NSDate *)localNotificationFireDate;
 - (NSString *)localNotificationSoundName;
 
-- (UILocalNotification *)localNotification;
+- (UILocalNotification *)localNotificationWithFireDate:(NSDate *)date;
 - (UILocalNotification *)scheduledLocalNotification;
 
 @end

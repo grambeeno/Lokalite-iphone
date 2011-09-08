@@ -131,7 +131,8 @@
 "event.local-notification.confirm.title" = "Event Alert";
 "event.local-notification.confirm.message" = "Would you like to be alerted 2 hours before this event starts?";
 "event.local-notification.confirm.cancel" = "Cancel";
-"event.local-notification.confirm.schedule" = "Alert Me";
+"event.local-notification.confirm.1-hour" = "Alert 1 Hour Before";
+"event.local-notification.confirm.1-day" = "Alert 1 Day Before";
 
 "event.local-notification.alert.body.format" = "%@ starts at %@";
 

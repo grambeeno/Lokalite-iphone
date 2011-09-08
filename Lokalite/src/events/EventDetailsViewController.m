@@ -96,7 +96,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 #pragma mark - Local notifications
 
 - (void)promptToSetLocalNotification;
-- (void)schedulLocalNotification;
+- (void)schedulLocalNotificationWithFireDate:(NSDate *)date;
 - (void)cancelLocalNotification;
 
 #pragma mark - Sharing
@@ -522,33 +522,33 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 
 - (void)promptToSetLocalNotification
 {
-    NSDate *fireDate = [[self event] localNotificationFireDate];
-    if ([fireDate compare:[NSDate date]] == NSOrderedDescending) {
-        NSString *title =
-            NSLocalizedString(@"event.local-notification.confirm.title", nil);
-        NSString *message =
-            NSLocalizedString(@"event.local-notification.confirm.message", nil);
-        NSString *cancelButtonTitle =
-            NSLocalizedString(@"event.local-notification.confirm.cancel", nil);
-        NSString *scheduleButtonTitle =
-            NSLocalizedString(@"event.local-notification.confirm.schedule",
-                              nil);
+    NSString *title =
+        NSLocalizedString(@"event.local-notification.confirm.title", nil);
+    NSString *message =
+        NSLocalizedString(@"event.local-notification.confirm.message", nil);
+    NSString *cancelButtonTitle =
+        NSLocalizedString(@"event.local-notification.confirm.cancel", nil);
+    NSString *schedule1DayButtonTitle =
+        NSLocalizedString(@"event.local-notification.confirm.1-day", nil);
+    NSString *schedule1HourButtonTitle =
+        NSLocalizedString(@"event.local-notification.confirm.1-hour", nil);
 
-        UIAlertView *alert =
-            [[UIAlertView alloc] initWithTitle:title
-                                       message:message
-                                      delegate:self
-                             cancelButtonTitle:cancelButtonTitle
-                             otherButtonTitles:scheduleButtonTitle,
-             nil];
-        [alert show];
-        [alert release], alert = nil;
-    }
+    UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle:title
+                                   message:message
+                                  delegate:self
+                         cancelButtonTitle:cancelButtonTitle
+                         otherButtonTitles:schedule1DayButtonTitle,
+                                           schedule1HourButtonTitle,
+         nil];
+    [alert show];
+    [alert release], alert = nil;
 }
 
-- (void)schedulLocalNotification
+- (void)schedulLocalNotificationWithFireDate:(NSDate *)date
 {
-    UILocalNotification *notification = [[self event] localNotification];
+    UILocalNotification *notification =
+        [[self event] localNotificationWithFireDate:date];
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
@@ -566,8 +566,17 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 - (void)alertView:(UIAlertView *)alertView
     clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
-        [self schedulLocalNotification];
+    if (buttonIndex == 1 || buttonIndex == 2) {
+        NSTimeInterval interval =
+            buttonIndex == 1 ?
+            20 : 10;
+            //60 * 60 * 24 * -1 :
+            //60 * 60 * 1 * -1;
+        //NSDate *startDate = [[self event] startDate];
+        NSDate *startDate = [NSDate date];
+        NSDate *date = [startDate dateByAddingTimeInterval:interval];
+        [self schedulLocalNotificationWithFireDate:date];
+    }
 }
 
 #pragma mark - Fetching image data
