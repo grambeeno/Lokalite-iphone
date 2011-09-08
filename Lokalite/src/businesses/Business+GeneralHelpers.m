@@ -201,7 +201,15 @@
 
 - (NSURL *)phoneUrl
 {
-    NSString *s = [NSString stringWithFormat:@"tel://%@", [self phone]];
+    NSString *phone = [self phone];
+
+    // strip out everything but the digits
+    NSCharacterSet *digits = [NSCharacterSet decimalDigitCharacterSet];
+    NSArray *comps =
+        [phone componentsSeparatedByCharactersInSet:[digits invertedSet]];
+    NSString *stripped = [comps componentsJoinedByString:@""];
+    NSString *s = [NSString stringWithFormat:@"tel://%@", stripped];
+
     return [NSURL URLWithString:s];
 }
 
