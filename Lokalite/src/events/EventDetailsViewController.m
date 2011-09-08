@@ -414,7 +414,7 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
         } else
             cell =
                 [[[UITableViewCell alloc]
-                  initWithStyle:UITableViewCellStyleValue1
+                  initWithStyle:UITableViewCellStyleDefault
                   reuseIdentifier:reuseIdentifier] autorelease];
     } else if ([path section] == kSectionLocation) {
         if ([path row] == kLocationRowMap)
@@ -434,11 +434,12 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
 {
     if ([indexPath section] == kSectionInfo) {
         if ([indexPath row] == kInfoRowEventTime) {
-            [[cell detailTextLabel] setText:
-             [[self event] dateStringDescription]];
-            [[cell textLabel] setText:NSLocalizedString(@"global.time", nil)];
+            [[cell textLabel] setText:[[self event] dateStringDescription]];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+            [[cell textLabel] setAdjustsFontSizeToFitWidth:YES];
+            [[cell textLabel] setMinimumFontSize:10];
         } /*else if ([indexPath row] == kInfoRowPhone) {
             [[cell textLabel] setText:[[[self event] business] phone]];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
