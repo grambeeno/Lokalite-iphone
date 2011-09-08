@@ -101,7 +101,7 @@
 {
     return [Event predicateForSearchString:queryString
                              includeEvents:YES
-                         includeBusinesses:YES];
+                         includeBusinesses:NO];
 }
 
 - (LokaliteStream *)remoteSearchLokaliteStreamInstanceForKeywords:

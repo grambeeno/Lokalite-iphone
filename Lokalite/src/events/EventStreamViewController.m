@@ -120,7 +120,7 @@
 {
     return [Event predicateForSearchString:queryString
                              includeEvents:YES
-                         includeBusinesses:YES];
+                         includeBusinesses:NO];
 }
 
 #pragma mark Working with the error view
