@@ -53,8 +53,6 @@
     NSString *title = nil;
     NSString *cancelButtonTitle = NSLocalizedString(@"global.cancel", nil);
     NSString *destructiveButtonTitle = nil;
-    NSString *openInMapsButtonTitle =
-        NSLocalizedString(@"global.open-in-maps", nil);
     NSString *directionsInMapsButtonTitle =
         NSLocalizedString(@"global.directions-in-maps", nil);
 
@@ -63,8 +61,7 @@
                                     delegate:self
                            cancelButtonTitle:cancelButtonTitle
                       destructiveButtonTitle:destructiveButtonTitle
-                           otherButtonTitles:openInMapsButtonTitle,
-                                             directionsInMapsButtonTitle, nil];
+                           otherButtonTitles:directionsInMapsButtonTitle, nil];
 
     LokaliteAppDelegate *appDelegate =
         (LokaliteAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -108,19 +105,13 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
     clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSURL *url = nil;
-    if (buttonIndex == 0)
-        // open in maps
-        url = [[self mappableObject] addressUrl];
-    else if (buttonIndex == 1) {
+    if (buttonIndex == 0) {
         // directions
         CLLocation *location =
             [[[[self displayController] mapView] userLocation] location];
-        url = [[self mappableObject] directionsUrlFromLocation:location];
-    }
-
-    if (url)
+        NSURL *url = [[self mappableObject] directionsUrlFromLocation:location];
         [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 #pragma mark - Accessors
