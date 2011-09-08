@@ -45,6 +45,8 @@
 
 - (void)dealloc
 {
+    NSLog(@"%@: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+
     [baseUrl_ release];
     [downloadSource_ release];
     [context_ release];
@@ -80,6 +82,13 @@
     }
 
     return self;
+}
+
+#pragma mark - Cancelling requests
+
+- (void)cancel
+{
+    [[self service] cancelAllRequests];
 }
 
 #pragma mark - Pagination

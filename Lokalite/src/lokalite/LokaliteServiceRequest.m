@@ -28,6 +28,7 @@
 
 - (void)processConnectionStarted:(NSURLConnection *)connection;
 - (void)processConnectionFinished;
+- (void)processConnectionCancelled;
 @end
 
 @implementation LokaliteServiceRequest
@@ -49,6 +50,8 @@
 
 - (void)dealloc
 {
+    NSLog(@"%@: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+
     [url_ release];
     [parameters_ release];
 
@@ -122,6 +125,7 @@
 - (void)cancel
 {
     [[self connection] cancel];
+    [self processConnectionCancelled];
 }
 
 #pragma mark NSURLConnectionDelegate implementation
@@ -177,5 +181,11 @@ didReceiveResponse:(NSURLResponse *)response
     [self setRequestHandler:nil];
 }
 
-@end
+- (void)processConnectionCancelled
+{
+    [self setConnection:nil];
+    [[UIApplication sharedApplication] networkActivityDidFinish];
+    [self setRequestHandler:nil];
+}
 
+@end

@@ -200,6 +200,9 @@ enum {
     [self unsubscribeForApplicationLifecycleNotifications];
     [self unsubscribeForNotoficationsForContext:context_];
 
+    [lokaliteStream_ cancel];
+    [remoteSearchLokaliteStream_ cancel];
+
     LokaliteDownloadSource *source = [[self lokaliteStream] downloadSource];
     [source unassociateAndDeleteDownloadedObjectsDeletingIfEmpty:YES];
 
@@ -341,6 +344,18 @@ enum {
     }
 
     [self fetchInitialSetOfObjectsIfNecessary];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+
+    if (![self navigationController]) {
+        // poppped from the navigation stack -- cancel network operations;
+        // don't go through accessors that may do lazy loading of the streams
+        [lokaliteStream_ cancel];
+        [remoteSearchLokaliteStream_ cancel];
+    }
 }
 
 #pragma mark - UIScrollViewDelegate implementation
@@ -946,6 +961,8 @@ titleForHeaderInSection:(NSInteger)section
 
 - (void)resetRemoteSearchState
 {
+    [remoteSearchLokaliteStream_ cancel];
+
     LokaliteDownloadSource *source =
         [[[self remoteSearchLokaliteStream] downloadSource] retain];
 

@@ -36,6 +36,10 @@ typedef void(^LKSResponseHandler)(NSArray *, NSError *);
        downloadSource:(LokaliteDownloadSource *)source
               context:(NSManagedObjectContext *)context;
 
+#pragma mark - Cancelling requests
+
+- (void)cancel;
+
 #pragma mark - Pagination
 
 - (void)setObjectsPerPage:(NSInteger)objectsPerPage;

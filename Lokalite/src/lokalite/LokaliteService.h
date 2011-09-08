@@ -37,6 +37,13 @@ typedef void(^LSResponseHandler)(NSHTTPURLResponse *,
 - (void)setEmail:(NSString *)email password:(NSString *)password;
 - (void)removeEmailAndPassword;
 
+#pragma mark - Cancelling requests
+
+//
+// For now, it's only possible to cancel all requests, not individual requests.
+//
+- (void)cancelAllRequests;
+
 #pragma mark - Events
 
 - (void)fetchEventsWithCategory:(NSString *)category

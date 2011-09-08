@@ -20,6 +20,10 @@
 @property (nonatomic, copy) NSString *email;
 @property (nonatomic, copy) NSString *password;
 
+#pragma mark - Looking up requests
+
+@property (nonatomic, retain) NSMutableDictionary *requests;
+
 #pragma mark - Sending requests
 
 - (void)sendRequestWithUrl:(NSURL *)url
@@ -30,6 +34,11 @@
 #pragma mark - Parameter helpers
 
 - (NSMutableDictionary *)queryParametersForPage:(NSInteger)page;
+
+#pragma mark - Request keys
+
+- (NSValue *)keyForRequest:(LokaliteServiceRequest *)request;
+- (LokaliteServiceRequest *)requestForKey:(NSValue *)value;
 
 #pragma mark - Processing JSON data
 
@@ -49,10 +58,14 @@
 @synthesize email = email_;
 @synthesize password = password_;
 
+@synthesize requests = requests_;
+
 #pragma mark - Memory management
 
 - (void)dealloc
 {
+    NSLog(@"%@: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+
     [baseUrl_ release];
 
     [numberOfDaysBefore_ release];
@@ -60,6 +73,8 @@
 
     [email_ release];
     [password_ release];
+
+    [requests_ release];
     
     [super dealloc];
 }
@@ -76,6 +91,8 @@
         location_ = CLLocationCoordinate2DMake(FLT_MAX, FLT_MAX);
         orderBy_ = nil;  // default ordering; just to be explicit about it
         objectsPerPage_ = 10;
+
+        requests_ = [[NSMutableDictionary alloc] init];
     }
 
     return self;
@@ -100,6 +117,21 @@
 - (void)removeEmailAndPassword
 {
     [self setEmail:nil password:nil];
+}
+
+#pragma mark - Cancelling requests
+
+- (void)cancelAllRequests
+{
+    if ([[self requests] count]) {
+        NSArray *keys = [[self requests] allKeys];
+        for (NSValue *key in keys) {
+            LokaliteServiceRequest *req = [self requestForKey:key];
+            [req cancel];
+            [req release];
+        }
+        [[self requests] removeAllObjects];
+    }
 }
 
 #pragma mark - Events
@@ -200,11 +232,13 @@
                                            forKey:@"keywords"];
     if (category)
         [parameters setObject:category forKey:@"category"];
-    
+
+    /*
     LokaliteServiceRequest *req =
         [[LokaliteServiceRequest alloc] initWithUrl:url
                                          parameters:parameters
                                       requestMethod:LKRequestMethodGET];
+
     [req performRequestWithHandler:
      ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
         if (data) {
@@ -216,6 +250,12 @@
 
          [req release];
      }];
+     */
+
+    [self sendRequestWithUrl:url
+                  parameters:parameters
+               requestMethod:LKRequestMethodGET
+             responseHandler:handler];
 }
 
 - (void)searchEventsForKeywords:(NSString *)keywords
@@ -247,29 +287,39 @@
              requestMethod:(LKRequestMethod)requestMethod
            responseHandler:(LSResponseHandler)handler
 {
-    LokaliteServiceRequest *req =
+    LokaliteServiceRequest *request =
         [[LokaliteServiceRequest alloc] initWithUrl:url
-                                         parameters:parameters
-                                      requestMethod:requestMethod];
+                                          parameters:parameters
+                                       requestMethod:requestMethod];
 
     NSString *email = [self email], *password = [self password];
     if (email && password)
-        [req authenticateWithUsername:email password:password];
+        [request authenticateWithUsername:email password:password];
 
-    [req performRequestWithHandler:
-     ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
-         id processedData = nil;
-         if ([response statusCode] == 200) {
-             if (data) {
-                 NSError *error = nil;
-                 processedData = [self processJsonData:data error:&error];
-             }
-         }
+    NSValue *requestKey = [self keyForRequest:request];
+    NSMutableDictionary *requests = [self requests];
 
-         handler(response, processedData, error);
+    LKRequestHandler requestHandler =
+        ^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
+            id processedData = nil;
+            if ([response statusCode] == 200) {
+                if (data) {
+                    NSError *error = nil;
+                    processedData =
+                        [LokaliteDataParser parseLokaliteData:data
+                                                        error:&error];
+                }
+            }
 
-         [req release];
-     }];
+            handler(response, processedData, error);
+
+            [requests removeObjectForKey:requestKey];
+            [request release];
+        };
+
+    [requests setObject:[[requestHandler copy] autorelease] forKey:requestKey];
+
+    [request performRequestWithHandler:requestHandler];
 }
 
 #pragma mark - Parameter helpers
@@ -314,6 +364,18 @@
 - (id)processJsonData:(NSData *)data error:(NSError **)error
 {
     return [LokaliteDataParser parseLokaliteData:data error:error];
+}
+
+#pragma mark - Request keys
+
+- (NSValue *)keyForRequest:(LokaliteServiceRequest *)request
+{
+    return [NSValue valueWithNonretainedObject:request];
+}
+
+- (LokaliteServiceRequest *)requestForKey:(NSValue *)value
+{
+    return [value nonretainedObjectValue];
 }
 
 #pragma mark - URLs
