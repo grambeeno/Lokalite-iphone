@@ -2173,11 +2173,13 @@
 		05209F0113C76F9200CA6A2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Blue Duck LLC";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lokalite/Lokalite-Prefix.pch";
 				INFOPLIST_FILE = "Lokalite/Lokalite-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EA001291-043A-41D3-A780-FE77BCC8050F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
