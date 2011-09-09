@@ -214,7 +214,12 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)application:(UIApplication *)application
     didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    [self processLocalNotification:notification];
+    if ([application applicationState] != UIApplicationStateActive) {
+        NSLog(@"Processing local notification: %@", notification);
+        [self processLocalNotification:notification];
+    } else
+        NSLog(@"Ignoring local notification because app state is: %d",
+              [application applicationState]);
 }
 
 #pragma mark - AccountDetailsViewControllerDelegate implementation
