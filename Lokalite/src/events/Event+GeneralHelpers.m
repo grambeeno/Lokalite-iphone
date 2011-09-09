@@ -306,7 +306,7 @@
 - (void)trendEvent:(BOOL)trend
 {
     NSManagedObjectContext *context = [self managedObjectContext];
-    NSString *sourceName = @"trended";
+    NSString *sourceName = @"user-trended-events";
     LokaliteDownloadSource *source =
         [LokaliteDownloadSource downloadSourceWithName:sourceName
                                              inContext:context
