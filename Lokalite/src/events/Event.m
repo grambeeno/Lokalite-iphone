@@ -72,7 +72,7 @@
 {
     NSString *format =
         NSLocalizedString(@"annotation.grouped.events.title.format", nil);
-    return [NSString stringWithFormat:format, [[self business] name]];
+    return [NSString stringWithFormat:format, [[self location] name]];
 }
 
 #pragma mark - ShareableObject implementation
@@ -100,7 +100,7 @@
         [NSMutableString stringWithFormat:@"<p>%@</p><p><a href=\"%@\">%@</a> "
          "at %@</p>", NSLocalizedString(@"event.share.email.body.prefix", nil),
          [[self lokaliteUrl] absoluteString], [self name],
-         [[self business] name]];
+         [[self location] name]];
 
     return s;
 }
@@ -109,10 +109,11 @@
 
 - (NSString *)smsBody
 {
+    NSString *locationName = [[self location] name];
     NSMutableString *s =
         [NSMutableString stringWithString:
          NSLocalizedString(@"event.share.sms.body.prefix", nil)];
-    [s appendFormat:@"\n\n%@ at %@\n\n%@", [self name], [[self business] name],
+    [s appendFormat:@"\n\n%@ at %@\n\n%@", [self name], locationName,
      [[self lokaliteUrl] absoluteString]];
 
     return s;
@@ -132,7 +133,7 @@
 
 - (NSString *)facebookCaption
 {
-    return [NSString stringWithFormat:@"@ %@", [[self business] name]];
+    return [NSString stringWithFormat:@"at %@", [[self location] name]];
 }
 
 - (NSString *)facebookDescription
@@ -147,7 +148,7 @@
     NSURL *url = [self lokaliteUrl];
     NSString *s =
         [NSString stringWithFormat:@"%@ at %@\n\n%@", [self name],
-         [[self business] name], [url absoluteString]];
+         [[self location] name], [url absoluteString]];
 
     return s;
 }
