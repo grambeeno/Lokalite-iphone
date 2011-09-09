@@ -572,11 +572,9 @@ static const NSInteger NUM_LOCATION_ROWS = kLocationRowAddress + 1;
     if (buttonIndex == 1 || buttonIndex == 2) {
         NSTimeInterval interval =
             buttonIndex == 1 ?
-            20 : 10;
-            //60 * 60 * 24 * -1 :
-            //60 * 60 * 1 * -1;
-        //NSDate *startDate = [[self event] startDate];
-        NSDate *startDate = [NSDate date];
+            60 * 60 * 24 * -1 :
+            60 * 60 * 1 * -1;
+        NSDate *startDate = [[self event] startDate];
         NSDate *date = [startDate dateByAddingTimeInterval:interval];
         [self schedulLocalNotificationWithFireDate:date];
     }
