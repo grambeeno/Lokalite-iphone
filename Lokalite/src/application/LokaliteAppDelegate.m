@@ -40,6 +40,10 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)startLocatingDevice;
 - (void)stopLocatingDevice;
 
+#pragma mark - Local notifications
+
+- (void)processLocalNotification:(UILocalNotification *)notification;
+
 #pragma mark - User interface management
 
 - (void)initializeTabBarController:(UITabBarController *)tabBarController;
@@ -147,23 +151,8 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
         UILocalNotification *notification =
             [launchOptions
              objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-        if (notification) {
-            NSString *key = [Event localNotificationEventIdKey];
-            NSNumber *eventId = [[notification userInfo] objectForKey:key];
-            Event *event = [Event eventWithId:eventId inContext:[self context]];
-            if (event) {
-                const NSInteger myLokaliteIndex = 4;
-
-                UINavigationController *nc =
-                    [[[self tabBarController] viewControllers]
-                     objectAtIndex:myLokaliteIndex];
-                TrendedEventsViewController *vc =
-                    (TrendedEventsViewController *) [nc topViewController];
-                [vc showDetailsForEvent:event animated:NO];
-
-                [[self tabBarController] setSelectedIndex:myLokaliteIndex];
-            }
-        }
+        if (notification)
+            [self processLocalNotification:notification];
     }
 
     return YES;
@@ -220,6 +209,12 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+- (void)application:(UIApplication *)application
+    didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    [self processLocalNotification:notification];
 }
 
 #pragma mark - AccountDetailsViewControllerDelegate implementation
@@ -285,6 +280,27 @@ static const NSInteger PROFILE_TAB_BAR_ITEM_INDEX = 4;
 - (void)stopLocatingDevice
 {
     [[self deviceLocator] stop];
+}
+
+#pragma mark - Local notifications
+
+- (void)processLocalNotification:(UILocalNotification *)notification
+{
+    NSString *key = [Event localNotificationEventIdKey];
+    NSNumber *eventId = [[notification userInfo] objectForKey:key];
+    Event *event = [Event eventWithId:eventId inContext:[self context]];
+    if (event) {
+        const NSInteger myLokaliteIndex = 4;
+
+        UINavigationController *nc =
+            [[[self tabBarController] viewControllers]
+             objectAtIndex:myLokaliteIndex];
+        TrendedEventsViewController *vc =
+            (TrendedEventsViewController *) [nc topViewController];
+        [vc showDetailsForEvent:event animated:NO];
+
+        [[self tabBarController] setSelectedIndex:myLokaliteIndex];
+    }
 }
 
 #pragma mark - User interface management
